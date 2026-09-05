@@ -163,7 +163,9 @@ export const PART7_DATA: Part7PassageSet[] = [
   }
 ];
 
+import { PART7_REAL_DATA } from './part7_real';
+
 export const getRandomPart7Passage = (): Part7PassageSet => {
-  const index = Math.floor(Math.random() * PART7_DATA.length);
-  return PART7_DATA[index];
+  const index = Math.floor(Math.random() * PART7_REAL_DATA.length);
+  return PART7_REAL_DATA[index];
 };

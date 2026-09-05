@@ -77,14 +77,12 @@ export default function Part7Trainer() {
       }
     }
 
-    // Default text rendering, replace newlines with paragraphs
-    const paragraphs = content.split('\n\n');
+    // Default text rendering, support HTML from raw data
     return (
-      <div className={styles.passageText}>
-        {paragraphs.map((p, idx) => (
-          <p key={idx} style={{ marginBottom: '15px' }}>{p}</p>
-        ))}
-      </div>
+      <div 
+        className={styles.passageText} 
+        dangerouslySetInnerHTML={{ __html: content }} 
+      />
     );
   };
 
@@ -192,9 +190,10 @@ export default function Part7Trainer() {
                       <div className={styles.exContent}>
                         <p><strong>Bạn chọn:</strong> {answers[q.id] || 'Không làm'}</p>
                         <p><strong>Đáp án đúng:</strong> {q.correctAnswer} - {q.options[q.correctAnswer]}</p>
-                        <div className={styles.exBox}>
-                          {q.explanation}
-                        </div>
+                        <div 
+                          className={styles.exBox} 
+                          dangerouslySetInnerHTML={{ __html: q.explanation }} 
+                        />
                       </div>
                     </div>
                   );

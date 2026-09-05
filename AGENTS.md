@@ -74,8 +74,15 @@ Follow this pipeline:
    * Recommend ONE highest-value feature.
    * Never invent features without a user problem or evidence.
 
-8. **Engineering**
-   Once a feature is selected:
+8. **Tech Lead Review & Architecture**
+   Before executing any complex feature or major data ingest:
+   * Activate the `tech-lead` skill.
+   * Review the implementation plan for Bundle Size, Type Safety, and Scalability risks.
+   * Challenge brittle solutions (e.g., complex web crawlers vs open-source dumps).
+   * Require explicit user approval on architectural trade-offs.
+
+9. **Engineering**
+   Once a feature is selected and the architecture plan is approved:
    * Explore only relevant code.
    * Create the smallest implementation plan.
    * Reuse existing architecture and utilities.
