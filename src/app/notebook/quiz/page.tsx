@@ -5,24 +5,32 @@ import Link from 'next/link';
 import QuizCard from '@/components/QuizCard';
 import Confetti from '@/components/Confetti';
 import { getRandomWords, VOCABULARY_DATA, VocabularyWord } from '@/data/vocabulary';
-import { useDailyMission } from '@/hooks/useDailyMission';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
-import styles from './page.module.css';
+import styles from '@/app/quiz/page.module.css';
 
-const QUIZ_LENGTH = 10;
-
-export default function QuizPage() {
-  const { recordQuizCompleted } = useDailyMission();
-  const { addMistake } = useMistakeNotebook();
+export default function NotebookQuizPage() {
+  const { mounted, getMistakes, removeMistake } = useMistakeNotebook();
   const [questions, setQuestions] = useState<{word: VocabularyWord, options: string[]}[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [clearedWords, setClearedWords] = useState(0);
 
   useEffect(() => {
-    // Generate quiz questions
-    const quizWords = getRandomWords(Math.min(QUIZ_LENGTH, VOCABULARY_DATA.length));
+    if (!mounted) return;
+    
+    const mistakeIds = getMistakes();
+    if (mistakeIds.length === 0) {
+      setIsFinished(true); // Nothing to do
+      return;
+    }
+
+    // Limit quiz to max 15 mistakes at a time
+    const quizIds = mistakeIds.sort(() => 0.5 - Math.random()).slice(0, 15);
+    const quizWords = quizIds
+      .map(id => VOCABULARY_DATA.find(w => w.id === id))
+      .filter((w): w is VocabularyWord => w !== undefined);
     
     const generatedQuestions = quizWords.map(word => {
       // Get 3 random wrong answers
@@ -35,20 +43,19 @@ export default function QuizPage() {
     });
 
     setQuestions(generatedQuestions);
-  }, []);
+  }, [mounted]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAnswer = (isCorrect: boolean) => {
     if (isCorrect) {
       setScore(prev => prev + 1);
-    } else {
-      addMistake(questions[currentIndex].word.id);
+      removeMistake(questions[currentIndex].word.id);
+      setClearedWords(prev => prev + 1);
     }
 
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(prev => prev + 1);
     } else {
       setIsFinished(true);
-      recordQuizCompleted();
       const percentage = ((score + (isCorrect ? 1 : 0)) / questions.length) * 100;
       if (percentage >= 70) {
         setShowConfetti(true);
@@ -56,35 +63,40 @@ export default function QuizPage() {
     }
   };
 
-  if (questions.length === 0) {
+  if (!mounted || (questions.length === 0 && !isFinished)) {
     return <div className={styles.loading}>Generating quiz...</div>;
   }
 
   if (isFinished) {
-    const percentage = (score / questions.length) * 100;
-    
+    // If they came here with 0 mistakes
+    if (questions.length === 0) {
+      return (
+        <div className={styles.finishedContainer}>
+          <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
+            <h2>Không có từ nào!</h2>
+            <p className={styles.feedback}>Sổ tay lỗi sai của bạn đang trống.</p>
+            <div className={styles.actions}>
+              <Link href="/notebook" className={styles.primaryBtn}>Quay lại sổ tay</Link>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className={styles.finishedContainer}>
         <Confetti show={showConfetti} />
         <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
-          <h2>Kết quả Quiz</h2>
+          <h2>Hoàn thành chuộc lỗi!</h2>
           <div className={styles.scoreCircle}>
             <span className={styles.scoreText}>{score}/{questions.length}</span>
           </div>
           <p className={styles.feedback}>
-            {percentage >= 90 ? 'Xuất sắc! Bạn có trí nhớ tuyệt vời.' :
-             percentage >= 70 ? 'Rất tốt! Cố gắng phát huy nhé.' :
-             percentage >= 50 ? 'Khá tốt, nhưng bạn cần ôn tập thêm.' :
-             'Bạn cần ôn tập flashcard nhiều hơn nhé!'}
+            Bạn đã xuất sắc xóa được <strong>{clearedWords}</strong> từ vựng khỏi Sổ tay lỗi sai!
           </p>
           <div className={styles.actions}>
-            <button 
-              className={styles.primaryBtn} 
-              onClick={() => window.location.reload()}
-            >
-              Làm lại 🔄
-            </button>
-            <Link href="/study" className={styles.secondaryBtn}>Ôn Flashcard</Link>
+            <Link href="/notebook" className={styles.primaryBtn}>Về Sổ tay</Link>
+            <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
           </div>
         </div>
       </div>
@@ -104,7 +116,10 @@ export default function QuizPage() {
         <div className={styles.progressBarBg}>
           <div 
             className={styles.progressBarFill} 
-            style={{ width: `${progressPercent}%` }} 
+            style={{ 
+              width: `${progressPercent}%`,
+              backgroundColor: 'var(--primary)'
+            }}
           />
         </div>
       </header>

@@ -90,6 +90,11 @@ export default function Home() {
             <h3>Từ vựng</h3>
             <p>Khám phá tất cả từ vựng</p>
           </Link>
+          <Link href="/notebook" className={`${styles.gridCard} card-minimal`}>
+            <span className={styles.cardIcon}>📓</span>
+            <h3>Sổ tay lỗi sai</h3>
+            <p>Ôn tập các từ hay quên</p>
+          </Link>
         </div>
       </section>
 
