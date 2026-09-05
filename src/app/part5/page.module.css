@@ -1,0 +1,342 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-size: 1.2rem;
+  color: var(--muted-foreground);
+}
+
+/* Header & Progress */
+.header {
+  margin-bottom: 10px;
+}
+
+.progressInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+}
+
+.progressBarBg {
+  height: 6px;
+  background-color: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Timer */
+.timerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.timerCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 4px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  background: var(--card-bg);
+}
+
+.timerText {
+  color: var(--primary);
+  transition: color 0.2s;
+}
+
+.timerWarning {
+  color: var(--destructive);
+  animation: pulse 1s infinite;
+}
+
+.timerBarBg {
+  width: 100%;
+  height: 4px;
+  background-color: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.timerBarFill {
+  height: 100%;
+  background-color: var(--primary);
+  transition: width 1s linear, background-color 0.3s;
+}
+
+.timerBarWarning {
+  background-color: var(--destructive);
+}
+
+/* Question Card */
+.main {
+  width: 100%;
+}
+
+.questionCard {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cardHeader, .wrongHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.categoryBadge {
+  background-color: var(--primary-light);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.sourceBadge {
+  background-color: var(--border);
+  color: var(--foreground);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.sentence {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.blankFill {
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: underline;
+  margin: 0 5px;
+}
+
+/* Options */
+.optionsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+@media (min-width: 600px) {
+  .optionsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.optionBtn {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+.optionBtn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.optionLetter {
+  font-weight: 700;
+  color: var(--muted-foreground);
+  margin-right: 15px;
+  width: 24px;
+}
+
+.optionText {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* Answer States */
+.correct {
+  border-color: var(--success);
+  background-color: rgba(34, 197, 94, 0.1);
+}
+.correct .optionLetter {
+  color: var(--success);
+}
+
+.incorrect {
+  border-color: var(--destructive);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+.incorrect .optionLetter {
+  color: var(--destructive);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Finished State */
+.finishedContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.finishedCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.finishedCard h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--foreground);
+}
+
+.scoreCircle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.scoreText {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.feedback {
+  font-size: 1.1rem;
+  color: var(--muted-foreground);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryBtn {
+  background-color: var(--primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.primaryBtn:hover {
+  opacity: 0.9;
+}
+
+.secondaryBtn {
+  background-color: transparent;
+  color: var(--foreground);
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.secondaryBtn:hover {
+  background-color: var(--muted);
+}
+
+/* Wrong Answers Review */
+.wrongAnswersSection {
+  margin-top: 20px;
+}
+
+.wrongAnswersSection h3 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: var(--foreground);
+  text-align: center;
+}
+
+.wrongAnswersList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wrongCard {
+  padding: 25px;
+}
+
+.wrongHeader {
+  margin-bottom: 15px;
+}
+
+.explanationBox {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  border-radius: 4px;
+  color: var(--foreground);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}

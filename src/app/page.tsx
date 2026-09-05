@@ -73,7 +73,7 @@ export default function Home() {
       </section>
 
       <section className={styles.quickActions}>
-        <h2 className={styles.sectionTitle}>Truy cập nhanh</h2>
+        <h2 className={styles.sectionTitle}>Từ vựng (Vocabulary Mastery)</h2>
         <div className={styles.actionGrid}>
           <Link href="/study" className={`${styles.gridCard} card-minimal`}>
             <span className={styles.cardIcon}>🃏</span>
@@ -87,13 +87,33 @@ export default function Home() {
           </Link>
           <Link href="/vocabulary" className={`${styles.gridCard} card-minimal`}>
             <span className={styles.cardIcon}>📚</span>
-            <h3>Từ vựng</h3>
+            <h3>Từ điển</h3>
             <p>Khám phá tất cả từ vựng</p>
           </Link>
           <Link href="/notebook" className={`${styles.gridCard} card-minimal`}>
             <span className={styles.cardIcon}>📓</span>
-            <h3>Sổ tay lỗi sai</h3>
+            <h3>Lỗi sai</h3>
             <p>Ôn tập các từ hay quên</p>
+          </Link>
+        </div>
+
+        <h2 className={styles.sectionTitle} style={{ marginTop: '2rem' }}>Kỹ năng (Exam Skills)</h2>
+        <div className={styles.actionGrid}>
+          <Link href="/part5" className={`${styles.gridCard} card-minimal`}>
+            <span className={styles.cardIcon}>⏱️</span>
+            <h3>Part 5 Speed</h3>
+            <p>Luyện phản xạ ngữ pháp</p>
+          </Link>
+          {/* Placeholder for future features */}
+          <Link href="/part6" className={`${styles.gridCard} card-minimal`}>
+            <span className={styles.cardIcon}>📖</span>
+            <h3>Part 6 Text</h3>
+            <p>Điền từ đoạn văn</p>
+          </Link>
+          <Link href="/part7" className={`${styles.gridCard} card-minimal`}>
+            <span className={styles.cardIcon}>📄</span>
+            <h3>Part 7 Reading</h3>
+            <p>Đọc hiểu văn bản</p>
           </Link>
         </div>
       </section>
