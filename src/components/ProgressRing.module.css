@@ -1,0 +1,43 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  transform: rotate(-90deg); /* Start at top */
+}
+
+.bgRing {
+  transition: stroke 0.3s ease;
+}
+
+.progressRing {
+  transition: stroke-dashoffset 1s ease-in-out, stroke 0.3s ease;
+}
+
+.labelContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.percentage {
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
