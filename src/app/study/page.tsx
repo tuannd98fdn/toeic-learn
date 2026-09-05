@@ -6,12 +6,14 @@ import FlashCard from '@/components/FlashCard';
 import Confetti from '@/components/Confetti';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useStreak } from '@/hooks/useStreak';
+import { useDailyMission } from '@/hooks/useDailyMission';
 import { VocabularyWord } from '@/data/vocabulary';
 import styles from './page.module.css';
 
 export default function StudyPage() {
-  const { mounted, getDueWords, rateWord } = useLeitner();
+  const { mounted, getDueWords, rateWord, progress } = useLeitner();
   const { recordStudy } = useStreak();
+  const { recordNewWordLearned, recordWordReviewed } = useDailyMission();
   const [words, setWords] = useState<VocabularyWord[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
@@ -26,7 +28,17 @@ export default function StudyPage() {
 
   const handleRate = (rating: 1 | 2 | 3 | 4) => {
     const currentWord = words[currentIndex];
+    
+    // Check if it's a new word before rating it (box 0 means unstudied)
+    const isNew = !progress[currentWord.id] || progress[currentWord.id].box === 0;
+    
     rateWord(currentWord.id, rating);
+
+    if (isNew) {
+      recordNewWordLearned();
+    } else {
+      recordWordReviewed();
+    }
 
     if (currentIndex < words.length - 1) {
       setCurrentIndex(prev => prev + 1);

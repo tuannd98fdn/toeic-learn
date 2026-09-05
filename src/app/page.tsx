@@ -5,6 +5,7 @@ import Link from 'next/link';
 import StreakCounter from '@/components/StreakCounter';
 import ProgressRing from '@/components/ProgressRing';
 import LeitnerBox from '@/components/LeitnerBox';
+import DailyMission from '@/components/DailyMission';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useStreak } from '@/hooks/useStreak';
 import { VOCABULARY_DATA } from '@/data/vocabulary';
@@ -68,15 +69,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={`${styles.actionCard} card-minimal`}>
-          <h2 className={styles.actionTitle}>Nhiệm vụ hôm nay</h2>
-          <div className={styles.dueNumber}>{dueWords.length}</div>
-          <p className={styles.dueDesc}>từ vựng cần ôn tập</p>
-          
-          <Link href="/study" className={`${styles.primaryBtn} btn-accent`}>
-            Bắt đầu học ngay 🚀
-          </Link>
-        </div>
+        <DailyMission />
       </section>
 
       <section className={styles.quickActions}>

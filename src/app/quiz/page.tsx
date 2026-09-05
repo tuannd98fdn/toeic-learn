@@ -5,11 +5,13 @@ import Link from 'next/link';
 import QuizCard from '@/components/QuizCard';
 import Confetti from '@/components/Confetti';
 import { getRandomWords, VOCABULARY_DATA, VocabularyWord } from '@/data/vocabulary';
+import { useDailyMission } from '@/hooks/useDailyMission';
 import styles from './page.module.css';
 
 const QUIZ_LENGTH = 10;
 
 export default function QuizPage() {
+  const { recordQuizCompleted } = useDailyMission();
   const [questions, setQuestions] = useState<{word: VocabularyWord, options: string[]}[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -42,6 +44,7 @@ export default function QuizPage() {
       setCurrentIndex(prev => prev + 1);
     } else {
       setIsFinished(true);
+      recordQuizCompleted();
       const percentage = ((score + (isCorrect ? 1 : 0)) / questions.length) * 100;
       if (percentage >= 70) {
         setShowConfetti(true);
