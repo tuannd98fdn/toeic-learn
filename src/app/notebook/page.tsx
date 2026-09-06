@@ -5,6 +5,7 @@ import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { VOCABULARY_DATA, VocabularyWord } from '@/data/vocabulary';
 import Link from 'next/link';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+import { isDueForReview } from '@/utils/spacedRepetition';
 import ExamMistakeList from './ExamMistakeList';
 import styles from './page.module.css';
 
@@ -31,13 +32,16 @@ export default function NotebookPage() {
     .filter((w): w is (VocabularyWord & { wrongCount: number }) => w !== null)
     .sort((a, b) => b.wrongCount - a.wrongCount);
 
+  const vocabDueCount = vocabMistakeIds.filter(id => mistakes[id].nextReviewDate && isDueForReview(mistakes[id].nextReviewDate)).length;
+  const examDueCount = examMistakeIds.filter(id => mistakes[id].nextReviewDate && isDueForReview(mistakes[id].nextReviewDate)).length;
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <Link href="/" className={styles.backBtn}>← Quay lại</Link>
         <h1>Sổ tay lỗi sai 📓</h1>
         <p className={styles.subtitle}>
-          Bạn đang có {vocabMistakeIds.length} từ vựng và {examMistakeIds.length} câu hỏi đề thi cần ôn tập.
+          Bạn đang có {vocabMistakeIds.length} từ vựng ({vocabDueCount} đến hạn) và {examMistakeIds.length} câu hỏi đề thi ({examDueCount} đến hạn) cần ôn tập.
         </p>
       </header>
       
@@ -73,7 +77,7 @@ export default function NotebookPage() {
               <section className={styles.actionSection}>
                 <div className={`${styles.ctaCard} card-minimal`}>
                   <h2>Sẵn sàng "chuộc lỗi"?</h2>
-                  <p>Làm một bài test nhanh với các từ này. Trả lời đúng sẽ xóa từ khỏi sổ tay!</p>
+                  <p>Bạn có <strong>{vocabDueCount}</strong> từ vựng đến hạn ôn tập hôm nay.</p>
                   <Link href="/notebook/quiz" className={`${styles.primaryBtn} btn-accent`}>
                     Bắt đầu test chuộc lỗi 🚀
                   </Link>
@@ -135,10 +139,23 @@ export default function NotebookPage() {
       )}
 
       {activeTab === 'exam' && (
-        <section className={styles.listSection}>
-          <h2>Danh sách câu hỏi đề thi cần ôn</h2>
-          <ExamMistakeList mistakeIds={examMistakeIds} mistakes={mistakes} />
-        </section>
+        <>
+          {examMistakeIds.length > 0 && (
+            <section className={styles.actionSection} style={{ marginBottom: '2rem' }}>
+              <div className={`${styles.ctaCard} card-minimal`}>
+                <h2>Ôn Tập Đề Thi</h2>
+                <p>Bạn có <strong>{examDueCount}</strong> câu hỏi đến hạn ôn tập hôm nay.</p>
+                <Link href="/notebook/quiz/exam" className={`${styles.primaryBtn} btn-accent`}>
+                  Bắt đầu làm Quiz Đề thi 🎯
+                </Link>
+              </div>
+            </section>
+          )}
+          <section className={styles.listSection}>
+            <h2>Danh sách câu hỏi đề thi cần ôn</h2>
+            <ExamMistakeList mistakeIds={examMistakeIds} mistakes={mistakes} />
+          </section>
+        </>
       )}
 
       {tutorContext && (
