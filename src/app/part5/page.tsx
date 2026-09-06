@@ -1,15 +1,30 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import Confetti from '@/components/Confetti';
-import { Part5Question, getRandomPart5Questions } from '@/data/part5';
+import { useSearchParams } from 'next/navigation';
+import { Part5Question, Part5DataSchema } from '@/schema/toeic';
 import styles from './page.module.css';
 
 const TIME_LIMIT = 20; // 20 seconds per question
 
-export default function Part5SpeedTrainer() {
+export default function Part5Page() {
+  return (
+    <Suspense fallback={<div className={styles.loading}>Loading Trainer...</div>}>
+      <Part5SpeedTrainer />
+    </Suspense>
+  );
+}
+
+function Part5SpeedTrainer() {
+  const searchParams = useSearchParams();
+  const testId = searchParams.get('test') || 'ets2022_test1';
+
   const [questions, setQuestions] = useState<Part5Question[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
@@ -23,16 +38,43 @@ export default function Part5SpeedTrainer() {
 
   useEffect(() => {
     // Client-side initialization
-    setQuestions(getRandomPart5Questions(10));
-  }, []);
+    const fetchQuestions = async () => {
+      try {
+        setLoading(true);
+        // Extract year and test number from testId (e.g. ets2022_test1)
+        const match = testId.match(/ets(\d+)_test(\d+)/);
+        if (!match) throw new Error("Invalid test ID");
+        
+        const path = `/data/ets${match[1]}/test${match[2]}/part5.json`;
+        const res = await fetch(path);
+        
+        if (!res.ok) throw new Error("Failed to fetch test data");
+        
+        const data = await res.json();
+        
+        // Zod validation (Tech Lead requirement)
+        const validated = Part5DataSchema.parse(data);
+        
+        // Load all questions sequentially for the full test
+        setQuestions(validated);
+      } catch (err: any) {
+        console.error("Error loading Part 5 data:", err);
+        setError(err.message || "Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchQuestions();
+  }, [testId]);
 
   useEffect(() => {
-    if (questions.length === 0 || isFinished || showAnswer) return;
+    if (loading || questions.length === 0 || isFinished || showAnswer) return;
 
     timerRef.current = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
-          // Time's up!
+          clearInterval(timerRef.current!);
           handleTimeUp();
           return 0;
         }
@@ -43,13 +85,12 @@ export default function Part5SpeedTrainer() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [currentIndex, isFinished, showAnswer, questions.length]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [currentIndex, isFinished, showAnswer, questions, loading]);
 
   const handleTimeUp = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    const currentQ = questions[currentIndex];
-    setWrongAnswers(prev => [...prev, currentQ]);
-    showResultAndMoveOn(null, currentQ.correctAnswer);
+    setShowAnswer(true);
+    setWrongAnswers(prev => [...prev, questions[currentIndex]]);
+    showResultAndMoveOn(null, questions[currentIndex].correctAnswer);
   };
 
   const handleAnswer = (answer: string) => {
@@ -88,8 +129,16 @@ export default function Part5SpeedTrainer() {
     }, 1500);
   };
 
-  if (questions.length === 0) {
+  if (loading) {
     return <div className={styles.loading}>Loading Trainer...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.loading} style={{color: 'red'}}>Lỗi: {error}</div>;
+  }
+
+  if (questions.length === 0) {
+    return <div className={styles.loading}>No questions found.</div>;
   }
 
   if (isFinished) {
@@ -126,16 +175,17 @@ export default function Part5SpeedTrainer() {
               {wrongAnswers.map(q => (
                 <div key={q.id} className={`${styles.wrongCard} card-minimal`}>
                   <div className={styles.wrongHeader}>
-                    <span className={styles.categoryBadge}>{q.category}</span>
-                    <span className={styles.sourceBadge}>{q.source}</span>
+                    <span className={styles.categoryBadge}>{q.type || 'Grammar'}</span>
+                    <span className={styles.sourceBadge}>ETS Test</span>
                   </div>
                   <p className={styles.sentence}>
-                    {q.sentence.split('___')[0]}
+                    {q.text.split('___')[0]}
                     <span className={styles.blankFill}>{q.options[q.correctAnswer]}</span>
-                    {q.sentence.split('___')[1]}
+                    {q.text.split('___')[1] || ''}
                   </p>
                   <div className={styles.explanationBox}>
-                    <strong>Giải thích:</strong> {q.explanation}
+                    <strong>Giải thích:</strong> 
+                    <div dangerouslySetInnerHTML={{ __html: q.explanation }} />
                   </div>
                 </div>
               ))}
@@ -190,11 +240,11 @@ export default function Part5SpeedTrainer() {
       <main className={styles.main}>
         <div className={`${styles.questionCard} card-minimal`}>
           <div className={styles.cardHeader}>
-            <span className={styles.categoryBadge}>{currentQ.category}</span>
-            <span className={styles.sourceBadge}>{currentQ.source}</span>
+            <span className={styles.categoryBadge}>{currentQ.type || 'Grammar'}</span>
+            <span className={styles.sourceBadge}>ETS Test</span>
           </div>
           <p className={styles.sentence}>
-            {currentQ.sentence}
+            {currentQ.text}
           </p>
           <div className={styles.optionsGrid}>
             {(Object.entries(currentQ.options) as [string, string][]).map(([key, value]) => (

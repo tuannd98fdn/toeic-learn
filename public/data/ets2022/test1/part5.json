@@ -1,0 +1,392 @@
+[
+  {
+    "id": "62b694aebbc57b27fe10f7e4",
+    "number": 101,
+    "text": "Relative housing values have dropped more than 10 percent from ____ peak in the first half of the year.",
+    "options": {
+      "A": "they",
+      "B": "their",
+      "C": "them",
+      "D": "theirs"
+    },
+    "correctAnswer": "B",
+    "explanation": "<p>We need a possessive adjective before the noun &quot;peak&quot; =&gt; B is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7e5",
+    "number": 102,
+    "text": "The botanical garden____ on the south side of the island and can easily be found on any map.",
+    "options": {
+      "A": "is located",
+      "B": "locates",
+      "C": "locating",
+      "D": "was locating"
+    },
+    "correctAnswer": "A",
+    "explanation": "<p>Be located on&nbsp;=&gt; A is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7e6",
+    "number": 103,
+    "text": "A special luncheon for the advertising team will be____ in the main banquet hall of the Phalya Hotel.",
+    "options": {
+      "A": "staged",
+      "B": "referred",
+      "C": "held",
+      "D": "went"
+    },
+    "correctAnswer": "C",
+    "explanation": "<p>&quot;Held&quot; is the past participle of &quot;hold&quot;. &quot;Hold&quot; means &quot;to have something such as a meeting or an election&quot; which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7e7",
+    "number": 104,
+    "text": "Because it is taking____ long for the staff to get used to the software, the office manager is planning to organize a training workshop.",
+    "options": {
+      "A": "immediately",
+      "B": "unexpectedly",
+      "C": "exactly",
+      "D": "attentively"
+    },
+    "correctAnswer": "B",
+    "explanation": "<p>&quot;Unexpectedly&quot; means &quot;in a way that is not expected&quot; which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7e8",
+    "number": 105,
+    "text": "____ newly-hired employees on the management level should attend the training workshop about the company values.",
+    "options": {
+      "A": "Neither",
+      "B": "Every",
+      "C": "Each",
+      "D": "All"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>All + plural noun (employees)&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7e9",
+    "number": 106,
+    "text": "Masara Bankole, an award-winning____ at the Toronto Star, has agreed to host radio show for charity fundraising.",
+    "options": {
+      "A": "journal",
+      "B": "journalist",
+      "C": "journalism",
+      "D": "journalistic"
+    },
+    "correctAnswer": "B",
+    "explanation": "<p>The blank needs a noun. &quot;Journalist&quot; means &quot;a person who writes news stories or articles for a newspaper or magazine or broadcasts them on radio or television&quot; which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7ea",
+    "number": 107,
+    "text": "Although a sufficient number of rooms in the company housing were offered, several attendees chose to stay at a ____hotel instead.",
+    "options": {
+      "A": "next",
+      "B": "closest",
+      "C": "nearby",
+      "D": "brief"
+    },
+    "correctAnswer": "C",
+    "explanation": "<p>An adjective is needed to modify the noun &quot;hotel&quot;. &quot;Nearby&quot; means &quot;not far&nbsp;away&quot; which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7eb",
+    "number": 108,
+    "text": "Halloween costumes of the faculty members are welcome but entirely____.",
+    "options": {
+      "A": "open",
+      "B": "single",
+      "C": "available",
+      "D": "optional"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>&quot;Optional&quot; means &quot;not necessary or demanded but possible or available; depending on what you decide to do&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7ec",
+    "number": 109,
+    "text": "Saitama Vehicles Company is expected to reach this year’s sales goal by ____ record sales numbers in the third quarter of the year.",
+    "options": {
+      "A": "arriving",
+      "B": "cautioning",
+      "C": "sympathizing",
+      "D": "achieving"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>&quot;Achieve&quot; means &quot;to succeed in finishing something or reaching an aim, especially after a lot of work or effort&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7ed",
+    "number": 110,
+    "text": "Image Horizon Corporation announced this morning that its chief financial officer, Julia Park, will____ Maholia Green as chief executive officer on March 22.",
+    "options": {
+      "A": "organize",
+      "B": "accomplish",
+      "C": "replace",
+      "D": "account"
+    },
+    "correctAnswer": "C",
+    "explanation": "<p>&quot;Replace&quot; means &quot;to take the place of something, or to put something or someone in the place of something or someone else&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7ee",
+    "number": 111,
+    "text": "Montaz Motorcycles wants to make the partnership between the product and research department ____.",
+    "options": {
+      "A": "strength",
+      "B": "strengthens",
+      "C": "stronger",
+      "D": "strongly"
+    },
+    "correctAnswer": "C",
+    "explanation": "<p>Make something + adj&nbsp;=&gt; C is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7ef",
+    "number": 112,
+    "text": "The display in the Raymond Art Gallery will feature a number of____ creative art works by promising contemporary artists.",
+    "options": {
+      "A": "amaze",
+      "B": "amazed",
+      "C": "amazement",
+      "D": "amazingly"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>An adverb is needed to modify the adjective &quot;creative&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f0",
+    "number": 113,
+    "text": "Whether the tour members take a sightseeing cruise on the waterway ____ spend the day visiting the museum, they will be relaxed and comfortable.",
+    "options": {
+      "A": "both",
+      "B": "also",
+      "C": "nor",
+      "D": "or"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>Whether &hellip; or&nbsp;=&gt; D is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f1",
+    "number": 114,
+    "text": "The new innovative diesel engine works____ than the other competitive engines of other companies.",
+    "options": {
+      "A": "quiet",
+      "B": "quietly",
+      "C": "more quiet",
+      "D": "more quietly"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>An adverb is needed to modify the verb &quot;work&quot;. Because there is &quot;than&quot;, we need to use &quot;more&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f2",
+    "number": 115,
+    "text": "The proposed service center would provide additional services _______ Kovac Industry customers in the region. ",
+    "options": {
+      "A": "up",
+      "B": "to",
+      "C": "of",
+      "D": "out"
+    },
+    "correctAnswer": "B",
+    "explanation": "<p>Provide something to somebody&nbsp;=&gt; B is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f3",
+    "number": 116,
+    "text": "The Gift Boy company has a system to automatically send____ of every online order by e-mail.",
+    "options": {
+      "A": "confirms",
+      "B": "confirmed",
+      "C": "confirming",
+      "D": "confirmation"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>The blank needs a noun&nbsp;=&gt; D is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f4",
+    "number": 117,
+    "text": "Reed-Winton Machines____ announced that its researchers are in the final stages of developing a revolutionary new natural gas-powered engine.",
+    "options": {
+      "A": "recently",
+      "B": "financially",
+      "C": "permanently",
+      "D": "hardly"
+    },
+    "correctAnswer": "A",
+    "explanation": "<p>&quot;Recently&quot; means &quot;not long ago, or at a time that started not long ago&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f5",
+    "number": 118,
+    "text": "Guests who are interested in tomorrow’s ____ to Ko Kret Island may join the tour group by signing up at the reception desk.",
+    "options": {
+      "A": "excursion",
+      "B": "itinerary",
+      "C": "reservation",
+      "D": "proposal"
+    },
+    "correctAnswer": "A",
+    "explanation": "<p>&quot;Excursion&quot; means &quot;a short journey usually made for pleasure, often by a group of people&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f6",
+    "number": 119,
+    "text": "Of all the customers____ responded to the survey, 80 percent usually purchase industrial products online.",
+    "options": {
+      "A": "who",
+      "B": "whose",
+      "C": "they",
+      "D": "what"
+    },
+    "correctAnswer": "A",
+    "explanation": "<p>A relative pronoun is needed to fill in the blank. &quot;Who&quot; is the most correct since it refers to people (customers)</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f7",
+    "number": 120,
+    "text": "The Library of the National Assembly is ____ to all members of the public, but books cannot be checked out.",
+    "options": {
+      "A": "invited",
+      "B": "right",
+      "C": "open",
+      "D": "intended"
+    },
+    "correctAnswer": "C",
+    "explanation": "<p>&quot;Open&quot; means &quot;ready to be used or ready to provide a service&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f8",
+    "number": 121,
+    "text": "The recruiter in charge of the vacancy will examine the applications and contact the candidates____ the next five working days.",
+    "options": {
+      "A": "toward",
+      "B": "between",
+      "C": "among",
+      "D": "within"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>&quot;Within&quot; means &quot;inside or not further than an area or period of time&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7f9",
+    "number": 122,
+    "text": "Due to____ weather conditions, all ships scheduled to depart from Port Bremerhaven have been delayed.",
+    "options": {
+      "A": "functional",
+      "B": "unfavorable",
+      "C": "promoted",
+      "D": "incomplete"
+    },
+    "correctAnswer": "B",
+    "explanation": "<p>&quot;Unfavorable&quot; means &quot;not positive&quot; which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7fa",
+    "number": 123,
+    "text": "In the last decade, there has been____ little medical research achievement regarding the factors that can affect human memory.",
+    "options": {
+      "A": "remarkably",
+      "B": "remarked",
+      "C": "remark",
+      "D": "remarking"
+    },
+    "correctAnswer": "A",
+    "explanation": "<p>An adverb is needed to modify the adjective &quot;little&quot;&nbsp;=&gt; A is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7fb",
+    "number": 124,
+    "text": "The proper____ of steps must be followed to ensure that the television is mounted on the wall securely.",
+    "options": {
+      "A": "expertise",
+      "B": "direction",
+      "C": "sequence",
+      "D": "range"
+    },
+    "correctAnswer": "C",
+    "explanation": "<p>&quot;Sequence&quot; means &quot;a series of related things or events, or the order in which they follow each other&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7fc",
+    "number": 125,
+    "text": "Mr. Fernandez called to ask if his Monday morning meeting could be postponed____ later in the week.",
+    "options": {
+      "A": "during",
+      "B": "when",
+      "C": "since",
+      "D": "until"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>&quot;Until&quot; means &quot;not before a particular time or event&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7fd",
+    "number": 126,
+    "text": "The Delain Technology is aggressively seeking seasoned computer programmers with____ skills that enable them to solve the clients’ most demanding security needs.",
+    "options": {
+      "A": "specialize",
+      "B": "specialized",
+      "C": "specializing",
+      "D": "specialization"
+    },
+    "correctAnswer": "B",
+    "explanation": "<p>An adjective is needed to modify the noun &quot;skills&quot;&nbsp;=&gt; B is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7fe",
+    "number": 127,
+    "text": "Watertrek Power company has recently had to____ the rate it charges for electricity due to rising expenses.",
+    "options": {
+      "A": "pretend",
+      "B": "repair",
+      "C": "remind",
+      "D": "increase"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>&quot;Increase&quot; means &quot;to (make something) become larger in amount or size&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7ff",
+    "number": 128,
+    "text": "Venetian Blinds Company’s colorful blinds and curtains are guaranteed to____ your home atmosphere.",
+    "options": {
+      "A": "enhance",
+      "B": "illustrate",
+      "C": "describe",
+      "D": "accelerate"
+    },
+    "correctAnswer": "A",
+    "explanation": "<p>&quot;Enhance&quot; means &quot;to improve the quality, amount, or strength of something&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f800",
+    "number": 129,
+    "text": "The Kilimanjaro Espresso Chain distributes mugs instead of____ promotional items because of their durability and visibility.",
+    "options": {
+      "A": "other",
+      "B": "another",
+      "C": "another one",
+      "D": "each other"
+    },
+    "correctAnswer": "A",
+    "explanation": "<p>Other + plural noun&nbsp;=&gt; A is correct&nbsp;</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f801",
+    "number": 130,
+    "text": "At a retirement dinner last week, Kenichi Tatsumi ____ for his 30 years of service to the Range Engineering Group.",
+    "options": {
+      "A": "honored",
+      "B": "had honored",
+      "C": "to be honored",
+      "D": "was honored"
+    },
+    "correctAnswer": "D",
+    "explanation": "<p>We need to use the passive voice. The structure of passive voice is &quot;be + past participle&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n"
+  }
+]

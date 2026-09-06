@@ -1,0 +1,481 @@
+[
+  {
+    "id": "62b694aebbc57b27fe10f7da",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/32759585.mp3",
+    "image": "",
+    "context": "refer to the following broadcast.",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nM: Welcome to Language Today on KXRP Radio. (71) I&rsquo;m Ted Costello, and I&rsquo;ll be your host this hour. For today&rsquo;s show, I&rsquo;m thrilled to be interviewing (72) language specialist Dr. Eric Alfson right here in the studio. (72) Dr. Alfson has recently completed groundbreaking research into child language acquisition in bilingual homes. He has agreed to tell us about the surprising results even before (73) his new book hits stores on August 4. Dr. Alfson, it&rsquo;s a pleasure to welcome you to this program.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f83c",
+        "number": 71,
+        "text": "Who most likely is Ted Costello?",
+        "options": {
+          "A": "A newspaper reporter",
+          "B": "A computer scientist",
+          "C": "A radio host",
+          "D": "A research assistant"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f83d",
+        "number": 72,
+        "text": "What does Dr. Alfson specialize in?",
+        "options": {
+          "A": "Music education",
+          "B": "Market research",
+          "C": "Mergers and acquisitions",
+          "D": "The study of language"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f83e",
+        "number": 73,
+        "text": "What will happen on August 4?",
+        "options": {
+          "A": "Dr. Alfson’s new book will be available.",
+          "B": "A new research project will be launched.",
+          "C": "The radio will broadcast an interview.",
+          "D": "The results of a study will be announced."
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7db",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/27856133.mp3",
+    "image": "",
+    "context": "refer to the following announcement.",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nGood evening, and welcome to the Lucero Theater. (74) Tonight&rsquo;s performance of La Traviata will begin at 7:20 P.M. instead of 7:00 P.M. as some of our singers arrived at the theater late because of the icy roads. We sincerely apologize for the delay, and we thank you for your patience. In the meantime, (75) please visit the table near the main entrance, where our staff is selling professionally produced copies of the soundtrack from the performance. (76) On the back of your programs you will find details of our theater&rsquo;s membership program, which we encourage you to join. Without the generous support from our members, we wouldn&rsquo;t be able to stay in operation.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f83f",
+        "number": 74,
+        "text": "What caused a performance delay?",
+        "options": {
+          "A": "A loss of power",
+          "B": "Some late arrivals",
+          "C": "Malfunctioning equipment",
+          "D": "A scheduling error"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f840",
+        "number": 75,
+        "text": "What can listeners do near the entrance?",
+        "options": {
+          "A": "Get their programs autographed",
+          "B": "Enjoy light refreshments",
+          "C": "Take photos of performers",
+          "D": "Purchase musical recordings"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f841",
+        "number": 76,
+        "text": "What can be found on the back of the program?",
+        "options": {
+          "A": "Promotional coupons for events",
+          "B": "An explanation of an exchange policy",
+          "D": "Information about becoming a member"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7dc",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/80409551.mp3",
+    "image": "",
+    "context": "refer to the following speech.",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nM: I&rsquo;m glad to see that everyone was able to make it today. Our first order of business, before the presentations, is to offer our sincere appreciation to (77) Dr. Darren Heinz, who was the top donor to the Bright Future Research Foundation. Thanks to his generous contribution, our poverty research team will be able to continue numerous projects. Their work for the past fifteen years has been at the forefront of this field, (78) and this money will allow the development of new initiatives to better assist disadvantaged children and teenagers. We are so pleased that we reached our fundraising goal this year. (79)We hope all of you will be able to attend a celebratory dinner to honor Dr. Heinz and our other supporters at the Eagle Club on November 12.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f842",
+        "number": 77,
+        "text": "Who is the speaker talking about?",
+        "options": {
+          "A": "A presenter",
+          "B": "A public official",
+          "C": "A researcher",
+          "D": "A donor"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f843",
+        "number": 78,
+        "text": "How will the funding be used?",
+        "options": {
+          "A": "To give assistance to needy youth",
+          "B": "To purchase modern technology",
+          "C": "To distribute critical information",
+          "D": "To advise new businesses"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f844",
+        "number": 79,
+        "text": "What will occur on November 12?",
+        "options": {
+          "A": "A donation will be given.",
+          "B": "A special dinner will be held.",
+          "C": "An achievement test will be taken.",
+          "D": "A grand opening will be organized."
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7dd",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/24580518.mp3",
+    "image": "",
+    "context": "refer to the following telephone message.",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nW: Hi. This is Deidre Elliot (80) calling with a message for the general manager. I purchased a dryer from your store earlier this week, (81) and I wanted to tell you how pleased I was with your delivery person, Ivan Podolski. He arrived as scheduled and set up the dryer quickly. He was also careful to clean up all of the packaging before he left. I had not realized how many steps were involved in the set up, so I really appreciated his work. (82)I will certainly be recommending you to my friends and will return myself for future purchases. Thank you for the excellent customer service I received.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f845",
+        "number": 80,
+        "text": "Who is the speaker leaving a message for?",
+        "options": {
+          "A": "A customer service agent",
+          "B": "A store manager",
+          "C": "An appliance manufacturer",
+          "D": "A sales representative"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f846",
+        "number": 81,
+        "text": "Why did the speaker make the call?",
+        "options": {
+          "A": "She needs to have a device repaired.",
+          "B": "She hopes to exchange an appliance.",
+          "C": "She is complaining about a late delivery.",
+          "D": "She wants to praise a staff member."
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f847",
+        "number": 82,
+        "text": "What does the speaker say she will do?",
+        "options": {
+          "A": "Tell her friends about the business",
+          "B": "Purchase a matching washing machine",
+          "C": "Provide a favorable review",
+          "D": "Order some products for her company"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7de",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/32703867.mp3",
+    "image": "",
+    "context": "refer to the following advertisement.",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nM: Researchers at the Minnesota Sleep Clinic are recruiting volunteers to participate in (83) the largest-ever study about the effects of caffeine on sleep. Dr. Wendy Senequa, lead researcher for the project, said that (84) participants will spend seven days at the clinic having their sleep patterns monitored and recorded. They will be required to consume varying amounts of caffeine over the test period and (85) keep a detailed journal. The study is due to start in two months, so interested parties should visit www.sleepclinic.net to complete the application form and health survey before November 15.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f848",
+        "number": 83,
+        "text": "What is the research focused on?",
+        "options": {
+          "A": "How sleep improves memory",
+          "B": "How caffeine influences mood",
+          "C": "How a certain substance affects sleep",
+          "D": "How fast a treatment works"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f849",
+        "number": 84,
+        "text": "How long will volunteers be needed?",
+        "options": {
+          "A": "For two days",
+          "B": "For one week",
+          "C": "For one month",
+          "D": "For two months"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f84a",
+        "number": 85,
+        "text": "What are participants expected to do?",
+        "options": {
+          "A": "Avoid high stress levels",
+          "B": "Keep a written record",
+          "C": "Visit the clinic weekly",
+          "D": "Take medication regularly"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7df",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/11063530.mp3",
+    "image": "",
+    "context": "refer to the following telephone message.",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nW: Hi. This is Erin Gibbs calling for Clifford Johnston. I&rsquo;m the one who visited your home earlier this week (86)to discuss the renovation project for your basement. I checked with our supplier, and it will be no problem to get wood paneling that matches the type of wood used in your living room. However, you said that you needed everything finished by August 17. Unfortunately, I just found out that a few of our crew members will be using vacation time in August, (87) so we&rsquo;ll be short-staffed. If you would be able to have the work done at the end of August instead, (88)1 could give you a lower price. Please call me back at 555-4175 to let me know what you think. Thank you.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f84b",
+        "number": 86,
+        "text": "What type of project is the speaker calling about?",
+        "options": {
+          "A": "Painting a vehicle",
+          "B": "Renovating a basement",
+          "C": "Replacing a roof",
+          "D": "Decorating a living room"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f84c",
+        "number": 87,
+        "text": "What problem does the speaker mention to the listener?",
+        "options": {
+          "A": "A supplier doesn’t have the right item.",
+          "B": "The company cannot take on new clients.",
+          "C": "The price of materials has increased.",
+          "D": "There will be a lack of employees."
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f84d",
+        "number": 88,
+        "text": "What does the speaker offer to do?",
+        "options": {
+          "A": "Give the listener a discount",
+          "B": "Cancel a service contract",
+          "C": "Visit the customer in person again",
+          "D": "Send a worker on the weekend"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7e0",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/61516067.mp3",
+    "image": "",
+    "context": "refer to the following talk.",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nM: (89) It&rsquo;s great to see so much enthusiasm for your first day here at Blane Advertising. We&rsquo;re glad you&rsquo;ll be a part of our team. (90) I&rsquo;m sure you&rsquo;re wondering exactly what your work will involve. Let&rsquo;s get to that. Each month, we create several marketing campaigns for newspapers, magazines, Web sites, and television. Your role will be creating custom photographs to accompany these campaigns. You will work on projects individually and then pass them on to Gary Eldon, our project lead. To make sure everyone is following the same criteria, we will start with some training. (91) I&rsquo;ll show you a brief video that highlights some of our best work, and then we&rsquo;ll discuss it together.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f84e",
+        "number": 89,
+        "text": "Who most likely is the speaker addressing?",
+        "options": {
+          "A": "Job applicants",
+          "B": "Contest entrants",
+          "C": "Marketing students",
+          "D": "New staff members"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f84f",
+        "number": 90,
+        "text": "What does the speaker mean when he says, “Let’s get to that”?",
+        "options": {
+          "A": "Some responsibilities will be explained.",
+          "B": "A campaign is expected to succeed.",
+          "C": "Some goals are likely to be achieved.",
+          "D": "The group will move to another place."
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f850",
+        "number": 91,
+        "text": "What will the speaker do next?",
+        "options": {
+          "A": "Introduce Mr. Eldon to the trainees",
+          "B": "Explain how to resolve problems",
+          "C": "Show a video of past advertisements",
+          "D": "Distribute some instructional materials"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7e1",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/37791141.mp3",
+    "image": "",
+    "context": "refer to the following advertisement.",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nW: (93) Enjoy dining at its finest with a visit to Trentini&rsquo;s, located across the street from Lindale Apartments. Trentini&rsquo;s features authentic Italian food with a menu designed by chefs trained in the heart of Italy. (92)To celebrate our official opening on Saturday, April 5, we&rsquo;ll be providing free appetizers and half-price cocktails. Stay for a full dinner and discover delicious dishes cooked to perfection. (94) Have you been searching for your next favorite restaurant? Here&rsquo;s the answer. (94) I guarantee you won&rsquo;t be disappointed.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f851",
+        "number": 92,
+        "text": "What is the purpose of the advertisement?",
+        "options": {
+          "A": "To promote a grand opening",
+          "B": "To introduce a new chef",
+          "C": "To announce menu changes",
+          "D": "To report a change in ownership"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f852",
+        "number": 93,
+        "text": "Where is the business located?",
+        "options": {
+          "A": "Opposite a residential building",
+          "B": "In the city center",
+          "C": "Near a shopping mall",
+          "D": "Next to a department store"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f853",
+        "number": 94,
+        "text": "What does the woman mean when she says, “Here’s the answer”?",
+        "options": {
+          "A": "She is endorsing a professional chef.",
+          "B": "She is reviewing a particular dish.",
+          "C": "She is recommending a business.",
+          "D": "She is confirming a location."
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7e2",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/79834338.mp3",
+    "image": "",
+    "context": "refer to the following telephone message and receipt.<br> <br>  <table border=\"1\" cellpadding=\"0\" cellspacing=\"0\"> <tbody> <tr> <td colspan=\"2\" style=\"width: 638px; text-align: center;\"><strong>Ace Movers</strong></td> </tr> <tr> <td style=\"width: 318px; text-align: center;\">Customer</td> <td style=\"width: 322px; text-align: center;\">Luke Landers</td> </tr> <tr> <td style=\"width: 318px; text-align: center;\">Address</td> <td style=\"width: 322px; text-align: center;\">253 North Ellis Drive</td> </tr> <tr> <td style=\"width: 318px; text-align: center;\">Arrival Time</td> <td style=\"width: 322px; text-align: center;\">8:30 A.M. June 5</td> </tr> <tr> <td style=\"width: 318px; text-align: center;\">Estimated Completion</td> <td style=\"width: 322px; text-align: center;\">4:30 P.M.</td> </tr> <tr> <td style=\"width: 318px; text-align: center;\">Payment</td> <td style=\"width: 322px; text-align: center;\">$825</td> </tr> </tbody> </table>",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nM: Hello. I&rsquo;m calling from Ace Movers for Luke Landers. (95) I&rsquo;d like to confirm the details of your upcoming move. The crew is scheduled to arrive at 253 North Ellis Drive at 8:30 A.M. tomorrow, pack up your belongings, and take them to 1244 18th Street. (96)Since we have to use a smaller truck than planned, we expect it to take about two hours longer than originally scheduled. I hope that&rsquo;s okay. The total charge comes to ... ahm ... $825, which has been paid in advance. However, (97) we do request that you show the receipt to one of our employees when they arrive. Thank you.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f854",
+        "number": 95,
+        "text": "What is the purpose of the speaker’s call?",
+        "options": {
+          "A": "To confirm moving details",
+          "B": "To request advanced payment",
+          "C": "To reserve a transportation service",
+          "D": "To inquire about a moving date"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f855",
+        "number": 96,
+        "text": "Look at the graphic. What is now incorrect?",
+        "options": {
+          "A": "The address",
+          "B": "The arrival time",
+          "C": "The estimated completion",
+          "D": "The payment"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f856",
+        "number": 97,
+        "text": "What is Mr. Landers instructed to do?",
+        "options": {
+          "A": "Complete a review form",
+          "B": "Pay an employee on the scheduled day",
+          "C": "Send confirmation of an address",
+          "D": "Present a document to a crew member"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7e3",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/9013217.mp3",
+    "image": "https://storage.googleapis.com/estudyme/dev/2022/06/28/4294338.png",
+    "context": "refer to the following except from a meeting and list.",
+    "transcript": "<p><br />\n<b>Transcript</b><br />\nM: Good afternoon. (98) I&rsquo;d like to take a moment to talk about the upcoming Annual Conference for Healthcare one of the highest in the industry, and it will be a great chance to show off our products to these professionals. (99) I&rsquo;ve given you each a pamphlet that highlights the event&rsquo;s activities and speakers. I hope it will encourage you to attend. (100)And I&rsquo;m planning to reserve a booth for both weekend days. I think this is the best value considering our budget.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f857",
+        "number": 98,
+        "text": "What is the speaker talking about?",
+        "options": {
+          "A": "A medical conference",
+          "B": "A technology exhibition",
+          "C": "A political convention",
+          "D": "A career fair"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f858",
+        "number": 99,
+        "text": "What will the listeners probably do next?",
+        "options": {
+          "A": "Read a brochure",
+          "B": "Watch a presentation",
+          "C": "Reserve a booth",
+          "D": "Register for activities"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f859",
+        "number": 100,
+        "text": "Look at the graphic. How much does the speaker plan to spend on the rental?",
+        "options": {
+          "A": "$750",
+          "B": "$950",
+          "C": "$1,600",
+          "D": "$2,800"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      }
+    ]
+  }
+]

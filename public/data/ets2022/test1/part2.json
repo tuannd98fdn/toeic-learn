@@ -1,0 +1,327 @@
+[
+  {
+    "id": "62b694aebbc57b27fe10f7b4",
+    "number": 7,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/46972225.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nCan you pack the shipment to Toronto now?<br />\n(A) Fragile dishes.<br />\n<b>(B) Of course, just a minute. </b><br />\n(C) I need it back soon.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nCan you pack the shipment to Toronto now?<br />\n(A) Fragile dishes.<br />\n<b>(B) Of course, just a minute. </b><br />\n(C) I need it back soon.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7b5",
+    "number": 8,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/51864012.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhere should I put the new laboratory equipment?<br />\n(A) Did you discover one?<br />\n<b>(B) I&rsquo;ll ask the professor. </b><br />\n(C) No, it&rsquo;s still functioning.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhere should I put the new laboratory equipment?<br />\n(A) Did you discover one?<br />\n<b>(B) I&rsquo;ll ask the professor. </b><br />\n(C) No, it&rsquo;s still functioning.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7b6",
+    "number": 9,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/69779558.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nHas the plumber stopped the leak in the upstairs restroom?<br />\n<b>(A) Yes, it&rsquo;s working fine now. </b><br />\n(B) No, I live downstairs.<br />\n(C) Try calling a professional.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nHas the plumber stopped the leak in the upstairs restroom?<br />\n<b>(A) Yes, it&rsquo;s working fine now. </b><br />\n(B) No, I live downstairs.<br />\n(C) Try calling a professional.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7b7",
+    "number": 10,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/53517470.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhen do you want to leave for the concert hall?<br />\n<b>(A) How about an hour from now? </b><br />\n(B) At the Montgomery Theater.<br />\n(C) My favorite band is playing.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhen do you want to leave for the concert hall?<br />\n<b>(A) How about an hour from now? </b><br />\n(B) At the Montgomery Theater.<br />\n(C) My favorite band is playing.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7b8",
+    "number": 11,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/75499226.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nIs gas also included in the monthly rent, or just electricity?<br />\n(A) The first of each month.<br />\n(B) How much is the rent?<br />\n<b>(C) It covers all utilities. </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nIs gas also included in the monthly rent, or just electricity?<br />\n(A) The first of each month.<br />\n(B) How much is the rent?<br />\n<b>(C) It covers all utilities. </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7b9",
+    "number": 12,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/1770823.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhere is the section for your imported goods?<br />\n(A) Mostly from India.<br />\n(B) These are very important.<br />\n<b>(C) Right this way. </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhere is the section for your imported goods?<br />\n(A) Mostly from India.<br />\n(B) These are very important.<br />\n<b>(C) Right this way. </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7ba",
+    "number": 13,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/72357308.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nI can pay the deposit by check, can&rsquo;t I?<br />\n(A) I&rsquo;ll pay the check.<br />\n<b>(B) People do it all the time. </b><br />\n(C) A studio apartment.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nI can pay the deposit by check, can&rsquo;t I?<br />\n(A) I&rsquo;ll pay the check.<br />\n<b>(B) People do it all the time. </b><br />\n(C) A studio apartment.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7bb",
+    "number": 14,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/36169115.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhat time do you catch the bus in the morning?<br />\n(A) Every day except for Sundays.<br />\n<b>(B) Between seven and seven fifteen. </b><br />\n(C) The one heading downtown.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhat time do you catch the bus in the morning?<br />\n(A) Every day except for Sundays.<br />\n<b>(B) Between seven and seven fifteen. </b><br />\n(C) The one heading downtown.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7bc",
+    "number": 15,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/4024783.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nIs your restaurant able to accommodate large groups?<br />\n(A) Food here is really tasty.<br />\n(B) For your accommodations.<br />\n<b>(C) How large is your party? </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nIs your restaurant able to accommodate large groups?<br />\n(A) Food here is really tasty.<br />\n(B) For your accommodations.<br />\n<b>(C) How large is your party? </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7bd",
+    "number": 16,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/27507251.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nThe lead singer gave an amazing performance.<br />\n<b>(A) She really did, didn&rsquo;t she? </b><br />\n(B) To improve engine performance.<br />\n(C) Seats near the stage.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nThe lead singer gave an amazing performance.<br />\n<b>(A) She really did, didn&rsquo;t she? </b><br />\n(B) To improve engine performance.<br />\n(C) Seats near the stage.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7be",
+    "number": 17,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/15066364.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nThe economic analyst finished the report, didn&rsquo;t he?<br />\n(A) It has a smooth finish.<br />\n<b>(B) I&rsquo;d have to ask him. </b><br />\n(C) Please start right away.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nThe economic analyst finished the report, didn&rsquo;t he?<br />\n(A) It has a smooth finish.<br />\n<b>(B) I&rsquo;d have to ask him. </b><br />\n(C) Please start right away.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7bf",
+    "number": 18,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/64542288.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhich frame would you prefer, wooden or metal?<br />\n(A) How many frames do you need?<br />\n(B) I don&rsquo;t like that kind of music.<br />\n<b>(C) Do you carry plastic ones? </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhich frame would you prefer, wooden or metal?<br />\n(A) How many frames do you need?<br />\n(B) I don&rsquo;t like that kind of music.<br />\n<b>(C) Do you carry plastic ones? </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c0",
+    "number": 19,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/07/04/78507086.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhy don&rsquo;t you get an estimate for the repair costs?<br />\n(A) Yes, it cost me a fortune.<br />\n<b>(B) I&rsquo;ve already called the mechanic. </b><br />\n(C) There seems to be an error.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhy don&rsquo;t you get an estimate for the repair costs?<br />\n(A) Yes, it cost me a fortune.<br />\n<b>(B) I&rsquo;ve already called the mechanic. </b><br />\n(C) There seems to be an error.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c1",
+    "number": 20,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/22349070.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nHow will you get to the staff picnic?<br />\n(A) Around twelve o&rsquo;clock.<br />\n(B) Gilbert Nature Reserve.<br />\n<b>(C) I&rsquo;ll take my car. </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nHow will you get to the staff picnic?<br />\n(A) Around twelve o&rsquo;clock.<br />\n(B) Gilbert Nature Reserve.<br />\n<b>(C) I&rsquo;ll take my car. </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c2",
+    "number": 21,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/07/04/44763086.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nIsn&rsquo;t admission free at this museum?<br />\n(A) Mostly contemporary art.<br />\n(B) He finally admitted it.<br />\n<b>(C) No. There&rsquo;s a small charge. </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nIsn&rsquo;t admission free at this museum?<br />\n(A) Mostly contemporary art.<br />\n(B) He finally admitted it.<br />\n<b>(C) No. There&rsquo;s a small charge. </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c3",
+    "number": 22,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/38221030.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nI&rsquo;ll help you carry your luggage to your room.<br />\n<b>(A) I&rsquo;d really appreciate that. </b><br />\n(B) It won&rsquo;t fit under my seat.<br />\n(C) It&rsquo;s in my carry-on, I think.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nI&rsquo;ll help you carry your luggage to your room.<br />\n<b>(A) I&rsquo;d really appreciate that. </b><br />\n(B) It won&rsquo;t fit under my seat.<br />\n(C) It&rsquo;s in my carry-on, I think.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c4",
+    "number": 23,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/1002434.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhy did you run out of notepads so quickly?<br />\n(A) I will order more next month.<br />\n(B) No, I just got them yesterday.<br />\n<b>(C) I used a lot for my recent proposal. </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhy did you run out of notepads so quickly?<br />\n(A) I will order more next month.<br />\n(B) No, I just got them yesterday.<br />\n<b>(C) I used a lot for my recent proposal. </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c5",
+    "number": 24,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/59488689.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nThree microphones have been set up on the main stage.<br />\n(A) Woud you like to do it?<br />\n<b>(B) That should be enough. </b><br />\n(C) I ordered the microscopes.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nThree microphones have been set up on the main stage.<br />\n(A) Woud you like to do it?<br />\n<b>(B) That should be enough. </b><br />\n(C) I ordered the microscopes.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c6",
+    "number": 25,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/2448937.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWho attended the convention last year?<br />\n(A) With Ms. Timmons.<br />\n(B) At the Clairidge Center.<br />\n<b>(C) Mostly young job seekers. </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWho attended the convention last year?<br />\n(A) With Ms. Timmons.<br />\n(B) At the Clairidge Center.<br />\n<b>(C) Mostly young job seekers. </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c7",
+    "number": 26,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/36497742.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nLet&rsquo;s assign the resume screening to Tim instead of Stacey.<br />\n(A) She&rsquo;s already submitted it.<br />\n<b>(B) He might be too busy. </b><br />\n(C) A flat-screen television.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nLet&rsquo;s assign the resume screening to Tim instead of Stacey.<br />\n(A) She&rsquo;s already submitted it.<br />\n<b>(B) He might be too busy. </b><br />\n(C) A flat-screen television.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c8",
+    "number": 27,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/27895551.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nDo you have any furnished studio apartments in this neighborhood?<br />\n<b>(A) I&rsquo;ll have to check our database. </b><br />\n(B) Yes, we sell furniture here.<br />\n(C) A one-year lease.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nDo you have any furnished studio apartments in this neighborhood?<br />\n<b>(A) I&rsquo;ll have to check our database. </b><br />\n(B) Yes, we sell furniture here.<br />\n(C) A one-year lease.</p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7c9",
+    "number": 28,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/54931694.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nThere&rsquo;s an exhibit of 19th-century paintings at the Hanover Gallery.<br />\n(A) I didn&rsquo;t know you could paint.<br />\n(B) Yes, the color looks great.<br />\n<b>(C) I saw a commercial for it yesterday. </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nThere&rsquo;s an exhibit of 19th-century paintings at the Hanover Gallery.<br />\n(A) I didn&rsquo;t know you could paint.<br />\n(B) Yes, the color looks great.<br />\n<b>(C) I saw a commercial for it yesterday. </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7ca",
+    "number": 29,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/91254480.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhen will we arrange the display for the new air purifier?<br />\n(A) The arrangement looks beautiful<br />\n(B) Would you mind if I kirn it on?<br />\n<b>(C) As soon as the brochures arrive. </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhen will we arrange the display for the new air purifier?<br />\n(A) The arrangement looks beautiful<br />\n(B) Would you mind if I kirn it on?<br />\n<b>(C) As soon as the brochures arrive. </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7cb",
+    "number": 30,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/48822592.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nInvesting in mining companies is risky, isn&rsquo;t it?<br />\n(A) Yes, he is a promising investor.<br />\n(B) I&rsquo;m glad no one was hurt.<br />\n<b>(C) My stock broker believes it is. </b></p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nInvesting in mining companies is risky, isn&rsquo;t it?<br />\n(A) Yes, he is a promising investor.<br />\n(B) I&rsquo;m glad no one was hurt.<br />\n<b>(C) My stock broker believes it is. </b></p>\n"
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7cc",
+    "number": 31,
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/65494038.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><br />\n<b>Transcript: </b><br />\nWho will inspect the machinery on the production floor?<br />\n(A) Joseph works on the second floor.<br />\n<b>(B) They&rsquo;re still deciding. </b><br />\n(C) For packaging items.</p>\n",
+    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWho will inspect the machinery on the production floor?<br />\n(A) Joseph works on the second floor.<br />\n<b>(B) They&rsquo;re still deciding. </b><br />\n(C) For packaging items.</p>\n"
+  }
+]

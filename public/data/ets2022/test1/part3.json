@@ -1,0 +1,626 @@
+[
+  {
+    "id": "62b694aebbc57b27fe10f7cd",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/40438651.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<b>W:</b> Hey, John. Do you know where the budget file is? I can&rsquo;t find it.<br />\n<b>M:</b> No, Jean, I have no idea. Why don&rsquo;t you ask Patrick?<br />\n<b>W:</b> Patrick&rsquo;s out of town right now, and I am sure he doesn&rsquo;t have it. Hmm, are you sure it&rsquo;s not in your office?<br />\n<b>M:</b> Well, I&rsquo;ll check once more, but I&rsquo;ll probably be giving you the same answer.</p>\n",
+    "questions": [
+      {
+        "id": "62b694aebbc57b27fe10f815",
+        "number": 32,
+        "text": "What does the woman want to find?",
+        "options": {
+          "A": "Some money",
+          "B": "A file",
+          "C": "An office key",
+          "D": "A check"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      },
+      {
+        "id": "62b694aebbc57b27fe10f816",
+        "number": 33,
+        "text": "Where most likely is Patrick?",
+        "options": {
+          "A": "At his home",
+          "B": "In his office",
+          "C": "At a restaurant",
+          "D": "On a business trip"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694aebbc57b27fe10f817",
+        "number": 34,
+        "text": "What will John most likely do next?",
+        "options": {
+          "A": "Check his office",
+          "B": "Bring Patrick",
+          "C": "Postpone a meeting",
+          "D": "Reply to a letter"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7ce",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/23344354.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<b>W:</b> Look at all the robotics we are using on the manufacturing assembly line. They are all automatically operated.<br />\n<b>M:</b> I can see. It&rsquo;s really impressive. You know, factories rarely use such high-quality devices these days.<br />\n<b>W:</b> Yes. So I need to find the right system to handle all the equipment we&rsquo;ve installed. The system we&rsquo;re currently using needs to be upgraded. How much would it cost to do business with your company?</p>\n",
+    "questions": [
+      {
+        "id": "62b694aebbc57b27fe10f818",
+        "number": 35,
+        "text": "Where is this conversation most likely taking place?",
+        "options": {
+          "A": "At a robot exhibition",
+          "B": "At a computer system convention",
+          "C": "At a machinery shop",
+          "D": "In a manufacturing plant"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694aebbc57b27fe10f819",
+        "number": 36,
+        "text": "Why is the man impressed?",
+        "options": {
+          "A": "The equipment is of high quality.",
+          "B": "The factory is selling expensive devices.",
+          "C": "The robots are working instead of people.",
+          "D": "The machines are very clean."
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694aebbc57b27fe10f81a",
+        "number": 37,
+        "text": "What is the woman wondering?",
+        "options": {
+          "A": "The cost of a system upgrade",
+          "B": "The location of a factory",
+          "C": "A time for installation",
+          "D": "A report on company’s performance"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7cf",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/2774499.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<b>M:</b> Mandy, Mr. Ransh just called me. He sounded pretty upset about not receiving any design blueprints yet. You&#39;d better send him something soon.<br />\n<b>W:</b> Really? That&#39;s weird. I sent him a blueprint by e-mail last week!<br />\n<b>M:</b> Hmm. Are you sure? Maybe you sent it to the wrong e-mail address.<br />\n<b>W:</b> No. I have his correct address saved in my computer directory. Well, I should send him a blueprint again right away anyway.</p>\n",
+    "questions": [
+      {
+        "id": "62b694aebbc57b27fe10f81b",
+        "number": 38,
+        "text": "Why is Mr. Ransh upset?",
+        "options": {
+          "A": "He did not receive a document.",
+          "B": "The woman canceled an appointment.",
+          "C": "He doesn’t like the woman’s design.",
+          "D": "The construction of a building has cancelled."
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694aebbc57b27fe10f81c",
+        "number": 39,
+        "text": "What did the woman do last week?",
+        "options": {
+          "A": "She had a business meeting with Mr. Ransh.",
+          "B": "She made changes in a blueprint design.",
+          "C": "She sent an e-mail to Mr. Ransh.",
+          "D": "She talked with Mr. Ransh on the phone."
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694aebbc57b27fe10f81d",
+        "number": 40,
+        "text": "What will the woman most likely do next?",
+        "options": {
+          "A": "Call Mr. Ransh",
+          "B": "Send a document",
+          "C": "Visit Mr. Ransh",
+          "D": "Redesign the blueprints"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d0",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/93860120.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<b>M:</b> Long time no see, Janice. Did you like Greece?<br />\n<b>W:</b> Yeah, it was just great. My friends and I stayed at a cozy hotel in Athens for three weeks.<br />\n<b>M:</b> Oh, I remember last year when I visited Athens for business. I had a lot of free time so I enjoyed sightseeing. What about you?<br />\n<b>W:</b> Just for the first week. We mostly spent our time walking, lying, and resting on the beach near the hotel. We sometimes tried out new restaurants, too.</p>\n",
+    "questions": [
+      {
+        "id": "62b694aebbc57b27fe10f81e",
+        "number": 41,
+        "text": "Where did Janice stay when she was in Athens?",
+        "options": {
+          "A": "In a hotel",
+          "B": "At a friend’s house",
+          "C": "In an office",
+          "D": "In her home"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694aebbc57b27fe10f81f",
+        "number": 42,
+        "text": "Why did the man go to Athens?",
+        "options": {
+          "A": "For a family trip",
+          "B": "For a vacation",
+          "C": "For a business trip",
+          "D": "For a promotion"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694aebbc57b27fe10f820",
+        "number": 43,
+        "text": "How did Janice mostly spend her vacation?",
+        "options": {
+          "A": "Eating various Greek foods",
+          "B": "Relaxing on the beach",
+          "C": "Shopping",
+          "D": "Sightseeing"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d1",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/99660487.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<b>W:</b> Everyone&rsquo;s here now. Is dinner ready to be served?<br />\n<b>M:</b> I&rsquo;m afraid there has been some miscommunications in the schedule. I just spoke with the caterer on the phone, and he thought the food was to be ready by 8 o&rsquo;clock.<br />\n<b>W:</b> Eight? But we told them dinner would be at 6:30. They must have mistaken it for the presentation time. Oh well, I guess we&rsquo;ll have to change our plans and watch the presentation first.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f821",
+        "number": 44,
+        "text": "What are the speakers talking about?",
+        "options": {
+          "A": "Food on the menu",
+          "B": "A dinner for guests",
+          "C": "A good place to eat",
+          "D": "A presentation coming up next month"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f822",
+        "number": 45,
+        "text": "What will happen at 8 o’clock?",
+        "options": {
+          "A": "A presentation will take place as scheduled.",
+          "B": "They will go home.",
+          "C": "Food will be served.",
+          "D": "They will call the caterer."
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f823",
+        "number": 46,
+        "text": "What will probably happen next?",
+        "options": {
+          "A": "They will do the presentation.",
+          "B": "They will go to the caterer.",
+          "C": "They will go to a restaurant.",
+          "D": "They will cancel the event."
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d2",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/108125.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<b>W:</b> The documents that I was planning to use at the presentation are missing. I&rsquo;m sure I brought them with me this morning.<br />\n<b>M:</b> Look in your bag again. They are probably somewhere among your other papers.<br />\n<b>W:</b> No, they&rsquo;re not. I&rsquo;ve already looked three times. Will you go first and get the conference room ready for the meeting? Let me just go back to my office and make some copies.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f824",
+        "number": 47,
+        "text": "What is the woman concerned about?",
+        "options": {
+          "A": "She is late for the conference.",
+          "B": "She cannot find her documents.",
+          "C": "She needs to practice a presentation speech.",
+          "D": "Her bag is missing."
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f825",
+        "number": 48,
+        "text": "What does the woman suggest the man do?",
+        "options": {
+          "A": "Help her find some materials",
+          "B": "Go to her office",
+          "C": "Prepare for the meeting",
+          "D": "Rewrite some papers"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f826",
+        "number": 49,
+        "text": "Where will the woman go next?",
+        "options": {
+          "A": "To the conference room",
+          "B": "To her house",
+          "C": "To her office",
+          "D": "To a copying store"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d3",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/10205448.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<br />\n<b>M:</b> I had a good look at your resume and cover letter, Ms. Landers. And I am willing to offer you a position as a sales representative at Indie Industries.<br />\n<b>W:</b> Oh, thank you Mr. Carper. I am grateful to accept your offer. I really wanted this opportunity to use my background in sales. I applied right away after seeing the newspaper advertisement for the job.<br />\n<b>M:</b> Well, you sure made a great choice there. Now I&rsquo;ll introduce you to Ms. Clarkson in the Personnel Department for some papers you need to fill out. When do you think you can start working?<br />\n<b>W:</b> I&rsquo;ll be ready in about two weeks.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f827",
+        "number": 50,
+        "text": "What does the man mean when he says, “Well, you sure made a great choice there”?",
+        "options": {
+          "A": "He wanted the opportunity to use his background.",
+          "B": "He decided to hire the woman as a salesperson.",
+          "C": "He looked over her resume and cover letter.",
+          "D": "He applied after seeing the newspaper advertisement."
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f828",
+        "number": 51,
+        "text": "Why does Ms. Landers have to go to the Personnel Department?",
+        "options": {
+          "A": "To introduce herself to the employees",
+          "B": "To have an interview",
+          "C": "To apply for a job",
+          "D": "To fill out some papers"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f829",
+        "number": 52,
+        "text": "When will Ms. Landers probably start working?",
+        "options": {
+          "A": "Today",
+          "B": "Tomorrow",
+          "C": "Next week",
+          "D": "In two weeks"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d4",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/74068035.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<br />\n<b>M1:</b> Lauri, what a surprise! I didn&rsquo;t know you were coming.<br />\n<b>W:</b> Oh, Hi! Long time no see!<br />\n<b>M2:</b> I was told that you moved from New York to London.<br />\n<b>W:</b> Right! I have lived in London for 10 years, so, I wasn&rsquo;t going to, but I changed my mind. I just couldn&rsquo;t get our 15th reunion out of my mind.<br />\n<b>M1:</b> Isn&rsquo;t it so great to be back here after all these years?<br />\n<b>M2:</b> Yeah, it&rsquo;s a beautiful campus. I can&rsquo;t believe it&rsquo;s already been 15 years since we graduated.<br />\n<b>M1:</b> Do you remember when we won the first prize at the student chess tournament?<br />\n<b>W:</b> How can I forget that? It was one of the best moments in my college life.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f82a",
+        "number": 53,
+        "text": "How do the speakers know each other?",
+        "options": {
+          "A": "They graduated from the same university.",
+          "B": "They are business colleagues.",
+          "C": "They are currently on the same chess team.",
+          "D": "They are professors at a college."
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f82b",
+        "number": 54,
+        "text": "How many years ago were the speakers at this place?",
+        "options": {
+          "A": "Five",
+          "B": "Ten",
+          "C": "Fifteen",
+          "D": "Fifty"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f82c",
+        "number": 55,
+        "text": "According to the woman, what is one of her favorite memories?",
+        "options": {
+          "A": "The graduation ceremony",
+          "B": "Studying with friends",
+          "C": "Winning a prize",
+          "D": "Walking around the campus"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d5",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/78867473.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<br />\n<b>M:</b> Hi, Kimmy. Do you have a minute to talk about the Technology Workshop?<br />\n<b>W:</b> I have a weekly meeting soon, but go ahead.<br />\n<b>M:</b> Actually, I need to discuss the refreshments for the workshop you&rsquo;re holding next Friday. You asked me to call you back before I confirm the order.<br />\n<b>W:</b> Right. I want to make sure everything is perfect. As I told you, we expect 20 participants and will need some coffee, juice, and bagels for breakfast. As for lunch, we will need sandwiches and diet Coke. Everything&rsquo;s clear, right?<br />\n<b>M:</b> Yes, perfect. I&rsquo;ll place the order right away. The cost will be approximately 100 dollars.<br />\n<b>W:</b> Okay. Oh, I want one more thing. Let&rsquo;s add some fruit to the lunch menu.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f82d",
+        "number": 56,
+        "text": "Who is the woman?",
+        "options": {
+          "A": "A restaurant manager",
+          "B": "A presentation participant",
+          "C": "A workshop organizer",
+          "D": "A cook"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f82e",
+        "number": 57,
+        "text": "What does the woman mean when she says, “I have a weekly meeting soon”?",
+        "options": {
+          "A": "She cannot talk with the man for long.",
+          "B": "She will discuss the problem soon.",
+          "C": "She will invite the man to a weekly meeting.",
+          "D": "She will participate in the workshop next Friday."
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f82f",
+        "number": 58,
+        "text": "What does Kimmy additionally want?",
+        "options": {
+          "A": "A cheaper price",
+          "B": "Additional food items",
+          "C": "Some alcohol",
+          "D": "Dinner menus"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d6",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/59643915.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<br />\n<b>W:</b> Mr. Heath, I want to talk about scheduling interviews for the web-design position.<br />\n<b>M:</b> Oh, yes. I&rsquo;ll be at work only on Wednesday and Thursday next week, because I will be on a business trip.<br />\n<b>W:</b> Hmm, I have a conference to attend on Wednesday, so I don&rsquo;t think I&rsquo;ll be at the office that day.<br />\n<b>M:</b> Well, what about doing the interviews on Thursday before I leave?<br />\n<b>W:</b> Okay. I guess only Thursday works for both of us. We really need to hire someone as quickly as possible.<br />\n<b>M:</b> Right, it&rsquo;s urgent. The clients are starting to complain about the old designs of our website.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f830",
+        "number": 59,
+        "text": "What is the conversation about?",
+        "options": {
+          "A": "Advertising a website",
+          "B": "Making schedules",
+          "C": "Improving interview skills",
+          "D": "Organizing a conference"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f831",
+        "number": 60,
+        "text": "What will happen on Thursday?",
+        "options": {
+          "A": "Job interviews will take place.",
+          "B": "They will attend a conference.",
+          "C": "A website will be renewed.",
+          "D": "They will leave on a business trip."
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f832",
+        "number": 61,
+        "text": "What are clients complaining about?",
+        "options": {
+          "A": "A website",
+          "B": "A building’s design",
+          "C": "A schedule for job interview",
+          "D": "A conference date"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d7",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/34867286.mp3",
+    "image": "https://storage.googleapis.com/kslearning/images/511506294-1620791494579-part3-1.png",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<br />\n<b>M:</b> Michiko, the monthly sales meeting is scheduled for tomorrow, right? What time is it scheduled for?<br />\n<b>W:</b> It&rsquo;s at the usual time, 1 o&rsquo;clock, but remember we&rsquo;re at a different location this month. The Royal Hotel didn&rsquo;t have any private rooms available, so we reserved a space at the Chinese restaurant near the city hall.<br />\n<b>M:</b> Great, I love Chinese food and I hope they&rsquo;ll give us a big room. Actually, I like the service and food at the Italian restaurant next to the cafe, but I was disappointed with the tiny room they gave us last month.<br />\n<b>W:</b> That&rsquo;s right. I guess they didn&rsquo;t know how much our sales department&rsquo;s grown. See you tomorrow.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f833",
+        "number": 62,
+        "text": "According to the speakers, who will meet tomorrow?",
+        "options": {
+          "A": "Hotel managers",
+          "B": "City officials",
+          "C": "A restaurant staff",
+          "D": "A sales department"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f834",
+        "number": 63,
+        "text": "What was the problem at last month’s meeting?",
+        "options": {
+          "A": "The room was cold.",
+          "B": "The meeting started late.",
+          "C": "The room was small.",
+          "D": "The service was poor."
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f835",
+        "number": 64,
+        "text": "Look at the graphic. Where will the meeting most likely be held?",
+        "options": {
+          "A": "Royal Hotel",
+          "B": "Pecking",
+          "C": "Tulips Cafe",
+          "D": "Sorento"
+        },
+        "correctAnswer": "B",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d8",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/66404242.mp3",
+    "image": "https://storage.googleapis.com/kslearning/images/813960684-1620791461246-part3-2.png",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<b>W:</b> Frank, did you order some clothes? I just received this box from Macy&rsquo;s but I haven&rsquo;t placed any orders.<br />\n<b>M:</b> Yes, thanks. I ordered a few things the day before yesterday. I needed some suits and neckties to wear for my presentations and banquet next week.<br />\n<b>W:</b> Oh, okay. I guess the delivery person was confused since you put the department in the order instead of your own name.<br />\n<b>M:</b> Oh, did I? I was in a real hurry. I won&rsquo;t forget to put my name next time.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f836",
+        "number": 65,
+        "text": "What does the woman say to the man?",
+        "options": {
+          "A": "She wants to place an order.",
+          "B": "She needs to borrow a box.",
+          "C": "She has a new telephone number.",
+          "D": "She received some clothes."
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f837",
+        "number": 66,
+        "text": "What is the man preparing for?",
+        "options": {
+          "A": "A job interview",
+          "B": "A business trip",
+          "C": "A vacation",
+          "D": "A presentation"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f838",
+        "number": 67,
+        "text": "Look at the graphic. What did the man forget to do?",
+        "options": {
+          "A": "Include his name",
+          "B": "Write zip code",
+          "C": "Write his department",
+          "D": "Order some clothes"
+        },
+        "correctAnswer": "A",
+        "explanation": ""
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f7d9",
+    "audioUrl": "https://storage.googleapis.com/estudyme/dev/2022/06/27/79173467.mp3",
+    "image": "https://storage.googleapis.com/kslearning/images/553702711-1620791436005-part3-3.png",
+    "context": "",
+    "transcript": "<p><b>Transcript</b><br />\n<br />\n<b>M:</b> I&rsquo;m looking for healthy foods. Last week, I went to hospital and my doctor advised me to lose weight. At least, I should lose 20 pounds.<br />\n<b>W:</b> If you want to lose weight, you&rsquo;ll need to eat less and exercise more. When you burn 500 more calories than you eat everyday for a week, you can lose about 1-2 pounds.<br />\n<b>M:</b> I know. Limiting salt and sugar may also help lose more weight. I&rsquo;m trying to change my diet. Look at this. How about this canned chicken soup?<br />\n<b>W:</b> Oh, no! That&rsquo;s almost 2 grams. Why don&rsquo;t you buy some fresh fruits and vegetables?</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f839",
+        "number": 68,
+        "text": "Where does this conversation take place?",
+        "options": {
+          "A": "In a restaurant",
+          "B": "In a hospital",
+          "C": "In a grocery store",
+          "D": "In a fitness center"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f83a",
+        "number": 69,
+        "text": "Look at the graphic. Which of the ingredients does the woman express concern about?",
+        "options": {
+          "A": "Fat",
+          "B": "Sugar",
+          "C": "Sodium",
+          "D": "Protein"
+        },
+        "correctAnswer": "C",
+        "explanation": ""
+      },
+      {
+        "id": "62b694afbbc57b27fe10f83b",
+        "number": 70,
+        "text": "What does the woman suggest the man do?",
+        "options": {
+          "A": "Try another soup and salad",
+          "B": "Speak with a doctor",
+          "C": "Become a strict vegetarian",
+          "D": "Purchase a different item"
+        },
+        "correctAnswer": "D",
+        "explanation": ""
+      }
+    ]
+  }
+]

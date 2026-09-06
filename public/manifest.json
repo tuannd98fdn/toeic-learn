@@ -1,0 +1,19 @@
+{
+  "name": "TOEIC Master VN",
+  "short_name": "TOEIC Master",
+  "description": "Luyện thi TOEIC miễn phí, hiệu quả nhất Việt Nam",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "lang": "vi",
+  "categories": ["education"]
+}

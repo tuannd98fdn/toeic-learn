@@ -1,22 +1,74 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Confetti from '@/components/Confetti';
-import { Part7PassageSet, getRandomPart7Passage } from '@/data/part7';
+import { useSearchParams } from 'next/navigation';
+import { Part7PassageSet, Part7DataSchema } from '@/schema/toeic';
 import styles from './page.module.css';
 
-export default function Part7Trainer() {
-  const [passageSet, setPassageSet] = useState<Part7PassageSet | null>(null);
+export default function Part7Page() {
+  return (
+    <Suspense fallback={<div className={styles.loading}>Đang tải dữ liệu bài thi...</div>}>
+      <Part7Trainer />
+    </Suspense>
+  );
+}
+
+function Part7Trainer() {
+  const searchParams = useSearchParams();
+  const testId = searchParams.get('test') || 'ets2022_test1';
+
+  const [passageSets, setPassageSets] = useState<Part7PassageSet[]>([]);
+  const [currentPassageIndex, setCurrentPassageIndex] = useState(0);
+  const passageSet = passageSets[currentPassageIndex] || null;
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
-    // Client-side initialization
-    setPassageSet(getRandomPart7Passage());
-  }, []);
+    const fetchPassage = async () => {
+      try {
+        setLoading(true);
+        const match = testId.match(/ets(\d+)_test(\d+)/);
+        if (!match) throw new Error("Invalid test ID");
+        
+        const path = `/data/ets${match[1]}/test${match[2]}/part7.json`;
+        const res = await fetch(path);
+        
+        if (!res.ok) throw new Error("Failed to fetch test data");
+        
+        const data = await res.json();
+        const validated = Part7DataSchema.parse(data);
+        
+        if (validated.length > 0) {
+          setPassageSets(validated as Part7PassageSet[]);
+        } else {
+          setError("No passages found");
+        }
+      } catch (err: any) {
+        console.error("Error loading Part 7 data:", err);
+        setError(err.message || "Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchPassage();
+  }, [testId]);
+
+  if (loading) {
+    return <div className={styles.loading}>Đang tải dữ liệu bài thi...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.loading} style={{color: 'var(--danger)'}}>Lỗi: {error}</div>;
+  }
 
   if (!passageSet) {
     return <div className={styles.loading}>Loading Passage...</div>;
@@ -41,13 +93,26 @@ export default function Part7Trainer() {
   const handleSubmit = () => {
     setIsSubmitted(true);
     // Check if score is perfect
-    let score = 0;
-    passageSet.questions.forEach(q => {
-      if (answers[q.id] === q.correctAnswer) score++;
-    });
+    const score = passageSet.questions.reduce((acc, q) => {
+      return acc + (answers[q.id] === q.correctAnswer ? 1 : 0);
+    }, 0);
+
     // Threshold for confetti: getting all questions correct
     if (score === passageSet.questions.length) {
       setShowConfetti(true);
+    }
+  };
+
+  const handleNextPassage = () => {
+    if (currentPassageIndex < passageSets.length - 1) {
+      setCurrentPassageIndex(prev => prev + 1);
+      setAnswers({});
+      setIsSubmitted(false);
+      setShowConfetti(false);
+      setActiveQuestionIndex(0);
+    } else {
+      // Completed all passages
+      window.location.href = '/';
     }
   };
 
@@ -93,7 +158,7 @@ export default function Part7Trainer() {
       <header className={styles.header}>
         <div>
           <h1 className={styles.title}>Part 7: Reading Comprehension</h1>
-          <p className={styles.subtitle}>{passageSet.source} - {passageSet.type} Passage</p>
+          <p className={styles.subtitle}>{passageSet.source || 'ETS Test'} - {passageSet.type} Passage ({currentPassageIndex + 1}/{passageSets.length})</p>
         </div>
         <Link href="/" className={styles.backBtn}>Thoát</Link>
       </header>
@@ -127,7 +192,6 @@ export default function Part7Trainer() {
                 <span className={styles.qIndicator}>
                   Question {activeQuestionIndex + 1} of {passageSet.questions.length}
                 </span>
-                <span className={styles.qTypeBadge}>{currentQuestion.type}</span>
               </div>
               
               <h3 className={styles.qText}>{currentQuestion.number}. {currentQuestion.text}</h3>
@@ -199,8 +263,8 @@ export default function Part7Trainer() {
                   );
                 })}
               </div>
-              <button className={styles.submitBtn} onClick={() => window.location.reload()}>
-                Làm bài đọc khác 🔄
+              <button className={styles.submitBtn} onClick={handleNextPassage}>
+                {currentPassageIndex < passageSets.length - 1 ? 'Đoạn văn tiếp theo ➡️' : 'Hoàn thành bài thi 🏆'}
               </button>
             </div>
           )}

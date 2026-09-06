@@ -1,0 +1,191 @@
+.playerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.playerContainer:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.audioWave {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+
+.audioWave span {
+  width: 3px;
+  height: 100%;
+  background: var(--primary);
+  border-radius: 2px;
+  animation: wave 1s infinite ease-in-out;
+}
+
+.audioWave span:nth-child(2) {
+  animation-delay: 0.2s;
+  height: 70%;
+}
+
+.audioWave span:nth-child(3) {
+  animation-delay: 0.4s;
+  height: 40%;
+}
+
+.audioWave.paused span {
+  animation: none;
+  height: 30%;
+  background: var(--text-tertiary);
+}
+
+@keyframes wave {
+  0%, 100% { height: 25%; }
+  50% { height: 100%; }
+}
+
+.speedGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--card);
+  padding: 2px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.speedBtn {
+  background: transparent;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 16px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.speedBtn:hover {
+  color: var(--foreground);
+}
+
+.speedBtn.active {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mainBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+  flex-shrink: 0;
+}
+
+.mainBtn:hover {
+  background: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.rewindBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.rewindBtn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: scale(1.05);
+}
+
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 0.25rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  appearance: none;
+  background: var(--muted);
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+.progressBar::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+  transition: transform 0.1s;
+}
+
+.progressBar::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.timeRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}

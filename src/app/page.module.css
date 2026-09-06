@@ -157,10 +157,45 @@
   margin-bottom: 15px;
 }
 
+.cardIconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gridCard:hover .cardIconWrapper {
+  transform: scale(1.12) translateY(-2px);
+}
+
+.iconPrimary {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.iconSecondary {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--secondary);
+}
+
+.iconAccent {
+  background: var(--warning-light);
+  color: var(--accent);
+}
+
+.iconSuccess {
+  background: var(--success-light);
+  color: var(--success);
+}
+
 .gridCard h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
   color: var(--foreground);
 }
 

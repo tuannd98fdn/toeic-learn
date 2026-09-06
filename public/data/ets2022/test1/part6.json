@@ -1,0 +1,242 @@
+[
+  {
+    "id": "62b694aebbc57b27fe10f802",
+    "title": "Part 6 Passage",
+    "type": "Text",
+    "content": "<p>refer to the following notice.<br />\n&nbsp;</p>\n\n<h4 align=\"center\"><b>NOTICE TO EMPLOYEES </b></h4>\n\n<p>The IT department maintains the proper working order of all on-site computer hardware. We also ensure that the accompanying software (131) ___ at its top level of performance.<br />\nIf you are having trouble with your office computer, please contact the IT department on extension 233 and leave a message explaining the (132) ___<br />\nTo best serve you, we ask you to include as many details as possible. This includes when the issue began. (133)___.The more information we have, the faster we can find a solution.<br />\nWe will (134) ____ contact you to set up a time for a visit from one of our technicians.<br />\nThank you for your cooperation.</p>\n\n<p>&nbsp;</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f85a",
+        "number": 131,
+        "text": "",
+        "options": {
+          "A": "functionally",
+          "B": "functional",
+          "C": "to function",
+          "D": "is functioning"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>The blank needs a verb =&gt; D is correct&nbsp;</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f85b",
+        "number": 132,
+        "text": "",
+        "options": {
+          "A": "problem",
+          "B": "charge",
+          "C": "meeting",
+          "D": "decision"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>&quot;Problem&quot; means &quot;a situation, person, or thing that needs attention and needs to be dealt with or solved&quot; which has the most appropriate meaning&nbsp;</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f85c",
+        "number": 133,
+        "text": "",
+        "options": {
+          "A": "Turning your computer off and back on won’t address the issue.",
+          "B": "Also tell us what you were doing immediately prior to it.",
+          "C": "Moreover, improper connections could be responsible for the error.",
+          "D": "We will try to answer any questions you have about your device."
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>B is correct since it can connect to the previous sentence <em>&quot;This includes when the issue began&quot;&nbsp;</em></p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f85d",
+        "number": 134,
+        "text": "",
+        "options": {
+          "A": "casually",
+          "B": "collectively",
+          "C": "frequently",
+          "D": "promptly"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>&quot;Promptly&quot; means &quot;quickly, without delay, or at the arranged time&quot; which has the most appropriate meaning&nbsp;</p>\n"
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f803",
+    "title": "Part 6 Passage",
+    "type": "Text",
+    "content": "<p>refer to the following e-mail.<br />\n<br />\n<b>To: </b>Vincent Silvers vsilvers@tjrprinting.com<br />\n<b>From:</b> Joseph Craig jcraig@tjrprinting.com<br />\n<b>Date:</b> June 20<br />\n<b>Subject:</b> Spelling error on Lambert posters<br />\n<br />\nHi Vincent,<br />\n<br />\nIt&rsquo;s just come to my attention that there&rsquo;s been a setback with the Lambert project. Apparently the posters for their product launch contain a (135)____.<br />\nThe company name was typed incorrectly in the heading on the final version. As the liaison for this client, I need you to contact Mr. Lambert, notify him of the issue, and (136) ___ for the oversight.<br />\nBecause we were responsible for this error, please reassure Mr. Lambert that reprinting of the posters will occur at (137) ___ expense and will be completed by the end of next week.<br />\n(138) ____.<br />\n<br />\nRegards,<br />\nJoseph Craig Production Manager, TJR Printing</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f85e",
+        "number": 135,
+        "text": "",
+        "options": {
+          "A": "statement",
+          "B": "correction",
+          "C": "misprint",
+          "D": "location"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>&quot;Misprint&quot; means &quot;a mistake, such as a word that is spelled wrong, in a printed text&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f85f",
+        "number": 136,
+        "text": "",
+        "options": {
+          "A": "apologizing",
+          "B": "apologized",
+          "C": "apologizes",
+          "D": "apologize"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>The blank needs a verb to create a parallel&nbsp;structure with &quot;<em>contact </em>Mr. Lambert, <em>notify </em>him of the issue&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f860",
+        "number": 137,
+        "text": "",
+        "options": {
+          "A": "our",
+          "B": "his",
+          "C": "its",
+          "D": "them"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Because the subject in the previous clause is &quot;We&quot; (Because we were responsible for this error), we need to use the possessive adjective &quot;our&quot;&nbsp;=&gt; A is correct&nbsp;</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f861",
+        "number": 138,
+        "text": "",
+        "options": {
+          "A": "Mr. Lambert has approved the final version, so this project is now complete.",
+          "B": "Any further production complaints can be sent to me directly.",
+          "C": "Let’s schedule a meeting to determine the appropriate solution.",
+          "D": "Please contact me once you have received payment for the reprints."
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>B is correct since it can connect with the previous sentence <em>&quot;please reassure Mr. Lambert that reprinting of the posters will occur at our expense and will be completed by the end of next week&quot;</em></p>\n"
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f804",
+    "title": "Part 6 Passage",
+    "type": "Text",
+    "content": "refer to the following article. <br><br><b>Sales Manager Wins Negotiation Prize!</b> <br><br>Our very own Nigel Davis, head of the direct sales division, has won the National Negotiation Prize this year. In recognition of his (139) ___, he has been awarded an all-expenses-paid trip for two to Spain, where he’ll stay in a luxury hotel for seven days. <br>In a hotly contested final round held in New York, Davis eventually prevailed against last year’s winner, Gupta Singh. (140) ___, Davis also managed to score the highest level of points ever for this stage of the competition.(141) ___.<br>Davis said he is grateful for the support he has received and that he (142) ___ his time abroad.",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f862",
+        "number": 139,
+        "text": "",
+        "options": {
+          "A": "achievements",
+          "B": "promotions",
+          "C": "lessons",
+          "D": "studies"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>&quot;Achievement&quot; means &quot;something very good and difficult that you have succeeded in doing&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f863",
+        "number": 140,
+        "text": "",
+        "options": {
+          "A": "Namely",
+          "B": "In addition",
+          "C": "Consequently",
+          "D": "On the other hand"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>&quot;In addition&quot; is used here to add more information about&nbsp;Davis</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f864",
+        "number": 141,
+        "text": "",
+        "options": {
+          "A": "This award is given out in our company each year.",
+          "B": "His coworkers will share his responsibilities during his absence.",
+          "C": "Mr. Davis was unavailable for comment when asked about his trip.",
+          "D": "We are all very proud of this accomplishment."
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>D is correct because it can connect with the previous sentence <em>&quot;Davis also managed to score the highest level of points ever for this stage of the competition&quot;</em></p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f865",
+        "number": 142,
+        "text": "",
+        "options": {
+          "A": "has enjoyed",
+          "B": "had been enjoying",
+          "C": "enjoys",
+          "D": "will enjoy"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>The action happens in the future&nbsp;=&gt; Use future simple tense&nbsp;=&gt; D is correct&nbsp;</p>\n"
+      }
+    ]
+  },
+  {
+    "id": "62b694aebbc57b27fe10f805",
+    "title": "Part 6 Passage",
+    "type": "Text",
+    "content": "<p>refer to the following instructions.<br />\n<br />\n<strong>Queensville University E-Learning<br />\nE-University Software</strong><br />\n<br />\nProspective students should visit the university Web site and download the E-University software (143) ___ onto their computers.<br />\nThe software gives students access to assessments, modules, and online classrooms. Upon (144) ___, each student is provided with a brochure detailing the features of the software.<br />\nOnce you have installed the program, you need to register by providing your student information as well as a username and a password. Any (145)___ login to your account will only require your username and password.<br />\n(146) ___ . Alternatively, you can call the Queensville University E-Learning Office at 555-9090.</p>\n",
+    "questions": [
+      {
+        "id": "62b694afbbc57b27fe10f866",
+        "number": 143,
+        "text": "",
+        "options": {
+          "A": "hardly",
+          "B": "deliberately",
+          "C": "continuously",
+          "D": "directly"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>&quot;Directly&quot; means &quot;without anything else being involved or in between&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f867",
+        "number": 144,
+        "text": "",
+        "options": {
+          "A": "enrollment",
+          "B": "enrolls",
+          "C": "enrolled",
+          "D": "enroll"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Upon + Noun&nbsp;=&gt; A is correct&nbsp;</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f868",
+        "number": 145,
+        "text": "",
+        "options": {
+          "A": "final",
+          "B": "subsequent",
+          "C": "distinctive",
+          "D": "failed"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>&quot;Subsequent&quot; means &quot;happening after something else&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+      },
+      {
+        "id": "62b694afbbc57b27fe10f869",
+        "number": 146,
+        "text": "",
+        "options": {
+          "A": "The software must be purchased before the end of the month.",
+          "B": "Usernames are the same as your university-assigned student number.",
+          "C": "If you experience any problems with the software, e-mail it@quelearning.edu.",
+          "D": "The software can be installed on a maximum of two computers."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>C is correct because it can connect with the sentence after it&nbsp;<em>&quot;Alternatively, you can call the Queensville University E-Learning Office at 555-9090.&quot;</em></p>\n"
+      }
+    ]
+  }
+]
