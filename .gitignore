@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# TOEIC Exam Data
+scripts/raw_toeic.json
+scripts/page_html.txt
+scripts/page_text.txt
+scripts/test_page.png
+public/data/ets*
+!public/data/tests_index.json
+

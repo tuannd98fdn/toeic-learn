@@ -7,9 +7,6 @@ import {
   ExamIcon,
   CardsIcon,
   QuizIcon,
-  BookIcon,
-  NotebookIcon,
-  StatsIcon,
   CompassIcon,
   TargetIcon,
 } from '@/components/icons/AppIcons';
@@ -25,18 +22,14 @@ interface NavItem {
 export default function Navbar() {
   const pathname = usePathname();
 
+  // Simplified navigation for gamified app (Duolingo style usually has 5-6 max items)
   const NAV_ITEMS: NavItem[] = [
-    { path: '/', label: 'Trang chủ', icon: <HomeIcon size={20} /> },
-    { path: '/study-plan', label: 'Lộ trình AI', icon: <CompassIcon size={20} />, badge: 'MỚI' },
-    { path: '/diagnostic', label: 'Test 20p', icon: <TargetIcon size={20} /> },
-    { path: '/exam', label: 'Thi thử 120p', icon: <ExamIcon size={20} />, badge: 'HOT' },
-    { path: '/study', label: 'Học Flashcard', icon: <CardsIcon size={20} /> },
-    { path: '/quiz', label: 'Làm Quiz', icon: <QuizIcon size={20} /> },
-    { path: '/vocabulary', label: 'Từ điển', icon: <BookIcon size={20} /> },
-    { path: '/notebook', label: 'Sổ tay lỗi', icon: <NotebookIcon size={20} /> },
-    { path: '/stats', label: 'Thống kê', icon: <StatsIcon size={20} /> },
+    { path: '/', label: 'Học', icon: <HomeIcon size={26} /> },
+    { path: '/study-plan', label: 'Lộ trình', icon: <CompassIcon size={26} /> },
+    { path: '/diagnostic', label: 'Mục tiêu', icon: <TargetIcon size={26} /> },
+    { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={26} />, badge: 'HOT' },
+    { path: '/study', label: 'Từ vựng', icon: <CardsIcon size={26} /> },
   ];
-
 
   return (
     <nav className={styles.navbar}>
@@ -44,13 +37,14 @@ export default function Navbar() {
         <div className={styles.logoIcon}>T</div>
         <div className={styles.logoText}>
           <span className={styles.brandName}>TOEIC Master</span>
-          <span className={styles.brandSub}>ETS Exam Prep</span>
+          <span className={styles.brandSub}>Luyện Thi Gamified</span>
         </div>
       </div>
 
       <ul className={styles.navList}>
         {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.path;
+          const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path));
+          
           return (
             <li key={item.path} className={styles.navItem}>
               <Link

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Confetti from '@/components/Confetti';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { storage } from '@/utils/storage';
+import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import {
   calculateScaledScore,
   getCefrLevel,
@@ -18,6 +19,7 @@ import {
   CheckCircleIcon,
   TargetIcon,
 } from '@/components/icons/AppIcons';
+import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import styles from './page.module.css';
 
 interface DiagnosticQuestion {
@@ -72,6 +74,9 @@ export default function DiagnosticPage() {
   const [result, setResult] = useState<DiagnosticResult | null>(null);
   const [showReview, setShowReview] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
+
+  const { addMistake } = useMistakeNotebook();
 
   // Load curated 28 questions
   useEffect(() => {
@@ -338,6 +343,14 @@ export default function DiagnosticPage() {
         } else {
           correctRC += 1;
         }
+      } else {
+        // Diagnostic mode always uses ets2022_test1 currently
+        addMistake(`exam_ets2022_test1_${q.part}_${q.id}`, {
+          type: 'exam',
+          testId: 'ets2022_test1',
+          part: q.part,
+          questionId: q.id
+        });
       }
     });
 
@@ -567,12 +580,54 @@ export default function DiagnosticPage() {
                         💡 <strong>Giải thích:</strong> {q.explanation}
                       </div>
                     )}
+
+                    <button
+                      type="button"
+                      onClick={() => setTutorContext({
+                        partTitle: q.partTitle,
+                        number: q.number,
+                        text: q.text,
+                        options: q.options,
+                        correctAnswer: q.correctAnswer,
+                        userAnswer: userAns,
+                        transcript: q.transcript,
+                        passageText: q.passageText,
+                        explanation: q.explanation,
+                        audioUrl: q.audioUrl,
+                      })}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
+                        color: '#ffffff',
+                        border: 'none',
+                        borderRadius: '16px',
+                        padding: '0.4rem 0.9rem',
+                        fontSize: '0.82rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        width: 'fit-content',
+                        marginTop: '0.5rem',
+                        boxShadow: '0 2px 6px rgba(37, 99, 235, 0.25)',
+                      }}
+                    >
+                      🤖 Hỏi Gia Sư AI 990 về câu này
+                    </button>
                   </div>
                 );
               })}
             </div>
           )}
         </div>
+
+        {tutorContext && (
+          <AITutorDrawer
+            isOpen={!!tutorContext}
+            onClose={() => setTutorContext(null)}
+            questionContext={tutorContext}
+          />
+        )}
       </div>
     );
   }
@@ -744,6 +799,14 @@ export default function DiagnosticPage() {
           })}
         </div>
       </div>
+
+      {tutorContext && (
+        <AITutorDrawer
+          isOpen={!!tutorContext}
+          onClose={() => setTutorContext(null)}
+          questionContext={tutorContext}
+        />
+      )}
     </div>
   );
 }

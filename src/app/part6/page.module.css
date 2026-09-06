@@ -187,34 +187,56 @@
 }
 
 .optionBtn {
+  position: relative;
   display: flex;
   align-items: center;
-  padding: 15px;
-  background-color: var(--background);
+  padding: 14px 20px;
+  background-color: var(--card);
   border: 2px solid var(--border);
-  border-radius: 8px;
+  border-bottom: 5px solid var(--card-shadow);
+  border-radius: 16px;
   text-align: left;
-  transition: all 0.2s;
+  transition: all 0.1s ease;
+  font-size: 1.1rem;
+  overflow: hidden;
+  color: var(--foreground);
 }
 
 .optionBtn:hover {
   border-color: var(--primary);
+  border-bottom-color: var(--primary-shadow);
   background-color: var(--primary-light);
+}
+
+.optionBtn:active:not(:disabled) {
+  transform: translateY(5px);
+  border-bottom-width: 0px;
+  margin-bottom: 5px;
 }
 
 .selectedOption {
-  border-color: var(--primary);
-  background-color: var(--primary-light);
-}
-.selectedOption .optionLetter {
-  color: var(--primary);
+  border-color: var(--primary) !important;
+  border-bottom: 5px solid var(--primary-shadow) !important;
+  background-color: var(--primary-light) !important;
 }
 
 .optionLetter {
-  font-weight: 700;
-  color: var(--muted-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--muted);
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
   margin-right: 15px;
-  width: 24px;
+}
+
+.selectedOption .optionLetter {
+  background: var(--primary);
+  color: #fff;
 }
 
 .optionText {

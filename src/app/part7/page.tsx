@@ -5,6 +5,9 @@ import Link from 'next/link';
 import Confetti from '@/components/Confetti';
 import { useSearchParams } from 'next/navigation';
 import { Part7PassageSet, Part7DataSchema } from '@/schema/toeic';
+import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
 export default function Part7Page() {
@@ -30,6 +33,10 @@ function Part7Trainer() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [currentSetScore, setCurrentSetScore] = useState(0);
+  const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
+
+  const { addMistake } = useMistakeNotebook();
 
   useEffect(() => {
     const fetchPassage = async () => {
@@ -92,12 +99,21 @@ function Part7Trainer() {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
-    // Check if score is perfect
-    const score = passageSet.questions.reduce((acc, q) => {
-      return acc + (answers[q.id] === q.correctAnswer ? 1 : 0);
-    }, 0);
+    let score = 0;
+    passageSet.questions.forEach((q) => {
+      if (answers[q.id] === q.correctAnswer) {
+        score++;
+      } else {
+        addMistake(`exam_${testId}_part7_${q.id}`, {
+          type: 'exam',
+          testId: testId,
+          part: 'part7',
+          questionId: q.id
+        });
+      }
+    });
 
-    // Threshold for confetti: getting all questions correct
+    setCurrentSetScore(score);
     if (score === passageSet.questions.length) {
       setShowConfetti(true);
     }
@@ -253,7 +269,7 @@ function Part7Trainer() {
                       <h3 className={styles.exQText}>{q.text}</h3>
                       <div className={styles.exContent}>
                         <p><strong>Bạn chọn:</strong> {answers[q.id] || 'Không làm'}</p>
-                        <p><strong>Đáp án đúng:</strong> {q.correctAnswer} - {q.options[q.correctAnswer]}</p>
+                        <p><strong>Đáp án đúng:</strong> {q.correctAnswer} - {q.options[q.correctAnswer as keyof typeof q.options]}</p>
                         <div 
                           className={styles.exBox} 
                           dangerouslySetInnerHTML={{ __html: q.explanation }} 
@@ -263,13 +279,35 @@ function Part7Trainer() {
                   );
                 })}
               </div>
-              <button className={styles.submitBtn} onClick={handleNextPassage}>
-                {currentPassageIndex < passageSets.length - 1 ? 'Đoạn văn tiếp theo ➡️' : 'Hoàn thành bài thi 🏆'}
-              </button>
             </div>
           )}
         </section>
       </div>
+
+      <PracticeFooter
+        isAnswered={isSubmitted}
+        isCorrect={currentSetScore === passageSet.questions.length}
+        correctMessage={`Tuyệt vời! Bạn trả lời đúng ${passageSet.questions.length}/${passageSet.questions.length} câu hỏi.`}
+        incorrectMessage={`Bạn trả lời đúng ${currentSetScore}/${passageSet.questions.length} câu hỏi.`}
+        onNext={handleNextPassage}
+        onAITutor={() => setTutorContext({
+          partTitle: 'Part 7: Reading Comprehension',
+          number: passageSet.questions[0].number,
+          text: `Read the passages and answer the questions.`,
+          options: { A: 'See full passage and explanations' },
+          correctAnswer: 'A',
+          explanation: passageSet.questions.map(q => `Q${q.number}: ${q.explanation}`).join('<br/><br/>'),
+        })}
+        nextLabel={currentPassageIndex + 1 === passageSets.length ? 'Xem tổng kết 🎉' : 'Đoạn văn tiếp theo ➔'}
+      />
+
+      {tutorContext && (
+        <AITutorDrawer
+          isOpen={!!tutorContext}
+          onClose={() => setTutorContext(null)}
+          questionContext={tutorContext}
+        />
+      )}
     </div>
   );
 }

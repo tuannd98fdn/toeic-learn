@@ -5,6 +5,9 @@ import Link from 'next/link';
 import Confetti from '@/components/Confetti';
 import { useSearchParams } from 'next/navigation';
 import { Part5Question, Part5DataSchema } from '@/schema/toeic';
+import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
 const TIME_LIMIT = 20; // 20 seconds per question
@@ -24,9 +27,11 @@ function Part5SpeedTrainer() {
   const [questions, setQuestions] = useState<Part5Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [streak, setStreak] = useState(0); // Added for gamification
   const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
   const [isFinished, setIsFinished] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -35,6 +40,8 @@ function Part5SpeedTrainer() {
   const [showConfetti, setShowConfetti] = useState(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const { addMistake } = useMistakeNotebook();
 
   useEffect(() => {
     // Client-side initialization
@@ -68,8 +75,21 @@ function Part5SpeedTrainer() {
     fetchQuestions();
   }, [testId]);
 
+  const openAITutor = (q: Part5Question) => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    setTutorContext({
+      partTitle: 'Part 5: Incomplete Sentences',
+      number: q.number,
+      text: q.text,
+      options: q.options,
+      correctAnswer: q.correctAnswer,
+      userAnswer: selectedAnswer || undefined,
+      explanation: q.explanation,
+    });
+  };
+
   useEffect(() => {
-    if (loading || questions.length === 0 || isFinished || showAnswer) return;
+    if (loading || questions.length === 0 || isFinished || showAnswer || tutorContext) return;
 
     timerRef.current = setInterval(() => {
       setTimeLeft(prev => {
@@ -85,12 +105,19 @@ function Part5SpeedTrainer() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [currentIndex, isFinished, showAnswer, questions, loading]);
+  }, [currentIndex, isFinished, showAnswer, questions, loading, tutorContext]);
 
   const handleTimeUp = () => {
     setShowAnswer(true);
-    setWrongAnswers(prev => [...prev, questions[currentIndex]]);
-    showResultAndMoveOn(null, questions[currentIndex].correctAnswer);
+    const currentQ = questions[currentIndex];
+    setWrongAnswers(prev => [...prev, currentQ]);
+    addMistake(`exam_${testId}_part5_${currentQ.id}`, {
+      type: 'exam',
+      testId: testId,
+      part: 'part5',
+      questionId: currentQ.id
+    });
+    showResultAndMoveOn(null, currentQ.correctAnswer);
   };
 
   const handleAnswer = (answer: string) => {
@@ -102,31 +129,38 @@ function Part5SpeedTrainer() {
     
     if (answer === currentQ.correctAnswer) {
       setScore(prev => prev + 1);
+      setStreak(prev => prev + 1); // Increment streak
     } else {
       setWrongAnswers(prev => [...prev, currentQ]);
+      setStreak(0); // Reset streak
+      addMistake(`exam_${testId}_part5_${currentQ.id}`, {
+        type: 'exam',
+        testId: testId,
+        part: 'part5',
+        questionId: currentQ.id
+      });
     }
     
     showResultAndMoveOn(answer, currentQ.correctAnswer);
   };
 
+  const moveToNextQuestion = () => {
+    setTutorContext(null);
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+      setTimeLeft(TIME_LIMIT);
+      setShowAnswer(false);
+      setSelectedAnswer(null);
+    } else {
+      setIsFinished(true);
+      if (score / questions.length >= 0.7) {
+        setShowConfetti(true);
+      }
+    }
+  };
+
   const showResultAndMoveOn = (selected: string | null, correct: string) => {
     setShowAnswer(true);
-    
-    // Wait 1.5 seconds to show the result, then move to next
-    setTimeout(() => {
-      if (currentIndex < questions.length - 1) {
-        setCurrentIndex(prev => prev + 1);
-        setTimeLeft(TIME_LIMIT);
-        setShowAnswer(false);
-        setSelectedAnswer(null);
-      } else {
-        setIsFinished(true);
-        // If score is >= 70%, show confetti
-        if ((score + (selected === correct ? 1 : 0)) / questions.length >= 0.7) {
-          setShowConfetti(true);
-        }
-      }
-    }, 1500);
   };
 
   if (loading) {
@@ -187,10 +221,34 @@ function Part5SpeedTrainer() {
                     <strong>Giải thích:</strong> 
                     <div dangerouslySetInnerHTML={{ __html: q.explanation }} />
                   </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setTutorContext({
+                      partTitle: 'Part 5: Incomplete Sentences',
+                      number: q.number,
+                      text: q.text,
+                      options: q.options,
+                      correctAnswer: q.correctAnswer,
+                      explanation: q.explanation,
+                    })}
+                    className={styles.aiMagicalBtn}
+                    style={{ marginTop: '0.6rem' }}
+                  >
+                    ✨ Hỏi Gia Sư AI bóc tách bẫy
+                  </button>
                 </div>
               ))}
             </div>
           </div>
+        )}
+
+        {tutorContext && (
+          <AITutorDrawer
+            isOpen={!!tutorContext}
+            onClose={() => setTutorContext(null)}
+            questionContext={tutorContext}
+          />
         )}
       </div>
     );
@@ -211,40 +269,49 @@ function Part5SpeedTrainer() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div className={styles.progressInfo}>
-          <span>Câu {currentIndex + 1} / {questions.length}</span>
-          <span>Score: {score}</span>
-        </div>
-        <div className={styles.progressBarBg}>
-          <div 
-            className={styles.progressBarFill} 
-            style={{ width: `${progressPercent}%` }} 
-          />
+        <div className={styles.topHeaderRow}>
+          {/* Progress Bar takes up most space */}
+          <div className={styles.progressSection}>
+            <div className={styles.statsRow}>
+              <span className={styles.questionCount}>Câu {currentIndex + 1} / {questions.length}</span>
+              {streak >= 2 && (
+                <div className={styles.streakBadge}>
+                  <span className={styles.streakFire}>🔥</span> {streak} Streak!
+                </div>
+              )}
+            </div>
+            <div className={styles.progressBarBg}>
+              <div 
+                className={styles.progressBarFill} 
+                style={{ width: `${progressPercent}%` }} 
+              />
+            </div>
+          </div>
+          
+          {/* Timer on the right */}
+          <div className={styles.timerSection}>
+            <span className={`${styles.timerIcon} ${timeLeft <= 5 ? styles.timerWarningIcon : ''}`}>⏱️</span>
+            <span className={`${styles.timerText} ${timeLeft <= 5 ? styles.timerTextWarning : ''}`}>
+              {timeLeft}s
+            </span>
+          </div>
         </div>
       </header>
 
-      <div className={styles.timerContainer}>
-        <div className={styles.timerCircle}>
-          <span className={`${styles.timerText} ${timeLeft <= 5 ? styles.timerWarning : ''}`}>
-            {timeLeft}s
-          </span>
-        </div>
-        <div className={styles.timerBarBg}>
-          <div 
-            className={`${styles.timerBarFill} ${timeLeft <= 5 ? styles.timerBarWarning : ''}`}
-            style={{ width: `${timePercent}%` }}
-          />
-        </div>
-      </div>
-
       <main className={styles.main}>
         <div className={`${styles.questionCard} card-minimal`}>
-          <div className={styles.cardHeader}>
-            <span className={styles.categoryBadge}>{currentQ.type || 'Grammar'}</span>
-            <span className={styles.sourceBadge}>ETS Test</span>
+          <div className={styles.cardHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <span className={styles.categoryBadge}>{currentQ.type || 'Grammar'}</span>
+              <span className={styles.sourceBadge}>ETS Test</span>
+            </div>
           </div>
           <p className={styles.sentence}>
-            {currentQ.text}
+            {currentQ.text.split(/_{3,}/)[0]}
+            <span className={styles.blankFill}>
+              {showAnswer ? currentQ.options[currentQ.correctAnswer as keyof typeof currentQ.options] : '___'}
+            </span>
+            {currentQ.text.split(/_{3,}/)[1] || ''}
           </p>
           <div className={styles.optionsGrid}>
             {(Object.entries(currentQ.options) as [string, string][]).map(([key, value]) => (
@@ -259,8 +326,41 @@ function Part5SpeedTrainer() {
               </button>
             ))}
           </div>
+
+          {showAnswer && currentQ.explanation && (
+            <div style={{
+              marginTop: '1.25rem',
+              padding: '1.1rem 1.25rem',
+              background: 'var(--bg-secondary)',
+              borderRadius: 'var(--radius)',
+              border: '1.5px solid var(--border)',
+            }}>
+              <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5, background: 'var(--card)', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid var(--border)' }}
+                dangerouslySetInnerHTML={{ __html: currentQ.explanation }}
+              />
+            </div>
+          )}
         </div>
       </main>
+
+      <PracticeFooter
+        isAnswered={showAnswer}
+        isCorrect={selectedAnswer === currentQ.correctAnswer}
+        correctMessage="Ngữ pháp rất chắc chắn!"
+        incorrectMessage={selectedAnswer === null ? "Hết thời gian!" : `Đáp án đúng là (${currentQ.correctAnswer})`}
+        onNext={moveToNextQuestion}
+        onAITutor={() => openAITutor(currentQ)}
+        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả 🎉' : 'Câu tiếp theo ➔'}
+      />
+
+
+      {tutorContext && (
+        <AITutorDrawer
+          isOpen={!!tutorContext}
+          onClose={() => setTutorContext(null)}
+          questionContext={tutorContext}
+        />
+      )}
     </div>
   );
 }

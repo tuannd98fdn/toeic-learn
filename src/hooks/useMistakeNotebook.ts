@@ -4,6 +4,10 @@ import { storage } from '../utils/storage';
 export interface MistakeRecord {
   wrongCount: number;
   lastMistakeDate: string;
+  type?: 'vocabulary' | 'exam';
+  testId?: string;
+  part?: string;
+  questionId?: string;
 }
 
 export type MistakeData = Record<string, MistakeRecord>;
@@ -20,12 +24,14 @@ export function useMistakeNotebook() {
     setMounted(true);
   }, []);
 
-  const addMistake = (wordId: string) => {
+  const addMistake = (id: string, metadata?: Partial<MistakeRecord>) => {
     setMistakes(prev => {
-      const current = prev[wordId] || { wrongCount: 0, lastMistakeDate: '' };
+      const current = prev[id] || { wrongCount: 0, lastMistakeDate: '', type: 'vocabulary' };
       const newData = {
         ...prev,
-        [wordId]: {
+        [id]: {
+          ...current,
+          ...metadata,
           wrongCount: current.wrongCount + 1,
           lastMistakeDate: new Date().toISOString()
         }
@@ -35,10 +41,10 @@ export function useMistakeNotebook() {
     });
   };
 
-  const removeMistake = (wordId: string) => {
+  const removeMistake = (id: string) => {
     setMistakes(prev => {
       const newData = { ...prev };
-      delete newData[wordId];
+      delete newData[id];
       storage.set(MISTAKE_KEY, newData);
       return newData;
     });

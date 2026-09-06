@@ -5,6 +5,9 @@ import Link from 'next/link';
 import Confetti from '@/components/Confetti';
 import { useSearchParams } from 'next/navigation';
 import { NormalizedPart6Passage, Part6DataSchema } from '@/schema/toeic';
+import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
 export default function Part6Page() {
@@ -30,6 +33,10 @@ function Part6Trainer() {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [currentSetScore, setCurrentSetScore] = useState(0);
+  const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
+
+  const { addMistake } = useMistakeNotebook();
 
   useEffect(() => {
     const fetchPassage = async () => {
@@ -95,12 +102,21 @@ function Part6Trainer() {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
-    // Check if score is perfect (4/4)
-    const score = passage.questions.reduce((acc, q) => {
-      return acc + (answers[q.blankNumber] === q.correctAnswer ? 1 : 0);
-    }, 0);
+    let score = 0;
+    passage.questions.forEach((q) => {
+      if (answers[q.blankNumber] === q.correctAnswer) {
+        score++;
+      } else {
+        addMistake(`exam_${testId}_part6_${q.id}`, {
+          type: 'exam',
+          testId: testId,
+          part: 'part6',
+          questionId: q.id
+        });
+      }
+    });
     
-    // Threshold for confetti: getting all questions correct
+    setCurrentSetScore(score);
     if (score === passage.questions.length) {
       setShowConfetti(true);
     }
@@ -244,7 +260,7 @@ function Part6Trainer() {
               )}
             </div>
           ) : (
-            <div className={styles.reviewSection}>
+              <div className={styles.reviewSection}>
               <h2 className={styles.reviewTitle}>Giải thích chi tiết</h2>
               <div className={styles.explanationsList}>
                 {passage.questions.map(q => {
@@ -259,7 +275,7 @@ function Part6Trainer() {
                       </div>
                       <div className={styles.exContent}>
                         <p><strong>Bạn chọn:</strong> {answers[q.blankNumber] || 'Không làm'}</p>
-                        <p><strong>Đáp án đúng:</strong> {q.correctAnswer} - {q.options[q.correctAnswer]}</p>
+                        <p><strong>Đáp án đúng:</strong> {q.correctAnswer} - {q.options[q.correctAnswer as keyof typeof q.options]}</p>
                         <div 
                           className={styles.exBox}
                           dangerouslySetInnerHTML={{ __html: q.explanation }}
@@ -269,13 +285,35 @@ function Part6Trainer() {
                   );
                 })}
               </div>
-              <button className={styles.submitBtn} onClick={handleNextPassage}>
-                {currentPassageIndex < passages.length - 1 ? 'Đoạn văn tiếp theo ➡️' : 'Hoàn thành bài thi 🏆'}
-              </button>
             </div>
           )}
         </section>
       </div>
+
+      <PracticeFooter
+        isAnswered={isSubmitted}
+        isCorrect={currentSetScore === passage.questions.length}
+        correctMessage={`Xuất sắc! Bạn điền đúng cả ${passage.questions.length} chỗ trống.`}
+        incorrectMessage={`Bạn điền đúng ${currentSetScore}/${passage.questions.length} chỗ trống.`}
+        onNext={handleNextPassage}
+        onAITutor={() => setTutorContext({
+          partTitle: 'Part 6: Text Completion',
+          number: passage.questions[0].number,
+          text: `Passage Title: ${passage.title || 'Text Completion'}. Questions: ${passage.questions.map(q => q.number).join(', ')}`,
+          options: { A: 'See full passage and explanations' },
+          correctAnswer: 'A',
+          explanation: passage.questions.map(q => `Blank ${q.blankNumber} (Q${q.number}): ${q.explanation}`).join('<br/><br/>'),
+        })}
+        nextLabel={currentPassageIndex + 1 === passages.length ? 'Xem tổng kết 🎉' : 'Đoạn văn tiếp theo ➔'}
+      />
+
+      {tutorContext && (
+        <AITutorDrawer
+          isOpen={!!tutorContext}
+          onClose={() => setTutorContext(null)}
+          questionContext={tutorContext}
+        />
+      )}
     </div>
   );
 }

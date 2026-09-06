@@ -7,6 +7,8 @@ import { Part1Question, Part1DataSchema } from '@/schema/toeic';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import Confetti from '@/components/Confetti';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
 export default function Part1Page() {
@@ -32,6 +34,7 @@ function Part1Trainer() {
   const [isFinished, setIsFinished] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
   const { addMistake } = useMistakeNotebook();
 
@@ -83,7 +86,12 @@ function Part1Trainer() {
     if (isCorrect) {
       setScore((prev) => prev + 1);
     } else {
-      addMistake(`part1_${currentQ.id}`);
+      addMistake(`exam_${testId}_part1_${currentQ.id}`, {
+        type: 'exam',
+        testId: testId,
+        part: 'part1',
+        questionId: currentQ.id
+      });
     }
   };
 
@@ -203,17 +211,15 @@ function Part1Trainer() {
         </div>
 
         {isAnswered && (
-          <>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <button
-                type="button"
-                className={styles.secondaryBtn}
-                style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
-                onClick={() => setShowTranscript((prev) => !prev)}
-              >
-                {showTranscript ? 'Ẩn Transcript 👁️' : 'Xem Transcript & Lời giải 💡'}
-              </button>
-            </div>
+          <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <button
+              type="button"
+              className={styles.secondaryBtn}
+              style={{ alignSelf: 'flex-start', padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
+              onClick={() => setShowTranscript((prev) => !prev)}
+            >
+              {showTranscript ? 'Ẩn Transcript 👁️' : 'Xem Transcript & Lời giải 💡'}
+            </button>
 
             {showTranscript && currentQ.transcript && (
               <div className={styles.transcriptCard}>
@@ -229,15 +235,36 @@ function Part1Trainer() {
                 />
               </div>
             )}
-
-            <div className={styles.actionRow}>
-              <button type="button" className={styles.nextBtn} onClick={handleNext}>
-                {currentIndex + 1 === questions.length ? 'Xem kết quả 🎉' : 'Câu tiếp theo ➔'}
-              </button>
-            </div>
-          </>
+          </div>
         )}
       </div>
+
+      <PracticeFooter
+        isAnswered={isAnswered}
+        isCorrect={selectedAnswer === currentQ.correctAnswer}
+        correctMessage="Phản xạ nghe rất tốt!"
+        incorrectMessage={`Đáp án đúng là (${currentQ.correctAnswer})`}
+        onNext={handleNext}
+        onAITutor={() => setTutorContext({
+          partTitle: 'Part 1: Photographs',
+          number: currentQ.number,
+          text: 'Look at the photograph and choose the statement that best describes what you see.',
+          options: currentQ.options,
+          correctAnswer: currentQ.correctAnswer,
+          userAnswer: selectedAnswer || undefined,
+          transcript: currentQ.transcript,
+          audioUrl: currentQ.audioUrl,
+        })}
+        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả 🎉' : 'Câu tiếp theo ➔'}
+      />
+
+      {tutorContext && (
+        <AITutorDrawer
+          isOpen={!!tutorContext}
+          onClose={() => setTutorContext(null)}
+          questionContext={tutorContext}
+        />
+      )}
     </div>
   );
 }

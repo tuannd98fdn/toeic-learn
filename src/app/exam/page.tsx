@@ -15,6 +15,7 @@ import {
   PartScore,
 } from '@/utils/toeicScoreCalculator';
 import styles from './page.module.css';
+import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 
 interface UnifiedQuestion {
   id: string;
@@ -69,6 +70,7 @@ function ExamSimulation() {
   const [isReviewMode, setIsReviewMode] = useState(false);
   const [showOnlyWrong, setShowOnlyWrong] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
   const { addMistake } = useMistakeNotebook();
 
@@ -321,7 +323,12 @@ function ExamSimulation() {
 
       // Add wrong questions to Mistake Notebook
       if (!isCorrect) {
-        addMistake(`exam_${testId}_q${q.number}`);
+        addMistake(`exam_${testId}_${q.part}_${q.id}`, {
+          type: 'exam',
+          testId: testId,
+          part: q.part,
+          questionId: q.id
+        });
       }
     });
 
@@ -706,6 +713,39 @@ function ExamSimulation() {
                   <div dangerouslySetInnerHTML={{ __html: currentQ.explanation }} />
                 </div>
               )}
+
+              <button
+                type="button"
+                onClick={() => setTutorContext({
+                  partTitle: currentQ.partTitle,
+                  number: currentQ.number,
+                  text: currentQ.text,
+                  options: currentQ.options,
+                  correctAnswer: currentQ.correctAnswer,
+                  userAnswer: userAnswers[currentQ.number],
+                  transcript: currentQ.transcript,
+                  passageText: currentQ.passageText,
+                  explanation: currentQ.explanation,
+                  audioUrl: currentQ.audioUrl,
+                })}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '16px',
+                  padding: '0.45rem 1rem',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  marginTop: '0.85rem',
+                  boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
+                }}
+              >
+                🤖 Hỏi Gia Sư AI 990 về câu này
+              </button>
             </div>
           )}
 
@@ -803,6 +843,14 @@ function ExamSimulation() {
           </div>
         </aside>
       </main>
+
+      {tutorContext && (
+        <AITutorDrawer
+          isOpen={!!tutorContext}
+          onClose={() => setTutorContext(null)}
+          questionContext={tutorContext}
+        />
+      )}
     </div>
   );
 }

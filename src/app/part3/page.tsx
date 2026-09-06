@@ -7,6 +7,8 @@ import { Part3Set, Part3DataSchema } from '@/schema/toeic';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import Confetti from '@/components/Confetti';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
 export default function Part3Page() {
@@ -33,6 +35,8 @@ function Part3Trainer() {
   const [isFinished, setIsFinished] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [currentSetScore, setCurrentSetScore] = useState(0);
+  const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
   const { addMistake } = useMistakeNotebook();
 
@@ -95,10 +99,16 @@ function Part3Trainer() {
       if (selectedAnswers[q.id] === q.correctAnswer) {
         setScore++;
       } else {
-        addMistake(`part3_${q.id}`);
+        addMistake(`exam_${testId}_part3_${q.id}`, {
+          type: 'exam',
+          testId: testId,
+          part: 'part3',
+          questionId: q.id
+        });
       }
     });
 
+    setCurrentSetScore(setScore);
     setTotalScore((prev) => prev + setScore);
   };
 
@@ -248,21 +258,19 @@ function Part3Trainer() {
               onClick={handleSubmitSet}
               disabled={!isAllAnsweredInSet}
             >
-              Nộp bài Set này ({Object.keys(selectedAnswers).length}/3 câu) ➔
+              Nộp bài Set này ({Object.keys(selectedAnswers).length}/{currentSet.questions.length} câu) ➔
             </button>
           </div>
         ) : (
-          <>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <button
-                type="button"
-                className={styles.secondaryBtn}
-                style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
-                onClick={() => setShowTranscript((prev) => !prev)}
-              >
-                {showTranscript ? 'Ẩn Transcript 👁️' : 'Xem Transcript hội thoại 💬'}
-              </button>
-            </div>
+          <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <button
+              type="button"
+              className={styles.secondaryBtn}
+              style={{ alignSelf: 'flex-start', padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
+              onClick={() => setShowTranscript((prev) => !prev)}
+            >
+              {showTranscript ? 'Ẩn Transcript 👁️' : 'Xem Transcript hội thoại 💬'}
+            </button>
 
             {showTranscript && currentSet.transcript && (
               <div className={styles.transcriptCard}>
@@ -275,15 +283,35 @@ function Part3Trainer() {
                 />
               </div>
             )}
-
-            <div className={styles.actionRow}>
-              <button type="button" className={styles.submitBtn} onClick={handleNextSet}>
-                {currentSetIndex + 1 === sets.length ? 'Xem tổng kết 🎉' : 'Set hội thoại tiếp theo ➔'}
-              </button>
-            </div>
-          </>
+          </div>
         )}
       </div>
+
+      <PracticeFooter
+        isAnswered={isSubmitted}
+        isCorrect={currentSetScore === currentSet.questions.length}
+        correctMessage={`Xuất sắc! Bạn trả lời đúng cả ${currentSet.questions.length} câu.`}
+        incorrectMessage={`Bạn trả lời đúng ${currentSetScore}/${currentSet.questions.length} câu.`}
+        onNext={handleNextSet}
+        onAITutor={() => setTutorContext({
+          partTitle: 'Part 3: Short Conversations',
+          number: firstQNum || 0,
+          text: `Context: ${currentSet.context || 'Conversation'}. Questions: ${firstQNum}-${lastQNum}`,
+          options: { A: 'See full set details in transcript' },
+          correctAnswer: 'A',
+          transcript: currentSet.transcript,
+          audioUrl: currentSet.audioUrl,
+        })}
+        nextLabel={currentSetIndex + 1 === sets.length ? 'Xem tổng kết 🎉' : 'Set tiếp theo ➔'}
+      />
+
+      {tutorContext && (
+        <AITutorDrawer
+          isOpen={!!tutorContext}
+          onClose={() => setTutorContext(null)}
+          questionContext={tutorContext}
+        />
+      )}
     </div>
   );
 }
