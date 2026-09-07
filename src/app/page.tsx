@@ -200,8 +200,8 @@ export default function Home() {
             </div>
           );
         })() : (
-          <div className="card-minimal" style={{ padding: '24px', background: 'var(--primary-light)', borderColor: 'var(--primary)' }}>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '8px' }}>Bạn chưa có lộ trình!</h3>
+          <div className="card-minimal" style={{ padding: '24px', background: 'var(--surface)', border: '2px dashed var(--primary)' }}>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '8px', color: 'var(--primary)' }}>Bạn chưa có lộ trình!</h3>
             <p style={{ fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '20px' }}>
               Làm bài Test Nhanh (28 câu) để nhận dự đoán band điểm và hệ thống AI tự thiết kế lộ trình riêng cho bạn.
             </p>

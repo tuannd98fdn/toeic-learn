@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { VOCABULARY_DATA, VocabularyWord } from '@/data/vocabulary';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useAudio } from '@/hooks/useAudio';
+import { VolumeIcon } from '@/components/icons/AppIcons';
 import styles from './page.module.css';
 
 const CATEGORIES = ["All", ...Array.from(new Set(VOCABULARY_DATA.map(w => w.category)))];
@@ -128,7 +129,7 @@ export default function VocabularyPage() {
                 className={styles.audioBtn}
                 onClick={(e) => { e.stopPropagation(); speak(word.word); }}
               >
-                🔊
+                <VolumeIcon size={20} className={styles.audioIcon} />
               </button>
 
               {isExpanded && (

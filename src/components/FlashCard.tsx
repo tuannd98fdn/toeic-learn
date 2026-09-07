@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { VocabularyWord } from '../data/vocabulary';
 import { useAudio } from '../hooks/useAudio';
+import { VolumeIcon, FrownIcon, BrainIcon, ThumbsUpIcon, ZapIcon } from './icons/AppIcons';
 import styles from './FlashCard.module.css';
 
 interface FlashCardProps {
@@ -59,7 +60,7 @@ export default function FlashCard({ word, onRate }: FlashCardProps) {
             onClick={handlePlayAudio}
             aria-label="Play pronunciation"
           >
-            🔊
+            <VolumeIcon size={24} className={styles.audioIcon} />
           </button>
           {!isFlipped && <div className={styles.hint}>Tap or press Space to flip</div>}
         </div>
@@ -87,19 +88,19 @@ export default function FlashCard({ word, onRate }: FlashCardProps) {
       {/* Rating Buttons */}
       <div className={`${styles.controls} ${isFlipped ? styles.visible : ''}`}>
         <button className={`${styles.rateBtn} ${styles.btnAgain}`} onClick={() => onRate(1)}>
-          <span className={styles.btnIcon}>😞</span>
+          <span className={styles.btnIcon}><FrownIcon size={20} /></span>
           <span className={styles.btnLabel}>Quên rồi (1)</span>
         </button>
         <button className={`${styles.rateBtn} ${styles.btnHard}`} onClick={() => onRate(2)}>
-          <span className={styles.btnIcon}>🤔</span>
+          <span className={styles.btnIcon}><BrainIcon size={20} /></span>
           <span className={styles.btnLabel}>Khó (2)</span>
         </button>
         <button className={`${styles.rateBtn} ${styles.btnGood}`} onClick={() => onRate(3)}>
-          <span className={styles.btnIcon}>👍</span>
+          <span className={styles.btnIcon}><ThumbsUpIcon size={20} /></span>
           <span className={styles.btnLabel}>OK (3)</span>
         </button>
         <button className={`${styles.rateBtn} ${styles.btnEasy}`} onClick={() => onRate(4)}>
-          <span className={styles.btnIcon}>⚡</span>
+          <span className={styles.btnIcon}><ZapIcon size={20} /></span>
           <span className={styles.btnLabel}>Dễ (4)</span>
         </button>
       </div>

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
+import AuthProvider from '@/components/AuthProvider';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin', 'vietnamese'],
@@ -61,10 +62,12 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
       <body>
-        <main className="page-container animate-fade-in">
-          {children}
-        </main>
-        <Navbar />
+        <AuthProvider>
+          <main className="page-container animate-fade-in">
+            {children}
+          </main>
+          <Navbar />
+        </AuthProvider>
       </body>
     </html>
   );

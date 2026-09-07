@@ -48,6 +48,17 @@
   --nav-height: 72px;
   --max-width: 1100px;
   --sidebar-width: 260px;
+  
+  /* Leitner Box Colors & Missing Shadcn mappings */
+  --box-1: #ef4444; /* Red */
+  --box-2: #f97316; /* Orange */
+  --box-3: #eab308; /* Yellow */
+  --box-4: #84cc16; /* Lime */
+  --box-5: #10b981; /* Emerald */
+  
+  --card: var(--surface);
+  --muted: var(--surface-hover);
+  --muted-foreground: var(--text-secondary);
 }
 
 /* Dark Mode - Sleek Midnight */
@@ -81,6 +92,17 @@
     
     --glass-bg: rgba(24, 24, 27, 0.85);
     --glass-border: rgba(255, 255, 255, 0.05);
+
+    /* Leitner Box Colors */
+    --box-1: #f87171;
+    --box-2: #fb923c;
+    --box-3: #facc15;
+    --box-4: #a3e635;
+    --box-5: #34d399;
+    
+    --card: var(--surface);
+    --muted: var(--surface-hover);
+    --muted-foreground: var(--text-secondary);
   }
 }
 
@@ -294,6 +316,10 @@ button {
   transition: padding-left 0.3s cubic-bezier(0.16, 1, 0.3, 1), padding-right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+body.is-resizing-sidebar .page-container {
+  transition: none !important;
+}
+
 @media (min-width: 860px) {
   .page-container {
     padding-left: calc(var(--sidebar-width, 260px) + 40px);
@@ -306,4 +332,19 @@ button {
 ::selection {
   background: var(--primary-light);
   color: var(--primary);
+}
+
+/* --------------------
+   Focus Mode Styles 
+--------------------- */
+body.focus-mode .page-container {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  padding-top: 10px !important;
+  max-width: 1200px !important; /* Keep it centered but wide */
+  margin: 0 auto !important;
+}
+
+body.focus-mode nav {
+  display: none !important;
 }

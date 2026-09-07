@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { storage } from '../utils/storage';
 import { calculateNextReviewDate, isDueForReview, MAX_BOX, MIN_BOX } from '../utils/spacedRepetition';
-import { VOCABULARY_DATA, VocabularyWord } from '../data/vocabulary';
+import { VocabularyWord } from '../data/vocabulary';
+import { useVocabulary } from './useVocabulary';
 
 export interface LeitnerRecord {
   box: number;
@@ -14,6 +15,7 @@ export type LeitnerState = Record<string, LeitnerRecord>;
 const STORAGE_KEY = 'leitner_progress';
 
 export function useLeitner() {
+  const { allWords } = useVocabulary();
   const [progress, setProgress] = useState<LeitnerState>({});
   const [mounted, setMounted] = useState(false);
 
@@ -24,7 +26,7 @@ export function useLeitner() {
     const initialProgress = { ...saved };
     let hasChanges = false;
     
-    VOCABULARY_DATA.forEach(word => {
+    allWords.forEach(word => {
       if (!initialProgress[word.id]) {
         initialProgress[word.id] = {
           box: 0, // 0 means unstudied
@@ -40,7 +42,7 @@ export function useLeitner() {
       storage.set(STORAGE_KEY, initialProgress);
     }
     setMounted(true);
-  }, []);
+  }, [allWords]);
 
   /**
    * Rates a word and updates its Leitner box and review dates.
@@ -87,7 +89,7 @@ export function useLeitner() {
   const getDueWords = (): VocabularyWord[] => {
     if (!mounted) return [];
     
-    return VOCABULARY_DATA.filter(word => {
+    return allWords.filter(word => {
       const record = progress[word.id];
       if (!record || record.box === 0) return true; // Unstudied words are due
       return isDueForReview(record.nextReview);
@@ -102,7 +104,7 @@ export function useLeitner() {
     let learning = 0;
     let unstudied = 0;
 
-    VOCABULARY_DATA.forEach(word => {
+    allWords.forEach(word => {
       const record = progress[word.id];
       if (!record || record.box === 0) {
         unstudied++;

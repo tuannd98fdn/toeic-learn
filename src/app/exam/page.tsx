@@ -15,6 +15,8 @@ import {
   AwardIcon,
   TrendingUpIcon,
   LightbulbIcon,
+  MaximizeIcon,
+  MinimizeIcon,
 } from '@/components/icons/AppIcons';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
@@ -83,6 +85,43 @@ function ExamSimulation() {
   const [showOnlyWrong, setShowOnlyWrong] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
+
+  // Focus Mode
+  const [isFocusMode, setIsFocusMode] = useState(false);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement) {
+        document.body.classList.remove('focus-mode');
+        setIsFocusMode(false);
+      }
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.body.classList.remove('focus-mode');
+    };
+  }, []);
+
+  const toggleFocusMode = () => {
+    if (!isFocusMode) {
+      document.body.classList.add('focus-mode');
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.warn('Error attempting to enable fullscreen:', err);
+        });
+      }
+      setIsFocusMode(true);
+    } else {
+      document.body.classList.remove('focus-mode');
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(err => {
+          console.warn('Error attempting to exit fullscreen:', err);
+        });
+      }
+      setIsFocusMode(false);
+    }
+  };
 
   const { addMistake } = useMistakeNotebook();
 
@@ -597,6 +636,15 @@ function ExamSimulation() {
         )}
 
         <div className={styles.barRight}>
+          <button 
+            type="button" 
+            className={styles.secondaryBtn} 
+            style={{ padding: '0.35rem 0.6rem', marginRight: '0.5rem' }}
+            onClick={toggleFocusMode}
+            title={isFocusMode ? 'Thoát Focus Mode' : 'Bật Focus Mode'}
+          >
+            {isFocusMode ? <MinimizeIcon size={16} /> : <MaximizeIcon size={16} />}
+          </button>
           <span className={styles.progressBadge}>
             Đã làm: <strong>{Object.keys(userAnswers).length}</strong> / {questions.length}
           </span>

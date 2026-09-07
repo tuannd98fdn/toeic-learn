@@ -48,13 +48,25 @@ export default function Navbar() {
     const handlePointerMove = (e: PointerEvent) => {
       if (!isResizing) return;
       let newWidth = e.clientX;
+
+      // Snap to collapse if dragged too small
+      if (newWidth < 120) {
+        if (!isCollapsed) setIsCollapsed(true);
+        return;
+      }
+
+      // Uncollapse if dragged out
+      if (isCollapsed && newWidth >= 120) {
+        setIsCollapsed(false);
+      }
+
+      // Constrain width
       if (newWidth < 180) {
-        newWidth = 180; // Min width
+        newWidth = 180; // Min width when expanded
       } else if (newWidth > 400) {
         newWidth = 400; // Max width
       }
       setSidebarWidth(newWidth);
-      if (isCollapsed) setIsCollapsed(false);
     };
 
     const stopResizing = () => {

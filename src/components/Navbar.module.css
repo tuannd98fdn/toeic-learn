@@ -127,6 +127,26 @@
     transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  .resizing {
+    transition: none !important;
+  }
+
+  .resizer {
+    position: absolute;
+    top: 0;
+    right: -3px;
+    width: 6px;
+    height: 100%;
+    cursor: col-resize;
+    z-index: 20;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+  }
+
+  .resizer:hover, .resizer:active {
+    background-color: var(--primary);
+  }
+
   .bottomArea {
     display: flex;
     justify-content: flex-end;

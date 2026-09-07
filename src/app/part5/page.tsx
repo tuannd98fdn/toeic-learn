@@ -127,7 +127,6 @@ function Part5SpeedTrainer() {
       part: 'part5',
       questionId: currentQ.id
     });
-    showResultAndMoveOn(null, currentQ.correctAnswer);
   };
 
   const handleAnswer = (answer: string) => {

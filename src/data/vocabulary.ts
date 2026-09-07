@@ -8,6 +8,7 @@ export interface VocabularyWord {
   examples: string[];
   mnemonicTip: string;
   emoji: string;
+  source?: 'system' | 'user';
 }
 
 export const VOCABULARY_DATA: VocabularyWord[] = [
