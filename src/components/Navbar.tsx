@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -9,6 +10,7 @@ import {
   StatsIcon,
   CompassIcon,
   TargetIcon,
+  ArrowRightIcon,
 } from '@/components/icons/AppIcons';
 import styles from './Navbar.module.css';
 
@@ -21,6 +23,55 @@ interface NavItem {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(260);
+  const [isResizing, setIsResizing] = useState(false);
+
+  useEffect(() => {
+    // Only apply on desktop
+    if (window.innerWidth >= 860) {
+      if (isCollapsed) {
+        document.documentElement.style.setProperty('--sidebar-width', '80px');
+      } else {
+        document.documentElement.style.setProperty('--sidebar-width', `${sidebarWidth}px`);
+      }
+    }
+  }, [isCollapsed, sidebarWidth]);
+
+  const startResizing = useCallback((e: React.PointerEvent) => {
+    e.preventDefault();
+    setIsResizing(true);
+    document.body.classList.add('is-resizing-sidebar');
+  }, []);
+
+  useEffect(() => {
+    const handlePointerMove = (e: PointerEvent) => {
+      if (!isResizing) return;
+      let newWidth = e.clientX;
+      if (newWidth < 180) {
+        newWidth = 180; // Min width
+      } else if (newWidth > 400) {
+        newWidth = 400; // Max width
+      }
+      setSidebarWidth(newWidth);
+      if (isCollapsed) setIsCollapsed(false);
+    };
+
+    const stopResizing = () => {
+      setIsResizing(false);
+      document.body.classList.remove('is-resizing-sidebar');
+    };
+
+    if (isResizing) {
+      window.addEventListener('pointermove', handlePointerMove);
+      window.addEventListener('pointerup', stopResizing);
+    }
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', stopResizing);
+    };
+  }, [isResizing, isCollapsed]);
 
   // Simplified navigation for gamified app (Duolingo style usually has 5-6 max items)
   const NAV_ITEMS: NavItem[] = [
@@ -33,7 +84,12 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${isCollapsed ? styles.collapsed : ''} ${isResizing ? styles.resizing : ''}`}>
+      <div 
+        className={styles.resizer} 
+        onPointerDown={startResizing}
+        title="Kéo để thay đổi kích thước"
+      />
       <div className={styles.logoArea}>
         <div className={styles.logoIcon}>T</div>
         <div className={styles.logoText}>
@@ -64,6 +120,18 @@ export default function Navbar() {
           );
         })}
       </ul>
+
+      <div className={styles.bottomArea}>
+        <button 
+          className={styles.toggleBtn}
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          title={isCollapsed ? 'Mở rộng menu' : 'Thu gọn menu'}
+        >
+          <div style={{ transform: isCollapsed ? 'none' : 'rotate(180deg)', transition: 'transform 0.3s', display: 'flex' }}>
+            <ArrowRightIcon size={20} />
+          </div>
+        </button>
+      </div>
     </nav>
   );
 }

@@ -25,6 +25,22 @@ export default function PracticeFooter({
   const visibilityClass = isAnswered ? styles.footerVisible : styles.footerHidden;
   const stateClass = isCorrect ? styles.footerCorrect : styles.footerIncorrect;
 
+  // Keyboard shortcut for AI Tutor
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if user is typing in an input
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+      
+      // H key for "Hỏi Gia Sư AI"
+      if ((e.key === 'h' || e.key === 'H') && !isCorrect && onAITutor && isAnswered) {
+        onAITutor();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isCorrect, onAITutor, isAnswered]);
+
   return (
     <div className={`${styles.footer} ${visibilityClass} ${stateClass}`}>
       <div className={styles.contentArea}>
@@ -39,7 +55,7 @@ export default function PracticeFooter({
       <div className={styles.actionArea}>
         {!isCorrect && onAITutor && (
           <button className={styles.aiBtn} onClick={onAITutor} type="button">
-            <SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI
+            <SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI <span style={{ opacity: 0.7, fontSize: '0.85em', marginLeft: '2px' }}>(H)</span>
           </button>
         )}
         <button className={styles.nextBtn} onClick={onNext} type="button">

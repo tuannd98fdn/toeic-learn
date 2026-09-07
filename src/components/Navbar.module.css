@@ -17,6 +17,10 @@
   display: none;
 }
 
+.toggleBtn {
+  display: none;
+}
+
 .navList {
   display: flex;
   justify-content: space-around;
@@ -111,7 +115,7 @@
   .navbar {
     bottom: auto;
     top: 0;
-    width: 260px;
+    width: var(--sidebar-width, 260px);
     height: 100vh;
     border-top: none;
     border-right: 1px solid var(--border);
@@ -120,6 +124,53 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .bottomArea {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 12px;
+  }
+
+  .toggleBtn {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .toggleBtn:hover {
+    color: var(--foreground);
+    background: var(--surface-hover);
+  }
+
+  .collapsed .logoText,
+  .collapsed .label,
+  .collapsed .badge {
+    display: none;
+  }
+
+  .collapsed .logoArea {
+    padding: 0 0 24px 0;
+    justify-content: center;
+  }
+
+  .collapsed .navLink {
+    padding: 14px 0;
+    justify-content: center;
+  }
+  
+  .collapsed .bottomArea {
+    justify-content: center;
+    padding: 0;
   }
 
   .logoArea {

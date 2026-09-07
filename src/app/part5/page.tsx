@@ -140,6 +140,11 @@ function Part5SpeedTrainer() {
     if (answer === currentQ.correctAnswer) {
       setScore(prev => prev + 1);
       setStreak(prev => prev + 1); // Increment streak
+      setShowAnswer(true);
+      // Auto move to next question if correct for 10/10 UX
+      setTimeout(() => {
+        moveToNextQuestion();
+      }, 800);
     } else {
       setWrongAnswers(prev => [...prev, currentQ]);
       setStreak(0); // Reset streak
@@ -149,29 +154,55 @@ function Part5SpeedTrainer() {
         part: 'part5',
         questionId: currentQ.id
       });
+      setShowAnswer(true);
     }
-    
-    showResultAndMoveOn(answer, currentQ.correctAnswer);
   };
 
   const moveToNextQuestion = () => {
     setTutorContext(null);
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-      setTimeLeft(TIME_LIMIT);
-      setShowAnswer(false);
-      setSelectedAnswer(null);
-    } else {
-      setIsFinished(true);
-      if (score / questions.length >= 0.7) {
-        setShowConfetti(true);
+    setCurrentIndex(prev => {
+      if (prev < questions.length - 1) {
+        setTimeLeft(TIME_LIMIT);
+        setShowAnswer(false);
+        setSelectedAnswer(null);
+        return prev + 1;
+      } else {
+        setIsFinished(true);
+        // We use a functional state update to access the latest score if needed, 
+        // but we just check score from closure. Since it might be stale, we use a ref or just rely on the effect.
+        // Actually, we can check it in the render block instead.
+        return prev;
       }
-    }
+    });
   };
 
-  const showResultAndMoveOn = (selected: string | null, correct: string) => {
-    setShowAnswer(true);
-  };
+  // Keyboard Shortcuts for 10/10 UX
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+      if (isFinished || questions.length === 0 || tutorContext) return;
+
+      const key = e.key.toUpperCase();
+      if (!showAnswer) {
+        if (['A', 'B', 'C', 'D'].includes(key)) {
+          handleAnswer(key);
+        }
+      } else {
+        if (e.key === 'Enter' || e.key === 'ArrowRight') {
+          moveToNextQuestion();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
+
+  // Check Confetti condition when finished
+  useEffect(() => {
+    if (isFinished && score / questions.length >= 0.7) {
+      setShowConfetti(true);
+    }
+  }, [isFinished, score, questions.length]);
 
   if (loading) {
     return <div className={styles.loading}>Loading Trainer...</div>;

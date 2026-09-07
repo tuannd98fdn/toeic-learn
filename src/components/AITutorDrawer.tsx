@@ -112,6 +112,18 @@ export default function AITutorDrawer({
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isStreaming]);
 
+  // Set global CSS variable for drawer width to squeeze content
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.setProperty('--ai-drawer-width', window.innerWidth > 640 ? '540px' : '0px');
+    } else {
+      document.body.style.setProperty('--ai-drawer-width', '0px');
+    }
+    return () => {
+      document.body.style.setProperty('--ai-drawer-width', '0px');
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const isListeningPart =
@@ -271,7 +283,7 @@ export default function AITutorDrawer({
 
           <div className={styles.headerActions}>
             <span className={styles.quotaPill} title="Lượt hỏi miễn phí mỗi ngày (tự động hồi phục sau 00:00)">
-              ⚡ Còn {remainingQuota}/{DAILY_LIMIT} lượt
+              <ZapIcon size={13} style={{ marginRight: '4px', verticalAlign: 'text-bottom', display: 'inline' }} /> Còn {remainingQuota}/{DAILY_LIMIT} lượt
             </span>
             <button onClick={onClose} className={styles.closeBtn} title="Đóng (Esc)">
               ✕
@@ -279,113 +291,7 @@ export default function AITutorDrawer({
           </div>
         </header>
 
-        {/* Question Context Banner */}
-        <div className={styles.questionBanner}>
-          <div className={styles.metaTags}>
-            <span className={styles.partPill}>{questionContext.partTitle}</span>
-            {questionContext.number && (
-              <span className={styles.questionNumberPill}>
-                Câu #{questionContext.number}
-              </span>
-            )}
-            <span className={styles.correctPill}>
-              Đáp án đúng: <strong>{questionContext.correctAnswer}</strong>
-            </span>
-            {questionContext.userAnswer && (
-              <span
-                className={
-                  questionContext.userAnswer === questionContext.correctAnswer
-                    ? styles.userAnswerCorrect
-                    : styles.userAnswerWrong
-                }
-              >
-                Em chọn: <strong>{questionContext.userAnswer}</strong>
-              </span>
-            )}
-          </div>
-
-          <div className={styles.questionSentence}>
-            {questionContext.text}
-          </div>
-
-          {/* Options Strip */}
-          {questionContext.options && Object.keys(questionContext.options).length > 0 && (
-            <div className={styles.optionsStrip}>
-              {Object.entries(questionContext.options).map(([letter, optText]) => {
-                const isCorrect = letter === questionContext.correctAnswer;
-                const isUserSelected = letter === questionContext.userAnswer;
-                return (
-                  <div
-                    key={letter}
-                    className={`${styles.miniOption} ${isCorrect ? styles.miniOptionCorrect : ''} ${
-                      isUserSelected && !isCorrect ? styles.miniOptionWrong : ''
-                    }`}
-                  >
-                    <span className={styles.miniLetter}>{letter}</span>
-                    <span className={styles.miniText}>{optText}</span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* Quick Action Prompt Chips */}
-        <div className={styles.quickActionsArea}>
-          <div className={styles.quickActionsTitle}>
-            <span>Gợi ý câu hỏi nhanh:</span>
-            {isStreaming && <span className={styles.streamingStatus}>Đang giải đáp...</span>}
-          </div>
-          <div className={styles.chipsList}>
-            <button
-              type="button"
-              onClick={() => triggerPrompt('trap')}
-              disabled={isStreaming}
-              className={styles.chipBtn}
-            >
-              <ZapIcon size={13} /> Bẫy ETS & Vì sao sai?
-            </button>
-
-            <button
-              type="button"
-              onClick={() => triggerPrompt('hack')}
-              disabled={isStreaming}
-              className={styles.chipBtn}
-            >
-              <ClockIcon size={13} /> Mẹo giải nhanh 15s
-            </button>
-
-            <button
-              type="button"
-              onClick={() => triggerPrompt('translate')}
-              disabled={isStreaming}
-              className={styles.chipBtn}
-            >
-              <FileTextIcon size={13} /> Dịch nghĩa & Từ vựng
-            </button>
-
-            {isListeningPart && (
-              <button
-                type="button"
-                onClick={() => triggerPrompt('audio')}
-                disabled={isStreaming}
-                className={styles.chipBtn}
-              >
-                <HeadphonesIcon size={13} /> Bóc tách nối âm bài nghe
-              </button>
-            )}
-
-            <button
-              type="button"
-              onClick={() => triggerPrompt('drill')}
-              disabled={isStreaming}
-              className={styles.chipBtn}
-            >
-              <TargetIcon size={13} /> Tạo 2 câu luyện phản xạ
-            </button>
-          </div>
-        </div>
-
+        {/* Removed Question Context Banner */}
         {/* Messages Chat List */}
         <div className={styles.messagesList}>
           {messages.map((msg) => (
@@ -400,7 +306,9 @@ export default function AITutorDrawer({
               ) : (
                 <div className={styles.tutorBubbleWrapper}>
                   <div className={styles.tutorHeaderMini}>
-                    <span className={styles.tutorName}>🤖 Gia Sư 990</span>
+                    <span className={styles.tutorName}>
+                      <span className={styles.tutorIcon}><TargetIcon size={14} /></span> Gia Sư 990
+                    </span>
                     {msg.content && (
                       <button
                         type="button"
@@ -461,7 +369,9 @@ export default function AITutorDrawer({
             <div className={`${styles.msgRow} ${styles.tutorRow}`}>
               <div className={styles.tutorBubbleWrapper}>
                 <div className={styles.tutorHeaderMini}>
-                  <span className={styles.tutorName}>🤖 Gia Sư 990</span>
+                  <span className={styles.tutorName}>
+                    <span className={styles.tutorIcon}><TargetIcon size={14} /></span> Gia Sư 990
+                  </span>
                 </div>
                 <div className={styles.typingIndicator}>
                   <span className={styles.dot} />
@@ -475,6 +385,60 @@ export default function AITutorDrawer({
           <div ref={messagesEndRef} />
         </div>
 
+        {/* Quick Action Prompt Chips (Moved down) */}
+        {!isStreaming && messages.length <= 1 && (
+          <div className={styles.quickActionsArea}>
+            <div className={styles.chipsList}>
+              <button
+                type="button"
+                onClick={() => triggerPrompt('trap')}
+                disabled={isStreaming}
+                className={styles.chipBtn}
+              >
+                <ZapIcon size={13} /> Bẫy ETS & Vì sao sai?
+              </button>
+
+              <button
+                type="button"
+                onClick={() => triggerPrompt('hack')}
+                disabled={isStreaming}
+                className={styles.chipBtn}
+              >
+                <ClockIcon size={13} /> Mẹo giải nhanh 15s
+              </button>
+
+              <button
+                type="button"
+                onClick={() => triggerPrompt('translate')}
+                disabled={isStreaming}
+                className={styles.chipBtn}
+              >
+                <FileTextIcon size={13} /> Dịch nghĩa & Từ vựng
+              </button>
+
+              {isListeningPart && (
+                <button
+                  type="button"
+                  onClick={() => triggerPrompt('audio')}
+                  disabled={isStreaming}
+                  className={styles.chipBtn}
+                >
+                  <HeadphonesIcon size={13} /> Bóc tách nối âm bài nghe
+                </button>
+              )}
+
+              <button
+                type="button"
+                onClick={() => triggerPrompt('drill')}
+                disabled={isStreaming}
+                className={styles.chipBtn}
+              >
+                <TargetIcon size={13} /> Tạo 2 câu luyện phản xạ
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Input Bar */}
         <div className={styles.inputArea}>
           <form onSubmit={handleFormSubmit} className={styles.inputForm}>
@@ -483,7 +447,7 @@ export default function AITutorDrawer({
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Hỏi bất kỳ thắc mắc nào về câu này..."
+              placeholder="Hỏi gia sư bất kỳ điều gì... (Nhấn Enter để gửi)"
               className={styles.chatInput}
               disabled={isStreaming}
             />
@@ -496,9 +460,6 @@ export default function AITutorDrawer({
               <ArrowRightIcon size={16} />
             </button>
           </form>
-          <div className={styles.inputHelper}>
-            💡 Nhấn <strong>Enter</strong> để gửi hoặc click các gợi ý nhanh bên trên.
-          </div>
         </div>
       </div>
     </div>
