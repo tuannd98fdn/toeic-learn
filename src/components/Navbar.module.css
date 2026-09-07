@@ -4,11 +4,13 @@
   left: 0;
   width: 100%;
   height: 70px;
-  background: var(--card);
-  border-top: 2px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
   z-index: 1000;
   padding: 0 8px;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-md);
 }
 
 .logoArea {
@@ -42,10 +44,10 @@
   width: 100%;
   height: 100%;
   color: var(--text-secondary);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
 }
 
 .iconWrapper {
@@ -58,17 +60,17 @@
 
 .label {
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   transition: color 0.2s ease;
 }
 
 .navLink:hover {
-  background: var(--bg-secondary);
+  background: var(--surface-hover);
   color: var(--foreground);
 }
 
 .navLink:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
 .active {
@@ -82,26 +84,26 @@
 
 .active .label {
   color: var(--primary);
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .badge {
   position: absolute;
-  top: -8px;
-  right: -12px;
-  background: var(--warning);
+  top: -6px;
+  right: -10px;
+  background: var(--danger);
   color: #fff;
-  font-size: 0.6rem;
-  font-weight: 800;
+  font-size: 0.65rem;
+  font-weight: 700;
   padding: 2px 6px;
-  border-radius: 8px;
-  border: 2px solid var(--card);
-  box-shadow: 0 2px 0 var(--warning-shadow);
+  border-radius: 12px;
+  border: 2px solid var(--surface);
+  box-shadow: var(--shadow-sm);
   letter-spacing: 0.5px;
 }
 
 .indicator {
-  display: none; /* Hide indicator on mobile, use colors instead */
+  display: none;
 }
 
 /* Desktop Sidebar styles */
@@ -112,12 +114,12 @@
     width: 260px;
     height: 100vh;
     border-top: none;
-    border-right: 2px solid var(--border);
-    padding: 24px 16px;
-    box-shadow: none;
+    border-right: 1px solid var(--border);
+    padding: 32px 20px;
+    box-shadow: var(--shadow-md);
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
   }
 
   .logoArea {
@@ -125,20 +127,20 @@
     align-items: center;
     gap: 12px;
     padding: 0 12px 24px 12px;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 1px solid var(--border);
   }
 
   .logoIcon {
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
-    background: var(--success);
-    border-bottom: 4px solid var(--success-shadow);
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 900;
+    font-weight: 800;
     font-size: 1.4rem;
   }
 
@@ -148,18 +150,17 @@
   }
 
   .brandName {
-    font-size: 1.25rem;
-    font-weight: 900;
-    color: var(--success);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--foreground);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
   }
 
   .brandSub {
     font-size: 0.8rem;
     color: var(--text-secondary);
-    font-weight: 700;
-    text-transform: uppercase;
+    font-weight: 600;
     letter-spacing: 0.5px;
   }
 
@@ -183,32 +184,28 @@
     justify-content: flex-start;
     gap: 16px;
     padding: 14px 16px;
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     height: auto;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
   }
 
   .navLink:hover {
-    background: var(--background);
-    border-color: var(--border);
+    background: var(--surface-hover);
   }
 
   .active {
     background: var(--primary-light);
     color: var(--primary);
-    border: 2px solid var(--primary-light);
   }
 
   .active:hover {
     background: var(--primary-light);
-    border-color: var(--primary-light);
   }
 
   .label {
     display: block;
     font-size: 1rem;
-    font-weight: 800;
-    text-transform: uppercase;
+    font-weight: 600;
   }
 
   .badge {
@@ -216,5 +213,6 @@
     top: 0;
     right: 0;
     margin-left: auto;
+    border: none;
   }
 }

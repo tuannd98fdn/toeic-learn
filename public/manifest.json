@@ -1,19 +1,21 @@
 {
-  "name": "TOEIC Master VN",
-  "short_name": "TOEIC Master",
-  "description": "Luyện thi TOEIC miễn phí, hiệu quả nhất Việt Nam",
+  "name": "TOEIC Learn Premium",
+  "short_name": "TOEIC Learn",
+  "description": "Nền tảng luyện thi TOEIC Top 1 Việt Nam",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#2563eb",
-  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon"
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-  ],
-  "lang": "vi",
-  "categories": ["education"]
+  ]
 }

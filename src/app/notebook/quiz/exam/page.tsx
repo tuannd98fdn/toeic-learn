@@ -62,19 +62,20 @@ export default function ExamNotebookQuizPage() {
     
     // Update spaced repetition state
     updateMistakeProgress(currentQ.mistakeId, isCorrect);
+  };
 
-    setTimeout(() => {
-      if (currentIndex < questions.length - 1) {
-        setCurrentIndex(prev => prev + 1);
-        setSelectedAnswer(null);
-      } else {
-        setIsFinished(true);
-        const percentage = ((score + (isCorrect ? 1 : 0)) / questions.length) * 100;
-        if (percentage >= 70) {
-          setShowConfetti(true);
-        }
+  const handleNext = () => {
+    const isCorrect = selectedAnswer === questions[currentIndex].qData.correctAnswer;
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+      setSelectedAnswer(null);
+    } else {
+      setIsFinished(true);
+      const percentage = ((score + (isCorrect ? 1 : 0)) / questions.length) * 100;
+      if (percentage >= 70) {
+        setShowConfetti(true);
       }
-    }, 1500);
+    }
   };
 
   if (!mounted || loading) {
@@ -179,35 +180,20 @@ export default function ExamNotebookQuizPage() {
           {qData.options && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {Object.entries(qData.options).map(([key, value]) => {
-                let btnStyle: React.CSSProperties = {
-                  padding: '1rem',
-                  border: '1px solid var(--border)',
-                  borderRadius: '8px',
-                  background: 'var(--card)',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  fontSize: '1rem',
-                  color: 'var(--foreground)'
-                };
+                let btnClass = styles.optionBtn;
 
                 if (selectedAnswer !== null) {
                   if (key === qData.correctAnswer) {
-                    btnStyle.background = 'var(--success)';
-                    btnStyle.color = 'white';
-                    btnStyle.border = '1px solid var(--success)';
+                    btnClass = `${styles.optionBtn} ${styles.correct}`;
                   } else if (key === selectedAnswer) {
-                    btnStyle.background = 'var(--danger)';
-                    btnStyle.color = 'white';
-                    btnStyle.border = '1px solid var(--danger)';
+                    btnClass = `${styles.optionBtn} ${styles.incorrect}`;
                   }
-                  btnStyle.cursor = 'default';
                 }
 
                 return (
                   <button
                     key={key}
-                    style={btnStyle}
+                    className={btnClass}
                     onClick={() => handleAnswer(key)}
                     disabled={selectedAnswer !== null}
                   >
@@ -218,11 +204,24 @@ export default function ExamNotebookQuizPage() {
             </div>
           )}
           
-          {selectedAnswer !== null && qData.explanation && (
-            <div style={{ marginTop: '1.5rem', padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '8px', fontSize: '0.9rem' }}>
-              <strong>Giải thích:</strong>
-              <p style={{ marginTop: '0.5rem', color: 'var(--muted-foreground)' }}>{qData.explanation}</p>
-            </div>
+          {selectedAnswer !== null && (
+            <>
+              {qData.explanation && (
+                <div style={{ marginTop: '1.5rem', padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '8px', fontSize: '0.9rem' }}>
+                  <strong>Giải thích:</strong>
+                  <p style={{ marginTop: '0.5rem', color: 'var(--muted-foreground)' }}>{qData.explanation}</p>
+                </div>
+              )}
+              
+              <div className={styles.nextBtnContainer}>
+                <button 
+                  className={styles.primaryBtn}
+                  onClick={handleNext}
+                >
+                  {currentIndex < questions.length - 1 ? 'Câu tiếp theo ➔' : 'Hoàn thành 🎉'}
+                </button>
+              </div>
+            </>
           )}
         </div>
       </main>

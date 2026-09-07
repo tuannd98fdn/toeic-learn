@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   height: 50vh;
-  color: var(--muted-foreground);
+  color: var(--text-secondary);
 }
 
 .header {
@@ -19,13 +19,14 @@
 .title {
   font-size: 2rem;
   color: var(--foreground);
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 24px;
 }
 
 @media (min-width: 768px) {
@@ -35,18 +36,19 @@
 }
 
 .card {
-  padding: 25px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
 }
 
 .cardTitle {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--foreground);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   border-bottom: 1px solid var(--border);
-  padding-bottom: 10px;
-  font-weight: 700;
+  padding-bottom: 12px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .streakWrap {
@@ -70,16 +72,16 @@
 }
 
 .statValue {
-  font-family: inherit;
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .statLabel {
-  font-size: 0.85rem;
-  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 .masteryBar {
@@ -88,25 +90,25 @@
 
 .masteryBarBg {
   width: 100%;
-  height: 10px;
-  background-color: var(--muted);
-  border-radius: 5px;
+  height: 12px;
+  background-color: var(--border);
+  border-radius: 6px;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .masteryBarFill {
   height: 100%;
-  background-color: var(--primary);
-  border-radius: 5px;
-  transition: width 1s ease-out;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 6px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .masteryText {
   text-align: right;
-  font-size: 0.9rem;
-  color: var(--muted-foreground);
-  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 .fullWidthSection {
@@ -114,14 +116,14 @@
 }
 
 .leitnerDesc {
-  margin-top: 15px;
-  padding: 15px;
-  background-color: var(--muted);
-  border-radius: 12px;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--muted-foreground);
-  border-left: 3px solid var(--primary);
+  margin-top: 20px;
+  padding: 20px;
+  background-color: var(--surface-hover);
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  border-left: 4px solid var(--primary);
 }
 
 .leitnerDesc strong {
@@ -131,28 +133,68 @@
 .examHistorySection {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 24px;
   width: 100%;
 }
 
+.examHistoryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.examHistoryHeaderInfo h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 4px 0;
+  color: var(--foreground);
+}
+
+.examHistoryHeaderInfo p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.chartContainer {
+  margin-bottom: 2rem;
+  padding: 24px;
+  height: 400px;
+}
+
+.chartTitle {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
 .historyTableCard {
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
+  border-radius: var(--radius-xl);
+  padding: 0; /* Removing padding to let table headers touch edges if desired, or keep 24px */
   box-shadow: var(--shadow-sm);
   overflow-x: auto;
+}
+
+.historyTableWrapper {
+  padding: 24px;
 }
 
 .historyTable {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .historyTable th,
 .historyTable td {
-  padding: 12px 14px;
+  padding: 16px;
   text-align: left;
   border-bottom: 1px solid var(--border);
 }
@@ -160,28 +202,52 @@
 .historyTable th {
   font-weight: 700;
   color: var(--text-secondary);
+  background-color: var(--surface-hover);
+}
+
+.historyTable th:first-child {
+  border-top-left-radius: 12px;
+}
+.historyTable th:last-child {
+  border-top-right-radius: 12px;
 }
 
 .scoreBadge {
   font-weight: 800;
   color: var(--primary);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 
 .cefrPill {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 12px;
-  background: #ecfdf5;
-  color: #065f46;
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  background: var(--success-light);
+  color: var(--success-hover); /* Ensures good contrast in both themes */
+  font-size: 0.8rem;
   font-weight: 700;
-  border: 1px solid #a7f3d0;
+  border: 1px solid var(--success-light);
 }
 
 .emptyHistory {
   text-align: center;
-  padding: 30px;
+  padding: 60px 20px;
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
+  background: var(--surface-hover);
+  border-radius: var(--radius-lg);
+  margin: 24px;
+}
+
+.emptyHistoryIcon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.emptyHistory p {
+  margin-bottom: 16px;
+  font-weight: 500;
 }

@@ -153,7 +153,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 5px;
+  
 }
 
 .wordTitle {
@@ -181,7 +181,7 @@
 .wordMeaning {
   font-weight: 600;
   color: var(--foreground);
-  margin-bottom: 5px;
+  
 }
 
 .wordType {

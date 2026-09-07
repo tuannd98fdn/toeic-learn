@@ -4,7 +4,7 @@
   padding: 24px;
   background-color: var(--card);
   border: 2px solid var(--border);
-  border-bottom: 6px solid var(--card-shadow);
+  box-shadow: var(--shadow-sm); border: 1px solid var(--border);
   border-radius: 20px;
 }
 
@@ -52,7 +52,7 @@
   border-radius: 16px;
   background-color: var(--background);
   border: 2px solid var(--border);
-  border-bottom: 4px solid var(--border);
+  box-shadow: var(--shadow-sm); border: 1px solid var(--border);
   transition: all 0.2s ease;
 }
 

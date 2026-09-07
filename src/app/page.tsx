@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import StreakCounter from '@/components/StreakCounter';
 import { useStreak } from '@/hooks/useStreak';
@@ -21,8 +22,12 @@ import {
 import styles from './page.module.css';
 
 export default function Home() {
+  const router = useRouter();
   const { mounted: streakMounted, streakData, recordStudy } = useStreak();
   const [studyPlan, setStudyPlan] = useState<StudyPlan | null>(null);
+  
+  // Onboarding Data
+  const [onboardingData, setOnboardingData] = useState<{ target: string; daysLeft: number | null }>({ target: '750+', daysLeft: null });
   
   // Test selection state
   const [testsIndex, setTestsIndex] = useState<{id: string, name: string}[]>([]);
@@ -73,6 +78,23 @@ export default function Home() {
   }, [selectedTest]);
 
   useEffect(() => {
+    const isDone = localStorage.getItem('toeic_onboarding_done');
+    if (!isDone) {
+      router.push('/onboarding');
+      return;
+    }
+
+    const target = localStorage.getItem('toeic_target_score') || '750+';
+    const examDate = localStorage.getItem('toeic_exam_date');
+    
+    let daysLeft = null;
+    if (examDate) {
+      const diff = new Date(examDate).getTime() - new Date().getTime();
+      daysLeft = Math.max(0, Math.ceil(diff / (1000 * 3600 * 24)));
+    }
+    
+    setOnboardingData({ target, daysLeft });
+
     recordStudy();
     fetch('/data/tests_index.json')
       .then(res => res.json())
@@ -94,8 +116,12 @@ export default function Home() {
       <header className={styles.header}>
         <div>
           {/* Slogan mạnh mẽ thay vì "Chào buổi chiều" */}
-          <h1 className={styles.greeting}>🔥 Sẵn sàng bứt phá<br/>TOEIC 750+ hôm nay chưa?</h1>
-          <p className={styles.subtitle}>Cùng AI Master lộ trình luyện thi chuẩn ETS</p>
+          <h1 className={styles.greeting}>🔥 Sẵn sàng bứt phá<br/>TOEIC {onboardingData.target} hôm nay chưa?</h1>
+          <p className={styles.subtitle}>
+            {onboardingData.daysLeft !== null 
+              ? <span style={{ color: 'var(--primary)', fontWeight: 'bold' }}>Chỉ còn {onboardingData.daysLeft} ngày nữa là thi. Cố lên!</span>
+              : 'Cùng AI Master lộ trình luyện thi chuẩn ETS'}
+          </p>
         </div>
         <StreakCounter currentStreak={streakData.currentStreak} bestStreak={streakData.bestStreak} />
       </header>
@@ -156,7 +182,7 @@ export default function Home() {
             </div>
           );
         })() : (
-          <div className="card-minimal" style={{ padding: '24px', background: 'var(--primary-light)', borderColor: 'var(--primary-shadow)' }}>
+          <div className="card-minimal" style={{ padding: '24px', background: 'var(--primary-light)', borderColor: 'var(--primary)' }}>
             <h3 style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '8px' }}>Bạn chưa có lộ trình!</h3>
             <p style={{ fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '20px' }}>
               Làm bài Test Nhanh (28 câu) để nhận dự đoán band điểm và hệ thống AI tự thiết kế lộ trình riêng cho bạn.
@@ -232,8 +258,26 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Trạm 2.5: Mini Test */}
+        <div className={`${styles.stationCard} card-minimal`}>
+          <div className={styles.stationInfo}>
+            <div className={`${styles.stationIcon} ${styles.stationIconSuccess}`}>
+              <ZapIcon size={32} />
+            </div>
+            <div className={styles.stationText}>
+              <h3>Trạm Nhanh (15-Min Mini Test)</h3>
+              <p>20 câu ngẫu nhiên (10 Nghe, 10 Đọc). Chữa cháy khi không có đủ 120 phút.</p>
+            </div>
+          </div>
+          <div className={styles.stationActions}>
+            <Link href={`/mini-test?test=${selectedTest}`} className="btn-accent" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>
+              THI NGAY (15P) ⚡
+            </Link>
+          </div>
+        </div>
+
         {/* Trạm 3: Full Test */}
-        <div className={`${styles.stationCard} card-minimal`} style={{ background: 'var(--secondary)', borderColor: 'var(--secondary-shadow)' }}>
+        <div className={`${styles.stationCard} card-minimal`} style={{ background: 'var(--secondary)', borderColor: 'var(--secondary-hover)' }}>
           <div className={styles.stationInfo}>
             <div className={`${styles.stationIcon}`} style={{ background: 'rgba(0,0,0,0.2)', color: '#fff' }}>
               <ExamIcon size={32} />

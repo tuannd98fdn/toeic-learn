@@ -33,6 +33,7 @@ export default function ListeningAudioPlayer({
       audioRef.current.currentTime = 0;
       audioRef.current.load();
       if (autoPlay) {
+        window.dispatchEvent(new CustomEvent('audioPlay', { detail: { player: audioRef.current } }));
         audioRef.current
           .play()
           .then(() => setIsPlaying(true))
@@ -41,12 +42,27 @@ export default function ListeningAudioPlayer({
     }
   }, [src, autoPlay]);
 
+  useEffect(() => {
+    const handleOtherAudioPlay = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail.player !== audioRef.current && isPlaying && audioRef.current) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+    };
+    window.addEventListener('audioPlay', handleOtherAudioPlay);
+    return () => {
+      window.removeEventListener('audioPlay', handleOtherAudioPlay);
+    };
+  }, [isPlaying]);
+
   const togglePlay = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
+      window.dispatchEvent(new CustomEvent('audioPlay', { detail: { player: audioRef.current } }));
       audioRef.current
         .play()
         .then(() => setIsPlaying(true))

@@ -134,3 +134,51 @@
 .secondaryBtn:hover {
   background-color: var(--border);
 }
+
+.optionBtn {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--card);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  color: var(--foreground);
+  font-family: inherit;
+  outline: none;
+}
+
+.optionBtn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background-color: var(--bg-secondary);
+}
+
+.optionBtn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.optionBtn.correct {
+  background-color: var(--success);
+  color: white;
+  border-color: var(--success);
+  cursor: default;
+}
+
+.optionBtn.incorrect {
+  background-color: var(--danger);
+  color: white;
+  border-color: var(--danger);
+  cursor: default;
+}
+
+.optionBtn:disabled {
+  cursor: default;
+}
+
+.nextBtnContainer {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -193,7 +193,7 @@
   padding: 14px 20px;
   background-color: var(--card);
   border: 2px solid var(--border);
-  border-bottom: 5px solid var(--card-shadow);
+  box-shadow: var(--shadow-sm); border: 1px solid var(--border);
   border-radius: 16px;
   text-align: left;
   transition: all 0.1s ease;
@@ -204,19 +204,19 @@
 
 .optionBtn:hover {
   border-color: var(--primary);
-  border-bottom-color: var(--primary-shadow);
+  
   background-color: var(--primary-light);
 }
 
 .optionBtn:active:not(:disabled) {
-  transform: translateY(5px);
-  border-bottom-width: 0px;
-  margin-bottom: 5px;
+  transform: translateY(1px);
+  
+  
 }
 
 .selectedOption {
   border-color: var(--primary) !important;
-  border-bottom: 5px solid var(--primary-shadow) !important;
+  box-shadow: 0 4px 12px var(--primary-light);
   background-color: var(--primary-light) !important;
 }
 
@@ -326,7 +326,7 @@
 }
 
 .exContent p {
-  margin-bottom: 5px;
+  
   font-size: 0.95rem;
 }
 

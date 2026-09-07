@@ -9,6 +9,8 @@ import LeitnerBox from '@/components/LeitnerBox';
 import StreakCounter from '@/components/StreakCounter';
 import { storage } from '@/utils/storage';
 import { ExamScoreSummary } from '@/utils/toeicScoreCalculator';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import ShareButton from '@/components/ShareButton';
 import styles from './page.module.css';
 
 export default function StatsPage() {
@@ -28,9 +30,10 @@ export default function StatsPage() {
   const masterRate = Math.round((stats.mastered / totalWords) * 100) || 0;
 
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
+    <div className={styles.container} id="stats-container">
+      <header className={styles.header} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
         <h1 className={styles.title}>Thống kê học tập</h1>
+        <ShareButton elementId="stats-container" />
       </header>
 
       <section className={styles.grid}>
@@ -64,7 +67,7 @@ export default function StatsPage() {
             </div>
             
             <div className={styles.statItem}>
-              <div className={styles.statValue} style={{ color: 'var(--text-tertiary)' }}>
+              <div className={styles.statValue} style={{ color: 'var(--text-secondary)' }}>
                 {stats.unstudied}
               </div>
               <div className={styles.statLabel}>Chưa học</div>
@@ -95,56 +98,82 @@ export default function StatsPage() {
 
       {/* Full Test Exam History */}
       <section className={styles.examHistorySection}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <div>
-            <h2 className={styles.cardTitle} style={{ margin: 0, border: 'none', padding: 0 }}>
-              Lịch sử Thi thử TOEIC (Full Mock Test) 📝
-            </h2>
-            <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-              Theo dõi tiến độ tăng điểm và chẩn đoán điểm yếu qua từng đề thi
-            </p>
+        <div className={styles.examHistoryHeader}>
+          <div className={styles.examHistoryHeaderInfo}>
+            <h2>Tiến trình Điểm số & Lịch sử Thi thử 📝</h2>
+            <p>Theo dõi tiến độ tăng điểm và chẩn đoán điểm yếu qua từng đề thi</p>
           </div>
 
-          <Link href="/exam" className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>
+          <Link href="/exam" className="btn-primary" aria-label="Vào thi đề mới">
             Vào thi đề mới 🚀
           </Link>
         </div>
 
+        {examHistory.length > 0 && (
+          <div className={`${styles.card} card-minimal ${styles.chartContainer}`}>
+            <h3 className={styles.chartTitle}>Biểu đồ tăng trưởng điểm số</h3>
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={[...examHistory].reverse()} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
+                <XAxis dataKey="date" tick={{ fontSize: 12 }} tickMargin={10} stroke="var(--text-secondary)" />
+                <YAxis domain={[0, 990]} tick={{ fontSize: 12 }} stroke="var(--text-secondary)" width={40} />
+                <Tooltip 
+                  contentStyle={{ 
+                    borderRadius: '12px', 
+                    border: '1px solid var(--border)', 
+                    boxShadow: 'var(--shadow-md)',
+                    backgroundColor: 'var(--surface)',
+                  }}
+                  labelStyle={{ fontWeight: 'bold', color: 'var(--foreground)', marginBottom: '4px' }}
+                  itemStyle={{ color: 'var(--text-secondary)' }}
+                />
+                <Legend wrapperStyle={{ paddingTop: '10px' }} />
+                <Line type="monotone" dataKey="totalScore" name="Tổng điểm" stroke="var(--primary)" strokeWidth={3} activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="scaledLC" name="Nghe (LC)" stroke="var(--success)" strokeWidth={2} />
+                <Line type="monotone" dataKey="scaledRC" name="Đọc (RC)" stroke="var(--warning)" strokeWidth={2} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+
         <div className={styles.historyTableCard}>
           {examHistory.length === 0 ? (
             <div className={styles.emptyHistory}>
-              <p>Bạn chưa thực hiện bài thi thử 200 câu nào.</p>
-              <Link href="/exam" className="btn-accent" style={{ display: 'inline-block', marginTop: '0.5rem', padding: '0.5rem 1.25rem' }}>
+              <span className={styles.emptyHistoryIcon}>📊</span>
+              <p>Bạn chưa có dữ liệu làm bài thi thử nào.</p>
+              <Link href="/exam" className="btn-accent">
                 Làm bài thi thử đầu tiên ngay 🎯
               </Link>
             </div>
           ) : (
-            <table className={styles.historyTable}>
-              <thead>
-                <tr>
-                  <th>Ngày thi</th>
-                  <th>Mã đề</th>
-                  <th>Listening</th>
-                  <th>Reading</th>
-                  <th>Tổng điểm</th>
-                  <th>Xếp loại</th>
-                  <th>Cần cải thiện</th>
-                </tr>
-              </thead>
-              <tbody>
-                {examHistory.map((item, idx) => (
-                  <tr key={idx}>
-                    <td>{item.date}</td>
-                    <td><strong>{item.testName}</strong></td>
-                    <td>{item.scaledLC}/495 ({item.rawLC}/100)</td>
-                    <td>{item.scaledRC}/495 ({item.rawRC}/100)</td>
-                    <td><span className={styles.scoreBadge}>{item.totalScore}</span> / 990</td>
-                    <td><span className={styles.cefrPill}>CEFR {item.cefrLevel}</span></td>
-                    <td style={{ color: 'var(--warning)', fontWeight: 600 }}>{item.weakestPart?.partName || 'Chưa rõ'}</td>
+            <div className={styles.historyTableWrapper}>
+              <table className={styles.historyTable}>
+                <thead>
+                  <tr>
+                    <th>Ngày thi</th>
+                    <th>Mã đề</th>
+                    <th>Listening</th>
+                    <th>Reading</th>
+                    <th>Tổng điểm</th>
+                    <th>Xếp loại</th>
+                    <th>Cần cải thiện</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {examHistory.map((item, idx) => (
+                    <tr key={idx}>
+                      <td>{item.date}</td>
+                      <td><strong>{item.testName}</strong></td>
+                      <td>{item.scaledLC}/495 ({item.rawLC}/100)</td>
+                      <td>{item.scaledRC}/495 ({item.rawRC}/100)</td>
+                      <td><span className={styles.scoreBadge}>{item.totalScore}</span> / 990</td>
+                      <td><span className={styles.cefrPill}>CEFR {item.cefrLevel}</span></td>
+                      <td style={{ color: 'var(--warning)', fontWeight: 600 }}>{item.weakestPart?.partName || 'Chưa rõ'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </section>

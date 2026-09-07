@@ -66,10 +66,10 @@ export default function NotebookPage() {
             <div className={`${styles.emptyState} card-minimal animate-slide-up`}>
               <span className={styles.emptyIcon}>🎉</span>
               <h2>Sổ tay trống rỗng!</h2>
-              <p>Tuyệt vời, bạn không có từ vựng nào cần "chuộc lỗi".<br/>Hãy tiếp tục làm Quiz để thử thách trí nhớ nhé!</p>
+              <p>Tuyệt vời, bạn chưa mắc lỗi từ vựng nào.<br/>Hãy tiếp tục học từ vựng mới để mở rộng vốn từ nhé!</p>
               <div className={styles.actions}>
                 <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
-                <Link href="/quiz" className={styles.primaryBtn}>Làm Quiz ngay</Link>
+                <Link href="/study" className={styles.primaryBtn}>Học từ vựng mới ➔</Link>
               </div>
             </div>
           ) : (
@@ -140,21 +140,33 @@ export default function NotebookPage() {
 
       {activeTab === 'exam' && (
         <>
-          {examMistakeIds.length > 0 && (
-            <section className={styles.actionSection} style={{ marginBottom: '2rem' }}>
-              <div className={`${styles.ctaCard} card-minimal`}>
-                <h2>Ôn Tập Đề Thi</h2>
-                <p>Bạn có <strong>{examDueCount}</strong> câu hỏi đến hạn ôn tập hôm nay.</p>
-                <Link href="/notebook/quiz/exam" className={`${styles.primaryBtn} btn-accent`}>
-                  Bắt đầu làm Quiz Đề thi 🎯
-                </Link>
+          {examMistakeIds.length === 0 ? (
+            <div className={`${styles.emptyState} card-minimal animate-slide-up`} style={{ marginTop: '2rem' }}>
+              <span className={styles.emptyIcon}>🎉</span>
+              <h2>Sổ tay trống rỗng!</h2>
+              <p>Tuyệt vời, bạn chưa có lỗi sai nào trong đề thi.<br/>Hãy thử sức với một bài thi mới để kiểm tra trình độ nhé!</p>
+              <div className={styles.actions}>
+                <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
+                <Link href="/exam" className={styles.primaryBtn}>Thi thử ngay ➔</Link>
               </div>
-            </section>
+            </div>
+          ) : (
+            <>
+              <section className={styles.actionSection} style={{ marginBottom: '2rem' }}>
+                <div className={`${styles.ctaCard} card-minimal`}>
+                  <h2>Ôn Tập Đề Thi</h2>
+                  <p>Bạn có <strong>{examDueCount}</strong> câu hỏi đến hạn ôn tập hôm nay.</p>
+                  <Link href="/notebook/quiz/exam" className={`${styles.primaryBtn} btn-accent`}>
+                    Bắt đầu làm Quiz Đề thi 🎯
+                  </Link>
+                </div>
+              </section>
+              <section className={styles.listSection}>
+                <h2>Danh sách câu hỏi đề thi cần ôn</h2>
+                <ExamMistakeList mistakeIds={examMistakeIds} mistakes={mistakes} />
+              </section>
+            </>
           )}
-          <section className={styles.listSection}>
-            <h2>Danh sách câu hỏi đề thi cần ôn</h2>
-            <ExamMistakeList mistakeIds={examMistakeIds} mistakes={mistakes} />
-          </section>
         </>
       )}
 

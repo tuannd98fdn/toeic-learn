@@ -1,8 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  max-width: 860px;
+  gap: 48px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -12,16 +12,16 @@
   align-items: center;
   height: 50vh;
   font-size: 1.2rem;
-  color: var(--muted-foreground);
+  color: var(--text-secondary);
 }
 
 .header {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   text-align: center;
   align-items: center;
-  padding: 20px 0 10px 0;
+  padding: 32px 0 16px 0;
 }
 
 @media (min-width: 640px) {
@@ -33,37 +33,37 @@
 }
 
 .greeting {
-  font-size: 2.2rem;
-  font-weight: 900;
+  font-size: 2.5rem;
+  font-weight: 800;
   color: var(--foreground);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 .subtitle {
   color: var(--text-secondary);
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 500;
 }
 
 /* Learning Path Sections */
 .pathSection {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
 .sectionHeader {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 4px;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
 .sectionTitle {
-  font-size: 1.5rem;
-  font-weight: 900;
+  font-size: 1.6rem;
+  font-weight: 800;
   color: var(--foreground);
   letter-spacing: -0.01em;
   margin: 0;
@@ -71,18 +71,20 @@
 
 .sectionSubtitle {
   color: var(--text-secondary);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 500;
   margin: 0;
+  margin-top: 4px;
 }
 
 /* Big Station Cards */
 .stationCard {
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  background-color: var(--card);
-  gap: 20px;
+  padding: 32px;
+  background-color: var(--surface);
+  gap: 24px;
+  transition: all 0.3s ease;
 }
 
 @media (min-width: 768px) {
@@ -96,45 +98,45 @@
 .stationInfo {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
+  gap: 24px;
   flex: 1;
 }
 
 .stationIcon {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border-bottom: 4px solid rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
-.stationIconPrimary { background: var(--primary); color: #fff; }
-.stationIconSecondary { background: var(--secondary); color: #fff; }
-.stationIconAccent { background: var(--warning); color: #fff; }
-.stationIconSuccess { background: var(--success); color: #fff; }
-.stationIconDestructive { background: var(--destructive); color: #fff; }
+.stationIconPrimary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%); color: #fff; }
+.stationIconSecondary { background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-hover) 100%); color: #fff; }
+.stationIconAccent { background: linear-gradient(135deg, var(--warning) 0%, var(--warning-hover) 100%); color: #fff; }
+.stationIconSuccess { background: linear-gradient(135deg, var(--success) 0%, var(--success-hover) 100%); color: #fff; }
+.stationIconDestructive { background: linear-gradient(135deg, var(--danger) 0%, var(--danger-hover) 100%); color: #fff; }
 
 .stationText h3 {
-  font-size: 1.3rem;
-  font-weight: 900;
-  margin: 0 0 4px 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 8px 0;
   color: var(--foreground);
 }
 
 .stationText p {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--text-secondary);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .stationActions {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
@@ -142,7 +144,7 @@
 .toolsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 20px;
 }
 
 @media (min-width: 768px) {
@@ -156,119 +158,132 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 20px 12px;
-  background-color: var(--card);
+  padding: 28px 16px;
+  background-color: var(--surface);
   cursor: pointer;
 }
 
 .toolIcon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   color: #fff;
-  border-bottom: 3px solid rgba(0,0,0,0.15);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);
 }
 
 .toolCard:hover .toolIcon {
-  transform: scale(1.1) translateY(-2px);
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 15px 30px -5px rgba(0,0,0,0.15);
 }
 
 .toolCard h4 {
-  font-size: 1rem;
-  font-weight: 800;
-  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
   color: var(--foreground);
 }
 
 .toolCard p {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 500;
   color: var(--text-secondary);
   margin: 0;
 }
 
 .testSelector {
-  padding: 10px 16px;
-  border-radius: 14px;
-  border: 2px solid var(--border);
-  background: var(--card);
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800;
-  font-size: 0.95rem;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
   color: var(--foreground);
   outline: none;
   cursor: pointer;
-  box-shadow: 0 4px 0 var(--border);
-  transition: transform 0.1s;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
 }
 
-.testSelector:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 var(--border);
+.testSelector:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.testSelector:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
 }
 
 /* Study Plan Path */
 .planList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .planItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  border-radius: 16px;
-  border: 2px solid var(--border);
-  background: var(--card);
+  padding: 20px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
   transition: all 0.2s ease;
+}
+
+.planItem:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .planItem[data-completed="true"] {
   background: var(--primary-light);
-  border-color: var(--primary-light);
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .planItemInfo {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 .checkButton {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 10px;
-  border: 2px solid var(--border);
-  border-bottom: 4px solid var(--border);
+  border: 1.5px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.1s;
+  transition: all 0.2s;
   flex-shrink: 0;
+  background: var(--surface);
 }
 
 .planItem[data-completed="true"] .checkButton {
   background: var(--primary);
-  border-color: var(--primary-shadow);
+  border-color: var(--primary);
   color: #fff;
 }
 
 .planItemTitle {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--foreground);
 }
 
 .planItem[data-completed="true"] .planItemTitle {
   text-decoration: line-through;
   color: var(--primary);
-  opacity: 0.8;
+  opacity: 0.7;
 }

@@ -36,7 +36,41 @@ function Part7Trainer() {
   const [currentSetScore, setCurrentSetScore] = useState(0);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
+  // Time Attack State
+  const [isTimeAttackEnabled, setIsTimeAttackEnabled] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
+
   const { addMistake } = useMistakeNotebook();
+
+  // Load preference
+  useEffect(() => {
+    const savedPref = localStorage.getItem('toeic_time_attack');
+    if (savedPref === 'true') setIsTimeAttackEnabled(true);
+  }, []);
+
+  const toggleTimeAttack = () => {
+    const newVal = !isTimeAttackEnabled;
+    setIsTimeAttackEnabled(newVal);
+    localStorage.setItem('toeic_time_attack', newVal.toString());
+  };
+
+  // Reset or initialize timer
+  useEffect(() => {
+    if (isTimeAttackEnabled && !isSubmitted && passageSet) {
+      setTimeLeft(passageSet.questions.length * 55);
+    } else {
+      setTimeLeft(null);
+    }
+  }, [currentPassageIndex, isTimeAttackEnabled, isSubmitted, passageSet]);
+
+  // Countdown timer
+  useEffect(() => {
+    if (!isTimeAttackEnabled || isSubmitted || timeLeft === null || timeLeft <= 0) return;
+    const timerId = setTimeout(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+    return () => clearTimeout(timerId);
+  }, [timeLeft, isTimeAttackEnabled, isSubmitted]);
 
   useEffect(() => {
     const fetchPassage = async () => {
@@ -70,7 +104,28 @@ function Part7Trainer() {
   }, [testId]);
 
   if (loading) {
-    return <div className={styles.loading}>Đang tải dữ liệu bài thi...</div>;
+    return (
+      <div className={styles.pageContainer} style={{ paddingTop: '20px' }}>
+        <div className={styles.skeletonContainer}>
+          <div className={styles.skeletonCard} style={{ height: '600px' }}>
+            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ marginTop: '20px' }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLineShort}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ marginTop: '10px' }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLineShort}`} />
+          </div>
+          <div className={styles.skeletonCard} style={{ height: '400px' }}>
+            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16, marginTop: '20px' }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
@@ -97,7 +152,34 @@ function Part7Trainer() {
     }
   };
 
+  // Keyboard Shortcuts for 10/10 UX
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if user is typing
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+      
+      if (!passageSet || isSubmitted) return;
+
+      const key = e.key.toUpperCase();
+      const currentQ = passageSet.questions[activeQuestionIndex];
+
+      if (['A', 'B', 'C', 'D'].includes(key)) {
+        if (currentQ.options[key as keyof typeof currentQ.options]) {
+          handleSelectAnswer(currentQ.id, key);
+        }
+      } else if (e.key === 'ArrowLeft') {
+        setActiveQuestionIndex(prev => Math.max(0, prev - 1));
+      } else if (e.key === 'ArrowRight') {
+        setActiveQuestionIndex(prev => Math.min(passageSet.questions.length - 1, prev + 1));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [passageSet, activeQuestionIndex, isSubmitted]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleSubmit = () => {
+    if (isSubmitted) return;
     setIsSubmitted(true);
     let score = 0;
     passageSet.questions.forEach((q) => {
@@ -118,6 +200,13 @@ function Part7Trainer() {
       setShowConfetti(true);
     }
   };
+
+  // Auto-submit when time is up
+  useEffect(() => {
+    if (timeLeft === 0 && !isSubmitted) {
+      handleSubmit();
+    }
+  }, [timeLeft, isSubmitted]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleNextPassage = () => {
     if (currentPassageIndex < passageSets.length - 1) {
@@ -176,7 +265,14 @@ function Part7Trainer() {
           <h1 className={styles.title}>Part 7: Reading Comprehension</h1>
           <p className={styles.subtitle}>{passageSet.source || 'ETS Test'} - {passageSet.type} Passage ({currentPassageIndex + 1}/{passageSets.length})</p>
         </div>
-        <Link href="/" className={styles.backBtn}>Thoát</Link>
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <div className={styles.timeAttackToggle} onClick={toggleTimeAttack}>
+            <span style={{ fontSize: '0.9rem' }}>⏱️ Ép thời gian</span>
+            <div className={`${styles.toggleSwitch} ${isTimeAttackEnabled ? styles.toggleSwitchOn : ''}`} />
+          </div>
+          <Link href="/" className={styles.backBtn}>Thoát</Link>
+        </div>
       </header>
 
       <div className={styles.splitView}>
@@ -202,6 +298,12 @@ function Part7Trainer() {
 
         {/* Right Side: Questions & Review */}
         <section className={styles.rightPanel}>
+          {isTimeAttackEnabled && timeLeft !== null && !isSubmitted && (
+            <div className={`${styles.timerContainer} ${timeLeft < 30 ? styles.timerDanger : timeLeft < 60 ? styles.timerWarning : ''}`}>
+              ⏳ {Math.floor(timeLeft / 60).toString().padStart(2, '0')} : {(timeLeft % 60).toString().padStart(2, '0')}
+            </div>
+          )}
+
           {!isSubmitted ? (
             <div className={`${styles.questionCard} card-minimal`}>
               <div className={styles.qHeader}>
@@ -223,10 +325,12 @@ function Part7Trainer() {
                     >
                       <span className={styles.optionLetter}>{key}</span>
                       <span className={styles.optionText}>{val}</span>
+                      <span className={styles.optionShortcut}>Nhấn {key}</span>
                     </button>
                   );
                 })}
               </div>
+              <p className={styles.shortcutHint}>⌨️ Mẹo: Sử dụng phím A, B, C, D để chọn đáp án và ⬅️ ➡️ để chuyển câu.</p>
 
               {/* Navigation below question */}
               <div className={styles.qNavigation}>
