@@ -1,27 +1,42 @@
 'use client';
 
 import { useState } from 'react';
-import { VOCABULARY_DATA, VocabularyWord } from '@/data/vocabulary';
+import { VocabularyWord } from '@/data/vocabulary';
+import { useVocabulary } from '@/hooks/useVocabulary';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useAudio } from '@/hooks/useAudio';
 import { VolumeIcon } from '@/components/icons/AppIcons';
 import styles from './page.module.css';
 
-const CATEGORIES = ["All", ...Array.from(new Set(VOCABULARY_DATA.map(w => w.category)))];
 const LEVELS = ["All", 1, 2, 3, 4, 5];
+const SOURCES = [
+  { value: 'All', label: 'Tất cả nguồn' },
+  { value: 'system', label: 'Hệ thống' },
+  { value: 'user', label: 'Từ của tôi' }
+];
 
 export default function VocabularyPage() {
-  const { progress, mounted } = useLeitner();
+  const { mounted: vocabMounted, allWords, addWord, removeWord } = useVocabulary();
+  const { progress, mounted: leitnerMounted } = useLeitner();
   const { speak } = useAudio();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState<string | number>('All');
+  const [selectedSource, setSelectedSource] = useState<'All' | 'system' | 'user'>('All');
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
+  const [isAddingWord, setIsAddingWord] = useState(false);
+  const [newWordData, setNewWordData] = useState({
+    word: '', ipa: '', vietnamese: '', partOfSpeech: 'noun', category: 'Custom', examples: '', mnemonicTip: '', emoji: '📝'
+  });
+
+  const mounted = vocabMounted && leitnerMounted;
   if (!mounted) return <div className={styles.loading}>Loading...</div>;
 
+  const CATEGORIES = ["All", ...Array.from(new Set(allWords.map(w => w.category)))];
+
   // Filter words
-  const filteredWords = VOCABULARY_DATA.filter(word => {
+  const filteredWords = allWords.filter(word => {
     // Search filter
     const matchesSearch = 
       word.word.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -34,7 +49,10 @@ export default function VocabularyPage() {
     const wordBox = progress[word.id]?.box || 0;
     const matchesLevel = selectedLevel === 'All' || wordBox === selectedLevel;
 
-    return matchesSearch && matchesCategory && matchesLevel;
+    // Source filter
+    const matchesSource = selectedSource === 'All' || word.source === selectedSource;
+
+    return matchesSearch && matchesCategory && matchesLevel && matchesSource;
   });
 
   const handleCardClick = (id: string) => {
@@ -46,10 +64,30 @@ export default function VocabularyPage() {
     return `var(--box-${box})`;
   };
 
+  const handleAddWord = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newWordData.word || !newWordData.vietnamese) return;
+    addWord({
+      ...newWordData,
+      examples: newWordData.examples.split('\n').filter(ex => ex.trim() !== '')
+    });
+    setIsAddingWord(false);
+    setNewWordData({ word: '', ipa: '', vietnamese: '', partOfSpeech: 'noun', category: 'Custom', examples: '', mnemonicTip: '', emoji: '📝' });
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Thư viện từ vựng</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+          <h1 className={styles.title}>Thư viện từ vựng</h1>
+          <button 
+            className="button-primary"
+            onClick={() => setIsAddingWord(true)}
+            style={{ padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '14px' }}
+          >
+            + Thêm từ mới
+          </button>
+        </div>
         <div className={styles.searchBar}>
           <span className={styles.searchIcon}>🔍</span>
           <input
@@ -62,6 +100,21 @@ export default function VocabularyPage() {
         </div>
 
         <div className={styles.filters}>
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Nguồn:</span>
+            <div className={styles.chips}>
+              {SOURCES.map(src => (
+                <button
+                  key={src.value}
+                  className={`${styles.chip} ${selectedSource === src.value ? styles.activeChip : ''}`}
+                  onClick={() => setSelectedSource(src.value as any)}
+                >
+                  {src.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className={styles.filterGroup}>
             <span className={styles.filterLabel}>Chủ đề:</span>
             <div className={styles.chips}>
@@ -94,6 +147,34 @@ export default function VocabularyPage() {
         </div>
       </header>
 
+      {isAddingWord && (
+        <div style={{
+          backgroundColor: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px', marginBottom: '2rem', border: '1px solid var(--border-color)'
+        }}>
+          <h3 style={{ marginBottom: '1rem', color: 'var(--text-primary)' }}>Thêm từ vựng mới</h3>
+          <form onSubmit={handleAddWord} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <input type="text" placeholder="Từ vựng (Ví dụ: hello)" required value={newWordData.word} onChange={e => setNewWordData({...newWordData, word: e.target.value})} className={styles.searchInput} style={{ flex: 1, minWidth: '200px' }} />
+              <input type="text" placeholder="Nghĩa tiếng Việt (Ví dụ: xin chào)" required value={newWordData.vietnamese} onChange={e => setNewWordData({...newWordData, vietnamese: e.target.value})} className={styles.searchInput} style={{ flex: 1, minWidth: '200px' }} />
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <input type="text" placeholder="Phiên âm (Ví dụ: /həˈləʊ/)" value={newWordData.ipa} onChange={e => setNewWordData({...newWordData, ipa: e.target.value})} className={styles.searchInput} style={{ flex: 1, minWidth: '150px' }} />
+              <input type="text" placeholder="Từ loại (Danh từ, động từ...)" value={newWordData.partOfSpeech} onChange={e => setNewWordData({...newWordData, partOfSpeech: e.target.value})} className={styles.searchInput} style={{ flex: 1, minWidth: '150px' }} />
+              <input type="text" placeholder="Chủ đề (Ví dụ: Giao tiếp)" value={newWordData.category} onChange={e => setNewWordData({...newWordData, category: e.target.value})} className={styles.searchInput} style={{ flex: 1, minWidth: '150px' }} />
+            </div>
+            <textarea placeholder="Các ví dụ (mỗi dòng 1 ví dụ)" value={newWordData.examples} onChange={e => setNewWordData({...newWordData, examples: e.target.value})} className={styles.searchInput} style={{ minHeight: '80px', padding: '12px' }} />
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <input type="text" placeholder="Mẹo nhớ" value={newWordData.mnemonicTip} onChange={e => setNewWordData({...newWordData, mnemonicTip: e.target.value})} className={styles.searchInput} style={{ flex: 2, minWidth: '200px' }} />
+              <input type="text" placeholder="Emoji (📝)" value={newWordData.emoji} onChange={e => setNewWordData({...newWordData, emoji: e.target.value})} className={styles.searchInput} style={{ flex: 1, minWidth: '80px' }} />
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', justifyContent: 'flex-end' }}>
+              <button type="button" onClick={() => setIsAddingWord(false)} style={{ padding: '0.5rem 1.5rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'transparent', color: 'var(--text-secondary)', cursor: 'pointer' }}>Hủy</button>
+              <button type="submit" className="button-primary" style={{ padding: '0.5rem 1.5rem', borderRadius: '8px', cursor: 'pointer' }}>Lưu từ vựng</button>
+            </div>
+          </form>
+        </div>
+      )}
+
       <div className={styles.wordCount}>
         Hiển thị {filteredWords.length} từ
       </div>
@@ -111,7 +192,10 @@ export default function VocabularyPage() {
             >
               <div className={styles.cardHeader}>
                 <div className={styles.wordInfo}>
-                  <h3 className={styles.word}>{word.word}</h3>
+                  <h3 className={styles.word}>
+                    {word.word}
+                    {word.source === 'user' && <span style={{fontSize: '12px', marginLeft: '8px', backgroundColor: 'var(--bg-tertiary)', padding: '2px 6px', borderRadius: '12px', color: 'var(--text-secondary)'}}>User</span>}
+                  </h3>
                   <span className={styles.ipa}>{word.ipa}</span>
                 </div>
                 <div 
@@ -141,15 +225,29 @@ export default function VocabularyPage() {
                     {word.examples.map((ex, i) => (
                       <p key={i} className={styles.example}>• {ex}</p>
                     ))}
+                    {word.examples.length === 0 && <p className={styles.example} style={{ color: 'var(--text-tertiary)' }}>Không có ví dụ</p>}
                   </div>
                   
-                  <div className={styles.section}>
-                    <div className={styles.sectionTitle}>Mẹo nhớ:</div>
-                    <div className={styles.mnemonic}>
-                      <span className={styles.emoji}>{word.emoji}</span>
-                      <span>{word.mnemonicTip}</span>
+                  {(word.mnemonicTip || word.emoji) && (
+                    <div className={styles.section}>
+                      <div className={styles.sectionTitle}>Mẹo nhớ:</div>
+                      <div className={styles.mnemonic}>
+                        <span className={styles.emoji}>{word.emoji}</span>
+                        <span>{word.mnemonicTip}</span>
+                      </div>
                     </div>
-                  </div>
+                  )}
+
+                  {word.source === 'user' && (
+                    <div style={{ marginTop: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '1rem', textAlign: 'right' }}>
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); removeWord(word.id); }}
+                        style={{ background: 'transparent', border: 'none', color: '#ff4d4f', cursor: 'pointer', fontSize: '14px', textDecoration: 'underline' }}
+                      >
+                        Xóa từ này
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

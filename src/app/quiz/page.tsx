@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import QuizCard from '@/components/QuizCard';
 import Confetti from '@/components/Confetti';
-import { getRandomWords, VOCABULARY_DATA, VocabularyWord } from '@/data/vocabulary';
+import { VocabularyWord } from '@/data/vocabulary';
+import { useVocabulary } from '@/hooks/useVocabulary';
 import { useDailyMission } from '@/hooks/useDailyMission';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import styles from './page.module.css';
@@ -12,6 +13,7 @@ import styles from './page.module.css';
 const QUIZ_LENGTH = 10;
 
 export default function QuizPage() {
+  const { mounted: vocabMounted, allWords, getRandomWords } = useVocabulary();
   const { recordQuizCompleted } = useDailyMission();
   const { addMistake } = useMistakeNotebook();
   const [questions, setQuestions] = useState<{word: VocabularyWord, options: string[]}[]>([]);
@@ -21,8 +23,10 @@ export default function QuizPage() {
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
+    if (!vocabMounted) return;
+    
     // Generate quiz questions
-    const quizWords = getRandomWords(Math.min(QUIZ_LENGTH, VOCABULARY_DATA.length));
+    const quizWords = getRandomWords(Math.min(QUIZ_LENGTH, allWords.length));
     
     const generatedQuestions = quizWords.map(word => {
       // Get 3 random wrong answers
@@ -35,7 +39,7 @@ export default function QuizPage() {
     });
 
     setQuestions(generatedQuestions);
-  }, []);
+  }, [vocabMounted, allWords, getRandomWords]);
 
   const handleAnswer = (isCorrect: boolean) => {
     if (isCorrect) {
@@ -56,7 +60,7 @@ export default function QuizPage() {
     }
   };
 
-  if (questions.length === 0) {
+  if (!vocabMounted || questions.length === 0) {
     return <div className={styles.loading}>Generating quiz...</div>;
   }
 

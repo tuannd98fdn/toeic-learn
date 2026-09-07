@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
-import { VOCABULARY_DATA, VocabularyWord } from '@/data/vocabulary';
+import { VocabularyWord } from '@/data/vocabulary';
+import { useVocabulary } from '@/hooks/useVocabulary';
 import Link from 'next/link';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import { isDueForReview } from '@/utils/spacedRepetition';
@@ -10,11 +11,12 @@ import ExamMistakeList from './ExamMistakeList';
 import styles from './page.module.css';
 
 export default function NotebookPage() {
-  const { mounted, getMistakes, mistakes } = useMistakeNotebook();
+  const { mounted: vocabMounted, allWords } = useVocabulary();
+  const { mounted: notebookMounted, getMistakes, mistakes } = useMistakeNotebook();
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
   const [activeTab, setActiveTab] = useState<'vocabulary' | 'exam'>('vocabulary');
 
-  if (!mounted) {
+  if (!vocabMounted || !notebookMounted) {
     return <div className={styles.loading}>Loading...</div>;
   }
 
@@ -24,13 +26,14 @@ export default function NotebookPage() {
   const examMistakeIds = mistakeIds.filter(id => mistakes[id].type === 'exam');
 
   // Get full word data and sort by wrongCount descending
-  const mistakeWords: (VocabularyWord & { wrongCount: number })[] = vocabMistakeIds
-    .map(id => {
-      const word = VOCABULARY_DATA.find(w => w.id === id);
-      return word ? { ...word, wrongCount: mistakes[id].wrongCount } : null;
-    })
-    .filter((w): w is (VocabularyWord & { wrongCount: number }) => w !== null)
-    .sort((a, b) => b.wrongCount - a.wrongCount);
+    const mistakeWords = vocabMistakeIds
+      .map(id => {
+        const word = allWords.find(w => w.id === id);
+        return word ? { ...word, wrongCount: mistakes[id].wrongCount } : null;
+      })
+      .filter((w) => w !== null) as (VocabularyWord & { wrongCount: number })[];
+      
+    mistakeWords.sort((a, b) => b.wrongCount - a.wrongCount);
 
   const vocabDueCount = vocabMistakeIds.filter(id => mistakes[id].nextReviewDate && isDueForReview(mistakes[id].nextReviewDate)).length;
   const examDueCount = examMistakeIds.filter(id => mistakes[id].nextReviewDate && isDueForReview(mistakes[id].nextReviewDate)).length;

@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import QuizCard from '@/components/QuizCard';
 import Confetti from '@/components/Confetti';
-import { getRandomWords, VOCABULARY_DATA, VocabularyWord } from '@/data/vocabulary';
+import { VocabularyWord } from '@/data/vocabulary';
+import { useVocabulary } from '@/hooks/useVocabulary';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import styles from '@/app/quiz/page.module.css';
 
 export default function NotebookQuizPage() {
-  const { mounted, getMistakes, removeMistake } = useMistakeNotebook();
+  const { mounted: vocabMounted, allWords, getRandomWords } = useVocabulary();
+  const { mounted: notebookMounted, getMistakes, removeMistake } = useMistakeNotebook();
   const [questions, setQuestions] = useState<{word: VocabularyWord, options: string[]}[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -18,7 +20,7 @@ export default function NotebookQuizPage() {
   const [clearedWords, setClearedWords] = useState(0);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!vocabMounted || !notebookMounted) return;
     
     const mistakeIds = getMistakes();
     if (mistakeIds.length === 0) {
@@ -29,8 +31,8 @@ export default function NotebookQuizPage() {
     // Limit quiz to max 15 mistakes at a time
     const quizIds = mistakeIds.sort(() => 0.5 - Math.random()).slice(0, 15);
     const quizWords = quizIds
-      .map(id => VOCABULARY_DATA.find(w => w.id === id))
-      .filter((w): w is VocabularyWord => w !== undefined);
+      .map(id => allWords.find(w => w.id === id))
+      .filter((w) => w !== undefined) as VocabularyWord[];
     
     const generatedQuestions = quizWords.map(word => {
       // Get 3 random wrong answers
@@ -43,7 +45,7 @@ export default function NotebookQuizPage() {
     });
 
     setQuestions(generatedQuestions);
-  }, [mounted]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [vocabMounted, notebookMounted, allWords, getMistakes, getRandomWords]);
 
   const handleAnswer = (isCorrect: boolean) => {
     if (isCorrect) {
@@ -63,7 +65,7 @@ export default function NotebookQuizPage() {
     }
   };
 
-  if (!mounted || (questions.length === 0 && !isFinished)) {
+  if (!vocabMounted || !notebookMounted || (questions.length === 0 && !isFinished)) {
     return <div className={styles.loading}>Generating quiz...</div>;
   }
 

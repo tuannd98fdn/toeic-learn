@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useStreak } from '@/hooks/useStreak';
-import { VOCABULARY_DATA } from '@/data/vocabulary';
+import { useVocabulary } from '@/hooks/useVocabulary';
 import LeitnerBox from '@/components/LeitnerBox';
 import StreakCounter from '@/components/StreakCounter';
 import { storage } from '@/utils/storage';
@@ -14,6 +14,7 @@ import ShareButton from '@/components/ShareButton';
 import styles from './page.module.css';
 
 export default function StatsPage() {
+  const { mounted: vocabMounted, allWords } = useVocabulary();
   const { mounted: leitnerMounted, getStats } = useLeitner();
   const { mounted: streakMounted, streakData } = useStreak();
   const [examHistory, setExamHistory] = useState<ExamScoreSummary[]>([]);
@@ -23,10 +24,10 @@ export default function StatsPage() {
     setExamHistory(history);
   }, []);
 
-  if (!leitnerMounted || !streakMounted) return <div className={styles.loading}>Loading...</div>;
+  if (!vocabMounted || !leitnerMounted || !streakMounted) return <div className={styles.loading}>Loading...</div>;
 
   const stats = getStats();
-  const totalWords = VOCABULARY_DATA.length;
+  const totalWords = allWords.length;
   const masterRate = Math.round((stats.mastered / totalWords) * 100) || 0;
 
   return (
