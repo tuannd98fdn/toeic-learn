@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './PracticeFooter.module.css';
+import { SparklesIcon } from '@/components/icons/AppIcons';
 
 interface PracticeFooterProps {
   isAnswered: boolean;
@@ -38,7 +39,7 @@ export default function PracticeFooter({
       <div className={styles.actionArea}>
         {!isCorrect && onAITutor && (
           <button className={styles.aiBtn} onClick={onAITutor} type="button">
-            ✨ Hỏi Gia Sư AI
+            <SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI
           </button>
         )}
         <button className={styles.nextBtn} onClick={onNext} type="button">

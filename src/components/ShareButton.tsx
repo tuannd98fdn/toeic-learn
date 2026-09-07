@@ -84,7 +84,7 @@ export default function ShareButton({
       style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}
     >
       <ShareIcon size={18} />
-      {isSharing ? 'Đang tạo ảnh...' : 'Khoe Thành Tích 🏆'}
+      {isSharing ? 'Đang tạo ảnh...' : 'Khoe Thành Tích'}
     </button>
   );
 }

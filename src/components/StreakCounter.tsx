@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './StreakCounter.module.css';
+import { ZapIcon } from './icons/AppIcons';
 
 interface StreakCounterProps {
   currentStreak: number;
@@ -12,7 +13,7 @@ export default function StreakCounter({ currentStreak, bestStreak }: StreakCount
   return (
     <div className={`${styles.container} card-minimal`}>
       <div className={`${styles.iconContainer} ${isActive ? styles.active : ''}`}>
-        <span className={styles.icon}>🔥</span>
+        <ZapIcon size={24} className={styles.icon} />
       </div>
       
       <div className={styles.info}>

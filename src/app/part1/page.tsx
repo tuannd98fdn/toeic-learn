@@ -6,6 +6,16 @@ import { useSearchParams } from 'next/navigation';
 import { Part1Question, Part1DataSchema } from '@/schema/toeic';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import Confetti from '@/components/Confetti';
+import { 
+  HeadphonesIcon,
+  AwardIcon,
+  ThumbsUpIcon,
+  RotateCcwIcon,
+  HomeIcon,
+  EyeIcon,
+  LightbulbIcon,
+  FileTextIcon,
+} from '@/components/icons/AppIcons';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
@@ -63,7 +73,7 @@ function Part1Trainer() {
   }, [testId]);
 
   if (loading) {
-    return <div className={styles.loading}>Đang nạp đề Part 1 Photographs... 🎧</div>;
+    return <div className={styles.loading}>Đang nạp đề Part 1 Photographs... <HeadphonesIcon size={18} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} /></div>;
   }
 
   if (error || questions.length === 0) {
@@ -125,22 +135,26 @@ function Part1Trainer() {
       <div className={styles.container}>
         <Confetti show={showConfetti} />
         <div className={styles.resultsCard}>
-          <span className={styles.resultsIcon}>{percentage >= 70 ? '🏆' : '💪'}</span>
-          <h1 className={styles.resultsTitle}>Hoàn thành Part 1 Photographs!</h1>
-          <div className={styles.scoreBanner}>
-            Kết quả: {score} / {questions.length} ({percentage}%)
+          <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
+          <h2>Kết quả Part 1</h2>
+          <div className={styles.scoreCircle}>
+            <span className={styles.scoreText}>{score}/{questions.length}</span>
           </div>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '480px' }}>
-            {percentage >= 80
-              ? 'Khả năng quan sát hình ảnh và nắm bắt bẫy thì/động từ của bạn rất tốt!'
-              : 'Hãy chú ý các bẫy hành động (V-ing) và vị trí vật thể (prepositions) trong hình!'}
+          <p className={styles.feedback}>
+            {percentage >= 80 ? 'Tuyệt vời! Bạn có kỹ năng quan sát rất nhạy bén.' :
+             percentage >= 50 ? 'Khá tốt! Hãy chú ý kỹ hơn vào các chi tiết nhỏ trong hình nhé.' :
+             'Đừng nản chí! Nghe nhiều sẽ giúp bạn quen với các từ vựng mô tả hình ảnh.'}
           </p>
-
-          <div className={styles.resultsActions}>
-            <button onClick={handleRestart} className={styles.nextBtn}>Làm lại đề này 🔄</button>
-            <Link href="/" className={styles.secondaryBtn}>Về Dashboard 🏠</Link>
+          <div className={styles.actions}>
+            <button onClick={handleRestart} className={styles.nextBtn}>
+              Làm lại đề này <RotateCcwIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
+            </button>
+            <Link href="/" className={styles.secondaryBtn}>
+              Về Dashboard <HomeIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
+            </Link>
           </div>
         </div>
+      </div>
       </div>
     );
   }
@@ -218,13 +232,18 @@ function Part1Trainer() {
               style={{ alignSelf: 'flex-start', padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
               onClick={() => setShowTranscript((prev) => !prev)}
             >
-              {showTranscript ? 'Ẩn Transcript 👁️' : 'Xem Transcript & Lời giải 💡'}
+                  {showTranscript ? (
+                    <><EyeIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Ẩn Transcript</>
+                  ) : (
+                    <><LightbulbIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Xem Transcript & Lời giải</>
+                  )}
             </button>
 
             {showTranscript && currentQ.transcript && (
               <div className={styles.transcriptCard}>
                 <div className={styles.transcriptHeader}>
-                  <span>📝 Transcript & Đáp án</span>
+                  <FileTextIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} />
+                  <span>Transcript & Đáp án</span>
                   <span style={{ color: 'var(--success)', fontWeight: 700 }}>
                     Đáp án đúng: ({currentQ.correctAnswer})
                   </span>
@@ -255,7 +274,7 @@ function Part1Trainer() {
           transcript: currentQ.transcript,
           audioUrl: currentQ.audioUrl,
         })}
-        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả 🎉' : 'Câu tiếp theo ➔'}
+        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả' : 'Câu tiếp theo ➔'}
       />
 
       {tutorContext && (

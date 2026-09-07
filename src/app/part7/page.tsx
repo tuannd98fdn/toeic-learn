@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Confetti from '@/components/Confetti';
+import { ClockIcon } from '@/components/icons/AppIcons';
 import { useSearchParams } from 'next/navigation';
 import { Part7PassageSet, Part7DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
@@ -268,7 +269,7 @@ function Part7Trainer() {
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           <div className={styles.timeAttackToggle} onClick={toggleTimeAttack}>
-            <span style={{ fontSize: '0.9rem' }}>⏱️ Ép thời gian</span>
+            <span style={{ fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '4px' }}><ClockIcon size={16} /> Ép thời gian</span>
             <div className={`${styles.toggleSwitch} ${isTimeAttackEnabled ? styles.toggleSwitchOn : ''}`} />
           </div>
           <Link href="/" className={styles.backBtn}>Thoát</Link>
@@ -300,7 +301,7 @@ function Part7Trainer() {
         <section className={styles.rightPanel}>
           {isTimeAttackEnabled && timeLeft !== null && !isSubmitted && (
             <div className={`${styles.timerContainer} ${timeLeft < 30 ? styles.timerDanger : timeLeft < 60 ? styles.timerWarning : ''}`}>
-              ⏳ {Math.floor(timeLeft / 60).toString().padStart(2, '0')} : {(timeLeft % 60).toString().padStart(2, '0')}
+              <ClockIcon size={18} style={{ marginRight: '6px', display: 'inline', verticalAlign: 'text-bottom' }} /> {Math.floor(timeLeft / 60).toString().padStart(2, '0')} : {(timeLeft % 60).toString().padStart(2, '0')}
             </div>
           )}
 
@@ -402,7 +403,7 @@ function Part7Trainer() {
           correctAnswer: 'A',
           explanation: passageSet.questions.map(q => `Q${q.number}: ${q.explanation}`).join('<br/><br/>'),
         })}
-        nextLabel={currentPassageIndex + 1 === passageSets.length ? 'Xem tổng kết 🎉' : 'Đoạn văn tiếp theo ➔'}
+        nextLabel={currentPassageIndex + 1 === passageSets.length ? 'Xem tổng kết' : 'Đoạn văn tiếp theo ➔'}
       />
 
       {tutorContext && (

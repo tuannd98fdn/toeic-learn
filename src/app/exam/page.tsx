@@ -4,6 +4,18 @@ import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import Confetti from '@/components/Confetti';
+import {
+  StatsIcon,
+  SearchIcon,
+  HomeIcon,
+  ClockIcon,
+  FlagIcon,
+  MapPinIcon,
+  BotIcon,
+  AwardIcon,
+  TrendingUpIcon,
+  LightbulbIcon,
+} from '@/components/icons/AppIcons';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { storage } from '@/utils/storage';
@@ -414,9 +426,9 @@ function ExamSimulation() {
 
         <div className={styles.resultsContainer}>
           <div className={styles.scoreBannerCard}>
-            <span style={{ fontSize: '3rem' }}>
-              {resultSummary.totalScore >= 700 ? '🎖️' : '📈'}
-            </span>
+            <span className={styles.accuracyIcon}>
+            {resultSummary.totalScore >= 700 ? <AwardIcon size={32} style={{ color: '#ff9800' }} /> : <TrendingUpIcon size={32} style={{ color: '#4caf50' }} />}
+          </span>
             <div className={styles.scoreBannerTitle}>Báo cáo Kết quả Thi thử TOEIC</div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
               <span className={styles.totalScoreBadge}>{resultSummary.totalScore}</span>
@@ -449,8 +461,9 @@ function ExamSimulation() {
             <div className={styles.diagnosisText}>
               Phần bạn cần cải thiện nhiều nhất là <strong>{resultSummary.weakestPart.partName}</strong>{' '}
               với tỷ lệ chính xác chỉ <strong>{resultSummary.weakestPart.accuracy}%</strong>.
-              <br />
-              💡 <em>Lời khuyên:</em> {resultSummary.weakestPart.advice}
+              <div className={styles.adviceBox}>
+                <LightbulbIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px', color: '#ff9800' }} /> <em>Lời khuyên:</em> {resultSummary.weakestPart.advice}
+              </div>
             </div>
           </div>
 
@@ -506,18 +519,14 @@ function ExamSimulation() {
           </div>
 
           <div className={styles.resultsActions}>
-            <button
-              type="button"
-              className={styles.primaryBtn}
-              onClick={() => setIsReviewMode(true)}
-            >
-              🔍 Xem lại toàn bộ bài thi & Lời giải
+            <button className={styles.secondaryBtn} onClick={() => setIsReviewMode(true)}>
+              <SearchIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Xem lại toàn bộ bài thi & Lời giải
             </button>
             <Link href="/stats" className={styles.secondaryBtn}>
-              📊 Xem tiến độ trên Stats
+              <StatsIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Xem tiến độ trên Stats
             </Link>
             <Link href="/" className={styles.secondaryBtn}>
-              🏠 Về Dashboard
+              <HomeIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Về Dashboard
             </Link>
           </div>
         </div>
@@ -545,7 +554,7 @@ function ExamSimulation() {
 
         {!isReviewMode ? (
           <div className={styles.timerGroup}>
-            <span>⏱️</span>
+            <ClockIcon size={16} style={{ display: 'inline', verticalAlign: 'middle' }} />
             <span
               className={`${styles.timerText} ${
                 timeLeft < 300
@@ -563,7 +572,7 @@ function ExamSimulation() {
               onClick={() => setIsPaused((p) => !p)}
               title={isPaused ? 'Tiếp tục' : 'Tạm dừng'}
             >
-              {isPaused ? '▶️ Tiếp tục' : '⏸️ Tạm dừng'}
+              {isPaused ? 'Tiếp tục' : 'Tạm dừng'}
             </button>
           </div>
         ) : (
@@ -574,7 +583,7 @@ function ExamSimulation() {
               style={{ padding: '0.35rem 0.75rem', fontSize: '0.85rem' }}
               onClick={() => setShowOnlyWrong((p) => !p)}
             >
-              {showOnlyWrong ? 'Hiện tất cả câu' : 'Chỉ xem câu sai ❌'}
+              {showOnlyWrong ? 'Hiện tất cả câu' : 'Chỉ xem câu sai'}
             </button>
             <button
               type="button"
@@ -582,8 +591,8 @@ function ExamSimulation() {
               style={{ padding: '0.35rem 0.75rem', fontSize: '0.85rem' }}
               onClick={() => setIsReviewMode(false)}
             >
-              Bảng điểm 📊
-            </button>
+              Bảng điểm <StatsIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
+          </button>
           </div>
         )}
 
@@ -606,7 +615,7 @@ function ExamSimulation() {
                 }
               }}
             >
-              Nộp bài 🏁
+              Nộp bài <FlagIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
             </button>
           )}
         </div>
@@ -627,14 +636,14 @@ function ExamSimulation() {
               className={`${styles.flagBtn} ${isCurrentFlagged ? styles.flagged : ''}`}
               onClick={() => toggleFlag(currentQ.number)}
             >
-              {isCurrentFlagged ? '🚩 Đã gắn cờ' : '🏳️ Đánh dấu xem lại'}
+              <FlagIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px', fill: isCurrentFlagged ? 'currentColor' : 'none' }} /> {isCurrentFlagged ? 'Đã gắn cờ' : 'Đánh dấu xem lại'}
             </button>
           </div>
 
           {/* Context Banner */}
           {currentQ.context && (
             <div style={{ fontStyle: 'italic', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-              📌 {currentQ.context}
+              <MapPinIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> {currentQ.context}
             </div>
           )}
 
@@ -744,7 +753,7 @@ function ExamSimulation() {
                   boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
                 }}
               >
-                🤖 Hỏi Gia Sư AI 990 về câu này
+                <BotIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Hỏi Gia Sư AI 990 về câu này
               </button>
             </div>
           )}
@@ -811,7 +820,8 @@ function ExamSimulation() {
               <span>Chưa làm</span>
             </div>
             <div className={styles.legendItem}>
-              <span>🚩 Cờ</span>
+              <FlagIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+              <span>Cờ</span>
             </div>
           </div>
 

@@ -6,7 +6,7 @@ import {
   HomeIcon,
   ExamIcon,
   CardsIcon,
-  QuizIcon,
+  StatsIcon,
   CompassIcon,
   TargetIcon,
 } from '@/components/icons/AppIcons';
@@ -27,7 +27,8 @@ export default function Navbar() {
     { path: '/', label: 'Học', icon: <HomeIcon size={26} /> },
     { path: '/study-plan', label: 'Lộ trình', icon: <CompassIcon size={26} /> },
     { path: '/diagnostic', label: 'Mục tiêu', icon: <TargetIcon size={26} /> },
-    { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={26} />, badge: 'HOT' },
+    { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={26} />, badge: 'MỚI' },
+    { path: '/stats', label: 'Thống kê', icon: <StatsIcon size={26} /> },
     { path: '/study', label: 'Từ vựng', icon: <CardsIcon size={26} /> },
   ];
 
@@ -37,13 +38,13 @@ export default function Navbar() {
         <div className={styles.logoIcon}>T</div>
         <div className={styles.logoText}>
           <span className={styles.brandName}>TOEIC Master</span>
-          <span className={styles.brandSub}>Luyện Thi Gamified</span>
+          <span className={styles.brandSub}>Nền tảng #1 Việt Nam</span>
         </div>
       </div>
 
       <ul className={styles.navList}>
         {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path));
+          const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(`${item.path}/`));
           
           return (
             <li key={item.path} className={styles.navItem}>

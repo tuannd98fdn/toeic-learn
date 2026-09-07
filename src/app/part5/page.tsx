@@ -3,6 +3,12 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import Confetti from '@/components/Confetti';
+import { 
+  ZapIcon,
+  ClockIcon,
+  RotateCcwIcon,
+  SparklesIcon,
+} from '@/components/icons/AppIcons';
 import { useSearchParams } from 'next/navigation';
 import { Part5Question, Part5DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
@@ -86,6 +92,10 @@ function Part5SpeedTrainer() {
       userAnswer: selectedAnswer || undefined,
       explanation: q.explanation,
     });
+  };
+
+  const handleRestart = () => {
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -192,11 +202,8 @@ function Part5SpeedTrainer() {
              'Đừng nản chí! Hãy xem lại các lỗi sai bên dưới nhé.'}
           </p>
           <div className={styles.actions}>
-            <button 
-              className={styles.primaryBtn} 
-              onClick={() => window.location.reload()}
-            >
-              Luyện tập lại 🔄
+            <button onClick={handleRestart} className={styles.primaryBtn}>
+              Luyện tập lại <RotateCcwIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
             </button>
             <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
           </div>
@@ -222,20 +229,15 @@ function Part5SpeedTrainer() {
                     <div dangerouslySetInnerHTML={{ __html: q.explanation }} />
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => setTutorContext({
+                  <button className={styles.aiTutorBtn} onClick={() => setTutorContext({
                       partTitle: 'Part 5: Incomplete Sentences',
                       number: q.number,
                       text: q.text,
                       options: q.options,
                       correctAnswer: q.correctAnswer,
                       explanation: q.explanation,
-                    })}
-                    className={styles.aiMagicalBtn}
-                    style={{ marginTop: '0.6rem' }}
-                  >
-                    ✨ Hỏi Gia Sư AI bóc tách bẫy
+                    })}>
+                    <SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI bóc tách bẫy
                   </button>
                 </div>
               ))}
@@ -256,7 +258,6 @@ function Part5SpeedTrainer() {
 
   const currentQ = questions[currentIndex];
   const progressPercent = ((currentIndex) / questions.length) * 100;
-  const timePercent = (timeLeft / TIME_LIMIT) * 100;
 
   // Determine button styles based on state
   const getButtonClass = (key: string) => {
@@ -270,13 +271,12 @@ function Part5SpeedTrainer() {
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.topHeaderRow}>
-          {/* Progress Bar takes up most space */}
           <div className={styles.progressSection}>
             <div className={styles.statsRow}>
               <span className={styles.questionCount}>Câu {currentIndex + 1} / {questions.length}</span>
-              {streak >= 2 && (
-                <div className={styles.streakBadge}>
-                  <span className={styles.streakFire}>🔥</span> {streak} Streak!
+              {streak > 0 && (
+                <div className={`${styles.streakBadge} ${styles.streakActive}`}>
+                  <span className={styles.streakFire}><ZapIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', color: '#ff9800' }} /></span> {streak} Streak!
                 </div>
               )}
             </div>
@@ -288,9 +288,8 @@ function Part5SpeedTrainer() {
             </div>
           </div>
           
-          {/* Timer on the right */}
           <div className={styles.timerSection}>
-            <span className={`${styles.timerIcon} ${timeLeft <= 5 ? styles.timerWarningIcon : ''}`}>⏱️</span>
+            <span className={`${styles.timerIcon} ${timeLeft <= 5 ? styles.timerWarningIcon : ''}`}><ClockIcon size={20} /></span>
             <span className={`${styles.timerText} ${timeLeft <= 5 ? styles.timerTextWarning : ''}`}>
               {timeLeft}s
             </span>
@@ -350,7 +349,7 @@ function Part5SpeedTrainer() {
         incorrectMessage={selectedAnswer === null ? "Hết thời gian!" : `Đáp án đúng là (${currentQ.correctAnswer})`}
         onNext={moveToNextQuestion}
         onAITutor={() => openAITutor(currentQ)}
-        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả 🎉' : 'Câu tiếp theo ➔'}
+        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả' : 'Câu tiếp theo ➔'}
       />
 
 

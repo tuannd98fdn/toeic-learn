@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useDailyMission, MISSION_GOALS } from '../hooks/useDailyMission';
+import { TargetIcon, RotateCcwIcon, BookIcon, CheckCircleIcon } from './icons/AppIcons';
 import styles from './DailyMission.module.css';
 
 export default function DailyMission() {
@@ -20,7 +21,10 @@ export default function DailyMission() {
   return (
     <div className={`${styles.container} card-minimal`}>
       <div className={styles.header}>
-        <h2 className={styles.title}>🎯 Nhiệm vụ hôm nay</h2>
+        <h2 className={styles.title}>
+          <TargetIcon size={24} className={styles.titleIcon} />
+          Nhiệm vụ hôm nay
+        </h2>
         <span className={styles.progressText}>{totalDone}/{totalMissions} hoàn thành</span>
       </div>
 
@@ -28,7 +32,7 @@ export default function DailyMission() {
         {/* Mission 1: New Words */}
         <div className={`${styles.missionItem} ${isNewWordsDone ? styles.completed : ''}`}>
           <div className={styles.missionInfo}>
-            <span className={styles.icon}>🌱</span>
+            <BookIcon size={24} className={styles.icon} />
             <div className={styles.details}>
               <h3>Học từ mới</h3>
               <div className={styles.progressBarBg}>
@@ -43,13 +47,13 @@ export default function DailyMission() {
           {!isNewWordsDone && (
             <Link href="/vocabulary" className={styles.actionBtn}>Học ngay</Link>
           )}
-          {isNewWordsDone && <span className={styles.doneMark}>✅</span>}
+          {isNewWordsDone && <CheckCircleIcon size={20} className={styles.doneMark} />}
         </div>
 
         {/* Mission 2: Review Words */}
         <div className={`${styles.missionItem} ${isReviewedWordsDone ? styles.completed : ''}`}>
           <div className={styles.missionInfo}>
-            <span className={styles.icon}>🔄</span>
+            <RotateCcwIcon size={24} className={styles.icon} />
             <div className={styles.details}>
               <h3>Ôn tập từ cũ</h3>
               <div className={styles.progressBarBg}>
@@ -64,13 +68,13 @@ export default function DailyMission() {
           {!isReviewedWordsDone && (
             <Link href="/study" className={styles.actionBtn}>Ôn ngay</Link>
           )}
-          {isReviewedWordsDone && <span className={styles.doneMark}>✅</span>}
+          {isReviewedWordsDone && <CheckCircleIcon size={20} className={styles.doneMark} />}
         </div>
 
         {/* Mission 3: Quizzes */}
         <div className={`${styles.missionItem} ${isQuizzesDone ? styles.completed : ''}`}>
           <div className={styles.missionInfo}>
-            <span className={styles.icon}>🎯</span>
+            <TargetIcon size={24} className={styles.icon} />
             <div className={styles.details}>
               <h3>Làm bài Quiz</h3>
               <div className={styles.progressBarBg}>
@@ -85,7 +89,7 @@ export default function DailyMission() {
           {!isQuizzesDone && (
             <Link href="/quiz" className={styles.actionBtn}>Làm ngay</Link>
           )}
-          {isQuizzesDone && <span className={styles.doneMark}>✅</span>}
+          {isQuizzesDone && <CheckCircleIcon size={20} className={styles.doneMark} />}
         </div>
       </div>
     </div>

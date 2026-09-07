@@ -196,6 +196,18 @@
   .active {
     background: var(--primary-light);
     color: var(--primary);
+    position: relative;
+  }
+
+  .active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--primary);
   }
 
   .active:hover {

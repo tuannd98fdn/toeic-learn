@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 32px;
   max-width: 960px;
   margin: 0 auto;
 }
@@ -18,10 +18,10 @@
 .header {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  text-align: center;
-  align-items: center;
-  padding: 32px 0 16px 0;
+  gap: 16px;
+  text-align: left;
+  align-items: flex-start;
+  padding: 24px 0 8px 0;
 }
 
 @media (min-width: 640px) {
@@ -33,17 +33,17 @@
 }
 
 .greeting {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--foreground);
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .subtitle {
   color: var(--text-secondary);
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -136,7 +136,7 @@
 
 .stationActions {
   display: flex;
-  gap: 16px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -240,8 +240,9 @@
 }
 
 .planItem:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: var(--shadow-md);
+  border-color: var(--border-focus);
 }
 
 .planItem[data-completed="true"] {
@@ -257,17 +258,18 @@
 }
 
 .checkButton {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
   border: 1.5px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   flex-shrink: 0;
   background: var(--surface);
+  font-size: 0.75rem;
 }
 
 .planItem[data-completed="true"] .checkButton {
@@ -284,6 +286,6 @@
 
 .planItem[data-completed="true"] .planItemTitle {
   text-decoration: line-through;
-  color: var(--primary);
-  opacity: 0.7;
+  color: var(--text-secondary);
+  opacity: 0.5;
 }

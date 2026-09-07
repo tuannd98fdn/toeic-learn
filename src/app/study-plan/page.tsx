@@ -22,6 +22,7 @@ import {
   QuizIcon,
   NotebookIcon,
   ExamIcon,
+  MapIcon,
 } from '@/components/icons/AppIcons';
 import styles from './page.module.css';
 
@@ -314,7 +315,8 @@ function StudyPlanContainer() {
         <section className={styles.todayCard}>
           <div className={styles.todayHeader}>
             <h2 className={styles.todayTitle}>
-              🎯 Nhiệm Vụ Hôm Nay (Ngày {activeDay.dayNumber})
+              <TargetIcon size={24} />
+              Nhiệm Vụ Hôm Nay (Ngày {activeDay.dayNumber})
             </h2>
             <span className={styles.dayBadge}>
               {activeDay.tasks.filter((t) => t.completed).length} / {activeDay.tasks.length} Hoàn thành
@@ -367,7 +369,8 @@ function StudyPlanContainer() {
       <section className={styles.timelineSection}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
           <h2 className={styles.timelineTitle}>
-            🗺️ Toàn Bộ Lộ Trình ({plan.daysTotal} Ngày)
+            <MapIcon size={24} />
+            Toàn Bộ Lộ Trình ({plan.daysTotal} Ngày)
           </h2>
 
           <button onClick={handleResetPlan} className={styles.resetBtn}>

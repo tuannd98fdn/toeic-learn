@@ -100,12 +100,12 @@ export default function StatsPage() {
       <section className={styles.examHistorySection}>
         <div className={styles.examHistoryHeader}>
           <div className={styles.examHistoryHeaderInfo}>
-            <h2>Tiến trình Điểm số & Lịch sử Thi thử 📝</h2>
+            <h2>Tiến trình Điểm số & Lịch sử Thi thử</h2>
             <p>Theo dõi tiến độ tăng điểm và chẩn đoán điểm yếu qua từng đề thi</p>
           </div>
 
           <Link href="/exam" className="btn-primary" aria-label="Vào thi đề mới">
-            Vào thi đề mới 🚀
+            Vào thi đề mới
           </Link>
         </div>
 
@@ -139,10 +139,10 @@ export default function StatsPage() {
         <div className={styles.historyTableCard}>
           {examHistory.length === 0 ? (
             <div className={styles.emptyHistory}>
-              <span className={styles.emptyHistoryIcon}>📊</span>
+              <span className={styles.emptyHistoryIcon}></span>
               <p>Bạn chưa có dữ liệu làm bài thi thử nào.</p>
               <Link href="/exam" className="btn-accent">
-                Làm bài thi thử đầu tiên ngay 🎯
+                Làm bài thi thử đầu tiên ngay
               </Link>
             </div>
           ) : (

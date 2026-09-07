@@ -108,7 +108,21 @@ export default function Home() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!streakMounted) {
-    return <div className={styles.loading}>Loading...</div>;
+    return (
+      <div className={styles.container} style={{ paddingTop: '32px' }}>
+        {/* Skeleton Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div>
+            <div style={{ width: '280px', height: '28px', borderRadius: '8px', background: 'var(--surface-hover)', animation: 'skeletonPulse 1.5s ease-in-out infinite' }} />
+            <div style={{ width: '200px', height: '16px', borderRadius: '6px', background: 'var(--surface-hover)', marginTop: '12px', animation: 'skeletonPulse 1.5s ease-in-out infinite', animationDelay: '0.15s' }} />
+          </div>
+          <div style={{ width: '80px', height: '60px', borderRadius: '16px', background: 'var(--surface-hover)', animation: 'skeletonPulse 1.5s ease-in-out infinite', animationDelay: '0.3s' }} />
+        </div>
+        {/* Skeleton Card */}
+        <div style={{ width: '100%', height: '200px', borderRadius: '24px', background: 'var(--surface-hover)', animation: 'skeletonPulse 1.5s ease-in-out infinite', animationDelay: '0.2s' }} />
+        <div style={{ width: '100%', height: '140px', borderRadius: '24px', background: 'var(--surface-hover)', animation: 'skeletonPulse 1.5s ease-in-out infinite', animationDelay: '0.4s' }} />
+      </div>
+    );
   }
 
   return (
@@ -116,7 +130,7 @@ export default function Home() {
       <header className={styles.header}>
         <div>
           {/* Slogan mạnh mẽ thay vì "Chào buổi chiều" */}
-          <h1 className={styles.greeting}>🔥 Sẵn sàng bứt phá<br/>TOEIC {onboardingData.target} hôm nay chưa?</h1>
+          <h1 className={styles.greeting}>Sẵn sàng bứt phá<br/>TOEIC {onboardingData.target} hôm nay chưa?</h1>
           <p className={styles.subtitle}>
             {onboardingData.daysLeft !== null 
               ? <span style={{ color: 'var(--primary)', fontWeight: 'bold' }}>Chỉ còn {onboardingData.daysLeft} ngày nữa là thi. Cố lên!</span>
@@ -154,8 +168,8 @@ export default function Home() {
               </div>
               
               {/* Progress Bar */}
-              <div style={{ width: '100%', height: '12px', background: 'var(--muted)', borderRadius: '6px', marginBottom: '24px', overflow: 'hidden' }}>
-                <div style={{ width: `${progressPercent}%`, height: '100%', background: 'var(--primary)', borderRadius: '6px', transition: 'width 0.3s ease' }}></div>
+              <div style={{ width: '100%', height: '8px', background: 'var(--border)', borderRadius: '4px', marginBottom: '24px', overflow: 'hidden' }}>
+                <div style={{ width: `${progressPercent}%`, height: '100%', background: 'var(--primary)', borderRadius: '4px', transition: 'width 0.3s ease', opacity: 0.85 }}></div>
               </div>
 
               <div className={styles.planList}>
@@ -164,7 +178,11 @@ export default function Home() {
                     <div className={styles.planItemInfo}>
                       <button
                         className={styles.checkButton}
-                        onClick={() => {
+                        onClick={(e) => {
+                          const btn = e.currentTarget;
+                          btn.classList.remove('animate-bounce-check');
+                          void btn.offsetWidth; // force reflow
+                          btn.classList.add('animate-bounce-check');
                           const updated = toggleTaskCompleted(activeDay.dayNumber, task.id);
                           if (updated) setStudyPlan({ ...updated });
                         }}
@@ -271,7 +289,7 @@ export default function Home() {
           </div>
           <div className={styles.stationActions}>
             <Link href={`/mini-test?test=${selectedTest}`} className="btn-accent" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>
-              THI NGAY (15P) ⚡
+              THI NGAY (15P)
             </Link>
           </div>
         </div>

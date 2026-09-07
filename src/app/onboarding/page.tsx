@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import Confetti from '@/components/Confetti';
+
+const TOTAL_STEPS = 3;
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -12,6 +14,12 @@ export default function OnboardingPage() {
   const [examDate, setExamDate] = useState('');
   const [level, setLevel] = useState('');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [animKey, setAnimKey] = useState(0); // forces re-mount for animation
+
+  const goToStep = useCallback((nextStep: number) => {
+    setAnimKey(prev => prev + 1);
+    setStep(nextStep);
+  }, []);
 
   const handleComplete = () => {
     localStorage.setItem('toeic_onboarding_done', 'true');
@@ -30,9 +38,19 @@ export default function OnboardingPage() {
       <Confetti show={showConfetti} />
       
       <div className={`${styles.card} animate-slide-up`}>
+        {/* Step Indicator */}
+        <div className={styles.stepIndicator}>
+          {[1, 2, 3].map((s) => (
+            <div
+              key={s}
+              className={`${styles.stepDot} ${s === step ? styles.stepDotActive : ''} ${s < step ? styles.stepDotDone : ''}`}
+            />
+          ))}
+        </div>
+
         {step === 1 && (
-          <div className="animate-fade-in">
-            <h1 className={styles.title}>Chào mừng bạn! 👋</h1>
+          <div key={`step1-${animKey}`} className={styles.slideEnter}>
+            <h1 className={styles.title}>Chào mừng bạn!</h1>
             <p className={styles.subtitle}>Hãy để TOEIC Master thiết kế lộ trình riêng cho bạn.</p>
             
             <div className={styles.formGroup}>
@@ -44,7 +62,7 @@ export default function OnboardingPage() {
                     className={`${styles.optionBtn} ${targetScore === score ? styles.optionSelected : ''}`}
                     onClick={() => {
                       setTargetScore(score);
-                      setTimeout(() => setStep(2), 300);
+                      setTimeout(() => goToStep(2), 300);
                     }}
                   >
                     Mục tiêu {score}
@@ -56,8 +74,11 @@ export default function OnboardingPage() {
         )}
 
         {step === 2 && (
-          <div className="animate-fade-in">
-            <h1 className={styles.title}>Trình độ hiện tại? 🎯</h1>
+          <div key={`step2-${animKey}`} className={styles.slideEnter}>
+            <button className={styles.backBtn} onClick={() => goToStep(1)}>
+              ← Quay lại
+            </button>
+            <h1 className={styles.title}>Trình độ hiện tại?</h1>
             <p className={styles.subtitle}>Chúng tôi sẽ điều chỉnh độ khó bài tập.</p>
             
             <div className={styles.formGroup}>
@@ -72,7 +93,7 @@ export default function OnboardingPage() {
                     className={`${styles.optionBtn} ${level === item.id ? styles.optionSelected : ''}`}
                     onClick={() => {
                       setLevel(item.id);
-                      setTimeout(() => setStep(3), 300);
+                      setTimeout(() => goToStep(3), 300);
                     }}
                   >
                     {item.label}
@@ -84,8 +105,11 @@ export default function OnboardingPage() {
         )}
 
         {step === 3 && (
-          <div className="animate-fade-in">
-            <h1 className={styles.title}>Khi nào bạn thi? 🗓️</h1>
+          <div key={`step3-${animKey}`} className={styles.slideEnter}>
+            <button className={styles.backBtn} onClick={() => goToStep(2)}>
+              ← Quay lại
+            </button>
+            <h1 className={styles.title}>Khi nào bạn thi?</h1>
             <p className={styles.subtitle}>Để chúng tôi lên lịch nhắc nhở mỗi ngày.</p>
             
             <div className={styles.formGroup}>
@@ -104,7 +128,7 @@ export default function OnboardingPage() {
               disabled={!examDate}
               style={{ opacity: !examDate ? 0.5 : 1 }}
             >
-              Bắt đầu lộ trình ngay 🚀
+              Bắt đầu lộ trình ngay
             </button>
           </div>
         )}

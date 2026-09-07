@@ -3,6 +3,16 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import Confetti from '@/components/Confetti';
+import {
+  ZapIcon,
+  ThumbsUpIcon,
+  AwardIcon,
+  SearchIcon,
+  HomeIcon,
+  StatsIcon,
+  FlagIcon,
+  ClockIcon,
+} from '@/components/icons/AppIcons';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { storage } from '@/utils/storage';
@@ -157,7 +167,8 @@ function MiniTestSimulation() {
     }));
   };
 
-  const toggleFlag = (num: number) => {
+  const toggleFlag = () => {
+    const num = questions[currentIndex].number;
     setFlaggedQuestions((prev) => {
       const next = new Set(prev);
       if (next.has(num)) next.delete(num);
@@ -229,8 +240,10 @@ function MiniTestSimulation() {
         <Confetti show={showConfetti} />
         <div className={styles.resultsContainer}>
           <div className={styles.scoreBannerCard}>
-            <span style={{ fontSize: '3rem' }}>
-              {accuracy >= 80 ? '🔥' : accuracy >= 50 ? '👍' : '💪'}
+            <span className={styles.accuracyIcon}>
+              {accuracy >= 80 ? <ZapIcon size={32} style={{ color: '#ff9800' }} /> : 
+               accuracy >= 50 ? <ThumbsUpIcon size={32} style={{ color: '#4caf50' }} /> : 
+               <AwardIcon size={32} style={{ color: '#2196f3' }} />}
             </span>
             <div className={styles.scoreBannerTitle}>Hoàn thành Mini Test!</div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
@@ -249,11 +262,11 @@ function MiniTestSimulation() {
           </div>
 
           <div className={styles.resultsActions}>
-            <button type="button" className={styles.primaryBtn} onClick={() => setIsReviewMode(true)}>
-              🔍 Xem lại giải thích
+            <button className={styles.secondaryBtn} onClick={() => setIsReviewMode(true)}>
+              <SearchIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Xem lại giải thích
             </button>
             <Link href="/" className={styles.secondaryBtn}>
-              🏠 Về Dashboard
+              <HomeIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Về Dashboard
             </Link>
           </div>
         </div>
@@ -280,7 +293,7 @@ function MiniTestSimulation() {
 
         {!isReviewMode ? (
           <div className={styles.timerGroup}>
-            <span>⏱️</span>
+            <ClockIcon size={16} />
             <span className={`${styles.timerText} ${timeLeft < 180 ? styles.timerDanger : ''}`}>
               {formatTimer(timeLeft)}
             </span>
@@ -288,7 +301,7 @@ function MiniTestSimulation() {
         ) : (
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <button type="button" className={styles.primaryBtn} style={{ padding: '0.35rem 0.75rem', fontSize: '0.85rem' }} onClick={() => setIsReviewMode(false)}>
-              Bảng điểm 📊
+              Bảng điểm <StatsIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
             </button>
           </div>
         )}
@@ -305,7 +318,7 @@ function MiniTestSimulation() {
                 if (window.confirm('Nộp bài ngay lập tức?')) handleSubmitExam();
               }}
             >
-              Nộp bài 🏁
+              Nộp bài <FlagIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
             </button>
           )}
         </div>
@@ -322,9 +335,9 @@ function MiniTestSimulation() {
             <button
               type="button"
               className={`${styles.flagBtn} ${isCurrentFlagged ? styles.flagged : ''}`}
-              onClick={() => toggleFlag(currentQ.number)}
+              onClick={toggleFlag}
             >
-              {isCurrentFlagged ? '🚩 Đã gắn cờ' : '🏳️ Đánh dấu'}
+              <FlagIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px', fill: isCurrentFlagged ? 'currentColor' : 'none' }} /> {isCurrentFlagged ? 'Đã gắn cờ' : 'Đánh dấu'}
             </button>
           </div>
 
