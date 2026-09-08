@@ -155,7 +155,9 @@ export default function LandingPage() {
       </main>
 
       <footer className={styles.footer}>
-        <MascotSVG mood="idle" size={24} style={{ opacity: 0.5, marginBottom: 12 }} />
+        <div style={{ opacity: 0.5, marginBottom: 12 }}>
+          <MascotSVG mood="idle" size={24} />
+        </div>
         <p>© 2026 TOEIC Master Vietnam. The Future of EdTech.</p>
       </footer>
     </div>
