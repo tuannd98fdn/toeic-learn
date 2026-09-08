@@ -82,15 +82,21 @@ export default function ExamNotebookQuizPage() {
     return <div className={styles.loading}>Đang chuẩn bị đề thi...</div>;
   }
 
-  if (isFinished) {
+  if (isFinished || questions.length === 0) {
     if (questions.length === 0) {
       return (
-        <div className={styles.finishedContainer}>
-          <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
-            <h2>Tuyệt vời! 🎉</h2>
-            <p className={styles.feedback}>Bạn không có câu hỏi đề thi nào tới hạn ôn tập hôm nay.</p>
-            <div className={styles.actions}>
-              <Link href="/notebook" className={styles.primaryBtn}>Quay lại sổ tay</Link>
+        <div className={styles.finishedWrapper}>
+          <div className={`${styles.heroCard} animate-slide-up`}>
+            <div className={`${styles.heroAura} ${styles.auraEmerald}`}></div>
+            <div className={styles.heroContent}>
+              <div className={`${styles.achievementBadge} ${styles.badgeEmerald}`}>
+                All Caught Up
+              </div>
+              <h2 className={styles.heroTitle}>Tuyệt vời!</h2>
+              <p className={styles.feedbackText}>Bạn không có câu hỏi đề thi nào tới hạn ôn tập hôm nay.</p>
+              <div className={styles.heroActions}>
+                <Link href="/notebook" className={styles.ctaBtnPrimary}>Quay lại sổ tay</Link>
+              </div>
             </div>
           </div>
         </div>
@@ -98,18 +104,37 @@ export default function ExamNotebookQuizPage() {
     }
 
     return (
-      <div className={styles.finishedContainer}>
+      <div className={styles.finishedWrapper}>
         <Confetti show={showConfetti} />
-        <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
-          <h2>Hoàn thành chuộc lỗi!</h2>
-          <div className={styles.scoreCircle}>
-            <span className={styles.scoreText}>{score}/{questions.length}</span>
-          </div>
-          <p className={styles.feedback}>
-            Bạn đã xuất sắc ôn lại <strong>{questions.length}</strong> câu hỏi khó. Hãy tiếp tục duy trì thói quen này nhé!
-          </p>
-          <div className={styles.actions}>
-            <Link href="/notebook" className={styles.primaryBtn}>Về Sổ tay</Link>
+        <div className={`${styles.heroCard} animate-slide-up`}>
+          <div className={`${styles.heroAura} ${showConfetti ? styles.auraGold : styles.auraBlue}`}></div>
+          <div className={styles.heroContent}>
+            <div className={`${styles.achievementBadge} ${showConfetti ? styles.badgeGold : styles.badgeBlue}`}>
+              {showConfetti ? 'Perfect Score' : 'Completed'}
+            </div>
+            <h2 className={styles.heroTitle}>Hoàn thành chuộc lỗi!</h2>
+            <div className={styles.gaugeContainer}>
+              <svg className={styles.gaugeSvg} viewBox="0 0 100 100">
+                <circle className={styles.gaugeBg} cx="50" cy="50" r="45" fill="none" strokeWidth="8" />
+                <circle 
+                  className={styles.gaugeFill} 
+                  cx="50" cy="50" r="45" fill="none" strokeWidth="8" 
+                  stroke="var(--primary)"
+                  strokeDasharray={`${(score / questions.length) * 283} 283`}
+                  strokeLinecap="round"
+                />
+              </svg>
+              <div className={styles.gaugeInner}>
+                <span className={styles.gaugeScore}>{score}</span>
+                <span className={styles.gaugeTotal}>/ {questions.length}</span>
+              </div>
+            </div>
+            <p className={styles.feedbackText}>
+              Bạn đã xuất sắc ôn lại <strong>{questions.length}</strong> câu hỏi khó. Hãy tiếp tục duy trì thói quen này nhé!
+            </p>
+            <div className={styles.heroActions}>
+              <Link href="/notebook" className={styles.ctaBtnPrimary}>Về Sổ tay</Link>
+            </div>
           </div>
         </div>
       </div>
@@ -218,7 +243,7 @@ export default function ExamNotebookQuizPage() {
                   className={styles.primaryBtn}
                   onClick={handleNext}
                 >
-                  {currentIndex < questions.length - 1 ? 'Câu tiếp theo ➔' : 'Hoàn thành 🎉'}
+                  {currentIndex < questions.length - 1 ? 'Câu tiếp theo' : 'Hoàn thành'}
                 </button>
               </div>
             </>

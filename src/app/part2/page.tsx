@@ -36,6 +36,11 @@ function Part2Trainer() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
+  // Dictation states
+  const [isDictationMode, setIsDictationMode] = useState(false);
+  const [dictationText, setDictationText] = useState('');
+  const [dictationChecked, setDictationChecked] = useState(false);
+
   const { addMistake } = useMistakeNotebook();
 
   useEffect(() => {
@@ -63,7 +68,7 @@ function Part2Trainer() {
   }, [testId]);
 
   if (loading) {
-    return <div className={styles.loading}>Đang nạp đề Part 2 Question-Response... ⚡</div>;
+    return <div className={styles.loading}>Đang nạp đề Part 2 Question-Response...</div>;
   }
 
   if (error || questions.length === 0) {
@@ -101,6 +106,8 @@ function Part2Trainer() {
       setSelectedAnswer(null);
       setIsAnswered(false);
       setShowTranscript(false);
+      setDictationText('');
+      setDictationChecked(false);
     } else {
       setIsFinished(true);
       if ((score / questions.length) >= 0.7) {
@@ -117,6 +124,8 @@ function Part2Trainer() {
     setScore(0);
     setIsFinished(false);
     setShowConfetti(false);
+    setDictationText('');
+    setDictationChecked(false);
   };
 
   if (isFinished) {
@@ -125,7 +134,7 @@ function Part2Trainer() {
       <div className={styles.container}>
         <Confetti show={showConfetti} />
         <div className={styles.resultsCard}>
-          <span className={styles.resultsIcon}>{percentage >= 70 ? '🎯' : '💪'}</span>
+          <span className={styles.resultsIcon}>{percentage >= 70 ? '' : ''}</span>
           <h1 className={styles.resultsTitle}>Hoàn thành Part 2 Question-Response!</h1>
           <div className={styles.scoreBanner}>
             Kết quả: {score} / {questions.length} ({percentage}%)
@@ -137,8 +146,8 @@ function Part2Trainer() {
           </p>
 
           <div className={styles.resultsActions}>
-            <button onClick={handleRestart} className={styles.nextBtn}>Làm lại đề này 🔄</button>
-            <Link href="/" className={styles.secondaryBtn}>Về Dashboard 🏠</Link>
+            <button onClick={handleRestart} className={styles.nextBtn}>Làm lại đề này</button>
+            <Link href="/" className={styles.secondaryBtn}>Về Dashboard</Link>
           </div>
         </div>
       </div>
@@ -168,8 +177,18 @@ function Part2Trainer() {
 
       <div className={styles.card}>
         <div className={styles.promptSection}>
-          <div className={styles.promptTitle}>🎧 Lắng nghe câu hỏi và 3 câu trả lời</div>
-          <div className={styles.promptHint}>Chọn câu đáp lại hợp lý nhất trong ngữ cảnh giao tiếp công việc</div>
+          <div>
+            <div className={styles.promptTitle}>🎧 Lắng nghe câu hỏi và 3 câu trả lời</div>
+            <div className={styles.promptHint}>Chọn câu đáp lại hợp lý nhất trong ngữ cảnh giao tiếp công việc</div>
+          </div>
+          <button
+            type="button"
+            className={`${styles.secondaryBtn} ${isDictationMode ? styles.active : ''}`}
+            onClick={() => setIsDictationMode(!isDictationMode)}
+            style={{ fontSize: '0.85rem', padding: '0.5rem', whiteSpace: 'nowrap' }}
+          >
+            {isDictationMode ? 'Đang bật Dictation' : 'Bật Dictation'}
+          </button>
         </div>
 
         <ListeningAudioPlayer
@@ -178,30 +197,51 @@ function Part2Trainer() {
           autoPlay={true}
         />
 
-        <div className={styles.optionsGrid}>
-          {['A', 'B', 'C'].map((letter) => {
-            let stateClass = '';
-            if (isAnswered) {
-              if (letter === currentQ.correctAnswer) stateClass = styles.correct;
-              else if (letter === selectedAnswer) stateClass = styles.incorrect;
-            } else if (selectedAnswer === letter) {
-              stateClass = styles.selected;
-            }
+        {isDictationMode && !dictationChecked && !isAnswered ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+            <textarea
+              value={dictationText}
+              onChange={(e) => setDictationText(e.target.value)}
+              placeholder="Gõ những gì bạn nghe được vào đây (nháp)..."
+              style={{ width: '100%', minHeight: '100px', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)', resize: 'vertical' }}
+            />
+            <button
+              type="button"
+              className={styles.submitBtn}
+              onClick={() => {
+                setDictationChecked(true);
+                setShowTranscript(true);
+              }}
+            >
+              Kiểm tra Transcript
+            </button>
+          </div>
+        ) : (
+          <div className={styles.optionsGrid}>
+            {['A', 'B', 'C'].map((letter) => {
+              let stateClass = '';
+              if (isAnswered) {
+                if (letter === currentQ.correctAnswer) stateClass = styles.correct;
+                else if (letter === selectedAnswer) stateClass = styles.incorrect;
+              } else if (selectedAnswer === letter) {
+                stateClass = styles.selected;
+              }
 
-            return (
-              <button
-                key={letter}
-                type="button"
-                className={`${styles.optionBtn} ${stateClass}`}
-                onClick={() => handleSelectOption(letter)}
-                disabled={isAnswered}
-              >
-                <span className={styles.optionLetter}>{letter}</span>
-                <span>{currentQ.options[letter] || `Option (${letter})`}</span>
-              </button>
-            );
-          })}
-        </div>
+              return (
+                <button
+                  key={letter}
+                  type="button"
+                  className={`${styles.optionBtn} ${stateClass}`}
+                  onClick={() => handleSelectOption(letter)}
+                  disabled={isAnswered}
+                >
+                  <span className={styles.optionLetter}>{letter}</span>
+                  <span>{currentQ.options[letter] || `Option (${letter})`}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         {isAnswered && (
           <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -211,13 +251,13 @@ function Part2Trainer() {
               style={{ alignSelf: 'flex-start', padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
               onClick={() => setShowTranscript((prev) => !prev)}
             >
-              {showTranscript ? 'Ẩn Transcript 👁️' : 'Xem Transcript & Lời giải 💡'}
+              {showTranscript ? 'Ẩn Transcript' : 'Xem Transcript & Lời giải'}
             </button>
 
             {showTranscript && currentQ.transcript && (
               <div className={styles.transcriptCard}>
                 <div className={styles.transcriptHeader}>
-                  <span>📝 Lời thoại câu hỏi & 3 đáp án</span>
+                  <span>Lời thoại câu hỏi & 3 đáp án</span>
                   <span style={{ color: 'var(--success)', fontWeight: 700 }}>
                     Đáp án đúng: ({currentQ.correctAnswer})
                   </span>

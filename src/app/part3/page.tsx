@@ -65,7 +65,7 @@ function Part3Trainer() {
   }, [testId]);
 
   if (loading) {
-    return <div className={styles.loading}>Đang nạp đề Part 3 Conversations... 👥</div>;
+    return <div className={styles.loading}>Đang nạp đề Part 3 Conversations...</div>;
   }
 
   if (error || sets.length === 0) {
@@ -204,10 +204,14 @@ function Part3Trainer() {
           </div>
         )}
 
+        <div style={{ padding: '0.8rem', backgroundColor: 'var(--warning-light, #fff8e1)', borderLeft: '4px solid #ffc107', borderRadius: '4px', marginBottom: '1rem', color: '#555', fontSize: '0.9rem' }}>
+          <strong>Mẹo:</strong> Hãy dành 8-10 giây đọc lướt 3 câu hỏi dưới đây trước khi bấm nút Play audio!
+        </div>
+
         <ListeningAudioPlayer
           src={currentSet.audioUrl}
           title={`Audio Hội thoại (Câu ${firstQNum} - ${lastQNum})`}
-          autoPlay={true}
+          autoPlay={false}
         />
 
         <div className={styles.questionsList}>
@@ -269,13 +273,13 @@ function Part3Trainer() {
               style={{ alignSelf: 'flex-start', padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
               onClick={() => setShowTranscript((prev) => !prev)}
             >
-              {showTranscript ? 'Ẩn Transcript 👁️' : 'Xem Transcript hội thoại 💬'}
+              {showTranscript ? 'Ẩn Transcript' : 'Xem Transcript hội thoại'}
             </button>
 
             {showTranscript && currentSet.transcript && (
               <div className={styles.transcriptCard}>
                 <div className={styles.transcriptHeader}>
-                  <span>📝 Lời thoại hội thoại</span>
+                  <span>Lời thoại hội thoại</span>
                 </div>
                 <div
                   className={styles.transcriptBody}

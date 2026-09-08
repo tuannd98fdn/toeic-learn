@@ -41,7 +41,30 @@ function Part7Trainer() {
   const [isTimeAttackEnabled, setIsTimeAttackEnabled] = useState(false);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
 
+  // Highlight State
+  const [isHighlightMode, setIsHighlightMode] = useState(false);
+
   const { addMistake } = useMistakeNotebook();
+
+  const handleTextHighlight = () => {
+    if (!isHighlightMode) return;
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed) return;
+
+    try {
+      const range = selection.getRangeAt(0);
+      const markNode = document.createElement('mark');
+      markNode.style.backgroundColor = 'var(--warning-light, #fff8e1)';
+      markNode.style.padding = '0 2px';
+      markNode.style.borderRadius = '2px';
+      
+      range.surroundContents(markNode);
+      selection.removeAllRanges();
+    } catch (e) {
+      console.warn('Không thể highlight qua nhiều thẻ block khác nhau', e);
+      selection.removeAllRanges();
+    }
+  };
 
   // Load preference
   useEffect(() => {
@@ -268,6 +291,23 @@ function Part7Trainer() {
         </div>
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <button
+            onClick={() => setIsHighlightMode(!isHighlightMode)}
+            style={{
+              padding: '6px 12px',
+              borderRadius: '6px',
+              fontSize: '0.9rem',
+              border: `1px solid ${isHighlightMode ? 'var(--primary-color, #2196F3)' : 'var(--border-color, #eee)'}`,
+              backgroundColor: isHighlightMode ? 'var(--primary-light, #e3f2fd)' : 'transparent',
+              cursor: 'pointer',
+              fontWeight: 500,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+          >
+            {isHighlightMode ? 'Tắt Highlight' : 'Bật Highlight'}
+          </button>
           <div className={styles.timeAttackToggle} onClick={toggleTimeAttack}>
             <span style={{ fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '4px' }}><ClockIcon size={16} /> Ép thời gian</span>
             <div className={`${styles.toggleSwitch} ${isTimeAttackEnabled ? styles.toggleSwitchOn : ''}`} />
@@ -278,7 +318,7 @@ function Part7Trainer() {
 
       <div className={styles.splitView}>
         {/* Left Side: Passages */}
-        <section className={styles.leftPanel}>
+        <section className={styles.leftPanel} onMouseUp={handleTextHighlight}>
           {passageSet.passages.map((passage, idx) => (
             <div key={passage.id} className={`${styles.passageCard} card-minimal`}>
               <div className={styles.passageHeader}>

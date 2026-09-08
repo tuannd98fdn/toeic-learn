@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { storage } from '../utils/storage';
 import { calculateNextReviewDate, MAX_BOX } from '../utils/spacedRepetition';
 
@@ -27,7 +27,7 @@ export function useMistakeNotebook() {
     setMounted(true);
   }, []);
 
-  const addMistake = (id: string, metadata?: Partial<MistakeRecord>) => {
+  const addMistake = useCallback((id: string, metadata?: Partial<MistakeRecord>) => {
     setMistakes(prev => {
       const current = prev[id] || { wrongCount: 0, lastMistakeDate: '', type: 'vocabulary', box: 1, nextReviewDate: calculateNextReviewDate(1) };
       const newData = {
@@ -44,18 +44,18 @@ export function useMistakeNotebook() {
       storage.set(MISTAKE_KEY, newData);
       return newData;
     });
-  };
+  }, []);
 
-  const removeMistake = (id: string) => {
+  const removeMistake = useCallback((id: string) => {
     setMistakes(prev => {
       const newData = { ...prev };
       delete newData[id];
       storage.set(MISTAKE_KEY, newData);
       return newData;
     });
-  };
+  }, []);
 
-  const updateMistakeProgress = (id: string, isCorrect: boolean) => {
+  const updateMistakeProgress = useCallback((id: string, isCorrect: boolean) => {
     setMistakes(prev => {
       const current = prev[id];
       if (!current) return prev;
@@ -84,12 +84,12 @@ export function useMistakeNotebook() {
       storage.set(MISTAKE_KEY, newData);
       return newData;
     });
-  };
+  }, []);
 
-  const getMistakes = (): string[] => {
+  const getMistakes = useCallback((): string[] => {
     if (!mounted) return [];
     return Object.keys(mistakes);
-  };
+  }, [mounted, mistakes]);
 
   return {
     mounted,

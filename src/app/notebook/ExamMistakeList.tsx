@@ -44,7 +44,7 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
       <div className={`${styles.emptyState} card-minimal animate-slide-up`}>
         <h2>Không có câu hỏi đề thi nào!</h2>
         <p>Bạn chưa sai câu hỏi nào trong phần thi thử.</p>
-        <Link href="/practice" className={styles.primaryBtn}>Vào Practice</Link>
+        <Link href="/exam" className={styles.primaryBtn}>Vào Thi thử</Link>
       </div>
     );
   }

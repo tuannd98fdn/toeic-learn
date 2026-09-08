@@ -69,16 +69,22 @@ export default function NotebookQuizPage() {
     return <div className={styles.loading}>Generating quiz...</div>;
   }
 
-  if (isFinished) {
+  if (isFinished || questions.length === 0) {
     // If they came here with 0 mistakes
     if (questions.length === 0) {
       return (
-        <div className={styles.finishedContainer}>
-          <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
-            <h2>Không có từ nào!</h2>
-            <p className={styles.feedback}>Sổ tay lỗi sai của bạn đang trống.</p>
-            <div className={styles.actions}>
-              <Link href="/notebook" className={styles.primaryBtn}>Quay lại sổ tay</Link>
+        <div className={styles.finishedWrapper}>
+          <div className={`${styles.heroCard} animate-slide-up`}>
+            <div className={`${styles.heroAura} ${styles.auraEmerald}`}></div>
+            <div className={styles.heroContent}>
+              <div className={`${styles.achievementBadge} ${styles.badgeEmerald}`}>
+                All Caught Up
+              </div>
+              <h2 className={styles.heroTitle}>Không có từ nào!</h2>
+              <p className={styles.feedbackText}>Sổ tay lỗi sai của bạn đang trống.</p>
+              <div className={styles.heroActions}>
+                <Link href="/notebook" className={styles.ctaBtnPrimary}>Quay lại sổ tay</Link>
+              </div>
             </div>
           </div>
         </div>
@@ -86,19 +92,38 @@ export default function NotebookQuizPage() {
     }
 
     return (
-      <div className={styles.finishedContainer}>
+      <div className={styles.finishedWrapper}>
         <Confetti show={showConfetti} />
-        <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
-          <h2>Hoàn thành chuộc lỗi!</h2>
-          <div className={styles.scoreCircle}>
-            <span className={styles.scoreText}>{score}/{questions.length}</span>
-          </div>
-          <p className={styles.feedback}>
-            Bạn đã xuất sắc xóa được <strong>{clearedWords}</strong> từ vựng khỏi Sổ tay lỗi sai!
-          </p>
-          <div className={styles.actions}>
-            <Link href="/notebook" className={styles.primaryBtn}>Về Sổ tay</Link>
-            <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
+        <div className={`${styles.heroCard} animate-slide-up`}>
+          <div className={`${styles.heroAura} ${showConfetti ? styles.auraGold : styles.auraBlue}`}></div>
+          <div className={styles.heroContent}>
+            <div className={`${styles.achievementBadge} ${showConfetti ? styles.badgeGold : styles.badgeBlue}`}>
+              {showConfetti ? 'Mastered' : 'Completed'}
+            </div>
+            <h2 className={styles.heroTitle}>Hoàn thành chuộc lỗi!</h2>
+            <div className={styles.gaugeContainer}>
+              <svg className={styles.gaugeSvg} viewBox="0 0 100 100">
+                <circle className={styles.gaugeBg} cx="50" cy="50" r="45" fill="none" strokeWidth="8" />
+                <circle 
+                  className={styles.gaugeFill} 
+                  cx="50" cy="50" r="45" fill="none" strokeWidth="8" 
+                  stroke="var(--primary)"
+                  strokeDasharray={`${(score / questions.length) * 283} 283`}
+                  strokeLinecap="round"
+                />
+              </svg>
+              <div className={styles.gaugeInner}>
+                <span className={styles.gaugeScore}>{score}</span>
+                <span className={styles.gaugeTotal}>/ {questions.length}</span>
+              </div>
+            </div>
+            <p className={styles.feedbackText}>
+              Bạn đã xuất sắc xóa được <strong>{clearedWords}</strong> từ vựng khỏi Sổ tay lỗi sai!
+            </p>
+            <div className={styles.heroActions}>
+              <Link href="/notebook" className={styles.ctaBtnPrimary}>Về Sổ tay</Link>
+              <Link href="/" className={styles.ctaBtnSecondary}>Về trang chủ</Link>
+            </div>
           </div>
         </div>
       </div>
