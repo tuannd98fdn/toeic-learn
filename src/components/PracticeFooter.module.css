@@ -65,64 +65,6 @@
   align-items: center;
 }
 
-.nextBtn {
-  padding: 14px 28px;
-  border-radius: var(--radius-lg);
-  font-weight: 700;
-  font-size: 1.05rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-transform: uppercase;
-  color: #fff;
-  min-width: 140px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.footerCorrect .nextBtn {
-  background: linear-gradient(135deg, var(--success) 0%, var(--success-hover) 100%);
-}
-
-.footerIncorrect .nextBtn {
-  background: linear-gradient(135deg, var(--danger) 0%, var(--danger-hover) 100%);
-}
-
-.nextBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-}
-
-.nextBtn:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.aiBtn {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius-lg);
-  padding: 14px 24px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-  transition: all 0.2s ease;
-}
-
-.aiBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(124, 58, 237, 0.4);
-}
-
-.aiBtn:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
-}
-
 @media (max-width: 600px) {
   .footer {
     padding: 20px;
@@ -136,7 +78,7 @@
     width: 100%;
   }
 
-  .nextBtn, .aiBtn {
+  .actionArea > button {
     width: 100%;
     justify-content: center;
   }

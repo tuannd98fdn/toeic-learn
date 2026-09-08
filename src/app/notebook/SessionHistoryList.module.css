@@ -1,0 +1,219 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px dashed var(--border);
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.sessionCard {
+  background: var(--bg-primary);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.sessionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  background: var(--bg-secondary);
+}
+
+.sessionHeader:hover {
+  background: var(--bg-tertiary, #f0f0f0);
+}
+
+.sessionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sessionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.sessionDate {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.sessionActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.msgCount {
+  font-size: 0.85rem;
+  color: var(--primary);
+  background: rgba(37, 99, 235, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.expandBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.sessionContent {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sectionHeader h4 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: 1px solid var(--error, #ef4444);
+  color: var(--error, #ef4444);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.chatLog {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.msgBubble {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.msgBubble strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.userMsg {
+  background: var(--primary);
+  color: white;
+  align-self: flex-end;
+  max-width: 85%;
+  border-bottom-right-radius: 2px;
+}
+
+.userMsg strong {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.aiMsg {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  align-self: flex-start;
+  max-width: 90%;
+  border-bottom-left-radius: 2px;
+}
+
+.noteSection, .summarySection {
+  margin-top: 1.5rem;
+}
+
+.noteSection h4, .summarySection h4 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.noteBox {
+  padding: 1rem;
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 4px solid var(--warning, #f59e0b);
+  border-radius: 4px;
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+}
+
+.summaryBox {
+  padding: 1.25rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.summaryEmpty {
+  text-align: center;
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.primaryBtn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.streamingCursor {
+  animation: blink 1s step-start infinite;
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--primary);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}

@@ -11,6 +11,7 @@ import {
   CompassIcon,
   TargetIcon,
   ArrowRightIcon,
+  NotebookIcon,
 } from '@/components/icons/AppIcons';
 import MascotSVG from '@/components/illustrations/MascotSVG';
 import styles from './Navbar.module.css';
@@ -93,6 +94,7 @@ export default function Navbar() {
     { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={24} />, badge: 'MỚI' },
     { path: '/stats', label: 'Thống kê', icon: <StatsIcon size={24} /> },
     { path: '/study', label: 'Từ vựng', icon: <CardsIcon size={24} /> },
+    { path: '/notebook', label: 'Sổ tay', icon: <NotebookIcon size={24} /> },
   ];
 
   // Mobile: 5 items — merge Mục tiêu into Lộ trình, highlight Học center
@@ -100,8 +102,8 @@ export default function Navbar() {
     { path: '/study-plan', label: 'Lộ trình', icon: <CompassIcon size={22} /> },
     { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={22} />, badge: '•' },
     { path: '/', label: 'Học', icon: <HomeIcon size={26} /> },
-    { path: '/stats', label: 'Thống kê', icon: <StatsIcon size={22} /> },
     { path: '/study', label: 'Từ vựng', icon: <CardsIcon size={22} /> },
+    { path: '/notebook', label: 'Sổ tay', icon: <NotebookIcon size={22} /> },
   ];
 
   return (

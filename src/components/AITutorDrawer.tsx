@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef, FormEvent } from 'react';
+import { useState, useEffect, useRef, FormEvent, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { storage } from '@/utils/storage';
+import { useAIHistory } from '@/hooks/useAIHistory';
 import {
   ZapIcon,
   ClockIcon,
@@ -12,6 +13,8 @@ import {
   ArrowRightIcon,
   TargetIcon,
   CheckCircleIcon,
+  MessageSquareIcon,
+  NotebookIcon,
 } from '@/components/icons/AppIcons';
 import styles from './AITutorDrawer.module.css';
 
@@ -42,6 +45,8 @@ interface Message {
 
 const DAILY_LIMIT = 15;
 
+let currentSessionId: string | null = null;
+
 function getTodayStr() {
   return new Date().toISOString().split('T')[0];
 }
@@ -56,6 +61,10 @@ export default function AITutorDrawer({
   const [isStreaming, setIsStreaming] = useState(false);
   const [remainingQuota, setRemainingQuota] = useState(DAILY_LIMIT);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'chat' | 'note'>('chat');
+  const [noteContent, setNoteContent] = useState('');
+
+  const { saveSession, sessions, mounted: historyMounted } = useAIHistory();
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -94,18 +103,40 @@ export default function AITutorDrawer({
     }
   }, [isOpen]);
 
-  // Reset conversation when a new question context opens
+  // Load session or create new one when drawer is opened
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !historyMounted) return;
 
-    const initialGreeting: Message = {
-      id: 'msg_welcome',
-      role: 'assistant',
-      content: `Chào em! Thầy là **Gia Sư TOEIC 990** của TOEIC Master.\n\nThầy đã sẵn sàng cùng em bẻ khóa câu **${questionContext.partTitle}${questionContext.number ? ` (Câu #${questionContext.number})` : ''}**.\n\n👉 Hãy bấm vào các nút gợi ý nhanh bên dưới hoặc nhắn trực tiếp cho thầy bất kỳ điều gì em còn phân vân nhé! 🚀`,
-    };
+    if (!currentSessionId) {
+      currentSessionId = `session_${Date.now()}`;
+    }
 
-    setMessages([initialGreeting]);
-  }, [isOpen, questionContext.number, questionContext.partTitle]);
+    const currentSession = sessions[currentSessionId];
+
+    if (currentSession) {
+      setNoteContent(currentSession.note || '');
+      if (currentSession.chatLog && currentSession.chatLog.length > 0) {
+        setMessages(currentSession.chatLog);
+      }
+    } else {
+      const initialGreeting: Message = {
+        id: 'msg_welcome',
+        role: 'assistant',
+        content: `Chào em! Thầy là **Gia Sư TOEIC 990** của TOEIC Master.\n\nThầy đã sẵn sàng đồng hành cùng em trong buổi học này.\n\nHãy bấm vào các nút gợi ý nhanh bên dưới hoặc nhắn trực tiếp cho thầy bất kỳ điều gì em còn phân vân nhé!`,
+      };
+      setMessages([initialGreeting]);
+      setNoteContent('');
+      
+      saveSession(currentSessionId, 'Phiên học TOEIC - ' + questionContext.partTitle, [initialGreeting], '');
+    }
+  }, [isOpen, historyMounted]);
+
+  // Sync messages to cache
+  useEffect(() => {
+    if (messages.length > 0 && isOpen && currentSessionId) {
+      saveSession(currentSessionId, 'Phiên học TOEIC - ' + questionContext.partTitle, messages, noteContent);
+    }
+  }, [messages, isOpen]);
 
   // Scroll to bottom on new messages
   useEffect(() => {
@@ -124,7 +155,129 @@ export default function AITutorDrawer({
     };
   }, [isOpen]);
 
+  // Nhóm các tin nhắn theo câu hỏi để hiển thị UI accordion (collapsible)
+  const groupedMessages = useMemo(() => {
+    const groups: { id: string; title: string; messages: Message[] }[] = [];
+    let currentGroup = { id: 'welcome', title: 'Lời chào', messages: [] as Message[] };
+
+    messages.forEach((msg) => {
+      if (msg.role === 'user') {
+        // Tách `**[Câu 101]**` ra khỏi tin nhắn nếu có
+        const match = msg.content.match(/^\*\*\[(.*?)\]\*\*\s*(.*)/);
+        if (match) {
+          const title = match[1];
+          const contentWithoutPrefix = match[2];
+
+          if (currentGroup.title !== title) {
+            if (currentGroup.messages.length > 0) {
+              groups.push(currentGroup);
+            }
+            currentGroup = {
+              id: `group_${Date.now()}_${title}`,
+              title,
+              messages: [{ ...msg, content: contentWithoutPrefix }],
+            };
+          } else {
+            currentGroup.messages.push({ ...msg, content: contentWithoutPrefix });
+          }
+        } else {
+          currentGroup.messages.push(msg);
+        }
+      } else {
+        currentGroup.messages.push(msg);
+      }
+    });
+
+    if (currentGroup.messages.length > 0) {
+      groups.push(currentGroup);
+    }
+    return groups;
+  }, [messages]);
+
   if (!isOpen) return null;
+
+  const renderMessage = (msg: Message) => (
+    <div key={msg.id} className={`${styles.msgRow} ${msg.role === 'user' ? styles.userRow : styles.tutorRow}`}>
+      {msg.role === 'user' ? (
+        <div className={styles.userBubble}>{msg.content}</div>
+      ) : (
+        <div className={styles.tutorBubbleWrapper}>
+          <div className={styles.tutorHeaderMini}>
+            <span className={styles.tutorName}>
+              <span className={styles.tutorIcon}><TargetIcon size={14} /></span> Gia Sư 990
+            </span>
+            {msg.content && (
+              <button
+                type="button"
+                onClick={() => handleCopy(msg.content, msg.id)}
+                className={styles.copyBtn}
+                title="Sao chép lời giải"
+              >
+                {copiedId === msg.id ? (
+                  <>
+                    <CheckCircleIcon size={12} /> Đã chép
+                  </>
+                ) : (
+                  'Sao chép'
+                )}
+              </button>
+            )}
+          </div>
+          <div className={styles.tutorBubble}>
+            {msg.content ? (
+              <div className={styles.markdownBody}>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    h1: ({ children }) => <h3 className={styles.mdHeading}>{children}</h3>,
+                    h2: ({ children }) => <h3 className={styles.mdHeading}>{children}</h3>,
+                    h3: ({ children }) => <h3 className={styles.mdHeading}>{children}</h3>,
+                    p: ({ children }) => <p className={styles.mdParagraph}>{children}</p>,
+                    ul: ({ children }) => <ul className={styles.mdUl}>{children}</ul>,
+                    ol: ({ children }) => <ol className={styles.mdOl}>{children}</ol>,
+                    li: ({ children }) => <li className={styles.mdLi}>{children}</li>,
+                    strong: ({ children }) => <strong className={styles.mdStrong}>{children}</strong>,
+                    em: ({ children }) => <em className={styles.mdEm}>{children}</em>,
+                    blockquote: ({ children }) => <blockquote className={styles.mdBlockquote}>{children}</blockquote>,
+                    hr: () => <hr className={styles.mdHr} />,
+                    code: ({ children }) => <code className={styles.mdCode}>{children}</code>,
+                  }}
+                >
+                  {msg.content}
+                </ReactMarkdown>
+                {isStreaming && msg.id === messages[messages.length - 1]?.id && (
+                  <span className={styles.streamingCursor}>▌</span>
+                )}
+              </div>
+            ) : (
+              <div className={styles.typingIndicator}>
+                <span className={styles.dot} />
+                <span className={styles.dot} />
+                <span className={styles.dot} />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
+  const renderTypingIndicator = () => (
+    <div className={`${styles.msgRow} ${styles.tutorRow}`}>
+      <div className={styles.tutorBubbleWrapper}>
+        <div className={styles.tutorHeaderMini}>
+          <span className={styles.tutorName}>
+            <span className={styles.tutorIcon}><TargetIcon size={14} /></span> Gia Sư 990
+          </span>
+        </div>
+        <div className={styles.typingIndicator}>
+          <span className={styles.dot} />
+          <span className={styles.dot} />
+          <span className={styles.dot} />
+        </div>
+      </div>
+    </div>
+  );
 
   const isListeningPart =
     !!questionContext.audioUrl ||
@@ -158,10 +311,13 @@ export default function AITutorDrawer({
     storage.set('toeic_tutor_daily_quota', { date: today, used: newUsed });
     setRemainingQuota(Math.max(0, DAILY_LIMIT - newUsed));
 
+    const contextPrefix = questionContext.number ? `**[Câu ${questionContext.number}]** ` : '';
+    const displayUserContent = `${contextPrefix}${textToSend}`;
+
     const userMsg: Message = {
       id: `msg_user_${Date.now()}`,
       role: 'user',
-      content: textToSend,
+      content: displayUserContent,
     };
 
     const assistantMsgId = `msg_asst_${Date.now()}`;
@@ -181,6 +337,7 @@ export default function AITutorDrawer({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          // Chỉ lấy content thực tế gửi lên API, hoặc lấy lịch sử hiện tại
           messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
           questionContext,
         }),
@@ -230,6 +387,14 @@ export default function AITutorDrawer({
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
     handleSendMessage(inputValue);
+  };
+
+  const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const val = e.target.value;
+    setNoteContent(val);
+    if (currentSessionId) {
+      saveSession(currentSessionId, 'Phiên học TOEIC - ' + questionContext.partTitle, messages, val);
+    }
   };
 
   const handleCopy = (text: string, id: string) => {
@@ -291,176 +456,146 @@ export default function AITutorDrawer({
           </div>
         </header>
 
-        {/* Removed Question Context Banner */}
-        {/* Messages Chat List */}
-        <div className={styles.messagesList}>
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`${styles.msgRow} ${
-                msg.role === 'user' ? styles.userRow : styles.tutorRow
-              }`}
-            >
-              {msg.role === 'user' ? (
-                <div className={styles.userBubble}>{msg.content}</div>
-              ) : (
-                <div className={styles.tutorBubbleWrapper}>
-                  <div className={styles.tutorHeaderMini}>
-                    <span className={styles.tutorName}>
-                      <span className={styles.tutorIcon}><TargetIcon size={14} /></span> Gia Sư 990
-                    </span>
-                    {msg.content && (
-                      <button
-                        type="button"
-                        onClick={() => handleCopy(msg.content, msg.id)}
-                        className={styles.copyBtn}
-                        title="Sao chép lời giải"
-                      >
-                        {copiedId === msg.id ? (
-                          <>
-                            <CheckCircleIcon size={12} /> Đã chép
-                          </>
-                        ) : (
-                          'Sao chép'
-                        )}
-                      </button>
-                    )}
-                  </div>
-                  <div className={styles.tutorBubble}>
-                    {msg.content ? (
-                      <div className={styles.markdownBody}>
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            h1: ({ children }) => <h3 className={styles.mdHeading}>{children}</h3>,
-                            h2: ({ children }) => <h3 className={styles.mdHeading}>{children}</h3>,
-                            h3: ({ children }) => <h3 className={styles.mdHeading}>{children}</h3>,
-                            p: ({ children }) => <p className={styles.mdParagraph}>{children}</p>,
-                            ul: ({ children }) => <ul className={styles.mdUl}>{children}</ul>,
-                            ol: ({ children }) => <ol className={styles.mdOl}>{children}</ol>,
-                            li: ({ children }) => <li className={styles.mdLi}>{children}</li>,
-                            strong: ({ children }) => <strong className={styles.mdStrong}>{children}</strong>,
-                            em: ({ children }) => <em className={styles.mdEm}>{children}</em>,
-                            blockquote: ({ children }) => <blockquote className={styles.mdBlockquote}>{children}</blockquote>,
-                            hr: () => <hr className={styles.mdHr} />,
-                            code: ({ children }) => <code className={styles.mdCode}>{children}</code>,
-                          }}
-                        >
-                          {msg.content}
-                        </ReactMarkdown>
-                        {isStreaming && msg.id === messages[messages.length - 1]?.id && (
-                          <span className={styles.streamingCursor}>▌</span>
-                        )}
-                      </div>
-                    ) : (
-                      <div className={styles.typingIndicator}>
-                        <span className={styles.dot} />
-                        <span className={styles.dot} />
-                        <span className={styles.dot} />
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-
-          {isStreaming && messages[messages.length - 1]?.role === 'user' && (
-            <div className={`${styles.msgRow} ${styles.tutorRow}`}>
-              <div className={styles.tutorBubbleWrapper}>
-                <div className={styles.tutorHeaderMini}>
-                  <span className={styles.tutorName}>
-                    <span className={styles.tutorIcon}><TargetIcon size={14} /></span> Gia Sư 990
-                  </span>
-                </div>
-                <div className={styles.typingIndicator}>
-                  <span className={styles.dot} />
-                  <span className={styles.dot} />
-                  <span className={styles.dot} />
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div ref={messagesEndRef} />
+        <div className={styles.tabContainer}>
+          <button 
+            type="button"
+            className={`${styles.tabBtn} ${activeTab === 'chat' ? styles.activeTab : ''}`}
+            onClick={() => setActiveTab('chat')}
+          >
+            <MessageSquareIcon size={14} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} /> Chat
+          </button>
+          <button 
+            type="button"
+            className={`${styles.tabBtn} ${activeTab === 'note' ? styles.activeTab : ''}`}
+            onClick={() => setActiveTab('note')}
+          >
+            <NotebookIcon size={14} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} /> Ghi chú
+          </button>
         </div>
 
-        {/* Quick Action Prompt Chips (Moved down) */}
-        {!isStreaming && messages.length <= 1 && (
-          <div className={styles.quickActionsArea}>
-            <div className={styles.chipsList}>
-              <button
-                type="button"
-                onClick={() => triggerPrompt('trap')}
-                disabled={isStreaming}
-                className={styles.chipBtn}
-              >
-                <ZapIcon size={13} /> Bẫy ETS & Vì sao sai?
-              </button>
+        {activeTab === 'chat' ? (
+          <>
+            {/* Messages Chat List */}
+            <div className={styles.messagesList}>
+              {groupedMessages.map((group, index) => {
+                const isLastGroup = index === groupedMessages.length - 1;
 
-              <button
-                type="button"
-                onClick={() => triggerPrompt('hack')}
-                disabled={isStreaming}
-                className={styles.chipBtn}
-              >
-                <ClockIcon size={13} /> Mẹo giải nhanh 15s
-              </button>
+                if (group.title === 'Lời chào') {
+                  return group.messages.map((msg) => renderMessage(msg));
+                }
 
-              <button
-                type="button"
-                onClick={() => triggerPrompt('translate')}
-                disabled={isStreaming}
-                className={styles.chipBtn}
-              >
-                <FileTextIcon size={13} /> Dịch nghĩa & Từ vựng
-              </button>
+                const isCurrentQuestion = questionContext.number && group.title === `Câu ${questionContext.number}`;
+                const defaultExpanded = isLastGroup || isCurrentQuestion;
 
-              {isListeningPart && (
-                <button
-                  type="button"
-                  onClick={() => triggerPrompt('audio')}
+                return (
+                  <details key={group.id} className={styles.groupDetails} open={defaultExpanded || undefined}>
+                    <summary className={styles.groupSummary}>
+                      <span className={styles.groupTitle}><MessageSquareIcon size={14}/> {group.title}</span>
+                      <span className={styles.groupMsgCount}>{group.messages.length}</span>
+                    </summary>
+                    <div className={styles.groupContent}>
+                      {group.messages.map((msg) => renderMessage(msg))}
+                      {isStreaming && isLastGroup && messages[messages.length - 1]?.role === 'user' && renderTypingIndicator()}
+                    </div>
+                  </details>
+                );
+              })}
+              
+              {isStreaming && groupedMessages[groupedMessages.length - 1]?.title === 'Lời chào' && messages[messages.length - 1]?.role === 'user' && renderTypingIndicator()}
+
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Quick Action Prompt Chips (Moved down) */}
+            {!isStreaming && (
+              <div className={styles.quickActionsArea}>
+                <div className={styles.chipsList}>
+                  <button
+                    type="button"
+                    onClick={() => triggerPrompt('trap')}
+                    disabled={isStreaming}
+                    className={styles.chipBtn}
+                  >
+                    <ZapIcon size={13} /> Bẫy ETS & Vì sao sai?
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => triggerPrompt('hack')}
+                    disabled={isStreaming}
+                    className={styles.chipBtn}
+                  >
+                    <ClockIcon size={13} /> Mẹo giải nhanh 15s
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => triggerPrompt('translate')}
+                    disabled={isStreaming}
+                    className={styles.chipBtn}
+                  >
+                    <FileTextIcon size={13} /> Dịch nghĩa & Từ vựng
+                  </button>
+
+                  {isListeningPart && (
+                    <button
+                      type="button"
+                      onClick={() => triggerPrompt('audio')}
+                      disabled={isStreaming}
+                      className={styles.chipBtn}
+                    >
+                      <HeadphonesIcon size={13} /> Bóc tách nối âm bài nghe
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => triggerPrompt('drill')}
+                    disabled={isStreaming}
+                    className={styles.chipBtn}
+                  >
+                    <TargetIcon size={13} /> Tạo 2 câu luyện phản xạ
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Input Bar */}
+            <div className={styles.inputArea}>
+              <form onSubmit={handleFormSubmit} className={styles.inputForm}>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="Hỏi gia sư bất kỳ điều gì... (Nhấn Enter để gửi)"
+                  className={styles.chatInput}
                   disabled={isStreaming}
-                  className={styles.chipBtn}
+                />
+                <button
+                  type="submit"
+                  disabled={!inputValue.trim() || isStreaming}
+                  className={styles.sendBtn}
+                  title="Gửi câu hỏi (Enter)"
                 >
-                  <HeadphonesIcon size={13} /> Bóc tách nối âm bài nghe
+                  <ArrowRightIcon size={16} />
                 </button>
-              )}
-
-              <button
-                type="button"
-                onClick={() => triggerPrompt('drill')}
-                disabled={isStreaming}
-                className={styles.chipBtn}
-              >
-                <TargetIcon size={13} /> Tạo 2 câu luyện phản xạ
-              </button>
+              </form>
+            </div>
+          </>
+        ) : (
+          <div className={styles.noteArea}>
+            <textarea
+              className={styles.noteTextarea}
+              placeholder="Ghi chú lại những kiến thức hay mà bạn vừa học được tại đây..."
+              value={noteContent}
+              onChange={handleNoteChange}
+            />
+            <div className={styles.noteHint}>
+              Tự động lưu lại trên máy của bạn
             </div>
           </div>
         )}
-
-        {/* Input Bar */}
-        <div className={styles.inputArea}>
-          <form onSubmit={handleFormSubmit} className={styles.inputForm}>
-            <input
-              ref={inputRef}
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Hỏi gia sư bất kỳ điều gì... (Nhấn Enter để gửi)"
-              className={styles.chatInput}
-              disabled={isStreaming}
-            />
-            <button
-              type="submit"
-              disabled={!inputValue.trim() || isStreaming}
-              className={styles.sendBtn}
-              title="Gửi câu hỏi (Enter)"
-            >
-              <ArrowRightIcon size={16} />
-            </button>
-          </form>
-        </div>
       </div>
     </div>
   );

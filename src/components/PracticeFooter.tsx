@@ -54,11 +54,11 @@ export default function PracticeFooter({
       
       <div className={styles.actionArea}>
         {!isCorrect && onAITutor && (
-          <button className={styles.aiBtn} onClick={onAITutor} type="button">
+          <button className="btn-ai" onClick={onAITutor} type="button">
             <SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI <span style={{ opacity: 0.7, fontSize: '0.85em', marginLeft: '2px' }}>(H)</span>
           </button>
         )}
-        <button className={styles.nextBtn} onClick={onNext} type="button">
+        <button className={isCorrect ? 'btn-success' : 'btn-danger'} onClick={onNext} type="button" style={{ textTransform: 'uppercase', minWidth: '140px' }}>
           {nextLabel}
         </button>
       </div>

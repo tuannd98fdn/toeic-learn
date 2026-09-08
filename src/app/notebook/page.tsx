@@ -8,13 +8,15 @@ import Link from 'next/link';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import { isDueForReview } from '@/utils/spacedRepetition';
 import ExamMistakeList from './ExamMistakeList';
+import SessionHistoryList from './SessionHistoryList';
 import styles from './page.module.css';
+import { BotIcon, CardsIcon, ExamIcon, BookIcon, CheckCircleIcon } from '@/components/icons/AppIcons';
 
 export default function NotebookPage() {
   const { mounted: vocabMounted, allWords } = useVocabulary();
   const { mounted: notebookMounted, getMistakes, mistakes } = useMistakeNotebook();
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
-  const [activeTab, setActiveTab] = useState<'vocabulary' | 'exam'>('vocabulary');
+  const [activeTab, setActiveTab] = useState<'vocabulary' | 'exam' | 'history'>('vocabulary');
 
   if (!vocabMounted || !notebookMounted) {
     return <div className={styles.loading}>Loading...</div>;
@@ -42,7 +44,7 @@ export default function NotebookPage() {
     <div className={styles.container}>
       <header className={styles.header}>
         <Link href="/" className={styles.backBtn}>← Quay lại</Link>
-        <h1>Sổ tay lỗi sai 📓</h1>
+        <h1>Sổ tay lỗi sai</h1>
         <p className={styles.subtitle}>
           Bạn đang có {vocabMistakeIds.length} từ vựng ({vocabDueCount} đến hạn) và {examMistakeIds.length} câu hỏi đề thi ({examDueCount} đến hạn) cần ôn tập.
         </p>
@@ -61,13 +63,19 @@ export default function NotebookPage() {
         >
           Đề thi ({examMistakeIds.length})
         </button>
+        <button 
+          className={`${styles.tabBtn} ${activeTab === 'history' ? styles.activeTab : ''}`}
+          onClick={() => setActiveTab('history')}
+        >
+          Lịch Sử & Chat AI
+        </button>
       </div>
 
       {activeTab === 'vocabulary' && (
         <>
           {vocabMistakeIds.length === 0 ? (
             <div className={`${styles.emptyState} card-minimal animate-slide-up`}>
-              <span className={styles.emptyIcon}>🎉</span>
+              <div className={styles.emptyIcon}><CheckCircleIcon size={48} /></div>
               <h2>Sổ tay trống rỗng!</h2>
               <p>Tuyệt vời, bạn chưa mắc lỗi từ vựng nào.<br/>Hãy tiếp tục học từ vựng mới để mở rộng vốn từ nhé!</p>
               <div className={styles.actions}>
@@ -82,7 +90,7 @@ export default function NotebookPage() {
                   <h2>Sẵn sàng "chuộc lỗi"?</h2>
                   <p>Bạn có <strong>{vocabDueCount}</strong> từ vựng đến hạn ôn tập hôm nay.</p>
                   <Link href="/notebook/quiz" className={`${styles.primaryBtn} btn-accent`}>
-                    Bắt đầu test chuộc lỗi 🚀
+                    Bắt đầu test chuộc lỗi
                   </Link>
                 </div>
               </section>
@@ -130,7 +138,7 @@ export default function NotebookPage() {
                           width: 'fit-content'
                         }}
                       >
-                        🤖 Hỏi Gia sư cách nhớ & Collocations
+                        <BotIcon size={16} /> Hỏi Gia sư cách nhớ & Collocations
                       </button>
                     </div>
                   ))}
@@ -145,7 +153,7 @@ export default function NotebookPage() {
         <>
           {examMistakeIds.length === 0 ? (
             <div className={`${styles.emptyState} card-minimal animate-slide-up`} style={{ marginTop: '2rem' }}>
-              <span className={styles.emptyIcon}>🎉</span>
+              <div className={styles.emptyIcon}><CheckCircleIcon size={48} /></div>
               <h2>Sổ tay trống rỗng!</h2>
               <p>Tuyệt vời, bạn chưa có lỗi sai nào trong đề thi.<br/>Hãy thử sức với một bài thi mới để kiểm tra trình độ nhé!</p>
               <div className={styles.actions}>
@@ -160,7 +168,7 @@ export default function NotebookPage() {
                   <h2>Ôn Tập Đề Thi</h2>
                   <p>Bạn có <strong>{examDueCount}</strong> câu hỏi đến hạn ôn tập hôm nay.</p>
                   <Link href="/notebook/quiz/exam" className={`${styles.primaryBtn} btn-accent`}>
-                    Bắt đầu làm Quiz Đề thi 🎯
+                    Bắt đầu làm Quiz Đề thi
                   </Link>
                 </div>
               </section>
@@ -171,6 +179,13 @@ export default function NotebookPage() {
             </>
           )}
         </>
+      )}
+
+      {activeTab === 'history' && (
+        <section className={styles.listSection} style={{ marginTop: '2rem' }}>
+          <h2>Lịch sử các phiên học</h2>
+          <SessionHistoryList />
+        </section>
       )}
 
       {tutorContext && (
