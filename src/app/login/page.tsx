@@ -2,6 +2,8 @@
 
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
+import avatarImg from "../../../public/images/avatar-van-anh.jpg";
 import styles from "./page.module.css";
 
 export default function Login() {
@@ -35,10 +37,17 @@ export default function Login() {
               "Giao diện đẹp và mượt mà nhất trong số các ứng dụng luyện thi mình từng dùng. Phương pháp Spaced Repetition thực sự hiệu quả!"
             </p>
             <div className={styles.author}>
-              <div className={styles.authorAvatar}></div>
+              <div className={styles.authorAvatar}>
+                <Image 
+                  src={avatarImg} 
+                  alt="Lê Thị Vân Anh" 
+                  fill 
+                  style={{ objectFit: 'cover' }} 
+                />
+              </div>
               <div>
-                <strong>Học viên giấu tên</strong>
-                <span>Tăng 200 điểm sau 1 tháng</span>
+                <strong>Lê Thị Vân Anh</strong>
+                <span>Đạt 850 TOEIC sau 1 tháng</span>
               </div>
             </div>
           </div>

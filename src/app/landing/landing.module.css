@@ -445,3 +445,11 @@
   background: #000000;
 }
 
+.footer svg {
+  --surface-elevated: #222538;
+  --surface-hover: #1e2030;
+  --border: #1e2030;
+  --surface-sunken: #0f1017;
+  color: #ffffff;
+}
+
