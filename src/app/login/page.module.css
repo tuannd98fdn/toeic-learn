@@ -1,22 +1,200 @@
 .container {
   display: flex;
+  min-height: 100vh;
+  background-color: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================
+   BRAND PANEL (LEFT SIDE)
+   ============================================ */
+.brandPanel {
+  display: none; /* Hide on mobile by default */
+  flex: 1;
+  position: relative;
+  background: #000000;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .brandPanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+  }
+}
+
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(circle at center, black 10%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 10%, transparent 80%);
+  pointer-events: none;
+}
+
+.glowOrb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.brandContent {
+  position: relative;
+  z-index: 10;
+  max-width: 500px;
+}
+
+.logoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 60px;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  background: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.brandHeadline {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.highlightText {
+  background: linear-gradient(90deg, #ffffff, var(--primary-light), var(--primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brandSubheadline {
+  font-size: 1.15rem;
+  color: #a1a1aa;
+  line-height: 1.6;
+  margin-bottom: 60px;
+  max-width: 440px;
+}
+
+.testimonialCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+}
+
+.stars {
+  color: #eab308;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.quote {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #e4e4e7;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authorAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+.author strong {
+  display: block;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.author span {
+  display: block;
+  color: #a1a1aa;
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   AUTH PANEL (RIGHT SIDE)
+   ============================================ */
+.authPanel {
+  flex: 1;
+  display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - var(--nav-height) - 60px);
   padding: 20px;
+  position: relative;
+}
+
+/* Add a subtle mobile grid since left panel is hidden */
+@media (max-width: 899px) {
+  .authPanel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at center, black 10%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black 10%, transparent 80%);
+    pointer-events: none;
+  }
 }
 
 .glassCard {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
+  background: rgba(15, 15, 15, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 28px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(255,255,255,0.05);
   padding: 48px;
   max-width: 440px;
   width: 100%;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  z-index: 1;
   animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -26,8 +204,9 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 6px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary));
+  border-radius: 28px 28px 0 0;
 }
 
 .header {
@@ -35,14 +214,15 @@
 }
 
 .title {
-  font-size: 2rem;
-  color: var(--foreground);
+  font-size: 2.2rem;
+  color: #ffffff;
   margin-bottom: 12px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  font-weight: 800;
 }
 
 .subtitle {
-  color: var(--text-secondary);
+  color: #a1a1aa;
   font-size: 1.05rem;
   line-height: 1.5;
 }
@@ -52,28 +232,26 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: var(--surface);
-  color: var(--foreground);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 14px 24px;
-  font-size: 1.05rem;
-  font-weight: 600;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 99px;
+  padding: 16px 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
   gap: 12px;
 }
 
 .googleBtn:hover {
-  border-color: var(--border-focus);
-  background-color: var(--surface-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
 }
 
 .googleBtn:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.98);
 }
 
 .googleIcon {
@@ -82,21 +260,20 @@
 }
 
 .footer {
-  margin-top: 32px;
+  margin-top: 40px;
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: #71717a;
 }
 
 .footer a {
-  color: var(--primary);
-  text-decoration: none;
+  color: #ffffff;
+  text-decoration: underline;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .footer a:hover {
-  color: var(--primary-hover);
-  text-decoration: underline;
+  color: var(--primary-light);
 }
 
 @media (max-width: 480px) {

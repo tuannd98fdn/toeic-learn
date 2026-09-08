@@ -81,7 +81,11 @@ export default function LandingPage() {
             </div>
             
             <div className={`${styles.floatingUi} ${styles.uiFlashcard}`}>
-              Acknowledge
+              <span style={{ fontSize: '1.5rem', marginBottom: '8px' }}>Accommodate</span>
+              <span style={{ fontSize: '0.9rem', color: '#a1a1aa', fontWeight: 400 }}>/əˈkɑːmədeɪt/</span>
+              <div style={{ marginTop: '12px', padding: '4px 12px', background: 'rgba(var(--primary-rgb), 0.2)', borderRadius: '99px', fontSize: '0.8rem' }}>
+                Cung cấp chỗ ở, đáp ứng
+              </div>
             </div>
           </div>
 
