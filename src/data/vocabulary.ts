@@ -1,3 +1,5 @@
+export type TargetBand = '450+' | '650+' | '800+';
+
 export interface VocabularyWord {
   id: string;
   word: string;
@@ -8,6 +10,7 @@ export interface VocabularyWord {
   examples: string[];
   mnemonicTip: string;
   emoji: string;
+  targetBand?: TargetBand;
   source?: 'system' | 'user';
 }
 
@@ -20,6 +23,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "sáp nhập doanh nghiệp",
     partOfSpeech: "noun",
     category: "Business & Corporate",
+    targetBand: "800+",
     examples: [
       "The corporate merger created a larger company.",
       "Rumors of a corporate merger caused the stock price to jump."
@@ -34,6 +38,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "công ty, hãng",
     partOfSpeech: "noun",
     category: "Business & Corporate",
+    targetBand: "650+",
     examples: [
       "She works for a law firm downtown.",
       "The accounting firm is hiring new graduates."
@@ -48,6 +53,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "tờ rơi quảng cáo",
     partOfSpeech: "noun",
     category: "Business & Corporate",
+    targetBand: "650+",
     examples: [
       "The brochures describe our new services.",
       "Please take one of our travel brochures."
@@ -62,6 +68,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "quảng cáo",
     partOfSpeech: "noun",
     category: "Business & Corporate",
+    targetBand: "450+",
     examples: [
       "The advertisement appeared in the newspaper.",
       "They spent a lot of money on TV advertisements."
@@ -76,6 +83,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "hội nghị",
     partOfSpeech: "noun",
     category: "Business & Corporate",
+    targetBand: "450+",
     examples: [
       "The annual conference attracted many attendees.",
       "He is speaking at a medical conference next week."
@@ -91,6 +99,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "bất động sản",
     partOfSpeech: "noun",
     category: "Real Estate & Location",
+    targetBand: "650+",
     examples: [
       "The real estate market is booming.",
       "He left his entire estate to his children."
@@ -105,6 +114,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "gác xép, căn hộ trên cao",
     partOfSpeech: "noun",
     category: "Real Estate & Location",
+    targetBand: "800+",
     examples: [
       "They converted the loft into a studio.",
       "She lives in a spacious loft apartment."
@@ -119,6 +129,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "trung tâm thành phố",
     partOfSpeech: "noun/adv",
     category: "Real Estate & Location",
+    targetBand: "450+",
     examples: [
       "The new office is located downtown.",
       "We went downtown for dinner."
@@ -134,6 +145,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "lời tạm biệt",
     partOfSpeech: "noun",
     category: "People & Social",
+    targetBand: "450+",
     examples: [
       "We organized a farewell party for the director.",
       "He bid a fond farewell to his colleagues."
@@ -148,6 +160,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "bữa trưa trang trọng",
     partOfSpeech: "noun",
     category: "People & Social",
+    targetBand: "650+",
     examples: [
       "The business luncheon was held at a hotel.",
       "She attended a charity luncheon."
@@ -162,6 +175,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "hội đồng thị trấn",
     partOfSpeech: "noun",
     category: "People & Social",
+    targetBand: "650+",
     examples: [
       "The town council approved the budget.",
       "She was elected to the town council."
@@ -176,6 +190,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "cùng chí hướng",
     partOfSpeech: "adj",
     category: "People & Social",
+    targetBand: "650+",
     examples: [
       "She surrounded herself with like-minded colleagues.",
       "It's great to work with a group of like-minded individuals."
@@ -191,6 +206,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "xà phòng",
     partOfSpeech: "noun",
     category: "Products & Consumer",
+    targetBand: "450+",
     examples: [
       "The store sells organic soaps.",
       "These artisanal soaps smell wonderful."
@@ -205,6 +221,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "kem dưỡng da",
     partOfSpeech: "noun",
     category: "Products & Consumer",
+    targetBand: "450+",
     examples: [
       "Apply lotions after showering.",
       "We offer a variety of skin lotions."
@@ -219,6 +236,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "thuộc về dinh dưỡng",
     partOfSpeech: "adj",
     category: "Products & Consumer",
+    targetBand: "650+",
     examples: [
       "Check the nutritional information on the label.",
       "The meal has high nutritional value."
@@ -233,6 +251,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "thực phẩm đông lạnh",
     partOfSpeech: "noun",
     category: "Products & Consumer",
+    targetBand: "450+",
     examples: [
       "The frozen foods section has new products.",
       "We rely on frozen foods when we don't have time to cook."
@@ -247,6 +266,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "sự tiện lợi",
     partOfSpeech: "noun",
     category: "Products & Consumer",
+    targetBand: "450+",
     examples: [
       "The store offers great convenience for shoppers.",
       "Please call me at your earliest convenience."
@@ -262,6 +282,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "tranh khảm",
     partOfSpeech: "noun",
     category: "Descriptive & Quality",
+    targetBand: "800+",
     examples: [
       "The mosaic on the wall depicts a landscape.",
       "They created a beautiful mosaic using colorful glass."
@@ -276,6 +297,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "kết cấu, chất liệu",
     partOfSpeech: "noun",
     category: "Descriptive & Quality",
+    targetBand: "650+",
     examples: [
       "The fabric has a smooth texture.",
       "This paint creates a rough texture on the wall."
@@ -290,6 +312,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "quang phổ, phạm vi",
     partOfSpeech: "noun",
     category: "Descriptive & Quality",
+    targetBand: "800+",
     examples: [
       "The product appeals to a broad spectrum of customers.",
       "The light was separated into its full spectrum."
@@ -304,6 +327,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "khoáng chất",
     partOfSpeech: "noun",
     category: "Descriptive & Quality",
+    targetBand: "800+",
     examples: [
       "The water contains essential minerals.",
       "These vitamins are packed with important minerals."
@@ -318,6 +342,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "sự chính xác",
     partOfSpeech: "noun",
     category: "Descriptive & Quality",
+    targetBand: "650+",
     examples: [
       "The machine operates with great precision.",
       "He measured the ingredients with extreme precision."
@@ -332,6 +357,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "lý tưởng",
     partOfSpeech: "adj",
     category: "Descriptive & Quality",
+    targetBand: "450+",
     examples: [
       "This is the ideal location for a new branch.",
       "She is the ideal candidate for the job."
@@ -346,6 +372,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "nhịp độ nhanh",
     partOfSpeech: "adj",
     category: "Descriptive & Quality",
+    targetBand: "650+",
     examples: [
       "She thrives in a fast-paced environment.",
       "The movie was an exciting, fast-paced thriller."
@@ -361,6 +388,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "được thay thế",
     partOfSpeech: "verb",
     category: "Actions & Processes",
+    targetBand: "650+",
     examples: [
       "A new manager was substituted for the old one.",
       "You can substitute oil for butter in this recipe."
@@ -375,6 +403,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "bảo vệ",
     partOfSpeech: "adj",
     category: "Actions & Processes",
+    targetBand: "450+",
     examples: [
       "Workers must wear protective equipment.",
       "He is very protective of his younger sister."
@@ -389,6 +418,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "sự thẩm tra, hỏi",
     partOfSpeech: "noun",
     category: "Actions & Processes",
+    targetBand: "650+",
     examples: [
       "Please direct your inquiry to the front desk.",
       "The police launched an inquiry into the incident."
@@ -403,6 +433,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "chỉ ra, cho thấy",
     partOfSpeech: "verb",
     category: "Actions & Processes",
+    targetBand: "650+",
     examples: [
       "The results indicate a positive trend.",
       "Please indicate your preference on the form."
@@ -417,6 +448,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "hy sinh",
     partOfSpeech: "verb",
     category: "Actions & Processes",
+    targetBand: "800+",
     examples: [
       "She is sacrificing her free time for work.",
       "They are sacrificing profits to gain market share."
@@ -431,6 +463,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "tìm kiếm",
     partOfSpeech: "verb",
     category: "Actions & Processes",
+    targetBand: "450+",
     examples: [
       "The company is seeking qualified applicants.",
       "He is actively seeking a new position."
@@ -445,6 +478,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "tỏa sáng",
     partOfSpeech: "verb",
     category: "Actions & Processes",
+    targetBand: "450+",
     examples: [
       "Her talent really shines in presentations.",
       "Please shine a light over here."
@@ -459,6 +493,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "phát triển, nở rộ",
     partOfSpeech: "verb",
     category: "Actions & Processes",
+    targetBand: "650+",
     examples: [
       "The business continued to flourish despite the economy.",
       "Plants flourish in this rich soil."
@@ -473,6 +508,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "khúc xạ",
     partOfSpeech: "verb",
     category: "Actions & Processes",
+    targetBand: "800+",
     examples: [
       "The prism is refracting the light.",
       "Water is refracting the sun's rays."
@@ -487,6 +523,7 @@ export const VOCABULARY_DATA: VocabularyWord[] = [
     vietnamese: "nhiều, dồi dào",
     partOfSpeech: "pronoun/adv",
     category: "Actions & Processes",
+    targetBand: "450+",
     examples: [
       "There is plenty of time to finish the project.",
       "We have plenty of food for everyone."

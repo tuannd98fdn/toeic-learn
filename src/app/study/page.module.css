@@ -61,15 +61,56 @@
 .finishedCard {
   text-align: center;
   padding: 50px 30px;
-  max-width: 400px;
+  width: 100%;
+  max-width: 440px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(79, 70, 229, 0.1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.emptyIcon {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  display: inline-block;
-  animation: float 3s infinite ease-in-out;
+.emptyCard::before,
+.finishedCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  z-index: 2;
 }
+
+.iconWrapper {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  margin-bottom: 24px;
+  animation: float 3s infinite ease-in-out;
+  box-shadow: 0 0 30px var(--primary-light);
+}
+
+.glowIcon {
+  filter: drop-shadow(0 0 8px var(--primary));
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+
 
 .emptyCard h2,
 .finishedCard h2 {
@@ -93,30 +134,56 @@
   gap: 15px;
 }
 
-.primaryBtn,
-.secondaryBtn {
-  padding: 12px 25px;
-  border-radius: 25px;
+
+.bandSelector {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.bandPill {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 0.8rem;
   font-weight: 600;
-  transition: all 0.2s;
-  display: inline-block;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.primaryBtn {
-  background-color: var(--primary);
-  color: white;
-}
-
-.primaryBtn:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
-
-.secondaryBtn {
-  background-color: var(--muted);
+.bandPill:hover {
+  background: var(--muted);
   color: var(--foreground);
 }
 
-.secondaryBtn:hover {
-  background-color: var(--border);
+.activeBandPill {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
 }
+
+.sessionStats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sessionStats strong {
+  color: var(--foreground);
+}
+

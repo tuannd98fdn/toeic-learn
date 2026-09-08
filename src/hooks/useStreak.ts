@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { storage } from '../utils/storage';
 
 export interface StreakData {
@@ -46,7 +46,7 @@ export function useStreak() {
     setMounted(true);
   }, []);
 
-  const recordStudy = () => {
+  const recordStudy = useCallback(() => {
     setStreakData(prev => {
       let newStreak = prev.currentStreak;
       const today = new Date();
@@ -85,7 +85,7 @@ export function useStreak() {
       storage.set(STREAK_KEY, newData);
       return newData;
     });
-  };
+  }, []);
 
   return {
     mounted,

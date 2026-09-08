@@ -223,6 +223,18 @@
   font-weight: 600;
 }
 
+.bandBadge {
+  display: inline-block;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
 .section {
   margin-bottom: 15px;
 }
@@ -263,4 +275,217 @@
   padding: 50px 20px;
   color: var(--muted-foreground);
   font-size: 1.1rem;
+}
+
+/* AI Add Word UI */
+.addWordContainer {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.addWordTabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.tabBtn {
+  background: transparent;
+  border: none;
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.tabBtn:hover {
+  background-color: var(--muted);
+  color: var(--foreground);
+}
+
+.activeTab {
+  color: var(--primary);
+  background-color: rgba(var(--primary-rgb), 0.1);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+/* AI Specific Styles */
+.aiContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.aiInputTypes {
+  display: flex;
+  gap: 1rem;
+}
+
+.aiTypeBtn {
+  flex: 1;
+  background-color: var(--muted);
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+  padding: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.aiTypeBtn:hover {
+  border-color: var(--primary);
+  color: var(--foreground);
+}
+
+.activeAiType {
+  background-color: rgba(var(--primary-rgb), 0.1);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.aiTextarea {
+  width: 100%;
+  min-height: 120px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  padding: 15px;
+  border-radius: 8px;
+  color: var(--foreground);
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+
+.aiTextarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.aiLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+  color: var(--primary);
+}
+
+.pulseIcon {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; text-shadow: 0 0 10px var(--primary); }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+.loadingBar {
+  width: 100%;
+  max-width: 300px;
+  height: 4px;
+  background-color: var(--muted);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loadingFill {
+  height: 100%;
+  background-color: var(--primary);
+  width: 30%;
+  animation: slide 1.5s infinite ease-in-out;
+}
+
+@keyframes slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+.generatedResults {
+  margin-top: 1.5rem;
+  background-color: var(--muted);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.resultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.resultsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.resultItem {
+  background-color: var(--card);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resultWord {
+  font-size: 1.1rem;
+}
+
+.resultIpa {
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  font-family: monospace;
+}
+
+.resultMeaning {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.resultMnemonic {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  margin-top: 4px;
 }

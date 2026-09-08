@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { storage } from '../utils/storage';
 
 export interface DailyMissionData {
@@ -47,7 +47,7 @@ export function useDailyMission() {
     setMounted(true);
   }, []);
 
-  const updateMission = (updater: (prev: DailyMissionData) => DailyMissionData) => {
+  const updateMission = useCallback((updater: (prev: DailyMissionData) => DailyMissionData) => {
     setMissionData(prev => {
       const today = new Date().toISOString().split('T')[0];
       
@@ -66,28 +66,28 @@ export function useDailyMission() {
       storage.set(MISSION_KEY, newData);
       return newData;
     });
-  };
+  }, []);
 
-  const recordNewWordLearned = () => {
+  const recordNewWordLearned = useCallback(() => {
     updateMission(prev => ({
       ...prev,
       newWords: Math.min(prev.newWords + 1, MISSION_GOALS.newWords)
     }));
-  };
+  }, [updateMission]);
 
-  const recordWordReviewed = () => {
+  const recordWordReviewed = useCallback(() => {
     updateMission(prev => ({
       ...prev,
       reviewedWords: Math.min(prev.reviewedWords + 1, MISSION_GOALS.reviewedWords)
     }));
-  };
+  }, [updateMission]);
 
-  const recordQuizCompleted = () => {
+  const recordQuizCompleted = useCallback(() => {
     updateMission(prev => ({
       ...prev,
       quizzes: Math.min(prev.quizzes + 1, MISSION_GOALS.quizzes)
     }));
-  };
+  }, [updateMission]);
 
   return {
     mounted,

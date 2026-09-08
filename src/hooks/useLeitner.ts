@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { storage } from '../utils/storage';
 import { calculateNextReviewDate, isDueForReview, MAX_BOX, MIN_BOX } from '../utils/spacedRepetition';
 import { VocabularyWord } from '../data/vocabulary';
@@ -52,7 +52,7 @@ export function useLeitner() {
    * 3 = Good (Knew it) -> Move to next box
    * 4 = Easy (Mastered) -> Move up 2 boxes
    */
-  const rateWord = (wordId: string, rating: 1 | 2 | 3 | 4) => {
+  const rateWord = useCallback((wordId: string, rating: 1 | 2 | 3 | 4) => {
     setProgress(prev => {
       const current = prev[wordId] || { box: 0, lastReview: '', nextReview: '' };
       
@@ -84,9 +84,9 @@ export function useLeitner() {
       storage.set(STORAGE_KEY, newState);
       return newState;
     });
-  };
+  }, []);
 
-  const getDueWords = (): VocabularyWord[] => {
+  const getDueWords = useCallback((): VocabularyWord[] => {
     if (!mounted) return [];
     
     return allWords.filter(word => {
@@ -94,9 +94,55 @@ export function useLeitner() {
       if (!record || record.box === 0) return true; // Unstudied words are due
       return isDueForReview(record.nextReview);
     });
-  };
+  }, [mounted, allWords, progress]);
 
-  const getStats = () => {
+  /**
+   * Returns a paced queue of words for today's study session.
+   * Prioritizes due reviews (box > 0) and limits new unstudied words (box 0) to avoid cognitive overload.
+   */
+  const getPacedStudyQueue = useCallback((targetBand: string = 'All', maxNewWords: number = 10) => {
+    if (!mounted) {
+      return {
+        queue: [] as VocabularyWord[],
+        reviewCount: 0,
+        newCount: 0,
+        totalDueReviews: 0,
+        totalAvailableNew: 0,
+      };
+    }
+
+    const eligibleWords = allWords.filter(word => {
+      if (targetBand === 'All') return true;
+      return word.targetBand === targetBand;
+    });
+
+    const reviewWords: VocabularyWord[] = [];
+    const newWords: VocabularyWord[] = [];
+
+    eligibleWords.forEach(word => {
+      const record = progress[word.id];
+      if (record && record.box > 0) {
+        if (isDueForReview(record.nextReview)) {
+          reviewWords.push(word);
+        }
+      } else {
+        newWords.push(word);
+      }
+    });
+
+    const selectedNewWords = newWords.slice(0, maxNewWords);
+    const queue = [...reviewWords, ...selectedNewWords];
+
+    return {
+      queue,
+      reviewCount: reviewWords.length,
+      newCount: selectedNewWords.length,
+      totalDueReviews: reviewWords.length,
+      totalAvailableNew: newWords.length,
+    };
+  }, [mounted, allWords, progress]);
+
+  const getStats = useCallback((targetBand: string = 'All') => {
     if (!mounted) return { mastered: 0, learning: 0, unstudied: 0, boxes: { 1:0, 2:0, 3:0, 4:0, 5:0 } };
 
     const boxes = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
@@ -104,7 +150,9 @@ export function useLeitner() {
     let learning = 0;
     let unstudied = 0;
 
-    allWords.forEach(word => {
+    const filtered = allWords.filter(w => targetBand === 'All' || w.targetBand === targetBand);
+
+    filtered.forEach(word => {
       const record = progress[word.id];
       if (!record || record.box === 0) {
         unstudied++;
@@ -119,13 +167,14 @@ export function useLeitner() {
     });
 
     return { mastered, learning, unstudied, boxes };
-  };
+  }, [mounted, allWords, progress]);
 
   return {
     mounted,
     progress,
     rateWord,
     getDueWords,
+    getPacedStudyQueue,
     getStats
   };
 }

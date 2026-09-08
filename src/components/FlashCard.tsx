@@ -50,7 +50,14 @@ export default function FlashCard({ word, onRate }: FlashCardProps) {
       >
         {/* Front side */}
         <div className={`${styles.face} ${styles.front} card-minimal`}>
-          <div className={styles.categoryBadge}>{word.category}</div>
+          <div className={styles.badgeContainer}>
+            <div className={styles.categoryBadge}>{word.category}</div>
+            {word.targetBand && (
+              <div className={styles.bandBadge}>
+                {word.targetBand}
+              </div>
+            )}
+          </div>
           <div className={styles.wordContainer}>
             <h1 className={styles.word}>{word.word}</h1>
             <p className={styles.ipa}>{word.ipa}</p>

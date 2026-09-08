@@ -15,8 +15,8 @@ export function useVocabulary() {
   }, []);
 
   const allWords = useMemo(() => {
-    const systemWords = VOCABULARY_DATA.map(w => ({ ...w, source: w.source || 'system' as const }));
-    const uWords = userWords.map(w => ({ ...w, source: 'user' as const }));
+    const systemWords = VOCABULARY_DATA.map(w => ({ ...w, source: w.source || 'system' as const, targetBand: w.targetBand || '650+' }));
+    const uWords = userWords.map(w => ({ ...w, source: 'user' as const, targetBand: w.targetBand || '650+' }));
     return [...systemWords, ...uWords];
   }, [userWords]);
 
@@ -27,6 +27,7 @@ export function useVocabulary() {
         ...newWord,
         id: wordId,
         source: 'user',
+        targetBand: newWord.targetBand || '650+',
       };
       const updated = [...prev, wordToAdd];
       storage.set(USER_VOCAB_STORAGE_KEY, updated);

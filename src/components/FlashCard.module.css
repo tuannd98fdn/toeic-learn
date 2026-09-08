@@ -47,15 +47,30 @@
 }
 
 /* Front Elements */
-.categoryBadge {
+.badgeContainer {
   position: absolute;
   top: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.categoryBadge {
   background: var(--muted);
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.8rem;
   color: var(--primary);
   font-weight: 600;
+}
+
+.bandBadge {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 .wordContainer {
