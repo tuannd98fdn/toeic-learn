@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/Navbar';
 import AuthProvider from '@/components/AuthProvider';
+import AppShell from '@/components/AppShell';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin', 'vietnamese'],
@@ -63,10 +63,9 @@ export default function RootLayout({
       </head>
       <body>
         <AuthProvider>
-          <main className="page-container animate-fade-in">
+          <AppShell>
             {children}
-          </main>
-          <Navbar />
+          </AppShell>
         </AuthProvider>
       </body>
     </html>
