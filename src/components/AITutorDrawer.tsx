@@ -295,7 +295,7 @@ export default function AITutorDrawer({
           id: `msg_${Date.now()}`,
           role: 'assistant',
           content:
-            '⚠️ Em đã dùng hết 15 lượt hỏi miễn phí trong ngày hôm nay rồi! Hãy quay lại vào ngày mai hoặc nâng cấp gói Pro để hỏi đáp không giới hạn cùng Gia sư 990 nhé.',
+            'Lưu ý: Em đã dùng hết 15 lượt hỏi miễn phí trong ngày hôm nay rồi! Hãy quay lại vào ngày mai hoặc nâng cấp gói Pro để hỏi đáp không giới hạn cùng Gia sư 990 nhé.',
         },
       ]);
       return;
@@ -374,7 +374,7 @@ export default function AITutorDrawer({
           msg.id === assistantMsgId
             ? {
                 ...msg,
-                content: `⚠️ Có lỗi kết nối: ${err.message || 'Vui lòng thử lại sau vài giây.'}`,
+                content: `Lỗi kết nối: ${err.message || 'Vui lòng thử lại sau vài giây.'}`,
               }
             : msg
         )

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useAIHistory, AISession } from '@/hooks/useAIHistory';
 import { NotebookIcon, BotIcon, UserIcon, SparklesIcon } from '@/components/icons/AppIcons';
