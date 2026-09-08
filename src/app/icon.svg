@@ -1,0 +1,28 @@
+<svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Body -->
+  <ellipse cx="50" cy="58" rx="28" ry="30" fill="#222538" stroke="#1e2030" stroke-width="1.5" />
+  <!-- Belly -->
+  <ellipse cx="50" cy="68" rx="16" ry="18" fill="#1e2030" opacity="0.5" />
+  <!-- Head -->
+  <circle cx="50" cy="40" r="24" fill="#222538" stroke="#1e2030" stroke-width="1.5" />
+  <!-- Ear tufts -->
+  <polygon points="30,22 36,32 26,32" fill="#818cf8" opacity="0.8" />
+  <polygon points="70,22 74,32 64,32" fill="#818cf8" opacity="0.8" />
+  <!-- Face disc -->
+  <ellipse cx="50" cy="44" rx="18" ry="14" fill="#0f1017" opacity="0.3" />
+  <!-- Eyes (Happy mood) -->
+  <path d="M34 44 Q38 38 42 44" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-linecap="round" />
+  <path d="M58 44 Q62 38 66 44" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-linecap="round" />
+  <!-- Beak -->
+  <polygon points="47,50 53,50 50,55" fill="#fbbf24" />
+  <!-- Graduation cap -->
+  <polygon points="32,22 50,14 68,22 50,18" fill="#818cf8" />
+  <rect x="48" y="10" width="4" height="6" rx="1" fill="#818cf8" />
+  <circle cx="50" cy="10" r="2.5" fill="#fbbf24" />
+  <!-- Wings -->
+  <path d="M22,50 Q16,60 24,72" stroke="#2d3050" stroke-width="1.5" fill="none" stroke-linecap="round" />
+  <path d="M78,50 Q84,60 76,72" stroke="#2d3050" stroke-width="1.5" fill="none" stroke-linecap="round" />
+  <!-- Feet -->
+  <ellipse cx="42" cy="88" rx="6" ry="3" fill="#fbbf24" opacity="0.8" />
+  <ellipse cx="58" cy="88" rx="6" ry="3" fill="#fbbf24" opacity="0.8" />
+</svg>
