@@ -5,6 +5,7 @@ import { VocabularyWord, TargetBand } from '@/data/vocabulary';
 import { useVocabulary } from '@/hooks/useVocabulary';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useAudio } from '@/hooks/useAudio';
+import EmptyState from '@/components/illustrations/EmptyState';
 import { VolumeIcon, SparklesIcon, FileTextIcon, TargetIcon, CheckCircleIcon, BrainIcon } from '@/components/icons/AppIcons';
 import styles from './page.module.css';
 
@@ -16,9 +17,9 @@ const SOURCES = [
 ];
 const TARGET_BANDS = [
   { value: 'All', label: 'Tất cả Band' },
-  { value: '450+', label: 'Band 450+ (Cơ bản)' },
-  { value: '650+', label: 'Band 650+ (Tiêu chuẩn)' },
-  { value: '800+', label: 'Band 800+ (Nâng cao)' }
+  { value: '450+', label: 'Band 450+' },
+  { value: '650+', label: 'Band 650+' },
+  { value: '800+', label: 'Band 800+' }
 ];
 
 export default function VocabularyPage() {
@@ -31,6 +32,7 @@ export default function VocabularyPage() {
   const [selectedSource, setSelectedSource] = useState<'All' | 'system' | 'user'>('All');
   const [selectedBand, setSelectedBand] = useState<string>('All');
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [showFilters, setShowFilters] = useState(false);
 
   const [isAddingWord, setIsAddingWord] = useState(false);
   const [newWordData, setNewWordData] = useState<{
@@ -55,30 +57,37 @@ export default function VocabularyPage() {
   const [generatedWords, setGeneratedWords] = useState<Omit<VocabularyWord, 'id' | 'source'>[]>([]);
 
   const mounted = vocabMounted && leitnerMounted;
-  if (!mounted) return <div className={styles.loading}>Loading...</div>;
+  if (!mounted) return (
+    <div className={styles.container}>
+      <div className={`${styles.skeletonHeader} skeleton`} />
+      <div className={styles.skeletonGrid}>
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className={`${styles.skeletonCard} skeleton`} />
+        ))}
+      </div>
+    </div>
+  );
 
   const CATEGORIES = ["All", ...Array.from(new Set(allWords.map(w => w.category)))];
 
+  // Count active filters
+  const activeFilterCount = [
+    selectedBand !== 'All',
+    selectedSource !== 'All',
+    selectedCategory !== 'All',
+    selectedLevel !== 'All',
+  ].filter(Boolean).length;
+
   // Filter words
   const filteredWords = allWords.filter(word => {
-    // Search filter
     const matchesSearch = 
       word.word.toLowerCase().includes(searchTerm.toLowerCase()) || 
       word.vietnamese.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    // Category filter
     const matchesCategory = selectedCategory === 'All' || word.category === selectedCategory;
-    
-    // Level filter
     const wordBox = progress[word.id]?.box || 0;
     const matchesLevel = selectedLevel === 'All' || wordBox === selectedLevel;
-
-    // Source filter
     const matchesSource = selectedSource === 'All' || word.source === selectedSource;
-
-    // Band filter
     const matchesBand = selectedBand === 'All' || (word.targetBand || '650+') === selectedBand;
-
     return matchesSearch && matchesCategory && matchesLevel && matchesSource && matchesBand;
   });
 
@@ -135,95 +144,128 @@ export default function VocabularyPage() {
     setIsAddingWord(false);
   };
 
+  const clearAllFilters = () => {
+    setSelectedBand('All');
+    setSelectedSource('All');
+    setSelectedCategory('All');
+    setSelectedLevel('All');
+    setSearchTerm('');
+  };
+
   return (
     <div className={styles.container}>
+      {/* ═══════════════ HEADER ═══════════════ */}
       <header className={styles.header}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className={styles.headerRow}>
           <h1 className={styles.title}>Thư viện từ vựng</h1>
           <button 
-            className="button-primary"
+            className="btn-primary btn-sm"
             onClick={() => setIsAddingWord(true)}
-            style={{ padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '14px' }}
           >
             + Thêm từ mới
           </button>
         </div>
-        <div className={styles.searchBar}>
-          <span className={styles.searchIcon}>🔍</span>
-          <input
-            type="text"
-            placeholder="Tìm kiếm tiếng Anh hoặc tiếng Việt..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className={styles.searchInput}
-          />
+
+        {/* Search + Filter Bar */}
+        <div className={styles.searchRow}>
+          <div className={styles.searchBar}>
+            <svg className={styles.searchSvg} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input
+              type="text"
+              placeholder="Tìm kiếm tiếng Anh hoặc tiếng Việt..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className={styles.searchInput}
+            />
+          </div>
+          <button 
+            className={`${styles.filterToggle} ${showFilters ? styles.filterActive : ''}`}
+            onClick={() => setShowFilters(!showFilters)}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Bộ lọc
+            {activeFilterCount > 0 && <span className={styles.filterCount}>{activeFilterCount}</span>}
+          </button>
         </div>
 
-        <div className={styles.filters}>
-          <div className={styles.filterGroup}>
-            <span className={styles.filterLabel}>Mục tiêu điểm (Band):</span>
-            <div className={styles.chips}>
-              {TARGET_BANDS.map(band => (
-                <button
-                  key={band.value}
-                  className={`${styles.chip} ${selectedBand === band.value ? styles.activeChip : ''}`}
-                  onClick={() => setSelectedBand(band.value)}
-                >
-                  {band.label}
+        {/* Collapsible Filter Panel */}
+        {showFilters && (
+          <div className={`${styles.filterPanel} animate-slide-up`}>
+            <div className={styles.filterPanelHeader}>
+              <span className={styles.filterPanelTitle}>Bộ lọc nâng cao</span>
+              {activeFilterCount > 0 && (
+                <button className={styles.clearBtn} onClick={clearAllFilters}>
+                  Xóa tất cả ({activeFilterCount})
                 </button>
-              ))}
+              )}
             </div>
-          </div>
 
-          <div className={styles.filterGroup}>
-            <span className={styles.filterLabel}>Nguồn:</span>
-            <div className={styles.chips}>
-              {SOURCES.map(src => (
-                <button
-                  key={src.value}
-                  className={`${styles.chip} ${selectedSource === src.value ? styles.activeChip : ''}`}
-                  onClick={() => setSelectedSource(src.value as any)}
-                >
-                  {src.label}
-                </button>
-              ))}
+            <div className={styles.filterGroup}>
+              <span className={styles.filterLabel}>Band mục tiêu</span>
+              <div className={styles.chips}>
+                {TARGET_BANDS.map(band => (
+                  <button
+                    key={band.value}
+                    className={`${styles.chip} ${selectedBand === band.value ? styles.activeChip : ''}`}
+                    onClick={() => setSelectedBand(band.value)}
+                  >
+                    {band.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className={styles.filterGroup}>
-            <span className={styles.filterLabel}>Chủ đề:</span>
-            <div className={styles.chips}>
-              {CATEGORIES.map(cat => (
-                <button
-                  key={cat}
-                  className={`${styles.chip} ${selectedCategory === cat ? styles.activeChip : ''}`}
-                  onClick={() => setSelectedCategory(cat)}
-                >
-                  {cat}
-                </button>
-              ))}
+            <div className={styles.filterGroup}>
+              <span className={styles.filterLabel}>Nguồn</span>
+              <div className={styles.chips}>
+                {SOURCES.map(src => (
+                  <button
+                    key={src.value}
+                    className={`${styles.chip} ${selectedSource === src.value ? styles.activeChip : ''}`}
+                    onClick={() => setSelectedSource(src.value as any)}
+                  >
+                    {src.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className={styles.filterGroup}>
-            <span className={styles.filterLabel}>Mức độ thuộc (Leitner):</span>
-            <div className={styles.chips}>
-              {LEVELS.map(level => (
-                <button
-                  key={level}
-                  className={`${styles.chip} ${selectedLevel === level ? styles.activeChip : ''}`}
-                  onClick={() => setSelectedLevel(level)}
-                >
-                  {level === 'All' ? 'Tất cả' : `Level ${level}`}
-                </button>
-              ))}
+            <div className={styles.filterGroup}>
+              <span className={styles.filterLabel}>Chủ đề</span>
+              <div className={styles.chips}>
+                {CATEGORIES.map(cat => (
+                  <button
+                    key={cat}
+                    className={`${styles.chip} ${selectedCategory === cat ? styles.activeChip : ''}`}
+                    onClick={() => setSelectedCategory(cat)}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.filterGroup}>
+              <span className={styles.filterLabel}>Mức độ thuộc (Leitner)</span>
+              <div className={styles.chips}>
+                {LEVELS.map(level => (
+                  <button
+                    key={level}
+                    className={`${styles.chip} ${selectedLevel === level ? styles.activeChip : ''}`}
+                    onClick={() => setSelectedLevel(level)}
+                  >
+                    {level === 'All' ? 'Tất cả' : `Level ${level}`}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </header>
 
+      {/* ═══════════════ ADD WORD ═══════════════ */}
       {isAddingWord && (
-        <div className={styles.addWordContainer}>
+        <div className={`${styles.addWordContainer} animate-scale-in`}>
           <div className={styles.addWordTabs}>
             <button 
               className={`${styles.tabBtn} ${addMode === 'manual' ? styles.activeTab : ''}`}
@@ -242,32 +284,31 @@ export default function VocabularyPage() {
           {addMode === 'manual' && (
             <form onSubmit={handleAddWord} className={styles.formContainer}>
               <div className={styles.formRow}>
-                <input type="text" placeholder="Từ vựng (Ví dụ: hello)" required value={newWordData.word} onChange={e => setNewWordData({...newWordData, word: e.target.value})} className={styles.searchInput} style={{ flex: 1 }} />
-                <input type="text" placeholder="Nghĩa tiếng Việt (Ví dụ: xin chào)" required value={newWordData.vietnamese} onChange={e => setNewWordData({...newWordData, vietnamese: e.target.value})} className={styles.searchInput} style={{ flex: 1 }} />
+                <input type="text" placeholder="Từ vựng (Ví dụ: hello)" required value={newWordData.word} onChange={e => setNewWordData({...newWordData, word: e.target.value})} className={styles.formInput} />
+                <input type="text" placeholder="Nghĩa tiếng Việt" required value={newWordData.vietnamese} onChange={e => setNewWordData({...newWordData, vietnamese: e.target.value})} className={styles.formInput} />
               </div>
               <div className={styles.formRow}>
-                <input type="text" placeholder="Phiên âm (/həˈləʊ/)" value={newWordData.ipa} onChange={e => setNewWordData({...newWordData, ipa: e.target.value})} className={styles.searchInput} style={{ flex: 1 }} />
-                <input type="text" placeholder="Từ loại (noun, verb...)" value={newWordData.partOfSpeech} onChange={e => setNewWordData({...newWordData, partOfSpeech: e.target.value})} className={styles.searchInput} style={{ flex: 1 }} />
-                <input type="text" placeholder="Chủ đề" value={newWordData.category} onChange={e => setNewWordData({...newWordData, category: e.target.value})} className={styles.searchInput} style={{ flex: 1 }} />
+                <input type="text" placeholder="Phiên âm (/həˈləʊ/)" value={newWordData.ipa} onChange={e => setNewWordData({...newWordData, ipa: e.target.value})} className={styles.formInput} />
+                <input type="text" placeholder="Từ loại" value={newWordData.partOfSpeech} onChange={e => setNewWordData({...newWordData, partOfSpeech: e.target.value})} className={styles.formInput} />
+                <input type="text" placeholder="Chủ đề" value={newWordData.category} onChange={e => setNewWordData({...newWordData, category: e.target.value})} className={styles.formInput} />
                 <select
                   value={newWordData.targetBand}
                   onChange={e => setNewWordData({...newWordData, targetBand: e.target.value as TargetBand})}
-                  className={styles.searchInput}
-                  style={{ flex: 1 }}
+                  className={styles.formInput}
                 >
                   <option value="450+">Band 450+</option>
                   <option value="650+">Band 650+</option>
                   <option value="800+">Band 800+</option>
                 </select>
               </div>
-              <textarea placeholder="Các ví dụ (mỗi dòng 1 ví dụ)" value={newWordData.examples} onChange={e => setNewWordData({...newWordData, examples: e.target.value})} className={styles.searchInput} style={{ minHeight: '80px', padding: '12px' }} />
+              <textarea placeholder="Các ví dụ (mỗi dòng 1 ví dụ)" value={newWordData.examples} onChange={e => setNewWordData({...newWordData, examples: e.target.value})} className={`${styles.formInput} ${styles.formTextarea}`} />
               <div className={styles.formRow}>
-                <input type="text" placeholder="Mẹo nhớ" value={newWordData.mnemonicTip} onChange={e => setNewWordData({...newWordData, mnemonicTip: e.target.value})} className={styles.searchInput} style={{ flex: 2 }} />
-                <input type="text" placeholder="Emoji (📝)" value={newWordData.emoji} onChange={e => setNewWordData({...newWordData, emoji: e.target.value})} className={styles.searchInput} style={{ flex: 1 }} />
+                <input type="text" placeholder="Mẹo nhớ" value={newWordData.mnemonicTip} onChange={e => setNewWordData({...newWordData, mnemonicTip: e.target.value})} className={styles.formInput} style={{ flex: 2 }} />
+                <input type="text" placeholder="Emoji (📝)" value={newWordData.emoji} onChange={e => setNewWordData({...newWordData, emoji: e.target.value})} className={styles.formInput} style={{ flex: 1 }} />
               </div>
               <div className={styles.formActions}>
-                <button type="button" onClick={() => setIsAddingWord(false)} className="btn-secondary">Hủy</button>
-                <button type="submit" className="btn-primary">Lưu từ vựng</button>
+                <button type="button" onClick={() => setIsAddingWord(false)} className="btn-secondary btn-sm">Hủy</button>
+                <button type="submit" className="btn-primary btn-sm">Lưu từ vựng</button>
               </div>
             </form>
           )}
@@ -297,31 +338,31 @@ export default function VocabularyPage() {
                   : "Nhập chủ đề muốn học (ví dụ: Sân bay, Ký hợp đồng, Marketing)..."}
                 value={aiPayload}
                 onChange={e => setAiPayload(e.target.value)}
-                className={styles.aiTextarea}
+                className={`${styles.formInput} ${styles.formTextarea}`}
                 disabled={isGenerating}
               />
 
-              <div className={styles.formActions} style={{ marginTop: '1rem' }}>
-                <button type="button" onClick={() => setIsAddingWord(false)} className="btn-secondary" disabled={isGenerating}>Hủy</button>
-                <button type="button" onClick={handleGenerateAI} className="btn-primary" disabled={isGenerating || !aiPayload.trim()}>
+              <div className={styles.formActions}>
+                <button type="button" onClick={() => setIsAddingWord(false)} className="btn-secondary btn-sm" disabled={isGenerating}>Hủy</button>
+                <button type="button" onClick={handleGenerateAI} className="btn-primary btn-sm" disabled={isGenerating || !aiPayload.trim()}>
                   {isGenerating ? 'Đang tạo...' : '✨ Bắt đầu tạo'}
                 </button>
               </div>
 
               {isGenerating && (
                 <div className={styles.aiLoading}>
-                  <BrainIcon size={40} className={styles.pulseIcon} />
-                  <p>AI đang phân tích và tạo flashcard chi tiết...</p>
-                  <div className={styles.loadingBar}><div className={styles.loadingFill}></div></div>
+                  <BrainIcon size={36} className={styles.pulseIcon} />
+                  <p>AI đang phân tích và tạo flashcard...</p>
+                  <div className={styles.loadingBar}><div className={styles.loadingFill} /></div>
                 </div>
               )}
 
               {generatedWords.length > 0 && !isGenerating && (
                 <div className={styles.generatedResults}>
                   <div className={styles.resultsHeader}>
-                    <h4>Đã tạo thành công {generatedWords.length} từ vựng!</h4>
-                    <button onClick={handleSaveGenerated} className="btn-success">
-                      <CheckCircleIcon size={16} style={{marginRight: '8px'}} />
+                    <h4>Đã tạo {generatedWords.length} từ vựng!</h4>
+                    <button onClick={handleSaveGenerated} className="btn-success btn-sm">
+                      <CheckCircleIcon size={16} />
                       Lưu tất cả vào thư viện
                     </button>
                   </div>
@@ -343,11 +384,14 @@ export default function VocabularyPage() {
         </div>
       )}
 
+      {/* ═══════════════ WORD COUNT ═══════════════ */}
       <div className={styles.wordCount}>
-        Hiển thị {filteredWords.length} từ
+        {filteredWords.length} từ
+        {activeFilterCount > 0 && <span className={styles.wordCountFilter}> (đã lọc)</span>}
       </div>
 
-      <main className={styles.grid}>
+      {/* ═══════════════ WORD GRID ═══════════════ */}
+      <main className={`${styles.grid} stagger-children`}>
         {filteredWords.map(word => {
           const isExpanded = expandedId === word.id;
           const box = progress[word.id]?.box || 0;
@@ -355,79 +399,78 @@ export default function VocabularyPage() {
           return (
             <div 
               key={word.id} 
-              className={`${styles.card} card-minimal`}
+              className={styles.card}
               onClick={() => handleCardClick(word.id)}
+              data-level={box}
             >
-              <div className={styles.cardHeader}>
-                <div className={styles.wordInfo}>
-                  <h3 className={styles.word}>
-                    {word.word}
+              <div className={styles.cardLevel} style={{ backgroundColor: getLevelColor(box) }} />
+              
+              <div className={styles.cardBody}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.wordInfo}>
+                    <h3 className={styles.word}>{word.word}</h3>
                     <span className={styles.bandBadge}>{word.targetBand || '650+'}</span>
-                    {word.source === 'user' && <span style={{fontSize: '12px', marginLeft: '8px', backgroundColor: 'var(--bg-tertiary)', padding: '2px 6px', borderRadius: '12px', color: 'var(--text-secondary)'}}>User</span>}
-                  </h3>
-                  <span className={styles.ipa}>{word.ipa}</span>
-                </div>
-                <div 
-                  className={styles.levelIndicator}
-                  style={{ backgroundColor: getLevelColor(box) }}
-                  title={box === 0 ? 'Chưa học' : `Level ${box}`}
-                >
-                  {box === 0 ? '-' : box}
-                </div>
-              </div>
-              
-              <div className={styles.vietnamese}>{word.vietnamese}</div>
-              
-              <button 
-                className={styles.audioBtn}
-                onClick={(e) => { e.stopPropagation(); speak(word.word); }}
-              >
-                <VolumeIcon size={20} className={styles.audioIcon} />
-              </button>
-
-              {isExpanded && (
-                <div className={styles.expandedContent}>
-                  <div className={styles.categoryBadge}>{word.category}</div>
-                  
-                  <div className={styles.section}>
-                    <div className={styles.sectionTitle}>Ví dụ:</div>
-                    {word.examples.map((ex, i) => (
-                      <p key={i} className={styles.example}>• {ex}</p>
-                    ))}
-                    {word.examples.length === 0 && <p className={styles.example} style={{ color: 'var(--text-tertiary)' }}>Không có ví dụ</p>}
+                    {word.source === 'user' && <span className={styles.userBadge}>Tôi</span>}
                   </div>
-                  
-                  {(word.mnemonicTip || word.emoji) && (
-                    <div className={styles.section}>
-                      <div className={styles.sectionTitle}>Mẹo nhớ:</div>
-                      <div className={styles.mnemonic}>
-                        <span className={styles.emoji}>{word.emoji}</span>
-                        <span>{word.mnemonicTip}</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {word.source === 'user' && (
-                    <div style={{ marginTop: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '1rem', textAlign: 'right' }}>
-                      <button 
-                        onClick={(e) => { e.stopPropagation(); removeWord(word.id); }}
-                        style={{ background: 'transparent', border: 'none', color: '#ff4d4f', cursor: 'pointer', fontSize: '14px', textDecoration: 'underline' }}
-                      >
-                        Xóa từ này
-                      </button>
-                    </div>
-                  )}
+                  <button 
+                    className={styles.audioBtn}
+                    onClick={(e) => { e.stopPropagation(); speak(word.word); }}
+                    aria-label={`Phát âm ${word.word}`}
+                  >
+                    <VolumeIcon size={18} />
+                  </button>
                 </div>
-              )}
+                
+                <span className={styles.ipa}>{word.ipa}</span>
+                <div className={styles.vietnamese}>{word.vietnamese}</div>
+
+                {isExpanded && (
+                  <div className={`${styles.expandedContent} animate-slide-up`}>
+                    <div className={styles.categoryBadge}>{word.category}</div>
+                    
+                    <div className={styles.expandSection}>
+                      <div className={styles.expandLabel}>Ví dụ</div>
+                      {word.examples.length > 0 ? word.examples.map((ex, i) => (
+                        <p key={i} className={styles.example}>• {ex}</p>
+                      )) : (
+                        <p className={styles.example} style={{ color: 'var(--text-tertiary)' }}>Không có ví dụ</p>
+                      )}
+                    </div>
+                    
+                    {(word.mnemonicTip || word.emoji) && (
+                      <div className={styles.expandSection}>
+                        <div className={styles.expandLabel}>Mẹo nhớ</div>
+                        <div className={styles.mnemonic}>
+                          <span className={styles.emoji}>{word.emoji}</span>
+                          <span>{word.mnemonicTip}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {word.source === 'user' && (
+                      <div className={styles.cardFooter}>
+                        <button 
+                          onClick={(e) => { e.stopPropagation(); removeWord(word.id); }}
+                          className={styles.deleteBtn}
+                        >
+                          Xóa từ này
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           );
         })}
       </main>
 
       {filteredWords.length === 0 && (
-        <div className={styles.emptyState}>
-          Không tìm thấy từ vựng nào phù hợp với bộ lọc.
-        </div>
+        <EmptyState 
+          title="Không tìm thấy từ vựng nào"
+          description="Thử thay đổi bộ lọc hoặc thêm từ mới vào thư viện."
+          mascotMood="thinking"
+        />
       )}
     </div>
   );

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import StreakCounter from '@/components/StreakCounter';
+import MascotSVG from '@/components/illustrations/MascotSVG';
 import { useStreak } from '@/hooks/useStreak';
 import { StudyPlan, getStudyPlan, toggleTaskCompleted } from '@/utils/studyPlanEngine';
 import {
@@ -109,44 +110,49 @@ export default function Home() {
 
   if (!streakMounted) {
     return (
-      <div className={styles.container} style={{ paddingTop: '32px' }}>
-        {/* Skeleton Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <div>
-            <div style={{ width: '280px', height: '28px', borderRadius: '8px', background: 'var(--surface-hover)', animation: 'skeletonPulse 1.5s ease-in-out infinite' }} />
-            <div style={{ width: '200px', height: '16px', borderRadius: '6px', background: 'var(--surface-hover)', marginTop: '12px', animation: 'skeletonPulse 1.5s ease-in-out infinite', animationDelay: '0.15s' }} />
-          </div>
-          <div style={{ width: '80px', height: '60px', borderRadius: '16px', background: 'var(--surface-hover)', animation: 'skeletonPulse 1.5s ease-in-out infinite', animationDelay: '0.3s' }} />
-        </div>
-        {/* Skeleton Card */}
-        <div style={{ width: '100%', height: '200px', borderRadius: '24px', background: 'var(--surface-hover)', animation: 'skeletonPulse 1.5s ease-in-out infinite', animationDelay: '0.2s' }} />
-        <div style={{ width: '100%', height: '140px', borderRadius: '24px', background: 'var(--surface-hover)', animation: 'skeletonPulse 1.5s ease-in-out infinite', animationDelay: '0.4s' }} />
+      <div className={styles.container}>
+        {/* Skeleton Hero */}
+        <div className={`${styles.heroSkeleton} skeleton`} />
+        <div className={`${styles.sectionSkeleton} skeleton`} />
+        <div className={`${styles.sectionSkeleton} skeleton`} style={{ height: 120 }} />
       </div>
     );
   }
 
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <div>
-          {/* Slogan mạnh mẽ thay vì "Chào buổi chiều" */}
-          <h1 className={styles.greeting}>Sẵn sàng bứt phá<br/>TOEIC {onboardingData.target} hôm nay chưa?</h1>
-          <p className={styles.subtitle}>
-            {onboardingData.daysLeft !== null 
-              ? <span style={{ color: 'var(--primary)', fontWeight: 'bold' }}>Chỉ còn {onboardingData.daysLeft} ngày nữa là thi. Cố lên!</span>
-              : 'Cùng AI Master lộ trình luyện thi chuẩn ETS'}
-          </p>
+    <div className={`${styles.container} stagger-children`}>
+      {/* ═══════════════ HERO SECTION ═══════════════ */}
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <div className={styles.heroText}>
+            <h1 className={styles.heroTitle}>
+              Sẵn sàng bứt phá{' '}
+              <span className="text-gradient">TOEIC {onboardingData.target}</span>
+            </h1>
+            <p className={styles.heroSubtitle}>
+              {onboardingData.daysLeft !== null 
+                ? <span className={styles.countdown}>Chỉ còn <strong>{onboardingData.daysLeft}</strong> ngày nữa là thi. Cố lên!</span>
+                : 'Cùng AI Master lộ trình luyện thi chuẩn ETS'}
+            </p>
+          </div>
+          <div className={styles.heroRight}>
+            <StreakCounter currentStreak={streakData.currentStreak} bestStreak={streakData.bestStreak} />
+            <div className={styles.mascotFloat}>
+              <MascotSVG mood={streakData.currentStreak > 0 ? 'happy' : 'idle'} size={80} />
+            </div>
+          </div>
         </div>
-        <StreakCounter currentStreak={streakData.currentStreak} bestStreak={streakData.bestStreak} />
-      </header>
+      </section>
 
-      {/* 1. KHOẢNG MỤC TIÊU VÀNG (Lộ trình hằng ngày) */}
-      <section className={styles.pathSection}>
+      {/* ═══════════════ DAILY GOALS ═══════════════ */}
+      <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <span style={{ color: 'var(--primary)' }}><TargetIcon size={24} /></span>
+          <div className={styles.sectionIcon} data-color="primary">
+            <TargetIcon size={20} />
+          </div>
           <div>
             <h2 className={styles.sectionTitle}>Mục tiêu Vàng hôm nay</h2>
-            <p className={styles.sectionSubtitle}>Hoàn thành để nhận điểm kinh nghiệm & giữ chuỗi</p>
+            <p className={styles.sectionSubtitle}>Hoàn thành để nhận XP &amp; giữ chuỗi</p>
           </div>
         </div>
 
@@ -157,19 +163,15 @@ export default function Home() {
           const progressPercent = Math.round((completedToday / totalToday) * 100);
 
           return (
-            <div className="card-minimal" style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0, color: 'var(--foreground)' }}>
-                  Ngày {activeDay.dayNumber}/{studyPlan.daysTotal}
-                </h3>
-                <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--primary)' }}>
-                  {progressPercent}% Hoàn thành
-                </span>
-              </div>
-              
-              {/* Progress Bar */}
-              <div style={{ width: '100%', height: '8px', background: 'var(--border)', borderRadius: '4px', marginBottom: '24px', overflow: 'hidden' }}>
-                <div style={{ width: `${progressPercent}%`, height: '100%', background: 'var(--primary)', borderRadius: '4px', transition: 'width 0.3s ease', opacity: 0.85 }}></div>
+            <div className={`${styles.dailyCard} card-glow`}>
+              <div className={styles.dailyHeader}>
+                <div className={styles.dailyInfo}>
+                  <span className={styles.dayLabel}>Ngày {activeDay.dayNumber}/{studyPlan.daysTotal}</span>
+                  <span className={styles.progressLabel}>{progressPercent}%</span>
+                </div>
+                <div className={styles.progressBarBg}>
+                  <div className={styles.progressBarFill} style={{ width: `${progressPercent}%` }} />
+                </div>
               </div>
 
               <div className={styles.planList}>
@@ -181,7 +183,7 @@ export default function Home() {
                         onClick={(e) => {
                           const btn = e.currentTarget;
                           btn.classList.remove('animate-bounce-check');
-                          void btn.offsetWidth; // force reflow
+                          void btn.offsetWidth;
                           btn.classList.add('animate-bounce-check');
                           const updated = toggleTaskCompleted(activeDay.dayNumber, task.id);
                           if (updated) setStudyPlan({ ...updated });
@@ -191,7 +193,7 @@ export default function Home() {
                       </button>
                       <span className={styles.planItemTitle}>{task.title}</span>
                     </div>
-                    <Link href={task.link} className={task.completed ? "btn-secondary" : "btn-primary"} style={{ padding: '8px 16px', fontSize: '0.9rem' }}>
+                    <Link href={task.link} className={`${task.completed ? 'btn-secondary' : 'btn-primary'} btn-sm`}>
                       {task.completed ? 'ÔN LẠI' : 'HỌC NGAY'}
                     </Link>
                   </div>
@@ -200,16 +202,22 @@ export default function Home() {
             </div>
           );
         })() : (
-          <div className="card-minimal" style={{ padding: '24px', background: 'var(--surface)', border: '2px dashed var(--primary)' }}>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '8px', color: 'var(--primary)' }}>Bạn chưa có lộ trình!</h3>
-            <p style={{ fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '20px' }}>
-              Làm bài Test Nhanh (28 câu) để nhận dự đoán band điểm và hệ thống AI tự thiết kế lộ trình riêng cho bạn.
-            </p>
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div className={styles.noPlanCard}>
+            <div className={styles.noPlanContent}>
+              <MascotSVG mood="thinking" size={72} />
+              <div>
+                <h3 className={styles.noPlanTitle}>Bạn chưa có lộ trình!</h3>
+                <p className={styles.noPlanDesc}>
+                  Làm bài Test Nhanh (28 câu) để AI thiết kế lộ trình riêng cho bạn.
+                </p>
+              </div>
+            </div>
+            <div className={styles.noPlanActions}>
               <Link href="/diagnostic" className="btn-primary">
-                TEST 20 PHÚT ➔
+                TEST 20 PHÚT
+                <ArrowRightIcon size={18} />
               </Link>
-              <Link href="/study-plan" className="btn-secondary">
+              <Link href="/study-plan" className="btn-secondary btn-sm">
                 TỰ TẠO LỘ TRÌNH
               </Link>
             </div>
@@ -217,14 +225,16 @@ export default function Home() {
         )}
       </section>
 
-      {/* 2. CHỌN ĐỀ */}
-      <section className={styles.pathSection} style={{ marginTop: '20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+      {/* ═══════════════ EXAM MAP ═══════════════ */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeaderRow}>
           <div className={styles.sectionHeader}>
-            <span style={{ color: 'var(--secondary)' }}><CompassIcon size={24} /></span>
+            <div className={styles.sectionIcon} data-color="secondary">
+              <CompassIcon size={20} />
+            </div>
             <div>
               <h2 className={styles.sectionTitle}>Bản Đồ Đề Thi</h2>
-              <p className={styles.sectionSubtitle}>Chọn đề và bắt đầu chinh phục các trạm</p>
+              <p className={styles.sectionSubtitle}>Chọn đề và chinh phục các trạm</p>
             </div>
           </div>
           
@@ -239,115 +249,120 @@ export default function Home() {
           </select>
         </div>
 
-        {/* Trạm 1: Listening */}
-        <div className={`${styles.stationCard} card-minimal`}>
-          <div className={styles.stationInfo}>
-            <div className={`${styles.stationIcon} ${styles.stationIconPrimary}`}>
-              <HeadphonesIcon size={32} />
+        <div className={styles.stationGrid}>
+          {/* Listening Station */}
+          <div className={`${styles.stationCard} card-glow`}>
+            <div className={styles.stationInfo}>
+              <div className={`${styles.stationIcon} ${styles.iconPrimary}`}>
+                <HeadphonesIcon size={28} />
+              </div>
+              <div className={styles.stationText}>
+                <h3>Trạm Nghe</h3>
+                <p>{testStats ? `${testStats.p1 + testStats.p2 + testStats.p3 + testStats.p4} câu chuẩn ETS` : 'Listening Station'}</p>
+              </div>
             </div>
-            <div className={styles.stationText}>
-              <h3>Trạm Nghe (Listening Station)</h3>
-              <p>100 câu hỏi Audio sắc nét. {testStats ? `Bao gồm ${testStats.p1 + testStats.p2 + testStats.p3 + testStats.p4} câu chuẩn ETS.` : ''}</p>
+            <div className={styles.stationActions}>
+              <Link href={`/part1?test=${selectedTest}`} className="btn-secondary btn-sm">Part 1</Link>
+              <Link href={`/part2?test=${selectedTest}`} className="btn-secondary btn-sm">Part 2</Link>
+              <Link href={`/part3?test=${selectedTest}`} className="btn-secondary btn-sm">Part 3</Link>
+              <Link href={`/part4?test=${selectedTest}`} className="btn-secondary btn-sm">Part 4</Link>
             </div>
           </div>
-          <div className={styles.stationActions}>
-            <Link href={`/part1?test=${selectedTest}`} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Part 1</Link>
-            <Link href={`/part2?test=${selectedTest}`} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Part 2</Link>
-            <Link href={`/part3?test=${selectedTest}`} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Part 3</Link>
-            <Link href={`/part4?test=${selectedTest}`} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Part 4</Link>
-          </div>
-        </div>
 
-        {/* Trạm 2: Reading */}
-        <div className={`${styles.stationCard} card-minimal`}>
-          <div className={styles.stationInfo}>
-            <div className={`${styles.stationIcon} ${styles.stationIconAccent}`}>
-              <ReadingIcon size={32} />
+          {/* Reading Station */}
+          <div className={`${styles.stationCard} card-glow`}>
+            <div className={styles.stationInfo}>
+              <div className={`${styles.stationIcon} ${styles.iconWarning}`}>
+                <ReadingIcon size={28} />
+              </div>
+              <div className={styles.stationText}>
+                <h3>Trạm Đọc</h3>
+                <p>{testStats ? `${testStats.p5 + testStats.p6 + testStats.p7} câu sát đề thật` : 'Reading Station'}</p>
+              </div>
             </div>
-            <div className={styles.stationText}>
-              <h3>Trạm Đọc (Reading Station)</h3>
-              <p>100 câu Đọc Hiểu nâng cao. {testStats ? `Bao gồm ${testStats.p5 + testStats.p6 + testStats.p7} câu cực sát đề thi thật.` : ''}</p>
+            <div className={styles.stationActions}>
+              <Link href={`/part5?test=${selectedTest}`} className="btn-secondary btn-sm">Part 5</Link>
+              <Link href={`/part6?test=${selectedTest}`} className="btn-secondary btn-sm">Part 6</Link>
+              <Link href={`/part7?test=${selectedTest}`} className="btn-secondary btn-sm">Part 7</Link>
             </div>
           </div>
-          <div className={styles.stationActions}>
-            <Link href={`/part5?test=${selectedTest}`} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Part 5</Link>
-            <Link href={`/part6?test=${selectedTest}`} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Part 6</Link>
-            <Link href={`/part7?test=${selectedTest}`} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Part 7</Link>
-          </div>
-        </div>
 
-        {/* Trạm 2.5: Mini Test */}
-        <div className={`${styles.stationCard} card-minimal`}>
-          <div className={styles.stationInfo}>
-            <div className={`${styles.stationIcon} ${styles.stationIconSuccess}`}>
-              <ZapIcon size={32} />
+          {/* Mini Test */}
+          <div className={`${styles.stationCard} card-glow`}>
+            <div className={styles.stationInfo}>
+              <div className={`${styles.stationIcon} ${styles.iconSuccess}`}>
+                <ZapIcon size={28} />
+              </div>
+              <div className={styles.stationText}>
+                <h3>Trạm Nhanh</h3>
+                <p>20 câu ngẫu nhiên — 15 phút</p>
+              </div>
             </div>
-            <div className={styles.stationText}>
-              <h3>Trạm Nhanh (15-Min Mini Test)</h3>
-              <p>20 câu ngẫu nhiên (10 Nghe, 10 Đọc). Chữa cháy khi không có đủ 120 phút.</p>
+            <div className={styles.stationActions}>
+              <Link href={`/mini-test?test=${selectedTest}`} className="btn-accent btn-sm">
+                THI NGAY (15P)
+              </Link>
             </div>
           </div>
-          <div className={styles.stationActions}>
-            <Link href={`/mini-test?test=${selectedTest}`} className="btn-accent" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>
-              THI NGAY (15P)
-            </Link>
-          </div>
-        </div>
 
-        {/* Trạm 3: Full Test */}
-        <div className={`${styles.stationCard} card-minimal`} style={{ background: 'var(--secondary)', borderColor: 'var(--secondary-hover)' }}>
-          <div className={styles.stationInfo}>
-            <div className={`${styles.stationIcon}`} style={{ background: 'rgba(0,0,0,0.2)', color: '#fff' }}>
-              <ExamIcon size={32} />
+          {/* Full Test — Featured */}
+          <div className={`${styles.stationCard} ${styles.stationFeatured}`}>
+            <div className={styles.stationInfo}>
+              <div className={`${styles.stationIcon} ${styles.iconFeatured}`}>
+                <ExamIcon size={28} />
+              </div>
+              <div className={styles.stationText}>
+                <h3>Đấu Trường</h3>
+                <p>200 Câu — 120 Phút mô phỏng phòng thi thật</p>
+              </div>
             </div>
-            <div className={styles.stationText}>
-              <h3 style={{ color: '#fff' }}>Đấu Trường (Full Mock Test)</h3>
-              <p style={{ color: 'rgba(255,255,255,0.9)' }}>Thi Thử 200 Câu - 120 Phút mô phỏng áp lực phòng thi thật.</p>
+            <div className={styles.stationActions}>
+              <Link href={`/exam?test=${selectedTest}`} className={styles.featuredBtn}>
+                VÀO THI NGAY
+                <ArrowRightIcon size={16} />
+              </Link>
             </div>
-          </div>
-          <div className={styles.stationActions}>
-            <Link href={`/exam?test=${selectedTest}`} className="btn-primary" style={{ background: '#fff', color: 'var(--secondary)', borderBottomColor: '#e5e5e5' }}>
-              VÀO THI NGAY ➔
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* 3. BỘ CÔNG CỤ TỪ VỰNG */}
-      <section className={styles.pathSection} style={{ marginTop: '20px' }}>
+      {/* ═══════════════ VOCABULARY TOOLS ═══════════════ */}
+      <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <span style={{ color: 'var(--warning)' }}><ZapIcon size={24} /></span>
+          <div className={styles.sectionIcon} data-color="warning">
+            <ZapIcon size={20} />
+          </div>
           <div>
-            <h2 className={styles.sectionTitle}>Kho Vũ Khí (Vocabulary)</h2>
+            <h2 className={styles.sectionTitle}>Kho Vũ Khí</h2>
             <p className={styles.sectionSubtitle}>Nạp từ vựng siêu tốc mỗi ngày</p>
           </div>
         </div>
 
         <div className={styles.toolsGrid}>
-          <Link href="/study" className={`${styles.toolCard} card-minimal`}>
-            <div className={`${styles.toolIcon} ${styles.stationIconPrimary}`}>
-              <CardsIcon size={24} />
+          <Link href="/study" className={`${styles.toolCard} card-glow`}>
+            <div className={`${styles.toolIcon} ${styles.iconPrimary}`}>
+              <CardsIcon size={22} />
             </div>
             <h4>Flashcards</h4>
             <p>Học lặp lại ngắt quãng</p>
           </Link>
-          <Link href="/quiz" className={`${styles.toolCard} card-minimal`}>
-            <div className={`${styles.toolIcon} ${styles.stationIconAccent}`}>
-              <QuizIcon size={24} />
+          <Link href="/quiz" className={`${styles.toolCard} card-glow`}>
+            <div className={`${styles.toolIcon} ${styles.iconWarning}`}>
+              <QuizIcon size={22} />
             </div>
             <h4>Làm Quiz</h4>
             <p>Kiểm tra trí nhớ</p>
           </Link>
-          <Link href="/vocabulary" className={`${styles.toolCard} card-minimal`}>
-            <div className={`${styles.toolIcon} ${styles.stationIconSecondary}`}>
-              <BookIcon size={24} />
+          <Link href="/vocabulary" className={`${styles.toolCard} card-glow`}>
+            <div className={`${styles.toolIcon} ${styles.iconSecondary}`}>
+              <BookIcon size={22} />
             </div>
             <h4>Từ điển</h4>
             <p>Khám phá kho từ</p>
           </Link>
-          <Link href="/notebook" className={`${styles.toolCard} card-minimal`}>
-            <div className={`${styles.toolIcon} ${styles.stationIconSuccess}`}>
-              <NotebookIcon size={24} />
+          <Link href="/notebook" className={`${styles.toolCard} card-glow`}>
+            <div className={`${styles.toolIcon} ${styles.iconSuccess}`}>
+              <NotebookIcon size={22} />
             </div>
             <h4>Sổ Tay Lỗi</h4>
             <p>Ôn từ hay quên</p>

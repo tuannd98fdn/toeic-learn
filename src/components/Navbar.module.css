@@ -1,37 +1,45 @@
+/* ============================================
+   Mobile Bottom Nav (default)
+   ============================================ */
 .navbar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 72px;
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--border);
   z-index: 1000;
-  padding: 0 8px;
-  box-shadow: var(--shadow-md);
+  padding: 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.logoArea {
+/* Hide desktop-only elements on mobile */
+.logoArea,
+.toggleBtn,
+.bottomArea,
+.navList,
+.resizer,
+.indicator {
   display: none;
 }
 
-.toggleBtn {
-  display: none;
-}
-
-.navList {
+/* ============================================
+   Mobile Nav List (visible by default)
+   ============================================ */
+.mobileNavList {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-end;
   height: 100%;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 4px;
 }
 
-.navItem {
+.mobileNavItem {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -39,22 +47,22 @@
   padding: 6px 0;
 }
 
-.navLink {
+.mobileNavLink {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
   width: 100%;
   height: 100%;
-  color: var(--text-secondary);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-tertiary);
+  transition: color 0.2s ease;
   position: relative;
   text-decoration: none;
   border-radius: var(--radius-md);
 }
 
-.iconWrapper {
+.mobileIconWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,55 +70,94 @@
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.label {
-  font-size: 0.75rem;
+.mobileLabel {
+  font-size: 0.65rem;
   font-weight: 600;
+  letter-spacing: 0.3px;
   transition: color 0.2s ease;
 }
 
-.navLink:hover {
-  background: var(--surface-hover);
-  color: var(--foreground);
+.mobileNavLink:active {
+  transform: scale(0.92);
 }
 
-.navLink:active {
-  transform: scale(0.96);
-}
-
-.active {
+/* Mobile active state */
+.mobileActive {
   color: var(--primary);
 }
 
-.active .iconWrapper {
+.mobileActive .mobileIconWrapper {
+  transform: translateY(-1px);
+}
+
+.mobileActive .mobileLabel {
+  font-weight: 700;
   color: var(--primary);
+}
+
+/* Mobile center FAB — raised "Học" button */
+.mobileCenter {
+  position: relative;
+  flex: 1.2;
+}
+
+.mobileFab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 6px;
+  gap: 2px;
+}
+
+.mobileFab .mobileIconWrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.4);
+  position: relative;
+  top: -10px;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s ease;
+}
+
+.mobileFab:active .mobileIconWrapper {
+  transform: scale(0.9);
+}
+
+.mobileFab .mobileLabel {
+  color: var(--primary);
+  font-weight: 700;
+  margin-top: -6px;
+}
+
+.mobileActive.mobileFab .mobileIconWrapper {
+  box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.5), var(--glow-primary);
   transform: translateY(-2px);
 }
 
-.active .label {
-  color: var(--primary);
-  font-weight: 700;
-}
-
-.badge {
+/* Mobile badge — dot */
+.mobileBadge {
   position: absolute;
-  top: -6px;
-  right: -10px;
+  top: -3px;
+  right: -6px;
+  width: 8px;
+  height: 8px;
   background: var(--danger);
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 12px;
-  border: 2px solid var(--surface);
-  box-shadow: var(--shadow-sm);
-  letter-spacing: 0.5px;
+  border-radius: 50%;
+  border: 2px solid var(--glass-bg);
+  font-size: 0;
+  line-height: 0;
 }
 
-.indicator {
-  display: none;
-}
-
-/* Desktop Sidebar styles */
+/* ============================================
+   Desktop Sidebar (min-width: 860px)
+   ============================================ */
 @media (min-width: 860px) {
   .navbar {
     bottom: auto;
@@ -119,12 +166,12 @@
     height: 100vh;
     border-top: none;
     border-right: 1px solid var(--border);
-    padding: 32px 20px;
+    padding: 28px 16px;
     box-shadow: var(--shadow-md);
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    gap: 24px;
+    transition: width 0.3s var(--ease-out-expo);
   }
 
   .resizing {
@@ -132,6 +179,7 @@
   }
 
   .resizer {
+    display: block;
     position: absolute;
     top: 0;
     right: -3px;
@@ -145,12 +193,31 @@
 
   .resizer:hover, .resizer:active {
     background-color: var(--primary);
+    opacity: 0.6;
+  }
+
+  /* Hide mobile nav on desktop */
+  .mobileNavList {
+    display: none;
+  }
+
+  /* Show desktop nav */
+  .navList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 4px;
+    height: auto;
+    flex: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .bottomArea {
     display: flex;
     justify-content: flex-end;
-    padding: 0 12px;
+    padding: 0 8px;
   }
 
   .toggleBtn {
@@ -160,7 +227,7 @@
     border-radius: 8px;
     background: transparent;
     border: none;
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -172,6 +239,7 @@
     background: var(--surface-hover);
   }
 
+  /* --- Collapsed State --- */
   .collapsed .logoText,
   .collapsed .label,
   .collapsed .badge {
@@ -179,12 +247,12 @@
   }
 
   .collapsed .logoArea {
-    padding: 0 0 24px 0;
+    padding: 0 0 16px 0;
     justify-content: center;
   }
 
   .collapsed .navLink {
-    padding: 14px 0;
+    padding: 12px 0;
     justify-content: center;
   }
   
@@ -193,26 +261,24 @@
     padding: 0;
   }
 
+  /* --- Logo Area --- */
   .logoArea {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 0 12px 24px 12px;
+    padding: 0 8px 20px 8px;
     border-bottom: 1px solid var(--border);
   }
 
   .logoIcon {
     width: 40px;
     height: 40px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-    color: #ffffff;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    font-size: 1.4rem;
+    flex-shrink: 0;
+    overflow: hidden;
   }
 
   .logoText {
@@ -221,7 +287,7 @@
   }
 
   .brandName {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: var(--foreground);
     line-height: 1.2;
@@ -229,20 +295,13 @@
   }
 
   .brandSub {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
     font-weight: 600;
     letter-spacing: 0.5px;
   }
 
-  .navList {
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 8px;
-    height: auto;
-    flex: 1;
-  }
-
+  /* --- Nav Items --- */
   .navItem {
     width: 100%;
     height: auto;
@@ -251,31 +310,59 @@
   }
 
   .navLink {
+    display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: flex-start;
-    gap: 16px;
-    padding: 14px 16px;
+    gap: 14px;
+    padding: 11px 14px;
     border-radius: var(--radius-md);
     height: auto;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    position: relative;
     border: 1px solid transparent;
+  }
+
+  .iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
   }
 
   .navLink:hover {
     background: var(--surface-hover);
+    color: var(--foreground);
   }
 
+  .navLink:hover .iconWrapper {
+    transform: scale(1.05);
+  }
+
+  /* Active state — glow */
   .active {
     background: var(--primary-light);
     color: var(--primary);
     position: relative;
+    box-shadow: var(--glow-primary);
   }
 
   .active::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 8px;
-    bottom: 8px;
+    top: 6px;
+    bottom: 6px;
     width: 3px;
     border-radius: 0 3px 3px 0;
     background: var(--primary);
@@ -285,10 +372,13 @@
     background: var(--primary-light);
   }
 
-  .label {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
+  .active .iconWrapper {
+    color: var(--primary);
+  }
+
+  .active .label {
+    color: var(--primary);
+    font-weight: 700;
   }
 
   .badge {
@@ -296,6 +386,16 @@
     top: 0;
     right: 0;
     margin-left: auto;
-    border: none;
+    background: var(--danger);
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .indicator {
+    display: none;
   }
 }
