@@ -20,6 +20,7 @@ import {
   ArrowRightIcon,
   CompassIcon,
   TargetIcon,
+  LightbulbIcon,
 } from '@/components/icons/AppIcons';
 import styles from './page.module.css';
 
@@ -372,12 +373,19 @@ export default function Home() {
             <h4>Từ điển</h4>
             <p>Khám phá kho từ</p>
           </Link>
+          <Link href="/tips" className={`${styles.toolCard} card-glow`}>
+            <div className={`${styles.toolIcon} ${styles.iconInfo}`}>
+              <LightbulbIcon size={22} />
+            </div>
+            <h3>Mẹo thi</h3>
+            <p>Chiến thuật làm bài</p>
+          </Link>
           <Link href="/notebook" className={`${styles.toolCard} card-glow`}>
             <div className={`${styles.toolIcon} ${styles.iconSuccess}`}>
               <NotebookIcon size={22} />
             </div>
-            <h4>Sổ Tay Lỗi</h4>
-            <p>Ôn từ hay quên</p>
+            <h3>Sổ tay lỗi</h3>
+            <p>Khắc phục điểm yếu</p>
           </Link>
         </div>
       </section>

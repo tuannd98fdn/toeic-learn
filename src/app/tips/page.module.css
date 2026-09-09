@@ -1,0 +1,176 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.headerLeft h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, var(--primary), #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  gap: 0.75rem;
+}
+
+.searchIcon {
+  color: var(--text-tertiary);
+}
+
+.searchInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.searchInput::placeholder {
+  color: var(--text-tertiary);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.tabBtn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.tabBtn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.tabBtn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.tipsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.tipCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tipHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tipBadge {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.tipTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.tipContent {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.tipExamples {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent);
+}
+
+.tipExamples strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.tipExamples ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+}
+
+.tipExamples li {
+  margin-bottom: 0.5rem;
+}
+.tipExamples li:last-child {
+  margin-bottom: 0;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  text-align: center;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px dashed var(--border-color);
+}
