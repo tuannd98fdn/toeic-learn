@@ -12,6 +12,8 @@ import {
 import { useSearchParams } from 'next/navigation';
 import { Part5Question, Part5DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import { useLeaveWarning } from '@/hooks/useLeaveWarning';
+import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
@@ -48,6 +50,7 @@ function Part5SpeedTrainer() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const { addMistake } = useMistakeNotebook();
+  useLeaveWarning(currentIndex > 0 && !isFinished);
 
   useEffect(() => {
     // Client-side initialization
@@ -167,9 +170,7 @@ function Part5SpeedTrainer() {
         return prev + 1;
       } else {
         setIsFinished(true);
-        // We use a functional state update to access the latest score if needed, 
-        // but we just check score from closure. Since it might be stale, we use a ref or just rely on the effect.
-        // Actually, we can check it in the render block instead.
+        storage.set(`progress_${testId}_part5`, true);
         return prev;
       }
     });

@@ -17,6 +17,7 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
   const [loadedQuestions, setLoadedQuestions] = useState<LoadedQuestion[]>([]);
   const [loading, setLoading] = useState(true);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
+  const [filterPart, setFilterPart] = useState<string>('all');
 
   useEffect(() => {
     const loadData = async () => {
@@ -59,10 +60,33 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
     p7: 'Part 7: Reading Comprehension',
   };
 
+  const filteredQuestions = filterPart === 'all' 
+    ? loadedQuestions 
+    : loadedQuestions.filter(q => q.part === filterPart);
+
   return (
-    <div className={styles.wordGrid}>
-      {loadedQuestions.map(({ mistakeId, wrongCount, testId, part, qData }) => {
-        const testName = testId === 'ets2022_test1' ? 'ETS 2022 Test 1' : testId;
+    <div>
+      <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <label style={{ fontSize: '0.9rem', fontWeight: 600 }}>Lọc theo Part:</label>
+        <select 
+          value={filterPart}
+          onChange={(e) => setFilterPart(e.target.value)}
+          style={{ padding: '0.5rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-primary)', color: 'var(--foreground)' }}
+        >
+          <option value="all">Tất cả</option>
+          <option value="part1">Part 1</option>
+          <option value="part2">Part 2</option>
+          <option value="part3">Part 3</option>
+          <option value="part4">Part 4</option>
+          <option value="part5">Part 5</option>
+          <option value="part6">Part 6</option>
+          <option value="part7">Part 7</option>
+        </select>
+      </div>
+
+      <div className={styles.wordGrid}>
+        {filteredQuestions.map(({ mistakeId, wrongCount, testId, part, qData }) => {
+          const testName = testId === 'ets2022_test1' ? 'ETS 2022 Test 1' : testId;
         const m = mistakes[mistakeId];
         const due = m?.nextReviewDate ? isDueForReview(m.nextReviewDate) : false;
         
@@ -130,6 +154,7 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
           questionContext={tutorContext}
         />
       )}
+    </div>
     </div>
   );
 }

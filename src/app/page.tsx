@@ -6,6 +6,7 @@ import Link from 'next/link';
 import StreakCounter from '@/components/StreakCounter';
 import MascotSVG from '@/components/illustrations/MascotSVG';
 import { useStreak } from '@/hooks/useStreak';
+import { storage } from '@/utils/storage';
 import { StudyPlan, getStudyPlan, toggleTaskCompleted } from '@/utils/studyPlanEngine';
 import {
   CardsIcon,
@@ -37,6 +38,7 @@ export default function Home() {
     p1: number; p2: number; p3: number; p4: number;
     p5: number; p6: number; p7: number;
   } | null>(null);
+  const [partProgress, setPartProgress] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     if (!selectedTest) return;
@@ -70,6 +72,13 @@ export default function Home() {
             p1: d1.length, p2: d2.length, p3: p3Questions, p4: p4Questions,
             p5: d5.length, p6: p6Questions, p7: p7Questions,
           });
+
+          // Check progress for each part
+          const progress: Record<string, boolean> = {};
+          [1, 2, 3, 4, 5, 6, 7].forEach(part => {
+            progress[`part${part}`] = storage.get<boolean>(`progress_${selectedTest}_part${part}`, false);
+          });
+          setPartProgress(progress);
         }
       } catch (err) {
         console.error("Failed to load stats for test", err);
@@ -262,10 +271,11 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.stationActions}>
-              <Link href={`/part1?test=${selectedTest}`} className="btn-secondary btn-sm">Part 1</Link>
-              <Link href={`/part2?test=${selectedTest}`} className="btn-secondary btn-sm">Part 2</Link>
-              <Link href={`/part3?test=${selectedTest}`} className="btn-secondary btn-sm">Part 3</Link>
-              <Link href={`/part4?test=${selectedTest}`} className="btn-secondary btn-sm">Part 4</Link>
+              {[1, 2, 3, 4].map(part => (
+                <Link key={part} href={`/part${part}?test=${selectedTest}`} className={`btn-secondary btn-sm ${partProgress[`part${part}`] ? styles.partCompleted : ''}`}>
+                  Part {part} {partProgress[`part${part}`] && '✓'}
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -281,9 +291,11 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.stationActions}>
-              <Link href={`/part5?test=${selectedTest}`} className="btn-secondary btn-sm">Part 5</Link>
-              <Link href={`/part6?test=${selectedTest}`} className="btn-secondary btn-sm">Part 6</Link>
-              <Link href={`/part7?test=${selectedTest}`} className="btn-secondary btn-sm">Part 7</Link>
+              {[5, 6, 7].map(part => (
+                <Link key={part} href={`/part${part}?test=${selectedTest}`} className={`btn-secondary btn-sm ${partProgress[`part${part}`] ? styles.partCompleted : ''}`}>
+                  Part {part} {partProgress[`part${part}`] && '✓'}
+                </Link>
+              ))}
             </div>
           </div>
 

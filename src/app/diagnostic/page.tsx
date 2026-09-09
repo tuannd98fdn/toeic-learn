@@ -6,6 +6,7 @@ import Confetti from '@/components/Confetti';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { storage } from '@/utils/storage';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import {
   calculateScaledScore,
   getCefrLevel,
@@ -77,6 +78,7 @@ export default function DiagnosticPage() {
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
   const { addMistake } = useMistakeNotebook();
+  useLeaveWarning(Object.keys(userAnswers).length > 0 && !isSubmitted);
 
   // Load curated 28 questions
   useEffect(() => {

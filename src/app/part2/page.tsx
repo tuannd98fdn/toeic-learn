@@ -7,7 +7,10 @@ import { Part2Question, Part2DataSchema } from '@/schema/toeic';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import Confetti from '@/components/Confetti';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import { useLeaveWarning } from '@/hooks/useLeaveWarning';
+import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+import { HeadphonesIcon } from '@/components/icons/AppIcons';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
@@ -42,6 +45,7 @@ function Part2Trainer() {
   const [dictationChecked, setDictationChecked] = useState(false);
 
   const { addMistake } = useMistakeNotebook();
+  useLeaveWarning(currentIndex > 0 && !isFinished);
 
   useEffect(() => {
     const fetchPart2 = async () => {
@@ -67,23 +71,10 @@ function Part2Trainer() {
     fetchPart2();
   }, [testId]);
 
-  if (loading) {
-    return <div className={styles.loading}>Đang nạp đề Part 2 Question-Response...</div>;
-  }
-
-  if (error || questions.length === 0) {
-    return (
-      <div className={styles.errorState}>
-        <p>⚠️ {error || 'Không tìm thấy câu hỏi Part 2 nào.'}</p>
-        <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
-      </div>
-    );
-  }
-
-  const currentQ = questions[currentIndex];
+  const currentQ = questions[currentIndex] || null;
 
   const handleSelectOption = (letter: string) => {
-    if (isAnswered) return;
+    if (isAnswered || !currentQ) return;
     setSelectedAnswer(letter);
     setIsAnswered(true);
 
@@ -110,6 +101,7 @@ function Part2Trainer() {
       setDictationChecked(false);
     } else {
       setIsFinished(true);
+      storage.set(`progress_${testId}_part2`, true);
       if ((score / questions.length) >= 0.7) {
         setShowConfetti(true);
       }
@@ -128,26 +120,72 @@ function Part2Trainer() {
     setDictationChecked(false);
   };
 
+  // Keyboard Shortcuts for 10/10 UX
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+      if (isFinished || questions.length === 0 || tutorContext) return;
+
+      const key = e.key.toUpperCase();
+      if (!isAnswered) {
+        if (['A', 'B', 'C'].includes(key)) {
+          if (currentQ?.options && currentQ.options[key as keyof typeof currentQ.options]) {
+            handleSelectOption(key);
+          }
+        }
+      } else {
+        if (e.key === 'Enter' || e.key === 'ArrowRight') {
+          handleNext();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <div className="skeleton" style={{ height: 20, width: '40%', marginBottom: 12 }} />
+        <div className="skeleton" style={{ height: 12, width: '55%', marginBottom: 8 }} />
+        <div className="skeleton" style={{ height: 6, width: '100%', marginBottom: 24, borderRadius: 3 }} />
+        <div className="skeleton" style={{ height: 64, width: '100%', marginBottom: 16, borderRadius: 12 }} />
+        <div className="skeleton" style={{ height: 48, width: '100%', marginBottom: 8, borderRadius: 10 }} />
+        <div className="skeleton" style={{ height: 48, width: '100%', marginBottom: 8, borderRadius: 10 }} />
+        <div className="skeleton" style={{ height: 48, width: '100%', borderRadius: 10 }} />
+      </div>
+    );
+  }
+
+  if (error || questions.length === 0) {
+    return (
+      <div className={styles.errorState}>
+        <p>⚠️ {error || 'Không tìm thấy câu hỏi Part 2 nào.'}</p>
+        <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
+      </div>
+    );
+  }
+
   if (isFinished) {
     const percentage = Math.round((score / questions.length) * 100);
     return (
       <div className={styles.container}>
         <Confetti show={showConfetti} />
-        <div className={styles.resultsCard}>
-          <span className={styles.resultsIcon}>{percentage >= 70 ? '' : ''}</span>
-          <h1 className={styles.resultsTitle}>Hoàn thành Part 2 Question-Response!</h1>
-          <div className={styles.scoreBanner}>
-            Kết quả: {score} / {questions.length} ({percentage}%)
+        <div className={styles.resultsCard} style={{ margin: '40px auto', maxWidth: 600, padding: 40, textAlign: 'center', backgroundColor: 'var(--glass-bg)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
+          <span style={{ fontSize: '4rem', display: 'block', marginBottom: 16 }}>{percentage >= 70 ? '🎉' : '📚'}</span>
+          <h1 style={{ fontSize: '1.8rem', marginBottom: 16, color: 'var(--foreground)' }}>Hoàn thành Part 2 Question-Response!</h1>
+          <div style={{ backgroundColor: 'var(--surface-hover)', padding: '16px 24px', borderRadius: 12, display: 'inline-block', marginBottom: 24 }}>
+            <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>Kết quả: {score} / {questions.length} ({percentage}%)</span>
           </div>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '480px' }}>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 32, lineHeight: 1.6 }}>
             {percentage >= 80
               ? 'Phản xạ bắt Wh-question và câu hỏi Yes/No gián tiếp của bạn rất xuất sắc!'
               : 'Hãy chú ý bẫy lặp từ (same-word trap) và câu trả lời gián tiếp (indirect answers)!'}
           </p>
 
-          <div className={styles.resultsActions}>
-            <button onClick={handleRestart} className={styles.nextBtn}>Làm lại đề này</button>
-            <Link href="/" className={styles.secondaryBtn}>Về Dashboard</Link>
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
+            <button onClick={handleRestart} className="btn-secondary">Làm lại đề này 🔄</button>
+            <Link href="/" className="btn-primary">Về Dashboard 🏠</Link>
           </div>
         </div>
       </div>
@@ -178,7 +216,7 @@ function Part2Trainer() {
       <div className={styles.card}>
         <div className={styles.promptSection}>
           <div>
-            <div className={styles.promptTitle}>🎧 Lắng nghe câu hỏi và 3 câu trả lời</div>
+            <div className={styles.promptTitle}><HeadphonesIcon size={18} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />Lắng nghe câu hỏi và 3 câu trả lời</div>
             <div className={styles.promptHint}>Chọn câu đáp lại hợp lý nhất trong ngữ cảnh giao tiếp công việc</div>
           </div>
           <button
@@ -203,7 +241,9 @@ function Part2Trainer() {
               value={dictationText}
               onChange={(e) => setDictationText(e.target.value)}
               placeholder="Gõ những gì bạn nghe được vào đây (nháp)..."
-              style={{ width: '100%', minHeight: '100px', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)', resize: 'vertical' }}
+              style={{ width: '100%', minHeight: '100px', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border)', backgroundColor: 'var(--surface)', color: 'var(--foreground)', resize: 'vertical', fontSize: '1rem', lineHeight: '1.5', outline: 'none', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)' }}
+              onFocus={(e) => e.target.style.borderColor = 'var(--primary-color)'}
+              onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
             />
             <button
               type="button"

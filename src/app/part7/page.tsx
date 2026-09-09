@@ -7,6 +7,8 @@ import { ClockIcon } from '@/components/icons/AppIcons';
 import { useSearchParams } from 'next/navigation';
 import { Part7PassageSet, Part7DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import { useLeaveWarning } from '@/hooks/useLeaveWarning';
+import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
@@ -33,6 +35,9 @@ function Part7Trainer() {
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+  const [totalScore, setTotalScore] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   const [currentSetScore, setCurrentSetScore] = useState(0);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
@@ -45,6 +50,7 @@ function Part7Trainer() {
   const [isHighlightMode, setIsHighlightMode] = useState(false);
 
   const { addMistake } = useMistakeNotebook();
+  useLeaveWarning(Object.keys(answers).length > 0 && !isSubmitted);
 
   const handleTextHighlight = () => {
     if (!isHighlightMode) return;
@@ -126,45 +132,11 @@ function Part7Trainer() {
     
     fetchPassage();
   }, [testId]);
-
-  if (loading) {
-    return (
-      <div className={styles.pageContainer} style={{ paddingTop: '20px' }}>
-        <div className={styles.skeletonContainer}>
-          <div className={styles.skeletonCard} style={{ height: '600px' }}>
-            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ marginTop: '20px' }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLineShort}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ marginTop: '10px' }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLineShort}`} />
-          </div>
-          <div className={styles.skeletonCard} style={{ height: '400px' }}>
-            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16, marginTop: '20px' }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div className={styles.loading} style={{color: 'var(--danger)'}}>Lỗi: {error}</div>;
-  }
-
-  if (!passageSet) {
-    return <div className={styles.loading}>Loading Passage...</div>;
-  }
-
-  const currentQuestion = passageSet.questions[activeQuestionIndex];
-  const allAnswered = Object.keys(answers).length === passageSet.questions.length;
+   const currentQuestion = passageSet?.questions[activeQuestionIndex];
+  const allAnswered = passageSet ? Object.keys(answers).length === passageSet.questions.length : false;
 
   const handleSelectAnswer = (questionId: string, optionKey: string) => {
-    if (isSubmitted) return;
+    if (isSubmitted || !passageSet) return;
     setAnswers(prev => ({ ...prev, [questionId]: optionKey }));
     
     // Auto move to next question if not on the last one
@@ -200,7 +172,40 @@ function Part7Trainer() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [passageSet, activeQuestionIndex, isSubmitted]); // eslint-disable-line react-hooks/exhaustive-deps
+  });
+
+  if (loading) {
+    return (
+      <div className={styles.pageContainer} style={{ paddingTop: '20px' }}>
+        <div className={styles.skeletonContainer}>
+          <div className={styles.skeletonCard} style={{ height: '600px' }}>
+            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ marginTop: '20px' }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLineShort}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ marginTop: '10px' }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLineShort}`} />
+          </div>
+          <div className={styles.skeletonCard} style={{ height: '400px' }}>
+            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16, marginTop: '20px' }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className={styles.loading} style={{color: 'var(--danger)'}}>Lỗi: {error}</div>;
+  }
+
+  if (!passageSet) {
+    return <div className={styles.loading}>Loading Passage...</div>;
+  }
 
   const handleSubmit = () => {
     if (isSubmitted) return;
@@ -234,14 +239,24 @@ function Part7Trainer() {
 
   const handleNextPassage = () => {
     if (currentPassageIndex < passageSets.length - 1) {
+      setTotalScore(prev => prev + currentSetScore);
+      setTotalQuestions(prev => prev + passageSet.questions.length);
       setCurrentPassageIndex(prev => prev + 1);
       setAnswers({});
       setIsSubmitted(false);
       setShowConfetti(false);
       setActiveQuestionIndex(0);
     } else {
-      // Completed all passages
-      window.location.href = '/';
+      // Show results
+      const finalTotal = totalScore + currentSetScore;
+      const finalQuestions = totalQuestions + passageSet.questions.length;
+      setTotalScore(finalTotal);
+      setTotalQuestions(finalQuestions);
+      setIsFinished(true);
+      storage.set(`progress_${testId}_part7`, true);
+      if ((finalTotal / finalQuestions) >= 0.7) {
+        setShowConfetti(true);
+      }
     }
   };
 
@@ -280,14 +295,45 @@ function Part7Trainer() {
     );
   };
 
+  if (isFinished) {
+    const percentage = Math.round((totalScore / totalQuestions) * 100);
+    return (
+      <div className={styles.pageContainer}>
+        <Confetti show={showConfetti} />
+        <div className={styles.resultsCard} style={{ margin: '40px auto', maxWidth: 600, padding: 40, textAlign: 'center', backgroundColor: 'var(--glass-bg)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
+          <span style={{ fontSize: '4rem', display: 'block', marginBottom: 16 }}>{percentage >= 70 ? '🎉' : '📚'}</span>
+          <h1 style={{ fontSize: '1.8rem', marginBottom: 16, color: 'var(--foreground)' }}>Hoàn thành Part 7 Reading Comprehension!</h1>
+          <div style={{ backgroundColor: 'var(--surface-hover)', padding: '16px 24px', borderRadius: 12, display: 'inline-block', marginBottom: 24 }}>
+            <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>Kết quả: {totalScore} / {totalQuestions} ({percentage}%)</span>
+          </div>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 32, lineHeight: 1.6 }}>
+            {percentage >= 80
+              ? 'Khả năng đọc hiểu và tìm kiếm thông tin của bạn rất tốt! Hãy tiếp tục rèn luyện tốc độ đọc.'
+              : 'Part 7 yêu cầu kỹ năng skimming và scanning. Bạn nên đọc lướt câu hỏi trước rồi mới tìm đáp án trong bài!'}
+          </p>
+
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
+            <button onClick={() => window.location.reload()} className="btn-secondary">Làm lại đề này 🔄</button>
+            <Link href="/" className="btn-primary">Về Dashboard 🏠</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.pageContainer}>
       <Confetti show={showConfetti} />
       
       <header className={styles.header}>
-        <div>
-          <h1 className={styles.title}>Part 7: Reading Comprehension</h1>
-          <p className={styles.subtitle}>{passageSet.source || 'ETS Test'} - {passageSet.type} Passage ({currentPassageIndex + 1}/{passageSets.length})</p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <Link href="/" className={styles.backBtn} style={{ color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+            ← Về Dashboard
+          </Link>
+          <div>
+            <h1 className={styles.title} style={{ margin: 0, fontSize: '1.25rem' }}>Part 7: Reading Comprehension</h1>
+            <p className={styles.subtitle} style={{ margin: 0, fontSize: '0.875rem' }}>{passageSet.source || 'ETS Test'} - {passageSet.type} Passage ({currentPassageIndex + 1}/{passageSets.length})</p>
+          </div>
         </div>
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
@@ -312,7 +358,6 @@ function Part7Trainer() {
             <span style={{ fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '4px' }}><ClockIcon size={16} /> Ép thời gian</span>
             <div className={`${styles.toggleSwitch} ${isTimeAttackEnabled ? styles.toggleSwitchOn : ''}`} />
           </div>
-          <Link href="/" className={styles.backBtn}>Thoát</Link>
         </div>
       </header>
 

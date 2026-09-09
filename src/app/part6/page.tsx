@@ -6,6 +6,8 @@ import Confetti from '@/components/Confetti';
 import { useSearchParams } from 'next/navigation';
 import { NormalizedPart6Passage, Part6DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import { useLeaveWarning } from '@/hooks/useLeaveWarning';
+import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
@@ -32,11 +34,15 @@ function Part6Trainer() {
   const [activeBlank, setActiveBlank] = useState<number>(1);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+  const [totalScore, setTotalScore] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   const [currentSetScore, setCurrentSetScore] = useState(0);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
   const { addMistake } = useMistakeNotebook();
+  useLeaveWarning(Object.keys(answers).length > 0 && !isSubmitted);
 
   useEffect(() => {
     const fetchPassage = async () => {
@@ -78,18 +84,6 @@ function Part6Trainer() {
     fetchPassage();
   }, [testId]);
 
-  if (loading) {
-    return <div className={styles.loading}>Đang tải dữ liệu bài thi...</div>;
-  }
-
-  if (error) {
-    return <div className={styles.loading} style={{color: 'var(--danger)'}}>Lỗi: {error}</div>;
-  }
-
-  if (!passage) {
-    return <div className={styles.loading}>Loading Passage...</div>;
-  }
-
   const handleSelectAnswer = (blankNumber: number, optionKey: string) => {
     if (isSubmitted) return;
     setAnswers(prev => ({ ...prev, [blankNumber]: optionKey }));
@@ -103,7 +97,7 @@ function Part6Trainer() {
   const handleSubmit = () => {
     setIsSubmitted(true);
     let score = 0;
-    passage.questions.forEach((q) => {
+    passage?.questions.forEach((q) => {
       if (answers[q.blankNumber] === q.correctAnswer) {
         score++;
       } else {
@@ -117,23 +111,69 @@ function Part6Trainer() {
     });
     
     setCurrentSetScore(score);
-    if (score === passage.questions.length) {
+    setTotalScore(prev => prev + score);
+    if (score === (passage?.questions.length || 0)) {
       setShowConfetti(true);
     }
   };
 
   const handleNextPassage = () => {
     if (currentPassageIndex < passages.length - 1) {
+      setTotalQuestions(prev => prev + (passage?.questions.length || 0));
       setCurrentPassageIndex(prev => prev + 1);
       setAnswers({});
       setIsSubmitted(false);
       setShowConfetti(false);
       setActiveBlank(1);
     } else {
-      // Completed all passages
-      window.location.href = '/';
+      // Show results
+      const finalTotal = totalScore;
+      const finalQuestions = totalQuestions + (passage?.questions.length || 0);
+      setTotalScore(finalTotal);
+      setTotalQuestions(finalQuestions);
+      setIsFinished(true);
+      storage.set(`progress_${testId}_part6`, true);
+      if ((finalTotal / finalQuestions) >= 0.7) {
+        setShowConfetti(true);
+      }
     }
   };
+
+  // Keyboard Shortcuts for 10/10 UX
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+      if (!passage || isSubmitted) return;
+
+      const key = e.key.toUpperCase();
+      const currentQ = passage.questions[activeBlank - 1];
+
+      if (['A', 'B', 'C', 'D'].includes(key)) {
+        if (currentQ?.options && currentQ.options[key as keyof typeof currentQ.options]) {
+          handleSelectAnswer(activeBlank, key);
+        }
+      } else if (e.key === 'ArrowLeft') {
+        setActiveBlank(prev => Math.max(1, prev - 1));
+      } else if (e.key === 'ArrowRight') {
+        setActiveBlank(prev => Math.min(4, prev + 1));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
+
+  if (loading) {
+    return <div className={styles.loading}>Đang tải dữ liệu bài thi...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.loading} style={{color: 'var(--danger)'}}>Lỗi: {error}</div>;
+  }
+
+  if (!passage) {
+    return <div className={styles.loading}>Loading Passage...</div>;
+  }
 
   const renderPassage = () => {
     let content = passage.content;
@@ -191,16 +231,46 @@ function Part6Trainer() {
   const currentQuestion = passage.questions[activeBlank - 1];
   const allAnswered = Object.keys(answers).length === 4;
 
+  if (isFinished) {
+    const percentage = Math.round((totalScore / totalQuestions) * 100);
+    return (
+      <div className={styles.pageContainer}>
+        <Confetti show={showConfetti} />
+        <div className={styles.resultsCard} style={{ margin: '40px auto', maxWidth: 600, padding: 40, textAlign: 'center', backgroundColor: 'var(--glass-bg)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
+          <span style={{ fontSize: '4rem', display: 'block', marginBottom: 16 }}>{percentage >= 70 ? '🎉' : '📚'}</span>
+          <h1 style={{ fontSize: '1.8rem', marginBottom: 16, color: 'var(--foreground)' }}>Hoàn thành Part 6 Text Completion!</h1>
+          <div style={{ backgroundColor: 'var(--surface-hover)', padding: '16px 24px', borderRadius: 12, display: 'inline-block', marginBottom: 24 }}>
+            <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>Kết quả: {totalScore} / {totalQuestions} ({percentage}%)</span>
+          </div>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 32, lineHeight: 1.6 }}>
+            {percentage >= 80
+              ? 'Kỹ năng điền từ và đọc hiểu ngữ cảnh của bạn rất tốt! Hãy tiếp tục duy trì nhé.'
+              : 'Part 6 đòi hỏi hiểu rõ ngữ cảnh của toàn đoạn văn. Đừng chỉ nhìn vào câu chứa chỗ trống, hãy đọc cả câu trước và sau nó!'}
+          </p>
+
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
+            <button onClick={() => window.location.reload()} className="btn-secondary">Làm lại đề này 🔄</button>
+            <Link href="/" className="btn-primary">Về Dashboard 🏠</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.pageContainer}>
       <Confetti show={showConfetti} />
       
       <header className={styles.header}>
-        <div>
-          <h1 className={styles.title}>Part 6: Text Completion</h1>
-          <p className={styles.subtitle}>{passage.source} - {passage.type} ({currentPassageIndex + 1}/{passages.length})</p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <Link href="/" className={styles.backBtn} style={{ color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+            ← Về Dashboard
+          </Link>
+          <div>
+            <h1 className={styles.title} style={{ margin: 0, fontSize: '1.25rem' }}>Part 6: Text Completion</h1>
+            <p className={styles.subtitle} style={{ margin: 0, fontSize: '0.875rem' }}>{passage.source} - {passage.type} ({currentPassageIndex + 1}/{passages.length})</p>
+          </div>
         </div>
-        <Link href="/" className={styles.backBtn}>Thoát</Link>
       </header>
 
       <div className={styles.splitView}>

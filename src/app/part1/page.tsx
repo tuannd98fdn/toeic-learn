@@ -17,6 +17,8 @@ import {
   FileTextIcon,
 } from '@/components/icons/AppIcons';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import { useLeaveWarning } from '@/hooks/useLeaveWarning';
+import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
@@ -47,6 +49,7 @@ function Part1Trainer() {
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
   const { addMistake } = useMistakeNotebook();
+  useLeaveWarning(currentIndex > 0 && !isFinished);
 
   useEffect(() => {
     const fetchPart1 = async () => {
@@ -72,23 +75,10 @@ function Part1Trainer() {
     fetchPart1();
   }, [testId]);
 
-  if (loading) {
-    return <div className={styles.loading}>Đang nạp đề Part 1 Photographs... <HeadphonesIcon size={18} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} /></div>;
-  }
-
-  if (error || questions.length === 0) {
-    return (
-      <div className={styles.errorState}>
-        <p>⚠️ {error || 'Không tìm thấy câu hỏi Part 1 nào.'}</p>
-        <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
-      </div>
-    );
-  }
-
-  const currentQ = questions[currentIndex];
+  const currentQ = questions[currentIndex] || null;
 
   const handleSelectOption = (letter: string) => {
-    if (isAnswered) return;
+    if (isAnswered || !currentQ) return;
     setSelectedAnswer(letter);
     setIsAnswered(true);
 
@@ -113,6 +103,7 @@ function Part1Trainer() {
       setShowTranscript(false);
     } else {
       setIsFinished(true);
+      storage.set(`progress_${testId}_part1`, true);
       if ((score / questions.length) >= 0.7) {
         setShowConfetti(true);
       }
@@ -129,32 +120,74 @@ function Part1Trainer() {
     setShowConfetti(false);
   };
 
+  // Keyboard Shortcuts for 10/10 UX
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+      if (isFinished || questions.length === 0 || tutorContext) return;
+
+      const key = e.key.toUpperCase();
+      if (!isAnswered) {
+        if (['A', 'B', 'C', 'D'].includes(key)) {
+          if (currentQ?.options && currentQ.options[key as keyof typeof currentQ.options]) {
+            handleSelectOption(key);
+          }
+        }
+      } else {
+        if (e.key === 'Enter' || e.key === 'ArrowRight') {
+          handleNext();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <div className="skeleton" style={{ height: 20, width: '40%', marginBottom: 12 }} />
+        <div className="skeleton" style={{ height: 12, width: '60%', marginBottom: 8 }} />
+        <div className="skeleton" style={{ height: 6, width: '100%', marginBottom: 24, borderRadius: 3 }} />
+        <div className="skeleton" style={{ height: 260, width: '100%', marginBottom: 16, borderRadius: 12 }} />
+        <div className="skeleton" style={{ height: 48, width: '100%', marginBottom: 8, borderRadius: 10 }} />
+        <div className="skeleton" style={{ height: 48, width: '100%', marginBottom: 8, borderRadius: 10 }} />
+        <div className="skeleton" style={{ height: 48, width: '100%', marginBottom: 8, borderRadius: 10 }} />
+        <div className="skeleton" style={{ height: 48, width: '100%', borderRadius: 10 }} />
+      </div>
+    );
+  }
+
+  if (error || questions.length === 0) {
+    return (
+      <div className={styles.errorState}>
+        <p>⚠️ {error || 'Không tìm thấy câu hỏi Part 1 nào.'}</p>
+        <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
+      </div>
+    );
+  }
+
   if (isFinished) {
     const percentage = Math.round((score / questions.length) * 100);
     return (
       <div className={styles.container}>
         <Confetti show={showConfetti} />
-        <div className={styles.resultsCard}>
-          <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
-          <h2>Kết quả Part 1</h2>
-          <div className={styles.scoreCircle}>
-            <span className={styles.scoreText}>{score}/{questions.length}</span>
+        <div className={styles.resultsCard} style={{ margin: '40px auto', maxWidth: 600, padding: 40, textAlign: 'center', backgroundColor: 'var(--glass-bg)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
+          <span style={{ fontSize: '4rem', display: 'block', marginBottom: 16 }}>{percentage >= 70 ? '🎉' : '📚'}</span>
+          <h1 style={{ fontSize: '1.8rem', marginBottom: 16, color: 'var(--foreground)' }}>Hoàn thành Part 1 Photographs!</h1>
+          <div style={{ backgroundColor: 'var(--surface-hover)', padding: '16px 24px', borderRadius: 12, display: 'inline-block', marginBottom: 24 }}>
+            <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>Kết quả: {score} / {questions.length} ({percentage}%)</span>
           </div>
-          <p className={styles.feedback}>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 32, lineHeight: 1.6 }}>
             {percentage >= 80 ? 'Tuyệt vời! Bạn có kỹ năng quan sát rất nhạy bén.' :
              percentage >= 50 ? 'Khá tốt! Hãy chú ý kỹ hơn vào các chi tiết nhỏ trong hình nhé.' :
              'Đừng nản chí! Nghe nhiều sẽ giúp bạn quen với các từ vựng mô tả hình ảnh.'}
           </p>
-          <div className={styles.actions}>
-            <button onClick={handleRestart} className={styles.nextBtn}>
-              Làm lại đề này <RotateCcwIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
-            </button>
-            <Link href="/" className={styles.secondaryBtn}>
-              Về Dashboard <HomeIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
-            </Link>
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
+            <button onClick={handleRestart} className="btn-secondary">Làm lại đề này 🔄</button>
+            <Link href="/" className="btn-primary">Về Dashboard 🏠</Link>
           </div>
         </div>
-      </div>
       </div>
     );
   }

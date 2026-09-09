@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './PracticeFooter.module.css';
-import { SparklesIcon } from '@/components/icons/AppIcons';
+import { SparklesIcon, LightbulbIcon } from '@/components/icons/AppIcons';
+import { soundEffects } from '@/utils/soundEffects';
 
 interface PracticeFooterProps {
   isAnswered: boolean;
@@ -25,21 +26,32 @@ export default function PracticeFooter({
   const visibilityClass = isAnswered ? styles.footerVisible : styles.footerHidden;
   const stateClass = isCorrect ? styles.footerCorrect : styles.footerIncorrect;
 
-  // Keyboard shortcut for AI Tutor
+  // Play sound effect when answer is revealed
+  const prevAnswered = React.useRef(false);
+  React.useEffect(() => {
+    if (isAnswered && !prevAnswered.current) {
+      if (isCorrect) {
+        soundEffects.playCorrect();
+      } else {
+        soundEffects.playWrong();
+      }
+    }
+    prevAnswered.current = isAnswered;
+  }, [isAnswered, isCorrect]);
+
+  // Keyboard shortcut for AI Tutor (H key — works for both correct and incorrect)
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignore if user is typing in an input
       if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
       
-      // H key for "Hỏi Gia Sư AI"
-      if ((e.key === 'h' || e.key === 'H') && !isCorrect && onAITutor && isAnswered) {
+      if ((e.key === 'h' || e.key === 'H') && onAITutor && isAnswered) {
         onAITutor();
       }
     };
     
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isCorrect, onAITutor, isAnswered]);
+  }, [onAITutor, isAnswered]);
 
   return (
     <div className={`${styles.footer} ${visibilityClass} ${stateClass}`}>
@@ -53,9 +65,13 @@ export default function PracticeFooter({
       </div>
       
       <div className={styles.actionArea}>
-        {!isCorrect && onAITutor && (
-          <button className="btn-ai" onClick={onAITutor} type="button">
-            <SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI <span style={{ opacity: 0.7, fontSize: '0.85em', marginLeft: '2px' }}>(H)</span>
+        {onAITutor && (
+          <button className={isCorrect ? 'btn-secondary' : 'btn-ai'} onClick={onAITutor} type="button">
+            {isCorrect ? (
+              <><LightbulbIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hiểu sâu hơn <span style={{ opacity: 0.7, fontSize: '0.85em', marginLeft: '2px' }}>(H)</span></>
+            ) : (
+              <><SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI <span style={{ opacity: 0.7, fontSize: '0.85em', marginLeft: '2px' }}>(H)</span></>
+            )}
           </button>
         )}
         <button className={isCorrect ? 'btn-success' : 'btn-danger'} onClick={onNext} type="button" style={{ textTransform: 'uppercase', minWidth: '140px' }}>

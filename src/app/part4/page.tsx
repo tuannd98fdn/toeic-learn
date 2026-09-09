@@ -7,7 +7,10 @@ import { Part4Set, Part4DataSchema } from '@/schema/toeic';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import Confetti from '@/components/Confetti';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import { useLeaveWarning } from '@/hooks/useLeaveWarning';
+import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+import { MapPinIcon } from '@/components/icons/AppIcons';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
@@ -38,6 +41,7 @@ function Part4Trainer() {
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
   const { addMistake } = useMistakeNotebook();
+  useLeaveWarning(currentSetIndex > 0 && !isFinished);
 
   useEffect(() => {
     const fetchPart4 = async () => {
@@ -63,21 +67,10 @@ function Part4Trainer() {
     fetchPart4();
   }, [testId]);
 
-  if (loading) {
-    return <div className={styles.loading}>Đang nạp đề Part 4 Short Talks...</div>;
-  }
-
-  if (error || sets.length === 0) {
-    return (
-      <div className={styles.errorState}>
-        <p>⚠️ {error || 'Không tìm thấy bài nghe Part 4 nào.'}</p>
-        <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
-      </div>
-    );
-  }
-
-  const currentSet = sets[currentSetIndex];
+  const currentSet = sets[currentSetIndex] || null;
   const allQuestionsCount = sets.reduce((acc, s) => acc + s.questions.length, 0);
+
+  const isAllAnsweredInSet = currentSet ? currentSet.questions.every((q) => selectedAnswers[q.id]) : false;
 
   const handleSelectOption = (questionId: string, letter: string) => {
     if (isSubmitted) return;
@@ -87,10 +80,8 @@ function Part4Trainer() {
     }));
   };
 
-  const isAllAnsweredInSet = currentSet.questions.every((q) => selectedAnswers[q.id]);
-
   const handleSubmitSet = () => {
-    if (!isAllAnsweredInSet || isSubmitted) return;
+    if (!isAllAnsweredInSet || isSubmitted || !currentSet) return;
     setIsSubmitted(true);
 
     let setScore = 0;
@@ -119,6 +110,7 @@ function Part4Trainer() {
       setShowTranscript(false);
     } else {
       setIsFinished(true);
+      storage.set(`progress_${testId}_part4`, true);
       if ((totalScore / allQuestionsCount) >= 0.7) {
         setShowConfetti(true);
       }
@@ -135,26 +127,68 @@ function Part4Trainer() {
     setShowConfetti(false);
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+      if (isFinished || sets.length === 0 || tutorContext) return;
+
+      if (isSubmitted) {
+        if (e.key === 'Enter' || e.key === 'ArrowRight') {
+          handleNextSet();
+        }
+      } else if (isAllAnsweredInSet) {
+        if (e.key === 'Enter') {
+          handleSubmitSet();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <div className="skeleton" style={{ height: 20, width: '40%', marginBottom: 12 }} />
+        <div className="skeleton" style={{ height: 12, width: '55%', marginBottom: 8 }} />
+        <div className="skeleton" style={{ height: 6, width: '100%', marginBottom: 24, borderRadius: 3 }} />
+        <div className="skeleton" style={{ height: 64, width: '100%', marginBottom: 16, borderRadius: 12 }} />
+        <div className="skeleton" style={{ height: 80, width: '100%', marginBottom: 8, borderRadius: 10 }} />
+        <div className="skeleton" style={{ height: 80, width: '100%', marginBottom: 8, borderRadius: 10 }} />
+        <div className="skeleton" style={{ height: 80, width: '100%', borderRadius: 10 }} />
+      </div>
+    );
+  }
+
+  if (error || sets.length === 0) {
+    return (
+      <div className={styles.errorState}>
+        <p>⚠️ {error || 'Không tìm thấy bài nghe Part 4 nào.'}</p>
+        <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
+      </div>
+    );
+  }
+
   if (isFinished) {
     const percentage = Math.round((totalScore / allQuestionsCount) * 100);
     return (
       <div className={styles.container}>
         <Confetti show={showConfetti} />
-        <div className={styles.resultsCard}>
-          <span className={styles.resultsIcon}>{percentage >= 70 ? '🏆' : '💪'}</span>
-          <h1 className={styles.resultsTitle}>Hoàn thành Part 4 Short Talks!</h1>
-          <div className={styles.scoreBanner}>
-            Kết quả: {totalScore} / {allQuestionsCount} ({percentage}%)
+        <div className={styles.resultsCard} style={{ margin: '40px auto', maxWidth: 600, padding: 40, textAlign: 'center', backgroundColor: 'var(--glass-bg)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
+          <span style={{ fontSize: '4rem', display: 'block', marginBottom: 16 }}>{percentage >= 70 ? '🎉' : '📚'}</span>
+          <h1 style={{ fontSize: '1.8rem', marginBottom: 16, color: 'var(--foreground)' }}>Hoàn thành Part 4 Short Talks!</h1>
+          <div style={{ backgroundColor: 'var(--surface-hover)', padding: '16px 24px', borderRadius: 12, display: 'inline-block', marginBottom: 24 }}>
+            <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>Kết quả: {totalScore} / {allQuestionsCount} ({percentage}%)</span>
           </div>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '480px' }}>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: 32, lineHeight: 1.6 }}>
             {percentage >= 80
               ? 'Khả năng tập trung nghe các bài nói độc thoại dài và nắm ý chính của bạn cực kỳ tốt!'
               : 'Hãy chú ý đoạn mở đầu (purpose of the talk) và đoạn kết (next action/request)!'}
           </p>
 
-          <div className={styles.resultsActions}>
-            <button onClick={handleRestart} className={styles.submitBtn}>Làm lại đề này 🔄</button>
-            <Link href="/" className={styles.secondaryBtn}>Về Dashboard 🏠</Link>
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
+            <button onClick={handleRestart} className="btn-secondary">Làm lại đề này 🔄</button>
+            <Link href="/" className="btn-primary">Về Dashboard 🏠</Link>
           </div>
         </div>
       </div>
@@ -188,7 +222,7 @@ function Part4Trainer() {
       <div className={styles.card}>
         {currentSet.context && (
           <div className={styles.contextBanner}>
-            📌 {currentSet.context}
+            <MapPinIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> {currentSet.context}
           </div>
         )}
 

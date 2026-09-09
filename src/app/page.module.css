@@ -530,3 +530,9 @@
   color: var(--text-secondary);
   margin: 0;
 }
+
+.partCompleted {
+  background-color: var(--success-light) !important;
+  color: var(--success-hover) !important;
+  border-color: var(--success) !important;
+}
