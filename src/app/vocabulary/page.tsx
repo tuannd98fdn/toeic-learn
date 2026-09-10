@@ -6,7 +6,7 @@ import { useVocabulary } from '@/hooks/useVocabulary';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useAudio } from '@/hooks/useAudio';
 import EmptyState from '@/components/illustrations/EmptyState';
-import { VolumeIcon, SparklesIcon, FileTextIcon, TargetIcon, CheckCircleIcon, BrainIcon } from '@/components/icons/AppIcons';
+import { VolumeIcon, SparklesIcon, FileTextIcon, TargetIcon, CheckCircleIcon, BrainIcon, LinkIcon } from '@/components/icons/AppIcons';
 import styles from './page.module.css';
 
 const LEVELS = ["All", 1, 2, 3, 4, 5];
@@ -51,7 +51,7 @@ export default function VocabularyPage() {
 
   // AI Generator States
   const [addMode, setAddMode] = useState<'manual' | 'ai'>('manual');
-  const [aiInputType, setAiInputType] = useState<'text_list' | 'topic'>('text_list');
+  const [aiInputType, setAiInputType] = useState<'text_list' | 'topic' | 'url'>('text_list');
   const [aiPayload, setAiPayload] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedWords, setGeneratedWords] = useState<Omit<VocabularyWord, 'id' | 'source'>[]>([]);
@@ -330,12 +330,21 @@ export default function VocabularyPage() {
                   <TargetIcon size={18} />
                   Theo chủ đề
                 </button>
+                <button 
+                  className={`${styles.aiTypeBtn} ${aiInputType === 'url' ? styles.activeAiType : ''}`}
+                  onClick={() => setAiInputType('url')}
+                >
+                  <LinkIcon size={18} />
+                  Từ link bài báo
+                </button>
               </div>
 
               <textarea 
                 placeholder={aiInputType === 'text_list' 
                   ? "Dán danh sách các từ tiếng Anh (ví dụ: revenue, budget, evaluate)..." 
-                  : "Nhập chủ đề muốn học (ví dụ: Sân bay, Ký hợp đồng, Marketing)..."}
+                  : aiInputType === 'topic' 
+                  ? "Nhập chủ đề muốn học (ví dụ: Sân bay, Ký hợp đồng, Marketing)..."
+                  : "Dán đường link bài báo hoặc trang web (ví dụ: https://www.itpro.com/...)"}
                 value={aiPayload}
                 onChange={e => setAiPayload(e.target.value)}
                 className={`${styles.formInput} ${styles.formTextarea}`}
