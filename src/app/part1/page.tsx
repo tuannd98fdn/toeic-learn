@@ -15,6 +15,9 @@ import {
   EyeIcon,
   LightbulbIcon,
   FileTextIcon,
+  BookIcon,
+  ArrowRightIcon,
+  AlertCircleIcon,
 } from '@/components/icons/AppIcons';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
@@ -161,7 +164,8 @@ function Part1Trainer() {
   if (error || questions.length === 0) {
     return (
       <div className={styles.errorState}>
-        <p>⚠️ {error || 'Không tìm thấy câu hỏi Part 1 nào.'}</p>
+        <AlertCircleIcon size={36} style={{ color: 'var(--warning, #f59e0b)', marginBottom: 8 }} />
+        <p>{error || 'Không tìm thấy câu hỏi Part 1 nào.'}</p>
         <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
       </div>
     );
@@ -173,7 +177,19 @@ function Part1Trainer() {
       <div className={styles.container}>
         <Confetti show={showConfetti} />
         <div className={styles.resultsCard} style={{ margin: '40px auto', maxWidth: 600, padding: 40, textAlign: 'center', backgroundColor: 'var(--glass-bg)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
-          <span style={{ fontSize: '4rem', display: 'block', marginBottom: 16 }}>{percentage >= 70 ? '🎉' : '📚'}</span>
+          <div style={{
+            width: 72,
+            height: 72,
+            borderRadius: '50%',
+            backgroundColor: percentage >= 70 ? 'var(--success-light, rgba(34, 197, 94, 0.15))' : 'var(--primary-light, rgba(59, 130, 246, 0.15))',
+            color: percentage >= 70 ? 'var(--success, #22c55e)' : 'var(--primary, #3b82f6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 20px auto',
+          }}>
+            {percentage >= 70 ? <AwardIcon size={38} /> : <BookIcon size={38} />}
+          </div>
           <h1 style={{ fontSize: '1.8rem', marginBottom: 16, color: 'var(--foreground)' }}>Hoàn thành Part 1 Photographs!</h1>
           <div style={{ backgroundColor: 'var(--surface-hover)', padding: '16px 24px', borderRadius: 12, display: 'inline-block', marginBottom: 24 }}>
             <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>Kết quả: {score} / {questions.length} ({percentage}%)</span>
@@ -183,9 +199,16 @@ function Part1Trainer() {
              percentage >= 50 ? 'Khá tốt! Hãy chú ý kỹ hơn vào các chi tiết nhỏ trong hình nhé.' :
              'Đừng nản chí! Nghe nhiều sẽ giúp bạn quen với các từ vựng mô tả hình ảnh.'}
           </p>
-          <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
-            <button onClick={handleRestart} className="btn-secondary">Làm lại đề này 🔄</button>
-            <Link href="/" className="btn-primary">Về Dashboard 🏠</Link>
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href={`/part2?test=${testId}`} className="btn-primary" style={{ padding: '14px 28px', fontSize: '1.05rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              HỌC TIẾP: Part 2 (Hỏi - Đáp) <ArrowRightIcon size={18} />
+            </Link>
+            <button onClick={handleRestart} className="btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <RotateCcwIcon size={16} /> Làm lại đề này
+            </button>
+            <Link href="/" className="btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <HomeIcon size={16} /> Về Dashboard
+            </Link>
           </div>
         </div>
       </div>
@@ -230,6 +253,7 @@ function Part1Trainer() {
           src={currentQ.audioUrl}
           title={`Audio Câu ${currentQ.number}`}
           autoPlay={true}
+          transcript={isAnswered ? currentQ.transcript : undefined}
         />
 
         <div className={styles.optionsGrid}>
@@ -307,7 +331,7 @@ function Part1Trainer() {
           transcript: currentQ.transcript,
           audioUrl: currentQ.audioUrl,
         })}
-        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả' : 'Câu tiếp theo ➔'}
+        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả' : 'Câu tiếp theo →'}
       />
 
       {tutorContext && (

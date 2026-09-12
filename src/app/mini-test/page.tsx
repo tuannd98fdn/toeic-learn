@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import Confetti from '@/components/Confetti';
 import {
   ZapIcon,
@@ -30,6 +31,8 @@ interface UnifiedQuestion {
   correctAnswer: string;
   explanation?: string;
   transcript?: string;
+  subCategory?: string;
+  grammarTag?: string;
 }
 
 const TOTAL_TIME = 15 * 60; // 15 minutes
@@ -43,6 +46,11 @@ export default function MiniTestPage() {
 }
 
 function MiniTestSimulation() {
+  const searchParams = useSearchParams();
+  const testParam = searchParams.get('test') || 'ets2022_test1';
+  const match = testParam.match(/ets(\d+)_test(\d+)/);
+  const pathBase = match ? `/data/ets${match[1]}/test${match[2]}` : `/data/ets2022/test1`;
+
   const [questions, setQuestions] = useState<UnifiedQuestion[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -70,7 +78,6 @@ function MiniTestSimulation() {
     const loadMiniTest = async () => {
       try {
         setLoading(true);
-        const pathBase = `/data/ets2022/test1`; // Hardcoded for MVP
         const responses = await Promise.all([
           fetch(`${pathBase}/part2.json`),
           fetch(`${pathBase}/part5.json`),
@@ -115,6 +122,8 @@ function MiniTestSimulation() {
             options: q.options,
             correctAnswer: q.correctAnswer,
             explanation: q.explanation,
+            subCategory: q.subCategory || q.type,
+            grammarTag: q.grammarTag,
           });
         });
 
@@ -129,7 +138,7 @@ function MiniTestSimulation() {
     };
 
     loadMiniTest();
-  }, []);
+  }, [pathBase]);
 
   // Timer interval
   useEffect(() => {
@@ -189,9 +198,11 @@ function MiniTestSimulation() {
       } else {
         addMistake(`minitest_${q.part}_${q.id}`, {
           type: 'exam',
-          testId: 'ets2022_test1',
+          testId: testParam,
           part: q.part === 'p2' ? 'part2' : 'part5',
-          questionId: q.id
+          questionId: q.id,
+          subCategory: q.subCategory,
+          grammarTag: q.grammarTag,
         });
       }
     });
@@ -284,7 +295,7 @@ function MiniTestSimulation() {
               e.preventDefault();
             }
           }}>
-            ✕ Thoát
+            Thoát
           </Link>
           <div className={styles.testTitle}>
             Daily 15-Min Mini Test {isReviewMode && <span style={{ color: 'var(--primary)' }}>(Review)</span>}
@@ -398,7 +409,7 @@ function MiniTestSimulation() {
               onClick={() => setCurrentIndex((idx) => Math.max(0, idx - 1))}
               disabled={currentIndex === 0}
             >
-              ← Trước
+              Trước
             </button>
             <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
               {currentIndex + 1} / {questions.length}
@@ -409,7 +420,7 @@ function MiniTestSimulation() {
               onClick={() => setCurrentIndex((idx) => Math.min(questions.length - 1, idx + 1))}
               disabled={currentIndex === questions.length - 1}
             >
-              Sau →
+              Sau
             </button>
           </div>
         </section>

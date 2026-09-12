@@ -488,7 +488,7 @@ function Part7Trainer() {
           correctAnswer: 'A',
           explanation: passageSet.questions.map(q => `Q${q.number}: ${q.explanation}`).join('<br/><br/>'),
         })}
-        nextLabel={currentPassageIndex + 1 === passageSets.length ? 'Xem tổng kết' : 'Đoạn văn tiếp theo ➔'}
+        nextLabel={currentPassageIndex + 1 === passageSets.length ? 'Xem tổng kết' : 'Đoạn văn tiếp theo'}
       />
 
       {tutorContext && (

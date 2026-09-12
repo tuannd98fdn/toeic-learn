@@ -15,6 +15,7 @@ import {
   CheckCircleIcon,
   MessageSquareIcon,
   NotebookIcon,
+  CloseIcon,
 } from '@/components/icons/AppIcons';
 import styles from './AITutorDrawer.module.css';
 
@@ -29,6 +30,8 @@ export interface QuestionContext {
   passageText?: string;
   explanation?: string;
   audioUrl?: string;
+  subCategory?: string;
+  grammarTag?: string;
 }
 
 interface AITutorDrawerProps {
@@ -441,6 +444,11 @@ export default function AITutorDrawer({
               <div className={styles.titleRow}>
                 <h2 className={styles.titleText}>Gia Sư TOEIC 990</h2>
                 <span className={styles.aiBadge}>AI COACH</span>
+                {questionContext.subCategory && (
+                  <span className={styles.subCategoryBadge}>
+                    {questionContext.subCategory}
+                  </span>
+                )}
               </div>
               <p className={styles.subTitleText}>Huấn luyện viên bẻ khóa bẫy ETS & Mẹo 15s</p>
             </div>
@@ -450,8 +458,8 @@ export default function AITutorDrawer({
             <span className={styles.quotaPill} title="Lượt hỏi miễn phí mỗi ngày (tự động hồi phục sau 00:00)">
               <ZapIcon size={13} style={{ marginRight: '4px', verticalAlign: 'text-bottom', display: 'inline' }} /> Còn {remainingQuota}/{DAILY_LIMIT} lượt
             </span>
-            <button onClick={onClose} className={styles.closeBtn} title="Đóng (Esc)">
-              ✕
+            <button onClick={onClose} className={styles.closeBtn} title="Đóng (Esc)" aria-label="Đóng">
+              <CloseIcon size={16} />
             </button>
           </div>
         </header>

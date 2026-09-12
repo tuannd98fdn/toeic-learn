@@ -290,7 +290,7 @@ function StudyPlanContainer() {
             <h1 className={styles.planTitle}>Lộ Trình Mục Tiêu: {plan.targetScore}+ Điểm</h1>
           </div>
           <p className={styles.planSubtitle}>
-            Điểm xuất phát: <strong>{plan.currentScore}</strong> ➔ Mục tiêu: <strong>{plan.targetScore}</strong> ({plan.daysTotal} ngày)
+            Điểm xuất phát: <strong>{plan.currentScore}</strong> &rarr; Mục tiêu: <strong>{plan.targetScore}</strong> ({plan.daysTotal} ngày)
           </p>
         </div>
 
@@ -356,7 +356,7 @@ function StudyPlanContainer() {
                     <ClockIcon size={14} /> {task.estimatedMinutes}p
                   </div>
                   <Link href={task.link} className={styles.actionBtn}>
-                    {getTaskIcon(task.type)} Vào làm ➔
+                    {getTaskIcon(task.type)} Vào làm
                   </Link>
                 </div>
               </div>
@@ -493,7 +493,7 @@ function StudyPlanContainer() {
                           textDecoration: 'none',
                         }}
                       >
-                        Vào làm ➔
+                        Vào làm
                       </Link>
                     </div>
                   ))}

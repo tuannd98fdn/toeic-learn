@@ -7,6 +7,8 @@ export interface LoadedQuestion {
   part: string;
   questionId: string;
   qData: any; // The question JSON
+  subCategory?: string;
+  grammarTag?: string;
 }
 
 /**
@@ -19,15 +21,22 @@ export const fetchMistakeQuestions = async (
 ): Promise<LoadedQuestion[]> => {
   const results: LoadedQuestion[] = [];
   
-  // Group by testId and part to minimize fetch calls
-  const fetchGroup: Record<string, Record<string, string[]>> = {};
+  // Group by testId and normalized part (e.g. 'part1'..'part7')
+  interface TargetItem {
+    id: string;
+    qid: string;
+    origPart: string;
+  }
+  const fetchGroup: Record<string, Record<string, TargetItem[]>> = {};
   
   mistakeIds.forEach(id => {
     const m = mistakes[id];
     if (m && m.type === 'exam' && m.testId && m.part && m.questionId) {
+      const partNum = m.part.replace(/^p(art)?/, '');
+      const partKey = `part${partNum}`;
       if (!fetchGroup[m.testId]) fetchGroup[m.testId] = {};
-      if (!fetchGroup[m.testId][m.part]) fetchGroup[m.testId][m.part] = [];
-      fetchGroup[m.testId][m.part].push(m.questionId);
+      if (!fetchGroup[m.testId][partKey]) fetchGroup[m.testId][partKey] = [];
+      fetchGroup[m.testId][partKey].push({ id, qid: m.questionId, origPart: m.part });
     }
   });
 
@@ -37,18 +46,19 @@ export const fetchMistakeQuestions = async (
     if (!match) continue;
     const pathBase = `/data/ets${match[1]}/test${match[2]}`;
 
-    for (const part of Object.keys(fetchGroup[testId])) {
+    for (const partKey of Object.keys(fetchGroup[testId])) {
       try {
-        const res = await fetch(`${pathBase}/${part}.json`);
+        const res = await fetch(`${pathBase}/${partKey}.json`);
         if (!res.ok) continue;
         const partData = await res.json();
+        const partNum = partKey.replace('part', '');
         
         // For parts 3,4,6,7, questions might be nested under sets/passages
-        const flattenQuestions = (data: any, partType: string) => {
+        const flattenQuestions = (data: any, pNum: string) => {
           let flat: any[] = [];
-          if (['p1', 'p2', 'p5'].includes(partType)) {
+          if (['1', '2', '5'].includes(pNum)) {
             flat = data;
-          } else if (['p3', 'p4'].includes(partType)) {
+          } else if (['3', '4'].includes(pNum)) {
             data.forEach((set: any) => {
               if (set.questions) {
                 set.questions.forEach((q: any) => {
@@ -56,7 +66,7 @@ export const fetchMistakeQuestions = async (
                 });
               }
             });
-          } else if (['p6', 'p7'].includes(partType)) {
+          } else if (['6', '7'].includes(pNum)) {
             data.forEach((passage: any) => {
               const passageContent = passage.passages 
                 ? passage.passages.map((p: any) => p.content).join('\n\n') 
@@ -71,25 +81,26 @@ export const fetchMistakeQuestions = async (
           return flat;
         };
         
-        const flatQuestions = flattenQuestions(partData, part);
-        const neededIds = fetchGroup[testId][part];
+        const flatQuestions = flattenQuestions(partData, partNum);
+        const neededItems = fetchGroup[testId][partKey];
         
-        neededIds.forEach(qid => {
+        neededItems.forEach(({ id, qid, origPart }) => {
           const q = flatQuestions.find((item: any) => item.id === qid);
           if (q) {
-            const mistakeId = `exam_${testId}_${part}_${qid}`;
             results.push({
-              mistakeId,
-              wrongCount: mistakes[mistakeId]?.wrongCount || 1,
+              mistakeId: id,
+              wrongCount: mistakes[id]?.wrongCount || 1,
               testId,
-              part,
+              part: origPart,
               questionId: qid,
-              qData: q
+              qData: q,
+              subCategory: mistakes[id]?.subCategory || q.subCategory || q.type,
+              grammarTag: mistakes[id]?.grammarTag || q.grammarTag
             });
           }
         });
       } catch (err) {
-        console.error(`Error loading ${testId} ${part}`, err);
+        console.error(`Error loading ${testId} ${partKey}`, err);
       }
     }
   }

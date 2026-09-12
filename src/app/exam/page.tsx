@@ -45,6 +45,8 @@ interface UnifiedQuestion {
   correctAnswer: string;
   explanation?: string;
   transcript?: string;
+  subCategory?: string;
+  grammarTag?: string;
 }
 
 const TOTAL_TIME = 120 * 60; // 120 minutes = 7200 seconds
@@ -238,6 +240,8 @@ function ExamSimulation() {
             options: q.options,
             correctAnswer: q.correctAnswer,
             explanation: q.explanation,
+            subCategory: q.subCategory || q.type,
+            grammarTag: q.grammarTag,
           });
         });
 
@@ -254,6 +258,8 @@ function ExamSimulation() {
               options: q.options,
               correctAnswer: q.correctAnswer,
               explanation: q.explanation,
+              subCategory: q.subCategory || q.type,
+              grammarTag: q.grammarTag,
             });
           });
         });
@@ -378,7 +384,9 @@ function ExamSimulation() {
           type: 'exam',
           testId: testId,
           part: q.part,
-          questionId: q.id
+          questionId: q.id,
+          subCategory: q.subCategory,
+          grammarTag: q.grammarTag,
         });
       }
     });
@@ -784,6 +792,8 @@ function ExamSimulation() {
                   passageText: currentQ.passageText,
                   explanation: currentQ.explanation,
                   audioUrl: currentQ.audioUrl,
+                  subCategory: currentQ.subCategory,
+                  grammarTag: currentQ.grammarTag,
                 })}
                 style={{
                   display: 'inline-flex',

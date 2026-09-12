@@ -11,6 +11,7 @@
   "dependencies": {
     "@ai-sdk/google": "^4.0.64",
     "@ducanh2912/next-pwa": "^10.2.9",
+    "@prisma/client": "^6.19.3",
     "ai": "^7.0.93",
     "cheerio": "^1.2.0",
     "html2canvas": "^1.4.1",
@@ -30,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
     "playwright": "^1.63.0",
+    "prisma": "^6.19.3",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   }

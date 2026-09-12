@@ -233,6 +233,7 @@ function Part2Trainer() {
           src={currentQ.audioUrl}
           title={`Audio Câu ${currentQ.number}`}
           autoPlay={true}
+          transcript={isAnswered ? currentQ.transcript : undefined}
         />
 
         {isDictationMode && !dictationChecked && !isAnswered ? (
@@ -328,7 +329,7 @@ function Part2Trainer() {
           transcript: currentQ.transcript,
           audioUrl: currentQ.audioUrl,
         })}
-        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả 🎉' : 'Câu tiếp theo ➔'}
+        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả' : 'Câu tiếp theo'}
       />
 
       {tutorContext && (

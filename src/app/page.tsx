@@ -7,7 +7,7 @@ import StreakCounter from '@/components/StreakCounter';
 import MascotSVG from '@/components/illustrations/MascotSVG';
 import { useStreak } from '@/hooks/useStreak';
 import { storage } from '@/utils/storage';
-import { StudyPlan, getStudyPlan, toggleTaskCompleted } from '@/utils/studyPlanEngine';
+import { StudyPlan, getStudyPlan, toggleTaskCompleted, getNextStudyTask } from '@/utils/studyPlanEngine';
 import {
   CardsIcon,
   QuizIcon,
@@ -40,6 +40,8 @@ export default function Home() {
     p5: number; p6: number; p7: number;
   } | null>(null);
   const [partProgress, setPartProgress] = useState<Record<string, boolean>>({});
+
+  const nextStudyTask = getNextStudyTask();
 
   useEffect(() => {
     if (!selectedTest) return;
@@ -144,6 +146,15 @@ export default function Home() {
                 ? <span className={styles.countdown}>Chỉ còn <strong>{onboardingData.daysLeft}</strong> ngày nữa là thi. Cố lên!</span>
                 : 'Cùng AI Master lộ trình luyện thi chuẩn ETS'}
             </p>
+            <div className={styles.heroCtaRow}>
+              <Link href={nextStudyTask.link} className={styles.heroPrimaryCta}>
+                <div className={styles.heroCtaInfo}>
+                  <span className={styles.heroCtaTag}>Tiếp tục lộ trình • 1-Click</span>
+                  <span className={styles.heroCtaTitle}>HỌC TIẾP: {nextStudyTask.title}</span>
+                </div>
+                <span className={styles.heroCtaArrow}><ArrowRightIcon size={18} /></span>
+              </Link>
+            </div>
           </div>
           <div className={styles.heroRight}>
             <StreakCounter currentStreak={streakData.currentStreak} bestStreak={streakData.bestStreak} />

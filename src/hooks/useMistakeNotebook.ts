@@ -9,6 +9,8 @@ export interface MistakeRecord {
   testId?: string;
   part?: string;
   questionId?: string;
+  subCategory?: string;
+  grammarTag?: string;
   box?: number;
   nextReviewDate?: string;
 }

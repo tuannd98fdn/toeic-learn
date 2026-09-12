@@ -246,6 +246,7 @@ function Part3Trainer() {
           src={currentSet.audioUrl}
           title={`Audio Hội thoại (Câu ${firstQNum} - ${lastQNum})`}
           autoPlay={false}
+          transcript={isSubmitted ? currentSet.transcript : undefined}
         />
 
         <div className={styles.questionsList}>
@@ -296,7 +297,7 @@ function Part3Trainer() {
               onClick={handleSubmitSet}
               disabled={!isAllAnsweredInSet}
             >
-              Nộp bài Set này ({Object.keys(selectedAnswers).length}/{currentSet.questions.length} câu) ➔
+              Nộp bài Set này ({Object.keys(selectedAnswers).length}/{currentSet.questions.length} câu)
             </button>
           </div>
         ) : (
@@ -340,7 +341,7 @@ function Part3Trainer() {
           transcript: currentSet.transcript,
           audioUrl: currentSet.audioUrl,
         })}
-        nextLabel={currentSetIndex + 1 === sets.length ? 'Xem tổng kết 🎉' : 'Set tiếp theo ➔'}
+        nextLabel={currentSetIndex + 1 === sets.length ? 'Xem tổng kết' : 'Set tiếp theo'}
       />
 
       {tutorContext && (

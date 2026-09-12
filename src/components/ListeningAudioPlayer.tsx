@@ -8,6 +8,7 @@ interface ListeningAudioPlayerProps {
   autoPlay?: boolean;
   onEnded?: () => void;
   title?: string;
+  transcript?: string;
 }
 
 export default function ListeningAudioPlayer({
@@ -15,18 +16,25 @@ export default function ListeningAudioPlayer({
   autoPlay = false,
   onEnded,
   title = 'Audio bài nghe',
+  transcript,
 }: ListeningAudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1.0);
+  const [pointA, setPointA] = useState<number | null>(null);
+  const [pointB, setPointB] = useState<number | null>(null);
+  const [showTranscript, setShowTranscript] = useState(false);
 
   // When src changes, reset state and load new audio
   useEffect(() => {
     setIsPlaying(false);
     setCurrentTime(0);
     setDuration(0);
+    setPointA(null);
+    setPointB(null);
+    setShowTranscript(false);
 
     if (audioRef.current) {
       audioRef.current.pause();
@@ -75,6 +83,11 @@ export default function ListeningAudioPlayer({
     audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime - 5);
   };
 
+  const handleForward = () => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = Math.min(duration || 0, audioRef.current.currentTime + 5);
+  };
+
   const handleSpeedChange = (rate: number) => {
     setPlaybackRate(rate);
     if (audioRef.current) {
@@ -84,7 +97,35 @@ export default function ListeningAudioPlayer({
 
   const handleTimeUpdate = () => {
     if (!audioRef.current) return;
-    setCurrentTime(audioRef.current.currentTime);
+    const current = audioRef.current.currentTime;
+    setCurrentTime(current);
+
+    // A-B Repeat Logic
+    if (pointA !== null && pointB !== null && current >= pointB) {
+      audioRef.current.currentTime = pointA;
+      if (!isPlaying) {
+        audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      }
+    }
+  };
+
+  const handleABRepeat = () => {
+    if (pointA === null) {
+      setPointA(currentTime);
+    } else if (pointB === null) {
+      if (currentTime > pointA + 0.5) { // Minimum 0.5s gap
+        setPointB(currentTime);
+        // Automatically jump back to A to start looping
+        if (audioRef.current) {
+          audioRef.current.currentTime = pointA;
+        }
+      } else {
+        setPointA(currentTime); // Reset A if clicked too soon
+      }
+    } else {
+      setPointA(null);
+      setPointB(null);
+    }
   };
 
   const handleLoadedMetadata = () => {
@@ -134,7 +175,7 @@ export default function ListeningAudioPlayer({
         </div>
 
         <div className={styles.speedGroup}>
-          {[0.8, 1.0, 1.2].map((rate) => (
+          {[0.75, 1.0, 1.25, 1.5].map((rate) => (
             <button
               key={rate}
               type="button"
@@ -176,6 +217,26 @@ export default function ListeningAudioPlayer({
           -5s
         </button>
 
+        <button
+          type="button"
+          className={styles.rewindBtn}
+          onClick={handleForward}
+          title="Tua tới 5 giây"
+          aria-label="Forward 5 seconds"
+        >
+          +5s
+        </button>
+
+        <button
+          type="button"
+          className={`${styles.abBtn} ${pointA !== null && pointB === null ? styles.active : ''} ${pointA !== null && pointB !== null ? styles.looping : ''}`}
+          onClick={handleABRepeat}
+          title="Lặp đoạn A-B (Shadowing)"
+          aria-label="A-B Repeat"
+        >
+          {pointA !== null && pointB !== null ? 'A-B' : pointA !== null ? 'A-' : 'A-B'}
+        </button>
+
         <div className={styles.progressContainer}>
           <input
             type="range"
@@ -193,6 +254,24 @@ export default function ListeningAudioPlayer({
           </div>
         </div>
       </div>
+
+      {transcript && (
+        <div className={styles.transcriptSection}>
+          <button
+            type="button"
+            className={styles.transcriptToggleBtn}
+            onClick={() => setShowTranscript(prev => !prev)}
+          >
+            <span>{showTranscript ? 'Ẩn Transcript bài nghe' : '📜 Xem Transcript & Lời thoại'}</span>
+          </button>
+          {showTranscript && (
+            <div 
+              className={styles.transcriptContent}
+              dangerouslySetInnerHTML={{ __html: transcript }}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

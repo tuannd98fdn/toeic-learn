@@ -65,6 +65,8 @@ export const Part5QuestionSchema = z.object({
   correctAnswer: z.string(),
   explanation: z.string(),
   type: z.string().optional(),
+  subCategory: z.string().optional(),
+  grammarTag: z.string().optional(),
 });
 
 export const Part5DataSchema = z.array(Part5QuestionSchema);
@@ -78,6 +80,8 @@ export const Part6QuestionSchema = z.object({
   explanation: z.string(),
   type: z.string().optional(),
   blankNumber: z.number().optional(),
+  subCategory: z.string().optional(),
+  grammarTag: z.string().optional(),
 });
 
 export const Part6PassageSchema = z.object({

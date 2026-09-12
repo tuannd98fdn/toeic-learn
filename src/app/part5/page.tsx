@@ -8,12 +8,15 @@ import {
   ClockIcon,
   RotateCcwIcon,
   SparklesIcon,
+  LightbulbIcon,
+  ArrowRightIcon,
 } from '@/components/icons/AppIcons';
 import { useSearchParams } from 'next/navigation';
 import { Part5Question, Part5DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
+import { getNextStudyTask } from '@/utils/studyPlanEngine';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
@@ -43,9 +46,12 @@ function Part5SpeedTrainer() {
   const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
   const [isFinished, setIsFinished] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [showExplanation, setShowExplanation] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [wrongAnswers, setWrongAnswers] = useState<Part5Question[]>([]);
   const [showConfetti, setShowConfetti] = useState(false);
+
+  const nextTask = getNextStudyTask();
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -94,6 +100,8 @@ function Part5SpeedTrainer() {
       correctAnswer: q.correctAnswer,
       userAnswer: selectedAnswer || undefined,
       explanation: q.explanation,
+      subCategory: q.subCategory || q.type,
+      grammarTag: q.grammarTag,
     });
   };
 
@@ -128,7 +136,9 @@ function Part5SpeedTrainer() {
       type: 'exam',
       testId: testId,
       part: 'part5',
-      questionId: currentQ.id
+      questionId: currentQ.id,
+      subCategory: currentQ.subCategory || currentQ.type,
+      grammarTag: currentQ.grammarTag,
     });
   };
 
@@ -143,10 +153,6 @@ function Part5SpeedTrainer() {
       setScore(prev => prev + 1);
       setStreak(prev => prev + 1); // Increment streak
       setShowAnswer(true);
-      // Auto move to next question if correct for 10/10 UX
-      setTimeout(() => {
-        moveToNextQuestion();
-      }, 800);
     } else {
       setWrongAnswers(prev => [...prev, currentQ]);
       setStreak(0); // Reset streak
@@ -154,7 +160,9 @@ function Part5SpeedTrainer() {
         type: 'exam',
         testId: testId,
         part: 'part5',
-        questionId: currentQ.id
+        questionId: currentQ.id,
+        subCategory: currentQ.subCategory || currentQ.type,
+        grammarTag: currentQ.grammarTag,
       });
       setShowAnswer(true);
     }
@@ -162,6 +170,7 @@ function Part5SpeedTrainer() {
 
   const moveToNextQuestion = () => {
     setTutorContext(null);
+    setShowExplanation(false);
     setCurrentIndex(prev => {
       if (prev < questions.length - 1) {
         setTimeLeft(TIME_LIMIT);
@@ -188,7 +197,8 @@ function Part5SpeedTrainer() {
           handleAnswer(key);
         }
       } else {
-        if (e.key === 'Enter' || e.key === 'ArrowRight') {
+        if (e.key === 'Enter' || e.key === 'ArrowRight' || e.key === ' ') {
+          e.preventDefault();
           moveToNextQuestion();
         }
       }
@@ -233,7 +243,14 @@ function Part5SpeedTrainer() {
              'Đừng nản chí! Hãy xem lại các lỗi sai bên dưới nhé.'}
           </p>
           <div className={styles.actions}>
-            <button onClick={handleRestart} className={styles.primaryBtn}>
+            <Link 
+              href={nextTask.link === '/part5' ? `/part6?test=${testId}` : nextTask.link} 
+              className={styles.nextStepBtn}
+            >
+              HỌC TIẾP: {nextTask.link === '/part5' ? 'Part 6 (Điền đoạn văn)' : nextTask.title}
+              <ArrowRightIcon size={18} />
+            </Link>
+            <button onClick={handleRestart} className={styles.secondaryBtn}>
               Luyện tập lại <RotateCcwIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
             </button>
             <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
@@ -267,6 +284,8 @@ function Part5SpeedTrainer() {
                       options: q.options,
                       correctAnswer: q.correctAnswer,
                       explanation: q.explanation,
+                      subCategory: q.subCategory || q.type,
+                      grammarTag: q.grammarTag,
                     })}>
                     <SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI bóc tách bẫy
                   </button>
@@ -332,8 +351,10 @@ function Part5SpeedTrainer() {
         <div className={`${styles.questionCard} card-minimal`}>
           <div className={styles.cardHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              <span className={styles.categoryBadge}>{currentQ.type || 'Grammar'}</span>
-              <span className={styles.sourceBadge}>ETS Test</span>
+              <span className={styles.categoryBadge}>{currentQ.subCategory || currentQ.type || 'Grammar'}</span>
+              {currentQ.grammarTag && (
+                <span className={styles.sourceBadge}>{currentQ.grammarTag}</span>
+              )}
             </div>
           </div>
           <p className={styles.sentence}>
@@ -358,16 +379,21 @@ function Part5SpeedTrainer() {
           </div>
 
           {showAnswer && currentQ.explanation && (
-            <div style={{
-              marginTop: '1.25rem',
-              padding: '1.1rem 1.25rem',
-              background: 'var(--bg-secondary)',
-              borderRadius: 'var(--radius)',
-              border: '1.5px solid var(--border)',
-            }}>
-              <div style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5, background: 'var(--card)', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid var(--border)' }}
-                dangerouslySetInnerHTML={{ __html: currentQ.explanation }}
-              />
+            <div className={styles.explanationContainer}>
+              <button 
+                type="button" 
+                className={styles.explanationToggleBtn}
+                onClick={() => setShowExplanation(prev => !prev)}
+              >
+                <LightbulbIcon size={16} />
+                <span>{showExplanation ? 'Thu gọn lời giải' : 'Xem giải thích ngữ pháp chi tiết'}</span>
+              </button>
+              {showExplanation && (
+                <div 
+                  className={styles.explanationBoxContent}
+                  dangerouslySetInnerHTML={{ __html: currentQ.explanation }}
+                />
+              )}
             </div>
           )}
         </div>
@@ -380,7 +406,7 @@ function Part5SpeedTrainer() {
         incorrectMessage={selectedAnswer === null ? "Hết thời gian!" : `Đáp án đúng là (${currentQ.correctAnswer})`}
         onNext={moveToNextQuestion}
         onAITutor={() => openAITutor(currentQ)}
-        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả' : 'Câu tiếp theo ➔'}
+        nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả' : 'Câu tiếp theo'}
       />
 
 

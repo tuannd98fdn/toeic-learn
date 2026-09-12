@@ -217,3 +217,28 @@ export function generateAdaptivePlan(params: {
   saveStudyPlan(newPlan);
   return newPlan;
 }
+
+export function getNextStudyTask(): { title: string; link: string; type: string } {
+  const plan = getStudyPlan();
+  if (plan) {
+    const activeDay = plan.days.find((d) => !d.completed) || plan.days[0];
+    if (activeDay) {
+      const nextTask = activeDay.tasks.find((t) => !t.completed);
+      if (nextTask) {
+        return {
+          title: nextTask.title,
+          link: nextTask.link,
+          type: nextTask.type,
+        };
+      }
+    }
+  }
+
+  // Fallback when no plan or all tasks completed
+  return {
+    title: 'Luyện Part 5: Tốc độ ngữ pháp 20s',
+    link: '/part5',
+    type: 'practice',
+  };
+}
+

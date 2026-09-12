@@ -10,7 +10,9 @@
       "D": "theirs"
     },
     "correctAnswer": "B",
-    "explanation": "<p>We need a possessive adjective before the noun &quot;peak&quot; =&gt; B is correct&nbsp;</p>\n"
+    "explanation": "<p>We need a possessive adjective before the noun &quot;peak&quot; =&gt; B is correct&nbsp;</p>\n",
+    "subCategory": "Pronoun",
+    "grammarTag": "Possessive Adjective"
   },
   {
     "id": "62b694aebbc57b27fe10f7e5",
@@ -23,7 +25,9 @@
       "D": "was locating"
     },
     "correctAnswer": "A",
-    "explanation": "<p>Be located on&nbsp;=&gt; A is correct&nbsp;</p>\n"
+    "explanation": "<p>Be located on&nbsp;=&gt; A is correct&nbsp;</p>\n",
+    "subCategory": "Verb Tense",
+    "grammarTag": "Passive Voice"
   },
   {
     "id": "62b694aebbc57b27fe10f7e6",
@@ -36,7 +40,9 @@
       "D": "went"
     },
     "correctAnswer": "C",
-    "explanation": "<p>&quot;Held&quot; is the past participle of &quot;hold&quot;. &quot;Hold&quot; means &quot;to have something such as a meeting or an election&quot; which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Held&quot; is the past participle of &quot;hold&quot;. &quot;Hold&quot; means &quot;to have something such as a meeting or an election&quot; which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Collocation"
   },
   {
     "id": "62b694aebbc57b27fe10f7e7",
@@ -49,7 +55,9 @@
       "D": "attentively"
     },
     "correctAnswer": "B",
-    "explanation": "<p>&quot;Unexpectedly&quot; means &quot;in a way that is not expected&quot; which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Unexpectedly&quot; means &quot;in a way that is not expected&quot; which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Adverb Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7e8",
@@ -62,7 +70,9 @@
       "D": "All"
     },
     "correctAnswer": "D",
-    "explanation": "<p>All + plural noun (employees)&nbsp;</p>\n"
+    "explanation": "<p>All + plural noun (employees)&nbsp;</p>\n",
+    "subCategory": "Sentence Structure",
+    "grammarTag": "Quantifier"
   },
   {
     "id": "62b694aebbc57b27fe10f7e9",
@@ -75,7 +85,9 @@
       "D": "journalistic"
     },
     "correctAnswer": "B",
-    "explanation": "<p>The blank needs a noun. &quot;Journalist&quot; means &quot;a person who writes news stories or articles for a newspaper or magazine or broadcasts them on radio or television&quot; which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>The blank needs a noun. &quot;Journalist&quot; means &quot;a person who writes news stories or articles for a newspaper or magazine or broadcasts them on radio or television&quot; which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Word Form",
+    "grammarTag": "Noun Suffix"
   },
   {
     "id": "62b694aebbc57b27fe10f7ea",
@@ -88,7 +100,9 @@
       "D": "brief"
     },
     "correctAnswer": "C",
-    "explanation": "<p>An adjective is needed to modify the noun &quot;hotel&quot;. &quot;Nearby&quot; means &quot;not far&nbsp;away&quot; which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>An adjective is needed to modify the noun &quot;hotel&quot;. &quot;Nearby&quot; means &quot;not far&nbsp;away&quot; which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Adjective Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7eb",
@@ -101,7 +115,9 @@
       "D": "optional"
     },
     "correctAnswer": "D",
-    "explanation": "<p>&quot;Optional&quot; means &quot;not necessary or demanded but possible or available; depending on what you decide to do&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Optional&quot; means &quot;not necessary or demanded but possible or available; depending on what you decide to do&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Adjective Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7ec",
@@ -114,7 +130,9 @@
       "D": "achieving"
     },
     "correctAnswer": "D",
-    "explanation": "<p>&quot;Achieve&quot; means &quot;to succeed in finishing something or reaching an aim, especially after a lot of work or effort&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Achieve&quot; means &quot;to succeed in finishing something or reaching an aim, especially after a lot of work or effort&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Verb Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7ed",
@@ -127,7 +145,9 @@
       "D": "account"
     },
     "correctAnswer": "C",
-    "explanation": "<p>&quot;Replace&quot; means &quot;to take the place of something, or to put something or someone in the place of something or someone else&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Replace&quot; means &quot;to take the place of something, or to put something or someone in the place of something or someone else&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Verb Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7ee",
@@ -140,7 +160,9 @@
       "D": "strongly"
     },
     "correctAnswer": "C",
-    "explanation": "<p>Make something + adj&nbsp;=&gt; C is correct&nbsp;</p>\n"
+    "explanation": "<p>Make something + adj&nbsp;=&gt; C is correct&nbsp;</p>\n",
+    "subCategory": "Word Form",
+    "grammarTag": "Comparative Adjective"
   },
   {
     "id": "62b694aebbc57b27fe10f7ef",
@@ -153,7 +175,9 @@
       "D": "amazingly"
     },
     "correctAnswer": "D",
-    "explanation": "<p>An adverb is needed to modify the adjective &quot;creative&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n"
+    "explanation": "<p>An adverb is needed to modify the adjective &quot;creative&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n",
+    "subCategory": "Word Form",
+    "grammarTag": "Adverb Modifier"
   },
   {
     "id": "62b694aebbc57b27fe10f7f0",
@@ -166,7 +190,9 @@
       "D": "or"
     },
     "correctAnswer": "D",
-    "explanation": "<p>Whether &hellip; or&nbsp;=&gt; D is correct&nbsp;</p>\n"
+    "explanation": "<p>Whether &hellip; or&nbsp;=&gt; D is correct&nbsp;</p>\n",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Correlative Conjunction"
   },
   {
     "id": "62b694aebbc57b27fe10f7f1",
@@ -179,7 +205,9 @@
       "D": "more quietly"
     },
     "correctAnswer": "D",
-    "explanation": "<p>An adverb is needed to modify the verb &quot;work&quot;. Because there is &quot;than&quot;, we need to use &quot;more&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n"
+    "explanation": "<p>An adverb is needed to modify the verb &quot;work&quot;. Because there is &quot;than&quot;, we need to use &quot;more&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n",
+    "subCategory": "Word Form",
+    "grammarTag": "Comparative Adverb"
   },
   {
     "id": "62b694aebbc57b27fe10f7f2",
@@ -192,7 +220,9 @@
       "D": "out"
     },
     "correctAnswer": "B",
-    "explanation": "<p>Provide something to somebody&nbsp;=&gt; B is correct&nbsp;</p>\n"
+    "explanation": "<p>Provide something to somebody&nbsp;=&gt; B is correct&nbsp;</p>\n",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Preposition"
   },
   {
     "id": "62b694aebbc57b27fe10f7f3",
@@ -205,7 +235,9 @@
       "D": "confirmation"
     },
     "correctAnswer": "D",
-    "explanation": "<p>The blank needs a noun&nbsp;=&gt; D is correct&nbsp;</p>\n"
+    "explanation": "<p>The blank needs a noun&nbsp;=&gt; D is correct&nbsp;</p>\n",
+    "subCategory": "Word Form",
+    "grammarTag": "Noun Suffix"
   },
   {
     "id": "62b694aebbc57b27fe10f7f4",
@@ -218,7 +250,9 @@
       "D": "hardly"
     },
     "correctAnswer": "A",
-    "explanation": "<p>&quot;Recently&quot; means &quot;not long ago, or at a time that started not long ago&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Recently&quot; means &quot;not long ago, or at a time that started not long ago&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Adverb Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7f5",
@@ -231,7 +265,9 @@
       "D": "proposal"
     },
     "correctAnswer": "A",
-    "explanation": "<p>&quot;Excursion&quot; means &quot;a short journey usually made for pleasure, often by a group of people&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Excursion&quot; means &quot;a short journey usually made for pleasure, often by a group of people&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Noun Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7f6",
@@ -244,7 +280,9 @@
       "D": "what"
     },
     "correctAnswer": "A",
-    "explanation": "<p>A relative pronoun is needed to fill in the blank. &quot;Who&quot; is the most correct since it refers to people (customers)</p>\n"
+    "explanation": "<p>A relative pronoun is needed to fill in the blank. &quot;Who&quot; is the most correct since it refers to people (customers)</p>\n",
+    "subCategory": "Relative Clause",
+    "grammarTag": "Relative Pronoun"
   },
   {
     "id": "62b694aebbc57b27fe10f7f7",
@@ -257,7 +295,9 @@
       "D": "intended"
     },
     "correctAnswer": "C",
-    "explanation": "<p>&quot;Open&quot; means &quot;ready to be used or ready to provide a service&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Open&quot; means &quot;ready to be used or ready to provide a service&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Adjective Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7f8",
@@ -270,7 +310,9 @@
       "D": "within"
     },
     "correctAnswer": "D",
-    "explanation": "<p>&quot;Within&quot; means &quot;inside or not further than an area or period of time&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Within&quot; means &quot;inside or not further than an area or period of time&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Preposition of Time"
   },
   {
     "id": "62b694aebbc57b27fe10f7f9",
@@ -283,7 +325,9 @@
       "D": "incomplete"
     },
     "correctAnswer": "B",
-    "explanation": "<p>&quot;Unfavorable&quot; means &quot;not positive&quot; which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Unfavorable&quot; means &quot;not positive&quot; which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Adjective Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7fa",
@@ -296,7 +340,9 @@
       "D": "remarking"
     },
     "correctAnswer": "A",
-    "explanation": "<p>An adverb is needed to modify the adjective &quot;little&quot;&nbsp;=&gt; A is correct&nbsp;</p>\n"
+    "explanation": "<p>An adverb is needed to modify the adjective &quot;little&quot;&nbsp;=&gt; A is correct&nbsp;</p>\n",
+    "subCategory": "Word Form",
+    "grammarTag": "Adverb Modifier"
   },
   {
     "id": "62b694aebbc57b27fe10f7fb",
@@ -309,7 +355,9 @@
       "D": "range"
     },
     "correctAnswer": "C",
-    "explanation": "<p>&quot;Sequence&quot; means &quot;a series of related things or events, or the order in which they follow each other&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Sequence&quot; means &quot;a series of related things or events, or the order in which they follow each other&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Noun Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7fc",
@@ -322,7 +370,9 @@
       "D": "until"
     },
     "correctAnswer": "D",
-    "explanation": "<p>&quot;Until&quot; means &quot;not before a particular time or event&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Until&quot; means &quot;not before a particular time or event&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Preposition of Time"
   },
   {
     "id": "62b694aebbc57b27fe10f7fd",
@@ -335,7 +385,9 @@
       "D": "specialization"
     },
     "correctAnswer": "B",
-    "explanation": "<p>An adjective is needed to modify the noun &quot;skills&quot;&nbsp;=&gt; B is correct&nbsp;</p>\n"
+    "explanation": "<p>An adjective is needed to modify the noun &quot;skills&quot;&nbsp;=&gt; B is correct&nbsp;</p>\n",
+    "subCategory": "Word Form",
+    "grammarTag": "Participial Adjective"
   },
   {
     "id": "62b694aebbc57b27fe10f7fe",
@@ -348,7 +400,9 @@
       "D": "increase"
     },
     "correctAnswer": "D",
-    "explanation": "<p>&quot;Increase&quot; means &quot;to (make something) become larger in amount or size&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Increase&quot; means &quot;to (make something) become larger in amount or size&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Verb Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f7ff",
@@ -361,7 +415,9 @@
       "D": "accelerate"
     },
     "correctAnswer": "A",
-    "explanation": "<p>&quot;Enhance&quot; means &quot;to improve the quality, amount, or strength of something&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+    "explanation": "<p>&quot;Enhance&quot; means &quot;to improve the quality, amount, or strength of something&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Verb Vocabulary"
   },
   {
     "id": "62b694aebbc57b27fe10f800",
@@ -374,7 +430,9 @@
       "D": "each other"
     },
     "correctAnswer": "A",
-    "explanation": "<p>Other + plural noun&nbsp;=&gt; A is correct&nbsp;</p>\n"
+    "explanation": "<p>Other + plural noun&nbsp;=&gt; A is correct&nbsp;</p>\n",
+    "subCategory": "Pronoun",
+    "grammarTag": "Indefinite Pronoun / Determiner"
   },
   {
     "id": "62b694aebbc57b27fe10f801",
@@ -387,6 +445,8 @@
       "D": "was honored"
     },
     "correctAnswer": "D",
-    "explanation": "<p>We need to use the passive voice. The structure of passive voice is &quot;be + past participle&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n"
+    "explanation": "<p>We need to use the passive voice. The structure of passive voice is &quot;be + past participle&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n",
+    "subCategory": "Verb Tense",
+    "grammarTag": "Passive Voice Past Simple"
   }
 ]

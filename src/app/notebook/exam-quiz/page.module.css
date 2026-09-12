@@ -1,0 +1,336 @@
+.container {
+  padding-bottom: 120px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  gap: 1rem;
+}
+
+/* Header & Progress */
+.header {
+  background: var(--card);
+  padding: 18px 24px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.backBtn {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s;
+}
+
+.backBtn:hover {
+  color: var(--primary);
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.partBadge {
+  background: var(--primary-light, rgba(28, 176, 246, 0.15));
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.wrongBadge {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.progressBarBg {
+  height: 8px;
+  background-color: var(--muted);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+/* Question Content Card */
+.questionCard {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.passageBox {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  max-height: 300px;
+  overflow-y: auto;
+  color: var(--foreground);
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  padding: 10px;
+}
+
+.questionImage {
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.audioWrapper {
+  margin-bottom: 0.5rem;
+}
+
+.questionText {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--foreground);
+  line-height: 1.5;
+}
+
+/* Options Grid */
+.optionsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.optionBtn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.optionBtn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--bg-secondary);
+  transform: translateY(-1px);
+}
+
+.optionLetter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.optionText {
+  flex-grow: 1;
+  line-height: 1.4;
+}
+
+/* Answer State Styles */
+.optionCorrect {
+  border-color: var(--success) !important;
+  background: rgba(34, 197, 94, 0.12) !important;
+  color: var(--foreground) !important;
+}
+
+.optionCorrect .optionLetter {
+  background: var(--success);
+  color: white;
+}
+
+.optionWrong {
+  border-color: var(--danger) !important;
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: var(--foreground) !important;
+}
+
+.optionWrong .optionLetter {
+  background: var(--danger);
+  color: white;
+}
+
+/* Explanation Box */
+.explanationCard {
+  background: var(--bg-secondary);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.explanationTitle {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Finished / Result Screen */
+.finishedCard {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 40px 24px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  max-width: 600px;
+  margin: 2rem auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.scoreCircle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 6px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  box-shadow: 0 8px 24px rgba(28, 176, 246, 0.2);
+}
+
+.scoreNumber {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--foreground);
+  line-height: 1;
+}
+
+.scoreLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.finishedMessage {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--foreground);
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+.resultStatsRow {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.statPill {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statPillVal {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.statPillLabel {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.finishedActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .questionCard {
+    padding: 16px;
+  }
+  .topRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

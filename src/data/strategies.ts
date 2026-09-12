@@ -31,6 +31,16 @@ export const TOEIC_TIPS: ToeicTip[] = [
     ]
   },
   {
+    id: "tip_p3_1",
+    part: "Part 3",
+    title: "Kỹ năng đoán trước câu hỏi (Anticipation)",
+    type: "strategy",
+    content: "Luôn đọc trước 3 câu hỏi và các đáp án TRƯỚC KHI đoạn hội thoại bắt đầu. Hãy xác định từ khóa để biết mình cần nghe thông tin gì (địa điểm, nghề nghiệp, vấn đề, hành động tiếp theo).",
+    examples: [
+      "Câu hỏi: 'Where does the conversation take place?' -> Tập trung nghe các từ vựng chỉ địa điểm ở ngay 2-3 câu đầu tiên."
+    ]
+  },
+  {
     id: "tip_grammar_1",
     part: "Grammar",
     title: "Phân biệt V-ing và V-ed (Phân từ)",
@@ -61,6 +71,17 @@ export const TOEIC_TIPS: ToeicTip[] = [
     examples: [
       "Trong bài: 'annual conference'",
       "Đáp án đúng: 'yearly convention'"
+    ]
+  },
+  {
+    id: "tip_p7_2",
+    part: "Part 7",
+    title: "Kỹ năng Skimming và Scanning",
+    type: "strategy",
+    content: "Đừng đọc từng chữ! Sử dụng Skimming (Đọc lướt lấy ý chính) bằng cách đọc tiêu đề và câu đầu/câu cuối mỗi đoạn. Sử dụng Scanning (Đọc quét tìm dữ liệu) để tìm chính xác ngày tháng, tên riêng, con số theo từ khóa trong câu hỏi.",
+    examples: [
+      "Skimming: Nắm được đoạn văn nói về chính sách hoàn trả hàng mới.",
+      "Scanning: Mắt quét thật nhanh để tìm con số '30 days' khi câu hỏi hỏi về thời hạn."
     ]
   }
 ];

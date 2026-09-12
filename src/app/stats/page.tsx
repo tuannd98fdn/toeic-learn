@@ -11,6 +11,7 @@ import { storage } from '@/utils/storage';
 import { ExamScoreSummary } from '@/utils/toeicScoreCalculator';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import ShareButton from '@/components/ShareButton';
+import GrammarRadarChart from '@/components/GrammarRadarChart';
 import styles from './page.module.css';
 
 export default function StatsPage() {
@@ -95,6 +96,11 @@ export default function StatsPage() {
         <p className={styles.leitnerDesc}>
           <strong>Hệ thống Leitner (Spaced Repetition)</strong> giúp bạn nhớ lâu hơn bằng cách ôn tập các từ ở Box thấp (màu đỏ/cam) thường xuyên hơn, và giãn cách thời gian ôn tập cho các từ ở Box cao (màu xanh).
         </p>
+      </section>
+
+      {/* Grammar & Sub-skill Gap Analysis */}
+      <section className={styles.fullWidthSection}>
+        <GrammarRadarChart />
       </section>
 
       {/* Full Test Exam History */}

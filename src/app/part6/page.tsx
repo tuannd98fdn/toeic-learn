@@ -105,7 +105,9 @@ function Part6Trainer() {
           type: 'exam',
           testId: testId,
           part: 'part6',
-          questionId: q.id
+          questionId: q.id,
+          subCategory: q.subCategory || q.type,
+          grammarTag: q.grammarTag,
         });
       }
     });
@@ -286,7 +288,14 @@ function Part6Trainer() {
             <div className={`${styles.questionCard} card-minimal`}>
               <div className={styles.qHeader}>
                 <span className={styles.blankIndicator}>Question {activeBlank} of 4</span>
-                <span className={styles.qType}>Q{currentQuestion.number}</span>
+                <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+                  <span className={styles.qType}>Q{currentQuestion.number}</span>
+                  {currentQuestion.subCategory && (
+                    <span className={styles.blankIndicator} style={{ background: 'rgba(99, 102, 241, 0.12)', color: 'var(--primary)', fontWeight: 600 }}>
+                      {currentQuestion.subCategory}
+                    </span>
+                  )}
+                </div>
               </div>
               
               <div className={styles.optionsList}>
@@ -338,7 +347,14 @@ function Part6Trainer() {
                   return (
                     <div key={q.id} className={`${styles.explanationCard} card-minimal`}>
                       <div className={styles.exHeader}>
-                        <span className={styles.exNumber}>Blank [{q.blankNumber}] - Q{q.number}</span>
+                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                          <span className={styles.exNumber}>Blank [{q.blankNumber}] - Q{q.number}</span>
+                          {q.subCategory && (
+                            <span style={{ fontSize: '0.75rem', padding: '0.15rem 0.5rem', borderRadius: '4px', background: 'rgba(99, 102, 241, 0.12)', color: 'var(--primary)', fontWeight: 600 }}>
+                              {q.subCategory}
+                            </span>
+                          )}
+                        </div>
                         <span className={isCorrect ? styles.badgeCorrect : styles.badgeWrong}>
                           {isCorrect ? 'Correct' : 'Incorrect'}
                         </span>
@@ -373,8 +389,9 @@ function Part6Trainer() {
           options: { A: 'See full passage and explanations' },
           correctAnswer: 'A',
           explanation: passage.questions.map(q => `Blank ${q.blankNumber} (Q${q.number}): ${q.explanation}`).join('<br/><br/>'),
+          subCategory: Array.from(new Set(passage.questions.map(q => q.subCategory).filter(Boolean))).join(', '),
         })}
-        nextLabel={currentPassageIndex + 1 === passages.length ? 'Xem tổng kết 🎉' : 'Đoạn văn tiếp theo ➔'}
+        nextLabel={currentPassageIndex + 1 === passages.length ? 'Xem tổng kết' : 'Đoạn văn tiếp theo'}
       />
 
       {tutorContext && (

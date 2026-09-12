@@ -104,6 +104,7 @@ Follow this pipeline:
 * Do not over-engineer.
 * Do not add speculative AI features.
 * Do not modify unrelated code.
+* **NO UI EMOJIS (STRICT)**: Never add emoji icons (e.g., 🎯, 🤖, 🚀, 💡, 🎧, 📝, ➔, 🧹, 👁️, 💪, 🎉) to UI components, buttons, badges, banners, or any user-facing strings. Always use clean SVG icons from `AppIcons` or plain typography.
 * Every important recommendation should have traceable evidence.
 * Every implemented feature must be verified.
 * STOP when the requirement is satisfied and verified.

@@ -16,7 +16,9 @@
           "D": "is functioning"
         },
         "correctAnswer": "D",
-        "explanation": "<p>The blank needs a verb =&gt; D is correct&nbsp;</p>\n"
+        "explanation": "<p>The blank needs a verb =&gt; D is correct&nbsp;</p>\n",
+        "subCategory": "Verb Tense",
+        "grammarTag": "Present Continuous Verb Form"
       },
       {
         "id": "62b694afbbc57b27fe10f85b",
@@ -29,7 +31,9 @@
           "D": "decision"
         },
         "correctAnswer": "A",
-        "explanation": "<p>&quot;Problem&quot; means &quot;a situation, person, or thing that needs attention and needs to be dealt with or solved&quot; which has the most appropriate meaning&nbsp;</p>\n"
+        "explanation": "<p>&quot;Problem&quot; means &quot;a situation, person, or thing that needs attention and needs to be dealt with or solved&quot; which has the most appropriate meaning&nbsp;</p>\n",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Noun Vocabulary"
       },
       {
         "id": "62b694afbbc57b27fe10f85c",
@@ -42,7 +46,9 @@
           "D": "We will try to answer any questions you have about your device."
         },
         "correctAnswer": "B",
-        "explanation": "<p>B is correct since it can connect to the previous sentence <em>&quot;This includes when the issue began&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>B is correct since it can connect to the previous sentence <em>&quot;This includes when the issue began&quot;&nbsp;</em></p>\n",
+        "subCategory": "Contextual Completion",
+        "grammarTag": "Sentence Insertion"
       },
       {
         "id": "62b694afbbc57b27fe10f85d",
@@ -55,7 +61,9 @@
           "D": "promptly"
         },
         "correctAnswer": "D",
-        "explanation": "<p>&quot;Promptly&quot; means &quot;quickly, without delay, or at the arranged time&quot; which has the most appropriate meaning&nbsp;</p>\n"
+        "explanation": "<p>&quot;Promptly&quot; means &quot;quickly, without delay, or at the arranged time&quot; which has the most appropriate meaning&nbsp;</p>\n",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Adverb Vocabulary"
       }
     ]
   },
@@ -76,7 +84,9 @@
           "D": "location"
         },
         "correctAnswer": "C",
-        "explanation": "<p>&quot;Misprint&quot; means &quot;a mistake, such as a word that is spelled wrong, in a printed text&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+        "explanation": "<p>&quot;Misprint&quot; means &quot;a mistake, such as a word that is spelled wrong, in a printed text&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Noun Vocabulary"
       },
       {
         "id": "62b694afbbc57b27fe10f85f",
@@ -89,7 +99,9 @@
           "D": "apologize"
         },
         "correctAnswer": "D",
-        "explanation": "<p>The blank needs a verb to create a parallel&nbsp;structure with &quot;<em>contact </em>Mr. Lambert, <em>notify </em>him of the issue&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n"
+        "explanation": "<p>The blank needs a verb to create a parallel&nbsp;structure with &quot;<em>contact </em>Mr. Lambert, <em>notify </em>him of the issue&quot;&nbsp;=&gt; D is correct&nbsp;</p>\n",
+        "subCategory": "Sentence Structure",
+        "grammarTag": "Parallel Structure"
       },
       {
         "id": "62b694afbbc57b27fe10f860",
@@ -102,7 +114,9 @@
           "D": "them"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Because the subject in the previous clause is &quot;We&quot; (Because we were responsible for this error), we need to use the possessive adjective &quot;our&quot;&nbsp;=&gt; A is correct&nbsp;</p>\n"
+        "explanation": "<p>Because the subject in the previous clause is &quot;We&quot; (Because we were responsible for this error), we need to use the possessive adjective &quot;our&quot;&nbsp;=&gt; A is correct&nbsp;</p>\n",
+        "subCategory": "Pronoun",
+        "grammarTag": "Possessive Adjective"
       },
       {
         "id": "62b694afbbc57b27fe10f861",
@@ -115,7 +129,9 @@
           "D": "Please contact me once you have received payment for the reprints."
         },
         "correctAnswer": "B",
-        "explanation": "<p>B is correct since it can connect with the previous sentence <em>&quot;please reassure Mr. Lambert that reprinting of the posters will occur at our expense and will be completed by the end of next week&quot;</em></p>\n"
+        "explanation": "<p>B is correct since it can connect with the previous sentence <em>&quot;please reassure Mr. Lambert that reprinting of the posters will occur at our expense and will be completed by the end of next week&quot;</em></p>\n",
+        "subCategory": "Contextual Completion",
+        "grammarTag": "Sentence Insertion"
       }
     ]
   },
@@ -136,7 +152,9 @@
           "D": "studies"
         },
         "correctAnswer": "A",
-        "explanation": "<p>&quot;Achievement&quot; means &quot;something very good and difficult that you have succeeded in doing&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+        "explanation": "<p>&quot;Achievement&quot; means &quot;something very good and difficult that you have succeeded in doing&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Noun Vocabulary"
       },
       {
         "id": "62b694afbbc57b27fe10f863",
@@ -149,7 +167,9 @@
           "D": "On the other hand"
         },
         "correctAnswer": "B",
-        "explanation": "<p>&quot;In addition&quot; is used here to add more information about&nbsp;Davis</p>\n"
+        "explanation": "<p>&quot;In addition&quot; is used here to add more information about&nbsp;Davis</p>\n",
+        "subCategory": "Preposition & Conjunction",
+        "grammarTag": "Conjunctive Adverb"
       },
       {
         "id": "62b694afbbc57b27fe10f864",
@@ -162,7 +182,9 @@
           "D": "We are all very proud of this accomplishment."
         },
         "correctAnswer": "D",
-        "explanation": "<p>D is correct because it can connect with the previous sentence <em>&quot;Davis also managed to score the highest level of points ever for this stage of the competition&quot;</em></p>\n"
+        "explanation": "<p>D is correct because it can connect with the previous sentence <em>&quot;Davis also managed to score the highest level of points ever for this stage of the competition&quot;</em></p>\n",
+        "subCategory": "Contextual Completion",
+        "grammarTag": "Sentence Insertion"
       },
       {
         "id": "62b694afbbc57b27fe10f865",
@@ -175,7 +197,9 @@
           "D": "will enjoy"
         },
         "correctAnswer": "D",
-        "explanation": "<p>The action happens in the future&nbsp;=&gt; Use future simple tense&nbsp;=&gt; D is correct&nbsp;</p>\n"
+        "explanation": "<p>The action happens in the future&nbsp;=&gt; Use future simple tense&nbsp;=&gt; D is correct&nbsp;</p>\n",
+        "subCategory": "Verb Tense",
+        "grammarTag": "Future Simple"
       }
     ]
   },
@@ -196,7 +220,9 @@
           "D": "directly"
         },
         "correctAnswer": "D",
-        "explanation": "<p>&quot;Directly&quot; means &quot;without anything else being involved or in between&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+        "explanation": "<p>&quot;Directly&quot; means &quot;without anything else being involved or in between&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Adverb Vocabulary"
       },
       {
         "id": "62b694afbbc57b27fe10f867",
@@ -209,7 +235,9 @@
           "D": "enroll"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Upon + Noun&nbsp;=&gt; A is correct&nbsp;</p>\n"
+        "explanation": "<p>Upon + Noun&nbsp;=&gt; A is correct&nbsp;</p>\n",
+        "subCategory": "Word Form",
+        "grammarTag": "Noun after Preposition"
       },
       {
         "id": "62b694afbbc57b27fe10f868",
@@ -222,7 +250,9 @@
           "D": "failed"
         },
         "correctAnswer": "B",
-        "explanation": "<p>&quot;Subsequent&quot; means &quot;happening after something else&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n"
+        "explanation": "<p>&quot;Subsequent&quot; means &quot;happening after something else&quot;&nbsp;which has the most appropriate meaning&nbsp;</p>\n",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Adjective Vocabulary"
       },
       {
         "id": "62b694afbbc57b27fe10f869",
@@ -235,7 +265,9 @@
           "D": "The software can be installed on a maximum of two computers."
         },
         "correctAnswer": "C",
-        "explanation": "<p>C is correct because it can connect with the sentence after it&nbsp;<em>&quot;Alternatively, you can call the Queensville University E-Learning Office at 555-9090.&quot;</em></p>\n"
+        "explanation": "<p>C is correct because it can connect with the sentence after it&nbsp;<em>&quot;Alternatively, you can call the Queensville University E-Learning Office at 555-9090.&quot;</em></p>\n",
+        "subCategory": "Contextual Completion",
+        "grammarTag": "Sentence Insertion"
       }
     ]
   }

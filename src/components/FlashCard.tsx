@@ -87,9 +87,9 @@ export default function FlashCard({ word, onRate }: FlashCardProps) {
               </div>
             )}
 
-            {(word.mnemonicTip || word.emoji) && (
+            {word.mnemonicTip && (
               <div className={styles.mnemonic}>
-                <span className={styles.emoji}>{word.emoji}</span>
+                {word.emoji ? <span className={styles.emoji}>{word.emoji}</span> : null}
                 <p>{word.mnemonicTip}</p>
               </div>
             )}

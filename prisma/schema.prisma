@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  image         String?
+  targetScore   String?        @default("750+")
+  examDate      String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  mistakes      Mistake[]
+  progress      UserProgress[]
+  studyPlan     StudyPlan?
+  streak        UserStreak?
+}
+
+model Mistake {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemKey     String   // e.g. "word_123" or "exam_ets2022_test1_part5_456"
+  type        String   // "vocabulary" | "exam"
+  testId      String?
+  part        String?  // "part1" .. "part7"
+  questionId  String?
+  rawMeta     String?  // JSON stringified optional metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, itemKey])
+  @@index([userId])
+}
+
+model UserProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  progressKey String   // e.g. "progress_ets2022_test1_part5"
+  completed   Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, progressKey])
+  @@index([userId])
+}
+
+model StudyPlan {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planData    String   // JSON stringified StudyPlan object
+  updatedAt   DateTime @updatedAt
+}
+
+model UserStreak {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currentStreak Int      @default(0)
+  bestStreak    Int      @default(0)
+  lastStudyDate String?
+  historyDays   String?  // JSON stringified array of dates
+  updatedAt     DateTime @updatedAt
+}

@@ -30,8 +30,8 @@
 }
 
 .footerIncorrect {
-  background-color: var(--danger-light);
-  border-top-color: var(--danger);
+  background-color: rgba(245, 158, 11, 0.08);
+  border-top-color: #f59e0b;
 }
 
 .contentArea {
@@ -50,7 +50,7 @@
 }
 
 .footerIncorrect .title {
-  color: var(--danger-hover);
+  color: #d97706;
 }
 
 .message {

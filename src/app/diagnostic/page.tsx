@@ -579,7 +579,7 @@ export default function DiagnosticPage() {
 
                     {q.explanation && (
                       <div className={styles.explanationText}>
-                        💡 <strong>Giải thích:</strong> {q.explanation}
+                        <strong>Giải thích:</strong> {q.explanation}
                       </div>
                     )}
 

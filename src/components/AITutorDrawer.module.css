@@ -125,6 +125,18 @@
   letter-spacing: 0.5px;
 }
 
+.subCategoryBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
 .subTitleText {
   font-size: 0.75rem;
   color: var(--text-secondary);

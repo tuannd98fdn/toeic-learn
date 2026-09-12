@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './PracticeFooter.module.css';
-import { SparklesIcon, LightbulbIcon } from '@/components/icons/AppIcons';
+import { SparklesIcon, LightbulbIcon, CheckCircleIcon } from '@/components/icons/AppIcons';
 import { soundEffects } from '@/utils/soundEffects';
 
 interface PracticeFooterProps {
@@ -20,7 +20,7 @@ export default function PracticeFooter({
   incorrectMessage = 'Chưa chính xác rồi!',
   onNext,
   onAITutor,
-  nextLabel = 'Tiếp tục ➔'
+  nextLabel = 'Tiếp tục →'
 }: PracticeFooterProps) {
   
   const visibilityClass = isAnswered ? styles.footerVisible : styles.footerHidden;
@@ -57,7 +57,17 @@ export default function PracticeFooter({
     <div className={`${styles.footer} ${visibilityClass} ${stateClass}`}>
       <div className={styles.contentArea}>
         <div className={styles.title}>
-          {isCorrect ? '✓ Chính xác!' : '✗ Sai rồi!'}
+          {isCorrect ? (
+            <>
+              <CheckCircleIcon size={18} style={{ marginRight: '6px', verticalAlign: 'text-bottom', display: 'inline' }} />
+              Chính xác!
+            </>
+          ) : (
+            <>
+              <LightbulbIcon size={18} style={{ marginRight: '6px', verticalAlign: 'text-bottom', display: 'inline' }} />
+              Chưa chính xác, cùng xem nhé!
+            </>
+          )}
         </div>
         <div className={styles.message}>
           {isCorrect ? correctMessage : incorrectMessage}
@@ -74,7 +84,7 @@ export default function PracticeFooter({
             )}
           </button>
         )}
-        <button className={isCorrect ? 'btn-success' : 'btn-danger'} onClick={onNext} type="button" style={{ textTransform: 'uppercase', minWidth: '140px' }}>
+        <button className={isCorrect ? 'btn-success' : 'btn-primary'} onClick={onNext} type="button" style={{ textTransform: 'uppercase', minWidth: '140px' }}>
           {nextLabel}
         </button>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { VocabularyWord } from '@/data/vocabulary';
 import { useVocabulary } from '@/hooks/useVocabulary';
@@ -13,10 +14,21 @@ import styles from './page.module.css';
 import { BotIcon, CardsIcon, ExamIcon, BookIcon, CheckCircleIcon } from '@/components/icons/AppIcons';
 
 export default function NotebookPage() {
+  return (
+    <Suspense fallback={<div className={styles.loading}>Đang tải Sổ tay lỗi sai...</div>}>
+      <NotebookContent />
+    </Suspense>
+  );
+}
+
+function NotebookContent() {
+  const searchParams = useSearchParams();
+  const initialTab = searchParams?.get('tab') === 'exam' || searchParams?.get('subCategory') ? 'exam' : 'vocabulary';
+
   const { mounted: vocabMounted, allWords } = useVocabulary();
   const { mounted: notebookMounted, getMistakes, mistakes } = useMistakeNotebook();
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
-  const [activeTab, setActiveTab] = useState<'vocabulary' | 'exam' | 'history'>('vocabulary');
+  const [activeTab, setActiveTab] = useState<'vocabulary' | 'exam' | 'history'>(initialTab);
 
   if (!vocabMounted || !notebookMounted) {
     return <div className={styles.loading}>Loading...</div>;
@@ -80,7 +92,7 @@ export default function NotebookPage() {
               <p>Tuyệt vời, bạn chưa mắc lỗi từ vựng nào.<br/>Hãy tiếp tục học từ vựng mới để mở rộng vốn từ nhé!</p>
               <div className={styles.actions}>
                 <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
-                <Link href="/study" className={styles.primaryBtn}>Học từ vựng mới ➔</Link>
+                <Link href="/study" className={styles.primaryBtn}>Học từ vựng mới</Link>
               </div>
             </div>
           ) : (
@@ -158,25 +170,13 @@ export default function NotebookPage() {
               <p>Tuyệt vời, bạn chưa có lỗi sai nào trong đề thi.<br/>Hãy thử sức với một bài thi mới để kiểm tra trình độ nhé!</p>
               <div className={styles.actions}>
                 <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
-                <Link href="/exam" className={styles.primaryBtn}>Thi thử ngay ➔</Link>
+                <Link href="/exam" className={styles.primaryBtn}>Thi thử ngay</Link>
               </div>
             </div>
           ) : (
-            <>
-              <section className={styles.actionSection} style={{ marginBottom: '2rem' }}>
-                <div className={`${styles.ctaCard} card-minimal`}>
-                  <h2>Ôn Tập Đề Thi</h2>
-                  <p>Bạn có <strong>{examDueCount}</strong> câu hỏi đến hạn ôn tập hôm nay.</p>
-                  <Link href="/notebook/quiz/exam" className={`${styles.primaryBtn} btn-accent`}>
-                    Bắt đầu làm Quiz Đề thi
-                  </Link>
-                </div>
-              </section>
-              <section className={styles.listSection}>
-                <h2>Danh sách câu hỏi đề thi cần ôn</h2>
-                <ExamMistakeList mistakeIds={examMistakeIds} mistakes={mistakes} />
-              </section>
-            </>
+            <section className={styles.listSection} style={{ marginTop: '1.5rem' }}>
+              <ExamMistakeList mistakeIds={examMistakeIds} mistakes={mistakes} />
+            </section>
           )}
         </>
       )}

@@ -46,7 +46,7 @@ export default function VocabularyPage() {
     mnemonicTip: string;
     emoji: string;
   }>({
-    word: '', ipa: '', vietnamese: '', partOfSpeech: 'noun', category: 'Custom', targetBand: '650+', examples: '', mnemonicTip: '', emoji: '📝'
+    word: '', ipa: '', vietnamese: '', partOfSpeech: 'noun', category: 'Custom', targetBand: '650+', examples: '', mnemonicTip: '', emoji: ''
   });
 
   // AI Generator States
@@ -108,7 +108,7 @@ export default function VocabularyPage() {
       examples: newWordData.examples.split('\n').filter(ex => ex.trim() !== '')
     });
     setIsAddingWord(false);
-    setNewWordData({ word: '', ipa: '', vietnamese: '', partOfSpeech: 'noun', category: 'Custom', targetBand: '650+', examples: '', mnemonicTip: '', emoji: '📝' });
+    setNewWordData({ word: '', ipa: '', vietnamese: '', partOfSpeech: 'noun', category: 'Custom', targetBand: '650+', examples: '', mnemonicTip: '', emoji: '' });
   };
 
   const handleGenerateAI = async () => {
@@ -271,7 +271,7 @@ export default function VocabularyPage() {
               className={`${styles.tabBtn} ${addMode === 'manual' ? styles.activeTab : ''}`}
               onClick={() => setAddMode('manual')}
             >
-              ✍️ Thêm thủ công
+              <FileTextIcon size={16} /> Thêm thủ công
             </button>
             <button 
               className={`${styles.tabBtn} ${addMode === 'ai' ? styles.activeTab : ''}`}
@@ -304,7 +304,7 @@ export default function VocabularyPage() {
               <textarea placeholder="Các ví dụ (mỗi dòng 1 ví dụ)" value={newWordData.examples} onChange={e => setNewWordData({...newWordData, examples: e.target.value})} className={`${styles.formInput} ${styles.formTextarea}`} />
               <div className={styles.formRow}>
                 <input type="text" placeholder="Mẹo nhớ" value={newWordData.mnemonicTip} onChange={e => setNewWordData({...newWordData, mnemonicTip: e.target.value})} className={styles.formInput} style={{ flex: 2 }} />
-                <input type="text" placeholder="Emoji (📝)" value={newWordData.emoji} onChange={e => setNewWordData({...newWordData, emoji: e.target.value})} className={styles.formInput} style={{ flex: 1 }} />
+                <input type="text" placeholder="Ghi chú thêm" value={newWordData.emoji} onChange={e => setNewWordData({...newWordData, emoji: e.target.value})} className={styles.formInput} style={{ flex: 1 }} />
               </div>
               <div className={styles.formActions}>
                 <button type="button" onClick={() => setIsAddingWord(false)} className="btn-secondary btn-sm">Hủy</button>
@@ -353,8 +353,8 @@ export default function VocabularyPage() {
 
               <div className={styles.formActions}>
                 <button type="button" onClick={() => setIsAddingWord(false)} className="btn-secondary btn-sm" disabled={isGenerating}>Hủy</button>
-                <button type="button" onClick={handleGenerateAI} className="btn-primary btn-sm" disabled={isGenerating || !aiPayload.trim()}>
-                  {isGenerating ? 'Đang tạo...' : '✨ Bắt đầu tạo'}
+                <button type="button" onClick={handleGenerateAI} className="btn-primary btn-sm" disabled={isGenerating || !aiPayload.trim()} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                  {isGenerating ? 'Đang tạo...' : <><SparklesIcon size={16} /> Bắt đầu tạo</>}
                 </button>
               </div>
 
@@ -382,7 +382,7 @@ export default function VocabularyPage() {
                           <strong>{word.word}</strong> <span className={styles.resultIpa}>{word.ipa}</span>
                         </div>
                         <div className={styles.resultMeaning}>{word.vietnamese}</div>
-                        <div className={styles.resultMnemonic}>{word.emoji} {word.mnemonicTip}</div>
+                        <div className={styles.resultMnemonic}>{word.mnemonicTip}</div>
                       </div>
                     ))}
                   </div>
@@ -446,11 +446,11 @@ export default function VocabularyPage() {
                       )}
                     </div>
                     
-                    {(word.mnemonicTip || word.emoji) && (
+                    {word.mnemonicTip && (
                       <div className={styles.expandSection}>
                         <div className={styles.expandLabel}>Mẹo nhớ</div>
                         <div className={styles.mnemonic}>
-                          <span className={styles.emoji}>{word.emoji}</span>
+                          {word.emoji ? <span className={styles.emoji}>{word.emoji}</span> : null}
                           <span>{word.mnemonicTip}</span>
                         </div>
                       </div>

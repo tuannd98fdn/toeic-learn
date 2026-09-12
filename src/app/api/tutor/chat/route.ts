@@ -17,6 +17,8 @@ export interface QuestionContext {
   transcript?: string;
   passageText?: string;
   explanation?: string;
+  subCategory?: string;
+  grammarTag?: string;
 }
 
 const SYSTEM_PROMPT = `
@@ -69,6 +71,7 @@ export async function POST(req: Request) {
 THÔNG TIN CÂU HỎI ĐANG HỎI:
 - Phần thi: ${questionContext.partTitle}
 - Câu số: ${questionContext.number ?? 'N/A'}
+${questionContext.subCategory ? `- Chủ điểm ngữ pháp (Sub-skill): ${questionContext.subCategory}${questionContext.grammarTag ? ` (${questionContext.grammarTag})` : ''}` : ''}
 - Nội dung câu hỏi: "${questionContext.text}"
 - Các lựa chọn: ${optionsFormatted}
 - Đáp án đúng: (${questionContext.correctAnswer})
@@ -94,7 +97,7 @@ ${questionContext.explanation ? `- Lời giải có sẵn: "${questionContext.ex
 
     if (err?.statusCode === 429) {
       return Response.json(
-        { error: '⏳ Hệ thống AI đang quá tải, vui lòng đợi 10 giây và thử lại!' },
+        { error: 'Hệ thống AI đang quá tải, vui lòng đợi 10 giây và thử lại!' },
         { status: 429 }
       );
     }

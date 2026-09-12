@@ -1,0 +1,92 @@
+export const part1Data = [
+  {
+    id: "ets22_t2_p1_01",
+    number: 1,
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80",
+    audioUrl: "https://storage.googleapis.com/estudyme/dev/2022/06/27/30449101.mp3",
+    options: {
+      A: "(A)",
+      B: "(B)",
+      C: "(C)",
+      D: "(D)"
+    },
+    correctAnswer: "B",
+    transcript: "<p><b>Transcript:</b><br/>(A) A man is assembling a bicycle.<br/><b>(B) A man is working with a power tool.</b><br/>(C) A man is painting a wooden fence.<br/>(D) A man is sweeping the workshop floor.</p>",
+    explanation: "<p>Trong ảnh, người đàn ông đang tập trung sử dụng máy móc/công cụ điện (power tool) tại bàn làm việc xưởng. Do đó, đáp án <b>(B)</b> miêu tả chính xác hành động.</p>"
+  },
+  {
+    id: "ets22_t2_p1_02",
+    number: 2,
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&auto=format&fit=crop&q=80",
+    audioUrl: "https://storage.googleapis.com/estudyme/dev/2022/06/27/96373586.mp3",
+    options: {
+      A: "(A)",
+      B: "(B)",
+      C: "(C)",
+      D: "(D)"
+    },
+    correctAnswer: "C",
+    transcript: "<p><b>Transcript:</b><br/>(A) She is trying on a winter coat.<br/>(B) She is paying for her purchases at the register.<br/><b>(C) She is looking at items displayed on a rack.</b><br/>(D) She is hanging up clothes in a fitting room.</p>",
+    explanation: "<p>Người phụ nữ đang đứng xem các món đồ được treo trên giá trưng bày trong cửa hàng thời trang (looking at items displayed on a rack). Đáp án <b>(C)</b> đúng.</p>"
+  },
+  {
+    id: "ets22_t2_p1_03",
+    number: 3,
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&auto=format&fit=crop&q=80",
+    audioUrl: "https://storage.googleapis.com/estudyme/dev/2022/06/27/10164366.mp3",
+    options: {
+      A: "(A)",
+      B: "(B)",
+      C: "(C)",
+      D: "(D)"
+    },
+    correctAnswer: "A",
+    transcript: "<p><b>Transcript:</b><br/><b>(A) Some colleagues are seated around a conference table.</b><br/>(B) A presenter is drawing a diagram on a whiteboard.<br/>(C) Workers are rearranging the office furniture.<br/>(D) Documents are being passed across the room.</p>",
+    explanation: "<p>Bức ảnh chụp các đồng nghiệp đang ngồi quanh bàn họp văn phòng (seated around a conference table). Đáp án <b>(A)</b> phù hợp nhất.</p>"
+  },
+  {
+    id: "ets22_t2_p1_04",
+    number: 4,
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80",
+    audioUrl: "https://storage.googleapis.com/estudyme/dev/2022/06/27/78028771.mp3",
+    options: {
+      A: "(A)",
+      B: "(B)",
+      C: "(C)",
+      D: "(D)"
+    },
+    correctAnswer: "D",
+    transcript: "<p><b>Transcript:</b><br/>(A) Customers are waiting in line outside a restaurant.<br/>(B) Dishes are being washed in a large sink.<br/>(C) Menus are being distributed to diners.<br/><b>(D) A server is placing cups on an outdoor table.</b></p>",
+    explanation: "<p>Nhân viên phục vụ (server) đang đặt cốc/ly lên bàn ăn ngoài trời (placing cups on an outdoor table). Đáp án <b>(D)</b> chính xác.</p>"
+  },
+  {
+    id: "ets22_t2_p1_05",
+    number: 5,
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&auto=format&fit=crop&q=80",
+    audioUrl: "https://storage.googleapis.com/estudyme/dev/2022/06/27/31046187.mp3",
+    options: {
+      A: "(A)",
+      B: "(B)",
+      C: "(C)",
+      D: "(D)"
+    },
+    correctAnswer: "A",
+    transcript: "<p><b>Transcript:</b><br/><b>(A) Boxes are stacked on wooden pallets in a warehouse.</b><br/>(B) A forklift is unloading a delivery truck.<br/>(C) A worker is carrying a ladder down an aisle.<br/>(D) Shelves are completely empty.</p>",
+    explanation: "<p>Các kiện hàng/hộp carton được xếp chồng trên các tấm pallet gỗ trong nhà kho (boxes are stacked on wooden pallets). Đáp án <b>(A)</b> phản ánh đúng hiện trường.</p>"
+  },
+  {
+    id: "ets22_t2_p1_06",
+    number: 6,
+    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&auto=format&fit=crop&q=80",
+    audioUrl: "https://storage.googleapis.com/estudyme/dev/2022/06/27/35794821.mp3",
+    options: {
+      A: "(A)",
+      B: "(B)",
+      C: "(C)",
+      D: "(D)"
+    },
+    correctAnswer: "C",
+    transcript: "<p><b>Transcript:</b><br/>(A) Pedestrians are crossing at a busy intersection.<br/>(B) A traffic officer is directing vehicles.<br/><b>(C) Several cars are parked along the side of a street.</b><br/>(D) Bicycles are chained to a metal railing.</p>",
+    explanation: "<p>Nhiều ô tô đang đỗ dọc bên lề đường (several cars are parked along the side of a street). Đáp án <b>(C)</b> chính xác.</p>"
+  }
+];

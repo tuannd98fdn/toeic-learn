@@ -476,6 +476,64 @@
   justify-content: center;
 }
 
+.nextStepBtn {
+  background: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);
+  color: #ffffff !important;
+  padding: 14px 32px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.35);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nextStepBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(var(--primary-rgb), 0.5);
+  filter: brightness(1.08);
+}
+
+.explanationContainer {
+  margin-top: 1.25rem;
+}
+
+.explanationToggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-hover, rgba(0, 0, 0, 0.04));
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.explanationToggleBtn:hover {
+  background: var(--border);
+  color: var(--foreground);
+}
+
+.explanationBoxContent {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  background: var(--card);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
 .primaryBtn {
   background: var(--foreground);
   color: var(--background);

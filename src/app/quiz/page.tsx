@@ -470,7 +470,7 @@ export default function QuizPage() {
                     <div className={styles.pedagogyExtras}>
                       {item.word.mnemonicTip && (
                         <div className={styles.mnemonicBox}>
-                          <span className={styles.mnemonicLabel}>💡 Mẹo nhớ:</span>
+                          <span className={styles.mnemonicLabel}>Mẹo nhớ:</span>
                           <span>{item.word.mnemonicTip}</span>
                         </div>
                       )}
