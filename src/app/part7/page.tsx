@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Confetti from '@/components/Confetti';
-import { ClockIcon } from '@/components/icons/AppIcons';
+import { ClockIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon } from '@/components/icons/AppIcons';
 import { useSearchParams } from 'next/navigation';
 import { Part7PassageSet, Part7DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
@@ -301,7 +301,13 @@ function Part7Trainer() {
       <div className={styles.pageContainer}>
         <Confetti show={showConfetti} />
         <div className={styles.resultsCard} style={{ margin: '40px auto', maxWidth: 600, padding: 40, textAlign: 'center', backgroundColor: 'var(--glass-bg)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
-          <span style={{ fontSize: '4rem', display: 'block', marginBottom: 16 }}>{percentage >= 70 ? '🎉' : '📚'}</span>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
+            {percentage >= 70 ? (
+              <AwardIcon size={56} style={{ color: 'var(--primary)' }} />
+            ) : (
+              <BookIcon size={56} style={{ color: 'var(--text-secondary)' }} />
+            )}
+          </div>
           <h1 style={{ fontSize: '1.8rem', marginBottom: 16, color: 'var(--foreground)' }}>Hoàn thành Part 7 Reading Comprehension!</h1>
           <div style={{ backgroundColor: 'var(--surface-hover)', padding: '16px 24px', borderRadius: 12, display: 'inline-block', marginBottom: 24 }}>
             <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>Kết quả: {totalScore} / {totalQuestions} ({percentage}%)</span>
@@ -313,8 +319,12 @@ function Part7Trainer() {
           </p>
 
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
-            <button onClick={() => window.location.reload()} className="btn-secondary">Làm lại đề này 🔄</button>
-            <Link href="/" className="btn-primary">Về Dashboard 🏠</Link>
+            <button onClick={() => window.location.reload()} className="btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <RotateCcwIcon size={16} /> Làm lại đề này
+            </button>
+            <Link href="/" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <HomeIcon size={16} /> Về Dashboard
+            </Link>
           </div>
         </div>
       </div>
@@ -416,7 +426,7 @@ function Part7Trainer() {
                   );
                 })}
               </div>
-              <p className={styles.shortcutHint}>⌨️ Mẹo: Sử dụng phím A, B, C, D để chọn đáp án và ⬅️ ➡️ để chuyển câu.</p>
+              <p className={styles.shortcutHint}>Phím tắt: Sử dụng phím A, B, C, D để chọn đáp án và phím mũi tên để chuyển câu.</p>
 
               {/* Navigation below question */}
               <div className={styles.qNavigation}>

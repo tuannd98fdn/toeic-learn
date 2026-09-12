@@ -519,7 +519,8 @@ export default function QuizPage() {
           <div className={styles.liveStats}>
             {combo >= 2 && (
               <div className={styles.comboBadge}>
-                🔥 Combo {combo}x!
+                <ZapIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px', color: '#ff9800' }} />
+                Combo {combo}x!
               </div>
             )}
             <div className={styles.questionBadge}>

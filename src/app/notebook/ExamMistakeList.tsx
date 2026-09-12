@@ -148,6 +148,17 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
                 <span>Chỉ ôn câu tới hạn ({dueQuestions.length})</span>
               </Link>
             )}
+            {filterSubCategory !== 'all' && (
+              <Link 
+                href={`/part5?subCategory=${encodeURIComponent(filterSubCategory)}`} 
+                className={styles.secondaryBtn}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                title={`Luyện tập câu hỏi Part 5 chuyên đề ${filterSubCategory}`}
+              >
+                <ZapIcon size={14} />
+                <span>Luyện chuyên đề ETS: {filterSubCategory}</span>
+              </Link>
+            )}
           </div>
         </div>
       </section>

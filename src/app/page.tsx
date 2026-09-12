@@ -7,7 +7,7 @@ import StreakCounter from '@/components/StreakCounter';
 import MascotSVG from '@/components/illustrations/MascotSVG';
 import { useStreak } from '@/hooks/useStreak';
 import { storage } from '@/utils/storage';
-import { StudyPlan, getStudyPlan, toggleTaskCompleted, getNextStudyTask } from '@/utils/studyPlanEngine';
+import { StudyPlan, getStudyPlan, toggleTaskCompleted, getNextStudyTask, syncAdaptivePlan } from '@/utils/studyPlanEngine';
 import {
   CardsIcon,
   QuizIcon,
@@ -117,7 +117,8 @@ export default function Home() {
       })
       .catch(err => console.error("Could not load tests index:", err));
 
-    setStudyPlan(getStudyPlan());
+    const syncRes = syncAdaptivePlan();
+    setStudyPlan(syncRes.plan || getStudyPlan());
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!streakMounted) {
@@ -190,13 +191,21 @@ export default function Home() {
                   <span className={styles.dayLabel}>Ngày {activeDay.dayNumber}/{studyPlan.daysTotal}</span>
                   <span className={styles.progressLabel}>{progressPercent}%</span>
                 </div>
+                <Link
+                  href="/study-plan"
+                  className="btn-ghost btn-sm"
+                  style={{ fontSize: '0.8rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                >
+                  <span>Chi tiết lộ trình</span>
+                  <ArrowRightIcon size={14} />
+                </Link>
                 <div className={styles.progressBarBg}>
                   <div className={styles.progressBarFill} style={{ width: `${progressPercent}%` }} />
                 </div>
               </div>
 
               <div className={styles.planList}>
-                {activeDay.tasks.map((task) => (
+                {activeDay.tasks.map((task: any) => (
                   <div key={task.id} className={styles.planItem} data-completed={task.completed}>
                     <div className={styles.planItemInfo}>
                       <button
@@ -212,7 +221,14 @@ export default function Home() {
                       >
                         {task.completed && '✓'}
                       </button>
-                      <span className={styles.planItemTitle}>{task.title}</span>
+                      <div className={styles.planItemTextGroup}>
+                        <div className={styles.planItemHeaderRow}>
+                          <span className={styles.planItemTitle}>{task.title}</span>
+                          {task.subCategory && (
+                            <span className={styles.subCatTag}>{task.subCategory}</span>
+                          )}
+                        </div>
+                      </div>
                     </div>
                     <Link href={task.link} className={`${task.completed ? 'btn-secondary' : 'btn-primary'} btn-sm`}>
                       {task.completed ? 'ÔN LẠI' : 'HỌC NGAY'}

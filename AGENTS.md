@@ -105,6 +105,7 @@ Follow this pipeline:
 * Do not add speculative AI features.
 * Do not modify unrelated code.
 * **NO UI EMOJIS (STRICT)**: Never add emoji icons (e.g., 🎯, 🤖, 🚀, 💡, 🎧, 📝, ➔, 🧹, 👁️, 💪, 🎉) to UI components, buttons, badges, banners, or any user-facing strings. Always use clean SVG icons from `AppIcons` or plain typography.
+* **Cross-Session Memory & Progress Tracking**: Always inspect `PROGRESS.md` at the start of any new session to maintain full context of completed milestones (Vấn đề 1 -> 6), architectural invariants, and the next issue to resolve. Keep `PROGRESS.md` updated whenever an issue is resolved.
 * Every important recommendation should have traceable evidence.
 * Every implemented feature must be verified.
 * STOP when the requirement is satisfied and verified.

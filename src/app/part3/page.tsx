@@ -10,7 +10,7 @@ import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
-import { MapPinIcon } from '@/components/icons/AppIcons';
+import { MapPinIcon, AlertCircleIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon } from '@/components/icons/AppIcons';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
@@ -164,7 +164,7 @@ function Part3Trainer() {
   if (error || sets.length === 0) {
     return (
       <div className={styles.errorState}>
-        <p>⚠️ {error || 'Không tìm thấy bài nghe Part 3 nào.'}</p>
+        <p><AlertCircleIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />{error || 'Không tìm thấy bài nghe Part 3 nào.'}</p>
         <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
       </div>
     );
@@ -176,7 +176,13 @@ function Part3Trainer() {
       <div className={styles.container}>
         <Confetti show={showConfetti} />
         <div className={styles.resultsCard} style={{ margin: '40px auto', maxWidth: 600, padding: 40, textAlign: 'center', backgroundColor: 'var(--glass-bg)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
-          <span style={{ fontSize: '4rem', display: 'block', marginBottom: 16 }}>{percentage >= 70 ? '🎉' : '📚'}</span>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
+            {percentage >= 70 ? (
+              <AwardIcon size={56} style={{ color: 'var(--primary)' }} />
+            ) : (
+              <BookIcon size={56} style={{ color: 'var(--text-secondary)' }} />
+            )}
+          </div>
           <h1 style={{ fontSize: '1.8rem', marginBottom: 16, color: 'var(--foreground)' }}>Hoàn thành Part 3 Conversations!</h1>
           <div style={{ backgroundColor: 'var(--surface-hover)', padding: '16px 24px', borderRadius: 12, display: 'inline-block', marginBottom: 24 }}>
             <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>Kết quả: {totalScore} / {allQuestionsCount} ({percentage}%)</span>
@@ -188,8 +194,12 @@ function Part3Trainer() {
           </p>
 
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
-            <button onClick={handleRestart} className="btn-secondary">Làm lại đề này 🔄</button>
-            <Link href="/" className="btn-primary">Về Dashboard 🏠</Link>
+            <button onClick={handleRestart} className="btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <RotateCcwIcon size={16} /> Làm lại đề này
+            </button>
+            <Link href="/" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <HomeIcon size={16} /> Về Dashboard
+            </Link>
           </div>
         </div>
       </div>

@@ -314,9 +314,9 @@ export default function GrammarRadarChart({ mistakes: propMistakes }: GrammarRad
                       <ArrowRightIcon size={13} />
                     </Link>
                     <Link
-                      href="/part5"
+                      href={`/part5?subCategory=${encodeURIComponent(item.key)}`}
                       className={styles.actionBtn}
-                      title="Luyện tập câu hỏi Part 5 mới"
+                      title={`Luyện tập chuyên đề ${item.nameVi} (${item.key})`}
                     >
                       <ZapIcon size={13} />
                       <span>Luyện tập</span>

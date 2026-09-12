@@ -19,8 +19,11 @@ import {
   RotateCcwIcon,
   CheckCircleIcon,
   TargetIcon,
+  AlertCircleIcon,
+  BotIcon,
 } from '@/components/icons/AppIcons';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+import { syncAdaptivePlan } from '@/utils/studyPlanEngine';
 import styles from './page.module.css';
 
 interface DiagnosticQuestion {
@@ -391,6 +394,8 @@ export default function DiagnosticPage() {
     };
 
     storage.set('toeic_diagnostic_result', newResult);
+    // Automatically synchronize study plan with fresh diagnostic diagnosis & weaknesses
+    syncAdaptivePlan();
     setResult(newResult);
     setIsSubmitted(true);
     setShowConfetti(true);
@@ -465,7 +470,8 @@ export default function DiagnosticPage() {
           {/* Weakness Diagnostic Alert */}
           <div className={styles.weaknessCard}>
             <span className={styles.weaknessBadge}>
-              ⚠️ Điểm yếu cần cải thiện nhất
+              <AlertCircleIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+              Điểm yếu cần cải thiện nhất
             </span>
             <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800 }}>
               {result.weakestPart.partName} (Độ chính xác: {result.weakestPart.accuracy}%)
@@ -614,7 +620,8 @@ export default function DiagnosticPage() {
                         boxShadow: '0 2px 6px rgba(37, 99, 235, 0.25)',
                       }}
                     >
-                      🤖 Hỏi Gia Sư AI 990 về câu này
+                      <BotIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
+                      Hỏi Gia Sư AI 990 về câu này
                     </button>
                   </div>
                 );

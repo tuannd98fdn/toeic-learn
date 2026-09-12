@@ -14,7 +14,7 @@ interface ShareButtonProps {
 export default function ShareButton({ 
   elementId, 
   title = 'Thành tích TOEIC của tôi', 
-  text = 'Mình vừa đạt kỷ lục mới trên TOEIC Master VN! Cùng học với mình nhé 🚀',
+  text = 'Mình vừa đạt kỷ lục mới trên TOEIC Master VN! Cùng học với mình nhé!',
   className = 'btn-primary'
 }: ShareButtonProps) {
   const [isSharing, setIsSharing] = useState(false);

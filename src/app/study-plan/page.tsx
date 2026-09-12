@@ -10,6 +10,7 @@ import {
   generateAdaptivePlan,
   toggleTaskCompleted,
   removeStudyPlan,
+  syncAdaptivePlan,
 } from '@/utils/studyPlanEngine';
 import {
   TargetIcon,
@@ -23,7 +24,9 @@ import {
   NotebookIcon,
   ExamIcon,
   MapIcon,
+  ZapIcon,
 } from '@/components/icons/AppIcons';
+import { storage } from '@/utils/storage';
 import styles from './page.module.css';
 
 export default function StudyPlanPage() {
@@ -41,10 +44,10 @@ function StudyPlanContainer() {
   const paramWeak = searchParams.get('weak');
 
   const [plan, setPlan] = useState<StudyPlan | null>(null);
-  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [showConfetti, setShowConfetti] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [selectedPhaseTab, setSelectedPhaseTab] = useState<'all' | 'phase1' | 'phase2' | 'phase3'>('all');
+  const [showConfetti, setShowConfetti] = useState(false);
 
   // Form State
   const [targetScore, setTargetScore] = useState<number>(650);
@@ -57,28 +60,64 @@ function StudyPlanContainer() {
     paramWeak ? paramWeak.split(',') : ['p5', 'p2', 'p7']
   );
 
+  const [syncNotice, setSyncNotice] = useState<string | null>(null);
+
   useEffect(() => {
     const existingPlan = getStudyPlan();
     if (existingPlan && !fromDiagnostic) {
       setPlan(existingPlan);
       setIsEditing(false);
-    } else {
-      // If fromDiagnostic or no plan, show form
-      setIsEditing(true);
-      if (paramScore) {
-        const scoreNum = parseInt(paramScore, 10);
-        setCurrentScore(scoreNum);
-        if (scoreNum < 500) setTargetScore(650);
-        else if (scoreNum < 650) setTargetScore(750);
-        else if (scoreNum < 750) setTargetScore(850);
-        else setTargetScore(900);
+    } else if (existingPlan && fromDiagnostic) {
+      // Auto-sync existing plan with fresh diagnostic data
+      const { plan: syncedPlan, gaps } = syncAdaptivePlan();
+      if (syncedPlan) {
+        setPlan(syncedPlan);
+        setIsEditing(false);
+        setSyncNotice(`Lộ trình đã tự động đồng bộ theo kết quả bài Test Chẩn đoán mới nhất (${gaps.latestScore} điểm)!`);
+        setTimeout(() => setSyncNotice(null), 5000);
       }
-      if (paramWeak) {
-        setWeakestParts(paramWeak.split(','));
+    } else {
+      // If no existing plan, check if we have diagnostic or exam data to auto-generate adaptive plan!
+      const hasDiagnostic = storage.get('toeic_diagnostic_result', null);
+      const examHistory = storage.get('toeic_exam_history', []);
+      if (hasDiagnostic || (examHistory && (examHistory as any[]).length > 0) || fromDiagnostic) {
+        const { plan: newPlan, gaps } = syncAdaptivePlan();
+        if (newPlan) {
+          setPlan(newPlan);
+          setIsEditing(false);
+          setSyncNotice(`AI đã tự động thiết lập lộ trình thích ứng theo bài Test Chẩn đoán (${gaps.latestScore} điểm)!`);
+          setTimeout(() => setSyncNotice(null), 5000);
+        } else {
+          setIsEditing(true);
+        }
+      } else {
+        setIsEditing(true);
+        if (paramScore) {
+          const scoreNum = parseInt(paramScore, 10);
+          setCurrentScore(scoreNum);
+          if (scoreNum < 500) setTargetScore(650);
+          else if (scoreNum < 650) setTargetScore(750);
+          else if (scoreNum < 750) setTargetScore(850);
+          else setTargetScore(900);
+        }
+        if (paramWeak) {
+          setWeakestParts(paramWeak.split(','));
+        }
       }
     }
     setLoading(false);
   }, [fromDiagnostic, paramScore, paramWeak]);
+
+  const handleSyncPlan = () => {
+    const { plan: syncedPlan, gaps } = syncAdaptivePlan();
+    if (syncedPlan) {
+      setPlan({ ...syncedPlan });
+      setSyncNotice(
+        `Đã đồng bộ thành công! Lộ trình đã được điều chỉnh theo ${gaps.totalMistakes} lỗi sai và điểm thi mới (${gaps.latestScore} điểm).`
+      );
+      setTimeout(() => setSyncNotice(null), 5000);
+    }
+  };
 
   const handleGeneratePlan = () => {
     const newPlan = generateAdaptivePlan({
@@ -310,6 +349,47 @@ function StudyPlanContainer() {
         </div>
       </header>
 
+      {/* Adaptive Sync Banner */}
+      <div className={styles.adaptiveBanner}>
+        <div className={styles.adaptiveBannerLeft}>
+          <div className={styles.adaptiveIconWrapper}>
+            <ZapIcon size={20} />
+          </div>
+          <div>
+            <div className={styles.adaptiveTitle}>
+              Lộ Trình Thích Ứng Thông Minh (Adaptive TOEIC Engine)
+            </div>
+            <div className={styles.adaptiveDesc}>
+              Điểm hiện tại: <strong>{plan.currentScore}</strong> • Trọng tâm gỡ điểm: <strong>{plan.weakestParts.map((p) => p.toUpperCase()).join(', ')}</strong>
+              {plan.topGrammarWeaknesses && plan.topGrammarWeaknesses.length > 0 && (
+                <span> • Chuyên đề ngữ pháp: <strong>{plan.topGrammarWeaknesses.slice(0, 2).join(', ')}</strong></span>
+              )}
+              {plan.lastSyncedAt && (
+                <span className={styles.syncTime}> (Đồng bộ: {new Date(plan.lastSyncedAt).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })})</span>
+              )}
+            </div>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={handleSyncPlan}
+          className={styles.syncBtn}
+          title="Tái cân bằng các ngày học còn lại theo điểm thi và lỗi sai mới nhất"
+        >
+          <RotateCcwIcon size={14} />
+          <span>Đồng bộ theo lỗi sai mới</span>
+        </button>
+      </div>
+
+      {syncNotice && (
+        <div className={styles.diagnosticNotice} style={{ background: 'rgba(16, 185, 129, 0.1)', borderColor: 'rgba(16, 185, 129, 0.3)', color: 'var(--foreground)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <CheckCircleIcon size={18} style={{ color: '#10b981' }} />
+            <span>{syncNotice}</span>
+          </div>
+        </div>
+      )}
+
       {/* Today's Tasks Card */}
       {activeDay && (
         <section className={styles.todayCard}>
@@ -346,6 +426,9 @@ function StudyPlanContainer() {
                   <div className={styles.taskContent}>
                     <div className={`${styles.taskTitle} ${task.completed ? styles.strikethrough : ''}`}>
                       {task.title}
+                      {task.subCategory && (
+                        <span className={styles.subCatTag}>{task.subCategory}</span>
+                      )}
                     </div>
                     <div className={styles.taskDesc}>{task.description}</div>
                   </div>
@@ -481,6 +564,9 @@ function StudyPlanContainer() {
                         </button>
                         <span style={{ textDecoration: task.completed ? 'line-through' : 'none', opacity: task.completed ? 0.6 : 1 }}>
                           {task.title}
+                          {task.subCategory && (
+                            <span className={styles.subCatTag}>{task.subCategory}</span>
+                          )}
                         </span>
                       </div>
 

@@ -13,6 +13,7 @@ import {
   StatsIcon,
   FlagIcon,
   ClockIcon,
+  AlertCircleIcon,
 } from '@/components/icons/AppIcons';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
@@ -233,7 +234,7 @@ function MiniTestSimulation() {
   if (error || questions.length === 0) {
     return (
       <div className={styles.errorState}>
-        <p>⚠️ {error || 'Lỗi dữ liệu'}</p>
+        <p><AlertCircleIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />{error || 'Lỗi dữ liệu'}</p>
         <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
       </div>
     );

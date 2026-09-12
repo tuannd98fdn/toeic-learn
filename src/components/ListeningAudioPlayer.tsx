@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { BookIcon } from '@/components/icons/AppIcons';
 import styles from './ListeningAudioPlayer.module.css';
 
 interface ListeningAudioPlayerProps {
@@ -262,7 +263,8 @@ export default function ListeningAudioPlayer({
             className={styles.transcriptToggleBtn}
             onClick={() => setShowTranscript(prev => !prev)}
           >
-            <span>{showTranscript ? 'Ẩn Transcript bài nghe' : '📜 Xem Transcript & Lời thoại'}</span>
+            <BookIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
+            <span>{showTranscript ? 'Ẩn Transcript bài nghe' : 'Xem Transcript & Lời thoại'}</span>
           </button>
           {showTranscript && (
             <div 

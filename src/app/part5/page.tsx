@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Confetti from '@/components/Confetti';
 import { 
   ZapIcon,
@@ -10,8 +11,8 @@ import {
   SparklesIcon,
   LightbulbIcon,
   ArrowRightIcon,
+  TargetIcon,
 } from '@/components/icons/AppIcons';
-import { useSearchParams } from 'next/navigation';
 import { Part5Question, Part5DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
@@ -23,6 +24,17 @@ import styles from './page.module.css';
 
 const TIME_LIMIT = 20; // 20 seconds per question
 
+export const PART5_SUB_SKILLS = [
+  { key: 'all', label: 'Tất cả câu hỏi' },
+  { key: 'Word Form', label: 'Từ loại' },
+  { key: 'Verb Tense', label: 'Thì động từ' },
+  { key: 'Preposition & Conjunction', label: 'Giới từ & Liên từ' },
+  { key: 'Business Vocabulary', label: 'Từ vựng công sở' },
+  { key: 'Pronoun', label: 'Đại từ' },
+  { key: 'Relative Clause', label: 'Mệnh đề quan hệ' },
+  { key: 'Sentence Structure', label: 'Cấu trúc câu' },
+];
+
 export default function Part5Page() {
   return (
     <Suspense fallback={<div className={styles.loading}>Loading Trainer...</div>}>
@@ -32,8 +44,13 @@ export default function Part5Page() {
 }
 
 function Part5SpeedTrainer() {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const testId = searchParams.get('test') || 'ets2022_test1';
+  const testIdParam = searchParams.get('test') || 'ets2022_test1';
+  const subCategoryParam = searchParams.get('subCategory') || 'all';
+
+  const [selectedTest, setSelectedTest] = useState(testIdParam);
+  const [selectedSubSkill, setSelectedSubSkill] = useState(subCategoryParam);
 
   const [questions, setQuestions] = useState<Part5Question[]>([]);
   const [loading, setLoading] = useState(true);
@@ -42,7 +59,7 @@ function Part5SpeedTrainer() {
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [streak, setStreak] = useState(0); // Added for gamification
+  const [streak, setStreak] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
   const [isFinished, setIsFinished] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -52,33 +69,79 @@ function Part5SpeedTrainer() {
   const [showConfetti, setShowConfetti] = useState(false);
 
   const nextTask = getNextStudyTask();
-
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentIndex > 0 && !isFinished);
 
+  // Sync state with URL params
   useEffect(() => {
-    // Client-side initialization
+    const sub = searchParams.get('subCategory');
+    if (sub) {
+      setSelectedSubSkill(sub);
+    } else {
+      setSelectedSubSkill('all');
+    }
+    const t = searchParams.get('test');
+    if (t) {
+      setSelectedTest(t);
+    }
+  }, [searchParams]);
+
+  // Fetch questions (either single test or cross-test subskill pool)
+  useEffect(() => {
     const fetchQuestions = async () => {
       try {
         setLoading(true);
-        // Extract year and test number from testId (e.g. ets2022_test1)
-        const match = testId.match(/ets(\d+)_test(\d+)/);
-        if (!match) throw new Error("Invalid test ID");
-        
-        const path = `/data/ets${match[1]}/test${match[2]}/part5.json`;
-        const res = await fetch(path);
-        
-        if (!res.ok) throw new Error("Failed to fetch test data");
-        
-        const data = await res.json();
-        
-        // Zod validation (Tech Lead requirement)
-        const validated = Part5DataSchema.parse(data);
-        
-        // Load all questions sequentially for the full test
-        setQuestions(validated);
+        setError(null);
+
+        if (selectedSubSkill !== 'all') {
+          // Cross-test pooling across ETS Test 1 and Test 2
+          const testPaths = [
+            '/data/ets2022/test1/part5.json',
+            '/data/ets2022/test2/part5.json',
+          ];
+          const responses = await Promise.all(testPaths.map(p => fetch(p)));
+          const allData: any[] = [];
+          for (const res of responses) {
+            if (res.ok) {
+              const data = await res.json();
+              allData.push(...data);
+            }
+          }
+          const validated = Part5DataSchema.parse(allData);
+          const filtered = validated.filter(q => {
+            const cat = q.subCategory || q.type || '';
+            return cat.toLowerCase() === selectedSubSkill.toLowerCase() ||
+                   cat.toLowerCase().includes(selectedSubSkill.toLowerCase());
+          });
+          setQuestions(filtered);
+        } else {
+          // Single test sequential mode
+          const match = selectedTest.match(/ets(\d+)_test(\d+)/);
+          if (!match) throw new Error("Invalid test ID");
+          
+          const path = `/data/ets${match[1]}/test${match[2]}/part5.json`;
+          const res = await fetch(path);
+          if (!res.ok) throw new Error("Failed to fetch test data");
+          
+          const data = await res.json();
+          const validated = Part5DataSchema.parse(data);
+          setQuestions(validated);
+        }
+
+        // Reset session state
+        setCurrentIndex(0);
+        setScore(0);
+        setStreak(0);
+        setTimeLeft(TIME_LIMIT);
+        setIsFinished(false);
+        setShowAnswer(false);
+        setShowExplanation(false);
+        setSelectedAnswer(null);
+        setWrongAnswers([]);
+        setShowConfetti(false);
+        setTutorContext(null);
       } catch (err: any) {
         console.error("Error loading Part 5 data:", err);
         setError(err.message || "Something went wrong");
@@ -88,7 +151,22 @@ function Part5SpeedTrainer() {
     };
     
     fetchQuestions();
-  }, [testId]);
+  }, [selectedTest, selectedSubSkill]);
+
+  const handleSelectSubSkill = (key: string) => {
+    setSelectedSubSkill(key);
+    if (key === 'all') {
+      router.push(`/part5?test=${selectedTest}`);
+    } else {
+      router.push(`/part5?subCategory=${encodeURIComponent(key)}`);
+    }
+  };
+
+  const handleSelectTest = (tId: string) => {
+    setSelectedTest(tId);
+    setSelectedSubSkill('all');
+    router.push(`/part5?test=${tId}`);
+  };
 
   const openAITutor = (q: Part5Question) => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -106,7 +184,17 @@ function Part5SpeedTrainer() {
   };
 
   const handleRestart = () => {
-    window.location.reload();
+    setCurrentIndex(0);
+    setScore(0);
+    setStreak(0);
+    setTimeLeft(TIME_LIMIT);
+    setIsFinished(false);
+    setShowAnswer(false);
+    setShowExplanation(false);
+    setSelectedAnswer(null);
+    setWrongAnswers([]);
+    setShowConfetti(false);
+    setTutorContext(null);
   };
 
   useEffect(() => {
@@ -128,13 +216,11 @@ function Part5SpeedTrainer() {
     };
   }, [currentIndex, isFinished, showAnswer, questions, loading, tutorContext]);
 
-  const handleTimeUp = () => {
-    setShowAnswer(true);
-    const currentQ = questions[currentIndex];
-    setWrongAnswers(prev => [...prev, currentQ]);
-    addMistake(`exam_${testId}_part5_${currentQ.id}`, {
+  const recordMistake = (currentQ: Part5Question) => {
+    const qTestId = currentQ.id.includes('t2') ? 'ets2022_test2' : (selectedSubSkill !== 'all' ? (currentQ.id.includes('t1') ? 'ets2022_test1' : selectedTest) : selectedTest);
+    addMistake(`exam_${qTestId}_part5_${currentQ.id}`, {
       type: 'exam',
-      testId: testId,
+      testId: qTestId,
       part: 'part5',
       questionId: currentQ.id,
       subCategory: currentQ.subCategory || currentQ.type,
@@ -142,28 +228,31 @@ function Part5SpeedTrainer() {
     });
   };
 
+  const handleTimeUp = () => {
+    setShowAnswer(true);
+    const currentQ = questions[currentIndex];
+    if (currentQ) {
+      setWrongAnswers(prev => [...prev, currentQ]);
+      recordMistake(currentQ);
+    }
+  };
+
   const handleAnswer = (answer: string) => {
-    if (showAnswer) return; // Prevent multiple clicks
+    if (showAnswer) return;
     if (timerRef.current) clearInterval(timerRef.current);
     
     setSelectedAnswer(answer);
     const currentQ = questions[currentIndex];
+    if (!currentQ) return;
     
     if (answer === currentQ.correctAnswer) {
       setScore(prev => prev + 1);
-      setStreak(prev => prev + 1); // Increment streak
+      setStreak(prev => prev + 1);
       setShowAnswer(true);
     } else {
       setWrongAnswers(prev => [...prev, currentQ]);
-      setStreak(0); // Reset streak
-      addMistake(`exam_${testId}_part5_${currentQ.id}`, {
-        type: 'exam',
-        testId: testId,
-        part: 'part5',
-        questionId: currentQ.id,
-        subCategory: currentQ.subCategory || currentQ.type,
-        grammarTag: currentQ.grammarTag,
-      });
+      setStreak(0);
+      recordMistake(currentQ);
       setShowAnswer(true);
     }
   };
@@ -179,13 +268,15 @@ function Part5SpeedTrainer() {
         return prev + 1;
       } else {
         setIsFinished(true);
-        storage.set(`progress_${testId}_part5`, true);
+        if (selectedSubSkill === 'all') {
+          storage.set(`progress_${selectedTest}_part5`, true);
+        }
         return prev;
       }
     });
   };
 
-  // Keyboard Shortcuts for 10/10 UX
+  // Keyboard Shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
@@ -207,12 +298,14 @@ function Part5SpeedTrainer() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   });
 
-  // Check Confetti condition when finished
+  // Confetti on good score
   useEffect(() => {
-    if (isFinished && score / questions.length >= 0.7) {
+    if (isFinished && questions.length > 0 && score / questions.length >= 0.7) {
       setShowConfetti(true);
     }
   }, [isFinished, score, questions.length]);
+
+  const activeSubMeta = PART5_SUB_SKILLS.find(s => s.key.toLowerCase() === selectedSubSkill.toLowerCase());
 
   if (loading) {
     return <div className={styles.loading}>Loading Trainer...</div>;
@@ -223,37 +316,84 @@ function Part5SpeedTrainer() {
   }
 
   if (questions.length === 0) {
-    return <div className={styles.loading}>No questions found.</div>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.subSkillContainer}>
+          <div className={styles.subSkillScroll}>
+            {PART5_SUB_SKILLS.map(skill => (
+              <button
+                key={skill.key}
+                type="button"
+                className={`${styles.subSkillPill} ${selectedSubSkill === skill.key ? styles.subSkillPillActive : ''}`}
+                onClick={() => handleSelectSubSkill(skill.key)}
+              >
+                {skill.key !== 'all' && <TargetIcon size={12} />}
+                {skill.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className={`${styles.finishedCard} card-minimal`}>
+          <h2>Không tìm thấy câu hỏi</h2>
+          <p className={styles.feedback}>Không có câu hỏi nào khớp với chủ điểm đã chọn.</p>
+          <button onClick={() => handleSelectSubSkill('all')} className={styles.primaryBtn}>
+            Làm tất cả câu hỏi
+          </button>
+        </div>
+      </div>
+    );
   }
 
   if (isFinished) {
-    const percentage = (score / questions.length) * 100;
-    
+    const percentage = questions.length > 0 ? (score / questions.length) * 100 : 0;
+    const isSubSkillMode = selectedSubSkill !== 'all';
+
     return (
       <div className={styles.container}>
         <Confetti show={showConfetti} />
         <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
-          <h2>Kết quả Speed Trainer</h2>
+          <h2>{isSubSkillMode ? `Chuyên đề: ${activeSubMeta?.label || selectedSubSkill}` : 'Kết quả Speed Trainer Part 5'}</h2>
           <div className={styles.scoreCircle}>
             <span className={styles.scoreText}>{score}/{questions.length}</span>
           </div>
           <p className={styles.feedback}>
-            {percentage >= 80 ? 'Tuyệt vời! Phản xạ ngữ pháp của bạn rất nhạy bén.' :
-             percentage >= 50 ? 'Khá tốt! Nhưng vẫn cần luyện tập thêm để phản xạ nhanh hơn.' :
-             'Đừng nản chí! Hãy xem lại các lỗi sai bên dưới nhé.'}
+            {percentage >= 80 ? `Tuyệt vời! Bạn nắm rất vững kiến thức ${activeSubMeta?.label || 'Part 5'}.` :
+             percentage >= 50 ? `Khá tốt! Nhưng vẫn cần luyện thêm để phản xạ nhạy bén hơn trong 20s.` :
+             `Chủ điểm này còn nhiều bẫy. Hãy xem kỹ giải thích và ôn lại trong Sổ tay lỗi sai.`}
           </p>
           <div className={styles.actions}>
-            <Link 
-              href={nextTask.link === '/part5' ? `/part6?test=${testId}` : nextTask.link} 
-              className={styles.nextStepBtn}
-            >
-              HỌC TIẾP: {nextTask.link === '/part5' ? 'Part 6 (Điền đoạn văn)' : nextTask.title}
-              <ArrowRightIcon size={18} />
-            </Link>
-            <button onClick={handleRestart} className={styles.secondaryBtn}>
-              Luyện tập lại <RotateCcwIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
-            </button>
-            <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
+            {isSubSkillMode ? (
+              <>
+                <Link 
+                  href="/stats" 
+                  className={styles.nextStepBtn}
+                >
+                  <TargetIcon size={18} />
+                  Xem Biểu đồ Radar Lỗ hổng
+                </Link>
+                <button onClick={handleRestart} className={styles.secondaryBtn}>
+                  Luyện lại chuyên đề này <RotateCcwIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
+                </button>
+                <button onClick={() => handleSelectSubSkill('all')} className={styles.secondaryBtn}>
+                  Làm đề đầy đủ 30 câu
+                </button>
+                <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
+              </>
+            ) : (
+              <>
+                <Link 
+                  href={nextTask.link === '/part5' ? `/part6?test=${selectedTest}` : nextTask.link} 
+                  className={styles.nextStepBtn}
+                >
+                  HỌC TIẾP: {nextTask.link === '/part5' ? 'Part 6 (Điền đoạn văn)' : nextTask.title}
+                  <ArrowRightIcon size={18} />
+                </Link>
+                <button onClick={handleRestart} className={styles.secondaryBtn}>
+                  Luyện tập lại <RotateCcwIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
+                </button>
+                <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
+              </>
+            )}
           </div>
         </div>
 
@@ -264,8 +404,8 @@ function Part5SpeedTrainer() {
               {wrongAnswers.map(q => (
                 <div key={q.id} className={`${styles.wrongCard} card-minimal`}>
                   <div className={styles.wrongHeader}>
-                    <span className={styles.categoryBadge}>{q.type || 'Grammar'}</span>
-                    <span className={styles.sourceBadge}>ETS Test</span>
+                    <span className={styles.categoryBadge}>{q.subCategory || q.type || 'Grammar'}</span>
+                    {q.grammarTag && <span className={styles.sourceBadge}>{q.grammarTag}</span>}
                   </div>
                   <p className={styles.sentence}>
                     {q.text.split('___')[0]}
@@ -309,7 +449,6 @@ function Part5SpeedTrainer() {
   const currentQ = questions[currentIndex];
   const progressPercent = ((currentIndex) / questions.length) * 100;
 
-  // Determine button styles based on state
   const getButtonClass = (key: string) => {
     if (!showAnswer) return styles.optionBtn;
     if (key === currentQ.correctAnswer) return `${styles.optionBtn} ${styles.correct}`;
@@ -319,6 +458,61 @@ function Part5SpeedTrainer() {
 
   return (
     <div className={styles.container}>
+      {/* Sub-skill and Test Selector Pill Bar */}
+      <div className={styles.subSkillContainer}>
+        <div className={styles.subSkillScroll}>
+          {PART5_SUB_SKILLS.map(skill => (
+            <button
+              key={skill.key}
+              type="button"
+              className={`${styles.subSkillPill} ${selectedSubSkill === skill.key ? styles.subSkillPillActive : ''}`}
+              onClick={() => handleSelectSubSkill(skill.key)}
+            >
+              {skill.key !== 'all' && <TargetIcon size={12} />}
+              {skill.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {selectedSubSkill !== 'all' ? (
+        <div className={styles.activeSkillBanner}>
+          <div>
+            <span>Đang luyện chuyên sâu: <strong>{activeSubMeta?.label || selectedSubSkill}</strong></span>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginLeft: '8px' }}>
+              ({questions.length} câu từ ngân hàng ETS)
+            </span>
+          </div>
+          <button 
+            type="button" 
+            onClick={() => handleSelectSubSkill('all')}
+            className={styles.clearSkillBtn}
+          >
+            Quay lại cả đề
+          </button>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
+          <div className={styles.testSelectorRow}>
+            <span>Đề thi:</span>
+            <button
+              type="button"
+              className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test1' ? styles.testOptionActive : ''}`}
+              onClick={() => handleSelectTest('ets2022_test1')}
+            >
+              ETS 2022 Test 1
+            </button>
+            <button
+              type="button"
+              className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test2' ? styles.testOptionActive : ''}`}
+              onClick={() => handleSelectTest('ets2022_test2')}
+            >
+              ETS 2022 Test 2
+            </button>
+          </div>
+        </div>
+      )}
+
       <header className={styles.header}>
         <div className={styles.topHeaderRow}>
           <div className={styles.progressSection}>
@@ -408,7 +602,6 @@ function Part5SpeedTrainer() {
         onAITutor={() => openAITutor(currentQ)}
         nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả' : 'Câu tiếp theo'}
       />
-
 
       {tutorContext && (
         <AITutorDrawer

@@ -17,10 +17,14 @@ import {
   LightbulbIcon,
   MaximizeIcon,
   MinimizeIcon,
+  AlertCircleIcon,
+  CloseIcon,
+  ZapIcon,
 } from '@/components/icons/AppIcons';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { storage } from '@/utils/storage';
+import { syncAdaptivePlan } from '@/utils/studyPlanEngine';
 import {
   calculateScaledScore,
   getCefrLevel,
@@ -426,6 +430,9 @@ function ExamSimulation() {
     const prevHistory = storage.get<ExamScoreSummary[]>('toeic_exam_history', []);
     storage.set('toeic_exam_history', [summary, ...prevHistory]);
 
+    // Synchronize and rebalance study plan based on full exam performance
+    syncAdaptivePlan();
+
     setResultSummary(summary);
     setIsSubmitted(true);
     if (totalScore >= 600) {
@@ -436,7 +443,7 @@ function ExamSimulation() {
   if (loading) {
     return (
       <div className={styles.loading}>
-        <span>⏳ Đang chuẩn bị đề thi 200 câu...</span>
+        <span>Đang chuẩn bị đề thi 200 câu...</span>
         <span style={{ fontSize: '0.9rem', color: 'var(--text-tertiary)' }}>
           Nạp hình ảnh, audio và dữ liệu chuẩn ETS
         </span>
@@ -447,7 +454,7 @@ function ExamSimulation() {
   if (error || questions.length === 0) {
     return (
       <div className={styles.errorState}>
-        <p>⚠️ {error || 'Không thể tải đề thi.'}</p>
+        <p><AlertCircleIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />{error || 'Không thể tải đề thi.'}</p>
         <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
       </div>
     );
@@ -503,7 +510,10 @@ function ExamSimulation() {
           {/* Diagnostic Card */}
           <div className={styles.diagnosisCard}>
             <div className={styles.diagnosisTitle}>
-              <span>⚠️ Chẩn đoán Điểm yếu Cần cải thiện</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <AlertCircleIcon size={16} />
+                Chẩn đoán Điểm yếu Cần cải thiện
+              </span>
             </div>
             <div className={styles.diagnosisText}>
               Phần bạn cần cải thiện nhiều nhất là <strong>{resultSummary.weakestPart.partName}</strong>{' '}
@@ -566,6 +576,9 @@ function ExamSimulation() {
           </div>
 
           <div className={styles.resultsActions}>
+            <Link href="/study-plan" className={styles.primaryActionBtn || styles.secondaryBtn} style={{ background: 'var(--primary)', color: '#fff', display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
+              <ZapIcon size={16} /> Lộ trình đã tối ưu thích ứng
+            </Link>
             <button className={styles.secondaryBtn} onClick={() => setIsReviewMode(true)}>
               <SearchIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Xem lại toàn bộ bài thi & Lời giải
             </button>
@@ -592,7 +605,8 @@ function ExamSimulation() {
               e.preventDefault();
             }
           }}>
-            ✕ Thoát
+            <CloseIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+            Thoát
           </Link>
           <div className={styles.testTitle}>
             ETS 2022 - Test 1 {isReviewMode && <span style={{ color: 'var(--primary)' }}>(Review Mode)</span>}
