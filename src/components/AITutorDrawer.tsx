@@ -16,6 +16,7 @@ import {
   MessageSquareIcon,
   NotebookIcon,
   CloseIcon,
+  UsersIcon,
 } from '@/components/icons/AppIcons';
 import styles from './AITutorDrawer.module.css';
 
@@ -32,6 +33,8 @@ export interface QuestionContext {
   audioUrl?: string;
   subCategory?: string;
   grammarTag?: string;
+  questionId?: string;
+  testId?: string;
 }
 
 interface AITutorDrawerProps {
@@ -64,13 +67,19 @@ export default function AITutorDrawer({
   const [isStreaming, setIsStreaming] = useState(false);
   const [remainingQuota, setRemainingQuota] = useState(DAILY_LIMIT);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'chat' | 'note'>('chat');
+  const [activeTab, setActiveTab] = useState<'chat' | 'community' | 'note'>('chat');
   const [noteContent, setNoteContent] = useState('');
+  const [communityDiscussions, setCommunityDiscussions] = useState<any[]>([]);
+  const [loadingCommunity, setLoadingCommunity] = useState(false);
 
   const { saveSession, sessions, mounted: historyMounted } = useAIHistory();
 
+  const messagesListRef = useRef<HTMLDivElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  
+  // Trạng thái kiểm soát việc tự động cuộn
+  const [userScrolledUp, setUserScrolledUp] = useState(false);
 
   // Close on Escape key
   useEffect(() => {
@@ -82,6 +91,19 @@ export default function AITutorDrawer({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
+
+  useEffect(() => {
+    if (activeTab === 'community' && questionContext.testId && questionContext.questionId) {
+      setLoadingCommunity(true);
+      fetch(`/api/community/question?testId=${questionContext.testId}&questionId=${questionContext.questionId}`)
+        .then(res => res.json())
+        .then(data => {
+          setCommunityDiscussions(Array.isArray(data) ? data : []);
+        })
+        .catch(err => console.error(err))
+        .finally(() => setLoadingCommunity(false));
+    }
+  }, [activeTab, questionContext.testId, questionContext.questionId]);
 
   // Load remaining quota
   useEffect(() => {
@@ -141,10 +163,36 @@ export default function AITutorDrawer({
     }
   }, [messages, isOpen]);
 
-  // Scroll to bottom on new messages
+  // Smart Scroll logic
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isStreaming]);
+    if (!messagesListRef.current) return;
+    
+    // Nếu người dùng không cố tình cuộn lên, ta mới tự động cuộn
+    if (!userScrolledUp) {
+      // Thay vì cuộn tuột xuống đáy (làm khuất phần đầu của câu trả lời dài),
+      // ta chỉ cuộn mượt xuống đáy nếu tin nhắn ngắn.
+      // Tuy nhiên, đối với tin nhắn siêu dài (như cache), cuộn xuống đáy là UX tồi.
+      // Giải pháp: Không force cuộn tuột xuống đáy nếu đó là câu trả lời đã xong (không stream).
+      if (isStreaming) {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Khi không stream (hoặc vừa nhận cache tức thì), ta scroll sao cho
+        // tin nhắn cuối cùng (hoặc câu hỏi của user) nằm trong tầm nhìn mà không bị trôi tuột.
+        // Bằng cách cuộn đến EndRef nhưng dùng block: 'nearest' để giữ phần đầu.
+        messagesEndRef.current?.scrollIntoView({ behavior: 'auto', block: 'nearest' });
+      }
+    }
+  }, [messages, isStreaming, userScrolledUp]);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
+    // Nếu cuộn lên cách đáy > 50px thì đánh dấu là user đang xem nội dung cũ
+    if (scrollHeight - scrollTop - clientHeight > 50) {
+      setUserScrolledUp(true);
+    } else {
+      setUserScrolledUp(false);
+    }
+  };
 
   // Set global CSS variable for drawer width to squeeze content
   useEffect(() => {
@@ -321,6 +369,7 @@ export default function AITutorDrawer({
     setMessages([...newMessages, initialAssistantMsg]);
     setInputValue('');
     setIsStreaming(true);
+    setUserScrolledUp(false); // Reset trạng thái cuộn khi người dùng gửi tin mới
 
     try {
       const response = await fetch('/api/tutor/chat', {
@@ -458,6 +507,13 @@ export default function AITutorDrawer({
           </button>
           <button 
             type="button"
+            className={`${styles.tabBtn} ${activeTab === 'community' ? styles.activeTab : ''}`}
+            onClick={() => setActiveTab('community')}
+          >
+            <UsersIcon size={14} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} /> Cộng đồng
+          </button>
+          <button 
+            type="button"
             className={`${styles.tabBtn} ${activeTab === 'note' ? styles.activeTab : ''}`}
             onClick={() => setActiveTab('note')}
           >
@@ -468,7 +524,7 @@ export default function AITutorDrawer({
         {activeTab === 'chat' ? (
           <>
             {/* Messages Chat List */}
-            <div className={styles.messagesList}>
+            <div className={styles.messagesList} ref={messagesListRef} onScroll={handleScroll}>
               {groupedMessages.map((group, index) => {
                 const isLastGroup = index === groupedMessages.length - 1;
 
@@ -575,7 +631,7 @@ export default function AITutorDrawer({
               </form>
             </div>
           </>
-        ) : (
+        ) : activeTab === 'note' ? (
           <div className={styles.noteArea}>
             <textarea
               className={styles.noteTextarea}
@@ -587,7 +643,46 @@ export default function AITutorDrawer({
               Tự động lưu lại trên máy của bạn
             </div>
           </div>
-        )}
+        ) : activeTab === 'community' ? (
+          <div className={styles.noteArea} style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', overflowY: 'auto' }}>
+            {loadingCommunity ? (
+              <p style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>Đang tải...</p>
+            ) : communityDiscussions.length === 0 ? (
+              <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                <UsersIcon size={48} style={{ color: 'var(--border-color)', margin: '0 auto 1rem' }} />
+                <h3 style={{ marginBottom: '0.5rem' }}>Cộng đồng hỏi đáp</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Chưa có thảo luận nào cho câu hỏi này. Bạn hãy là người đầu tiên đặt câu hỏi cho Gia Sư AI nhé!</p>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div style={{ paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
+                  <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
+                    <UsersIcon size={20} style={{ color: 'var(--primary)' }} /> Thảo luận từ học viên khác
+                  </h3>
+                </div>
+                {communityDiscussions.map((disc, idx) => (
+                  <div key={idx} style={{ background: 'var(--background-secondary)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                      <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '12px', fontWeight: 'bold' }}>
+                        {disc.user?.name ? disc.user.name.charAt(0).toUpperCase() : 'H'}
+                      </div>
+                      <strong style={{ fontSize: '0.9rem' }}>{disc.user?.name || 'Học viên'}</strong>
+                      <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
+                        {new Date(disc.createdAt).toLocaleDateString('vi-VN')}
+                      </span>
+                    </div>
+                    <div style={{ fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
+                      Q: {disc.query}
+                    </div>
+                    <div className={styles.markdownBody} style={{ fontSize: '0.9rem', color: 'var(--text-primary)', borderLeft: '3px solid var(--primary)', paddingLeft: '0.75rem', marginLeft: '0.25rem' }}>
+                      <ReactMarkdown>{disc.response}</ReactMarkdown>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ) : null}
       </div>
     </div>
   );

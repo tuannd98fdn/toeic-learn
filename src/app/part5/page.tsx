@@ -170,6 +170,10 @@ function Part5SpeedTrainer() {
 
   const openAITutor = (q: Part5Question) => {
     if (timerRef.current) clearInterval(timerRef.current);
+    
+    // Xử lý testId tương tự recordMistake
+    const qTestId = q.id.includes('t2') ? 'ets2022_test2' : (selectedSubSkill !== 'all' ? (q.id.includes('t1') ? 'ets2022_test1' : selectedTest) : selectedTest);
+
     setTutorContext({
       partTitle: 'Part 5: Incomplete Sentences',
       number: q.number,
@@ -180,6 +184,8 @@ function Part5SpeedTrainer() {
       explanation: q.explanation,
       subCategory: q.subCategory || q.type,
       grammarTag: q.grammarTag,
+      questionId: q.id,
+      testId: qTestId,
     });
   };
 

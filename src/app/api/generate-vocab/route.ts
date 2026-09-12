@@ -34,6 +34,10 @@ export async function POST(req: Request) {
       userPrompt = `Tạo flashcard chi tiết cho các từ vựng sau: ${payload}. Hãy đảm bảo bao gồm đầy đủ nghĩa, ví dụ sát đề thi TOEIC, mẹo nhớ tiếng Việt và phiên âm chuẩn.`;
     } else if (type === 'topic') {
       userPrompt = `Hãy gợi ý danh sách 10 từ vựng cốt lõi nhất thường xuất hiện trong đề thi TOEIC thuộc chủ đề: "${payload}". Cung cấp đầy đủ thông tin cho từng từ.`;
+    } else if (type === 'context_word') {
+      const payloadObj = payload as { word: string; context: string };
+      userPrompt = `Hãy giải nghĩa từ vựng tiếng Anh "${payloadObj.word}" DỰA TRÊN NGỮ CẢNH của câu sau đây: "${payloadObj.context}".
+Chỉ trả về 1 từ duy nhất. Phần giải nghĩa tiếng Việt (vietnamese) cần ngắn gọn, chính xác tuyệt đối với ngữ cảnh câu trên. Từ loại (partOfSpeech) cũng phải chuẩn theo ngữ cảnh.`;
     } else if (type === 'url') {
       try {
         const response = await fetch(payload);

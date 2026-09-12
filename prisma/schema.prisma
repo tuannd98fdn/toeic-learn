@@ -8,34 +8,35 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  email         String         @unique
-  name          String?
-  image         String?
-  targetScore   String?        @default("750+")
-  examDate      String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  mistakes      Mistake[]
-  progress      UserProgress[]
-  studyPlan     StudyPlan?
-  streak        UserStreak?
-  vocabularies  UserVocabulary[]
-  aiSessions    AiSession[]
+  id           String               @id @default(cuid())
+  email        String               @unique
+  name         String?
+  image        String?
+  targetScore  String?              @default("750+")
+  examDate     String?
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  aiSessions   AiSession[]
+  mistakes     Mistake[]
+  discussions  QuestionDiscussion[]
+  studyPlan    StudyPlan?
+  progress     UserProgress[]
+  streak       UserStreak?
+  vocabularies UserVocabulary[]
 }
 
 model Mistake {
-  id          String   @id @default(cuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  itemKey     String   // e.g. "word_123" or "exam_ets2022_test1_part5_456"
-  type        String   // "vocabulary" | "exam"
-  testId      String?
-  part        String?  // "part1" .. "part7"
-  questionId  String?
-  rawMeta     String?  // JSON stringified optional metadata
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(cuid())
+  userId     String
+  itemKey    String
+  type       String
+  testId     String?
+  part       String?
+  questionId String?
+  rawMeta    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, itemKey])
   @@index([userId])
@@ -44,54 +45,71 @@ model Mistake {
 model UserProgress {
   id          String   @id @default(cuid())
   userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  progressKey String   // e.g. "progress_ets2022_test1_part5"
+  progressKey String
   completed   Boolean  @default(true)
   updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, progressKey])
   @@index([userId])
 }
 
 model StudyPlan {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  planData    String   // JSON stringified StudyPlan object
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  planData  String
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserStreak {
   id            String   @id @default(cuid())
   userId        String   @unique
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   currentStreak Int      @default(0)
   bestStreak    Int      @default(0)
   lastStudyDate String?
-  historyDays   String?  // JSON stringified array of dates
+  historyDays   String?
   updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserVocabulary {
-  id           String   @id @default(cuid())
-  userId       String
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  wordId       String   // e.g. "u_123456"
-  wordData     String   // JSON stringified VocabularyWord
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id        String   @id @default(cuid())
+  userId    String
+  wordId    String
+  wordData  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, wordId])
 }
 
 model AiSession {
-  id           String   @id @default(cuid())
-  userId       String
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  sessionId    String
-  sessionData  String   // JSON stringified AISession
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          String   @id @default(cuid())
+  userId      String
+  sessionId   String
+  sessionData String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, sessionId])
+}
+
+model QuestionDiscussion {
+  id         String   @id @default(cuid())
+  userId     String
+  testId     String
+  questionId String
+  query      String
+  response   String
+  upvotes    Int      @default(0)
+  isVerified Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([testId, questionId])
+  @@index([userId])
 }

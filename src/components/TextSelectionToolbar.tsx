@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useMemo } from 'react';
 import { useVocabulary } from '@/hooks/useVocabulary';
-import { CloseIcon, FileTextIcon, CheckCircleIcon } from '@/components/icons/AppIcons';
+import { CloseIcon, FileTextIcon, CheckCircleIcon, VolumeIcon, ZapIcon } from '@/components/icons/AppIcons';
 import styles from './TextSelectionToolbar.module.css';
 
 interface ToolbarPosition {
@@ -20,6 +20,8 @@ export default function TextSelectionToolbar() {
   const [partOfSpeech, setPartOfSpeech] = useState('Danh từ');
   const [matchedIpa, setMatchedIpa] = useState('');
   const [isAutoFilled, setIsAutoFilled] = useState(false);
+  const [isAIFetching, setIsAIFetching] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
   
   // Build a lookup map for O(1) word matching
   const wordLookup = useMemo(() => {
@@ -103,7 +105,7 @@ export default function TextSelectionToolbar() {
     };
   }, [isModalOpen, position]);
   
-  const handleOpenModal = (e: React.MouseEvent) => {
+  const handleOpenModal = async (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsModalOpen(true);
     setPosition(null);
@@ -115,12 +117,112 @@ export default function TextSelectionToolbar() {
       setPartOfSpeech(match.partOfSpeech);
       setMatchedIpa(match.ipa);
       setIsAutoFilled(true);
+      setIsAIFetching(false);
     } else {
       setVietnamese('');
       setPartOfSpeech('Danh từ');
       setMatchedIpa('');
       setIsAutoFilled(false);
+      setIsAIFetching(true);
+      
+      try {
+        const res = await fetch('/api/generate-vocab', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'context_word',
+            payload: { word: selectedText, context: contextSentence }
+          })
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          if (data.words && data.words.length > 0) {
+            const wordData = data.words[0];
+            setVietnamese(wordData.vietnamese);
+            const posMap: Record<string, string> = {
+              noun: 'Danh từ', verb: 'Động từ', adjective: 'Tính từ', adverb: 'Trạng từ',
+              preposition: 'Giới từ', conjunction: 'Liên từ', idiom: 'Thành ngữ', 'phrasal verb': 'Cụm động từ'
+            };
+            setPartOfSpeech(posMap[wordData.partOfSpeech] || 'Danh từ');
+            setMatchedIpa(wordData.ipa);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch AI vocab', error);
+      } finally {
+        setIsAIFetching(false);
+      }
     }
+  };
+
+  const handleQuickSave = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setPosition(null);
+    setToastMessage('✨ Đang dịch AI...');
+    
+    try {
+      // 1. Check if it's already in DB
+      const match = wordLookup.get(selectedText.toLowerCase());
+      if (match) {
+        setToastMessage('✅ Từ này đã có trong sổ!');
+        setTimeout(() => setToastMessage(''), 2000);
+        return;
+      }
+      
+      // 2. Fetch AI translation
+      const res = await fetch('/api/generate-vocab', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'context_word',
+          payload: { word: selectedText, context: contextSentence }
+        })
+      });
+      
+      if (res.ok) {
+        const data = await res.json();
+        if (data.words && data.words.length > 0) {
+          const wordData = data.words[0];
+          const posMap: Record<string, string> = {
+            noun: 'Danh từ', verb: 'Động từ', adjective: 'Tính từ', adverb: 'Trạng từ',
+            preposition: 'Giới từ', conjunction: 'Liên từ', idiom: 'Thành ngữ', 'phrasal verb': 'Cụm động từ'
+          };
+          
+          // 3. Save to DB directly
+          addWord({
+            word: selectedText,
+            ipa: wordData.ipa,
+            vietnamese: wordData.vietnamese,
+            partOfSpeech: posMap[wordData.partOfSpeech] || 'Danh từ',
+            category: 'Lưu nhanh bằng AI',
+            examples: contextSentence ? [contextSentence] : [],
+            mnemonicTip: '',
+            emoji: '',
+            targetBand: '650+',
+          });
+          
+          setToastMessage(`✅ Đã lưu: ${selectedText} - ${wordData.vietnamese}`);
+        } else {
+          setToastMessage('❌ Lỗi dịch AI');
+        }
+      }
+    } catch (error) {
+      setToastMessage('❌ Lỗi kết nối');
+    }
+    
+    window.getSelection()?.removeAllRanges();
+    setTimeout(() => setToastMessage(''), 3000);
+  };
+  
+  const playAudio = () => {
+    if (!selectedText) return;
+    // Ngắt các âm thanh đang phát (nếu có) để tránh đè nhau
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(selectedText);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
   };
   
   const handleSave = () => {
@@ -146,9 +248,22 @@ export default function TextSelectionToolbar() {
           className={styles.toolbar}
           style={{ top: position.top, left: position.left }}
         >
-          <button className={styles.toolbarBtn} onClick={handleOpenModal}>
-            <FileTextIcon size={14} style={{ marginRight: 6 }} /> Lưu từ
-          </button>
+          <div className={styles.toolbarButtonGroup}>
+            <button className={styles.toolbarBtnQuick} onClick={handleQuickSave}>
+              <ZapIcon size={14} style={{ marginRight: 6 }} /> Lưu Nhanh
+            </button>
+            <div className={styles.toolbarDivider}></div>
+            <button className={styles.toolbarBtn} onClick={handleOpenModal} title="Xem và sửa">
+              <FileTextIcon size={14} />
+            </button>
+          </div>
+        </div>
+      )}
+      
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className={styles.toastNotification}>
+          {toastMessage}
         </div>
       )}
       
@@ -163,16 +278,23 @@ export default function TextSelectionToolbar() {
             </div>
             <div className={styles.modalBody}>
               {/* Auto-match status badge */}
-              <div className={`${styles.matchBadge} ${isAutoFilled ? styles.matchFound : styles.matchNotFound}`}>
+              <div className={`${styles.matchBadge} ${isAutoFilled ? styles.matchFound : (isAIFetching ? styles.matchPending : styles.matchNotFound)}`}>
                 {isAutoFilled ? (
-                  <><CheckCircleIcon size={14} /> Da tim thay trong kho tu vung</>
+                  <><CheckCircleIcon size={14} /> Đã lưu trong kho từ vựng</>
+                ) : isAIFetching ? (
+                  <>✨ Đang phân tích nghĩa bằng AI...</>
                 ) : (
-                  'Tu moi - Nhap thu cong'
+                  <>✨ AI đã tự động điền (Bạn có thể sửa)</>
                 )}
               </div>
               
               <div className={styles.formGroup}>
-                <label>Từ vựng (English)</label>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <label style={{ margin: 0 }}>Từ vựng (English)</label>
+                  <button type="button" onClick={playAudio} className={styles.audioBtn} title="Nghe phát âm">
+                    <VolumeIcon size={16} /> Phát âm
+                  </button>
+                </div>
                 <input type="text" value={selectedText} onChange={e => setSelectedText(e.target.value)} className={styles.input} />
                 {matchedIpa && (
                   <div className={styles.ipaRow}>
@@ -188,14 +310,20 @@ export default function TextSelectionToolbar() {
                   value={vietnamese} 
                   onChange={e => setVietnamese(e.target.value)} 
                   placeholder="Nhập nghĩa (vd: phát triển, cải thiện...)" 
-                  className={styles.input} 
+                  className={`${styles.input} ${isAIFetching ? styles.loadingInput : ''}`}
                   autoFocus={!isAutoFilled}
+                  disabled={isAIFetching}
                 />
               </div>
               
               <div className={styles.formGroup}>
                 <label>Từ loại</label>
-                <select value={partOfSpeech} onChange={e => setPartOfSpeech(e.target.value)} className={styles.input}>
+                <select 
+                  value={partOfSpeech} 
+                  onChange={e => setPartOfSpeech(e.target.value)} 
+                  className={`${styles.input} ${isAIFetching ? styles.loadingInput : ''}`}
+                  disabled={isAIFetching}
+                >
                   <option value="Danh từ">Danh từ (Noun)</option>
                   <option value="Động từ">Động từ (Verb)</option>
                   <option value="Tính từ">Tính từ (Adjective)</option>
@@ -216,12 +344,16 @@ export default function TextSelectionToolbar() {
                 />
               </div>
             </div>
-            <div className={styles.modalFooter}>
-              <button onClick={() => setIsModalOpen(false)} className={styles.cancelBtn}>Hủy</button>
-              <button onClick={handleSave} className={styles.saveBtn} disabled={!selectedText.trim() || !vietnamese.trim()}>
-                Lưu vào sổ
-              </button>
-            </div>
+              <div className={styles.modalFooter}>
+                <button className={styles.cancelBtn} onClick={() => setIsModalOpen(false)}>Hủy</button>
+                <button 
+                  className={styles.saveBtn} 
+                  onClick={handleSave} 
+                  disabled={!vietnamese.trim() || isAIFetching}
+                >
+                  {isAIFetching ? 'Đang dịch...' : 'Lưu vào sổ'}
+                </button>
+              </div>
           </div>
         </div>
       )}
