@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import Navbar from './Navbar';
 import { useCloudSync } from '@/hooks/useCloudSync';
+import TextSelectionToolbar from './TextSelectionToolbar';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -12,7 +13,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const isNoLayoutRoute = pathname === '/login' || pathname === '/landing' || pathname === '/onboarding';
 
   if (isNoLayoutRoute) {
-    return <main>{children}</main>;
+    return (
+      <main>
+        {children}
+        <TextSelectionToolbar />
+      </main>
+    );
   }
 
   return (
@@ -21,6 +27,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <Navbar />
+      <TextSelectionToolbar />
     </>
   );
 }

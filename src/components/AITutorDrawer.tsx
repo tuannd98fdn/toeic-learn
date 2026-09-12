@@ -291,19 +291,6 @@ export default function AITutorDrawer({
   const handleSendMessage = async (textToSend: string) => {
     if (!textToSend.trim() || isStreaming) return;
 
-    if (remainingQuota <= 0) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `msg_${Date.now()}`,
-          role: 'assistant',
-          content:
-            'Lưu ý: Em đã dùng hết 15 lượt hỏi miễn phí trong ngày hôm nay rồi! Hãy quay lại vào ngày mai hoặc nâng cấp gói Pro để hỏi đáp không giới hạn cùng Gia sư 990 nhé.',
-        },
-      ]);
-      return;
-    }
-
     // Decrement quota
     const today = getTodayStr();
     const quotaData = storage.get<{ date: string; used: number }>('toeic_tutor_daily_quota', {
@@ -455,9 +442,6 @@ export default function AITutorDrawer({
           </div>
 
           <div className={styles.headerActions}>
-            <span className={styles.quotaPill} title="Lượt hỏi miễn phí mỗi ngày (tự động hồi phục sau 00:00)">
-              <ZapIcon size={13} style={{ marginRight: '4px', verticalAlign: 'text-bottom', display: 'inline' }} /> Còn {remainingQuota}/{DAILY_LIMIT} lượt
-            </span>
             <button onClick={onClose} className={styles.closeBtn} title="Đóng (Esc)" aria-label="Đóng">
               <CloseIcon size={16} />
             </button>
