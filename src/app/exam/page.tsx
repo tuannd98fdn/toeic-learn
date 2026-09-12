@@ -94,6 +94,20 @@ function ExamSimulation() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
+  // Part 7 Pacing Tracker
+  const part7SecondsRef = useRef<number>(0);
+  const currentIndexRef = useRef<number>(currentIndex);
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+  const [part7ExamPacing, setPart7ExamPacing] = useState<{
+    secondsSpent: number;
+    avgSecondsPerQ: number;
+    status: 'optimal' | 'moderate' | 'critical';
+    statusText: string;
+    advice: string;
+  } | null>(null);
+
   // Focus Mode
   const [isFocusMode, setIsFocusMode] = useState(false);
 
@@ -287,6 +301,8 @@ function ExamSimulation() {
               options: q.options,
               correctAnswer: q.correctAnswer,
               explanation: q.explanation,
+              subCategory: q.questionType || q.subCategory || 'Detail',
+              grammarTag: q.questionType || 'Detail',
             });
           });
         });
@@ -309,6 +325,10 @@ function ExamSimulation() {
     if (loading || isSubmitted || isPaused) return;
 
     timerRef.current = setInterval(() => {
+      if (questions[currentIndexRef.current]?.part === 'p7') {
+        part7SecondsRef.current += 1;
+      }
+
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timerRef.current!);
@@ -434,6 +454,36 @@ function ExamSimulation() {
 
     // Synchronize and rebalance study plan based on full exam performance
     syncAdaptivePlan();
+
+    // Calculate Part 7 Pacing Analytics
+    const part7Seconds = part7SecondsRef.current;
+    const part7Count = questions.filter((q) => q.part === 'p7').length || 54;
+    const avgSecPerQ = part7Count > 0 ? Math.round(part7Seconds / part7Count) : 0;
+
+    let pacingStatus: 'optimal' | 'moderate' | 'critical' = 'optimal';
+    let pacingStatusText = 'Đạt chuẩn nhịp độ ETS (≤ 54 phút)';
+    let pacingAdvice =
+      'Phân bổ thời gian lý tưởng! Bạn kiểm soát rất tốt nhịp độ 60s/câu cho Part 7, đảm bảo không bị cướp thời gian của Part 5 và 6.';
+
+    if (part7Seconds > 65 * 60 || avgSecPerQ > 72) {
+      pacingStatus = 'critical';
+      pacingStatusText = 'Nguy cơ cháy giờ nghiêm trọng (> 65 phút)';
+      pacingAdvice =
+        'Thời gian làm Part 7 vượt mức an toàn (> 65 phút). Trong bài thi thật, việc này sẽ khiến bạn phải khoanh bừa 10-15 câu cuối. Hãy chuyển qua luyện Part 7 chuyên sâu để cải thiện tốc độ định vị từ khóa!';
+    } else if (part7Seconds > 54 * 60 || avgSecPerQ > 60) {
+      pacingStatus = 'moderate';
+      pacingStatusText = 'Hơi lẹm thời gian (55 - 65 phút)';
+      pacingAdvice =
+        'Bạn dùng quá 54 phút cho Part 7. Hãy rèn luyện kỹ năng Skimming đoạn đơn (Single passages) dưới 50s/câu để dành thêm thời gian cho đoạn ba (Triple passages).';
+    }
+
+    setPart7ExamPacing({
+      secondsSpent: part7Seconds,
+      avgSecondsPerQ: avgSecPerQ,
+      status: pacingStatus,
+      statusText: pacingStatusText,
+      advice: pacingAdvice,
+    });
 
     setResultSummary(summary);
     setIsSubmitted(true);
@@ -576,6 +626,56 @@ function ExamSimulation() {
               </tbody>
             </table>
           </div>
+
+          {/* Part 7 Pacing Analysis Card */}
+          {part7ExamPacing && (
+            <div className={styles.pacingAnalysisCard}>
+              <div className={styles.pacingAnalysisTitle}>
+                <ClockIcon size={20} />
+                <span>Phân tích Nhịp độ & Thời gian Part 7</span>
+              </div>
+              <div className={styles.pacingStatRow}>
+                <div className={styles.pacingStatItem}>
+                  <span className={styles.pacingStatLabel}>Thời gian làm Part 7</span>
+                  <span className={styles.pacingStatValue}>
+                    {Math.floor(part7ExamPacing.secondsSpent / 60)}p {part7ExamPacing.secondsSpent % 60}s
+                  </span>
+                  <span className={styles.pacingStatSub}>Chuẩn ETS: ≤ 54 phút</span>
+                </div>
+                <div className={styles.pacingStatItem}>
+                  <span className={styles.pacingStatLabel}>Tốc độ trung bình</span>
+                  <span className={styles.pacingStatValue}>
+                    {part7ExamPacing.avgSecondsPerQ}s / câu
+                  </span>
+                  <span className={styles.pacingStatSub}>Mục tiêu: ≤ 60s / câu</span>
+                </div>
+                <div className={styles.pacingStatItem}>
+                  <span className={styles.pacingStatLabel}>Đánh giá nguy cơ</span>
+                  <span
+                    className={styles.pacingStatValue}
+                    style={{
+                      fontSize: '1rem',
+                      color:
+                        part7ExamPacing.status === 'optimal'
+                          ? 'var(--success)'
+                          : part7ExamPacing.status === 'moderate'
+                          ? 'var(--warning)'
+                          : 'var(--danger)',
+                    }}
+                  >
+                    {part7ExamPacing.statusText}
+                  </span>
+                  <span className={styles.pacingStatSub}>
+                    {part7ExamPacing.status === 'optimal' ? 'Thời gian tối ưu' : 'Cần điều chỉnh'}
+                  </span>
+                </div>
+              </div>
+              <div className={styles.pacingAdviceBox}>
+                <ZapIcon size={16} style={{ color: 'var(--primary)', flexShrink: 0, marginTop: '2px' }} />
+                <span>{part7ExamPacing.advice}</span>
+              </div>
+            </div>
+          )}
 
           {/* Knowledge Gap Breakdown */}
           <KnowledgeGapBreakdown

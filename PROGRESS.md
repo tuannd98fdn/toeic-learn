@@ -153,10 +153,46 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+---
+
+### ✅ Vấn đề 11: Hệ thống Phân tích Nhịp độ Đọc hiểu Part 7 Toàn diện & Tích hợp Thi thử (Full Pacing Analytics & Exam Integration)
+* **Mô tả**:
+  * Trước đây, người học Part 7 thiếu hệ thống kiểm soát thời gian chuẩn ETS theo cấu trúc từng bài đọc (Single vs Double vs Triple Passages).
+  * Trong bài thi thử full 200 câu (`/exam`), hệ thống không ghi nhận và bóc tách thời gian thực tế đã dùng cho Part 7 (Q147 - 200), khiến người học không biết mình có bị "cháy giờ" (vượt quá 54 phút chuẩn ETS) hay không.
+  * Thiếu liên kết bóc tách dạng câu hỏi Part 7 trong bài thi Full Test vào bảng `KnowledgeGapBreakdown`.
+* **Giải pháp**:
+  * **Huy hiệu Nhịp độ Đề xuất ETS Thời gian thực (Live Target Pacing Badge)**:
+    * Tự động tính toán chuẩn thời gian khuyến nghị chuẩn ETS trên header `/part7` theo cấu trúc:
+      * *Đoạn đơn (Single)*: < 50s / câu
+      * *Đoạn đôi (Double)*: < 60s / câu (5 câu / 5 phút)
+      * *Đoạn ba (Triple)*: < 75s / câu (5 câu / 6 - 6.5 phút)
+    * Hiển thị gọn gàng trên header: `Mục tiêu ETS: < X phút (Y câu)` với `ClockIcon`.
+  * **Báo cáo Phân tích Nhịp độ Toàn phiên (Session Pacing Analytics Card)**:
+    * Tích lũy `sessionPacingHistory` cho từng bài đọc trong phiên luyện tập.
+    * Trên màn hình kết quả `/part7`, hiển thị thẻ Báo cáo Phân tích Nhịp độ Đọc hiểu:
+      * Tốc độ đọc trung bình phiên (giây/câu) kèm tổng thời gian hoàn thành.
+      * Trạng thái nhịp độ: Tốc độ vàng ETS (<= 60s/câu, xanh lá), Cần tăng tốc nhẹ (61 - 80s/câu, vàng), Nguy cơ cháy giờ cao (> 80s/câu, đỏ).
+      * Phân tích đối sánh thực tế vs chuẩn ETS theo từng cấu trúc (Đoạn đơn vs Đoạn đôi vs Đoạn ba).
+      * Lời khuyên phân bổ thời gian chiến thuật cá nhân hóa (Pacing Action Advice).
+  * **Đo lường & Phân tích Thời gian Part 7 trong Bài Thi Thử Full Test 200 câu (`/exam`)**:
+    * Gắn tag `subCategory` và `grammarTag` chuẩn 6 dạng bài đọc cho toàn bộ câu hỏi 147 - 200 khi nạp bài thi.
+    * Tích lũy thời gian thực tế người học lưu lại tại Part 7 trong 120 phút thi thử.
+    * Trên màn hình kết quả thi thử 200 câu, hiển thị **Thẻ Phân tích Nhịp độ & Thời gian Part 7**:
+      * Thời gian đã làm (phút giây) so sánh với chuẩn ETS (<= 54 phút).
+      * Tốc độ trung bình (giây/câu) so với mục tiêu (<= 60s/câu).
+      * Đánh giá nguy cơ cháy giờ và lời khuyên chiến thuật phân bổ thời gian cho bài thi thật.
+      * Kết nối đồng bộ với Báo cáo Lỗ hổng Kiến thức (`KnowledgeGapBreakdown`) hiển thị toàn bộ dạng đọc hiểu Part 7.
+  * **Chất lượng & Tiêu chuẩn**:
+    * Tuân thủ tuyệt đối quy tắc **NO UI EMOJIS (STRICT)**: 0 emojis, 100% SVG icons từ `AppIcons`.
+    * Đạt 100% kiểm thử tự động E2E: `scratch/test_part7_full_pacing_e2e.mjs`.
+    * Không gây hồi quy các tính năng cũ (Regression tests passed 100%).
+
+---
+
 ## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### 🚀 Vấn Đề 11: [Đang chờ người dùng cung cấp mô tả chi tiết]
-* Khi người dùng gửi yêu cầu về Vấn đề 11, Agent sẽ:
+### 🚀 Vấn Đề 12: [Đang chờ người dùng lựa chọn & yêu cầu tiếp theo]
+* Khi người dùng đưa ra yêu cầu tiếp theo hoặc cần tư vấn tính năng tiếp theo từ danh mục ưu tiên, Agent sẽ:
   1. Ghi nhận Problem, Evidence, Recommendation, Effort.
   2. Phân tích các file liên quan và lập implementation plan tối giản, không phá vỡ các chức năng cũ.
   3. Lấy xác nhận từ người dùng trước khi triển khai.
@@ -170,6 +206,8 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Chạy Dev Server**: `npm run dev` (đang chạy ngầm tại `http://localhost:3000`).
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_part7_full_pacing_e2e.mjs` (Kiểm thử Live Target Badge, Session Pacing Report & Exam Part 7 Pacing).
+  * `node scratch/test_part7_targeted_reading_e2e.mjs` (Kiểm thử Part 7 Targeted Reading theo 6 dạng & cấu trúc đoạn).
   * `node scratch/test_dictation_e2e.mjs` (Kiểm thử Dictation & Interactive Transcript toàn diện Part 1 - 4).
   * `node scratch/test_strategies_page_e2e.mjs` (Kiểm thử Kho Chiến thuật & Bẫy đề thi 30 chuyên đề).
   * `node scratch/test_knowledge_gap_report_e2e.mjs` (Kiểm thử Báo cáo Bóc tách Lỗ hổng Kiến thức Exam & Mini-test).

@@ -17,6 +17,8 @@ import {
   CheckCircleIcon,
   AlertCircleIcon,
   LightbulbIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
 } from '@/components/icons/AppIcons';
 import { Part7PassageSet, Part7Question, Part7DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
@@ -86,6 +88,12 @@ function Part7Trainer() {
   // Pacing Tracking State
   const passageStartTimeRef = useRef<number>(Date.now());
   const [paceInfo, setPaceInfo] = useState<{ elapsedSeconds: number; secondsPerQ: number } | null>(null);
+  const [sessionPacingHistory, setSessionPacingHistory] = useState<{
+    passageType: string;
+    elapsedSeconds: number;
+    questionsCount: number;
+    secondsPerQ: number;
+  }[]>([]);
   const [sessionAnsweredQuestions, setSessionAnsweredQuestions] = useState<
     { question: Part7Question; isCorrect: boolean }[]
   >([]);
@@ -96,9 +104,19 @@ function Part7Trainer() {
 
   // Highlight State
   const [isHighlightMode, setIsHighlightMode] = useState(false);
+  const [isFilterExpanded, setIsFilterExpanded] = useState(false);
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(Object.keys(answers).length > 0 && !isSubmitted);
+
+  // Helper: ETS Target Pace per Passage
+  const getTargetPaceSeconds = (passageType: string, questionsCount: number) => {
+    const lower = (passageType || '').toLowerCase();
+    if (lower.includes('single')) return questionsCount * 50; // <50s/Q
+    if (lower.includes('double')) return questionsCount * 60; // <60s/Q
+    if (lower.includes('triple')) return questionsCount * 75; // <75s/Q
+    return questionsCount * 60;
+  };
 
   // Sync searchParams changes from URL
   useEffect(() => {
@@ -165,6 +183,7 @@ function Part7Trainer() {
         setTotalScore(0);
         setTotalQuestions(0);
         setSessionAnsweredQuestions([]);
+        setSessionPacingHistory([]);
         setPaceInfo(null);
         passageStartTimeRef.current = Date.now();
       } catch (err: any) {
@@ -303,6 +322,15 @@ function Part7Trainer() {
     const elapsed = Math.max(1, Math.round((Date.now() - passageStartTimeRef.current) / 1000));
     const secondsPerQ = Math.round(elapsed / (passageSet.questions.length || 1));
     setPaceInfo({ elapsedSeconds: elapsed, secondsPerQ });
+    setSessionPacingHistory((prev) => [
+      ...prev,
+      {
+        passageType: passageSet.type,
+        elapsedSeconds: elapsed,
+        questionsCount: passageSet.questions.length,
+        secondsPerQ,
+      },
+    ]);
 
     let score = 0;
     const answeredInThisSet: { question: Part7Question; isCorrect: boolean }[] = [];
@@ -410,6 +438,67 @@ function Part7Trainer() {
     }));
   }, [sessionAnsweredQuestions]);
 
+  // Session Pacing Report calculation
+  const sessionPacingReport = useMemo(() => {
+    if (sessionPacingHistory.length === 0) return null;
+    const totalSeconds = sessionPacingHistory.reduce((acc, h) => acc + h.elapsedSeconds, 0);
+    const totalQ = sessionPacingHistory.reduce((acc, h) => acc + h.questionsCount, 0);
+    const avgSecondsPerQ = totalQ > 0 ? Math.round(totalSeconds / totalQ) : 0;
+
+    const structures = [
+      { key: 'single', label: 'Đoạn đơn (Single)', targetSec: 50 },
+      { key: 'double', label: 'Đoạn đôi (Double)', targetSec: 60 },
+      { key: 'triple', label: 'Đoạn ba (Triple)', targetSec: 75 },
+    ];
+
+    const structureStats = structures
+      .map((st) => {
+        const items = sessionPacingHistory.filter((h) => h.passageType.toLowerCase().includes(st.key));
+        const sec = items.reduce((acc, h) => acc + h.elapsedSeconds, 0);
+        const qCount = items.reduce((acc, h) => acc + h.questionsCount, 0);
+        const pace = qCount > 0 ? Math.round(sec / qCount) : null;
+        return {
+          label: st.label,
+          targetSec: st.targetSec,
+          actualSec: pace,
+          questionsCount: qCount,
+        };
+      })
+      .filter((st) => st.questionsCount > 0);
+
+    let status: 'optimal' | 'moderate' | 'critical' = 'optimal';
+    let statusText = 'Tốc độ vàng ETS';
+    let advice =
+      'Nhịp độ của bạn rất tốt! Với tốc độ này, bạn sẽ làm kịp 54 câu Part 7 trong đúng 54 phút và còn dư thời gian soát lại bài.';
+
+    if (avgSecondsPerQ > 80) {
+      status = 'critical';
+      statusText = 'Nguy cơ cháy giờ cao';
+      advice =
+        'Tốc độ trung bình > 80s/câu! Trong bài thi thật, bạn có nguy cơ phải đánh lụi 10-15 câu cuối. Hãy áp dụng chiến thuật đọc lướt câu hỏi trước, định vị từ khóa trong bài và tránh đọc dịch từng từ.';
+    } else if (avgSecondsPerQ > 60) {
+      status = 'moderate';
+      statusText = 'Cần tăng tốc nhẹ';
+      advice =
+        'Tốc độ trung bình từ 60-80s/câu chớm lẹm vào thời gian của Part 5 và 6. Hãy cố gắng rút ngắn thời gian làm bài ở các đoạn đơn xuống dưới 50s/câu để dành thời gian cho đoạn ba.';
+    }
+
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const remainingSeconds = totalSeconds % 60;
+    const durationDisplay =
+      totalMinutes > 0 ? `${totalMinutes} phút ${remainingSeconds} giây` : `${remainingSeconds} giây`;
+
+    return {
+      totalSeconds,
+      durationDisplay,
+      avgSecondsPerQ,
+      status,
+      statusText,
+      advice,
+      structureStats,
+    };
+  }, [sessionPacingHistory]);
+
   if (loading) {
     return (
       <div className={styles.pageContainer} style={{ paddingTop: '20px' }}>
@@ -482,6 +571,92 @@ function Part7Trainer() {
               : 'Part 7 yêu cầu kỹ năng Skimming và Scanning nhạy bén. Bạn nên xác định từ khóa câu hỏi trước rồi quét thông tin trong bài đọc.'}
           </p>
 
+          {/* Full Session Pacing Analytics Card */}
+          {sessionPacingReport && (
+            <div className={styles.sessionPacingCard}>
+              <div className={styles.sessionPacingHeader}>
+                <h3 className={styles.sessionPacingTitle}>
+                  <ClockIcon size={18} /> Phân tích Nhịp độ Đọc hiểu Toàn phiên
+                </h3>
+                <span className={styles.totalDurationBadge}>
+                  Tổng thời gian: {sessionPacingReport.durationDisplay}
+                </span>
+              </div>
+
+              <div
+                className={`${styles.pacingOverviewBanner} ${
+                  sessionPacingReport.status === 'optimal'
+                    ? styles.pacingStatusOptimal
+                    : sessionPacingReport.status === 'moderate'
+                    ? styles.pacingStatusModerate
+                    : styles.pacingStatusCritical
+                }`}
+              >
+                <div>
+                  <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.04em' }}>
+                    Tốc độ trung bình phiên
+                  </span>
+                  <div style={{ fontSize: '1.4rem', fontWeight: 900 }}>
+                    {sessionPacingReport.avgSecondsPerQ}s / câu
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <span
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontWeight: 700,
+                      fontSize: '0.9rem',
+                    }}
+                  >
+                    {sessionPacingReport.status === 'optimal' ? (
+                      <CheckCircleIcon size={16} />
+                    ) : (
+                      <AlertCircleIcon size={16} />
+                    )}
+                    {sessionPacingReport.statusText}
+                  </span>
+                  <div style={{ fontSize: '0.75rem', opacity: 0.85 }}>Mục tiêu ETS: ≤ 60s / câu</div>
+                </div>
+              </div>
+
+              {sessionPacingReport.structureStats.length > 0 && (
+                <div className={styles.pacingStructureGrid}>
+                  {sessionPacingReport.structureStats.map((st) => {
+                    const isOptimal = st.actualSec !== null && st.actualSec <= st.targetSec;
+                    return (
+                      <div key={st.label} className={styles.pacingStructureCard}>
+                        <div className={styles.pacingStructureHeader}>
+                          <span>{st.label}</span>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--muted-foreground)' }}>
+                            {st.questionsCount} câu
+                          </span>
+                        </div>
+                        <div
+                          className={styles.pacingStructureVal}
+                          style={{
+                            color: isOptimal ? 'var(--success)' : 'var(--warning)',
+                          }}
+                        >
+                          {st.actualSec}s / câu
+                        </div>
+                        <div className={styles.pacingStructureTarget}>
+                          Mục tiêu ETS: &lt; {st.targetSec}s
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              <div className={styles.pacingAdviceBox}>
+                <ZapIcon size={16} style={{ color: 'var(--primary)', flexShrink: 0, marginTop: '2px' }} />
+                <span>{sessionPacingReport.advice}</span>
+              </div>
+            </div>
+          )}
+
           {/* Question Type Breakdown */}
           {questionTypeStats.length > 0 && (
             <div className={styles.resultsBreakdown}>
@@ -531,6 +706,11 @@ function Part7Trainer() {
                         setCurrentPassageIndex(0);
                         setAnswers({});
                         setIsSubmitted(false);
+                        setTotalScore(0);
+                        setTotalQuestions(0);
+                        setSessionAnsweredQuestions([]);
+                        setSessionPacingHistory([]);
+                        passageStartTimeRef.current = Date.now();
                       }}
                     >
                       <span>Luyện riêng dạng này</span>
@@ -553,6 +733,7 @@ function Part7Trainer() {
                 setTotalScore(0);
                 setTotalQuestions(0);
                 setSessionAnsweredQuestions([]);
+                setSessionPacingHistory([]);
                 passageStartTimeRef.current = Date.now();
               }}
               className="btn-secondary"
@@ -594,9 +775,17 @@ function Part7Trainer() {
             <h1 className={styles.title} style={{ margin: 0, fontSize: '1.25rem' }}>
               Part 7: Reading Comprehension
             </h1>
-            <p className={styles.subtitle} style={{ margin: 0, fontSize: '0.875rem' }}>
-              {passageSet ? `${passageSet.source || 'ETS Test'} - ${passageSet.type} (${currentPassageIndex + 1}/${filteredPassageSets.length})` : 'Đang tải'}
-            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <p className={styles.subtitle} style={{ margin: 0, fontSize: '0.875rem' }}>
+                {passageSet ? `${passageSet.source || 'ETS Test'} - ${passageSet.type} (${currentPassageIndex + 1}/${filteredPassageSets.length})` : 'Đang tải'}
+              </p>
+              {passageSet && (
+                <span className={styles.targetPaceBadge}>
+                  <ClockIcon size={12} />
+                  Mục tiêu ETS: &lt; {Math.round(getTargetPaceSeconds(passageSet.type, passageSet.questions.length) / 60)} phút ({passageSet.questions.length} câu)
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
@@ -629,105 +818,143 @@ function Part7Trainer() {
       </header>
 
       {/* Targeted Reading Filters */}
-      <div className={styles.filterContainer}>
-        {/* Row 1: Question Type Pills */}
-        <div className={styles.filterRow}>
-          <span className={styles.filterLabel}>Dạng câu hỏi:</span>
-          <div className={styles.pillsWrap}>
-            {QUESTION_TYPES.map((type) => {
-              const isActive = selectedQType === type.key;
-              return (
-                <button
-                  key={type.key}
-                  className={`${styles.filterPill} ${isActive ? styles.filterPillActive : ''}`}
-                  onClick={() => {
-                    setSelectedQType(type.key);
-                    setCurrentPassageIndex(0);
-                    setActiveQuestionIndex(0);
-                    setAnswers({});
-                    setIsSubmitted(false);
-                    updateUrlParams(testId, type.key, selectedPassageType);
-                  }}
-                >
-                  <span>{type.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Row 2: Passage Structure Pills & Test Selector */}
-        <div className={styles.filterRow}>
-          <span className={styles.filterLabel}>Cấu trúc đoạn:</span>
-          <div className={styles.pillsWrap}>
-            {PASSAGE_TYPES.map((pt) => {
-              const isActive = selectedPassageType === pt.key;
-              return (
-                <button
-                  key={pt.key}
-                  className={`${styles.filterPill} ${isActive ? styles.filterPillActive : ''}`}
-                  onClick={() => {
-                    setSelectedPassageType(pt.key);
-                    setCurrentPassageIndex(0);
-                    setActiveQuestionIndex(0);
-                    setAnswers({});
-                    setIsSubmitted(false);
-                    updateUrlParams(testId, selectedQType, pt.key);
-                  }}
-                >
-                  <span>{pt.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Test Selector */}
-          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span className={styles.filterLabel} style={{ minWidth: 'auto' }}>Bộ đề:</span>
-            <select
-              value={testId}
-              onChange={(e) => {
-                const newTest = e.target.value;
-                setTestId(newTest);
-                updateUrlParams(newTest, selectedQType, selectedPassageType);
-              }}
-              style={{
-                padding: '4px 8px',
-                borderRadius: '8px',
-                border: '1px solid var(--border)',
-                background: 'var(--surface)',
-                color: 'var(--foreground)',
-                fontSize: '0.82rem',
-                fontWeight: 600,
-              }}
-            >
-              {TESTS_LIST.map((t) => (
-                <option key={t.key} value={t.key}>
-                  {t.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        {/* Active Filter Banner */}
-        <div className={styles.activeTargetBanner}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <TargetIcon size={16} />
-            <span>
-              Chế độ luyện: <strong>{QUESTION_TYPES.find((q) => q.key === selectedQType)?.label}</strong> | Đoạn:{' '}
-              <strong>{PASSAGE_TYPES.find((p) => p.key === selectedPassageType)?.label}</strong>
+      {!isFilterExpanded ? (
+        <div className={styles.filterBarSlim}>
+          <div className={styles.activeTargetBanner} style={{ flex: 1, margin: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <TargetIcon size={16} />
+              <span>
+                Chế độ luyện: <strong>{QUESTION_TYPES.find((q) => q.key === selectedQType)?.label}</strong> | Đoạn:{' '}
+                <strong>{PASSAGE_TYPES.find((p) => p.key === selectedPassageType)?.label}</strong> | Bộ đề:{' '}
+                <strong>{TESTS_LIST.find((t) => t.key === testId)?.label}</strong>
+              </span>
+            </div>
+            <span className={styles.pillBadge} style={{ fontSize: '0.8rem' }}>
+              Tìm thấy {filteredPassageSets.length} bài đọc
             </span>
           </div>
-          <span className={styles.pillBadge} style={{ fontSize: '0.8rem' }}>
-            Tìm thấy {filteredPassageSets.length} bài đọc phù hợp
-          </span>
+          <button
+            type="button"
+            className={styles.filterToggleBtn}
+            onClick={() => setIsFilterExpanded(true)}
+            title="Mở rộng bộ lọc dạng câu hỏi và cấu trúc đoạn"
+          >
+            <span>Đổi bộ lọc</span>
+            <ChevronDownIcon size={15} />
+          </button>
         </div>
-      </div>
+      ) : (
+        <div className={styles.filterContainer}>
+          {/* Row 1: Question Type Pills */}
+          <div className={styles.filterRow}>
+            <span className={styles.filterLabel}>Dạng câu hỏi:</span>
+            <div className={styles.pillsWrap}>
+              {QUESTION_TYPES.map((type) => {
+                const isActive = selectedQType === type.key;
+                return (
+                  <button
+                    key={type.key}
+                    className={`${styles.filterPill} ${isActive ? styles.filterPillActive : ''}`}
+                    onClick={() => {
+                      setSelectedQType(type.key);
+                      setCurrentPassageIndex(0);
+                      setActiveQuestionIndex(0);
+                      setAnswers({});
+                      setIsSubmitted(false);
+                      updateUrlParams(testId, type.key, selectedPassageType);
+                    }}
+                  >
+                    <span>{type.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Row 2: Passage Structure Pills & Test Selector */}
+          <div className={styles.filterRow}>
+            <span className={styles.filterLabel}>Cấu trúc đoạn:</span>
+            <div className={styles.pillsWrap}>
+              {PASSAGE_TYPES.map((pt) => {
+                const isActive = selectedPassageType === pt.key;
+                return (
+                  <button
+                    key={pt.key}
+                    className={`${styles.filterPill} ${isActive ? styles.filterPillActive : ''}`}
+                    onClick={() => {
+                      setSelectedPassageType(pt.key);
+                      setCurrentPassageIndex(0);
+                      setActiveQuestionIndex(0);
+                      setAnswers({});
+                      setIsSubmitted(false);
+                      updateUrlParams(testId, selectedQType, pt.key);
+                    }}
+                  >
+                    <span>{pt.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Test Selector */}
+            <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span className={styles.filterLabel} style={{ minWidth: 'auto' }}>Bộ đề:</span>
+              <select
+                value={testId}
+                onChange={(e) => {
+                  const newTest = e.target.value;
+                  setTestId(newTest);
+                  updateUrlParams(newTest, selectedQType, selectedPassageType);
+                }}
+                style={{
+                  padding: '4px 8px',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border)',
+                  background: 'var(--surface)',
+                  color: 'var(--foreground)',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                }}
+              >
+                {TESTS_LIST.map((t) => (
+                  <option key={t.key} value={t.key}>
+                    {t.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Active Filter Banner with Collapse Button */}
+          <div className={styles.activeTargetBanner}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <TargetIcon size={16} />
+              <span>
+                Chế độ luyện: <strong>{QUESTION_TYPES.find((q) => q.key === selectedQType)?.label}</strong> | Đoạn:{' '}
+                <strong>{PASSAGE_TYPES.find((p) => p.key === selectedPassageType)?.label}</strong>
+              </span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span className={styles.pillBadge} style={{ fontSize: '0.8rem' }}>
+                Tìm thấy {filteredPassageSets.length} bài đọc phù hợp
+              </span>
+              <button
+                type="button"
+                className={styles.filterToggleBtn}
+                style={{ padding: '4px 10px', fontSize: '0.78rem' }}
+                onClick={() => setIsFilterExpanded(false)}
+              >
+                <span>Thu gọn</span>
+                <ChevronUpIcon size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {!passageSet ? (
         <div
-          className={`${styles.passageCard} card-minimal`}
+          className={styles.passageCard}
           style={{ padding: 40, textAlign: 'center', borderRadius: 16 }}
         >
           <AlertCircleIcon size={36} style={{ color: 'var(--warning)', margin: '0 auto 12px' }} />
@@ -751,7 +978,7 @@ function Part7Trainer() {
           {/* Left Side: Passages */}
           <section className={styles.leftPanel} onMouseUp={handleTextHighlight}>
             {passageSet.passages.map((passage) => (
-              <div key={passage.id} className={`${styles.passageCard} card-minimal`}>
+              <div key={passage.id} className={styles.passageCard}>
                 <div className={styles.passageHeader}>
                   <span className={styles.passageTypeBadge}>{passage.type}</span>
                   {passage.title && <h2 className={styles.passageTitle}>{passage.title}</h2>}
@@ -783,7 +1010,7 @@ function Part7Trainer() {
             )}
 
             {!isSubmitted && currentQuestion ? (
-              <div className={`${styles.questionCard} card-minimal`}>
+              <div className={styles.questionCard}>
                 <div className={styles.qHeader}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span className={styles.qIndicator}>
@@ -879,7 +1106,7 @@ function Part7Trainer() {
                   {passageSet.questions.map((q) => {
                     const isCorrect = answers[q.id] === q.correctAnswer;
                     return (
-                      <div key={q.id} className={`${styles.explanationCard} card-minimal`}>
+                      <div key={q.id} className={styles.explanationCard}>
                         <div className={styles.exHeader}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <span className={styles.exNumber}>Q{q.number}</span>

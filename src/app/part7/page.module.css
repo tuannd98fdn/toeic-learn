@@ -1,10 +1,18 @@
 .pageContainer {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - var(--nav-height) - 40px);
+  height: calc(100vh - 90px);
+  min-height: 600px;
+}
+
+@media (max-height: 750px) {
+  .pageContainer {
+    height: auto;
+    min-height: 100vh;
+  }
 }
 
 .loading {
@@ -21,7 +29,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .title {
@@ -54,11 +62,12 @@
   gap: 20px;
   flex: 1;
   min-height: 0;
+  padding-bottom: 90px; /* Breathing room so PracticeFooter never blocks navigation or explanations */
 }
 
 @media (min-width: 900px) {
   .splitView {
-    grid-template-columns: 1.2fr 1fr; /* Passages are slightly larger */
+    grid-template-columns: 1.25fr 1fr; /* Passages are slightly larger */
   }
 }
 
@@ -68,14 +77,44 @@
   flex-direction: column;
   gap: 20px;
   overflow-y: auto;
-  padding-right: 5px; /* For scrollbar breathing room */
+  padding-right: 8px; /* For scrollbar breathing room */
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.leftPanel::-webkit-scrollbar,
+.rightPanel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.leftPanel::-webkit-scrollbar-track,
+.rightPanel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.leftPanel::-webkit-scrollbar-thumb,
+.rightPanel::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.leftPanel::-webkit-scrollbar-thumb:hover,
+.rightPanel::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
 }
 
 .passageCard {
   background-color: var(--card);
   border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
+  height: auto;
+  min-height: min-content;
+  overflow: visible;
 }
 
 .passageHeader {
@@ -184,13 +223,24 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  padding-right: 8px;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
 
 .questionCard {
-  padding: 30px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: 22px 24px 30px 24px;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex-shrink: 0;
+  height: auto;
+  min-height: min-content;
+  overflow: visible;
 }
 
 .qHeader {
@@ -343,7 +393,12 @@
 }
 
 .explanationCard {
-  padding: 25px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  flex-shrink: 0;
 }
 
 .exHeader {
@@ -534,12 +589,42 @@
 }
 
 /* Targeted Reading Filters */
+.filterBarSlim {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.filterToggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--card);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.filterToggleBtn:hover {
+  background: var(--surface);
+  border-color: var(--primary);
+}
+
 .filterContainer {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 14px 18px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -781,5 +866,138 @@
 .breakdownActionBtn:hover {
   text-decoration: underline;
 }
+
+/* Target Pace Badge in Header */
+.targetPaceBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Full Session Pacing Analytics Card on Results Screen */
+.sessionPacingCard {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.sessionPacingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sessionPacingTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--foreground);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.totalDurationBadge {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  background: var(--card);
+  padding: 3px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.pacingOverviewBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pacingStatusOptimal {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #059669;
+}
+
+.pacingStatusModerate {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: #d97706;
+}
+
+.pacingStatusCritical {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #dc2626;
+}
+
+.pacingStructureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.pacingStructureCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pacingStructureHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.pacingStructureVal {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.pacingStructureTarget {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.pacingAdviceBox {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.06);
+  border-left: 3px solid var(--primary);
+  font-size: 0.83rem;
+  color: var(--foreground);
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
 
 
