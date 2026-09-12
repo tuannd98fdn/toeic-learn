@@ -32,7 +32,7 @@ export default function Login() {
           </p>
           
           <div className={styles.testimonialCard}>
-            <div className={styles.stars}>★★★★★</div>
+            <div className={styles.stars}>5.0 / 5.0 Rating</div>
             <p className={styles.quote}>
               "Giao diện đẹp và mượt mà nhất trong số các ứng dụng luyện thi mình từng dùng. Phương pháp Spaced Repetition thực sự hiệu quả!"
             </p>

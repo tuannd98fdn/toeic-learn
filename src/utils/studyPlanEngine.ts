@@ -202,6 +202,14 @@ export function rebalanceStudyPlan(plan: StudyPlan, gaps: LearnerGaps): StudyPla
           task.link = `/part5?subCategory=${encodeURIComponent(chosenSubSkill)}`;
           task.subCategory = chosenSubSkill;
           task.part = 'p5';
+        } else if (weakPart === 'p7') {
+          const readingTypes = ['Main Idea', 'Detail', 'Inference', 'NOT / TRUE', 'Vocabulary', 'Sentence Placement'];
+          const matchedReadingGap = gaps.topGrammarWeaknesses.find(w => readingTypes.includes(w)) || 'Inference';
+          task.title = `Luyện Part 7: Dạng câu hỏi ${matchedReadingGap}`;
+          task.description = `Rèn luyện kỹ năng đọc hiểu và bẫy ETS dạng ${matchedReadingGap}`;
+          task.link = `/part7?questionType=${encodeURIComponent(matchedReadingGap)}`;
+          task.subCategory = matchedReadingGap;
+          task.part = 'p7';
         } else {
           const pInfo = partLabels[weakPart] || partLabels.p5;
           task.title = pInfo.title;

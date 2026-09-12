@@ -120,10 +120,43 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### ✅ Vấn đề 10: Bóc tách Dạng câu hỏi & Luyện chuyên sâu Part 7 (Targeted Reading Practice)
+* **Mô tả**:
+  * Trước đây, Part 7 Reading Comprehension là "hộp đen" lớn nhất của bài thi: không có gắn nhãn dạng câu hỏi, người học chỉ có thể làm lần lượt từng bài đọc theo đề mà không thể luyện tập tập trung vào dạng câu hỏi mình hay sai.
+  * Toàn bộ 15 set bài đọc của Test 1 đều bị gán nhầm là "Single Passage" (trong khi câu 176-185 là Đoạn đôi và câu 186-200 là Đoạn ba).
+  * Thiếu đo lường nhịp độ (Pacing Analysis: giây/câu) khiến người học dễ bị "cháy giờ" mà không được cảnh báo.
+  * Báo cáo lỗ hổng sau thi (`KnowledgeGapBreakdown`), Sổ tay lỗi sai và Lộ trình thích ứng chưa bóc tách được các dạng bài Part 7.
+* **Giải pháp**:
+  * Chuẩn hóa Schema `Part7QuestionSchema` trong `src/schema/toeic.ts` bổ sung `questionType`, `subCategory`, `strategyHint`.
+  * Chuẩn hóa toàn diện 108 câu hỏi Part 7 (54 câu Test 1 + 54 câu Test 2) theo 6 Dạng câu hỏi chuẩn ETS:
+    * *Main Idea & Purpose (Ý chính & Mục đích bài đọc)*
+    * *Detail & Factual (Thông tin chi tiết)*
+    * *Inference & Suggestion (Suy luận ngụ ý)*
+    * *NOT / TRUE (Thông tin Sai / Đúng)*
+    * *Vocabulary in Context (Từ vựng ngữ cảnh)*
+    * *Sentence Placement & Intent (Điền câu & Ý đồ lời nói)*
+  * Sửa lỗi cấu trúc bài đọc trong Test 1: 10 Đoạn đơn (Q147-175), 2 Đoạn đôi (Q176-185), và 3 Đoạn ba (Q186-200).
+  * Nâng cấp giao diện `/part7` với **Targeted Reading Filter Bar**:
+    * Thanh lọc dạng câu hỏi và thanh lọc cấu trúc đoạn văn dạng Pills mượt mà.
+    * Hỗ trợ Cross-test pooling (Gom liên đề Test 1 + Test 2 = 30 bài đọc phong phú).
+    * Hiển thị nhãn Badge chuyên nghiệp trên từng câu hỏi (`[Inference]`, `[Detail]`, v.v.).
+    * Hộp mẹo giải nhanh ETS (`LightbulbIcon`) hiển thị ngay khi xem giải thích chi tiết.
+  * Tích hợp **Pacing Indicator (Đo lường nhịp độ làm bài)**:
+    * Tự động đo lường thời gian giải quyết từng bài đọc theo giây/câu.
+    * Hiển thị Chip nhịp độ: Chuẩn ETS (<60s/câu, xanh lá), Vừa phải (60-90s/câu, vàng), Cảnh báo chậm (>90s/câu, đỏ).
+  * Kết nối khép kín chu trình học tập:
+    * Khi làm sai câu hỏi Part 7, `addMistake` tự động lưu `subCategory: q.questionType` vào Sổ tay lỗi sai.
+    * Màn hình tổng kết Part 7 bóc tách độ chính xác theo từng dạng bài và có nút 1-click `Luyện riêng dạng này`.
+    * Báo cáo lỗ hổng sau thi (`KnowledgeGapBreakdown.tsx`) bổ sung nhóm **Bóc tách Kỹ năng Đọc hiểu Part 7** kèm lời khuyên chiến thuật và link 1-click đến `/part7?questionType=...`.
+    * Lộ trình học thích ứng (`studyPlanEngine.ts`) tự động nhận diện điểm yếu đọc hiểu để sinh nhiệm vụ: `Luyện Part 7: Dạng câu hỏi [Tên dạng]`.
+  * Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)** với SVG icons sạch từ `AppIcons`.
+
+---
+
 ## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### 🚀 Vấn Đề 10: [Đang chờ người dùng cung cấp mô tả chi tiết]
-* Khi người dùng gửi yêu cầu về Vấn đề 10, Agent sẽ:
+### 🚀 Vấn Đề 11: [Đang chờ người dùng cung cấp mô tả chi tiết]
+* Khi người dùng gửi yêu cầu về Vấn đề 11, Agent sẽ:
   1. Ghi nhận Problem, Evidence, Recommendation, Effort.
   2. Phân tích các file liên quan và lập implementation plan tối giản, không phá vỡ các chức năng cũ.
   3. Lấy xác nhận từ người dùng trước khi triển khai.

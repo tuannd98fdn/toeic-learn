@@ -150,13 +150,29 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
             )}
             {filterSubCategory !== 'all' && (
               <Link 
-                href={`/part5?subCategory=${encodeURIComponent(filterSubCategory)}`} 
+                href={
+                  filterPart.replace(/^p(art)?/, '') === '7' ||
+                  ['main idea', 'inference', 'not / true', 'sentence placement'].some(k =>
+                    filterSubCategory.toLowerCase().includes(k)
+                  )
+                    ? `/part7?questionType=${encodeURIComponent(filterSubCategory)}`
+                    : `/part5?subCategory=${encodeURIComponent(filterSubCategory)}`
+                } 
                 className={styles.secondaryBtn}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                title={`Luyện tập câu hỏi Part 5 chuyên đề ${filterSubCategory}`}
+                title={`Luyện tập chuyên đề ${filterSubCategory}`}
               >
                 <ZapIcon size={14} />
-                <span>Luyện chuyên đề ETS: {filterSubCategory}</span>
+                <span>
+                  Luyện{' '}
+                  {filterPart.replace(/^p(art)?/, '') === '7' ||
+                  ['main idea', 'inference', 'not / true', 'sentence placement'].some(k =>
+                    filterSubCategory.toLowerCase().includes(k)
+                  )
+                    ? 'dạng đọc hiểu'
+                    : 'chuyên đề ETS'}
+                  : {filterSubCategory}
+                </span>
               </Link>
             )}
           </div>

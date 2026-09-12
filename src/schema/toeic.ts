@@ -102,6 +102,9 @@ export const Part7QuestionSchema = z.object({
   options: z.record(z.string(), z.string()),
   correctAnswer: z.string(),
   explanation: z.string(),
+  questionType: z.string().optional(),
+  subCategory: z.string().optional(),
+  strategyHint: z.string().optional(),
 });
 
 export const Part7PassageSetSchema = z.object({

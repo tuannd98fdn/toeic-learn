@@ -22,7 +22,10 @@
           "D": "In an advertisement"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Information can be inferred from <em>&quot;In this publication, you will find everything you need to know to start scanning documents and images into a computer running any common operating system.&quot;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;In this publication, you will find everything you need to know to start scanning documents and images into a computer running any common operating system.&quot;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f86b",
@@ -35,7 +38,10 @@
           "D": "Detailed images"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information is in <em>&quot;For more detailed instructions on how to use your TechRight scanner, visit us at www.techright.com.&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;For more detailed instructions on how to use your TechRight scanner, visit us at www.techright.com.&quot;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       }
     ]
   },
@@ -62,7 +68,10 @@
           "D": "To explain a hiring decision"
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information can be inferred from <em>&quot;While we were impressed with your enthusiastic personality, we decided to hire someone with a more intimate knowledge of the individual makes and models in order to reduce the need for in-house training.&quot;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;While we were impressed with your enthusiastic personality, we decided to hire someone with a more intimate knowledge of the individual makes and models in order to reduce the need for in-house training.&quot;</em></p>\n",
+        "questionType": "Main Idea",
+        "subCategory": "Main Idea",
+        "strategyHint": "Đọc lướt dòng tiêu đề, phần mở đầu hoặc dòng Subject của email/thông báo để xác định mục đích cốt lõi bài viết."
       },
       {
         "id": "62b694afbbc57b27fe10f86d",
@@ -75,7 +84,10 @@
           "D": "She scored poorly on a skills test."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;You also mentioned that you are working mornings at a high- end boutique&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;You also mentioned that you are working mornings at a high- end boutique&quot;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       }
     ]
   },
@@ -102,7 +114,10 @@
           "D": "A clothing store"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information can be inferred from <em>&quot;For over 60 years, Harrison&rsquo;s has been Hartwick City&rsquo;s leading retailer of wooden tables, shelving, bed frames, and more.&quot; </em>and <em>&quot;Our in-house carpenters and creative designers have been praised in the local and national press for their ability to create in consultation with the client&quot;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;For over 60 years, Harrison&rsquo;s has been Hartwick City&rsquo;s leading retailer of wooden tables, shelving, bed frames, and more.&quot; </em>and <em>&quot;Our in-house carpenters and creative designers have been praised in the local and national press for their ability to create in consultation with the client&quot;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f86f",
@@ -115,7 +130,10 @@
           "D": "It was featured in a publication."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;Our in-house carpenters and creative designers have been praised in the local and national press for their ability to create in consultation with the client&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Our in-house carpenters and creative designers have been praised in the local and national press for their ability to create in consultation with the client&quot;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       }
     ]
   },
@@ -142,7 +160,10 @@
           "D": "Supervisors in the marketing department"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;with your phone lines in the sales department remaining unaffected&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;with your phone lines in the sales department remaining unaffected&quot;&nbsp;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f871",
@@ -155,7 +176,10 @@
           "D": "He expects to finish the repairs by the end of the day."
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information is in <em>&quot;Terrence Preece from the IT department is working hard to restore full service to our phone network, and he is optimistic that this will be achieved by 6 P.M. today.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Terrence Preece from the IT department is working hard to restore full service to our phone network, and he is optimistic that this will be achieved by 6 P.M. today.&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f872",
@@ -168,7 +192,10 @@
           "D": "Bring broken equipment to Mr. Preece for repairs"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information is in <em>&quot;we ask that even those who are able to use your phones, please communicate with the affected departments using e-mail only.&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;we ask that even those who are able to use your phones, please communicate with the affected departments using e-mail only.&quot;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       }
     ]
   },
@@ -195,7 +222,10 @@
           "D": "A connection device"
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information is in <em>&quot;I&#39;m setting up the conference room for the board meeting, but can&#39;t find the the cable for the laptop.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;I&#39;m setting up the conference room for the board meeting, but can&#39;t find the the cable for the laptop.&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f874",
@@ -208,7 +238,10 @@
           "D": "He is contacting the IT department to fix a common problem."
         },
         "correctAnswer": "C",
-        "explanation": "<p>Based on the sentences <em>&quot;The one that hooks up a computer to the projector for videos and slideshows. I need one of those but it&#39;s missing.&quot;</em> and <em>&quot;I&rsquo;ll bring one down in a few minutes.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Based on the sentences <em>&quot;The one that hooks up a computer to the projector for videos and slideshows. I need one of those but it&#39;s missing.&quot;</em> and <em>&quot;I&rsquo;ll bring one down in a few minutes.&quot;&nbsp;</em></p>\n",
+        "questionType": "Sentence Placement",
+        "subCategory": "Sentence Placement",
+        "strategyHint": "Quan sát các liên từ nối (however, therefore) và đại từ chỉ định (this, that, such) để xác định vị trí câu văn."
       }
     ]
   },
@@ -235,7 +268,10 @@
           "D": "It requires some minor repairs."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;Price reduced for quick sale to $19,000 (or nearest offer).&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Price reduced for quick sale to $19,000 (or nearest offer).&quot;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f876",
@@ -248,7 +284,10 @@
           "D": "Heated seats in front"
         },
         "correctAnswer": "C",
-        "explanation": "<p>a USB jack for any second- generation or higher smartphone =&gt; Eliminate A</p>\n\n<p>satellite navigation =&gt;&nbsp;Eliminate B&nbsp;</p>\n\n<p>The truck is fitted with seat heaters for both the driver and front passenger =&gt;&nbsp;Eliminate D</p>\n"
+        "explanation": "<p>a USB jack for any second- generation or higher smartphone =&gt; Eliminate A</p>\n\n<p>satellite navigation =&gt;&nbsp;Eliminate B&nbsp;</p>\n\n<p>The truck is fitted with seat heaters for both the driver and front passenger =&gt;&nbsp;Eliminate D</p>\n",
+        "questionType": "NOT / TRUE",
+        "subCategory": "NOT / TRUE",
+        "strategyHint": "Dùng phương pháp loại trừ: 3 phương án được đề cập trong bài là sai, phương án không xuất hiện là đáp án đúng."
       },
       {
         "id": "62b694afbbc57b27fe10f877",
@@ -261,7 +300,10 @@
           "D": "She will answer all e-mails within 24 hours"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is inferred from <em>&quot;Please call (201) 555-7586 and leave a message for Geraldine.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is inferred from <em>&quot;Please call (201) 555-7586 and leave a message for Geraldine.&quot;&nbsp;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       }
     ]
   },
@@ -288,7 +330,10 @@
           "D": "To give advice on employee recruitment"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information can be inferred from <em>&quot;Thank you for your interest in our services.&quot;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;Thank you for your interest in our services.&quot;</em></p>\n",
+        "questionType": "Main Idea",
+        "subCategory": "Main Idea",
+        "strategyHint": "Đọc lướt dòng tiêu đề, phần mở đầu hoặc dòng Subject của email/thông báo để xác định mục đích cốt lõi bài viết."
       },
       {
         "id": "62b694afbbc57b27fe10f879",
@@ -301,7 +346,10 @@
           "D": "It has purchased several graphic design"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information is in <em>&quot;Ace HR Consulting, Inc., provides reliable human resource solutions and works closely with large companies, domestically and abroad, to develop effective work systems.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Ace HR Consulting, Inc., provides reliable human resource solutions and works closely with large companies, domestically and abroad, to develop effective work systems.&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f87a",
@@ -314,7 +362,10 @@
           "D": "convince"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Based on the meaning&nbsp;=&gt; Choose B&nbsp;</p>\n"
+        "explanation": "<p>Based on the meaning&nbsp;=&gt; Choose B&nbsp;</p>\n",
+        "questionType": "Vocabulary",
+        "subCategory": "Vocabulary",
+        "strategyHint": "Không dịch nghĩa gốc của từ; hãy thay thế lần lượt 4 đáp án vào ngữ cảnh câu văn để chọn từ hợp lý nhất."
       },
       {
         "id": "62b694afbbc57b27fe10f87b",
@@ -327,7 +378,10 @@
           "D": "[4]"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Based on the sentence <em>&quot;We have assisted other U.K.-based graphic design firms like yours with their expansion into Dubai and Abu Dhabi before, and we can say that they are fully satisfied with the outcome. The booming entertainment and tourism industries in the country have contributed much to their growth.&quot;&nbsp;</em>=&gt; Choose B&nbsp;</p>\n"
+        "explanation": "<p>Based on the sentence <em>&quot;We have assisted other U.K.-based graphic design firms like yours with their expansion into Dubai and Abu Dhabi before, and we can say that they are fully satisfied with the outcome. The booming entertainment and tourism industries in the country have contributed much to their growth.&quot;&nbsp;</em>=&gt; Choose B&nbsp;</p>\n",
+        "questionType": "Sentence Placement",
+        "subCategory": "Sentence Placement",
+        "strategyHint": "Quan sát các liên từ nối (however, therefore) và đại từ chỉ định (this, that, such) để xác định vị trí câu văn."
       }
     ]
   },
@@ -354,7 +408,10 @@
           "D": "It intends to open a manufacturing plant in London."
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information can be inferred from <em>&quot;Radcliffe, CEO of Lagrange Clothing, today announced his intention to take the thriving clothing retail business into international markets&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;Radcliffe, CEO of Lagrange Clothing, today announced his intention to take the thriving clothing retail business into international markets&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f87d",
@@ -367,7 +424,10 @@
           "D": "They are scheduled to open for business next March."
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information is in <em>&quot;Construction has already begun on a new manufacturing plant and distribution warehouse in Brussels, Belgium, and these are expected to begin operations in early February, just one month before the opening of the flagship stores&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Construction has already begun on a new manufacturing plant and distribution warehouse in Brussels, Belgium, and these are expected to begin operations in early February, just one month before the opening of the flagship stores&quot;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f87e",
@@ -380,7 +440,10 @@
           "D": "It released a new line of clothing."
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information can be inferred from <em>&quot;This year has proven to be a banner year for Lagrange Clothing and saw Mr. Radcliffe attend the opening of the company&rsquo;s newest retail location in downtown Houston.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;This year has proven to be a banner year for Lagrange Clothing and saw Mr. Radcliffe attend the opening of the company&rsquo;s newest retail location in downtown Houston.&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f87f",
@@ -393,7 +456,10 @@
           "D": "[4]"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Based on the sentence &quot;By moving operations into foreign markets for the first time, we aim to establish ourselves as one of the world&rsquo;s leading clothing manufacturers.&quot;&nbsp;=&gt; Choose C&nbsp;</p>\n"
+        "explanation": "<p>Based on the sentence &quot;By moving operations into foreign markets for the first time, we aim to establish ourselves as one of the world&rsquo;s leading clothing manufacturers.&quot;&nbsp;=&gt; Choose C&nbsp;</p>\n",
+        "questionType": "Sentence Placement",
+        "subCategory": "Sentence Placement",
+        "strategyHint": "Quan sát các liên từ nối (however, therefore) và đại từ chỉ định (this, that, such) để xác định vị trí câu văn."
       }
     ]
   },
@@ -420,7 +486,10 @@
           "D": "To notify residents of necessary repairs"
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information is inferred from <em>&quot;Please be advised that the water supply to the entire apartment complex will be shut off between the hours of 10 A.M. and 3 P.M. tomorrow. This is to enable the replacement of some old pipes, which have become corroded and fallen into a dangerous state of disrepair.&quot;</em></p>\n"
+        "explanation": "<p>Information is inferred from <em>&quot;Please be advised that the water supply to the entire apartment complex will be shut off between the hours of 10 A.M. and 3 P.M. tomorrow. This is to enable the replacement of some old pipes, which have become corroded and fallen into a dangerous state of disrepair.&quot;</em></p>\n",
+        "questionType": "Main Idea",
+        "subCategory": "Main Idea",
+        "strategyHint": "Đọc lướt dòng tiêu đề, phần mở đầu hoặc dòng Subject của email/thông báo để xác định mục đích cốt lõi bài viết."
       },
       {
         "id": "62b694afbbc57b27fe10f881",
@@ -433,7 +502,10 @@
           "D": "A water boiler must be replaced."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;This is to enable the replacement of some old pipes, which have become corroded and fallen into a dangerous state of disrepair.&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;This is to enable the replacement of some old pipes, which have become corroded and fallen into a dangerous state of disrepair.&quot;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f882",
@@ -446,7 +518,10 @@
           "D": "Refraining from flushing toilets"
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information is in <em>&quot;Toilets in your unit are not used throughout these hours.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Toilets in your unit are not used throughout these hours.&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       }
     ]
   },
@@ -473,7 +548,10 @@
           "D": "She is not sure which model she needs."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;Can anyone help me with a problem that I&rsquo;m having with my Viewsnap R-400 digital camera?&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Can anyone help me with a problem that I&rsquo;m having with my Viewsnap R-400 digital camera?&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f884",
@@ -486,7 +564,10 @@
           "D": "Its shutter should be dusted regularly."
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information is in <em>&quot;It&rsquo;s intended for wildlife photography, so if you&rsquo;re using it to take pictures indoors that might be why it&rsquo;s not working as you want.&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;It&rsquo;s intended for wildlife photography, so if you&rsquo;re using it to take pictures indoors that might be why it&rsquo;s not working as you want.&quot;</em></p>\n",
+        "questionType": "NOT / TRUE",
+        "subCategory": "NOT / TRUE",
+        "strategyHint": "Dùng phương pháp loại trừ: 3 phương án được đề cập trong bài là sai, phương án không xuất hiện là đáp án đúng."
       },
       {
         "id": "62b694afbbc57b27fe10f885",
@@ -499,7 +580,10 @@
           "D": "She cannot delete photographs."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Based on the sentence <em>&quot;Can&rsquo;t you just return it to Viewsnap and have them give you a new camera?&quot;&nbsp;=&gt; Choose B&nbsp;</em></p>\n"
+        "explanation": "<p>Based on the sentence <em>&quot;Can&rsquo;t you just return it to Viewsnap and have them give you a new camera?&quot;&nbsp;=&gt; Choose B&nbsp;</em></p>\n",
+        "questionType": "Sentence Placement",
+        "subCategory": "Sentence Placement",
+        "strategyHint": "Quan sát các liên từ nối (however, therefore) và đại từ chỉ định (this, that, such) để xác định vị trí câu văn."
       },
       {
         "id": "62b694afbbc57b27fe10f886",
@@ -512,13 +596,16 @@
           "D": "He owns the R-400 model."
         },
         "correctAnswer": "A",
-        "explanation": "<p>Information can be inferred from <em>&quot;I have dealt with this problem before.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;I have dealt with this problem before.&quot;&nbsp;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       }
     ]
   },
   {
     "id": "62b694aebbc57b27fe10f810",
-    "type": "Single Passage",
+    "type": "Double Passage",
     "passages": [
       {
         "id": "62b694aebbc57b27fe10f810_p1",
@@ -539,7 +626,10 @@
           "D": "To explain a change in ownership"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information can be inferred from <em>&quot;If you or your coworkers are bogged down in office cleaning, then Ready Hands is the right choice for you!&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;If you or your coworkers are bogged down in office cleaning, then Ready Hands is the right choice for you!&quot;&nbsp;</em></p>\n",
+        "questionType": "Main Idea",
+        "subCategory": "Main Idea",
+        "strategyHint": "Đọc lướt dòng tiêu đề, phần mở đầu hoặc dòng Subject của email/thông báo để xác định mục đích cốt lõi bài viết."
       },
       {
         "id": "62b694afbbc57b27fe10f888",
@@ -552,7 +642,10 @@
           "D": "It monitors the indoor air quality."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;but what sets Ready Hands apart is our exclusive use of non-toxic cleaning products, which are proven to not pollute waterways&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;but what sets Ready Hands apart is our exclusive use of non-toxic cleaning products, which are proven to not pollute waterways&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f889",
@@ -565,7 +658,10 @@
           "D": "Scrubbing windows"
         },
         "correctAnswer": "D",
-        "explanation": "<p><em>&quot;We vacuum and sweep floors, dust surfaces, clean bathrooms&quot; </em>=&gt; Eliminate A, B, C&nbsp;</p>\n"
+        "explanation": "<p><em>&quot;We vacuum and sweep floors, dust surfaces, clean bathrooms&quot; </em>=&gt; Eliminate A, B, C&nbsp;</p>\n",
+        "questionType": "NOT / TRUE",
+        "subCategory": "NOT / TRUE",
+        "strategyHint": "Dùng phương pháp loại trừ: 3 phương án được đề cập trong bài là sai, phương án không xuất hiện là đáp án đúng."
       },
       {
         "id": "62b694afbbc57b27fe10f88a",
@@ -578,7 +674,10 @@
           "D": "Her store’s goods often sell out."
         },
         "correctAnswer": "C",
-        "explanation": "<p>The email is sent to&nbsp;Emily Young&nbsp;<em>(To:&nbsp;Emily Young (emily.young@readyhands.com).</em> In the letter, there is the information <em>&quot;For Longview, contact Emily Young at&nbsp;<u>emily.young@readyhands.com</u>.&quot;&nbsp;</em>=&gt;C is correct&nbsp;</p>\n"
+        "explanation": "<p>The email is sent to&nbsp;Emily Young&nbsp;<em>(To:&nbsp;Emily Young (emily.young@readyhands.com).</em> In the letter, there is the information <em>&quot;For Longview, contact Emily Young at&nbsp;<u>emily.young@readyhands.com</u>.&quot;&nbsp;</em>=&gt;C is correct&nbsp;</p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f88b",
@@ -591,13 +690,16 @@
           "D": "Moving some clothes"
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information is inferred from <em>&quot;we are looking for a business that can also provide extra services occasionally, including helping us with rearranging the retail apparel from time to time&quot;</em></p>\n"
+        "explanation": "<p>Information is inferred from <em>&quot;we are looking for a business that can also provide extra services occasionally, including helping us with rearranging the retail apparel from time to time&quot;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       }
     ]
   },
   {
     "id": "62b694aebbc57b27fe10f811",
-    "type": "Single Passage",
+    "type": "Double Passage",
     "passages": [
       {
         "id": "62b694aebbc57b27fe10f811_p1",
@@ -618,7 +720,10 @@
           "D": "To get information about service providers"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Information is in <em>&quot;To activate each phone, please have the user call (303) 555-3299&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;To activate each phone, please have the user call (303) 555-3299&quot;&nbsp;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f88d",
@@ -631,7 +736,10 @@
           "D": "They require an ID check beforehand."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;If you have an account associated with the phone, your bill will be issued on the 25 th of each month.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;If you have an account associated with the phone, your bill will be issued on the 25 th of each month.&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f88e",
@@ -644,7 +752,10 @@
           "D": "Account service charges"
         },
         "correctAnswer": "D",
-        "explanation": "<p>You can see that the web page provides a list of account options and their service fees&nbsp;=&gt; Choose D&nbsp;</p>\n"
+        "explanation": "<p>You can see that the web page provides a list of account options and their service fees&nbsp;=&gt; Choose D&nbsp;</p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f88f",
@@ -657,7 +768,10 @@
           "D": "The Champion Package"
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information is in <em>&quot;International calls are free during non-peak hours.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;International calls are free during non-peak hours.&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f890",
@@ -670,13 +784,16 @@
           "D": "PT800"
         },
         "correctAnswer": "C",
-        "explanation": "<p>In the second passage, it says that <em>&quot;Users of AR Mobile models will also need to reply to a text message to activate the service.&quot;&nbsp;</em>Meanwhile, in the first passage, there is the information &quot;<em>AR Mobile TRX440&quot;</em>&nbsp;=&gt; C is correct&nbsp;</p>\n"
+        "explanation": "<p>In the second passage, it says that <em>&quot;Users of AR Mobile models will also need to reply to a text message to activate the service.&quot;&nbsp;</em>Meanwhile, in the first passage, there is the information &quot;<em>AR Mobile TRX440&quot;</em>&nbsp;=&gt; C is correct&nbsp;</p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       }
     ]
   },
   {
     "id": "62b694aebbc57b27fe10f812",
-    "type": "Single Passage",
+    "type": "Triple Passage",
     "passages": [
       {
         "id": "62b694aebbc57b27fe10f812_p1",
@@ -697,7 +814,10 @@
           "D": "Interactive displays"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information is in <em>&quot;Separated only by some glass walls, you will see live deep-sea animals up close and personal.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Separated only by some glass walls, you will see live deep-sea animals up close and personal.&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f892",
@@ -710,7 +830,10 @@
           "D": "statues"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Based on the meaning and context&nbsp;=&gt; Choose A&nbsp;</p>\n"
+        "explanation": "<p>Based on the meaning and context&nbsp;=&gt; Choose A&nbsp;</p>\n",
+        "questionType": "Vocabulary",
+        "subCategory": "Vocabulary",
+        "strategyHint": "Không dịch nghĩa gốc của từ; hãy thay thế lần lượt 4 đáp án vào ngữ cảnh câu văn để chọn từ hợp lý nhất."
       },
       {
         "id": "62b694afbbc57b27fe10f893",
@@ -723,7 +846,10 @@
           "D": "Ancient Ancestors"
         },
         "correctAnswer": "C",
-        "explanation": "<p>In the website, there is the information <em>&quot;Date: August 1&quot;.&nbsp;</em>Meanwhile, in the flyer, there is the information <em>&quot;From the King&#39;s Castle&nbsp;(July-September)&quot;&nbsp;</em>=&gt; C is correct&nbsp;</p>\n"
+        "explanation": "<p>In the website, there is the information <em>&quot;Date: August 1&quot;.&nbsp;</em>Meanwhile, in the flyer, there is the information <em>&quot;From the King&#39;s Castle&nbsp;(July-September)&quot;&nbsp;</em>=&gt; C is correct&nbsp;</p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f894",
@@ -736,7 +862,10 @@
           "D": "Young children must be escorted by an adult."
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information is in <em>&quot;Children under the age of 10 must be accompanied by an adult at all times.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Children under the age of 10 must be accompanied by an adult at all times.&quot;&nbsp;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f895",
@@ -749,13 +878,16 @@
           "D": "It will include children younger than 10."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;Likewise, groups with fewer than 6 participants will be grouped together with another party&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;Likewise, groups with fewer than 6 participants will be grouped together with another party&quot;&nbsp;</em></p>\n",
+        "questionType": "NOT / TRUE",
+        "subCategory": "NOT / TRUE",
+        "strategyHint": "Dùng phương pháp loại trừ: 3 phương án được đề cập trong bài là sai, phương án không xuất hiện là đáp án đúng."
       }
     ]
   },
   {
     "id": "62b694aebbc57b27fe10f813",
-    "type": "Single Passage",
+    "type": "Triple Passage",
     "passages": [
       {
         "id": "62b694aebbc57b27fe10f813_p1",
@@ -776,7 +908,10 @@
           "D": "Upcoming construction work"
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information can be inferred from <em>&quot;Yesterday, Clarkton city officials announced that they will be repaving some of the city&rsquo;s oldest and most uneven sidewalks this summer. Several pedestrians have complained about the cracked sidewalks for a while and the city finally has some funds to address the issue. The first street to be repaired will be Kincaid Avenue. Construction begins on August 20 and is expected to last for two weeks.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;Yesterday, Clarkton city officials announced that they will be repaving some of the city&rsquo;s oldest and most uneven sidewalks this summer. Several pedestrians have complained about the cracked sidewalks for a while and the city finally has some funds to address the issue. The first street to be repaired will be Kincaid Avenue. Construction begins on August 20 and is expected to last for two weeks.&quot;&nbsp;</em></p>\n",
+        "questionType": "Main Idea",
+        "subCategory": "Main Idea",
+        "strategyHint": "Đọc lướt dòng tiêu đề, phần mở đầu hoặc dòng Subject của email/thông báo để xác định mục đích cốt lõi bài viết."
       },
       {
         "id": "62b694afbbc57b27fe10f897",
@@ -789,7 +924,10 @@
           "D": "He supports the efforts to make some improvements."
         },
         "correctAnswer": "C",
-        "explanation": "<p>Information is in<em> &quot;I think it could create a problem for our business since it will be happening right in front of our store.&quot;&nbsp;</em></p>\n"
+        "explanation": "<p>Information is in<em> &quot;I think it could create a problem for our business since it will be happening right in front of our store.&quot;&nbsp;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f898",
@@ -802,7 +940,10 @@
           "D": "On Cardin Street"
         },
         "correctAnswer": "A",
-        "explanation": "<p>In the email, it says that <em>&quot;I think it could create a problem for our business since it will be happening right in front of our store.&quot; </em>Meanwhile, in the article, there is the information <em>&quot;The first street to be repaired will be Kincaid Avenue.&quot;&nbsp;</em>=&gt; Choose A&nbsp;</p>\n"
+        "explanation": "<p>In the email, it says that <em>&quot;I think it could create a problem for our business since it will be happening right in front of our store.&quot; </em>Meanwhile, in the article, there is the information <em>&quot;The first street to be repaired will be Kincaid Avenue.&quot;&nbsp;</em>=&gt; Choose A&nbsp;</p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f899",
@@ -815,7 +956,10 @@
           "D": "Contact another department in the company"
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information is in <em>&quot;could you contact our marketing team and suggest making some large promotional signs that we can put out front?&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;could you contact our marketing team and suggest making some large promotional signs that we can put out front?&quot;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f89a",
@@ -828,13 +972,16 @@
           "D": "Promotions manager"
         },
         "correctAnswer": "C",
-        "explanation": "<p>In the website, there is the information <em>&quot;My message to Nicholas Dow&quot;. </em>Meanwhile, in the email, it says that <em>&quot;I&rsquo;ve already submitted a contact request to our city councilor&quot;&nbsp;</em>=&gt; Choose C&nbsp;</p>\n"
+        "explanation": "<p>In the website, there is the information <em>&quot;My message to Nicholas Dow&quot;. </em>Meanwhile, in the email, it says that <em>&quot;I&rsquo;ve already submitted a contact request to our city councilor&quot;&nbsp;</em>=&gt; Choose C&nbsp;</p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       }
     ]
   },
   {
     "id": "62b694aebbc57b27fe10f814",
-    "type": "Single Passage",
+    "type": "Triple Passage",
     "passages": [
       {
         "id": "62b694aebbc57b27fe10f814_p1",
@@ -855,7 +1002,10 @@
           "D": "It sends out weekly e-mails."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information can be inferred from <em>&quot;a 20% discount on our <strong>online merchandise</strong>&quot; </em>and <em>&quot;On our Web site at www.feedback.hdabroadcasing.org&quot;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;a 20% discount on our <strong>online merchandise</strong>&quot; </em>and <em>&quot;On our Web site at www.feedback.hdabroadcasing.org&quot;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f89c",
@@ -868,7 +1018,10 @@
           "D": "Sponsor"
         },
         "correctAnswer": "C",
-        "explanation": "<p>In the website, there is the information<strong> </strong><em>&quot;I think the $125/year rate is a little high&quot;. </em>Look at the notice, you can see that the membership level which costs $125 is Supporter&nbsp;=&gt; C is correct&nbsp;</p>\n"
+        "explanation": "<p>In the website, there is the information<strong> </strong><em>&quot;I think the $125/year rate is a little high&quot;. </em>Look at the notice, you can see that the membership level which costs $125 is Supporter&nbsp;=&gt; C is correct&nbsp;</p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       },
       {
         "id": "62b694afbbc57b27fe10f89d",
@@ -881,7 +1034,10 @@
           "D": "structure"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Based on the meaning and context&nbsp;=&gt; Choose B&nbsp;</p>\n"
+        "explanation": "<p>Based on the meaning and context&nbsp;=&gt; Choose B&nbsp;</p>\n",
+        "questionType": "Vocabulary",
+        "subCategory": "Vocabulary",
+        "strategyHint": "Không dịch nghĩa gốc của từ; hãy thay thế lần lượt 4 đáp án vào ngữ cảnh câu văn để chọn từ hợp lý nhất."
       },
       {
         "id": "62b694afbbc57b27fe10f89e",
@@ -894,7 +1050,10 @@
           "D": "Its monthly publication is educational."
         },
         "correctAnswer": "D",
-        "explanation": "<p>Information can be inferred from <em>&quot;I really enjoy my copies of the HDA Broadcasting magazine. It is quite interesting and full of useful information.&quot;</em></p>\n"
+        "explanation": "<p>Information can be inferred from <em>&quot;I really enjoy my copies of the HDA Broadcasting magazine. It is quite interesting and full of useful information.&quot;</em></p>\n",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tìm mối liên hệ gián tiếp hoặc liên kết giữa các văn bản; không chọn phương án suy diễn ngoài thực tế bài đọc."
       },
       {
         "id": "62b694afbbc57b27fe10f89f",
@@ -907,7 +1066,10 @@
           "D": "A renewal notification"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Information is in <em>&quot;I recently renewed my membership, but only my free passes were included with the thank you letter I received. Could you please send me the item that I am still missing?&quot;</em></p>\n"
+        "explanation": "<p>Information is in <em>&quot;I recently renewed my membership, but only my free passes were included with the thank you letter I received. Could you please send me the item that I am still missing?&quot;</em></p>\n",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Xác định từ khóa danh từ riêng, số liệu, mốc thời gian trong câu hỏi và dùng kỹ thuật quét (Scanning) để định vị thông tin."
       }
     ]
   }

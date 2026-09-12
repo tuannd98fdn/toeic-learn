@@ -1,17 +1,53 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useRef, useMemo, Suspense } from 'react';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Confetti from '@/components/Confetti';
-import { ClockIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon } from '@/components/icons/AppIcons';
-import { useSearchParams } from 'next/navigation';
-import { Part7PassageSet, Part7DataSchema } from '@/schema/toeic';
+import {
+  ClockIcon,
+  AwardIcon,
+  BookIcon,
+  RotateCcwIcon,
+  HomeIcon,
+  TargetIcon,
+  ZapIcon,
+  LayersIcon,
+  ArrowRightIcon,
+  CheckCircleIcon,
+  AlertCircleIcon,
+  LightbulbIcon,
+} from '@/components/icons/AppIcons';
+import { Part7PassageSet, Part7Question, Part7DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
+
+export const QUESTION_TYPES = [
+  { key: 'all', label: 'Tất cả dạng' },
+  { key: 'Main Idea', label: 'Ý chính & Mục đích' },
+  { key: 'Detail', label: 'Chi tiết' },
+  { key: 'Inference', label: 'Suy luận (Inference)' },
+  { key: 'NOT / TRUE', label: 'NOT / TRUE' },
+  { key: 'Vocabulary', label: 'Từ vựng ngữ cảnh' },
+  { key: 'Sentence Placement', label: 'Điền câu' },
+];
+
+export const PASSAGE_TYPES = [
+  { key: 'all', label: 'Tất cả đoạn' },
+  { key: 'Single Passage', label: 'Đoạn đơn (Single)' },
+  { key: 'Double Passage', label: 'Đoạn đôi (Double)' },
+  { key: 'Triple Passage', label: 'Đoạn ba (Triple)' },
+];
+
+export const TESTS_LIST = [
+  { key: 'ets2022_test1', label: 'ETS 2022 Test 1' },
+  { key: 'ets2022_test2', label: 'ETS 2022 Test 2' },
+  { key: 'all', label: 'Liên đề (Test 1 + Test 2)' },
+];
 
 export default function Part7Page() {
   return (
@@ -22,16 +58,21 @@ export default function Part7Page() {
 }
 
 function Part7Trainer() {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const testId = searchParams.get('test') || 'ets2022_test1';
+  const initialTest = searchParams?.get('test') || 'ets2022_test1';
+  const initialQType = searchParams?.get('questionType') || 'all';
+  const initialPassageType = searchParams?.get('passageType') || 'all';
 
-  const [passageSets, setPassageSets] = useState<Part7PassageSet[]>([]);
-  const [currentPassageIndex, setCurrentPassageIndex] = useState(0);
-  const passageSet = passageSets[currentPassageIndex] || null;
+  const [testId, setTestId] = useState<string>(initialTest);
+  const [selectedQType, setSelectedQType] = useState<string>(initialQType);
+  const [selectedPassageType, setSelectedPassageType] = useState<string>(initialPassageType);
 
+  const [allPassageSets, setAllPassageSets] = useState<Part7PassageSet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [currentPassageIndex, setCurrentPassageIndex] = useState(0);
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -41,6 +82,13 @@ function Part7Trainer() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [currentSetScore, setCurrentSetScore] = useState(0);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
+
+  // Pacing Tracking State
+  const passageStartTimeRef = useRef<number>(Date.now());
+  const [paceInfo, setPaceInfo] = useState<{ elapsedSeconds: number; secondsPerQ: number } | null>(null);
+  const [sessionAnsweredQuestions, setSessionAnsweredQuestions] = useState<
+    { question: Part7Question; isCorrect: boolean }[]
+  >([]);
 
   // Time Attack State
   const [isTimeAttackEnabled, setIsTimeAttackEnabled] = useState(false);
@@ -52,27 +100,17 @@ function Part7Trainer() {
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(Object.keys(answers).length > 0 && !isSubmitted);
 
-  const handleTextHighlight = () => {
-    if (!isHighlightMode) return;
-    const selection = window.getSelection();
-    if (!selection || selection.isCollapsed) return;
+  // Sync searchParams changes from URL
+  useEffect(() => {
+    const t = searchParams?.get('test');
+    const q = searchParams?.get('questionType');
+    const p = searchParams?.get('passageType');
+    if (t && t !== testId) setTestId(t);
+    if (q && q !== selectedQType) setSelectedQType(q);
+    if (p && p !== selectedPassageType) setSelectedPassageType(p);
+  }, [searchParams]);
 
-    try {
-      const range = selection.getRangeAt(0);
-      const markNode = document.createElement('mark');
-      markNode.style.backgroundColor = 'var(--warning-light, #fff8e1)';
-      markNode.style.padding = '0 2px';
-      markNode.style.borderRadius = '2px';
-      
-      range.surroundContents(markNode);
-      selection.removeAllRanges();
-    } catch (e) {
-      console.warn('Không thể highlight qua nhiều thẻ block khác nhau', e);
-      selection.removeAllRanges();
-    }
-  };
-
-  // Load preference
+  // Load preferences
   useEffect(() => {
     const savedPref = localStorage.getItem('toeic_time_attack');
     if (savedPref === 'true') setIsTimeAttackEnabled(true);
@@ -84,12 +122,97 @@ function Part7Trainer() {
     localStorage.setItem('toeic_time_attack', newVal.toString());
   };
 
-  // Reset or initialize timer
+  // Fetch passages from JSON
+  useEffect(() => {
+    const fetchPassages = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        let loadedSets: Part7PassageSet[] = [];
+
+        if (testId === 'all') {
+          // Cross-test pooling: Load both Test 1 and Test 2
+          const [res1, res2] = await Promise.all([
+            fetch('/data/ets2022/test1/part7.json'),
+            fetch('/data/ets2022/test2/part7.json'),
+          ]);
+
+          if (!res1.ok || !res2.ok) throw new Error('Không thể tải dữ liệu đề thi');
+          const [d1, d2] = await Promise.all([res1.json(), res2.json()]);
+          const v1 = Part7DataSchema.parse(d1);
+          const v2 = Part7DataSchema.parse(d2);
+          loadedSets = [...v1, ...v2];
+        } else {
+          const match = testId.match(/ets(\d+)_test(\d+)/);
+          if (!match) throw new Error('Mã đề thi không hợp lệ');
+
+          const path = `/data/ets${match[1]}/test${match[2]}/part7.json`;
+          const res = await fetch(path);
+          if (!res.ok) throw new Error('Không thể tải dữ liệu đề thi');
+
+          const data = await res.json();
+          const validated = Part7DataSchema.parse(data);
+          loadedSets = validated as Part7PassageSet[];
+        }
+
+        setAllPassageSets(loadedSets);
+        setCurrentPassageIndex(0);
+        setActiveQuestionIndex(0);
+        setAnswers({});
+        setIsSubmitted(false);
+        setIsFinished(false);
+        setTotalScore(0);
+        setTotalQuestions(0);
+        setSessionAnsweredQuestions([]);
+        setPaceInfo(null);
+        passageStartTimeRef.current = Date.now();
+      } catch (err: any) {
+        console.error('Error loading Part 7 data:', err);
+        setError(err.message || 'Có lỗi xảy ra khi tải dữ liệu');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPassages();
+  }, [testId]);
+
+  // Filter passages based on selected filters
+  const filteredPassageSets = useMemo(() => {
+    return allPassageSets.filter((set) => {
+      // 1. Passage type filter
+      if (selectedPassageType !== 'all') {
+        const matchesPassageType = set.type.toLowerCase().includes(selectedPassageType.toLowerCase());
+        if (!matchesPassageType) return false;
+      }
+
+      // 2. Question type filter
+      if (selectedQType !== 'all') {
+        const hasMatchingQuestion = set.questions.some(
+          (q) => (q.questionType || q.subCategory) === selectedQType
+        );
+        if (!hasMatchingQuestion) return false;
+      }
+
+      return true;
+    });
+  }, [allPassageSets, selectedPassageType, selectedQType]);
+
+  const passageSet = filteredPassageSets[currentPassageIndex] || null;
+  const currentQuestion = passageSet?.questions[activeQuestionIndex];
+  const allAnswered = passageSet ? Object.keys(answers).length === passageSet.questions.length : false;
+
+  // Reset timer on passage change
   useEffect(() => {
     if (isTimeAttackEnabled && !isSubmitted && passageSet) {
       setTimeLeft(passageSet.questions.length * 55);
     } else {
       setTimeLeft(null);
+    }
+    if (!isSubmitted) {
+      passageStartTimeRef.current = Date.now();
+      setPaceInfo(null);
     }
   }, [currentPassageIndex, isTimeAttackEnabled, isSubmitted, passageSet]);
 
@@ -102,71 +225,51 @@ function Part7Trainer() {
     return () => clearTimeout(timerId);
   }, [timeLeft, isTimeAttackEnabled, isSubmitted]);
 
+  // Auto-submit when time is up
   useEffect(() => {
-    const fetchPassage = async () => {
-      try {
-        setLoading(true);
-        const match = testId.match(/ets(\d+)_test(\d+)/);
-        if (!match) throw new Error("Invalid test ID");
-        
-        const path = `/data/ets${match[1]}/test${match[2]}/part7.json`;
-        const res = await fetch(path);
-        
-        if (!res.ok) throw new Error("Failed to fetch test data");
-        
-        const data = await res.json();
-        const validated = Part7DataSchema.parse(data);
-        
-        if (validated.length > 0) {
-          setPassageSets(validated as Part7PassageSet[]);
-        } else {
-          setError("No passages found");
-        }
-      } catch (err: any) {
-        console.error("Error loading Part 7 data:", err);
-        setError(err.message || "Something went wrong");
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    fetchPassage();
-  }, [testId]);
-   const currentQuestion = passageSet?.questions[activeQuestionIndex];
-  const allAnswered = passageSet ? Object.keys(answers).length === passageSet.questions.length : false;
+    if (timeLeft === 0 && !isSubmitted && passageSet) {
+      handleSubmit();
+    }
+  }, [timeLeft, isSubmitted, passageSet]);
+
+  const updateUrlParams = (newTest: string, newQType: string, newPType: string) => {
+    const params = new URLSearchParams();
+    if (newTest !== 'ets2022_test1') params.set('test', newTest);
+    if (newQType !== 'all') params.set('questionType', newQType);
+    if (newPType !== 'all') params.set('passageType', newPType);
+    const queryString = params.toString();
+    router.replace(`/part7${queryString ? `?${queryString}` : ''}`, { scroll: false });
+  };
 
   const handleSelectAnswer = (questionId: string, optionKey: string) => {
     if (isSubmitted || !passageSet) return;
-    setAnswers(prev => ({ ...prev, [questionId]: optionKey }));
-    
-    // Auto move to next question if not on the last one
+    setAnswers((prev) => ({ ...prev, [questionId]: optionKey }));
+
     if (activeQuestionIndex < passageSet.questions.length - 1) {
-      // Delay slightly for better UX so user sees their selection
       setTimeout(() => {
-        setActiveQuestionIndex(prev => prev + 1);
-      }, 300);
+        setActiveQuestionIndex((prev) => prev + 1);
+      }, 250);
     }
   };
 
-  // Keyboard Shortcuts for 10/10 UX
+  // Keyboard Shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignore if user is typing
       if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
-      
       if (!passageSet || isSubmitted) return;
 
       const key = e.key.toUpperCase();
       const currentQ = passageSet.questions[activeQuestionIndex];
+      if (!currentQ) return;
 
       if (['A', 'B', 'C', 'D'].includes(key)) {
         if (currentQ.options[key as keyof typeof currentQ.options]) {
           handleSelectAnswer(currentQ.id, key);
         }
       } else if (e.key === 'ArrowLeft') {
-        setActiveQuestionIndex(prev => Math.max(0, prev - 1));
+        setActiveQuestionIndex((prev) => Math.max(0, prev - 1));
       } else if (e.key === 'ArrowRight') {
-        setActiveQuestionIndex(prev => Math.min(passageSet.questions.length - 1, prev + 1));
+        setActiveQuestionIndex((prev) => Math.min(passageSet.questions.length - 1, prev + 1));
       }
     };
 
@@ -174,78 +277,74 @@ function Part7Trainer() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   });
 
-  if (loading) {
-    return (
-      <div className={styles.pageContainer} style={{ paddingTop: '20px' }}>
-        <div className={styles.skeletonContainer}>
-          <div className={styles.skeletonCard} style={{ height: '600px' }}>
-            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ marginTop: '20px' }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLineShort}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ marginTop: '10px' }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLineShort}`} />
-          </div>
-          <div className={styles.skeletonCard} style={{ height: '400px' }}>
-            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16, marginTop: '20px' }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
-            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const handleTextHighlight = () => {
+    if (!isHighlightMode) return;
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed) return;
 
-  if (error) {
-    return <div className={styles.loading} style={{color: 'var(--danger)'}}>Lỗi: {error}</div>;
-  }
-
-  if (!passageSet) {
-    return <div className={styles.loading}>Loading Passage...</div>;
-  }
+    try {
+      const range = selection.getRangeAt(0);
+      const markNode = document.createElement('mark');
+      markNode.style.backgroundColor = 'var(--warning-light, #fff8e1)';
+      markNode.style.padding = '0 2px';
+      markNode.style.borderRadius = '2px';
+      range.surroundContents(markNode);
+      selection.removeAllRanges();
+    } catch (e) {
+      console.warn('Không thể highlight qua nhiều thẻ block khác nhau', e);
+      selection.removeAllRanges();
+    }
+  };
 
   const handleSubmit = () => {
-    if (isSubmitted) return;
+    if (isSubmitted || !passageSet) return;
     setIsSubmitted(true);
+
+    const elapsed = Math.max(1, Math.round((Date.now() - passageStartTimeRef.current) / 1000));
+    const secondsPerQ = Math.round(elapsed / (passageSet.questions.length || 1));
+    setPaceInfo({ elapsedSeconds: elapsed, secondsPerQ });
+
     let score = 0;
+    const answeredInThisSet: { question: Part7Question; isCorrect: boolean }[] = [];
+
     passageSet.questions.forEach((q) => {
-      if (answers[q.id] === q.correctAnswer) {
+      const isCorrect = answers[q.id] === q.correctAnswer;
+      if (isCorrect) {
         score++;
       } else {
         addMistake(`exam_${testId}_part7_${q.id}`, {
           type: 'exam',
-          testId: testId,
+          testId: testId === 'all' ? 'ets2022_cross' : testId,
           part: 'part7',
-          questionId: q.id
+          questionId: q.id,
+          subCategory: q.questionType || q.subCategory || 'Detail',
+          grammarTag: q.questionType || 'Detail',
         });
       }
+      answeredInThisSet.push({ question: q, isCorrect });
     });
 
     setCurrentSetScore(score);
+    setSessionAnsweredQuestions((prev) => [...prev, ...answeredInThisSet]);
+
     if (score === passageSet.questions.length) {
       setShowConfetti(true);
     }
   };
 
-  // Auto-submit when time is up
-  useEffect(() => {
-    if (timeLeft === 0 && !isSubmitted) {
-      handleSubmit();
-    }
-  }, [timeLeft, isSubmitted]); // eslint-disable-line react-hooks/exhaustive-deps
-
   const handleNextPassage = () => {
-    if (currentPassageIndex < passageSets.length - 1) {
-      setTotalScore(prev => prev + currentSetScore);
-      setTotalQuestions(prev => prev + passageSet.questions.length);
-      setCurrentPassageIndex(prev => prev + 1);
+    if (!passageSet) return;
+
+    if (currentPassageIndex < filteredPassageSets.length - 1) {
+      setTotalScore((prev) => prev + currentSetScore);
+      setTotalQuestions((prev) => prev + passageSet.questions.length);
+      setCurrentPassageIndex((prev) => prev + 1);
       setAnswers({});
       setIsSubmitted(false);
       setShowConfetti(false);
       setActiveQuestionIndex(0);
+      setPaceInfo(null);
+      passageStartTimeRef.current = Date.now();
     } else {
       // Show results
       const finalTotal = totalScore + currentSetScore;
@@ -253,8 +352,10 @@ function Part7Trainer() {
       setTotalScore(finalTotal);
       setTotalQuestions(finalQuestions);
       setIsFinished(true);
-      storage.set(`progress_${testId}_part7`, true);
-      if ((finalTotal / finalQuestions) >= 0.7) {
+      if (testId !== 'all') {
+        storage.set(`progress_${testId}_part7`, true);
+      }
+      if (finalTotal / finalQuestions >= 0.7) {
         setShowConfetti(true);
       }
     }
@@ -263,11 +364,10 @@ function Part7Trainer() {
   const renderContent = (content: string, type: string) => {
     if (type === 'Text Message') {
       try {
-        const messages = JSON.parse(content) as {sender: string, time: string, text: string}[];
+        const messages = JSON.parse(content) as { sender: string; time: string; text: string }[];
         return (
           <div className={styles.chatContainer}>
             {messages.map((msg, idx) => {
-              // Simple heuristic to make different senders appear on different sides
               const isFirstSender = msg.sender === messages[0].sender;
               return (
                 <div key={idx} className={`${styles.chatMessage} ${isFirstSender ? styles.chatLeft : styles.chatRight}`}>
@@ -286,42 +386,187 @@ function Part7Trainer() {
       }
     }
 
-    // Default text rendering, support HTML from raw data
     return (
-      <div 
-        className={styles.passageText} 
-        dangerouslySetInnerHTML={{ __html: content }} 
-      />
+      <div className={styles.passageText} dangerouslySetInnerHTML={{ __html: content }} />
     );
   };
 
+  // Result Breakdown calculation
+  const questionTypeStats = useMemo(() => {
+    const stats: Record<string, { total: number; correct: number }> = {};
+    sessionAnsweredQuestions.forEach((item) => {
+      const type = item.question.questionType || item.question.subCategory || 'Detail';
+      if (!stats[type]) {
+        stats[type] = { total: 0, correct: 0 };
+      }
+      stats[type].total++;
+      if (item.isCorrect) stats[type].correct++;
+    });
+    return Object.entries(stats).map(([type, counts]) => ({
+      type,
+      total: counts.total,
+      correct: counts.correct,
+      accuracy: Math.round((counts.correct / counts.total) * 100),
+    }));
+  }, [sessionAnsweredQuestions]);
+
+  if (loading) {
+    return (
+      <div className={styles.pageContainer} style={{ paddingTop: '20px' }}>
+        <div className={styles.skeletonContainer}>
+          <div className={styles.skeletonCard} style={{ height: '600px' }}>
+            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ marginTop: '20px' }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLineShort}`} />
+          </div>
+          <div className={styles.skeletonCard} style={{ height: '400px' }}>
+            <div className={`${styles.skeletonPulse} ${styles.skeletonTitle}`} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16, marginTop: '20px' }} />
+            <div className={`${styles.skeletonPulse} ${styles.skeletonLine}`} style={{ height: 50, borderRadius: 16 }} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className={styles.loading} style={{ color: 'var(--danger)' }}>Lỗi: {error}</div>;
+  }
+
   if (isFinished) {
-    const percentage = Math.round((totalScore / totalQuestions) * 100);
+    const percentage = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) : 0;
     return (
       <div className={styles.pageContainer}>
         <Confetti show={showConfetti} />
-        <div className={styles.resultsCard} style={{ margin: '40px auto', maxWidth: 600, padding: 40, textAlign: 'center', backgroundColor: 'var(--glass-bg)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
+        <div
+          className={styles.resultsCard}
+          style={{
+            margin: '30px auto',
+            maxWidth: 720,
+            padding: 36,
+            textAlign: 'center',
+            backgroundColor: 'var(--card)',
+            borderRadius: 24,
+            border: '1px solid var(--border)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.06)',
+          }}
+        >
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
             {percentage >= 70 ? (
               <AwardIcon size={56} style={{ color: 'var(--primary)' }} />
             ) : (
-              <BookIcon size={56} style={{ color: 'var(--text-secondary)' }} />
+              <BookIcon size={56} style={{ color: 'var(--muted-foreground)' }} />
             )}
           </div>
-          <h1 style={{ fontSize: '1.8rem', marginBottom: 16, color: 'var(--foreground)' }}>Hoàn thành Part 7 Reading Comprehension!</h1>
-          <div style={{ backgroundColor: 'var(--surface-hover)', padding: '16px 24px', borderRadius: 12, display: 'inline-block', marginBottom: 24 }}>
-            <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>Kết quả: {totalScore} / {totalQuestions} ({percentage}%)</span>
+          <h1 style={{ fontSize: '1.8rem', marginBottom: 12, color: 'var(--foreground)' }}>
+            Hoàn thành Luyện Đọc hiểu Part 7!
+          </h1>
+          <div
+            style={{
+              backgroundColor: 'var(--surface)',
+              padding: '14px 24px',
+              borderRadius: 12,
+              display: 'inline-block',
+              marginBottom: 20,
+              border: '1px solid var(--border)',
+            }}
+          >
+            <span style={{ fontSize: '1.2rem', fontWeight: 700 }}>
+              Kết quả: {totalScore} / {totalQuestions} ({percentage}%)
+            </span>
           </div>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: 32, lineHeight: 1.6 }}>
+          <p style={{ color: 'var(--muted-foreground)', marginBottom: 24, lineHeight: 1.6 }}>
             {percentage >= 80
-              ? 'Khả năng đọc hiểu và tìm kiếm thông tin của bạn rất tốt! Hãy tiếp tục rèn luyện tốc độ đọc.'
-              : 'Part 7 yêu cầu kỹ năng skimming và scanning. Bạn nên đọc lướt câu hỏi trước rồi mới tìm đáp án trong bài!'}
+              ? 'Khả năng đọc hiểu và định vị thông tin của bạn rất tốt! Hãy tiếp tục rèn luyện tốc độ để chinh phục 450+ Reading.'
+              : 'Part 7 yêu cầu kỹ năng Skimming và Scanning nhạy bén. Bạn nên xác định từ khóa câu hỏi trước rồi quét thông tin trong bài đọc.'}
           </p>
 
-          <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
-            <button onClick={() => window.location.reload()} className="btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <RotateCcwIcon size={16} /> Làm lại đề này
+          {/* Question Type Breakdown */}
+          {questionTypeStats.length > 0 && (
+            <div className={styles.resultsBreakdown}>
+              <h3 className={styles.resultsBreakdownTitle}>
+                <TargetIcon size={18} /> Bóc tách theo dạng câu hỏi Part 7
+              </h3>
+              <div className={styles.breakdownGrid}>
+                {questionTypeStats.map((item) => (
+                  <div key={item.type} className={styles.breakdownCard}>
+                    <div className={styles.breakdownCardHeader}>
+                      <span className={styles.breakdownTypeName}>{item.type}</span>
+                      <span
+                        className={styles.breakdownScore}
+                        style={{
+                          color:
+                            item.accuracy >= 75
+                              ? 'var(--success)'
+                              : item.accuracy >= 50
+                              ? 'var(--warning)'
+                              : 'var(--danger)',
+                        }}
+                      >
+                        {item.correct}/{item.total} ({item.accuracy}%)
+                      </span>
+                    </div>
+                    <div className={styles.breakdownBarBg}>
+                      <div
+                        className={styles.breakdownBarFill}
+                        style={{
+                          width: `${item.accuracy}%`,
+                          backgroundColor:
+                            item.accuracy >= 75
+                              ? 'var(--success)'
+                              : item.accuracy >= 50
+                              ? 'var(--warning)'
+                              : 'var(--danger)',
+                        }}
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      className={styles.breakdownActionBtn}
+                      onClick={() => {
+                        setSelectedQType(item.type);
+                        updateUrlParams(testId, item.type, selectedPassageType);
+                        setIsFinished(false);
+                        setCurrentPassageIndex(0);
+                        setAnswers({});
+                        setIsSubmitted(false);
+                      }}
+                    >
+                      <span>Luyện riêng dạng này</span>
+                      <ArrowRightIcon size={12} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => {
+                setIsFinished(false);
+                setCurrentPassageIndex(0);
+                setActiveQuestionIndex(0);
+                setAnswers({});
+                setIsSubmitted(false);
+                setTotalScore(0);
+                setTotalQuestions(0);
+                setSessionAnsweredQuestions([]);
+                passageStartTimeRef.current = Date.now();
+              }}
+              className="btn-secondary"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            >
+              <RotateCcwIcon size={16} /> Luyện lại bài này
             </button>
+            <Link
+              href="/notebook?tab=exam"
+              className="btn-secondary"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            >
+              <BookIcon size={16} /> Xem Sổ tay lỗi sai
+            </Link>
             <Link href="/" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <HomeIcon size={16} /> Về Dashboard
             </Link>
@@ -334,172 +579,372 @@ function Part7Trainer() {
   return (
     <div className={styles.pageContainer}>
       <Confetti show={showConfetti} />
-      
+
+      {/* Header */}
       <header className={styles.header}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <Link href="/" className={styles.backBtn} style={{ color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-            ← Về Dashboard
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <Link
+            href="/"
+            className={styles.backBtn}
+            style={{ color: 'var(--text-secondary)', textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+          >
+            ← Dashboard
           </Link>
           <div>
-            <h1 className={styles.title} style={{ margin: 0, fontSize: '1.25rem' }}>Part 7: Reading Comprehension</h1>
-            <p className={styles.subtitle} style={{ margin: 0, fontSize: '0.875rem' }}>{passageSet.source || 'ETS Test'} - {passageSet.type} Passage ({currentPassageIndex + 1}/{passageSets.length})</p>
+            <h1 className={styles.title} style={{ margin: 0, fontSize: '1.25rem' }}>
+              Part 7: Reading Comprehension
+            </h1>
+            <p className={styles.subtitle} style={{ margin: 0, fontSize: '0.875rem' }}>
+              {passageSet ? `${passageSet.source || 'ETS Test'} - ${passageSet.type} (${currentPassageIndex + 1}/${filteredPassageSets.length})` : 'Đang tải'}
+            </p>
           </div>
         </div>
-        
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
           <button
             onClick={() => setIsHighlightMode(!isHighlightMode)}
             style={{
               padding: '6px 12px',
-              borderRadius: '6px',
-              fontSize: '0.9rem',
-              border: `1px solid ${isHighlightMode ? 'var(--primary-color, #2196F3)' : 'var(--border-color, #eee)'}`,
-              backgroundColor: isHighlightMode ? 'var(--primary-light, #e3f2fd)' : 'transparent',
+              borderRadius: '8px',
+              fontSize: '0.85rem',
+              border: `1px solid ${isHighlightMode ? 'var(--primary)' : 'var(--border)'}`,
+              backgroundColor: isHighlightMode ? 'rgba(99, 102, 241, 0.12)' : 'transparent',
+              color: isHighlightMode ? 'var(--primary)' : 'var(--foreground)',
               cursor: 'pointer',
-              fontWeight: 500,
+              fontWeight: 600,
               display: 'flex',
               alignItems: 'center',
-              gap: '4px'
+              gap: '4px',
             }}
           >
             {isHighlightMode ? 'Tắt Highlight' : 'Bật Highlight'}
           </button>
           <div className={styles.timeAttackToggle} onClick={toggleTimeAttack}>
-            <span style={{ fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '4px' }}><ClockIcon size={16} /> Ép thời gian</span>
+            <span style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <ClockIcon size={15} /> Ép thời gian
+            </span>
             <div className={`${styles.toggleSwitch} ${isTimeAttackEnabled ? styles.toggleSwitchOn : ''}`} />
           </div>
         </div>
       </header>
 
-      <div className={styles.splitView}>
-        {/* Left Side: Passages */}
-        <section className={styles.leftPanel} onMouseUp={handleTextHighlight}>
-          {passageSet.passages.map((passage, idx) => (
-            <div key={passage.id} className={`${styles.passageCard} card-minimal`}>
-              <div className={styles.passageHeader}>
-                <span className={styles.passageTypeBadge}>{passage.type}</span>
-                {passage.title && <h2 className={styles.passageTitle}>{passage.title}</h2>}
-                <div className={styles.passageMeta}>
-                  {passage.sender && <div>{passage.sender}</div>}
-                  {passage.recipient && <div>{passage.recipient}</div>}
-                  {passage.date && <div>{passage.date}</div>}
-                </div>
-              </div>
-              <div className={styles.passageContent}>
-                {renderContent(passage.content, passage.type)}
-              </div>
-            </div>
-          ))}
-        </section>
-
-        {/* Right Side: Questions & Review */}
-        <section className={styles.rightPanel}>
-          {isTimeAttackEnabled && timeLeft !== null && !isSubmitted && (
-            <div className={`${styles.timerContainer} ${timeLeft < 30 ? styles.timerDanger : timeLeft < 60 ? styles.timerWarning : ''}`}>
-              <ClockIcon size={18} style={{ marginRight: '6px', display: 'inline', verticalAlign: 'text-bottom' }} /> {Math.floor(timeLeft / 60).toString().padStart(2, '0')} : {(timeLeft % 60).toString().padStart(2, '0')}
-            </div>
-          )}
-
-          {!isSubmitted ? (
-            <div className={`${styles.questionCard} card-minimal`}>
-              <div className={styles.qHeader}>
-                <span className={styles.qIndicator}>
-                  Question {activeQuestionIndex + 1} of {passageSet.questions.length}
-                </span>
-              </div>
-              
-              <h3 className={styles.qText}>{currentQuestion.number}. {currentQuestion.text}</h3>
-              
-              <div className={styles.optionsList}>
-                {(Object.entries(currentQuestion.options) as [string, string][]).map(([key, val]) => {
-                  const isSelected = answers[currentQuestion.id] === key;
-                  return (
-                    <button
-                      key={key}
-                      className={`${styles.optionBtn} ${isSelected ? styles.selectedOption : ''}`}
-                      onClick={() => handleSelectAnswer(currentQuestion.id, key)}
-                    >
-                      <span className={styles.optionLetter}>{key}</span>
-                      <span className={styles.optionText}>{val}</span>
-                      <span className={styles.optionShortcut}>Nhấn {key}</span>
-                    </button>
-                  );
-                })}
-              </div>
-              <p className={styles.shortcutHint}>Phím tắt: Sử dụng phím A, B, C, D để chọn đáp án và phím mũi tên để chuyển câu.</p>
-
-              {/* Navigation below question */}
-              <div className={styles.qNavigation}>
-                <button 
-                  className={styles.navBtn}
-                  disabled={activeQuestionIndex === 0}
-                  onClick={() => setActiveQuestionIndex(prev => prev - 1)}
+      {/* Targeted Reading Filters */}
+      <div className={styles.filterContainer}>
+        {/* Row 1: Question Type Pills */}
+        <div className={styles.filterRow}>
+          <span className={styles.filterLabel}>Dạng câu hỏi:</span>
+          <div className={styles.pillsWrap}>
+            {QUESTION_TYPES.map((type) => {
+              const isActive = selectedQType === type.key;
+              return (
+                <button
+                  key={type.key}
+                  className={`${styles.filterPill} ${isActive ? styles.filterPillActive : ''}`}
+                  onClick={() => {
+                    setSelectedQType(type.key);
+                    setCurrentPassageIndex(0);
+                    setActiveQuestionIndex(0);
+                    setAnswers({});
+                    setIsSubmitted(false);
+                    updateUrlParams(testId, type.key, selectedPassageType);
+                  }}
                 >
-                  &larr; Prev
+                  <span>{type.label}</span>
                 </button>
-                <button 
-                  className={styles.navBtn}
-                  disabled={activeQuestionIndex === passageSet.questions.length - 1}
-                  onClick={() => setActiveQuestionIndex(prev => prev + 1)}
-                >
-                  Next &rarr;
-                </button>
-              </div>
+              );
+            })}
+          </div>
+        </div>
 
-              {allAnswered && (
-                <button className={`${styles.submitBtn} animate-slide-up`} onClick={handleSubmit}>
-                  Nộp bài & Xem giải thích
+        {/* Row 2: Passage Structure Pills & Test Selector */}
+        <div className={styles.filterRow}>
+          <span className={styles.filterLabel}>Cấu trúc đoạn:</span>
+          <div className={styles.pillsWrap}>
+            {PASSAGE_TYPES.map((pt) => {
+              const isActive = selectedPassageType === pt.key;
+              return (
+                <button
+                  key={pt.key}
+                  className={`${styles.filterPill} ${isActive ? styles.filterPillActive : ''}`}
+                  onClick={() => {
+                    setSelectedPassageType(pt.key);
+                    setCurrentPassageIndex(0);
+                    setActiveQuestionIndex(0);
+                    setAnswers({});
+                    setIsSubmitted(false);
+                    updateUrlParams(testId, selectedQType, pt.key);
+                  }}
+                >
+                  <span>{pt.label}</span>
                 </button>
-              )}
-            </div>
-          ) : (
-            <div className={styles.reviewSection}>
-              <h2 className={styles.reviewTitle}>Giải thích chi tiết</h2>
-              <div className={styles.explanationsList}>
-                {passageSet.questions.map((q, index) => {
-                  const isCorrect = answers[q.id] === q.correctAnswer;
-                  return (
-                    <div key={q.id} className={`${styles.explanationCard} card-minimal`}>
-                      <div className={styles.exHeader}>
-                        <span className={styles.exNumber}>Q{q.number}</span>
-                        <span className={isCorrect ? styles.badgeCorrect : styles.badgeWrong}>
-                          {isCorrect ? 'Correct' : 'Incorrect'}
-                        </span>
-                      </div>
-                      <h3 className={styles.exQText}>{q.text}</h3>
-                      <div className={styles.exContent}>
-                        <p><strong>Bạn chọn:</strong> {answers[q.id] || 'Không làm'}</p>
-                        <p><strong>Đáp án đúng:</strong> {q.correctAnswer} - {q.options[q.correctAnswer as keyof typeof q.options]}</p>
-                        <div 
-                          className={styles.exBox} 
-                          dangerouslySetInnerHTML={{ __html: q.explanation }} 
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </section>
+              );
+            })}
+          </div>
+
+          {/* Test Selector */}
+          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span className={styles.filterLabel} style={{ minWidth: 'auto' }}>Bộ đề:</span>
+            <select
+              value={testId}
+              onChange={(e) => {
+                const newTest = e.target.value;
+                setTestId(newTest);
+                updateUrlParams(newTest, selectedQType, selectedPassageType);
+              }}
+              style={{
+                padding: '4px 8px',
+                borderRadius: '8px',
+                border: '1px solid var(--border)',
+                background: 'var(--surface)',
+                color: 'var(--foreground)',
+                fontSize: '0.82rem',
+                fontWeight: 600,
+              }}
+            >
+              {TESTS_LIST.map((t) => (
+                <option key={t.key} value={t.key}>
+                  {t.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Active Filter Banner */}
+        <div className={styles.activeTargetBanner}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <TargetIcon size={16} />
+            <span>
+              Chế độ luyện: <strong>{QUESTION_TYPES.find((q) => q.key === selectedQType)?.label}</strong> | Đoạn:{' '}
+              <strong>{PASSAGE_TYPES.find((p) => p.key === selectedPassageType)?.label}</strong>
+            </span>
+          </div>
+          <span className={styles.pillBadge} style={{ fontSize: '0.8rem' }}>
+            Tìm thấy {filteredPassageSets.length} bài đọc phù hợp
+          </span>
+        </div>
       </div>
 
-      <PracticeFooter
-        isAnswered={isSubmitted}
-        isCorrect={currentSetScore === passageSet.questions.length}
-        correctMessage={`Tuyệt vời! Bạn trả lời đúng ${passageSet.questions.length}/${passageSet.questions.length} câu hỏi.`}
-        incorrectMessage={`Bạn trả lời đúng ${currentSetScore}/${passageSet.questions.length} câu hỏi.`}
-        onNext={handleNextPassage}
-        onAITutor={() => setTutorContext({
-          partTitle: 'Part 7: Reading Comprehension',
-          number: passageSet.questions[0].number,
-          text: `Read the passages and answer the questions.`,
-          options: { A: 'See full passage and explanations' },
-          correctAnswer: 'A',
-          explanation: passageSet.questions.map(q => `Q${q.number}: ${q.explanation}`).join('<br/><br/>'),
-        })}
-        nextLabel={currentPassageIndex + 1 === passageSets.length ? 'Xem tổng kết' : 'Đoạn văn tiếp theo'}
-      />
+      {!passageSet ? (
+        <div
+          className={`${styles.passageCard} card-minimal`}
+          style={{ padding: 40, textAlign: 'center', borderRadius: 16 }}
+        >
+          <AlertCircleIcon size={36} style={{ color: 'var(--warning)', margin: '0 auto 12px' }} />
+          <h3>Không tìm thấy bài đọc phù hợp bộ lọc</h3>
+          <p style={{ color: 'var(--muted-foreground)', marginBottom: 16 }}>
+            Thử chuyển sang bộ lọc &quot;Tất cả dạng&quot; hoặc &quot;Tất cả đoạn&quot; để làm bài.
+          </p>
+          <button
+            className="btn-primary"
+            onClick={() => {
+              setSelectedQType('all');
+              setSelectedPassageType('all');
+              updateUrlParams(testId, 'all', 'all');
+            }}
+          >
+            Đặt lại bộ lọc
+          </button>
+        </div>
+      ) : (
+        <div className={styles.splitView}>
+          {/* Left Side: Passages */}
+          <section className={styles.leftPanel} onMouseUp={handleTextHighlight}>
+            {passageSet.passages.map((passage) => (
+              <div key={passage.id} className={`${styles.passageCard} card-minimal`}>
+                <div className={styles.passageHeader}>
+                  <span className={styles.passageTypeBadge}>{passage.type}</span>
+                  {passage.title && <h2 className={styles.passageTitle}>{passage.title}</h2>}
+                  <div className={styles.passageMeta}>
+                    {passage.sender && <div>{passage.sender}</div>}
+                    {passage.recipient && <div>{passage.recipient}</div>}
+                    {passage.date && <div>{passage.date}</div>}
+                  </div>
+                </div>
+                <div className={styles.passageContent}>{renderContent(passage.content, passage.type)}</div>
+              </div>
+            ))}
+          </section>
+
+          {/* Right Side: Questions & Review */}
+          <section className={styles.rightPanel}>
+            {isTimeAttackEnabled && timeLeft !== null && !isSubmitted && (
+              <div
+                className={`${styles.timerContainer} ${
+                  timeLeft < 30 ? styles.timerDanger : timeLeft < 60 ? styles.timerWarning : ''
+                }`}
+              >
+                <ClockIcon size={18} style={{ marginRight: '6px', display: 'inline', verticalAlign: 'text-bottom' }} />{' '}
+                {Math.floor(timeLeft / 60)
+                  .toString()
+                  .padStart(2, '0')}{' '}
+                : {(timeLeft % 60).toString().padStart(2, '0')}
+              </div>
+            )}
+
+            {!isSubmitted && currentQuestion ? (
+              <div className={`${styles.questionCard} card-minimal`}>
+                <div className={styles.qHeader}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span className={styles.qIndicator}>
+                      Câu hỏi {activeQuestionIndex + 1} / {passageSet.questions.length}
+                    </span>
+                    {currentQuestion.questionType && (
+                      <span className={styles.questionTypeBadge}>
+                        <TargetIcon size={12} /> {currentQuestion.questionType}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <h3 className={styles.qText}>
+                  {currentQuestion.number}. {currentQuestion.text}
+                </h3>
+
+                <div className={styles.optionsList}>
+                  {(Object.entries(currentQuestion.options) as [string, string][]).map(([key, val]) => {
+                    const isSelected = answers[currentQuestion.id] === key;
+                    return (
+                      <button
+                        key={key}
+                        className={`${styles.optionBtn} ${isSelected ? styles.selectedOption : ''}`}
+                        onClick={() => handleSelectAnswer(currentQuestion.id, key)}
+                      >
+                        <span className={styles.optionLetter}>{key}</span>
+                        <span className={styles.optionText}>{val}</span>
+                        <span className={styles.optionShortcut}>Nhấn {key}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className={styles.shortcutHint}>
+                  Phím tắt: Sử dụng phím A, B, C, D để chọn đáp án và phím mũi tên để chuyển câu.
+                </p>
+
+                {/* Navigation below question */}
+                <div className={styles.qNavigation}>
+                  <button
+                    className={styles.navBtn}
+                    disabled={activeQuestionIndex === 0}
+                    onClick={() => setActiveQuestionIndex((prev) => prev - 1)}
+                  >
+                    &larr; Câu trước
+                  </button>
+                  <button
+                    className={styles.navBtn}
+                    disabled={activeQuestionIndex === passageSet.questions.length - 1}
+                    onClick={() => setActiveQuestionIndex((prev) => prev + 1)}
+                  >
+                    Câu tiếp theo &rarr;
+                  </button>
+                </div>
+
+                {allAnswered && (
+                  <button className={`${styles.submitBtn} animate-slide-up`} onClick={handleSubmit}>
+                    Nộp bài & Xem giải thích
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className={styles.reviewSection}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <h2 className={styles.reviewTitle} style={{ margin: 0 }}>
+                    Giải thích chi tiết
+                  </h2>
+                  {paceInfo && (
+                    <span
+                      className={`${styles.pacingBadge} ${
+                        paceInfo.secondsPerQ <= 60
+                          ? styles.pacingOptimal
+                          : paceInfo.secondsPerQ <= 90
+                          ? styles.pacingModerate
+                          : styles.pacingSlow
+                      }`}
+                    >
+                      <ClockIcon size={14} />
+                      <span>
+                        Tốc độ: {paceInfo.secondsPerQ}s/câu (
+                        {paceInfo.secondsPerQ <= 60
+                          ? 'Chuẩn ETS'
+                          : paceInfo.secondsPerQ <= 90
+                          ? 'Vừa phải'
+                          : 'Cảnh báo chậm'}
+                        )
+                      </span>
+                    </span>
+                  )}
+                </div>
+
+                <div className={styles.explanationsList}>
+                  {passageSet.questions.map((q) => {
+                    const isCorrect = answers[q.id] === q.correctAnswer;
+                    return (
+                      <div key={q.id} className={`${styles.explanationCard} card-minimal`}>
+                        <div className={styles.exHeader}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span className={styles.exNumber}>Q{q.number}</span>
+                            {q.questionType && (
+                              <span className={styles.questionTypeBadge}>
+                                <TargetIcon size={12} /> {q.questionType}
+                              </span>
+                            )}
+                          </div>
+                          <span className={isCorrect ? styles.badgeCorrect : styles.badgeWrong}>
+                            {isCorrect ? 'Đúng' : 'Chưa đúng'}
+                          </span>
+                        </div>
+                        <h3 className={styles.exQText}>{q.text}</h3>
+                        <div className={styles.exContent}>
+                          <p>
+                            <strong>Bạn chọn:</strong> {answers[q.id] || 'Chưa làm'}
+                          </p>
+                          <p>
+                            <strong>Đáp án đúng:</strong> {q.correctAnswer} -{' '}
+                            {q.options[q.correctAnswer as keyof typeof q.options]}
+                          </p>
+
+                          {/* Strategy Tip Box */}
+                          {q.strategyHint && (
+                            <div className={styles.strategyHintBox}>
+                              <div className={styles.strategyHintHeader}>
+                                <LightbulbIcon size={14} /> Mẹo giải nhanh ETS
+                              </div>
+                              <p className={styles.strategyHintText}>{q.strategyHint}</p>
+                            </div>
+                          )}
+
+                          <div className={styles.exBox} dangerouslySetInnerHTML={{ __html: q.explanation }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </section>
+        </div>
+      )}
+
+      {passageSet && (
+        <PracticeFooter
+          isAnswered={isSubmitted}
+          isCorrect={currentSetScore === passageSet.questions.length}
+          correctMessage={`Tuyệt vời! Bạn trả lời đúng ${passageSet.questions.length}/${passageSet.questions.length} câu hỏi.`}
+          incorrectMessage={`Bạn trả lời đúng ${currentSetScore}/${passageSet.questions.length} câu hỏi.`}
+          onNext={handleNextPassage}
+          onAITutor={() =>
+            setTutorContext({
+              partTitle: 'Part 7: Reading Comprehension',
+              number: passageSet.questions[0].number,
+              text: `Đọc đoạn văn và trả lời câu hỏi: ${passageSet.questions.map((q) => `Q${q.number}: ${q.text}`).join(' | ')}`,
+              options: { A: 'Xem giải thích chi tiết và phân tích bẫy' },
+              correctAnswer: 'A',
+              explanation: passageSet.questions.map((q) => `Q${q.number}: ${q.explanation}`).join('<br/><br/>'),
+            })
+          }
+          nextLabel={currentPassageIndex + 1 === filteredPassageSets.length ? 'Xem tổng kết' : 'Đoạn văn tiếp theo'}
+        />
+      )}
 
       {tutorContext && (
         <AITutorDrawer

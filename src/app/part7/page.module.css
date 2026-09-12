@@ -533,3 +533,253 @@
   opacity: 0.5;
 }
 
+/* Targeted Reading Filters */
+.filterContainer {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filterLabel {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  min-width: 100px;
+}
+
+.pillsWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  overflow-x: auto;
+}
+
+.filterPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.filterPill:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.filterPillActive {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+}
+
+.pillBadge {
+  font-size: 0.72rem;
+  padding: 1px 6px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+}
+
+.filterPillActive .pillBadge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.activeTargetBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  color: var(--foreground);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.activeTargetBanner strong {
+  color: var(--primary);
+}
+
+/* Pacing Indicator */
+.pacingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.pacingOptimal {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.pacingModerate {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.pacingSlow {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* Question Badges & Strategy Hint */
+.questionTypeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--surface);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  margin-left: 8px;
+}
+
+.strategyHintBox {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.06);
+  border-left: 4px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.strategyHintHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+}
+
+.strategyHintText {
+  font-size: 0.85rem;
+  color: var(--foreground);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Results Breakdown */
+.resultsBreakdown {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.resultsBreakdownTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breakdownGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.breakdownCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.breakdownCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.breakdownTypeName {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--foreground);
+}
+
+.breakdownScore {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.breakdownBarBg {
+  height: 6px;
+  background: var(--muted);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.breakdownBarFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.breakdownActionBtn {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.breakdownActionBtn:hover {
+  text-decoration: underline;
+}
+
+
