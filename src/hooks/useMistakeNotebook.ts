@@ -13,6 +13,7 @@ export interface MistakeRecord {
   grammarTag?: string;
   box?: number;
   nextReviewDate?: string;
+  rootCause?: string;
 }
 
 export type MistakeData = Record<string, MistakeRecord>;
@@ -93,12 +94,31 @@ export function useMistakeNotebook() {
     return Object.keys(mistakes);
   }, [mounted, mistakes]);
 
+  const updateMistakeRootCause = useCallback((id: string, cause: string) => {
+    setMistakes(prev => {
+      const current = prev[id];
+      if (!current) return prev;
+
+      const newData = {
+        ...prev,
+        [id]: {
+          ...current,
+          rootCause: cause
+        }
+      };
+      
+      storage.set(MISTAKE_KEY, newData);
+      return newData;
+    });
+  }, []);
+
   return {
     mounted,
     mistakes,
     addMistake,
     removeMistake,
     updateMistakeProgress,
+    updateMistakeRootCause,
     getMistakes
   };
 }

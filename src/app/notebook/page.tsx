@@ -26,7 +26,7 @@ function NotebookContent() {
   const initialTab = searchParams?.get('tab') === 'exam' || searchParams?.get('subCategory') ? 'exam' : 'vocabulary';
 
   const { mounted: vocabMounted, allWords } = useVocabulary();
-  const { mounted: notebookMounted, getMistakes, mistakes } = useMistakeNotebook();
+  const { mounted: notebookMounted, getMistakes, mistakes, updateMistakeRootCause } = useMistakeNotebook();
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
   const [activeTab, setActiveTab] = useState<'vocabulary' | 'exam' | 'history'>(initialTab);
 
@@ -175,7 +175,7 @@ function NotebookContent() {
             </div>
           ) : (
             <section className={styles.listSection} style={{ marginTop: '1.5rem' }}>
-              <ExamMistakeList mistakeIds={examMistakeIds} mistakes={mistakes} />
+              <ExamMistakeList mistakeIds={examMistakeIds} mistakes={mistakes} updateMistakeRootCause={updateMistakeRootCause} />
             </section>
           )}
         </>

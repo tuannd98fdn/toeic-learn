@@ -19,9 +19,18 @@ import styles from './page.module.css';
 interface ExamMistakeListProps {
   mistakeIds: string[];
   mistakes: MistakeData;
+  updateMistakeRootCause?: (id: string, cause: string) => void;
 }
 
-export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeListProps) {
+const ROOT_CAUSES = [
+  'Từ vựng',
+  'Ngữ pháp',
+  'Nghe không rõ',
+  'Mắc bẫy',
+  'Bất cẩn / Đọc lướt'
+];
+
+export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRootCause }: ExamMistakeListProps) {
   const searchParams = useSearchParams();
   const initialSubCat = searchParams?.get('subCategory') || 'all';
 
@@ -30,6 +39,7 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
   const [filterPart, setFilterPart] = useState<string>('all');
   const [filterSubCategory, setFilterSubCategory] = useState<string>(initialSubCat);
+  const [filterRootCause, setFilterRootCause] = useState<string>('all');
 
   useEffect(() => {
     const sub = searchParams?.get('subCategory');
@@ -82,9 +92,14 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
         ? true
         : cat && (cat.toLowerCase() === filterSubCategory.toLowerCase() || cat.toLowerCase().includes(filterSubCategory.toLowerCase()));
 
-      return matchPart && matchSub;
+      const rc = mistakes[q.mistakeId]?.rootCause;
+      const matchRC = filterRootCause === 'all'
+        ? true
+        : filterRootCause === 'unassigned' ? !rc : rc === filterRootCause;
+
+      return matchPart && matchSub && matchRC;
     });
-  }, [loadedQuestions, filterPart, filterSubCategory]);
+  }, [loadedQuestions, filterPart, filterSubCategory, filterRootCause, mistakes]);
 
   const partLabels: Record<string, string> = {
     p1: 'Part 1: Photographs',
@@ -214,6 +229,21 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
           </div>
         )}
 
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <label style={{ fontSize: '0.88rem', fontWeight: 600 }}>Nguyên nhân sai:</label>
+          <select 
+            value={filterRootCause}
+            onChange={(e) => setFilterRootCause(e.target.value)}
+            style={{ padding: '0.45rem 0.75rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-primary)', color: 'var(--foreground)', fontSize: '0.85rem' }}
+          >
+            <option value="all">Tất cả nguyên nhân</option>
+            {ROOT_CAUSES.map(rc => (
+              <option key={rc} value={rc}>{rc}</option>
+            ))}
+            <option value="unassigned">Chưa gắn nhãn</option>
+          </select>
+        </div>
+
         <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
           Hiển thị {filteredQuestions.length} câu
         </span>
@@ -272,6 +302,34 @@ export default function ExamMistakeList({ mistakeIds, mistakes }: ExamMistakeLis
               <div style={{ marginTop: '0.6rem', fontSize: '0.85rem' }}>
                 <strong>Đáp án: </strong> 
                 <span style={{ color: 'var(--success)', fontWeight: 700 }}>{qData.correctAnswer}</span>
+              </div>
+
+              <div style={{ marginTop: '1rem' }}>
+                <div style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Nguyên nhân sai:</div>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  {ROOT_CAUSES.map(rc => {
+                    const isSelected = m?.rootCause === rc;
+                    return (
+                      <button
+                        key={rc}
+                        onClick={() => updateMistakeRootCause?.(mistakeId, rc)}
+                        style={{
+                          background: isSelected ? 'var(--primary)' : 'var(--bg-secondary)',
+                          color: isSelected ? 'white' : 'var(--text-secondary)',
+                          border: `1px solid ${isSelected ? 'var(--primary)' : 'var(--border)'}`,
+                          padding: '0.35rem 0.7rem',
+                          borderRadius: '16px',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease'
+                        }}
+                      >
+                        {rc}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginTop: '1rem' }}>

@@ -190,9 +190,20 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### ✅ Vấn đề 12: Gắn nhãn nguyên nhân sai (Root-Cause Tagging) trong Sổ tay
+* **Mô tả**: Sổ tay lỗi sai trước đây chỉ báo cho người dùng biết họ đã làm sai câu nào và sai bao nhiêu lần, nhưng thiếu cơ chế giúp họ tự nhìn nhận "tại sao" mình sai (VD: hổng từ vựng, sai ngữ pháp, bị lừa, hay do bất cẩn). Việc thiếu bước tự phản tư (self-reflection) này khiến việc học thụ động.
+* **Giải pháp**:
+  * Bổ sung trường `rootCause` vào `MistakeRecord` trong store `useMistakeNotebook.ts`.
+  * Xây dựng bộ 5 nhãn nguyên nhân chuẩn TOEIC: `Từ vựng`, `Ngữ pháp`, `Nghe không rõ`, `Mắc bẫy`, `Bất cẩn / Đọc lướt`.
+  * Tích hợp dải Nút chọn (Interactive Pills) vào từng thẻ câu hỏi trong `ExamMistakeList.tsx` để người học click 1 chạm gán nhãn ngay lập tức, lưu trạng thái xuống LocalStorage.
+  * Bổ sung bộ lọc (Filter by Root Cause) trên thanh công cụ của Sổ tay, cho phép gom nhóm ôn tập tập trung theo nguyên nhân (ví dụ: lọc toàn bộ câu sai do "Mắc bẫy" để rèn sự cẩn thận).
+  * Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**, thiết kế dùng SVG và CSS thuần túy.
+
+---
+
 ## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### 🚀 Vấn Đề 12: [Đang chờ người dùng lựa chọn & yêu cầu tiếp theo]
+### 🚀 Vấn Đề 13: [Đang chờ người dùng lựa chọn & yêu cầu tiếp theo]
 * Khi người dùng đưa ra yêu cầu tiếp theo hoặc cần tư vấn tính năng tiếp theo từ danh mục ưu tiên, Agent sẽ:
   1. Ghi nhận Problem, Evidence, Recommendation, Effort.
   2. Phân tích các file liên quan và lập implementation plan tối giản, không phá vỡ các chức năng cũ.
