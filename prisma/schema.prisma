@@ -20,6 +20,8 @@ model User {
   progress      UserProgress[]
   studyPlan     StudyPlan?
   streak        UserStreak?
+  vocabularies  UserVocabulary[]
+  aiSessions    AiSession[]
 }
 
 model Mistake {
@@ -68,4 +70,28 @@ model UserStreak {
   lastStudyDate String?
   historyDays   String?  // JSON stringified array of dates
   updatedAt     DateTime @updatedAt
+}
+
+model UserVocabulary {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wordId       String   // e.g. "u_123456"
+  wordData     String   // JSON stringified VocabularyWord
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId, wordId])
+}
+
+model AiSession {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessionId    String
+  sessionData  String   // JSON stringified AISession
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId, sessionId])
 }

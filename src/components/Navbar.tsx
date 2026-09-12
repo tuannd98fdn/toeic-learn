@@ -12,6 +12,7 @@ import {
   TargetIcon,
   ArrowRightIcon,
   NotebookIcon,
+  UserIcon,
 } from '@/components/icons/AppIcons';
 import MascotSVG from '@/components/illustrations/MascotSVG';
 import styles from './Navbar.module.css';
@@ -95,6 +96,7 @@ export default function Navbar() {
     { path: '/stats', label: 'Thống kê', icon: <StatsIcon size={24} /> },
     { path: '/study', label: 'Từ vựng', icon: <CardsIcon size={24} /> },
     { path: '/notebook', label: 'Sổ tay', icon: <NotebookIcon size={24} /> },
+    { path: '/profile', label: 'Tài khoản', icon: <UserIcon size={24} /> },
   ];
 
   // Mobile: 5 items — merge Mục tiêu into Lộ trình, highlight Học center
@@ -103,7 +105,7 @@ export default function Navbar() {
     { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={22} />, badge: '•' },
     { path: '/', label: 'Học', icon: <HomeIcon size={26} /> },
     { path: '/study', label: 'Từ vựng', icon: <CardsIcon size={22} /> },
-    { path: '/notebook', label: 'Sổ tay', icon: <NotebookIcon size={22} /> },
+    { path: '/profile', label: 'Tài khoản', icon: <UserIcon size={22} /> },
   ];
 
   return (

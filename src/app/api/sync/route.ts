@@ -22,6 +22,8 @@ export async function GET() {
         progress: true,
         studyPlan: true,
         streak: true,
+        vocabularies: true,
+        aiSessions: true,
       },
     });
 
@@ -32,6 +34,8 @@ export async function GET() {
         studyPlan: null,
         streak: null,
         profile: null,
+        vocabularies: [],
+        aiHistory: {},
       });
     }
 
@@ -85,11 +89,29 @@ export async function GET() {
       };
     }
 
+    // Map vocabularies
+    const vocabulariesList: any[] = [];
+    user.vocabularies.forEach((v) => {
+      try {
+        vocabulariesList.push(JSON.parse(v.wordData));
+      } catch {}
+    });
+
+    // Map aiSessions
+    const aiHistoryMap: Record<string, any> = {};
+    user.aiSessions.forEach((s) => {
+      try {
+        aiHistoryMap[s.sessionId] = JSON.parse(s.sessionData);
+      } catch {}
+    });
+
     return NextResponse.json({
       mistakes: mistakesMap,
       progress: progressMap,
       studyPlan: studyPlanData,
       streak: streakData,
+      vocabularies: vocabulariesList,
+      aiHistory: aiHistoryMap,
       profile: {
         targetScore: user.targetScore,
         examDate: user.examDate,
@@ -117,7 +139,7 @@ export async function POST(req: Request) {
     const image = session.user.image || null;
 
     const body = await req.json();
-    const { mistakes, progress, studyPlan, streak, profile } = body;
+    const { mistakes, progress, studyPlan, streak, profile, vocabularies, aiHistory } = body;
 
     // 1. Upsert User
     const user = await prisma.user.upsert({
@@ -226,6 +248,47 @@ export async function POST(req: Request) {
           historyDays: streak.historyDays ? JSON.stringify(streak.historyDays) : undefined,
         },
       });
+    }
+
+    // 6. Sync Vocabularies
+    if (Array.isArray(vocabularies)) {
+      for (const word of vocabularies) {
+        if (!word.id) continue;
+        await prisma.userVocabulary.upsert({
+          where: {
+            userId_wordId: { userId: user.id, wordId: word.id },
+          },
+          create: {
+            userId: user.id,
+            wordId: word.id,
+            wordData: JSON.stringify(word),
+          },
+          update: {
+            wordData: JSON.stringify(word),
+          },
+        });
+      }
+    }
+
+    // 7. Sync AI History
+    if (aiHistory && typeof aiHistory === 'object') {
+      const entries = Object.entries(aiHistory);
+      for (const [sessionId, sessionData] of entries) {
+        if (!sessionId) continue;
+        await prisma.aiSession.upsert({
+          where: {
+            userId_sessionId: { userId: user.id, sessionId },
+          },
+          create: {
+            userId: user.id,
+            sessionId,
+            sessionData: JSON.stringify(sessionData),
+          },
+          update: {
+            sessionData: JSON.stringify(sessionData),
+          },
+        });
+      }
     }
 
     return NextResponse.json({

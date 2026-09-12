@@ -1,7 +1,7 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useVocabulary } from '@/hooks/useVocabulary';
-import { CloseIcon, FileTextIcon } from '@/components/icons/AppIcons';
+import { CloseIcon, FileTextIcon, CheckCircleIcon } from '@/components/icons/AppIcons';
 import styles from './TextSelectionToolbar.module.css';
 
 interface ToolbarPosition {
@@ -14,10 +14,24 @@ export default function TextSelectionToolbar() {
   const [selectedText, setSelectedText] = useState('');
   const [contextSentence, setContextSentence] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { addWord } = useVocabulary();
+  const { addWord, allWords } = useVocabulary();
   
   const [vietnamese, setVietnamese] = useState('');
   const [partOfSpeech, setPartOfSpeech] = useState('Danh từ');
+  const [matchedIpa, setMatchedIpa] = useState('');
+  const [isAutoFilled, setIsAutoFilled] = useState(false);
+  
+  // Build a lookup map for O(1) word matching
+  const wordLookup = useMemo(() => {
+    const map = new Map<string, { vietnamese: string; partOfSpeech: string; ipa: string }>();
+    for (const w of allWords) {
+      const key = w.word.toLowerCase();
+      if (!map.has(key)) {
+        map.set(key, { vietnamese: w.vietnamese, partOfSpeech: w.partOfSpeech, ipa: w.ipa });
+      }
+    }
+    return map;
+  }, [allWords]);
   
   useEffect(() => {
     const handleSelection = () => {
@@ -93,20 +107,32 @@ export default function TextSelectionToolbar() {
     e.stopPropagation();
     setIsModalOpen(true);
     setPosition(null);
-    setVietnamese('');
-    setPartOfSpeech('Danh từ');
+    
+    // Auto-fill from existing vocabulary
+    const match = wordLookup.get(selectedText.toLowerCase());
+    if (match) {
+      setVietnamese(match.vietnamese);
+      setPartOfSpeech(match.partOfSpeech);
+      setMatchedIpa(match.ipa);
+      setIsAutoFilled(true);
+    } else {
+      setVietnamese('');
+      setPartOfSpeech('Danh từ');
+      setMatchedIpa('');
+      setIsAutoFilled(false);
+    }
   };
   
   const handleSave = () => {
     addWord({
       word: selectedText,
-      ipa: '',
+      ipa: matchedIpa,
       vietnamese,
       partOfSpeech,
       category: 'Từ vựng mới (Lưu thủ công)',
       examples: contextSentence ? [contextSentence] : [],
       mnemonicTip: '',
-      emoji: '📝',
+      emoji: '',
       targetBand: '650+',
     });
     setIsModalOpen(false);
@@ -136,9 +162,23 @@ export default function TextSelectionToolbar() {
               </button>
             </div>
             <div className={styles.modalBody}>
+              {/* Auto-match status badge */}
+              <div className={`${styles.matchBadge} ${isAutoFilled ? styles.matchFound : styles.matchNotFound}`}>
+                {isAutoFilled ? (
+                  <><CheckCircleIcon size={14} /> Da tim thay trong kho tu vung</>
+                ) : (
+                  'Tu moi - Nhap thu cong'
+                )}
+              </div>
+              
               <div className={styles.formGroup}>
                 <label>Từ vựng (English)</label>
                 <input type="text" value={selectedText} onChange={e => setSelectedText(e.target.value)} className={styles.input} />
+                {matchedIpa && (
+                  <div className={styles.ipaRow}>
+                    <span className={styles.ipaText}>{matchedIpa}</span>
+                  </div>
+                )}
               </div>
               
               <div className={styles.formGroup}>
@@ -149,7 +189,7 @@ export default function TextSelectionToolbar() {
                   onChange={e => setVietnamese(e.target.value)} 
                   placeholder="Nhập nghĩa (vd: phát triển, cải thiện...)" 
                   className={styles.input} 
-                  autoFocus 
+                  autoFocus={!isAutoFilled}
                 />
               </div>
               
@@ -161,6 +201,8 @@ export default function TextSelectionToolbar() {
                   <option value="Tính từ">Tính từ (Adjective)</option>
                   <option value="Trạng từ">Trạng từ (Adverb)</option>
                   <option value="Cụm từ">Cụm từ (Phrase)</option>
+                  <option value="noun/adj">Danh từ / Tính từ</option>
+                  <option value="verb/noun">Động từ / Danh từ</option>
                 </select>
               </div>
               
