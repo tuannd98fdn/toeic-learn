@@ -14,10 +14,13 @@ import {
   FlagIcon,
   ClockIcon,
   AlertCircleIcon,
+  NotebookIcon,
 } from '@/components/icons/AppIcons';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { storage } from '@/utils/storage';
+import { syncAdaptivePlan } from '@/utils/studyPlanEngine';
+import KnowledgeGapBreakdown from '@/components/KnowledgeGapBreakdown';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import styles from './page.module.css';
 
@@ -218,6 +221,9 @@ function MiniTestSimulation() {
       storage.set('toeic_study_days', [...studiedDays, today]);
     }
 
+    // Synchronize adaptive plan based on new mistakes
+    syncAdaptivePlan();
+
     if (correct >= questions.length * 0.7) {
       setShowConfetti(true);
     }
@@ -226,7 +232,7 @@ function MiniTestSimulation() {
   if (loading) {
     return (
       <div className={styles.loading}>
-        <span>⏳ Đang tạo đề thi Mini (20 câu)...</span>
+        <span>Đang tạo đề thi Mini (20 câu)...</span>
       </div>
     );
   }
@@ -273,12 +279,46 @@ function MiniTestSimulation() {
             </div>
           </div>
 
+          {/* Knowledge Gap Breakdown */}
+          <KnowledgeGapBreakdown
+            testType="mini-test"
+            testId={testParam}
+            questions={questions.map((q) => ({
+              id: q.id,
+              number: q.number,
+              part: q.part,
+              subCategory: q.subCategory,
+              grammarTag: q.grammarTag,
+              userAnswer: userAnswers[q.number],
+              correctAnswer: q.correctAnswer,
+              isCorrect: userAnswers[q.number] === q.correctAnswer,
+            }))}
+          />
+
           <div className={styles.resultsActions}>
+            <Link
+              href="/study-plan"
+              className={styles.primaryBtn}
+              style={{
+                background: 'var(--primary)',
+                color: '#fff',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontWeight: 600,
+                textDecoration: 'none',
+              }}
+            >
+              <ZapIcon size={16} /> Lộ trình thích ứng đã tối ưu
+            </Link>
             <button className={styles.secondaryBtn} onClick={() => setIsReviewMode(true)}>
               <SearchIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Xem lại giải thích
             </button>
-            <Link href="/" className={styles.secondaryBtn}>
-              <HomeIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Về Dashboard
+            <Link href="/notebook" className={styles.secondaryBtn} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <NotebookIcon size={16} /> Sổ tay câu hỏi sai
+            </Link>
+            <Link href="/" className={styles.secondaryBtn} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <HomeIcon size={16} /> Về Dashboard
             </Link>
           </div>
         </div>

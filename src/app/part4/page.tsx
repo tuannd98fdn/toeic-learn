@@ -10,8 +10,11 @@ import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
-import { MapPinIcon, AlertCircleIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon } from '@/components/icons/AppIcons';
+import { MapPinIcon, AlertCircleIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon, ExamIcon, HeadphonesIcon, FileTextIcon } from '@/components/icons/AppIcons';
 import PracticeFooter from '@/components/PracticeFooter';
+import InteractiveTranscript from '@/components/InteractiveTranscript';
+import DictationTrainer from '@/components/DictationTrainer';
+import { parseTranscript } from '@/utils/transcriptParser';
 import styles from './page.module.css';
 
 export default function Part4Page() {
@@ -39,6 +42,7 @@ function Part4Trainer() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [currentSetScore, setCurrentSetScore] = useState(0);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
+  const [practiceMode, setPracticeMode] = useState<'standard' | 'dictation' | 'transcript'>('standard');
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentSetIndex > 0 && !isFinished);
@@ -230,6 +234,30 @@ function Part4Trainer() {
       </header>
 
       <div className={styles.card}>
+        <div className={styles.modeTabsContainer}>
+          <button
+            type="button"
+            className={`${styles.modeTabBtn} ${practiceMode === 'standard' ? styles.activeModeTab : ''}`}
+            onClick={() => setPracticeMode('standard')}
+          >
+            <ExamIcon size={16} /> Làm bài ETS
+          </button>
+          <button
+            type="button"
+            className={`${styles.modeTabBtn} ${practiceMode === 'dictation' ? styles.activeModeTab : ''}`}
+            onClick={() => setPracticeMode('dictation')}
+          >
+            <HeadphonesIcon size={16} /> Chép chính tả (Dictation)
+          </button>
+          <button
+            type="button"
+            className={`${styles.modeTabBtn} ${practiceMode === 'transcript' ? styles.activeModeTab : ''}`}
+            onClick={() => setPracticeMode('transcript')}
+          >
+            <FileTextIcon size={16} /> Lời thoại tương tác
+          </button>
+        </div>
+
         {currentSet.context && (
           <div className={styles.contextBanner}>
             <MapPinIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> {currentSet.context}
@@ -258,80 +286,86 @@ function Part4Trainer() {
           transcript={isSubmitted ? currentSet.transcript : undefined}
         />
 
-        <div className={styles.questionsList}>
-          {currentSet.questions.map((q) => {
-            const userChoice = selectedAnswers[q.id];
-
-            return (
-              <div key={q.id} className={styles.questionItem}>
-                <div className={styles.questionTitle}>
-                  <span className={styles.qNumber}>#{q.number}.</span>
-                  <span>{q.text}</span>
-                </div>
-
-                <div className={styles.optionsCol}>
-                  {['A', 'B', 'C', 'D'].map((letter) => {
-                    let stateClass = '';
-                    if (isSubmitted) {
-                      if (letter === q.correctAnswer) stateClass = styles.correct;
-                      else if (letter === userChoice) stateClass = styles.incorrect;
-                    } else if (userChoice === letter) {
-                      stateClass = styles.selected;
-                    }
-
-                    return (
-                      <button
-                        key={letter}
-                        type="button"
-                        className={`${styles.optionBtn} ${stateClass}`}
-                        onClick={() => handleSelectOption(q.id, letter)}
-                        disabled={isSubmitted}
-                      >
-                        <span className={styles.optionLetter}>{letter}</span>
-                        <span>{q.options[letter] || `Option (${letter})`}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {!isSubmitted ? (
-          <div className={styles.actionRow}>
-            <button
-              type="button"
-              className={styles.submitBtn}
-              onClick={handleSubmitSet}
-              disabled={!isAllAnsweredInSet}
-            >
-              Nộp bài Set này ({Object.keys(selectedAnswers).length}/{currentSet.questions.length} câu)
-            </button>
-          </div>
+        {practiceMode === 'dictation' ? (
+          <DictationTrainer
+            lines={parseTranscript(currentSet.transcript || '', 'part4')}
+            audioUrl={currentSet.audioUrl}
+            title={`Chép chính tả Bài nói (Câu ${firstQNum} - ${lastQNum})`}
+            onBackToStandard={() => setPracticeMode('standard')}
+          />
+        ) : practiceMode === 'transcript' ? (
+          <InteractiveTranscript
+            transcriptHtml={currentSet.transcript}
+            part="part4"
+            title={`Lời thoại tương tác (Câu ${firstQNum} - ${lastQNum})`}
+            onStartDictation={() => setPracticeMode('dictation')}
+          />
         ) : (
-          <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <button
-              type="button"
-              className={styles.secondaryBtn}
-              style={{ alignSelf: 'flex-start', padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
-              onClick={() => setShowTranscript((prev) => !prev)}
-            >
-              {showTranscript ? 'Ẩn Transcript' : 'Xem Transcript bài nói'}
-            </button>
+          <>
+            <div className={styles.questionsList}>
+              {currentSet.questions.map((q) => {
+                const userChoice = selectedAnswers[q.id];
 
-            {showTranscript && currentSet.transcript && (
-              <div className={styles.transcriptCard}>
-                <div className={styles.transcriptHeader}>
-                  <span>Lời thoại bài nói</span>
-                </div>
-                <div
-                  className={styles.transcriptBody}
-                  dangerouslySetInnerHTML={{ __html: currentSet.transcript }}
-                />
+                return (
+                  <div key={q.id} className={styles.questionItem}>
+                    <div className={styles.questionTitle}>
+                      <span className={styles.qNumber}>#{q.number}.</span>
+                      <span>{q.text}</span>
+                    </div>
+
+                    <div className={styles.optionsCol}>
+                      {['A', 'B', 'C', 'D'].map((letter) => {
+                        let stateClass = '';
+                        if (isSubmitted) {
+                          if (letter === q.correctAnswer) stateClass = styles.correct;
+                          else if (letter === userChoice) stateClass = styles.incorrect;
+                        } else if (userChoice === letter) {
+                          stateClass = styles.selected;
+                        }
+
+                        return (
+                          <button
+                            key={letter}
+                            type="button"
+                            className={`${styles.optionBtn} ${stateClass}`}
+                            onClick={() => handleSelectOption(q.id, letter)}
+                            disabled={isSubmitted}
+                          >
+                            <span className={styles.optionLetter}>{letter}</span>
+                            <span>{q.options[letter] || `Option (${letter})`}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {!isSubmitted ? (
+              <div className={styles.actionRow}>
+                <button
+                  type="button"
+                  className={styles.submitBtn}
+                  onClick={handleSubmitSet}
+                  disabled={!isAllAnsweredInSet}
+                >
+                  Nộp bài Set này ({Object.keys(selectedAnswers).length}/{currentSet.questions.length} câu)
+                </button>
               </div>
+            ) : (
+              currentSet.transcript && (
+                <div style={{ marginTop: '1rem' }}>
+                  <InteractiveTranscript
+                    transcriptHtml={currentSet.transcript}
+                    part="part4"
+                    title={`Lời thoại bài nói (Câu ${firstQNum} - ${lastQNum})`}
+                    onStartDictation={() => setPracticeMode('dictation')}
+                  />
+                </div>
+              )
             )}
-          </div>
+          </>
         )}
       </div>
 

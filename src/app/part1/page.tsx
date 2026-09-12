@@ -18,12 +18,16 @@ import {
   BookIcon,
   ArrowRightIcon,
   AlertCircleIcon,
+  ExamIcon,
 } from '@/components/icons/AppIcons';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
+import InteractiveTranscript from '@/components/InteractiveTranscript';
+import DictationTrainer from '@/components/DictationTrainer';
+import { parseTranscript } from '@/utils/transcriptParser';
 import styles from './page.module.css';
 
 export default function Part1Page() {
@@ -50,6 +54,7 @@ function Part1Trainer() {
   const [showTranscript, setShowTranscript] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
+  const [practiceMode, setPracticeMode] = useState<'standard' | 'dictation' | 'transcript'>('standard');
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentIndex > 0 && !isFinished);
@@ -237,6 +242,30 @@ function Part1Trainer() {
       </header>
 
       <div className={styles.card}>
+        <div className={styles.modeTabsContainer}>
+          <button
+            type="button"
+            className={`${styles.modeTabBtn} ${practiceMode === 'standard' ? styles.activeModeTab : ''}`}
+            onClick={() => setPracticeMode('standard')}
+          >
+            <ExamIcon size={16} /> Làm bài ETS
+          </button>
+          <button
+            type="button"
+            className={`${styles.modeTabBtn} ${practiceMode === 'dictation' ? styles.activeModeTab : ''}`}
+            onClick={() => setPracticeMode('dictation')}
+          >
+            <HeadphonesIcon size={16} /> Chép chính tả (Dictation)
+          </button>
+          <button
+            type="button"
+            className={`${styles.modeTabBtn} ${practiceMode === 'transcript' ? styles.activeModeTab : ''}`}
+            onClick={() => setPracticeMode('transcript')}
+          >
+            <FileTextIcon size={16} /> Lời thoại tương tác
+          </button>
+        </div>
+
         {currentQ.image && (
           <div className={styles.imageWrapper}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -256,62 +285,60 @@ function Part1Trainer() {
           transcript={isAnswered ? currentQ.transcript : undefined}
         />
 
-        <div className={styles.optionsGrid}>
-          {['A', 'B', 'C', 'D'].map((letter) => {
-            let stateClass = '';
-            if (isAnswered) {
-              if (letter === currentQ.correctAnswer) stateClass = styles.correct;
-              else if (letter === selectedAnswer) stateClass = styles.incorrect;
-            } else if (selectedAnswer === letter) {
-              stateClass = styles.selected;
-            }
+        {practiceMode === 'dictation' ? (
+          <DictationTrainer
+            lines={parseTranscript(currentQ.transcript || '', 'part1', currentQ.correctAnswer)}
+            audioUrl={currentQ.audioUrl}
+            title={`Chép chính tả Câu ${currentQ.number}`}
+            onBackToStandard={() => setPracticeMode('standard')}
+          />
+        ) : practiceMode === 'transcript' ? (
+          <InteractiveTranscript
+            transcriptHtml={currentQ.transcript}
+            part="part1"
+            correctAnswer={currentQ.correctAnswer}
+            title={`Lời thoại tương tác Câu ${currentQ.number}`}
+            onStartDictation={() => setPracticeMode('dictation')}
+          />
+        ) : (
+          <>
+            <div className={styles.optionsGrid}>
+              {['A', 'B', 'C', 'D'].map((letter) => {
+                let stateClass = '';
+                if (isAnswered) {
+                  if (letter === currentQ.correctAnswer) stateClass = styles.correct;
+                  else if (letter === selectedAnswer) stateClass = styles.incorrect;
+                } else if (selectedAnswer === letter) {
+                  stateClass = styles.selected;
+                }
 
-            return (
-              <button
-                key={letter}
-                type="button"
-                className={`${styles.optionBtn} ${stateClass}`}
-                onClick={() => handleSelectOption(letter)}
-                disabled={isAnswered}
-              >
-                <span className={styles.optionLetter}>{letter}</span>
-                <span>{currentQ.options[letter] || `Option (${letter})`}</span>
-              </button>
-            );
-          })}
-        </div>
+                return (
+                  <button
+                    key={letter}
+                    type="button"
+                    className={`${styles.optionBtn} ${stateClass}`}
+                    onClick={() => handleSelectOption(letter)}
+                    disabled={isAnswered}
+                  >
+                    <span className={styles.optionLetter}>{letter}</span>
+                    <span>{currentQ.options[letter] || `Option (${letter})`}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-        {isAnswered && (
-          <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <button
-              type="button"
-              className={styles.secondaryBtn}
-              style={{ alignSelf: 'flex-start', padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
-              onClick={() => setShowTranscript((prev) => !prev)}
-            >
-                  {showTranscript ? (
-                    <><EyeIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Ẩn Transcript</>
-                  ) : (
-                    <><LightbulbIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Xem Transcript & Lời giải</>
-                  )}
-            </button>
-
-            {showTranscript && currentQ.transcript && (
-              <div className={styles.transcriptCard}>
-                <div className={styles.transcriptHeader}>
-                  <FileTextIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} />
-                  <span>Transcript & Đáp án</span>
-                  <span style={{ color: 'var(--success)', fontWeight: 700 }}>
-                    Đáp án đúng: ({currentQ.correctAnswer})
-                  </span>
-                </div>
-                <div
-                  className={styles.transcriptBody}
-                  dangerouslySetInnerHTML={{ __html: currentQ.transcript }}
+            {isAnswered && currentQ.transcript && (
+              <div style={{ marginTop: '1rem' }}>
+                <InteractiveTranscript
+                  transcriptHtml={currentQ.transcript}
+                  part="part1"
+                  correctAnswer={currentQ.correctAnswer}
+                  title={`Lời thoại & Giải thích Câu ${currentQ.number}`}
+                  onStartDictation={() => setPracticeMode('dictation')}
                 />
               </div>
             )}
-          </div>
+          </>
         )}
       </div>
 

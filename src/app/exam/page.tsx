@@ -20,11 +20,13 @@ import {
   AlertCircleIcon,
   CloseIcon,
   ZapIcon,
+  NotebookIcon,
 } from '@/components/icons/AppIcons';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { storage } from '@/utils/storage';
 import { syncAdaptivePlan } from '@/utils/studyPlanEngine';
+import KnowledgeGapBreakdown from '@/components/KnowledgeGapBreakdown';
 import {
   calculateScaledScore,
   getCefrLevel,
@@ -575,6 +577,22 @@ function ExamSimulation() {
             </table>
           </div>
 
+          {/* Knowledge Gap Breakdown */}
+          <KnowledgeGapBreakdown
+            testType="exam"
+            testId={testId}
+            questions={questions.map((q) => ({
+              id: q.id,
+              number: q.number,
+              part: q.part,
+              subCategory: q.subCategory,
+              grammarTag: q.grammarTag,
+              userAnswer: userAnswers[q.number],
+              correctAnswer: q.correctAnswer,
+              isCorrect: userAnswers[q.number] === q.correctAnswer,
+            }))}
+          />
+
           <div className={styles.resultsActions}>
             <Link href="/study-plan" className={styles.primaryActionBtn || styles.secondaryBtn} style={{ background: 'var(--primary)', color: '#fff', display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
               <ZapIcon size={16} /> Lộ trình đã tối ưu thích ứng
@@ -582,6 +600,9 @@ function ExamSimulation() {
             <button className={styles.secondaryBtn} onClick={() => setIsReviewMode(true)}>
               <SearchIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Xem lại toàn bộ bài thi & Lời giải
             </button>
+            <Link href="/notebook" className={styles.secondaryBtn} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <NotebookIcon size={16} /> Sổ tay câu hỏi sai
+            </Link>
             <Link href="/stats" className={styles.secondaryBtn}>
               <StatsIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Xem tiến độ trên Stats
             </Link>
