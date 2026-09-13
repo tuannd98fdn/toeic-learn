@@ -12,17 +12,27 @@ import {
   LightbulbIcon,
   ArrowRightIcon,
   TargetIcon,
+  BookOpenIcon,
+  HelpCircleIcon,
+  InfoIcon,
 } from '@/components/icons/AppIcons';
 import { Part5Question, Part5DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
 import { getNextStudyTask } from '@/utils/studyPlanEngine';
+import { GRAMMAR_CHEATSHEETS } from '@/data/grammarCheatsheets';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
 const TIME_LIMIT = 20; // 20 seconds per question
+
+function formatSeconds(sec: number) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+}
 
 export const PART5_SUB_SKILLS = [
   { key: 'all', label: 'Tất cả câu hỏi' },
@@ -52,6 +62,11 @@ function Part5SpeedTrainer() {
   const [selectedTest, setSelectedTest] = useState(testIdParam);
   const [selectedSubSkill, setSelectedSubSkill] = useState(subCategoryParam);
 
+  const [practiceMode, setPracticeMode] = useState<'study' | 'speed'>('study');
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [showCheatsheet, setShowCheatsheet] = useState(false);
+  const [showClueHint, setShowClueHint] = useState(false);
+
   const [questions, setQuestions] = useState<Part5Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -73,6 +88,14 @@ function Part5SpeedTrainer() {
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentIndex > 0 && !isFinished);
+
+  // Load saved practice mode on mount
+  useEffect(() => {
+    const savedMode = storage.get<'study' | 'speed'>('toeic_part5_mode', 'study');
+    if (savedMode === 'study' || savedMode === 'speed') {
+      setPracticeMode(savedMode);
+    }
+  }, []);
 
   // Sync state with URL params
   useEffect(() => {
@@ -189,14 +212,26 @@ function Part5SpeedTrainer() {
     });
   };
 
+  const handleToggleMode = (mode: 'study' | 'speed') => {
+    setPracticeMode(mode);
+    storage.set('toeic_part5_mode', mode);
+    if (mode === 'speed') {
+      setTimeLeft(TIME_LIMIT);
+    } else {
+      setElapsedSeconds(0);
+    }
+  };
+
   const handleRestart = () => {
     setCurrentIndex(0);
     setScore(0);
     setStreak(0);
     setTimeLeft(TIME_LIMIT);
+    setElapsedSeconds(0);
     setIsFinished(false);
     setShowAnswer(false);
     setShowExplanation(false);
+    setShowClueHint(false);
     setSelectedAnswer(null);
     setWrongAnswers([]);
     setShowConfetti(false);
@@ -206,21 +241,27 @@ function Part5SpeedTrainer() {
   useEffect(() => {
     if (loading || questions.length === 0 || isFinished || showAnswer || tutorContext) return;
 
-    timerRef.current = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(timerRef.current!);
-          handleTimeUp();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+    if (practiceMode === 'speed') {
+      timerRef.current = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev <= 1) {
+            clearInterval(timerRef.current!);
+            handleTimeUp();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      timerRef.current = setInterval(() => {
+        setElapsedSeconds(prev => prev + 1);
+      }, 1000);
+    }
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [currentIndex, isFinished, showAnswer, questions, loading, tutorContext]);
+  }, [currentIndex, isFinished, showAnswer, questions, loading, tutorContext, practiceMode]);
 
   const recordMistake = (currentQ: Part5Question) => {
     const qTestId = currentQ.id.includes('t2') ? 'ets2022_test2' : (selectedSubSkill !== 'all' ? (currentQ.id.includes('t1') ? 'ets2022_test1' : selectedTest) : selectedTest);
@@ -266,9 +307,11 @@ function Part5SpeedTrainer() {
   const moveToNextQuestion = () => {
     setTutorContext(null);
     setShowExplanation(false);
+    setShowClueHint(false);
     setCurrentIndex(prev => {
       if (prev < questions.length - 1) {
         setTimeLeft(TIME_LIMIT);
+        setElapsedSeconds(0);
         setShowAnswer(false);
         setSelectedAnswer(null);
         return prev + 1;
@@ -312,6 +355,7 @@ function Part5SpeedTrainer() {
   }, [isFinished, score, questions.length]);
 
   const activeSubMeta = PART5_SUB_SKILLS.find(s => s.key.toLowerCase() === selectedSubSkill.toLowerCase());
+  const currentCheatsheet = selectedSubSkill !== 'all' ? GRAMMAR_CHEATSHEETS[selectedSubSkill] : null;
 
   if (loading) {
     return <div className={styles.loading}>Loading Trainer...</div>;
@@ -519,6 +563,96 @@ function Part5SpeedTrainer() {
         </div>
       )}
 
+      {/* Mode Control Selector */}
+      <div className={styles.modeControlRow}>
+        <div className={styles.modeToggleGroup}>
+          <button
+            type="button"
+            className={`${styles.modeBtn} ${practiceMode === 'study' ? styles.modeBtnActive : ''}`}
+            onClick={() => handleToggleMode('study')}
+          >
+            <BookOpenIcon size={14} />
+            <span>Học kỹ (Không áp lực giờ)</span>
+          </button>
+          <button
+            type="button"
+            className={`${styles.modeBtn} ${practiceMode === 'speed' ? styles.modeBtnActive : ''}`}
+            onClick={() => handleToggleMode('speed')}
+          >
+            <ClockIcon size={14} />
+            <span>Tốc độ (20s)</span>
+          </button>
+        </div>
+        <span className={styles.modeNotice}>
+          {practiceMode === 'study' ? 'Thư thái đọc câu, tra từ, xem manh mối và trực quan cú pháp' : 'Áp lực 20 giây/câu rèn phản xạ tốc độ chuẩn thi ETS'}
+        </span>
+      </div>
+
+      {/* Interactive Grammar Cheatsheet Card */}
+      {currentCheatsheet && (
+        <div className={styles.cheatsheetCard}>
+          <div 
+            className={styles.cheatsheetHeader}
+            onClick={() => setShowCheatsheet(prev => !prev)}
+          >
+            <div className={styles.cheatsheetTitleArea}>
+              <BookOpenIcon size={18} style={{ color: 'var(--primary)' }} />
+              <span className={styles.cheatsheetTitle}>{currentCheatsheet.title}</span>
+              <span className={styles.cheatsheetBadge}>Lý thuyết nền tảng</span>
+            </div>
+            <button 
+              type="button" 
+              className={styles.cheatsheetToggleBtn}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowCheatsheet(prev => !prev);
+              }}
+            >
+              <span>{showCheatsheet ? 'Thu gọn lý thuyết' : 'Xem tóm tắt lý thuyết'}</span>
+            </button>
+          </div>
+
+          {showCheatsheet && (
+            <div className={styles.cheatsheetBody}>
+              <p className={styles.cheatsheetTagline}>{currentCheatsheet.tagline}</p>
+              
+              <div className={styles.formulaBox}>
+                <strong>Công thức cốt lõi: </strong> {currentCheatsheet.ruleFormula}
+              </div>
+
+              {currentCheatsheet.suffixes && currentCheatsheet.suffixes.length > 0 && (
+                <div className={styles.suffixesGrid}>
+                  {currentCheatsheet.suffixes.map(s => (
+                    <div key={s.category} className={styles.suffixCard}>
+                      <div className={styles.suffixCategory}>{s.category}</div>
+                      <div className={styles.suffixEndings}>{s.endings}</div>
+                      <div className={styles.suffixExamples}>Ví dụ: {s.examples}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className={styles.rulesList}>
+                {currentCheatsheet.keyRules.map((rule, idx) => (
+                  <div key={idx} className={styles.ruleItem}>
+                    <div className={styles.ruleItemTitle}>{rule.title}</div>
+                    <div className={styles.ruleItemFormula}>{rule.formula}</div>
+                    <div className={styles.ruleItemExplanation}>{rule.explanation}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.stepsBox}>
+                <div className={styles.stepsTitle}>Quy trình 3 bước giải nhanh:</div>
+                {currentCheatsheet.solvingSteps.map((step, idx) => (
+                  <div key={idx} className={styles.stepItem}>{step}</div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       <header className={styles.header}>
         <div className={styles.topHeaderRow}>
           <div className={styles.progressSection}>
@@ -539,9 +673,11 @@ function Part5SpeedTrainer() {
           </div>
           
           <div className={styles.timerSection}>
-            <span className={`${styles.timerIcon} ${timeLeft <= 5 ? styles.timerWarningIcon : ''}`}><ClockIcon size={20} /></span>
-            <span className={`${styles.timerText} ${timeLeft <= 5 ? styles.timerTextWarning : ''}`}>
-              {timeLeft}s
+            <span className={`${styles.timerIcon} ${practiceMode === 'speed' && timeLeft <= 5 ? styles.timerWarningIcon : ''}`}>
+              <ClockIcon size={20} />
+            </span>
+            <span className={`${styles.timerText} ${practiceMode === 'speed' && timeLeft <= 5 ? styles.timerTextWarning : ''}`}>
+              {practiceMode === 'speed' ? `${timeLeft}s` : formatSeconds(elapsedSeconds)}
             </span>
           </div>
         </div>
@@ -564,6 +700,33 @@ function Part5SpeedTrainer() {
             </span>
             {currentQ.text.split(/_{3,}/)[1] || ''}
           </p>
+
+          {/* Clue Hint Button & Box */}
+          {!showAnswer && (
+            <div className={styles.clueHintRow}>
+              <button
+                type="button"
+                className={`${styles.clueHintToggleBtn} ${showClueHint ? styles.clueHintToggleBtnActive : ''}`}
+                onClick={() => setShowClueHint(prev => !prev)}
+              >
+                <HelpCircleIcon size={14} />
+                <span>{showClueHint ? 'Ẩn manh mối' : 'Gợi ý manh mối tư duy'}</span>
+              </button>
+            </div>
+          )}
+
+          {showClueHint && !showAnswer && (
+            <div className={styles.clueHintBox}>
+              <div className={styles.clueHintTitle}>
+                <LightbulbIcon size={15} />
+                <span>Manh Mối Tư Duy (Clue Hint)</span>
+              </div>
+              <p>
+                {currentQ.clueHint || `Quan sát từ đứng trước và sau chỗ trống: Câu này thuộc chuyên đề ${currentQ.subCategory || 'Ngữ pháp'}. Hãy xác định vai trò của chỗ trống trong câu (cần Danh từ, Tính từ, Trạng từ hay Động từ chia thì) để loại trừ phương án sai.`}
+              </p>
+            </div>
+          )}
+
           <div className={styles.optionsGrid}>
             {(Object.entries(currentQ.options) as [string, string][]).map(([key, value]) => (
               <button
@@ -589,10 +752,45 @@ function Part5SpeedTrainer() {
                 <span>{showExplanation ? 'Thu gọn lời giải' : 'Xem giải thích ngữ pháp chi tiết'}</span>
               </button>
               {showExplanation && (
-                <div 
-                  className={styles.explanationBoxContent}
-                  dangerouslySetInnerHTML={{ __html: currentQ.explanation }}
-                />
+                <>
+                  {/* Syntax Visualizer */}
+                  {currentQ.syntaxBreakdown && (
+                    <div className={styles.syntaxVisualizerBox}>
+                      <div className={styles.syntaxVisualizerTitle}>Trực quan hóa cấu trúc câu (Syntax Visualizer)</div>
+                      <div className={styles.syntaxTokensGrid}>
+                        {currentQ.syntaxBreakdown.subject && (
+                          <div className={`${styles.syntaxToken} ${styles.syntaxTokenSubject}`}>
+                            <span className={styles.syntaxTokenLabel}>Chủ ngữ (Subject)</span>
+                            <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.subject}</span>
+                          </div>
+                        )}
+                        {currentQ.syntaxBreakdown.verb && (
+                          <div className={`${styles.syntaxToken} ${styles.syntaxTokenVerb}`}>
+                            <span className={styles.syntaxTokenLabel}>Động từ chính (Verb)</span>
+                            <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.verb}</span>
+                          </div>
+                        )}
+                        {currentQ.syntaxBreakdown.objectOrComplement && (
+                          <div className={`${styles.syntaxToken} ${styles.syntaxTokenObject}`}>
+                            <span className={styles.syntaxTokenLabel}>Tân ngữ / Bổ ngữ (Object/Prep)</span>
+                            <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.objectOrComplement}</span>
+                          </div>
+                        )}
+                        {currentQ.syntaxBreakdown.blankRole && (
+                          <div className={`${styles.syntaxToken} ${styles.syntaxTokenBlank}`}>
+                            <span className={styles.syntaxTokenLabel}>Vai trò chỗ trống</span>
+                            <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.blankRole}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  <div 
+                    className={styles.explanationBoxContent}
+                    dangerouslySetInnerHTML={{ __html: currentQ.explanation }}
+                  />
+                </>
               )}
             </div>
           )}
@@ -603,7 +801,7 @@ function Part5SpeedTrainer() {
         isAnswered={showAnswer}
         isCorrect={selectedAnswer === currentQ.correctAnswer}
         correctMessage="Ngữ pháp rất chắc chắn!"
-        incorrectMessage={selectedAnswer === null ? "Hết thời gian!" : `Đáp án đúng là (${currentQ.correctAnswer})`}
+        incorrectMessage={practiceMode === 'speed' && selectedAnswer === null ? "Hết thời gian!" : `Đáp án đúng là (${currentQ.correctAnswer})`}
         onNext={moveToNextQuestion}
         onAITutor={() => openAITutor(currentQ)}
         nextLabel={currentIndex + 1 === questions.length ? 'Xem kết quả' : 'Câu tiếp theo'}

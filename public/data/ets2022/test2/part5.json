@@ -1,4 +1,4 @@
-export const part5Data = [
+[
   {
     "id": "ets22_t2_p5_101",
     "number": 101,
@@ -689,4 +689,4 @@ export const part5Data = [
       "blankRole": "Cụm động từ nguyên mẫu sau decided to"
     }
   }
-];
+]

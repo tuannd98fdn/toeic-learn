@@ -482,11 +482,37 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
      - Kiểm thử E2E Playwright `scratch/test_profile_redesign_e2e.mjs`: 100% PASS trên cả tài khoản xác thực, chế độ Guest, đổi mục tiêu, cài đặt âm thanh, Light Mode, Dark Mode và Mobile (390px).
      - Không gây hồi quy các tính năng cũ (Regression tests passed 100%).
 
+### Milestone 25: Nâng Tầm Toàn Diện Học Part 5 Đạt Chuẩn 10/10 Cho Người Mất Gốc Ngữ Pháp (Chế Độ Học Kỹ Untimed, Thư Viện Grammar Cheatsheet 7 Chuyên Đề, Gợi Ý Tư Duy Clue Hint & Phân Tích Cú Pháp Trực Quan S-V-O) [HOÀN TẤT 100%]
+* **Vấn đề đã giải quyết**: 
+  - Đánh giá ban đầu chỉ đạt **4.8/10** đối với người mất gốc: duy nhất chế độ Speed Drill 20s gây áp lực lớn, không có lý thuyết nền tảng đi kèm, thiếu dẫn dắt suy luận trước khi chọn và lời giải trước đó chưa trực quan hóa cấu trúc câu.
+* **Chi tiết triển khai**:
+  1. **Chế độ Học kỹ không giới hạn giờ (Untimed Study Mode)**:
+     - Tích hợp Bộ chuyển đổi chế độ (`Mode Switcher`) ngay đầu trang: *Chế độ Học kỹ (Không giới hạn giờ)* (mặc định) với đồng hồ đếm xuôi không phạt hết giờ, và *Chế độ Tốc độ (20s)* cho luyện phản xạ.
+     - Lưu trữ trạng thái lựa chọn qua `localStorage('toeic_part5_mode')`.
+  2. **Thư viện Grammar Cheatsheet 7 Chuyên đề Trọng tâm (`src/data/grammarCheatsheets.ts`)**:
+     - Biên soạn đầy đủ 7 chuyên đề: *Từ loại, Thì & Hòa hợp Chủ - Vị, Dạng động từ, Giới từ & Liên từ, Đại từ, So sánh & Mệnh đề quan hệ, Từ vựng & Collocation*.
+     - Thẻ Cheatsheet động trong màn hình làm bài tự mở chuyên đề tương ứng với câu hỏi hiện tại, hỗ trợ thu gọn/mở rộng với 1 click, cung cấp 3 bước giải nhanh và cảnh báo bẫy ETS.
+  3. **Gợi ý tư duy loại trừ (Clue Hint)**:
+     - Nút "Gợi ý tư duy" định hướng người học quan sát manh mối trước và sau chỗ trống mà không làm lộ đáp án ngay.
+  4. **Bộ phân tích cú pháp trực quan (Syntax Visualizer)**:
+     - Sau khi chọn đáp án, cấu trúc câu được bóc tách trực quan thành 4 khối màu chuyên nghiệp: Chủ ngữ (Xanh lam), Vị ngữ chính (Cam), Tân ngữ/Cụm giới từ (Tím), Vai trò chỗ trống (Vàng hổ phách).
+  5. **Nâng cấp Toàn vẹn Dữ liệu ETS Test 1 & Test 2**:
+     - Bổ sung `clueHint` và `syntaxBreakdown` cho 100% 60 câu hỏi Part 5.
+     - Viết lại 30 câu hỏi ETS Test 2 theo chuẩn lời giải 3 phần tiếng Việt, sửa lỗi trùng đáp án tại Q105.
+     - Cấu hình `.gitignore` đảm bảo dữ liệu Test 2 được theo dõi cho môi trường Vercel.
+  6. **Quy Chuẩn & Kiểm Định**:
+     - Tuân thủ nghiêm ngặt `NO UI EMOJIS (STRICT)`: 0 emoji trong code, dữ liệu và giao diện (100% SVG từ `AppIcons`).
+     - Bổ sung các icon SVG sạch mới: `BookOpenIcon`, `HelpCircleIcon`, `InfoIcon`, `SlidersIcon`.
+     - Xử lý lỗi tràn ngang (horizontal overflow) trên màn hình di động hẹp (iPhone 390px).
+     - Kiểm thử toàn vẹn `scratch/test_part5_pedagogy_integrity.mjs`: 100% PASS (60/60 câu, 7 cheatsheets, 0 emoji).
+     - Kiểm thử E2E Playwright `scratch/test_part5_pedagogy_e2e.mjs`: 100% PASS cả Desktop và Mobile.
+     - Typecheck `npx tsc --noEmit`: 0 lỗi.
+
 ---
 
 ## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### 🚀 Vấn Đề 25: [Ưu tiên đề xuất] Mở Rộng Ngân Hàng Đề Thi ETS Test 3 Hoặc Nâng Cấp Sổ Tay Lỗi Sai Cá Nhân Hóa (AI Root-Cause Diagnosis)
+### 🚀 Vấn Đề 26: [Ưu tiên đề xuất] Mở Rộng Ngân Hàng Đề Thi ETS Test 3 Hoặc Nâng Cấp Sổ Tay Lỗi Sai Cá Nhân Hóa (AI Root-Cause Diagnosis)
 * **Lựa chọn A (Đề xuất)**: Bổ sung bộ dữ liệu **ETS Test 3** hoàn chỉnh (Listening với âm thanh phân vai đa giọng đọc cục bộ + Reading với 100 câu lời giải sư phạm tiếng Việt) để tiếp tục mở rộng ngân hàng thi thử và luyện tập.
 * **Lựa chọn B**: Nâng cấp **Sổ tay Lỗi sai (Mistake Notebook)** với AI Tutor phân tích nguyên nhân gốc rễ lỗi sai (Root-Cause Diagnosis) và tự động tạo bài test khắc phục điểm yếu cá nhân hóa theo chu trình Leitner.
 
@@ -497,6 +523,8 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Chạy Dev Server**: `npm run dev` (đang chạy ngầm tại `http://localhost:3000`).
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_part5_pedagogy_e2e.mjs` (Kiểm thử Part 5 Untimed Mode, Grammar Cheatsheet, Clue Hint, Syntax Visualizer, Mobile 390px).
+  * `node scratch/test_part5_pedagogy_integrity.mjs` (Kiểm tra dữ liệu 60 câu Part 5 Test 1 & 2, 7 Cheatsheets, quét 0 emoji).
   * `node scratch/test_profile_redesign_e2e.mjs` (Kiểm thử Profile Redesign, Guest/Local mode, Goal settings, Preferences, Light/Dark/Mobile).
   * `node scratch/test_reading_vocab_e2e.mjs` (Kiểm thử 3 chế độ từ vựng Reading Part 6 & 7: Flashcard SRS, Match Challenge, Collocation Drill).
   * `node scratch/test_reading_vocab_integrity.mjs` (Kiểm tra dữ liệu 50 collocations/paraphrase & quét 0 emoji).
@@ -513,5 +541,6 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
   * `node scratch/test_adaptive_study_plan_e2e.mjs` (Kiểm thử Lộ trình học thích ứng & Dashboard).
   * `node scratch/test_subskill_practice.mjs` (Kiểm thử Luyện tập chuyên đề Part 5 liên đề).
   * `node scratch/test_vocab_e2e.mjs` (Kiểm thử 400+ từ vựng & Spaced Repetition).
+
 
 

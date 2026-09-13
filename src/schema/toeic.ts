@@ -73,6 +73,13 @@ export const Part5QuestionSchema = z.object({
   type: z.string().optional(),
   subCategory: z.string().optional(),
   grammarTag: z.string().optional(),
+  clueHint: z.string().optional(),
+  syntaxBreakdown: z.object({
+    subject: z.string().optional(),
+    verb: z.string().optional(),
+    objectOrComplement: z.string().optional(),
+    blankRole: z.string().optional(),
+  }).optional(),
 });
 
 export const Part5DataSchema = z.array(Part5QuestionSchema);

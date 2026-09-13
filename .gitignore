@@ -47,4 +47,6 @@ scripts/page_text.txt
 scripts/test_page.png
 public/data/ets*
 !public/data/tests_index.json
+!public/data/ets2022
+!public/data/ets2022/**
 
