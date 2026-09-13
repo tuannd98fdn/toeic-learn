@@ -70,7 +70,7 @@ export function evaluateLearnerKnowledge(): KnowledgeEvaluationResult {
   let grammarMistakesCount = 0;
   
   mistakeEntries.forEach((m: any) => {
-    if (m && m.type === 'exam' && m.subCategory) {
+    if (m && m.type === 'exam' && m.subCategory && !m.isMastered) {
       grammarMistakesCount += (m.wrongCount || 1);
     }
   });

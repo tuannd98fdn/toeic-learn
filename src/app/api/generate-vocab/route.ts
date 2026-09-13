@@ -71,7 +71,7 @@ Hãy phân tích nội dung trên và chọn ra 10 từ vựng hoặc cụm từ
     }
 
     const { object } = await generateObject({
-      model: google('gemini-3.5-flash'),
+      model: google('gemini-1.5-flash'),
       schema: vocabSchema,
       system: `Bạn là một chuyên gia đào tạo và luyện thi TOEIC hàng đầu. 
       Nhiệm vụ của bạn là cung cấp dữ liệu từ vựng TOEIC cực kỳ chuẩn xác và dễ hiểu cho người Việt học tiếng Anh.

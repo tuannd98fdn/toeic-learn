@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     const dynamicSystem = `${SYSTEM_PROMPT}\n\n${conversationContext}`;
 
     const result = await streamText({
-      model: google('gemini-3.5-flash'),
+      model: google('gemini-1.5-flash'),
       system: dynamicSystem,
       prompt: 'Hãy tổng hợp lại những kiến thức quan trọng nhất từ phiên học này.',
     });

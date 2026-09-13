@@ -9,6 +9,8 @@ export interface LoadedQuestion {
   qData: any; // The question JSON
   subCategory?: string;
   grammarTag?: string;
+  rootCause?: string;
+  isMastered?: boolean;
 }
 
 /**
@@ -95,7 +97,9 @@ export const fetchMistakeQuestions = async (
               questionId: qid,
               qData: q,
               subCategory: mistakes[id]?.subCategory || q.subCategory || q.type,
-              grammarTag: mistakes[id]?.grammarTag || q.grammarTag
+              grammarTag: mistakes[id]?.grammarTag || q.grammarTag,
+              rootCause: mistakes[id]?.rootCause,
+              isMastered: Boolean(mistakes[id]?.isMastered)
             });
           }
         });

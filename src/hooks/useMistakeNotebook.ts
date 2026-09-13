@@ -14,6 +14,8 @@ export interface MistakeRecord {
   box?: number;
   nextReviewDate?: string;
   rootCause?: string;
+  isMastered?: boolean;
+  masteredAt?: string;
 }
 
 export type MistakeData = Record<string, MistakeRecord>;
@@ -41,6 +43,7 @@ export function useMistakeNotebook() {
           wrongCount: current.wrongCount + 1,
           lastMistakeDate: new Date().toISOString(),
           box: 1, // Reset box if they get it wrong again during practice
+          isMastered: false, // Reactivate mistake if answered incorrectly
           nextReviewDate: calculateNextReviewDate(1)
         }
       };
@@ -64,10 +67,19 @@ export function useMistakeNotebook() {
       if (!current) return prev;
 
       let newBox = current.box || 1;
+      let isMastered = current.isMastered || false;
+      let masteredAt = current.masteredAt;
+
       if (isCorrect) {
         newBox = Math.min(newBox + 1, MAX_BOX);
+        if (newBox >= MAX_BOX) {
+          isMastered = true;
+          masteredAt = new Date().toISOString();
+        }
       } else {
         newBox = 1;
+        isMastered = false;
+        masteredAt = undefined;
       }
 
       const newData = {
@@ -75,14 +87,52 @@ export function useMistakeNotebook() {
         [id]: {
           ...current,
           box: newBox,
+          isMastered,
+          masteredAt,
           nextReviewDate: calculateNextReviewDate(newBox)
         }
       };
       
-      // Optional: Auto-remove if mastered (e.g. hits MAX_BOX)
-      if (isCorrect && newBox >= MAX_BOX) {
-        delete newData[id];
-      }
+      storage.set(MISTAKE_KEY, newData);
+      return newData;
+    });
+  }, []);
+
+  const masterMistake = useCallback((id: string) => {
+    setMistakes(prev => {
+      const current = prev[id];
+      if (!current) return prev;
+
+      const newData = {
+        ...prev,
+        [id]: {
+          ...current,
+          isMastered: true,
+          masteredAt: new Date().toISOString(),
+          box: MAX_BOX
+        }
+      };
+      
+      storage.set(MISTAKE_KEY, newData);
+      return newData;
+    });
+  }, []);
+
+  const unmasterMistake = useCallback((id: string) => {
+    setMistakes(prev => {
+      const current = prev[id];
+      if (!current) return prev;
+
+      const newData = {
+        ...prev,
+        [id]: {
+          ...current,
+          isMastered: false,
+          masteredAt: undefined,
+          box: 1,
+          nextReviewDate: calculateNextReviewDate(1)
+        }
+      };
       
       storage.set(MISTAKE_KEY, newData);
       return newData;
@@ -118,6 +168,8 @@ export function useMistakeNotebook() {
     addMistake,
     removeMistake,
     updateMistakeProgress,
+    masterMistake,
+    unmasterMistake,
     updateMistakeRootCause,
     getMistakes
   };
