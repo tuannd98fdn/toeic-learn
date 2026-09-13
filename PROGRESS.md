@@ -571,11 +571,29 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
      - **No UI Emojis**: Kiểm tra tự động bằng regex Unicode emoji trên DOM của cả 5 phần thi -> 100% 0 UI emojis vi phạm.
      - **Playwright E2E**: Chụp ảnh màn hình trực quan tại viewport 1280x800px (`scratch/p1_answered.png`, `scratch/p2_answered.png`, `scratch/p3_answered.png`, `scratch/p4_answered.png`, `scratch/p5_results_redesigned.png`, `scratch/p5_wrong_card_detail.png`) xác nhận toàn bộ lời giải và phương án hiển thị hoàn hảo trong tầm mắt không cần cuộn chuột.
 
+### Milestone 29: Khắc Phục Lỗi Build Vercel (Missing Prisma Client Generation) & Deploy Thành Công Lên Alias `toeicmaster-beta.vercel.app` [HOÀN TẤT 100%]
+* **Vấn đề đã giải quyết**:
+  - Khi deploy lên Vercel, build job thất bại tại bước TypeScript check với hàng loạt lỗi `Property 'questionDiscussion' does not exist on type 'PrismaClient'`, `'vocabularies' does not exist in type 'UserInclude'`, `Property 'mistakes' does not exist`, `Property 'userVocabulary' does not exist`, v.v.
+  - **Nguyên nhân**: Trong `package.json`, script `"build"` trước đây chỉ chạy `"next build"` mà không gọi `"prisma generate"`, và không có script `"postinstall"`. Môi trường npm trên Vercel kích hoạt cảnh báo allow-scripts và không tự động generate Prisma Client từ `prisma/schema.prisma`, dẫn đến thiếu toàn bộ TypeScript types của các model Prisma.
+* **Chi tiết triển khai**:
+  1. Cập nhật `package.json`:
+     - `"build": "prisma generate && next build"`: Đảm bảo Prisma Client luôn được sinh đầy đủ types trước khi Next.js biên dịch TypeScript.
+     - `"postinstall": "prisma generate"`: Tự động khởi tạo Prisma Client ngay sau khi cài đặt dependencies.
+  2. Kiểm thử và xác nhận:
+     - `npm run build` cục bộ thành công 100% với 0 lỗi Typecheck.
+     - Commit và đẩy mã nguồn lên nhánh `main` (`commit d7c9358`).
+     - Vercel tự động build thành công triển khai `toeicmaster-aj3zt8uyu-thu-nha-projects.vercel.app` (Status: Ready).
+     - Gán alias thành công `https://toeicmaster-beta.vercel.app` trỏ trực tiếp tới bản triển khai mới nhất.
+* **Quy chuẩn & Kiểm định**:
+  - `npx tsc --noEmit`: 0 lỗi.
+  - Vercel Deployment: Status Ready, Production target.
+  - Alias active: `https://toeicmaster-beta.vercel.app` (và `https://toeicmaster-vn-beta.vercel.app`).
+
 ---
 
 ## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### 🚀 Vấn Đề 29: Chế Độ Luyện Tập Sâu Khắc Phục Lỗi Sai Thông Minh (Smart Mistake Remediation Drill & AI Root-Cause Tutor) Trong Sổ Tay Lỗi Sai
+### 🚀 Vấn Đề 30: Chế Độ Luyện Tập Sâu Khắc Phục Lỗi Sai Thông Minh (Smart Mistake Remediation Drill & AI Root-Cause Tutor) Trong Sổ Tay Lỗi Sai
 * **Bối cảnh & Vấn đề**:
   - Người học sau khi làm bài thi thử hoặc luyện tập các đề (Test 1, 2, 3) có một lượng lớn câu sai được lưu vào Sổ tay lỗi sai (`/notebook`).
   - Hiện tại, Sổ tay lỗi sai chỉ hỗ trợ xem lại danh sách câu hỏi và gắn nhãn nguyên nhân gốc (Root Cause). Người học thiếu một **Chế độ Luyện Tập Tức Thì (Remediation Drill)**:
