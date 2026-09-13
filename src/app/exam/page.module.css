@@ -454,11 +454,14 @@
 }
 
 .paletteBtn.flagged::after {
-  content: '🚩';
+  content: '';
   position: absolute;
-  top: -4px;
-  right: -4px;
-  font-size: 0.65rem;
+  top: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--danger, #ef4444);
 }
 
 /* Results Screen */

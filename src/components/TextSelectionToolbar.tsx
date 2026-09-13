@@ -159,13 +159,13 @@ export default function TextSelectionToolbar() {
   const handleQuickSave = async (e: React.MouseEvent) => {
     e.stopPropagation();
     setPosition(null);
-    setToastMessage('✨ Đang dịch AI...');
+    setToastMessage('Đang dịch tự động...');
     
     try {
       // 1. Check if it's already in DB
       const match = wordLookup.get(selectedText.toLowerCase());
       if (match) {
-        setToastMessage('✅ Từ này đã có trong sổ!');
+        setToastMessage('Từ này đã có trong sổ!');
         setTimeout(() => setToastMessage(''), 2000);
         return;
       }
@@ -202,13 +202,13 @@ export default function TextSelectionToolbar() {
             targetBand: '650+',
           });
           
-          setToastMessage(`✅ Đã lưu: ${selectedText} - ${wordData.vietnamese}`);
+          setToastMessage(`Đã lưu: ${selectedText} - ${wordData.vietnamese}`);
         } else {
-          setToastMessage('❌ Lỗi dịch AI');
+          setToastMessage('Lỗi dịch từ vựng');
         }
       }
     } catch (error) {
-      setToastMessage('❌ Lỗi kết nối');
+      setToastMessage('Lỗi kết nối mạng');
     }
     
     window.getSelection()?.removeAllRanges();
@@ -282,9 +282,9 @@ export default function TextSelectionToolbar() {
                 {isAutoFilled ? (
                   <><CheckCircleIcon size={14} /> Đã lưu trong kho từ vựng</>
                 ) : isAIFetching ? (
-                  <>✨ Đang phân tích nghĩa bằng AI...</>
+                  <>Đang phân tích nghĩa bằng AI...</>
                 ) : (
-                  <>✨ AI đã tự động điền (Bạn có thể sửa)</>
+                  <>AI đã tự động điền (Bạn có thể sửa)</>
                 )}
               </div>
               
