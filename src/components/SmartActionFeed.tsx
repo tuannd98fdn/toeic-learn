@@ -7,16 +7,20 @@ import {
   TargetIcon,
   ZapIcon,
   CompassIcon,
+  BookOpenIcon,
   ArrowRightIcon,
 } from '@/components/icons/AppIcons';
 import { analyzeLearnerGaps, LearnerGaps } from '@/utils/studyPlanEngine';
+import { evaluateLearnerKnowledge, KnowledgeEvaluationResult } from '@/utils/knowledgeEvaluator';
 import styles from './SmartActionFeed.module.css';
 
 export default function SmartActionFeed() {
   const [gaps, setGaps] = useState<LearnerGaps | null>(null);
+  const [knowledge, setKnowledge] = useState<KnowledgeEvaluationResult | null>(null);
 
   useEffect(() => {
     setGaps(analyzeLearnerGaps());
+    setKnowledge(evaluateLearnerKnowledge());
   }, []);
 
   if (!gaps) return null;
@@ -49,7 +53,63 @@ export default function SmartActionFeed() {
     );
   }
 
-  // 2. Priority 2: Urgent Grammar Gap
+  // 2. Priority 2: Execution Deficit (Knowledge is high, but pacing/listening reflex needs boost)
+  if (knowledge && knowledge.gapType === 'EXECUTION_DEFICIT') {
+    return (
+      <div className={styles.feedCard}>
+        <div className={styles.leftGroup}>
+          <div className={styles.iconBox} style={{ color: 'var(--primary)', background: 'rgba(var(--primary-rgb), 0.12)' }}>
+            <ZapIcon size={22} />
+          </div>
+          <div className={styles.textGroup}>
+            <div className={styles.tagRow}>
+              <span className={styles.tag}>THÁO GỠ NGHẼN PHẢN XẠ</span>
+            </div>
+            <h4 className={styles.title}>
+              Bứt phá trần điểm: Luyện nhịp độ & Chép chính tả
+            </h4>
+            <p className={styles.subtitle}>
+              Vốn tri thức của bạn đạt trần {knowledge.knowledgeCeilingScore} điểm. Khắc phục độ trễ tốc độ để thu hẹp khoảng cách {knowledge.executionGap} điểm thi thật.
+            </p>
+          </div>
+        </div>
+        <Link href={knowledge.primaryRecommendation.actionLink} className={styles.actionBtn}>
+          <span>{knowledge.primaryRecommendation.actionLabel}</span>
+          <ArrowRightIcon size={16} />
+        </Link>
+      </div>
+    );
+  }
+
+  // 3. Priority 3: Knowledge Deficit (Exam score near ceiling, needs vocab/grammar injection)
+  if (knowledge && knowledge.gapType === 'KNOWLEDGE_DEFICIT') {
+    return (
+      <div className={styles.feedCard}>
+        <div className={styles.leftGroup}>
+          <div className={styles.iconBox} style={{ color: 'var(--secondary)', background: 'rgba(var(--secondary-rgb), 0.12)' }}>
+            <BookOpenIcon size={22} />
+          </div>
+          <div className={styles.textGroup}>
+            <div className={styles.tagRow}>
+              <span className={styles.tag} style={{ color: 'var(--secondary)' }}>NÂNG TRẦN TRI THỨC</span>
+            </div>
+            <h4 className={styles.title}>
+              Nạp thêm từ vựng Spaced Repetition (SRS)
+            </h4>
+            <p className={styles.subtitle}>
+              Điểm thi đang chạm sát trần tri thức hiện có. Nạp thêm từ vựng Hộp 4 - 5 để mở khóa dải điểm cao hơn.
+            </p>
+          </div>
+        </div>
+        <Link href="/study" className={styles.actionBtn} style={{ background: 'var(--secondary)', boxShadow: '0 4px 14px rgba(var(--secondary-rgb), 0.3)' }}>
+          <span>HỌC TỪ VỰNG NGAY</span>
+          <ArrowRightIcon size={16} />
+        </Link>
+      </div>
+    );
+  }
+
+  // 4. Priority 4: Urgent Grammar Gap
   if (gaps.topGrammarWeaknesses.length > 0) {
     const topGap = gaps.topGrammarWeaknesses[0];
     return (
@@ -78,7 +138,7 @@ export default function SmartActionFeed() {
     );
   }
 
-  // 3. Priority 3: Weakest Part
+  // 5. Priority 5: Weakest Part
   if (gaps.weakestParts.length > 0 && gaps.weakestParts[0] !== 'p5') {
     const weakPart = gaps.weakestParts[0];
     return (
@@ -107,7 +167,7 @@ export default function SmartActionFeed() {
     );
   }
 
-  // 4. Default: Diagnostic Suggestion
+  // 6. Default: Diagnostic Suggestion
   return (
     <div className={styles.feedCard}>
       <div className={styles.leftGroup}>

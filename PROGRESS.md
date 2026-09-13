@@ -510,11 +510,43 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### Milestone 26: Xây Dựng Bộ Đánh Giá Năng Lực Dựa Trên Độ Phủ Tri Thức (Knowledge Ceiling Engine) & Thẻ Chẩn Đoán Khoảng Cách Thực Thi (Execution Gap) [HOÀN TẤT 100%]
+* **Vấn đề đã giải quyết**: 
+  - Người học thường rơi vào ngộ nhận "Testing is not Learning" (càng cày nhiều đề điểm càng cao), dẫn đến việc thi thử liên tục mà không tích lũy kiến thức nền tảng (từ vựng, ngữ pháp).
+  - Trước đây hệ thống chỉ hiển thị điểm số thi thử đơn lẻ (`scorePredictor.ts`), không phân biệt được người học đang bị "Hổng kiến thức nền" (Knowledge Deficit - thiếu từ vựng, ngữ pháp) hay đang bị "Nghẽn tốc độ và phản xạ" (Execution Deficit - kiến thức đủ nhưng giải đề quá chậm, nghe không bắt kịp).
+* **Chi tiết triển khai**:
+  1. **Xây dựng module `src/utils/knowledgeEvaluator.ts`**:
+     - Đo lường và chuẩn hóa 4 trụ cột tri thức TOEIC:
+       - *Trụ cột 1 - Từ vựng*: Đánh giá số từ trong Hộp 4 - 5 của Leitner SRS so với dung lượng yêu cầu của Target Band (450, 650, 800, 990).
+       - *Trụ cột 2 - Ngữ pháp*: Tỷ lệ làm chủ và mật độ lỗi sai trên 7 chuyên đề ngữ pháp Part 5 & 6.
+       - *Trụ cột 3 - Âm học & Nghe hiểu (LC)*: Tỷ lệ giải mã âm thanh từ bài thi thực tế và tiến độ chép chính tả Dictation.
+       - *Trụ cột 4 - Đọc hiểu & Paraphrase (RC)*: Khả năng làm chủ các dạng bài Part 7 và các cặp từ diễn đạt tương đương.
+     - Tính toán **Knowledge Ceiling Score** (Điểm trần tiềm năng: 10 - 990 điểm) theo thang điểm chuẩn ETS (bội số của 5).
+     - Phân tích **Khoảng cách thực thi (`executionGap = knowledgeCeiling - examScore`)**:
+       - *EXECUTION_DEFICIT* (gap >= 60): Kiến thức cao nhưng thi điểm thấp do tốc độ hoặc phản xạ -> Đề xuất luyện Dictation và Pacing.
+       - *KNOWLEDGE_DEFICIT* (gap <= -35 hoặc từ vựng thấp): Điểm thi chạm trần tri thức -> Đề xuất nạp thêm từ vựng Flashcard SRS Hộp 4-5.
+       - *BALANCED_GROWTH*: Nền tảng tri thức và kỹ năng giải đề đồng pha -> Đề xuất duy trì chu trình học tập cân bằng.
+  2. **Nâng cấp giao diện `PredictiveScoreMeter.tsx` & `PredictiveScoreMeter.module.css`**:
+     - Thiết kế thanh đo kép trực quan: **[Điểm Thi Thực Chiến]** (xanh dương) đối sánh song song cùng **[Trần Tri Thức Tích Lũy]** (xanh ngọc).
+     - Hộp Chẩn đoán Chiến lược (Strategic Diagnosis Insight Box) với các nhãn màu trạng thái tinh tế (`gapChipAlert`, `gapChipWarning`, `gapChipGood`).
+     - Bảng 4 thẻ mini hiển thị tiến độ 4 trụ cột tri thức.
+     - Nút hành động thích ứng 1-click dẫn thẳng vào bài tập khắc phục điểm nghẽn.
+  3. **Tích hợp Thẻ Hành động Thích ứng trong `SmartActionFeed.tsx`**:
+     - Tự động ưu tiên hiển thị thẻ "Tháo gỡ nghẽn phản xạ" (nếu thừa tri thức thiếu tốc độ) hoặc "Nâng trần tri thức" (nếu hổng từ vựng/ngữ pháp).
+  4. **Quy Chuẩn & Kiểm Định**:
+     - Tuân thủ nghiêm ngặt `NO UI EMOJIS (STRICT)`: 0 emoji trong code, dữ liệu và giao diện rendered DOM (100% SVG từ `AppIcons`).
+     - Kiểm thử Unit Test toàn diện `scratch/test_knowledge_evaluator.mjs`: 100% PASS (Cold start, Execution Deficit, Knowledge Deficit, No Emoji).
+     - Kiểm thử E2E Playwright `scratch/test_knowledge_meter_e2e.mjs`: 100% PASS trên cả Desktop và Mobile (390px).
+     - Kiểm thử hồi quy `scratch/test_part5_pedagogy_e2e.mjs`: 100% PASS.
+     - Typecheck `npx tsc --noEmit`: 0 lỗi.
+
+---
+
 ## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### 🚀 Vấn Đề 26: [Ưu tiên đề xuất] Mở Rộng Ngân Hàng Đề Thi ETS Test 3 Hoặc Nâng Cấp Sổ Tay Lỗi Sai Cá Nhân Hóa (AI Root-Cause Diagnosis)
-* **Lựa chọn A (Đề xuất)**: Bổ sung bộ dữ liệu **ETS Test 3** hoàn chỉnh (Listening với âm thanh phân vai đa giọng đọc cục bộ + Reading với 100 câu lời giải sư phạm tiếng Việt) để tiếp tục mở rộng ngân hàng thi thử và luyện tập.
-* **Lựa chọn B**: Nâng cấp **Sổ tay Lỗi sai (Mistake Notebook)** với AI Tutor phân tích nguyên nhân gốc rễ lỗi sai (Root-Cause Diagnosis) và tự động tạo bài test khắc phục điểm yếu cá nhân hóa theo chu trình Leitner.
+### 🚀 Vấn Đề 27: [Ưu tiên đề xuất] Bổ Sung Ngân Hàng Đề Thi ETS Test 3 Hoàn Chỉnh (LC Đa Giọng Cục Bộ & RC 100 Câu Lời Giải Sư Phạm Tiếng Việt) Hoặc Nâng Cấp AI Tutor Sổ Tay Lỗi Sai
+* **Lựa chọn A (Đề xuất)**: Mở rộng ngân hàng đề thi với **ETS Test 3** (100 câu LC với 54 file audio đa giọng đọc cục bộ + 100 câu RC với lời giải sư phạm tiếng Việt 3 phần chi tiết) để người học có thêm nguồn đề thi thử chất lượng sau khi đã nạp đủ tri thức.
+* **Lựa chọn B**: Xây dựng tính năng **Chẩn Đoán Nguyên Nhân Sâu AI (Deep Root-Cause Diagnosis)** trong Sổ tay lỗi sai, tự động sinh đề thi mini 10 câu khắc phục đúng lỗ hổng vừa mắc.
 
 ---
 
