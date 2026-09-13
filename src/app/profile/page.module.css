@@ -1,168 +1,778 @@
 .container {
-  max-width: 800px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem 0 3rem;
 }
 
-.header {
-  margin-bottom: 2rem;
+/* ============================================
+   Hero Profile Banner
+   ============================================ */
+.heroBanner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--success) 100%);
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-}
-
-.title {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.subtitle {
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-}
-
-.grid {
-  display: grid;
   gap: 1.5rem;
 }
 
+@media (min-width: 768px) {
+  .heroContent {
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+  }
+}
+
+.avatarWrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  background: var(--surface-sunken);
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+}
+
+.avatarBadge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.heroInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.heroTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .heroTitleRow {
+    justify-content: flex-start;
+  }
+}
+
+.userName {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--foreground);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.statusTag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.statusTagSynced {
+  background: var(--success-light);
+  color: var(--success);
+  border: 1px solid rgba(var(--success-rgb), 0.3);
+}
+
+.statusTagLocal {
+  background: var(--warning-light);
+  color: var(--warning);
+  border: 1px solid rgba(var(--warning-rgb), 0.3);
+}
+
+.userEmail {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.heroMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  margin-top: 0.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .heroMeta {
+    justify-content: flex-start;
+  }
+}
+
+.guestPrompt {
+  background: rgba(var(--primary-rgb), 0.06);
+  border: 1px dashed rgba(var(--primary-rgb), 0.3);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.guestPromptText {
+  font-size: 0.9rem;
+  color: var(--foreground);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.guestPromptTitle {
+  font-weight: 700;
+}
+
+.guestPromptDesc {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   Main Layout Grid (2 Columns on Desktop)
+   ============================================ */
+.layoutGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 960px) {
+  .layoutGrid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ============================================
+   Card Common Styles
+   ============================================ */
 .card {
   background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--border-focus);
 }
 
 .cardHeader {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.cardTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0;
+.cardHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
 }
 
-.iconWrapper {
+.iconBox {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
-  background: rgba(var(--primary-rgb), 0.1);
+  background: var(--primary-light);
   color: var(--primary);
+  flex-shrink: 0;
 }
 
-.avatarSection {
+.iconBoxSuccess {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.iconBoxWarning {
+  background: var(--warning-light);
+  color: var(--warning);
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--foreground);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================
+   Stats Mini Grid (4 Boxes)
+   ============================================ */
+.statsMiniGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+@media (min-width: 540px) {
+  .statsMiniGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statBox {
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-}
-
-.avatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  border: 4px solid var(--surface);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: var(--border-color);
-  object-fit: cover;
-}
-
-.userInfo {
   text-align: center;
+  gap: 0.25rem;
 }
 
-.userName {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem;
+.statBoxValue {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--foreground);
+  line-height: 1.2;
 }
 
-.userEmail {
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.infoRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-}
-
-.infoRow:not(:last-child) {
-  border-bottom: 1px solid var(--border-color);
-}
-
-.infoLabel {
+.statBoxLabel {
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-secondary);
 }
 
-.infoValue {
+/* ============================================
+   Predicted Score Highlight Box
+   ============================================ */
+.predictedScoreCard {
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.06) 0%, rgba(var(--secondary-rgb), 0.06) 100%);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.predictedTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.predictedLabel {
+  font-size: 0.85rem;
   font-weight: 700;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.syncStatus {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   color: var(--text-secondary);
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.syncIcon {
-  color: var(--success);
+.confidenceBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
 }
 
-.syncIcon.syncing {
+.predictedScoreRange {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.predictedScoreNumber {
+  font-size: 2.2rem;
+  font-weight: 900;
   color: var(--primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.predictedScoreSub {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.subScoreRow {
+  display: flex;
+  gap: 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(var(--primary-rgb), 0.12);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.subScoreItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.subScoreVal {
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+/* ============================================
+   Milestones & Badges
+   ============================================ */
+.badgesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+@media (min-width: 500px) {
+  .badgesGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.badgeCard {
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.badgeCard.unlocked {
+  background: var(--surface);
+  border-color: rgba(var(--primary-rgb), 0.3);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.08);
+}
+
+.badgeCard.locked {
+  opacity: 0.6;
+  filter: grayscale(0.7);
+}
+
+.badgeIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.unlocked .badgeIconBox {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: rgba(var(--primary-rgb), 0.3);
+}
+
+.badgeTitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.badgeDesc {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* ============================================
+   Target Score & Date Settings
+   ============================================ */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.pillsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.scorePill {
+  flex: 1;
+  min-width: 60px;
+  padding: 0.5rem 0.25rem;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.scorePill:hover {
+  border-color: var(--primary);
+  color: var(--foreground);
+}
+
+.scorePillActive {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.3);
+}
+
+.dateInputRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.dateInput {
+  flex: 1;
+  min-width: 180px;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-sunken);
+  color: var(--foreground);
+  font-size: 0.9rem;
+  font-weight: 600;
+  outline: none;
+  font-family: inherit;
+}
+
+.dateInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+}
+
+.daysLeftChip {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--primary-light);
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.saveBtnRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.saveFeedback {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ============================================
+   Learning Preferences
+   ============================================ */
+.preferenceItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+}
+
+.preferenceItem:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+
+.preferenceText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.preferenceTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.preferenceDesc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.toggleSwitch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.toggleSwitch.active {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.toggleKnob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.toggleSwitch.active .toggleKnob {
+  transform: translateX(20px);
+}
+
+.minutePills {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.minPill {
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.minPillActive {
+  background: var(--primary-light);
+  border-color: rgba(var(--primary-rgb), 0.4);
+  color: var(--primary);
+}
+
+/* ============================================
+   Cloud Sync & Data Management
+   ============================================ */
+.syncStatusBox {
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.syncStatusLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-secondary);
+}
+
+.syncIconSpin {
   animation: spin 1s linear infinite;
+  color: var(--primary);
 }
 
 @keyframes spin {
   100% { transform: rotate(360deg); }
 }
 
-.dangerZone {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.backupBtnRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
 }
 
-.dangerTitle {
+.backupBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.backupBtn:hover {
+  background: var(--surface);
+  border-color: var(--border-focus);
+}
+
+/* ============================================
+   Danger / Account Zone
+   ============================================ */
+.dangerCard {
+  border-color: rgba(var(--danger-rgb), 0.25);
+  background: var(--surface);
+}
+
+.dangerCard .cardHeader {
+  border-bottom-color: rgba(var(--danger-rgb), 0.15);
+}
+
+.dangerCard .iconBox {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.dangerActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dangerBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--danger);
+  background: transparent;
   color: var(--danger);
   font-weight: 700;
-  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-@media (min-width: 768px) {
-  .avatarSection {
-    flex-direction: row;
-    align-items: center;
-    text-align: left;
-    gap: 1.5rem;
-  }
-  .userInfo {
-    text-align: left;
-  }
+.dangerBtn:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.clearDataBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.clearDataBtn:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: var(--danger-light);
 }

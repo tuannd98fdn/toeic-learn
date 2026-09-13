@@ -16,22 +16,174 @@
   color: var(--muted-foreground);
 }
 
-/* Header */
+/* Header & Navigation */
 .header {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.topBar {
+  display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.controlsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 16px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.testSelect {
+  padding: 6px 12px;
+  background-color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  cursor: pointer;
+  outline: none;
+}
+
+.testSelect:focus {
+  border-color: var(--primary);
+}
+
+.subSkillTabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: none;
+}
+
+.subSkillTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.subSkillTab {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.subSkillTab:hover {
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+.subSkillTabActive {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  border-color: var(--primary) !important;
+}
+
+/* Pacing Bar */
+.pacingBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+.pacingTime {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pacingTarget {
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+}
+
+.pacingBadge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badgeAhead {
+  background: rgba(14, 165, 233, 0.15);
+  color: #0284c7;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.badgeOnTrack {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badgeBehind {
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.timeAttackToggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.timeAttackToggleActive {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border-color: rgba(239, 68, 68, 0.3);
 }
 
 .title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: var(--foreground);
 }
 
 .subtitle {
   color: var(--muted-foreground);
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .backBtn {
@@ -41,6 +193,10 @@
   border-radius: var(--radius);
   font-weight: 600;
   transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .backBtn:hover {
@@ -339,3 +495,113 @@
   font-size: 0.95rem;
   line-height: 1.5;
 }
+
+/* Focused Sub-skill Blank Highlight */
+.focusedSubSkillBlank {
+  border-color: #f59e0b !important;
+  background-color: rgba(245, 158, 11, 0.1) !important;
+  color: #d97706 !important;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+}
+
+.targetedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Session Pacing Report at Results Screen */
+.pacingReportSection {
+  margin-top: 28px;
+  text-align: left;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.pacingReportTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--foreground);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pacingSummaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.pacingStatCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.pacingStatValue {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.pacingStatLabel {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin-top: 4px;
+}
+
+.pacingTableWrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.pacingTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.pacingTable th {
+  background: var(--muted);
+  padding: 10px 14px;
+  font-weight: 700;
+  color: var(--muted-foreground);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.pacingTable td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+.pacingTable tr:last-child td {
+  border-bottom: none;
+}
+
+.pacingAdviceBox {
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.08);
+  border-left: 4px solid var(--primary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--foreground);
+}
+

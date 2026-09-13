@@ -123,6 +123,32 @@ export default function FlashCard({ word, onRate, autoPlay = true }: FlashCardPr
               </div>
             )}
 
+            {word.paraphrasePair && (
+              <div style={{
+                background: 'rgba(99, 102, 241, 0.08)',
+                border: '1px solid rgba(99, 102, 241, 0.2)',
+                borderRadius: '8px',
+                padding: '8px 12px',
+                margin: '8px 0',
+                textAlign: 'left',
+                fontSize: '0.85rem'
+              }}>
+                <div style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: '4px' }}>
+                  Cặp đối chiếu đề thi ETS:
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                  <div>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', display: 'block' }}>Trong bài đọc:</span>
+                    <div style={{ fontWeight: 600 }}>&ldquo;{word.paraphrasePair.passageText}&rdquo;</div>
+                  </div>
+                  <div>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', display: 'block' }}>Trong đáp án:</span>
+                    <div style={{ fontWeight: 600, color: 'var(--success)' }}>&ldquo;{word.paraphrasePair.optionText}&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {word.mnemonicTip && (
               <div className={styles.mnemonic}>
                 {word.emoji ? <span className={styles.emoji}>{word.emoji}</span> : null}

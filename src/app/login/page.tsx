@@ -42,6 +42,7 @@ export default function Login() {
                   src={avatarImg} 
                   alt="Lê Thị Vân Anh" 
                   fill 
+                  sizes="48px"
                   style={{ objectFit: 'cover' }} 
                 />
               </div>

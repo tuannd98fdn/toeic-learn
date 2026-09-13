@@ -113,6 +113,9 @@ export function useLeitner() {
 
     const eligibleWords = allWords.filter(word => {
       if (targetBand === 'All') return true;
+      if (targetBand === 'Reading Part 6 & 7' || targetBand === 'reading_specialized') {
+        return word.category === 'Reading Collocations' || word.category === 'ETS Paraphrasing Pairs' || !!word.readingType;
+      }
       return word.targetBand === targetBand;
     });
 
@@ -150,7 +153,13 @@ export function useLeitner() {
     let learning = 0;
     let unstudied = 0;
 
-    const filtered = allWords.filter(w => targetBand === 'All' || w.targetBand === targetBand);
+    const filtered = allWords.filter(w => {
+      if (targetBand === 'All') return true;
+      if (targetBand === 'Reading Part 6 & 7' || targetBand === 'reading_specialized') {
+        return w.category === 'Reading Collocations' || w.category === 'ETS Paraphrasing Pairs' || !!w.readingType;
+      }
+      return w.targetBand === targetBand;
+    });
 
     filtered.forEach(word => {
       const record = progress[word.id];
