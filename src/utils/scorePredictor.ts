@@ -30,8 +30,8 @@ export function getPredictiveScore(): PredictiveScoreData {
   }
 
   // 1. Get Target Score
-  const rawTarget = storage.get<string>('toeic_target_score', '750+');
-  const targetScoreNum = parseInt(rawTarget.replace(/\D/g, ''), 10) || 750;
+  const rawTarget = storage.get<string | number>('toeic_target_score', '750+');
+  const targetScoreNum = parseInt(String(rawTarget || '').replace(/\D/g, ''), 10) || 750;
 
   // 2. Check full exam history
   const examHistory = storage.get<any[]>('toeic_exam_history', []);

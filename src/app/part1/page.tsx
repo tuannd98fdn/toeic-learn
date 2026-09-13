@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Part1Question, Part1DataSchema } from '@/schema/toeic';
@@ -55,9 +55,18 @@ function Part1Trainer() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
   const [practiceMode, setPracticeMode] = useState<'standard' | 'dictation' | 'transcript'>('standard');
+  const explanationRef = useRef<HTMLDivElement>(null);
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentIndex > 0 && !isFinished);
+
+  useEffect(() => {
+    if (isAnswered && explanationRef.current) {
+      if (typeof window !== 'undefined' && window.innerWidth < 992) {
+        explanationRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  }, [isAnswered]);
 
   useEffect(() => {
     const fetchPart1 = async () => {
@@ -241,106 +250,116 @@ function Part1Trainer() {
         </div>
       </header>
 
-      <div className={styles.card}>
-        <div className={styles.modeTabsContainer}>
-          <button
-            type="button"
-            className={`${styles.modeTabBtn} ${practiceMode === 'standard' ? styles.activeModeTab : ''}`}
-            onClick={() => setPracticeMode('standard')}
-          >
-            <ExamIcon size={16} /> Làm bài ETS
-          </button>
-          <button
-            type="button"
-            className={`${styles.modeTabBtn} ${practiceMode === 'dictation' ? styles.activeModeTab : ''}`}
-            onClick={() => setPracticeMode('dictation')}
-          >
-            <HeadphonesIcon size={16} /> Chép chính tả (Dictation)
-          </button>
-          <button
-            type="button"
-            className={`${styles.modeTabBtn} ${practiceMode === 'transcript' ? styles.activeModeTab : ''}`}
-            onClick={() => setPracticeMode('transcript')}
-          >
-            <FileTextIcon size={16} /> Lời thoại tương tác
-          </button>
-        </div>
-
-        {currentQ.image && (
-          <div className={styles.imageWrapper}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={currentQ.image}
-              alt={`TOEIC Part 1 - Question ${currentQ.number}`}
-              className={styles.questionImage}
-              loading="eager"
-            />
-          </div>
-        )}
-
-        <ListeningAudioPlayer
-          src={currentQ.audioUrl}
-          title={`Audio Câu ${currentQ.number}`}
-          autoPlay={true}
-          transcript={isAnswered ? currentQ.transcript : undefined}
-        />
-
-        {practiceMode === 'dictation' ? (
-          <DictationTrainer
-            lines={parseTranscript(currentQ.transcript || '', 'part1', currentQ.correctAnswer)}
-            audioUrl={currentQ.audioUrl}
-            title={`Chép chính tả Câu ${currentQ.number}`}
-            onBackToStandard={() => setPracticeMode('standard')}
-          />
-        ) : practiceMode === 'transcript' ? (
-          <InteractiveTranscript
-            transcriptHtml={currentQ.transcript}
-            part="part1"
-            correctAnswer={currentQ.correctAnswer}
-            title={`Lời thoại tương tác Câu ${currentQ.number}`}
-            onStartDictation={() => setPracticeMode('dictation')}
-          />
-        ) : (
-          <>
-            <div className={styles.optionsGrid}>
-              {['A', 'B', 'C', 'D'].map((letter) => {
-                let stateClass = '';
-                if (isAnswered) {
-                  if (letter === currentQ.correctAnswer) stateClass = styles.correct;
-                  else if (letter === selectedAnswer) stateClass = styles.incorrect;
-                } else if (selectedAnswer === letter) {
-                  stateClass = styles.selected;
-                }
-
-                return (
-                  <button
-                    key={letter}
-                    type="button"
-                    className={`${styles.optionBtn} ${stateClass}`}
-                    onClick={() => handleSelectOption(letter)}
-                    disabled={isAnswered}
-                  >
-                    <span className={styles.optionLetter}>{letter}</span>
-                    <span>{currentQ.options[letter] || `Option (${letter})`}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {isAnswered && currentQ.transcript && (
-              <div style={{ marginTop: '1rem' }}>
-                <InteractiveTranscript
-                  transcriptHtml={currentQ.transcript}
-                  explanationHtml={currentQ.explanation}
-                  part="part1"
-                  correctAnswer={currentQ.correctAnswer}
-                  title={`Lời thoại & Giải thích Câu ${currentQ.number}`}
-                  onStartDictation={() => setPracticeMode('dictation')}
+      <div className={styles.workspaceSplit}>
+        {/* Left Column: Media (Photo + Audio player) */}
+        <div className={styles.mediaColumn}>
+          <div className={styles.card}>
+            {currentQ.image && (
+              <div className={styles.imageWrapper}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={currentQ.image}
+                  alt={`TOEIC Part 1 - Question ${currentQ.number}`}
+                  className={styles.questionImage}
+                  loading="eager"
                 />
               </div>
             )}
-          </>
-        )}
+
+            <ListeningAudioPlayer
+              src={currentQ.audioUrl}
+              title={`Audio Câu ${currentQ.number}`}
+              autoPlay={true}
+              transcript={isAnswered ? currentQ.transcript : undefined}
+            />
+          </div>
+        </div>
+
+        {/* Right Column: Interaction (Mode Tabs + Options / Explanation) */}
+        <div className={styles.interactionColumn}>
+          <div className={styles.card}>
+            <div className={styles.modeTabsContainer}>
+              <button
+                type="button"
+                className={`${styles.modeTabBtn} ${practiceMode === 'standard' ? styles.activeModeTab : ''}`}
+                onClick={() => setPracticeMode('standard')}
+              >
+                <ExamIcon size={16} /> Làm bài ETS
+              </button>
+              <button
+                type="button"
+                className={`${styles.modeTabBtn} ${practiceMode === 'dictation' ? styles.activeModeTab : ''}`}
+                onClick={() => setPracticeMode('dictation')}
+              >
+                <HeadphonesIcon size={16} /> Chép chính tả (Dictation)
+              </button>
+              <button
+                type="button"
+                className={`${styles.modeTabBtn} ${practiceMode === 'transcript' ? styles.activeModeTab : ''}`}
+                onClick={() => setPracticeMode('transcript')}
+              >
+                <FileTextIcon size={16} /> Lời thoại tương tác
+              </button>
+            </div>
+
+            {practiceMode === 'dictation' ? (
+              <DictationTrainer
+                lines={parseTranscript(currentQ.transcript || '', 'part1', currentQ.correctAnswer)}
+                audioUrl={currentQ.audioUrl}
+                title={`Chép chính tả Câu ${currentQ.number}`}
+                onBackToStandard={() => setPracticeMode('standard')}
+              />
+            ) : practiceMode === 'transcript' ? (
+              <InteractiveTranscript
+                transcriptHtml={currentQ.transcript}
+                part="part1"
+                correctAnswer={currentQ.correctAnswer}
+                title={`Lời thoại tương tác Câu ${currentQ.number}`}
+                onStartDictation={() => setPracticeMode('dictation')}
+              />
+            ) : (
+              <>
+                <div className={styles.optionsGrid}>
+                  {['A', 'B', 'C', 'D'].map((letter) => {
+                    let stateClass = '';
+                    if (isAnswered) {
+                      if (letter === currentQ.correctAnswer) stateClass = styles.correct;
+                      else if (letter === selectedAnswer) stateClass = styles.incorrect;
+                    } else if (selectedAnswer === letter) {
+                      stateClass = styles.selected;
+                    }
+
+                    return (
+                      <button
+                        key={letter}
+                        type="button"
+                        className={`${styles.optionBtn} ${stateClass}`}
+                        onClick={() => handleSelectOption(letter)}
+                        disabled={isAnswered}
+                      >
+                        <span className={styles.optionLetter}>{letter}</span>
+                        <span>{currentQ.options[letter] || `Option (${letter})`}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {isAnswered && currentQ.transcript && (
+                  <div ref={explanationRef} style={{ marginTop: '0.85rem' }}>
+                    <InteractiveTranscript
+                      transcriptHtml={currentQ.transcript}
+                      explanationHtml={currentQ.explanation}
+                      part="part1"
+                      correctAnswer={currentQ.correctAnswer}
+                      title={`Lời thoại & Giải thích Câu ${currentQ.number}`}
+                      onStartDictation={() => setPracticeMode('dictation')}
+                    />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
       </div>
 
       <PracticeFooter

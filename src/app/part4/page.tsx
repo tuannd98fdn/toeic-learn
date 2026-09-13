@@ -43,6 +43,7 @@ function Part4Trainer() {
   const [currentSetScore, setCurrentSetScore] = useState(0);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
   const [practiceMode, setPracticeMode] = useState<'standard' | 'dictation' | 'transcript'>('standard');
+  const [activeReviewQIndex, setActiveReviewQIndex] = useState<number>(0);
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentSetIndex > 0 && !isFinished);
@@ -89,10 +90,12 @@ function Part4Trainer() {
     setIsSubmitted(true);
 
     let setScore = 0;
-    currentSet.questions.forEach((q) => {
+    let firstWrongIndex = -1;
+    currentSet.questions.forEach((q, idx) => {
       if (selectedAnswers[q.id] === q.correctAnswer) {
         setScore++;
       } else {
+        if (firstWrongIndex === -1) firstWrongIndex = idx;
         addMistake(`exam_${testId}_part4_${q.id}`, {
           type: 'exam',
           testId: testId,
@@ -104,6 +107,7 @@ function Part4Trainer() {
 
     setCurrentSetScore(setScore);
     setTotalScore((prev) => prev + setScore);
+    setActiveReviewQIndex(firstWrongIndex >= 0 ? firstWrongIndex : 0);
   };
 
   const handleNextSet = () => {
@@ -112,6 +116,7 @@ function Part4Trainer() {
       setSelectedAnswers({});
       setIsSubmitted(false);
       setShowTranscript(false);
+      setActiveReviewQIndex(0);
     } else {
       setIsFinished(true);
       storage.set(`progress_${testId}_part4`, true);
@@ -129,6 +134,7 @@ function Part4Trainer() {
     setTotalScore(0);
     setIsFinished(false);
     setShowConfetti(false);
+    setActiveReviewQIndex(0);
   };
 
   useEffect(() => {
@@ -192,8 +198,8 @@ function Part4Trainer() {
           </div>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 32, lineHeight: 1.6 }}>
             {percentage >= 80
-              ? 'Khả năng tập trung nghe các bài nói độc thoại dài và nắm ý chính của bạn cực kỳ tốt!'
-              : 'Hãy chú ý đoạn mở đầu (purpose of the talk) và đoạn kết (next action/request)!'}
+              ? 'Khả năng nắm bắt đại ý và chi tiết trong độc thoại thương mại của bạn rất ấn tượng!'
+              : 'Hãy chú ý các từ chuyển ý và ngữ điệu người nói để xác định mục đích bài nói nhanh hơn!'}
           </p>
 
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
@@ -258,34 +264,6 @@ function Part4Trainer() {
           </button>
         </div>
 
-        {currentSet.context && (
-          <div className={styles.contextBanner}>
-            <MapPinIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> {currentSet.context}
-          </div>
-        )}
-
-        {currentSet.image && (
-          <div className={styles.graphicWrapper}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={currentSet.image}
-              alt={`TOEIC Part 4 Graphic for questions ${firstQNum}-${lastQNum}`}
-              className={styles.graphicImage}
-            />
-          </div>
-        )}
-
-        <div style={{ padding: '0.8rem', backgroundColor: 'var(--warning-light, #fff8e1)', borderLeft: '4px solid #ffc107', borderRadius: '4px', marginBottom: '1rem', color: '#555', fontSize: '0.9rem' }}>
-          <strong>Mẹo:</strong> Hãy dành 8-10 giây đọc lướt 3 câu hỏi dưới đây trước khi bấm nút Play audio!
-        </div>
-
-        <ListeningAudioPlayer
-          src={currentSet.audioUrl}
-          title={`Audio Bài nói (Câu ${firstQNum} - ${lastQNum})`}
-          autoPlay={false}
-          transcript={isSubmitted ? currentSet.transcript : undefined}
-        />
-
         {practiceMode === 'dictation' ? (
           <DictationTrainer
             lines={parseTranscript(currentSet.transcript || '', 'part4')}
@@ -301,70 +279,40 @@ function Part4Trainer() {
             onStartDictation={() => setPracticeMode('dictation')}
           />
         ) : (
-          <>
-            <div className={styles.questionsList}>
-              {currentSet.questions.map((q) => {
-                const userChoice = selectedAnswers[q.id];
+          <div className={styles.workspaceSplit}>
+            <div className={styles.leftColumn}>
+              {currentSet.context && (
+                <div className={styles.contextBanner}>
+                  <MapPinIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> {currentSet.context}
+                </div>
+              )}
 
-                return (
-                  <div key={q.id} className={styles.questionItem}>
-                    <div className={styles.questionTitle}>
-                      <span className={styles.qNumber}>#{q.number}.</span>
-                      <span>{q.text}</span>
-                    </div>
+              {currentSet.image && (
+                <div className={styles.graphicWrapper}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={currentSet.image}
+                    alt={`TOEIC Part 4 Graphic for questions ${firstQNum}-${lastQNum}`}
+                    className={styles.graphicImage}
+                  />
+                </div>
+              )}
 
-                    <div className={styles.optionsCol}>
-                      {['A', 'B', 'C', 'D'].map((letter) => {
-                        let stateClass = '';
-                        if (isSubmitted) {
-                          if (letter === q.correctAnswer) stateClass = styles.correct;
-                          else if (letter === userChoice) stateClass = styles.incorrect;
-                        } else if (userChoice === letter) {
-                          stateClass = styles.selected;
-                        }
+              {!isSubmitted && (
+                <div style={{ padding: '0.8rem 1rem', backgroundColor: 'var(--surface-hover)', borderLeft: '4px solid var(--primary)', borderRadius: '8px', color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                  <strong style={{ color: 'var(--foreground)' }}>Chiến thuật ETS:</strong> Đọc lướt nhanh 3 câu hỏi bên phải trước khi nghe để định vị từ khóa quan trọng.
+                </div>
+              )}
 
-                        return (
-                          <button
-                            key={letter}
-                            type="button"
-                            className={`${styles.optionBtn} ${stateClass}`}
-                            onClick={() => handleSelectOption(q.id, letter)}
-                            disabled={isSubmitted}
-                          >
-                            <span className={styles.optionLetter}>{letter}</span>
-                            <span>{q.options[letter] || `Option (${letter})`}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
+              <ListeningAudioPlayer
+                src={currentSet.audioUrl}
+                title={`Audio Bài nói (Câu ${firstQNum} - ${lastQNum})`}
+                autoPlay={false}
+                transcript={isSubmitted ? currentSet.transcript : undefined}
+              />
 
-                    {isSubmitted && q.explanation && (
-                      <div style={{ marginTop: '0.85rem', padding: '12px 16px', borderRadius: 10, backgroundColor: 'var(--surface-hover)', border: '1px solid var(--border)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: 'var(--primary)', marginBottom: 4 }}>
-                          <LightbulbIcon size={14} /> Lời giải chi tiết:
-                        </div>
-                        <div dangerouslySetInnerHTML={{ __html: q.explanation }} />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {!isSubmitted ? (
-              <div className={styles.actionRow}>
-                <button
-                  type="button"
-                  className={styles.submitBtn}
-                  onClick={handleSubmitSet}
-                  disabled={!isAllAnsweredInSet}
-                >
-                  Nộp bài Set này ({Object.keys(selectedAnswers).length}/{currentSet.questions.length} câu)
-                </button>
-              </div>
-            ) : (
-              currentSet.transcript && (
-                <div style={{ marginTop: '1rem' }}>
+              {isSubmitted && currentSet.transcript && (
+                <div className={styles.transcriptScrollArea}>
                   <InteractiveTranscript
                     transcriptHtml={currentSet.transcript}
                     part="part4"
@@ -372,9 +320,129 @@ function Part4Trainer() {
                     onStartDictation={() => setPracticeMode('dictation')}
                   />
                 </div>
-              )
-            )}
-          </>
+              )}
+            </div>
+
+            <div className={styles.rightColumn}>
+              {isSubmitted && (
+                <div className={styles.reviewTabs}>
+                  {currentSet.questions.map((q, idx) => {
+                    const isQCorrect = selectedAnswers[q.id] === q.correctAnswer;
+                    const isActive = activeReviewQIndex === idx;
+                    return (
+                      <button
+                        key={q.id}
+                        type="button"
+                        className={`${styles.reviewTabBtn} ${isActive ? styles.reviewTabActive : ''} ${isQCorrect ? styles.reviewTabCorrect : styles.reviewTabIncorrect}`}
+                        onClick={() => setActiveReviewQIndex(idx)}
+                      >
+                        <span>Câu #{q.number}</span>
+                        <span className={styles.tabResultBadge}>
+                          {isQCorrect ? 'Đúng' : 'Sai'}
+                        </span>
+                      </button>
+                    );
+                  })}
+                  <button
+                    type="button"
+                    className={`${styles.reviewTabBtn} ${activeReviewQIndex === -1 ? styles.reviewTabActive : ''}`}
+                    onClick={() => setActiveReviewQIndex(-1)}
+                  >
+                    Xem cả 3 câu
+                  </button>
+                </div>
+              )}
+
+              <div className={styles.questionsList}>
+                {(!isSubmitted || activeReviewQIndex === -1
+                  ? currentSet.questions
+                  : [currentSet.questions[activeReviewQIndex] || currentSet.questions[0]]
+                ).map((q) => {
+                  const userChoice = selectedAnswers[q.id];
+
+                  return (
+                    <div key={q.id} className={styles.questionItem}>
+                      <div className={styles.questionTitle}>
+                        <span className={styles.qNumber}>#{q.number}.</span>
+                        <span>{q.text}</span>
+                      </div>
+
+                      <div className={styles.optionsCol}>
+                        {['A', 'B', 'C', 'D'].map((letter) => {
+                          let stateClass = '';
+                          if (isSubmitted) {
+                            if (letter === q.correctAnswer) stateClass = styles.correct;
+                            else if (letter === userChoice) stateClass = styles.incorrect;
+                          } else if (userChoice === letter) {
+                            stateClass = styles.selected;
+                          }
+
+                          return (
+                            <button
+                              key={letter}
+                              type="button"
+                              className={`${styles.optionBtn} ${stateClass}`}
+                              onClick={() => handleSelectOption(q.id, letter)}
+                              disabled={isSubmitted}
+                            >
+                              <span className={styles.optionLetter}>{letter}</span>
+                              <span>{q.options[letter] || `Option (${letter})`}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {isSubmitted && q.explanation && (
+                        <div style={{ marginTop: '0.85rem', padding: '14px 18px', borderRadius: 12, backgroundColor: 'var(--surface-hover)', border: '1px solid var(--border)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: 'var(--primary)', marginBottom: 6 }}>
+                            <LightbulbIcon size={14} /> Lời giải chi tiết:
+                          </div>
+                          <div dangerouslySetInnerHTML={{ __html: q.explanation }} />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {isSubmitted && activeReviewQIndex !== -1 && currentSet.questions.length > 1 && (
+                <div className={styles.qNavRow}>
+                  <button
+                    type="button"
+                    className={styles.qNavBtn}
+                    onClick={() => setActiveReviewQIndex((prev) => Math.max(0, prev - 1))}
+                    disabled={activeReviewQIndex === 0}
+                  >
+                    ← Câu trước
+                  </button>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                    Câu {activeReviewQIndex + 1} / {currentSet.questions.length}
+                  </span>
+                  <button
+                    type="button"
+                    className={styles.qNavBtn}
+                    onClick={() => setActiveReviewQIndex((prev) => Math.min(currentSet.questions.length - 1, prev + 1))}
+                    disabled={activeReviewQIndex === currentSet.questions.length - 1}
+                  >
+                    Câu sau →
+                  </button>
+                </div>
+              )}
+
+              {!isSubmitted && (
+                <div className={styles.actionRow}>
+                  <button
+                    type="button"
+                    className={styles.submitBtn}
+                    onClick={handleSubmitSet}
+                    disabled={!isAllAnsweredInSet}
+                  >
+                    Nộp bài Set này ({Object.keys(selectedAnswers).length}/{currentSet.questions.length} câu)
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
 

@@ -2,10 +2,81 @@
   padding-bottom: 120px !important;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-width: 800px;
+  gap: 1.25rem;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 1.5rem 1rem 4rem 1rem;
+  padding: 1rem 1rem 4rem 1rem;
+}
+
+.workspaceSplit {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  .workspaceSplit {
+    display: grid;
+    grid-template-columns: minmax(360px, 1fr) minmax(420px, 1.2fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+}
+
+.questionColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 992px) {
+  .questionColumn {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+.explanationColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.guidanceCard {
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 2.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.guidanceTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.guidanceText {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 380px;
+}
+
+.guidanceTip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  background: var(--surface-hover);
+  border-radius: 8px;
+  color: var(--primary);
+  font-weight: 600;
 }
 
 .loading, .errorState {
@@ -173,15 +244,15 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 18px 24px;
+  padding: 12px 18px;
   background-color: var(--card);
   border: 2px solid var(--border);
-  box-shadow: var(--shadow-sm); border: 1px solid var(--border);
-  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  border-radius: 14px;
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition: all 0.15s ease;
   text-align: left;
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   overflow: hidden;
   color: var(--foreground);
 }

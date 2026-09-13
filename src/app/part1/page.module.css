@@ -1,11 +1,45 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-width: 800px;
+  gap: 1.25rem;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 1.5rem 1rem 4rem 1rem;
+  padding: 1rem 1rem 4rem 1rem;
   padding-bottom: 120px;
+}
+
+.workspaceSplit {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  .workspaceSplit {
+    display: grid;
+    grid-template-columns: minmax(360px, 1fr) minmax(400px, 1.2fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+}
+
+.mediaColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 992px) {
+  .mediaColumn {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+.interactionColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .loading, .errorState {
@@ -163,29 +197,23 @@
 .optionsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-}
-
-@media (max-width: 600px) {
-  .optionsGrid {
-    grid-template-columns: 1fr;
-  }
+  gap: 0.5rem;
 }
 
 .optionBtn {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 18px 24px;
+  gap: 0.5rem;
+  padding: 10px 14px;
   background-color: var(--card);
   border: 2px solid var(--border);
-  box-shadow: var(--shadow-sm); border: 1px solid var(--border);
-  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition: all 0.15s ease;
   text-align: left;
-  font-size: 1.25rem;
+  font-size: 1rem;
   overflow: hidden;
   color: var(--foreground);
 }

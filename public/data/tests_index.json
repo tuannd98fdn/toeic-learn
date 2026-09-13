@@ -10,5 +10,11 @@
     "name": "ETS 2022 - Test 2",
     "year": 2022,
     "path": "/data/ets2022/test2"
+  },
+  {
+    "id": "ets2022_test3",
+    "name": "ETS 2022 - Test 3",
+    "year": 2022,
+    "path": "/data/ets2022/test3"
   }
 ]

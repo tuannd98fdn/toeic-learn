@@ -15,6 +15,12 @@ import {
   BookOpenIcon,
   HelpCircleIcon,
   InfoIcon,
+  CheckCircleIcon,
+  CloseIcon,
+  AwardIcon,
+  BookIcon,
+  HomeIcon,
+  AlertCircleIcon,
 } from '@/components/icons/AppIcons';
 import { Part5Question, Part5DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
@@ -80,14 +86,22 @@ function Part5SpeedTrainer() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [wrongAnswers, setWrongAnswers] = useState<Part5Question[]>([]);
+  const [wrongAnswers, setWrongAnswers] = useState<{ question: Part5Question; userAnswer?: string }[]>([]);
   const [showConfetti, setShowConfetti] = useState(false);
 
   const nextTask = getNextStudyTask();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const explanationRef = useRef<HTMLDivElement | null>(null);
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentIndex > 0 && !isFinished);
+
+  // Smooth scroll to explanation on mobile/narrow screens when answer is revealed
+  useEffect(() => {
+    if (showAnswer && typeof window !== 'undefined' && window.innerWidth < 992 && explanationRef.current) {
+      explanationRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [showAnswer]);
 
   // Load saved practice mode on mount
   useEffect(() => {
@@ -277,9 +291,10 @@ function Part5SpeedTrainer() {
 
   const handleTimeUp = () => {
     setShowAnswer(true);
+    setShowExplanation(true);
     const currentQ = questions[currentIndex];
     if (currentQ) {
-      setWrongAnswers(prev => [...prev, currentQ]);
+      setWrongAnswers(prev => [...prev, { question: currentQ, userAnswer: undefined }]);
       recordMistake(currentQ);
     }
   };
@@ -292,12 +307,13 @@ function Part5SpeedTrainer() {
     const currentQ = questions[currentIndex];
     if (!currentQ) return;
     
+    setShowExplanation(true);
     if (answer === currentQ.correctAnswer) {
       setScore(prev => prev + 1);
       setStreak(prev => prev + 1);
       setShowAnswer(true);
     } else {
-      setWrongAnswers(prev => [...prev, currentQ]);
+      setWrongAnswers(prev => [...prev, { question: currentQ, userAnswer: answer }]);
       setStreak(0);
       recordMistake(currentQ);
       setShowAnswer(true);
@@ -401,86 +417,228 @@ function Part5SpeedTrainer() {
     return (
       <div className={styles.container}>
         <Confetti show={showConfetti} />
-        <div className={`${styles.finishedCard} card-minimal animate-slide-up`}>
-          <h2>{isSubSkillMode ? `Chuyên đề: ${activeSubMeta?.label || selectedSubSkill}` : 'Kết quả Speed Trainer Part 5'}</h2>
-          <div className={styles.scoreCircle}>
-            <span className={styles.scoreText}>{score}/{questions.length}</span>
+        
+        {/* Modern Hero Performance Dashboard */}
+        <div className={`${styles.finishedDashboard} animate-slide-up`}>
+          <div className={styles.summaryTopRow}>
+            <div className={styles.summaryMeta}>
+              <span className={styles.categoryPill}>
+                <TargetIcon size={14} />
+                {isSubSkillMode ? `Chuyên đề: ${activeSubMeta?.label || selectedSubSkill}` : 'Speed Trainer Part 5'}
+              </span>
+              <h1 className={styles.summaryTitle}>Tổng kết bài luyện tập</h1>
+            </div>
+            <div className={styles.summaryPacingBadge}>
+              {percentage >= 80 ? (
+                <span className={styles.badgeMastered}><AwardIcon size={16} /> Xuất sắc</span>
+              ) : percentage >= 50 ? (
+                <span className={styles.badgeGood}><CheckCircleIcon size={16} /> Khá tốt</span>
+              ) : (
+                <span className={styles.badgeNeedsPractice}><AlertCircleIcon size={16} /> Cần củng cố</span>
+              )}
+            </div>
           </div>
-          <p className={styles.feedback}>
-            {percentage >= 80 ? `Tuyệt vời! Bạn nắm rất vững kiến thức ${activeSubMeta?.label || 'Part 5'}.` :
-             percentage >= 50 ? `Khá tốt! Nhưng vẫn cần luyện thêm để phản xạ nhạy bén hơn trong 20s.` :
-             `Chủ điểm này còn nhiều bẫy. Hãy xem kỹ giải thích và ôn lại trong Sổ tay lỗi sai.`}
-          </p>
-          <div className={styles.actions}>
+
+          <div className={styles.dashboardGrid}>
+            {/* Left: Score Gauge / Circular Progress */}
+            <div className={styles.scoreGaugeCard}>
+              <div className={styles.scoreRingWrapper}>
+                <svg className={styles.scoreSvg} viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="50" className={styles.scoreTrack} />
+                  <circle
+                    cx="60"
+                    cy="60"
+                    r="50"
+                    className={styles.scoreProgress}
+                    style={{
+                      strokeDasharray: 314.16,
+                      strokeDashoffset: 314.16 - (314.16 * percentage) / 100,
+                      stroke: percentage >= 80 ? 'var(--success, #22c55e)' : percentage >= 50 ? 'var(--primary, #3b82f6)' : 'var(--warning, #f59e0b)',
+                    }}
+                  />
+                </svg>
+                <div className={styles.scoreCenter}>
+                  <div className={styles.scoreBig}>
+                    {score}<span className={styles.scoreDivider}>/{questions.length}</span>
+                  </div>
+                  <div className={styles.scorePercent}>{Math.round(percentage)}%</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Key Stats & Pedagogical Insight */}
+            <div className={styles.statsInsightColumn}>
+              <div className={styles.statTilesGrid}>
+                <div className={styles.statTile}>
+                  <div className={styles.statTileLabel}>Số câu đúng</div>
+                  <div className={styles.statTileValueSuccess}>{score} câu</div>
+                </div>
+                <div className={styles.statTile}>
+                  <div className={styles.statTileLabel}>Số câu cần sửa</div>
+                  <div className={styles.statTileValueWarning}>{wrongAnswers.length} câu</div>
+                </div>
+                <div className={styles.statTile}>
+                  <div className={styles.statTileLabel}>Chủ điểm</div>
+                  <div className={styles.statTileValueSub}>{activeSubMeta?.label || 'Tổng hợp Part 5'}</div>
+                </div>
+              </div>
+
+              <div className={styles.feedbackCard}>
+                <div className={styles.feedbackIconWrap}>
+                  <LightbulbIcon size={18} />
+                </div>
+                <p className={styles.feedbackText}>
+                  {percentage >= 80 ? `Tuyệt vời! Bạn nắm rất vững kiến thức ${activeSubMeta?.label || 'Part 5'}. Hãy duy trì phản xạ luyện tập mỗi ngày để giữ vững phong độ.` :
+                   percentage >= 50 ? `Khá tốt! Bạn đã vượt qua hơn một nửa số câu hỏi. Hãy xem kỹ phân tích các câu sai bên dưới để bóc tách bẫy và ghi nhớ các quy tắc ngữ pháp quan trọng.` :
+                   `Chủ điểm này còn nhiều bẫy ngữ pháp. Hãy xem lại từng câu sai bên dưới, đối chiếu đáp án và lưu lại các câu quan trọng vào Sổ tay.`}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Unified Action Buttons Toolbar */}
+          <div className={styles.actionToolbar}>
+            <button onClick={handleRestart} className={styles.primaryActionBtn}>
+              <RotateCcwIcon size={16} /> Luyện lại bài này
+            </button>
             {isSubSkillMode ? (
               <>
-                <Link 
-                  href="/stats" 
-                  className={styles.nextStepBtn}
-                >
-                  <TargetIcon size={18} />
-                  Xem Biểu đồ Radar Lỗ hổng
+                <Link href="/stats" className={styles.secondaryActionBtn}>
+                  <TargetIcon size={16} /> Xem Biểu đồ Radar Lỗ hổng
                 </Link>
-                <button onClick={handleRestart} className={styles.secondaryBtn}>
-                  Luyện lại chuyên đề này <RotateCcwIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
+                <button onClick={() => handleSelectSubSkill('all')} className={styles.secondaryActionBtn}>
+                  <BookIcon size={16} /> Làm đề đầy đủ 30 câu
                 </button>
-                <button onClick={() => handleSelectSubSkill('all')} className={styles.secondaryBtn}>
-                  Làm đề đầy đủ 30 câu
-                </button>
-                <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
               </>
             ) : (
-              <>
-                <Link 
-                  href={nextTask.link === '/part5' ? `/part6?test=${selectedTest}` : nextTask.link} 
-                  className={styles.nextStepBtn}
-                >
-                  HỌC TIẾP: {nextTask.link === '/part5' ? 'Part 6 (Điền đoạn văn)' : nextTask.title}
-                  <ArrowRightIcon size={18} />
-                </Link>
-                <button onClick={handleRestart} className={styles.secondaryBtn}>
-                  Luyện tập lại <RotateCcwIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
-                </button>
-                <Link href="/" className={styles.secondaryBtn}>Về trang chủ</Link>
-              </>
+              <Link href={nextTask.link === '/part5' ? `/part6?test=${selectedTest}` : nextTask.link} className={styles.secondaryActionBtn}>
+                Học tiếp: {nextTask.link === '/part5' ? 'Part 6 (Điền đoạn văn)' : nextTask.title} <ArrowRightIcon size={16} />
+              </Link>
             )}
+            <Link href="/" className={styles.ghostActionBtn}>
+              <HomeIcon size={16} /> Về Dashboard
+            </Link>
           </div>
         </div>
 
+        {/* Upgraded Wrong Answers Review Section */}
         {wrongAnswers.length > 0 && (
           <div className={styles.wrongAnswersSection}>
-            <h3>Review các câu sai ({wrongAnswers.length})</h3>
-            <div className={styles.wrongAnswersList}>
-              {wrongAnswers.map(q => (
-                <div key={q.id} className={`${styles.wrongCard} card-minimal`}>
-                  <div className={styles.wrongHeader}>
-                    <span className={styles.categoryBadge}>{q.subCategory || q.type || 'Grammar'}</span>
-                    {q.grammarTag && <span className={styles.sourceBadge}>{q.grammarTag}</span>}
-                  </div>
-                  <p className={styles.sentence}>
-                    {q.text.split('___')[0]}
-                    <span className={styles.blankFill}>{q.options[q.correctAnswer]}</span>
-                    {q.text.split('___')[1] || ''}
-                  </p>
-                  <div className={styles.explanationBox}>
-                    <strong>Giải thích:</strong> 
-                    <div dangerouslySetInnerHTML={{ __html: q.explanation }} />
-                  </div>
+            <div className={styles.wrongAnswersHeader}>
+              <div className={styles.wrongAnswersTitleRow}>
+                <h2 className={styles.wrongAnswersTitle}>
+                  Phân tích chi tiết {wrongAnswers.length} câu cần khắc phục
+                </h2>
+                <span className={styles.wrongCountPill}>
+                  {wrongAnswers.length} / {questions.length} câu
+                </span>
+              </div>
+              <p className={styles.wrongAnswersSubtitle}>
+                Đối chiếu phương án bạn đã chọn với đáp án chuẩn ETS, bóc tách cấu trúc ngữ pháp và nhận diện bẫy đề thi.
+              </p>
+            </div>
 
-                  <button className={styles.aiTutorBtn} onClick={() => setTutorContext({
-                      partTitle: 'Part 5: Incomplete Sentences',
-                      number: q.number,
-                      text: q.text,
-                      options: q.options,
-                      correctAnswer: q.correctAnswer,
-                      explanation: q.explanation,
-                      subCategory: q.subCategory || q.type,
-                      grammarTag: q.grammarTag,
-                    })}>
-                    <SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI bóc tách bẫy
-                  </button>
-                </div>
-              ))}
+            <div className={styles.wrongAnswersList}>
+              {wrongAnswers.map(({ question: q, userAnswer }) => {
+                const parts = q.text.split(/_{3,}/);
+                const beforeBlank = parts[0] || '';
+                const afterBlank = parts[1] || '';
+
+                return (
+                  <div key={q.id} className={styles.wrongCard}>
+                    {/* Top Metadata */}
+                    <div className={styles.wrongCardTopRow}>
+                      <div className={styles.wrongMetaTags}>
+                        <span className={styles.qNumTag}>Câu #{q.number}</span>
+                        <span className={styles.subCategoryTag}>{q.subCategory || q.type || 'Grammar'}</span>
+                        {q.grammarTag && <span className={styles.grammarTagBadge}>{q.grammarTag}</span>}
+                      </div>
+                      <div className={styles.choiceComparisonPill}>
+                        <span className={styles.userChoiceLabel}>
+                          Bạn chọn: <strong>({userAnswer || 'Chưa chọn'})</strong>
+                        </span>
+                        <span className={styles.dividerDot}>•</span>
+                        <span className={styles.correctChoiceLabel}>
+                          Đáp án đúng: <strong>({q.correctAnswer})</strong>
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Question Sentence Box */}
+                    <div className={styles.questionSentenceBox}>
+                      {beforeBlank}
+                      <span className={styles.highlightedBlank}>
+                        {q.options[q.correctAnswer]}
+                      </span>
+                      {afterBlank}
+                    </div>
+
+                    {/* 4 Options Grid with clear status */}
+                    <div className={styles.reviewOptionsGrid}>
+                      {(['A', 'B', 'C', 'D'] as const).map((letter) => {
+                        const isCorrect = letter === q.correctAnswer;
+                        const isUserChoice = letter === userAnswer;
+                        let optCardClass = styles.reviewOptNeutral;
+                        if (isCorrect) optCardClass = styles.reviewOptCorrect;
+                        else if (isUserChoice) optCardClass = styles.reviewOptIncorrect;
+
+                        return (
+                          <div key={letter} className={`${styles.reviewOptCard} ${optCardClass}`}>
+                            <div className={styles.reviewOptLetter}>{letter}</div>
+                            <div className={styles.reviewOptContent}>
+                              <span className={styles.reviewOptText}>{q.options[letter]}</span>
+                              {isCorrect && (
+                                <span className={styles.reviewOptBadgeSuccess}>
+                                  <CheckCircleIcon size={12} /> Đáp án đúng
+                                </span>
+                              )}
+                              {isUserChoice && !isCorrect && (
+                                <span className={styles.reviewOptBadgeError}>
+                                  <CloseIcon size={12} /> Bạn đã chọn
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Structured Pedagogical Explanation */}
+                    <div className={styles.structuredExplanation}>
+                      <div className={styles.explanationHeader}>
+                        <LightbulbIcon size={16} />
+                        <span>Lời giải chi tiết & Phân tích ngữ pháp</span>
+                      </div>
+                      <div
+                        className={styles.explanationBody}
+                        dangerouslySetInnerHTML={{ __html: q.explanation }}
+                      />
+                    </div>
+
+                    {/* Bottom Action */}
+                    <div className={styles.wrongCardFooter}>
+                      <button
+                        type="button"
+                        className={styles.askAiButton}
+                        onClick={() => setTutorContext({
+                          partTitle: 'Part 5: Incomplete Sentences',
+                          number: q.number,
+                          text: q.text,
+                          options: q.options,
+                          correctAnswer: q.correctAnswer,
+                          userAnswer: userAnswer,
+                          explanation: q.explanation,
+                          subCategory: q.subCategory || q.type,
+                          grammarTag: q.grammarTag,
+                        })}
+                      >
+                        <SparklesIcon size={16} />
+                        Hỏi Gia Sư AI bóc tách bẫy câu này
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
@@ -525,131 +683,113 @@ function Part5SpeedTrainer() {
         </div>
       </div>
 
-      {selectedSubSkill !== 'all' ? (
-        <div className={styles.activeSkillBanner}>
-          <div>
-            <span>Đang luyện chuyên sâu: <strong>{activeSubMeta?.label || selectedSubSkill}</strong></span>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginLeft: '8px' }}>
-              ({questions.length} câu từ ngân hàng ETS)
-            </span>
+      {/* Streamlined Controls Row: Mode Toggle + Cheatsheet Trigger + Sub-skill context */}
+      <div className={styles.modeControlRow}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          <div className={styles.modeToggleGroup}>
+            <button
+              type="button"
+              className={`${styles.modeBtn} ${practiceMode === 'study' ? styles.modeBtnActive : ''}`}
+              onClick={() => handleToggleMode('study')}
+            >
+              <BookOpenIcon size={14} />
+              <span>Học kỹ</span>
+            </button>
+            <button
+              type="button"
+              className={`${styles.modeBtn} ${practiceMode === 'speed' ? styles.modeBtnActive : ''}`}
+              onClick={() => handleToggleMode('speed')}
+            >
+              <ClockIcon size={14} />
+              <span>Tốc độ (20s)</span>
+            </button>
           </div>
+
+          {selectedSubSkill !== 'all' ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+                ({questions.length} câu ETS)
+              </span>
+              <button 
+                type="button" 
+                onClick={() => handleSelectSubSkill('all')}
+                className={styles.clearSkillBtn}
+              >
+                Quay lại cả đề
+              </button>
+            </div>
+          ) : (
+            <div className={styles.testSelectorRow}>
+              <span>Đề:</span>
+              <button
+                type="button"
+                className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test1' ? styles.testOptionActive : ''}`}
+                onClick={() => handleSelectTest('ets2022_test1')}
+              >
+                Test 1
+              </button>
+              <button
+                type="button"
+                className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test2' ? styles.testOptionActive : ''}`}
+                onClick={() => handleSelectTest('ets2022_test2')}
+              >
+                Test 2
+              </button>
+            </div>
+          )}
+        </div>
+
+        {currentCheatsheet && (
           <button 
             type="button" 
-            onClick={() => handleSelectSubSkill('all')}
-            className={styles.clearSkillBtn}
-          >
-            Quay lại cả đề
-          </button>
-        </div>
-      ) : (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
-          <div className={styles.testSelectorRow}>
-            <span>Đề thi:</span>
-            <button
-              type="button"
-              className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test1' ? styles.testOptionActive : ''}`}
-              onClick={() => handleSelectTest('ets2022_test1')}
-            >
-              ETS 2022 Test 1
-            </button>
-            <button
-              type="button"
-              className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test2' ? styles.testOptionActive : ''}`}
-              onClick={() => handleSelectTest('ets2022_test2')}
-            >
-              ETS 2022 Test 2
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Mode Control Selector */}
-      <div className={styles.modeControlRow}>
-        <div className={styles.modeToggleGroup}>
-          <button
-            type="button"
-            className={`${styles.modeBtn} ${practiceMode === 'study' ? styles.modeBtnActive : ''}`}
-            onClick={() => handleToggleMode('study')}
-          >
-            <BookOpenIcon size={14} />
-            <span>Học kỹ (Không áp lực giờ)</span>
-          </button>
-          <button
-            type="button"
-            className={`${styles.modeBtn} ${practiceMode === 'speed' ? styles.modeBtnActive : ''}`}
-            onClick={() => handleToggleMode('speed')}
-          >
-            <ClockIcon size={14} />
-            <span>Tốc độ (20s)</span>
-          </button>
-        </div>
-        <span className={styles.modeNotice}>
-          {practiceMode === 'study' ? 'Thư thái đọc câu, tra từ, xem manh mối và trực quan cú pháp' : 'Áp lực 20 giây/câu rèn phản xạ tốc độ chuẩn thi ETS'}
-        </span>
-      </div>
-
-      {/* Interactive Grammar Cheatsheet Card */}
-      {currentCheatsheet && (
-        <div className={styles.cheatsheetCard}>
-          <div 
-            className={styles.cheatsheetHeader}
+            className={styles.cheatsheetToggleBtn}
             onClick={() => setShowCheatsheet(prev => !prev)}
           >
-            <div className={styles.cheatsheetTitleArea}>
-              <BookOpenIcon size={18} style={{ color: 'var(--primary)' }} />
-              <span className={styles.cheatsheetTitle}>{currentCheatsheet.title}</span>
-              <span className={styles.cheatsheetBadge}>Lý thuyết nền tảng</span>
+            <BookOpenIcon size={14} style={{ color: 'var(--primary)' }} />
+            <span>{showCheatsheet ? 'Thu gọn lý thuyết' : `Lý thuyết: ${currentCheatsheet.title}`}</span>
+          </button>
+        )}
+      </div>
+
+      {/* Expandable Grammar Cheatsheet Modal/Drawer Dropdown */}
+      {currentCheatsheet && showCheatsheet && (
+        <div className={styles.cheatsheetCard}>
+          <div className={styles.cheatsheetBody}>
+            <p className={styles.cheatsheetTagline}>{currentCheatsheet.tagline}</p>
+            
+            <div className={styles.formulaBox}>
+              <strong>Công thức cốt lõi: </strong> {currentCheatsheet.ruleFormula}
             </div>
-            <button 
-              type="button" 
-              className={styles.cheatsheetToggleBtn}
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowCheatsheet(prev => !prev);
-              }}
-            >
-              <span>{showCheatsheet ? 'Thu gọn lý thuyết' : 'Xem tóm tắt lý thuyết'}</span>
-            </button>
-          </div>
 
-          {showCheatsheet && (
-            <div className={styles.cheatsheetBody}>
-              <p className={styles.cheatsheetTagline}>{currentCheatsheet.tagline}</p>
-              
-              <div className={styles.formulaBox}>
-                <strong>Công thức cốt lõi: </strong> {currentCheatsheet.ruleFormula}
-              </div>
-
-              {currentCheatsheet.suffixes && currentCheatsheet.suffixes.length > 0 && (
-                <div className={styles.suffixesGrid}>
-                  {currentCheatsheet.suffixes.map(s => (
-                    <div key={s.category} className={styles.suffixCard}>
-                      <div className={styles.suffixCategory}>{s.category}</div>
-                      <div className={styles.suffixEndings}>{s.endings}</div>
-                      <div className={styles.suffixExamples}>Ví dụ: {s.examples}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <div className={styles.rulesList}>
-                {currentCheatsheet.keyRules.map((rule, idx) => (
-                  <div key={idx} className={styles.ruleItem}>
-                    <div className={styles.ruleItemTitle}>{rule.title}</div>
-                    <div className={styles.ruleItemFormula}>{rule.formula}</div>
-                    <div className={styles.ruleItemExplanation}>{rule.explanation}</div>
+            {currentCheatsheet.suffixes && currentCheatsheet.suffixes.length > 0 && (
+              <div className={styles.suffixesGrid}>
+                {currentCheatsheet.suffixes.map(s => (
+                  <div key={s.category} className={styles.suffixCard}>
+                    <div className={styles.suffixCategory}>{s.category}</div>
+                    <div className={styles.suffixEndings}>{s.endings}</div>
+                    <div className={styles.suffixExamples}>Ví dụ: {s.examples}</div>
                   </div>
                 ))}
               </div>
+            )}
 
-              <div className={styles.stepsBox}>
-                <div className={styles.stepsTitle}>Quy trình 3 bước giải nhanh:</div>
-                {currentCheatsheet.solvingSteps.map((step, idx) => (
-                  <div key={idx} className={styles.stepItem}>{step}</div>
-                ))}
-              </div>
+            <div className={styles.rulesList}>
+              {currentCheatsheet.keyRules.map((rule, idx) => (
+                <div key={idx} className={styles.ruleItem}>
+                  <div className={styles.ruleItemTitle}>{rule.title}</div>
+                  <div className={styles.ruleItemFormula}>{rule.formula}</div>
+                  <div className={styles.ruleItemExplanation}>{rule.explanation}</div>
+                </div>
+              ))}
             </div>
-          )}
+
+            <div className={styles.stepsBox}>
+              <div className={styles.stepsTitle}>Quy trình 3 bước giải nhanh:</div>
+              {currentCheatsheet.solvingSteps.map((step, idx) => (
+                <div key={idx} className={styles.stepItem}>{step}</div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 
@@ -684,114 +824,130 @@ function Part5SpeedTrainer() {
       </header>
 
       <main className={styles.main}>
-        <div className={`${styles.questionCard} card-minimal`}>
-          <div className={styles.cardHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              <span className={styles.categoryBadge}>{currentQ.subCategory || currentQ.type || 'Grammar'}</span>
-              {currentQ.grammarTag && (
-                <span className={styles.sourceBadge}>{currentQ.grammarTag}</span>
-              )}
-            </div>
-          </div>
-          <p className={styles.sentence}>
-            {currentQ.text.split(/_{3,}/)[0]}
-            <span className={styles.blankFill}>
-              {showAnswer ? currentQ.options[currentQ.correctAnswer as keyof typeof currentQ.options] : '___'}
-            </span>
-            {currentQ.text.split(/_{3,}/)[1] || ''}
-          </p>
-
-          {/* Clue Hint Button & Box */}
-          {!showAnswer && (
-            <div className={styles.clueHintRow}>
-              <button
-                type="button"
-                className={`${styles.clueHintToggleBtn} ${showClueHint ? styles.clueHintToggleBtnActive : ''}`}
-                onClick={() => setShowClueHint(prev => !prev)}
-              >
-                <HelpCircleIcon size={14} />
-                <span>{showClueHint ? 'Ẩn manh mối' : 'Gợi ý manh mối tư duy'}</span>
-              </button>
-            </div>
-          )}
-
-          {showClueHint && !showAnswer && (
-            <div className={styles.clueHintBox}>
-              <div className={styles.clueHintTitle}>
-                <LightbulbIcon size={15} />
-                <span>Manh Mối Tư Duy (Clue Hint)</span>
+        <div className={`${styles.workspace} ${showAnswer ? styles.workspaceSplit : ''}`}>
+          {/* Left Column: Question & Options */}
+          <div className={`${styles.questionCard} card-minimal`}>
+            <div className={styles.cardHeader} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                <span className={styles.categoryBadge}>{currentQ.subCategory || currentQ.type || 'Grammar'}</span>
+                {currentQ.grammarTag && (
+                  <span className={styles.sourceBadge}>{currentQ.grammarTag}</span>
+                )}
               </div>
-              <p>
-                {currentQ.clueHint || `Quan sát từ đứng trước và sau chỗ trống: Câu này thuộc chuyên đề ${currentQ.subCategory || 'Ngữ pháp'}. Hãy xác định vai trò của chỗ trống trong câu (cần Danh từ, Tính từ, Trạng từ hay Động từ chia thì) để loại trừ phương án sai.`}
-              </p>
+              {showAnswer && (
+                <span className={selectedAnswer === currentQ.correctAnswer ? styles.answeredBadgeCorrect : styles.answeredBadgeWrong}>
+                  {selectedAnswer === currentQ.correctAnswer ? 'Chính xác' : `Đáp án: (${currentQ.correctAnswer})`}
+                </span>
+              )}
             </div>
-          )}
+            <p className={styles.sentence}>
+              {currentQ.text.split(/_{3,}/)[0]}
+              <span className={styles.blankFill}>
+                {showAnswer ? currentQ.options[currentQ.correctAnswer as keyof typeof currentQ.options] : '___'}
+              </span>
+              {currentQ.text.split(/_{3,}/)[1] || ''}
+            </p>
 
-          <div className={styles.optionsGrid}>
-            {(Object.entries(currentQ.options) as [string, string][]).map(([key, value]) => (
-              <button
-                key={key}
-                className={getButtonClass(key)}
-                onClick={() => handleAnswer(key)}
-                disabled={showAnswer}
-              >
-                <span className={styles.optionLetter}>{key}</span>
-                <span className={styles.optionText}>{value}</span>
-              </button>
-            ))}
+            {/* Clue Hint Button & Box */}
+            {!showAnswer && (
+              <div className={styles.clueHintRow}>
+                <button
+                  type="button"
+                  className={`${styles.clueHintToggleBtn} ${showClueHint ? styles.clueHintToggleBtnActive : ''}`}
+                  onClick={() => setShowClueHint(prev => !prev)}
+                >
+                  <HelpCircleIcon size={14} />
+                  <span>{showClueHint ? 'Ẩn manh mối' : 'Gợi ý manh mối tư duy'}</span>
+                </button>
+              </div>
+            )}
+
+            {showClueHint && !showAnswer && (
+              <div className={styles.clueHintBox}>
+                <div className={styles.clueHintTitle}>
+                  <LightbulbIcon size={15} />
+                  <span>Manh Mối Tư Duy (Clue Hint)</span>
+                </div>
+                <p>
+                  {currentQ.clueHint || `Quan sát từ đứng trước và sau chỗ trống: Câu này thuộc chuyên đề ${currentQ.subCategory || 'Ngữ pháp'}. Hãy xác định vai trò của chỗ trống trong câu (cần Danh từ, Tính từ, Trạng từ hay Động từ chia thì) để loại trừ phương án sai.`}
+                </p>
+              </div>
+            )}
+
+            <div className={styles.optionsGrid}>
+              {(Object.entries(currentQ.options) as [string, string][]).map(([key, value]) => (
+                <button
+                  key={key}
+                  className={getButtonClass(key)}
+                  onClick={() => handleAnswer(key)}
+                  disabled={showAnswer}
+                >
+                  <span className={styles.optionLetter}>{key}</span>
+                  <span className={styles.optionText}>{value}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
+          {/* Right Column: Dedicated Explanation Board (Side-by-side on desktop, auto-scroll on mobile) */}
           {showAnswer && currentQ.explanation && (
-            <div className={styles.explanationContainer}>
-              <button 
-                type="button" 
-                className={styles.explanationToggleBtn}
-                onClick={() => setShowExplanation(prev => !prev)}
-              >
-                <LightbulbIcon size={16} />
-                <span>{showExplanation ? 'Thu gọn lời giải' : 'Xem giải thích ngữ pháp chi tiết'}</span>
-              </button>
-              {showExplanation && (
-                <>
-                  {/* Syntax Visualizer */}
-                  {currentQ.syntaxBreakdown && (
-                    <div className={styles.syntaxVisualizerBox}>
-                      <div className={styles.syntaxVisualizerTitle}>Trực quan hóa cấu trúc câu (Syntax Visualizer)</div>
-                      <div className={styles.syntaxTokensGrid}>
-                        {currentQ.syntaxBreakdown.subject && (
-                          <div className={`${styles.syntaxToken} ${styles.syntaxTokenSubject}`}>
-                            <span className={styles.syntaxTokenLabel}>Chủ ngữ (Subject)</span>
-                            <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.subject}</span>
-                          </div>
-                        )}
-                        {currentQ.syntaxBreakdown.verb && (
-                          <div className={`${styles.syntaxToken} ${styles.syntaxTokenVerb}`}>
-                            <span className={styles.syntaxTokenLabel}>Động từ chính (Verb)</span>
-                            <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.verb}</span>
-                          </div>
-                        )}
-                        {currentQ.syntaxBreakdown.objectOrComplement && (
-                          <div className={`${styles.syntaxToken} ${styles.syntaxTokenObject}`}>
-                            <span className={styles.syntaxTokenLabel}>Tân ngữ / Bổ ngữ (Object/Prep)</span>
-                            <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.objectOrComplement}</span>
-                          </div>
-                        )}
-                        {currentQ.syntaxBreakdown.blankRole && (
-                          <div className={`${styles.syntaxToken} ${styles.syntaxTokenBlank}`}>
-                            <span className={styles.syntaxTokenLabel}>Vai trò chỗ trống</span>
-                            <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.blankRole}</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
+            <div ref={explanationRef} className={`${styles.explanationBoard} card-minimal animate-slide-up`}>
+              <div className={styles.explanationBoardHeader}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <LightbulbIcon size={18} style={{ color: 'var(--primary)' }} />
+                  <span className={styles.explanationBoardTitle}>Lời giải chi tiết & Bóc tách bẫy</span>
+                </div>
+                <span className={styles.pedagogyBadge}>Chuẩn Sư Phạm ETS</span>
+              </div>
 
-                  <div 
-                    className={styles.explanationBoxContent}
-                    dangerouslySetInnerHTML={{ __html: currentQ.explanation }}
-                  />
-                </>
-              )}
+              <div className={styles.explanationBoardScroll}>
+                {/* Syntax Visualizer */}
+                {currentQ.syntaxBreakdown && (
+                  <div className={styles.syntaxVisualizerBox}>
+                    <div className={styles.syntaxVisualizerTitle}>Trực quan hóa cấu trúc câu (Syntax Visualizer)</div>
+                    <div className={styles.syntaxTokensGrid}>
+                      {currentQ.syntaxBreakdown.subject && (
+                        <div className={`${styles.syntaxToken} ${styles.syntaxTokenSubject}`}>
+                          <span className={styles.syntaxTokenLabel}>Chủ ngữ (Subject)</span>
+                          <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.subject}</span>
+                        </div>
+                      )}
+                      {currentQ.syntaxBreakdown.verb && (
+                        <div className={`${styles.syntaxToken} ${styles.syntaxTokenVerb}`}>
+                          <span className={styles.syntaxTokenLabel}>Động từ chính (Verb)</span>
+                          <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.verb}</span>
+                        </div>
+                      )}
+                      {currentQ.syntaxBreakdown.objectOrComplement && (
+                        <div className={`${styles.syntaxToken} ${styles.syntaxTokenObject}`}>
+                          <span className={styles.syntaxTokenLabel}>Tân ngữ / Bổ ngữ (Object/Prep)</span>
+                          <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.objectOrComplement}</span>
+                        </div>
+                      )}
+                      {currentQ.syntaxBreakdown.blankRole && (
+                        <div className={`${styles.syntaxToken} ${styles.syntaxTokenBlank}`}>
+                          <span className={styles.syntaxTokenLabel}>Vai trò chỗ trống</span>
+                          <span className={styles.syntaxTokenContent}>{currentQ.syntaxBreakdown.blankRole}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                <div 
+                  className={styles.explanationBoxContent}
+                  dangerouslySetInnerHTML={{ __html: currentQ.explanation }}
+                />
+
+                <button
+                  type="button"
+                  className={styles.aiTutorInlineBtn}
+                  onClick={() => openAITutor(currentQ)}
+                >
+                  <SparklesIcon size={16} />
+                  <span>Hỏi Gia Sư AI bóc tách bẫy sâu hơn (Phím H)</span>
+                </button>
+              </div>
             </div>
           )}
         </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Part2Question, Part2DataSchema } from '@/schema/toeic';
@@ -10,7 +10,7 @@ import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
-import { HeadphonesIcon, AlertCircleIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon, ExamIcon, FileTextIcon } from '@/components/icons/AppIcons';
+import { HeadphonesIcon, AlertCircleIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon, ExamIcon, FileTextIcon, LightbulbIcon } from '@/components/icons/AppIcons';
 import PracticeFooter from '@/components/PracticeFooter';
 import InteractiveTranscript from '@/components/InteractiveTranscript';
 import DictationTrainer from '@/components/DictationTrainer';
@@ -42,9 +42,18 @@ function Part2Trainer() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
   const [practiceMode, setPracticeMode] = useState<'standard' | 'dictation' | 'transcript'>('standard');
+  const explanationRef = useRef<HTMLDivElement>(null);
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentIndex > 0 && !isFinished);
+
+  useEffect(() => {
+    if (isAnswered && explanationRef.current) {
+      if (typeof window !== 'undefined' && window.innerWidth < 992) {
+        explanationRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  }, [isAnswered]);
 
   useEffect(() => {
     const fetchPart2 = async () => {
@@ -218,62 +227,51 @@ function Part2Trainer() {
         </div>
       </header>
 
-      <div className={styles.card}>
-        <div className={styles.modeTabsContainer}>
-          <button
-            type="button"
-            className={`${styles.modeTabBtn} ${practiceMode === 'standard' ? styles.activeModeTab : ''}`}
-            onClick={() => setPracticeMode('standard')}
-          >
-            <ExamIcon size={16} /> Làm bài ETS
-          </button>
-          <button
-            type="button"
-            className={`${styles.modeTabBtn} ${practiceMode === 'dictation' ? styles.activeModeTab : ''}`}
-            onClick={() => setPracticeMode('dictation')}
-          >
-            <HeadphonesIcon size={16} /> Chép chính tả (Dictation)
-          </button>
-          <button
-            type="button"
-            className={`${styles.modeTabBtn} ${practiceMode === 'transcript' ? styles.activeModeTab : ''}`}
-            onClick={() => setPracticeMode('transcript')}
-          >
-            <FileTextIcon size={16} /> Lời thoại tương tác
-          </button>
-        </div>
+      <div className={styles.workspaceSplit}>
+        {/* Left Column: Audio & Options */}
+        <div className={styles.questionColumn}>
+          <div className={styles.card}>
+            <div className={styles.modeTabsContainer}>
+              <button
+                type="button"
+                className={`${styles.modeTabBtn} ${practiceMode === 'standard' ? styles.activeModeTab : ''}`}
+                onClick={() => setPracticeMode('standard')}
+              >
+                <ExamIcon size={16} /> Làm bài ETS
+              </button>
+              <button
+                type="button"
+                className={`${styles.modeTabBtn} ${practiceMode === 'dictation' ? styles.activeModeTab : ''}`}
+                onClick={() => setPracticeMode('dictation')}
+              >
+                <HeadphonesIcon size={16} /> Chép chính tả (Dictation)
+              </button>
+              <button
+                type="button"
+                className={`${styles.modeTabBtn} ${practiceMode === 'transcript' ? styles.activeModeTab : ''}`}
+                onClick={() => setPracticeMode('transcript')}
+              >
+                <FileTextIcon size={16} /> Lời thoại tương tác
+              </button>
+            </div>
 
-        <div className={styles.promptSection}>
-          <div>
-            <div className={styles.promptTitle}><HeadphonesIcon size={18} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />Lắng nghe câu hỏi và 3 câu trả lời</div>
-            <div className={styles.promptHint}>Chọn câu đáp lại hợp lý nhất trong ngữ cảnh giao tiếp công việc</div>
-          </div>
-        </div>
+            <div className={styles.promptSection}>
+              <div>
+                <div className={styles.promptTitle}>
+                  <HeadphonesIcon size={18} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
+                  Lắng nghe câu hỏi và 3 câu trả lời
+                </div>
+                <div className={styles.promptHint}>Chọn câu đáp lại hợp lý nhất trong ngữ cảnh giao tiếp công việc</div>
+              </div>
+            </div>
 
-        <ListeningAudioPlayer
-          src={currentQ.audioUrl}
-          title={`Audio Câu ${currentQ.number}`}
-          autoPlay={true}
-          transcript={isAnswered ? currentQ.transcript : undefined}
-        />
+            <ListeningAudioPlayer
+              src={currentQ.audioUrl}
+              title={`Audio Câu ${currentQ.number}`}
+              autoPlay={true}
+              transcript={isAnswered ? currentQ.transcript : undefined}
+            />
 
-        {practiceMode === 'dictation' ? (
-          <DictationTrainer
-            lines={parseTranscript(currentQ.transcript || '', 'part2', currentQ.correctAnswer)}
-            audioUrl={currentQ.audioUrl}
-            title={`Chép chính tả Câu ${currentQ.number}`}
-            onBackToStandard={() => setPracticeMode('standard')}
-          />
-        ) : practiceMode === 'transcript' ? (
-          <InteractiveTranscript
-            transcriptHtml={currentQ.transcript}
-            part="part2"
-            correctAnswer={currentQ.correctAnswer}
-            title={`Lời thoại tương tác Câu ${currentQ.number}`}
-            onStartDictation={() => setPracticeMode('dictation')}
-          />
-        ) : (
-          <>
             <div className={styles.optionsGrid}>
               {['A', 'B', 'C'].map((letter) => {
                 let stateClass = '';
@@ -298,21 +296,65 @@ function Part2Trainer() {
                 );
               })}
             </div>
+          </div>
+        </div>
 
-            {isAnswered && currentQ.transcript && (
-              <div style={{ marginTop: '1rem' }}>
-                <InteractiveTranscript
-                  transcriptHtml={currentQ.transcript}
-                  explanationHtml={currentQ.explanation}
-                  part="part2"
-                  correctAnswer={currentQ.correctAnswer}
-                  title={`Lời thoại & Giải thích Câu ${currentQ.number}`}
-                  onStartDictation={() => setPracticeMode('dictation')}
-                />
+        {/* Right Column: Explanations & Learning tools */}
+        <div className={styles.explanationColumn}>
+          {practiceMode === 'dictation' ? (
+            <div className={styles.card}>
+              <DictationTrainer
+                lines={parseTranscript(currentQ.transcript || '', 'part2', currentQ.correctAnswer)}
+                audioUrl={currentQ.audioUrl}
+                title={`Chép chính tả Câu ${currentQ.number}`}
+                onBackToStandard={() => setPracticeMode('standard')}
+              />
+            </div>
+          ) : practiceMode === 'transcript' ? (
+            <div className={styles.card}>
+              <InteractiveTranscript
+                transcriptHtml={currentQ.transcript}
+                part="part2"
+                correctAnswer={currentQ.correctAnswer}
+                title={`Lời thoại tương tác Câu ${currentQ.number}`}
+                onStartDictation={() => setPracticeMode('dictation')}
+              />
+            </div>
+          ) : isAnswered && currentQ.transcript ? (
+            <div ref={explanationRef} className={styles.card}>
+              <InteractiveTranscript
+                transcriptHtml={currentQ.transcript}
+                explanationHtml={currentQ.explanation}
+                part="part2"
+                correctAnswer={currentQ.correctAnswer}
+                title={`Lời thoại & Giải thích Câu ${currentQ.number}`}
+                onStartDictation={() => setPracticeMode('dictation')}
+              />
+            </div>
+          ) : (
+            <div className={styles.guidanceCard}>
+              <div style={{
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                backgroundColor: 'var(--primary-light, rgba(59, 130, 246, 0.12))',
+                color: 'var(--primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                <LightbulbIcon size={24} />
               </div>
-            )}
-          </>
-        )}
+              <div className={styles.guidanceTitle}>Chiến thuật nghe Part 2</div>
+              <div className={styles.guidanceText}>
+                Tập trung vào 3 từ đầu tiên (từ để hỏi Who/When/Where hoặc trợ động từ Do/Did/Have). Tránh bẫy lặp lại từ (same-sound trap) và lưu ý các câu trả lời gián tiếp.
+              </div>
+              <div className={styles.guidanceTip}>
+                Phím tắt: Bấm phím A, B, C để chọn đáp án và Enter để tiếp tục
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <PracticeFooter

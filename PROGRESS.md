@@ -542,11 +542,46 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### ✅ Vấn đề 27: Ngân Hàng Đề Thi ETS 2022 Test 3 Toàn Diện 200 Câu (Audio Cục Bộ Đa Giọng Đọc & Chuẩn Lời Giải Sư Phạm 3 Phần Tiếng Việt)
+* **Chi tiết triển khai**:
+  1. **Dữ liệu Đề thi ETS 2022 Test 3 (200 câu hỏi)**:
+     - Đầy đủ Part 1 đến Part 7, bóc tách cấu trúc câu, clueHint, syntaxBreakdown và lời giải 3 phần chi tiết.
+  2. **Pipeline Âm Thanh Cục Bộ Đa Giọng Đọc (54 tệp MP3 - 11.81 MB)**:
+     - 54 file âm thanh chuẩn ETS lưu tại `public/audio/ets2022/test3/` với 4 giọng đọc native (Mỹ, Anh, Úc).
+  3. **Kiểm định**:
+     - 100% PASS kiểm tra Zod Schema, E2E Playwright, và quét 0 UI emojis.
+
+### ✅ Vấn đề 28: Tối Ưu Hóa Giao Diện Sư Phạm Không Cuộn Màn Hình (Zero-Scroll Workspace) & Tái Thiết Kế Chuẩn SaaS Cho Màn Hình Tổng Kết Part 5
+* **Bối cảnh & Vấn đề**:
+  - Người dùng phản ánh trải nghiệm học tập bị đứt gãy do phần giải thích câu hỏi bị đẩy xuống tít phía dưới ("ở dưới tít làm người dùng phải kéo xuống màn hình để xem rất khó chịu"), đặc biệt khi luyện nghe Part 1, 2, 3, 4 và Part 5.
+  - Màn hình tổng kết và phân tích câu sai của Part 5 (`/part5?subCategory=...`) trước đây bị phản ánh "UI/UX quá xấu", thẻ kết quả hẹp (560px), biểu đồ tròn thô sơ, danh sách câu sai thiếu cấu trúc đối chiếu trực quan.
+* **Giải pháp & Kiến trúc Đã Triển Khai**:
+  1. **Workspace Chia Đôi Không Cần Cuộn (2-Column Zero-Scroll Layout)**:
+     - **Part 1 Photographs**: Cột trái cố định ảnh (max-height 380px) + ListeningAudioPlayer; Cột phải bố trí lưới 4 phương án A-D + Lời thoại tương tác + Lời giải chi tiết ngay tầm mắt.
+     - **Part 2 Question-Response**: Cột trái đặt ListeningAudioPlayer + Phương án A/B/C; Cột phải hiển thị thẻ mẹo thi trước khi chọn và lời thoại tương tác + phân tích bẫy đề thi ngay tầm mắt sau khi trả lời.
+     - **Part 3 Conversations & Part 4 Short Talks**:
+       - Cột trái: ListeningAudioPlayer + Bối cảnh/Hình ảnh (nếu có) + InteractiveTranscript có thanh cuộn độc lập khi nộp bài.
+       - Cột phải: Bố trí bộ tab chuyển câu thông minh `[Câu #1 (Đúng/Sai)] [Câu #2 (Đúng/Sai)] [Câu #3 (Đúng/Sai)] [Xem tất cả]` kèm lời giải chi tiết ngay bên dưới phương án, loại bỏ hoàn toàn việc phải cuộn trang qua 3 câu hỏi dài.
+     - **Part 5 Active Practice**: Bố trí cột trái gồm câu hỏi và 4 phương án; cột phải là bảng ghim (Sticky Board) hiển thị Bảng tra cứu ngữ pháp, Gợi ý tư duy sư phạm (Clue Hint) và Phân tích cú pháp (Syntax Visualizer) ngay tầm mắt.
+  2. **Tái Thiết Kế Chuẩn SaaS Cho Màn Hình Tổng Kết & Review Part 5**:
+     - Thẻ tổng kết hiệu suất hiện đại: Vòng tròn đo độ chính xác SVG mượt mà (`X/Y (Z%)`), 3 ô thống kê (Số câu đúng, Số câu cần sửa, Chủ điểm), hộp gợi ý sư phạm và thanh công cụ điều hướng cân đối.
+     - Thẻ review câu sai chuyên sâu (Deep-dive Wrong Cards): Hiển thị tag phân loại, thanh đối chiếu `Bạn chọn: (X) • Đáp án đúng: (Y)`, câu hỏi có highlight chỗ trống dạng pill mềm mại (không lỗi gạch dưới thừa), lưới 4 phương án có badge trạng thái trực quan, khung lời giải sư phạm bóc tách 3 phần và nút `Hỏi Gia Sư AI` tích hợp `SparklesIcon`.
+  3. **Kiểm Định Toàn Diện**:
+     - **Type Safety**: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+     - **No UI Emojis**: Kiểm tra tự động bằng regex Unicode emoji trên DOM của cả 5 phần thi -> 100% 0 UI emojis vi phạm.
+     - **Playwright E2E**: Chụp ảnh màn hình trực quan tại viewport 1280x800px (`scratch/p1_answered.png`, `scratch/p2_answered.png`, `scratch/p3_answered.png`, `scratch/p4_answered.png`, `scratch/p5_results_redesigned.png`, `scratch/p5_wrong_card_detail.png`) xác nhận toàn bộ lời giải và phương án hiển thị hoàn hảo trong tầm mắt không cần cuộn chuột.
+
+---
+
 ## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### 🚀 Vấn Đề 27: [Ưu tiên đề xuất] Bổ Sung Ngân Hàng Đề Thi ETS Test 3 Hoàn Chỉnh (LC Đa Giọng Cục Bộ & RC 100 Câu Lời Giải Sư Phạm Tiếng Việt) Hoặc Nâng Cấp AI Tutor Sổ Tay Lỗi Sai
-* **Lựa chọn A (Đề xuất)**: Mở rộng ngân hàng đề thi với **ETS Test 3** (100 câu LC với 54 file audio đa giọng đọc cục bộ + 100 câu RC với lời giải sư phạm tiếng Việt 3 phần chi tiết) để người học có thêm nguồn đề thi thử chất lượng sau khi đã nạp đủ tri thức.
-* **Lựa chọn B**: Xây dựng tính năng **Chẩn Đoán Nguyên Nhân Sâu AI (Deep Root-Cause Diagnosis)** trong Sổ tay lỗi sai, tự động sinh đề thi mini 10 câu khắc phục đúng lỗ hổng vừa mắc.
+### 🚀 Vấn Đề 29: Chế Độ Luyện Tập Sâu Khắc Phục Lỗi Sai Thông Minh (Smart Mistake Remediation Drill & AI Root-Cause Tutor) Trong Sổ Tay Lỗi Sai
+* **Bối cảnh & Vấn đề**:
+  - Người học sau khi làm bài thi thử hoặc luyện tập các đề (Test 1, 2, 3) có một lượng lớn câu sai được lưu vào Sổ tay lỗi sai (`/notebook`).
+  - Hiện tại, Sổ tay lỗi sai chỉ hỗ trợ xem lại danh sách câu hỏi và gắn nhãn nguyên nhân gốc (Root Cause). Người học thiếu một **Chế độ Luyện Tập Tức Thì (Remediation Drill)**:
+    1. Tự động lọc ra các câu sai theo nhóm nguyên nhân gốc (Bẫy từ đồng âm, Quên công thức thì, Bẫy phân từ, Thiếu từ vựng, Nhầm liên từ).
+    2. Cho phép người học làm lại ngay các câu sai này dưới dạng mini-quiz thích ứng (5-10 câu) kèm hướng dẫn tư duy từng bước.
+    3. Tự động tháo nhãn "Câu hỏi cần ôn tập" (mastered status) và cập nhật điểm số tiềm năng trong `KnowledgeEvaluator` khi người học trả lời đúng.
 
 ---
 
