@@ -40,8 +40,10 @@ export default function ProfilePage() {
     return null;
   }
 
-  const daysLeft = examDate 
-    ? Math.max(0, Math.ceil((new Date(examDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24)))
+  const parsedExamDate = examDate ? new Date(examDate) : null;
+  const isDateValid = parsedExamDate !== null && !isNaN(parsedExamDate.getTime());
+  const daysLeft = isDateValid
+    ? Math.max(0, Math.ceil((parsedExamDate.getTime() - new Date().getTime()) / (1000 * 3600 * 24)))
     : null;
 
   return (
@@ -85,7 +87,7 @@ export default function ProfilePage() {
           <div className={styles.infoRow}>
             <span className={styles.infoLabel}>Ngày thi dự kiến</span>
             <span className={styles.infoValue}>
-              {examDate ? new Date(examDate).toLocaleDateString('vi-VN') : 'Chưa xác định'}
+              {isDateValid && parsedExamDate ? parsedExamDate.toLocaleDateString('vi-VN') : 'Chưa xác định'}
               {daysLeft !== null && (
                 <span style={{ fontSize: '0.85rem', color: 'var(--primary)', background: 'rgba(var(--primary-rgb), 0.1)', padding: '2px 8px', borderRadius: 12 }}>
                   Còn {daysLeft} ngày

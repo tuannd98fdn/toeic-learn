@@ -55,3 +55,47 @@
   color: var(--muted-foreground);
   margin-top: 4px;
 }
+
+.freezeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #3b82f6;
+  margin-left: 6px;
+  cursor: default;
+  transition: all 0.2s ease;
+  vertical-align: middle;
+}
+
+.freezeBadge:hover {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.freezeBadge.freezeActive {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: #0ea5e9;
+  color: #0ea5e9;
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.35);
+}
+
+.shieldIcon {
+  flex-shrink: 0;
+}
+
+.freezeText {
+  line-height: 1;
+}
+
+.frozenNotice {
+  font-size: 0.72rem;
+  color: #0ea5e9;
+  font-weight: 600;
+  margin-top: 4px;
+}

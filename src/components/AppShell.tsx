@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Navbar from './Navbar';
 import { useCloudSync } from '@/hooks/useCloudSync';
 import TextSelectionToolbar from './TextSelectionToolbar';
+import CommandPalette from './CommandPalette';
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -28,6 +29,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </main>
       <Navbar />
       <TextSelectionToolbar />
+      <CommandPalette />
     </>
   );
 }

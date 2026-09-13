@@ -10,7 +10,7 @@ import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
-import { MapPinIcon, AlertCircleIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon, ExamIcon, HeadphonesIcon, FileTextIcon } from '@/components/icons/AppIcons';
+import { MapPinIcon, AlertCircleIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon, ExamIcon, HeadphonesIcon, FileTextIcon, LightbulbIcon } from '@/components/icons/AppIcons';
 import PracticeFooter from '@/components/PracticeFooter';
 import InteractiveTranscript from '@/components/InteractiveTranscript';
 import DictationTrainer from '@/components/DictationTrainer';
@@ -338,6 +338,15 @@ function Part3Trainer() {
                         );
                       })}
                     </div>
+
+                    {isSubmitted && q.explanation && (
+                      <div style={{ marginTop: '0.85rem', padding: '12px 16px', borderRadius: 10, backgroundColor: 'var(--surface-hover)', border: '1px solid var(--border)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: 'var(--primary)', marginBottom: 4 }}>
+                          <LightbulbIcon size={14} /> Lời giải chi tiết:
+                        </div>
+                        <div dangerouslySetInnerHTML={{ __html: q.explanation }} />
+                      </div>
+                    )}
                   </div>
                 );
               })}

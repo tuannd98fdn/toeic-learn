@@ -13,6 +13,7 @@ import {
   ArrowRightIcon,
   NotebookIcon,
   UserIcon,
+  SearchIcon,
 } from '@/components/icons/AppIcons';
 import MascotSVG from '@/components/illustrations/MascotSVG';
 import styles from './Navbar.module.css';
@@ -126,6 +127,24 @@ export default function Navbar() {
           <span className={styles.brandSub}>Nền tảng #1 Việt Nam</span>
         </div>
       </div>
+
+      {/* Quick Search Trigger */}
+      <button
+        type="button"
+        className={styles.searchTrigger}
+        onClick={() => {
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('open-command-palette'));
+          }
+        }}
+        title="Tìm kiếm hoặc mở nhanh (⌘K)"
+      >
+        <div className={styles.searchTriggerLeft}>
+          <SearchIcon size={16} />
+          <span className={styles.searchTriggerText}>Tìm nhanh...</span>
+        </div>
+        <kbd className={styles.searchShortcutBadge}>⌘K</kbd>
+      </button>
 
       {/* Desktop Nav */}
       <ul className={styles.navList}>

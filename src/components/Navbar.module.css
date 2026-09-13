@@ -399,3 +399,64 @@
     display: none;
   }
 }
+
+/* Quick Search Trigger for Command Palette */
+.searchTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  margin-bottom: 6px;
+}
+
+.searchTrigger:hover {
+  background: var(--surface-hover);
+  border-color: rgba(var(--primary-rgb), 0.3);
+  color: var(--foreground);
+}
+
+.searchTriggerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchTriggerText {
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.searchShortcutBadge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: inherit;
+}
+
+.collapsed .searchTriggerText,
+.collapsed .searchShortcutBadge {
+  display: none;
+}
+
+.collapsed .searchTrigger {
+  justify-content: center;
+  padding: 8px;
+}
+
+@media (max-width: 859px) {
+  .searchTrigger {
+    display: none;
+  }
+}

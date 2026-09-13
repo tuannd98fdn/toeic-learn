@@ -9,22 +9,39 @@ import styles from './FlashCard.module.css';
 interface FlashCardProps {
   word: VocabularyWord;
   onRate: (rating: 1 | 2 | 3 | 4) => void;
+  autoPlay?: boolean;
 }
 
-export default function FlashCard({ word, onRate }: FlashCardProps) {
+export default function FlashCard({ word, onRate, autoPlay = true }: FlashCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const { speak } = useAudio();
+  const { speak, speaking } = useAudio();
 
-  // Reset flip state when word changes
+  // Reset flip state and trigger auto-play if enabled
   useEffect(() => {
     setIsFlipped(false);
-  }, [word.id]);
+    let timer: NodeJS.Timeout | undefined;
+    if (autoPlay) {
+      timer = setTimeout(() => {
+        speak(word.word);
+      }, 150);
+    }
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [word.id, autoPlay, speak, word.word]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+
+      const keyLower = e.key.toLowerCase();
+
       if (e.code === 'Space') {
         e.preventDefault();
         setIsFlipped(prev => !prev);
+      } else if (keyLower === 'a' || keyLower === 'r') {
+        e.preventDefault();
+        speak(word.word);
       } else if (isFlipped) {
         if (e.key === '1') onRate(1);
         if (e.key === '2') onRate(2);
@@ -35,7 +52,7 @@ export default function FlashCard({ word, onRate }: FlashCardProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFlipped, onRate]);
+  }, [isFlipped, onRate, speak, word.word]);
 
   const handlePlayAudio = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -62,20 +79,39 @@ export default function FlashCard({ word, onRate }: FlashCardProps) {
               <p className={styles.ipa}>{word.ipa}</p>
             </div>
             <button 
-              className={styles.audioButton} 
+              className={`${styles.audioButton} ${speaking ? styles.speaking : ''}`} 
               onClick={handlePlayAudio}
-              aria-label="Play pronunciation"
+              aria-label="Phát âm (Phím A hoặc R)"
+              title="Phát âm (Phím A hoặc R)"
             >
               <VolumeIcon size={22} />
+              <span className={styles.audioKeyBadge}>A</span>
             </button>
-            {!isFlipped && <div className={styles.hint}>Tap hoặc nhấn Space để lật</div>}
+            {!isFlipped && (
+              <div className={styles.hint}>
+                <span>Tap hoặc <strong>Space</strong> để lật</span>
+                <span className={styles.hintDot}>•</span>
+                <span>Phím <strong>A</strong> nghe</span>
+              </div>
+            )}
           </div>
 
           {/* Back side */}
           <div className={`${styles.face} ${styles.back}`}>
             <div className={styles.backGlow} />
-            <div className={styles.meaningContainer}>
+            <div className={styles.backHeader}>
               <span className={styles.partOfSpeech}>{word.partOfSpeech}</span>
+              <button 
+                className={`${styles.backAudioBtn} ${speaking ? styles.speaking : ''}`}
+                onClick={handlePlayAudio}
+                title="Nghe lại phát âm (Phím A)"
+                aria-label="Nghe lại"
+              >
+                <VolumeIcon size={16} />
+                <span className={styles.backAudioBadge}>A</span>
+              </button>
+            </div>
+            <div className={styles.meaningContainer}>
               <h2 className={styles.meaning}>{word.vietnamese}</h2>
             </div>
 
@@ -93,6 +129,12 @@ export default function FlashCard({ word, onRate }: FlashCardProps) {
                 <p>{word.mnemonicTip}</p>
               </div>
             )}
+
+            <div className={styles.backHint}>
+              <span>Phím <strong>A</strong> nghe lại</span>
+              <span className={styles.hintDot}>•</span>
+              <span><strong>Space</strong> lật lại</span>
+            </div>
           </div>
         </div>
       </div>

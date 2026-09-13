@@ -11,7 +11,39 @@ export const storage = {
     
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : defaultValue;
+      if (item === null || item === undefined) {
+        return defaultValue;
+      }
+
+      try {
+        return JSON.parse(item) as T;
+      } catch {
+        // If caller expects an object or array (and defaultValue is not null),
+        // but JSON.parse failed, do not return raw string.
+        if (defaultValue !== null && typeof defaultValue === 'object') {
+          return defaultValue;
+        }
+
+        // If the item clearly intended to be a JSON object/array but is broken
+        const trimmed = typeof item === 'string' ? item.trim() : '';
+        if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+          return defaultValue;
+        }
+
+        // Handle boolean expected values
+        if (typeof defaultValue === 'boolean') {
+          return (item === 'true' || item === '1') as unknown as T;
+        }
+
+        // Handle number expected values
+        if (typeof defaultValue === 'number') {
+          const num = Number(item);
+          return (isNaN(num) ? defaultValue : num) as unknown as T;
+        }
+
+        // Plain raw string (e.g. '2026-10-15', '750+', 'intermediate')
+        return item as unknown as T;
+      }
     } catch (error) {
       console.error(`Error reading localStorage key "${key}":`, error);
       return defaultValue;

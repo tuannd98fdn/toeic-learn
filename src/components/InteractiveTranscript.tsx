@@ -21,6 +21,7 @@ interface InteractiveTranscriptProps {
   correctAnswer?: string;
   title?: string;
   onStartDictation?: () => void;
+  explanationHtml?: string;
 }
 
 export default function InteractiveTranscript({
@@ -29,6 +30,7 @@ export default function InteractiveTranscript({
   correctAnswer,
   title = 'Lời thoại tương tác (Interactive Transcript)',
   onStartDictation,
+  explanationHtml,
 }: InteractiveTranscriptProps) {
   const [activeSpeakingId, setActiveSpeakingId] = useState<string | null>(null);
 
@@ -140,6 +142,18 @@ export default function InteractiveTranscript({
           </div>
         ))}
       </div>
+
+      {explanationHtml && explanationHtml !== transcriptHtml && (
+        <div style={{ marginTop: '1rem', padding: '14px 18px', borderRadius: 12, backgroundColor: 'var(--surface-hover)', border: '1px solid var(--border)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, fontWeight: 700, fontSize: '0.95rem', color: 'var(--primary)' }}>
+            <LightbulbIcon size={16} /> Lời giải chi tiết
+          </div>
+          <div
+            style={{ fontSize: '0.92rem', lineHeight: 1.6, color: 'var(--foreground)' }}
+            dangerouslySetInnerHTML={{ __html: explanationHtml }}
+          />
+        </div>
+      )}
 
       <div className={styles.hintNote}>
         <LightbulbIcon size={14} style={{ color: 'var(--warning, #f59e0b)' }} />

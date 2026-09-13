@@ -17,7 +17,9 @@
           "D": "A research assistant"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người nói tự giới thiệu: <i>'Welcome to Language Today on KXRP Radio. I'm Ted Costello, and I'll be your host this hour.'</i> => Ted Costello là người dẫn chương trình radio (<b>A radio host</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Speaker / Listener",
+        "subCategory": "Speaker / Listener"
       },
       {
         "id": "62b694afbbc57b27fe10f83d",
@@ -30,7 +32,9 @@
           "D": "The study of language"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người dẫn giới thiệu: <i>'...interviewing language specialist Dr. Eric Alfson...'</i> => Tiến sĩ Alfson là chuyên gia chuyên nghiên cứu về ngôn ngữ (<b>The study of language</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f83e",
@@ -43,7 +47,9 @@
           "D": "The results of a study will be announced."
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người dẫn nhắc đến mốc thời gian: <i>'...even before his new book hits stores on August 4.'</i> (trước khi cuốn sách mới lên kệ vào ngày 4/8) => Cuốn sách mới của Tiến sĩ Alfson sẽ được phát hành (<b>Dr. Alfson's new book will be available</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -65,7 +71,9 @@
           "D": "A scheduling error"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người thông báo giải thích: <i>'Tonight's performance of La Traviata will begin at 7:20 P.M. instead of 7:00 P.M. as some of our singers arrived at the theater late because of the icy roads.'</i> => Buổi diễn bị hoãn do một số ca sĩ đến muộn (<b>Some late arrivals</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f840",
@@ -78,7 +86,9 @@
           "D": "Purchase musical recordings"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người nói hướng dẫn: <i>'...please visit the table near the main entrance, where our staff is selling professionally produced copies of the soundtrack from the performance.'</i> => Bán đĩa nhạc/bản ghi âm buổi biểu diễn (<b>Purchase musical recordings</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f841",
@@ -90,7 +100,9 @@
           "D": "Information about becoming a member"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người nói cho biết: <i>'On the back of your programs you will find details of our theater's membership program...'</i> => Mặt sau tờ rơi giới thiệu chi tiết về chương trình hội viên (<b>Information about becoming a member</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -112,7 +124,9 @@
           "D": "A donor"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người nói mở đầu: <i>'...to offer our sincere appreciation to Dr. Darren Heinz, who was the top donor to the Bright Future Research Foundation.'</i> => Tiến sĩ Darren Heinz là nhà hảo tâm/nhà tài trợ hàng đầu (<b>A donor</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Speaker / Listener",
+        "subCategory": "Speaker / Listener"
       },
       {
         "id": "62b694afbbc57b27fe10f843",
@@ -125,7 +139,9 @@
           "D": "To advise new businesses"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người nói giải thích mục đích tiền tài trợ: <i>'...this money will allow the development of new initiatives to better assist disadvantaged children and teenagers.'</i> Cụm từ <i>'disadvantaged children and teenagers'</i> được diễn đạt lại (paraphrase) thành <i>'needy youth'</i> (thanh thiếu niên có hoàn cảnh khó khăn). Chọn <b>(A) To give assistance to needy youth</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f844",
@@ -138,7 +154,9 @@
           "D": "A grand opening will be organized."
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người nói thông báo: <i>'We hope all of you will be able to attend a celebratory dinner to honor Dr. Heinz and our other supporters at the Eagle Club on November 12.'</i> => Một bữa tiệc tối đặc biệt sẽ được tổ chức vào ngày 12/11 (<b>A special dinner will be held</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -160,7 +178,9 @@
           "D": "A sales representative"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người gọi giới thiệu: <i>'This is Deidre Elliot calling with a message for the general manager.'</i> => Người gọi để lại tin nhắn cho tổng quản lý cửa hàng (<b>A store manager</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Speaker / Listener",
+        "subCategory": "Speaker / Listener"
       },
       {
         "id": "62b694afbbc57b27fe10f846",
@@ -173,7 +193,9 @@
           "D": "She wants to praise a staff member."
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Bà Elliot giải thích lý do gọi: <i>'...I wanted to tell you how pleased I was with your delivery person, Ivan Podolski. He arrived as scheduled and set up the dryer quickly.'</i> => Bà muốn khen ngợi sự tận tình của nhân viên giao hàng (<b>She wants to praise a staff member</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Purpose",
+        "subCategory": "Purpose"
       },
       {
         "id": "62b694afbbc57b27fe10f847",
@@ -186,7 +208,9 @@
           "D": "Order some products for her company"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Bà Elliot khẳng định: <i>'I will certainly be recommending you to my friends and will return myself for future purchases.'</i> => Bà sẽ giới thiệu cửa hàng cho bạn bè của mình (<b>Tell her friends about the business</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
@@ -208,7 +232,9 @@
           "D": "How fast a treatment works"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Bài nói cho biết: <i>'...the largest-ever study about the effects of caffeine on sleep.'</i> => Nghiên cứu tập trung vào tác động của một chất cụ thể (caffeine) lên giấc ngủ (<b>How a certain substance affects sleep</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Topic / Main Idea",
+        "subCategory": "Topic / Main Idea"
       },
       {
         "id": "62b694afbbc57b27fe10f849",
@@ -221,7 +247,9 @@
           "D": "For two months"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Bác sĩ Senequa cho biết: <i>'participants will spend seven days at the clinic having their sleep patterns monitored and recorded.'</i> Bảy ngày (<i>'seven days'</i>) tương đương với một tuần (<b>For one week</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f84a",
@@ -234,7 +262,9 @@
           "D": "Take medication regularly"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người nói nêu yêu cầu: <i>'They will be required to consume varying amounts of caffeine over the test period and keep a detailed journal.'</i> Cụm từ <i>'keep a detailed journal'</i> (viết nhật ký chi tiết) đồng nghĩa với ghi chép lại thông tin bằng văn bản (<b>Keep a written record</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -256,7 +286,9 @@
           "D": "Decorating a living room"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người gọi nói: <i>'I'm the one who visited your home earlier this week to discuss the renovation project for your basement.'</i> => Dự án cải tạo tầng hầm (<b>Renovating a basement</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f84c",
@@ -269,7 +301,9 @@
           "D": "There will be a lack of employees."
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người gọi thông báo vấn đề: <i>'...a few of our crew members will be using vacation time in August, so we'll be short-staffed.'</i> Cụm từ <i>'short-staffed'</i> nghĩa là thiếu nhân lực (<b>There will be a lack of employees</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f84d",
@@ -282,7 +316,9 @@
           "D": "Send a worker on the weekend"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người gọi đề nghị: <i>'If you would be able to have the work done at the end of August instead, I could give you a lower price.'</i> Cụm từ <i>'give you a lower price'</i> đồng nghĩa với giảm giá (<b>Give the listener a discount</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Offer",
+        "subCategory": "Offer"
       }
     ]
   },
@@ -304,7 +340,9 @@
           "D": "New staff members"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người nói mở đầu buổi gặp: <i>'It's great to see so much enthusiasm for your first day here at Blane Advertising. We're glad you'll be a part of our team.'</i> (ngày đầu tiên các bạn ở đây, gia nhập đội ngũ) => Đối tượng nghe là các nhân viên mới tuyển dụng (<b>New staff members</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Speaker / Listener",
+        "subCategory": "Speaker / Listener"
       },
       {
         "id": "62b694afbbc57b27fe10f84f",
@@ -317,7 +355,9 @@
           "D": "The group will move to another place."
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người nói nói: <i>'I'm sure you're wondering exactly what your work will involve. Let's get to that. Each month, we create several marketing campaigns...'</i> => Câu <i>'Let's get to that'</i> ngụ ý người nói sẽ bắt đầu giải thích về nhiệm vụ và trách nhiệm công việc (<b>Some responsibilities will be explained</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
       },
       {
         "id": "62b694afbbc57b27fe10f850",
@@ -330,7 +370,9 @@
           "D": "Distribute some instructional materials"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người nói thông báo bước tiếp theo: <i>'I'll show you a brief video that highlights some of our best work, and then we'll discuss it together.'</i> => Trình chiếu video về các quảng cáo xuất sắc trước đây (<b>Show a video of past advertisements</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
@@ -352,7 +394,9 @@
           "D": "To report a change in ownership"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Đoạn quảng cáo nêu rõ: <i>'To celebrate our official opening on Saturday, April 5, we'll be providing free appetizers and half-price cocktails.'</i> => Mục đích quảng bá cho ngày khai trương nhà hàng (<b>To promote a grand opening</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Purpose",
+        "subCategory": "Purpose"
       },
       {
         "id": "62b694afbbc57b27fe10f852",
@@ -365,7 +409,9 @@
           "D": "Next to a department store"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Bài nói giới thiệu vị trí: <i>'Trentini's, located across the street from Lindale Apartments.'</i> Cụm từ <i>'across the street from'</i> đồng nghĩa với <i>'opposite'</i> (đối diện) và <i>'Apartments'</i> là tòa nhà dân cư (<b>Opposite a residential building</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f853",
@@ -378,7 +424,9 @@
           "D": "She is confirming a location."
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người nói quảng cáo: <i>'Have you been searching for your next favorite restaurant? Here's the answer. I guarantee you won't be disappointed.'</i> => Câu <i>'Here's the answer'</i> dùng để giới thiệu và đề xuất nhà hàng Trentini cho thực khách (<b>She is recommending a business</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
       }
     ]
   },
@@ -400,7 +448,9 @@
           "D": "To inquire about a moving date"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người gọi nói: <i>'I'm calling from Ace Movers for Luke Landers. I'd like to confirm the details of your upcoming move.'</i> => Cuộc gọi nhằm xác nhận thông tin chi tiết về việc chuyển nhà (<b>To confirm moving details</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Purpose",
+        "subCategory": "Purpose"
       },
       {
         "id": "62b694afbbc57b27fe10f855",
@@ -413,7 +463,9 @@
           "D": "The payment"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người gọi thông báo: <i>'Since we have to use a smaller truck than planned, we expect it to take about two hours longer than originally scheduled.'</i> (chúng tôi dự kiến sẽ mất thêm 2 tiếng so với lịch trình ban đầu) => Thông tin thời gian hoàn thành dự kiến trên hóa đơn/bản kế hoạch hiện không còn chính xác nữa (<b>The estimated completion</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Graphic / Map",
+        "subCategory": "Graphic / Map"
       },
       {
         "id": "62b694afbbc57b27fe10f856",
@@ -426,7 +478,9 @@
           "D": "Present a document to a crew member"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người gọi dặn dò: <i>'...we do request that you show the receipt to one of our employees when they arrive.'</i> Cụm từ <i>'show the receipt'</i> đồng nghĩa với xuất trình giấy tờ/hóa đơn cho nhân viên (<b>Present a document to a crew member</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Request",
+        "subCategory": "Request"
       }
     ]
   },
@@ -448,7 +502,9 @@
           "D": "A career fair"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người nói mở đầu: <i>'I'd like to take a moment to talk about the upcoming Annual Conference for Healthcare...'</i> => Hội nghị chuyên ngành y tế/chăm sóc sức khỏe (<b>A medical conference</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Topic / Main Idea",
+        "subCategory": "Topic / Main Idea"
       },
       {
         "id": "62b694afbbc57b27fe10f858",
@@ -461,7 +517,9 @@
           "D": "Register for activities"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người nói cho biết: <i>'I've given you each a pamphlet that highlights the event's activities and speakers. I hope it will encourage you to attend.'</i> Từ <i>'pamphlet'</i> đồng nghĩa với <i>'brochure'</i> (tờ gấp giới thiệu) => Người nghe sẽ đọc tài liệu giới thiệu (<b>Read a brochure</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       },
       {
         "id": "62b694afbbc57b27fe10f859",
@@ -474,7 +532,9 @@
           "D": "$2,800"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người nói cho biết: <i>'And I'm planning to reserve a booth for both weekend days.'</i> (thuê gian hàng cho cả 2 ngày cuối tuần). Đối chiếu bảng giá, gói thuê gian hàng cho cả 2 ngày cuối tuần (Saturday & Sunday) có giá $1,600. Chọn <b>(C) $1,600</b>.</p>",
+        "questionType": "Graphic / Map",
+        "subCategory": "Graphic / Map"
       }
     ]
   }

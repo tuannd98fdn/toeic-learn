@@ -1,13 +1,20 @@
 import React from 'react';
 import styles from './StreakCounter.module.css';
-import { ZapIcon } from './icons/AppIcons';
+import { ZapIcon, ShieldIcon } from './icons/AppIcons';
 
 interface StreakCounterProps {
   currentStreak: number;
   bestStreak: number;
+  freezeCount?: number;
+  isFrozenToday?: boolean;
 }
 
-export default function StreakCounter({ currentStreak, bestStreak }: StreakCounterProps) {
+export default function StreakCounter({
+  currentStreak,
+  bestStreak,
+  freezeCount = 1,
+  isFrozenToday = false
+}: StreakCounterProps) {
   const isActive = currentStreak > 0;
 
   return (
@@ -20,14 +27,24 @@ export default function StreakCounter({ currentStreak, bestStreak }: StreakCount
         <div className={styles.streakInfo}>
           <span className={styles.number}>{currentStreak}</span>
           <span className={styles.label}>day streak</span>
+          <div 
+            className={`${styles.freezeBadge} ${isFrozenToday ? styles.freezeActive : ''}`} 
+            title={isFrozenToday ? "Chuỗi hôm qua được bảo vệ an toàn!" : `Bảo vệ chuỗi tự động: còn ${freezeCount} khiên`}
+          >
+            <ShieldIcon size={12} className={styles.shieldIcon} />
+            <span className={styles.freezeText}>{freezeCount}</span>
+          </div>
         </div>
         
-        {bestStreak > 0 && (
+        {isFrozenToday ? (
+          <div className={styles.frozenNotice}>Đã kích hoạt khiên bảo vệ chuỗi</div>
+        ) : bestStreak > 0 ? (
           <div className={styles.bestStreak}>
             Best: {bestStreak} days
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );
 }
+

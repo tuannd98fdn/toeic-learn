@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 36px;
-  max-width: 960px;
+  max-width: 1140px;
+  width: 100%;
   margin: 0 auto;
   padding-top: 8px;
 }
@@ -254,6 +255,13 @@
   margin-bottom: 10px;
 }
 
+.dailyTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .dayLabel {
   font-size: 1.1rem;
   font-weight: 800;
@@ -281,12 +289,84 @@
   transition: width 0.5s var(--ease-out-expo);
 }
 
+/* Celebration Banner */
+.celebrationBanner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  animation: celebrationGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes celebrationGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 22px rgba(16, 185, 129, 0.35);
+  }
+}
+
+.celebrationIconWrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+.celebrationText {
+  flex: 1;
+  min-width: 0;
+}
+
+.celebrationHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+
+.celebrationTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.celebrationBadge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.celebrationSub {
+  font-size: 0.82rem;
+  color: var(--muted-foreground);
+  margin: 0;
+  line-height: 1.4;
+}
+
 /* Plan List */
 .planList {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
+
 
 .planItem {
   display: flex;
@@ -382,7 +462,38 @@
   opacity: 0.6;
 }
 
+.planItemActionGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.shortcutKeyBadge {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--surface-sunken, rgba(255, 255, 255, 0.06));
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: monospace, var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .shortcutKeyBadge {
+    display: inline-flex;
+  }
+}
+
 /* No Plan Card */
+
 .noPlanCard {
   padding: 28px;
   border-radius: var(--radius-xl);
@@ -578,9 +689,15 @@
   gap: 16px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .toolsGrid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .toolsGrid {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
@@ -589,7 +706,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 28px 16px;
+  padding: 24px 12px;
   cursor: pointer;
   text-decoration: none;
 }
@@ -610,8 +727,9 @@
   transform: scale(1.12) translateY(-4px);
 }
 
+.toolCard h3,
 .toolCard h4 {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   margin: 0 0 4px 0;
   color: var(--foreground);

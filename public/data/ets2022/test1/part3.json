@@ -17,7 +17,9 @@
           "D": "A check"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ mở đầu cuộc đối thoại: <i>'Do you know where the budget file is? I can't find it.'</i> => Cô ấy đang tìm tệp tài liệu ngân sách (<b>A file</b>). Do đó chọn <b>(B)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694aebbc57b27fe10f816",
@@ -30,7 +32,9 @@
           "D": "On a business trip"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ nói về Patrick: <i>'Patrick's out of town right now, and I am sure he doesn't have it.'</i> Trong ngữ cảnh công sở, cụm <i>'out of town'</i> đồng nghĩa với đi công tác (<b>On a business trip</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
       },
       {
         "id": "62b694aebbc57b27fe10f817",
@@ -43,7 +47,9 @@
           "D": "Reply to a letter"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông kết thúc bằng câu: <i>'Well, I'll check once more, but I'll probably be giving you the same answer.'</i> => Anh ấy sẽ kiểm tra lại văn phòng của mình lần nữa. Do đó chọn <b>(A) Check his office</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
@@ -65,7 +71,9 @@
           "D": "In a manufacturing plant"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ nhắc đến: <i>'Look at all the robotics we are using on the manufacturing assembly line.'</i> (dây chuyền lắp ráp chế tạo) và người đàn ông nhắc tới <i>'factories'</i> => Cuộc trò chuyện diễn ra tại nhà máy sản xuất (<b>In a manufacturing plant</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Topic / Main Idea",
+        "subCategory": "Topic / Main Idea"
       },
       {
         "id": "62b694aebbc57b27fe10f819",
@@ -78,7 +86,9 @@
           "D": "The machines are very clean."
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông bày tỏ ấn tượng: <i>'It's really impressive. You know, factories rarely use such high-quality devices these days.'</i> => Máy móc thiết bị có chất lượng rất cao (<b>The equipment is of high quality</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694aebbc57b27fe10f81a",
@@ -91,7 +101,9 @@
           "D": "A report on company’s performance"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ hỏi: <i>'The system we're currently using needs to be upgraded. How much would it cost to do business with your company?'</i> => Cô ấy băn khoăn về chi phí nâng cấp hệ thống (<b>The cost of a system upgrade</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -113,7 +125,9 @@
           "D": "The construction of a building has cancelled."
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông nói: <i>'He sounded pretty upset about not receiving any design blueprints yet.'</i> => Ông Ransh khó chịu vì chưa nhận được tài liệu bản vẽ thiết kế (<b>He did not receive a document</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694aebbc57b27fe10f81c",
@@ -126,7 +140,9 @@
           "D": "She talked with Mr. Ransh on the phone."
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ nói: <i>'I sent him a blueprint by e-mail last week!'</i> => Cô ấy đã gửi email cho ông Ransh tuần trước. Chọn <b>(C) She sent an e-mail to Mr. Ransh</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694aebbc57b27fe10f81d",
@@ -139,7 +155,9 @@
           "D": "Redesign the blueprints"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ quyết định: <i>'Well, I should send him a blueprint again right away anyway.'</i> => Cô ấy sẽ gửi lại tài liệu bản vẽ ngay lập tức (<b>Send a document</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
@@ -161,7 +179,9 @@
           "D": "In her home"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Janice nói: <i>'My friends and I stayed at a cozy hotel in Athens for three weeks.'</i> => Cô ấy ở tại một khách sạn ấm cúng (<b>In a hotel</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694aebbc57b27fe10f81f",
@@ -174,7 +194,9 @@
           "D": "For a promotion"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông chia sẻ: <i>'Oh, I remember last year when I visited Athens for business.'</i> => Anh ấy đến Athens vì chuyến công tác (<b>For a business trip</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694aebbc57b27fe10f820",
@@ -187,7 +209,9 @@
           "D": "Sightseeing"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Janice nói: <i>'We mostly spent our time walking, lying, and resting on the beach near the hotel.'</i> => Phần lớn thời gian cô ấy thư giãn trên bãi biển (<b>Relaxing on the beach</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -209,7 +233,9 @@
           "D": "A presentation coming up next month"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ hỏi: <i>'Everyone's here now. Is dinner ready to be served?'</i> và người đàn ông nhắc đến việc đặt đồ ăn với bên dịch vụ ăn uống (caterer) => Họ đang nói về bữa tối chiêu đãi khách (<b>A dinner for guests</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Topic / Main Idea",
+        "subCategory": "Topic / Main Idea"
       },
       {
         "id": "62b694afbbc57b27fe10f822",
@@ -222,7 +248,9 @@
           "D": "They will call the caterer."
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông nói: <i>'...he thought the food was to be ready by 8 o'clock.'</i> => Thức ăn sẽ được phục vụ vào lúc 8 giờ (<b>Food will be served</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f823",
@@ -235,7 +263,9 @@
           "D": "They will cancel the event."
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ kết luận: <i>'Oh well, I guess we'll have to change our plans and watch the presentation first.'</i> => Họ sẽ điều chỉnh kế hoạch để xem bài thuyết trình trước (<b>They will do the presentation</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
@@ -257,7 +287,9 @@
           "D": "Her bag is missing."
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ mở đầu: <i>'The documents that I was planning to use at the presentation are missing.'</i> => Cô ấy lo lắng vì không tìm thấy tài liệu thuyết trình (<b>She cannot find her documents</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f825",
@@ -270,7 +302,9 @@
           "D": "Rewrite some papers"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ đề nghị: <i>'Will you go first and get the conference room ready for the meeting?'</i> => Đề nghị người đàn ông đi chuẩn bị phòng họp (<b>Prepare for the meeting</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Request",
+        "subCategory": "Request"
       },
       {
         "id": "62b694afbbc57b27fe10f826",
@@ -283,7 +317,9 @@
           "D": "To a copying store"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ nói: <i>'Let me just go back to my office and make some copies.'</i> => Cô ấy sẽ quay trở lại văn phòng làm việc để in sao tài liệu (<b>To her office</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
@@ -305,7 +341,9 @@
           "D": "He applied after seeing the newspaper advertisement."
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Sau khi cô Landers nói cô ứng tuyển vào vị trí bán hàng sau khi thấy quảng cáo trên báo, ông Carper nhận xét: <i>'Well, you sure made a great choice there.'</i> kèm lời đề nghị tuyển dụng trước đó <i>'I am willing to offer you a position as a sales representative'</i> => Ông ấy đã quyết định tuyển cô vào vị trí nhân viên kinh doanh (<b>He decided to hire the woman as a salesperson</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
       },
       {
         "id": "62b694afbbc57b27fe10f828",
@@ -318,7 +356,9 @@
           "D": "To fill out some papers"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông nói: <i>'Now I'll introduce you to Ms. Clarkson in the Personnel Department for some papers you need to fill out.'</i> => Đến phòng nhân sự để điền giấy tờ thủ tục nhận việc (<b>To fill out some papers</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f829",
@@ -331,7 +371,9 @@
           "D": "In two weeks"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Khi được hỏi khi nào có thể bắt đầu làm việc, cô Landers trả lời: <i>'I'll be ready in about two weeks.'</i> => Cô sẽ bắt đầu trong khoảng 2 tuần nữa (<b>In two weeks</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -353,7 +395,9 @@
           "D": "They are professors at a college."
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Các nhân vật nhắc lại: <i>'...our 15th reunion'</i> và <i>'I can't believe it's already been 15 years since we graduated.'</i> và nói về giải cờ vua thời sinh viên (<i>'student chess tournament... in my college life'</i>) => Họ là bạn học cùng tốt nghiệp từ một trường đại học (<b>They graduated from the same university</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
       },
       {
         "id": "62b694afbbc57b27fe10f82b",
@@ -366,7 +410,9 @@
           "D": "Fifty"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người nói nhắc: <i>'I can't believe it's already been 15 years since we graduated.'</i> => Đã 15 năm trôi qua kể từ khi họ ở khuôn viên này (<b>Fifteen</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f82c",
@@ -379,7 +425,9 @@
           "D": "Walking around the campus"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ nói về kỷ niệm đoạt giải nhất cờ vua: <i>'How can I forget that? It was one of the best moments in my college life.'</i> (Làm sao tôi quên được, đó là khoảnh khắc tuyệt nhất thời đại học) => Đoạt giải thưởng (<b>Winning a prize</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -401,7 +449,9 @@
           "D": "A cook"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông nói: <i>'...the refreshments for the workshop you're holding next Friday.'</i> (hội thảo cô tổ chức vào thứ Sáu tới) => Người phụ nữ là người tổ chức hội thảo (<b>A workshop organizer</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Speaker / Listener",
+        "subCategory": "Speaker / Listener"
       },
       {
         "id": "62b694afbbc57b27fe10f82e",
@@ -414,7 +464,9 @@
           "D": "She will participate in the workshop next Friday."
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Khi người đàn ông hỏi có chút thời gian để nói chuyện không, cô gái đáp: <i>'I have a weekly meeting soon, but go ahead.'</i> ngụ ý cô sắp phải họp nên không thể nói chuyện lâu được (<b>She cannot talk with the man for long</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
       },
       {
         "id": "62b694afbbc57b27fe10f82f",
@@ -427,7 +479,9 @@
           "D": "Dinner menus"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Kimmy nói thêm ở cuối: <i>'Oh, I want one more thing. Let's add some fruit to the lunch menu.'</i> => Cô muốn thêm món trái cây vào thực đơn bữa trưa (<b>Additional food items</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -449,7 +503,9 @@
           "D": "Organizing a conference"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ mở đầu: <i>'Mr. Heath, I want to talk about scheduling interviews for the web-design position.'</i> (sắp xếp lịch phỏng vấn) => Cuộc thảo luận về việc sắp xếp lịch trình (<b>Making schedules</b>). Chọn <b>(B)</b>.</p>",
+        "questionType": "Topic / Main Idea",
+        "subCategory": "Topic / Main Idea"
       },
       {
         "id": "62b694afbbc57b27fe10f831",
@@ -462,7 +518,9 @@
           "D": "They will leave on a business trip."
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông đề xuất: <i>'Well, what about doing the interviews on Thursday before I leave?'</i> và người phụ nữ đồng ý => Các buổi phỏng vấn tuyển dụng sẽ diễn ra vào thứ Năm (<b>Job interviews will take place</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f832",
@@ -475,7 +533,9 @@
           "D": "A conference date"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông nói: <i>'The clients are starting to complain about the old designs of our website.'</i> => Khách hàng đang phàn nàn về thiết kế trang web (<b>A website</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
@@ -497,7 +557,9 @@
           "D": "A sales department"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ nói: <i>'I guess they didn't know how much our sales department's grown.'</i> (bộ phận kinh doanh của chúng ta phát triển nhanh thế nào) => Những người tham gia cuộc họp ngày mai là nhân viên phòng kinh doanh (<b>A sales department</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Speaker / Listener",
+        "subCategory": "Speaker / Listener"
       },
       {
         "id": "62b694afbbc57b27fe10f834",
@@ -510,7 +572,9 @@
           "D": "The service was poor."
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông nói về cuộc họp tháng trước ở nhà hàng Ý: <i>'I was disappointed with the tiny room they gave us last month.'</i> (Tôi thất vọng với căn phòng nhỏ xíu mà họ xếp cho chúng ta) => Phòng quá nhỏ (<b>The room was small</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f835",
@@ -523,7 +587,9 @@
           "D": "Sorento"
         },
         "correctAnswer": "B",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ cho biết: <i>'The Royal Hotel didn't have any private rooms available, so we reserved a space at the Chinese restaurant near the city hall.'</i> (nhà hàng Trung Hoa gần tòa thị chính) => Đối chiếu sơ đồ, nhà hàng Trung Hoa là Pecking. Chọn <b>(B) Pecking</b>.</p>",
+        "questionType": "Graphic / Map",
+        "subCategory": "Graphic / Map"
       }
     ]
   },
@@ -545,7 +611,9 @@
           "D": "She received some clothes."
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ nói: <i>'Frank, did you order some clothes? I just received this box from Macy's...'</i> => Cô ấy vừa nhận được một kiện hàng chứa quần áo (<b>She received some clothes</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f837",
@@ -558,7 +626,9 @@
           "D": "A presentation"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Frank giải thích: <i>'I needed some suits and neckties to wear for my presentations and banquet next week.'</i> => Anh ấy cần vest và cà vạt cho buổi thuyết trình (<b>A presentation</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
         "id": "62b694afbbc57b27fe10f838",
@@ -571,7 +641,9 @@
           "D": "Order some clothes"
         },
         "correctAnswer": "A",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ giải thích: <i>'...since you put the department in the order instead of your own name.'</i> và người đàn ông xác nhận: <i>'I won't forget to put my name next time.'</i> => Anh ấy đã quên ghi tên mình vào đơn hàng (<b>Include his name</b>). Chọn <b>(A)</b>.</p>",
+        "questionType": "Graphic / Map",
+        "subCategory": "Graphic / Map"
       }
     ]
   },
@@ -593,7 +665,9 @@
           "D": "In a fitness center"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người đàn ông nói: <i>'I'm looking for healthy foods... How about this canned chicken soup?'</i> và người phụ nữ khuyên mua rau củ quả tươi => Họ đang đi mua sắm thực phẩm tại cửa hàng bách hóa/siêu thị (<b>In a grocery store</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Topic / Main Idea",
+        "subCategory": "Topic / Main Idea"
       },
       {
         "id": "62b694afbbc57b27fe10f83a",
@@ -606,7 +680,9 @@
           "D": "Protein"
         },
         "correctAnswer": "C",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ cảnh báo về hộp súp gà: <i>'Oh, no! That's almost 2 grams.'</i> Đối chiếu bảng thành phần dinh dưỡng, thành phần có hàm lượng gần 2 grams (1800mg - 2000mg) là Natri/Muối (<b>Sodium</b>). Chọn <b>(C)</b>.</p>",
+        "questionType": "Graphic / Map",
+        "subCategory": "Graphic / Map"
       },
       {
         "id": "62b694afbbc57b27fe10f83b",
@@ -619,7 +695,9 @@
           "D": "Purchase a different item"
         },
         "correctAnswer": "D",
-        "explanation": ""
+        "explanation": "<p>Người phụ nữ khuyên: <i>'Why don't you buy some fresh fruits and vegetables?'</i> => Cô ấy gợi ý người đàn ông nên mua mặt hàng khác có lợi cho sức khỏe hơn (<b>Purchase a different item</b>). Chọn <b>(D)</b>.</p>",
+        "questionType": "Recommendation",
+        "subCategory": "Recommendation"
       }
     ]
   }

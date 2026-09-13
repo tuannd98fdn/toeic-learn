@@ -331,6 +331,7 @@ function Part1Trainer() {
               <div style={{ marginTop: '1rem' }}>
                 <InteractiveTranscript
                   transcriptHtml={currentQ.transcript}
+                  explanationHtml={currentQ.explanation}
                   part="part1"
                   correctAnswer={currentQ.correctAnswer}
                   title={`Lời thoại & Giải thích Câu ${currentQ.number}`}

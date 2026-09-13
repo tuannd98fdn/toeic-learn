@@ -10,7 +10,9 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nCan you pack the shipment to Toronto now?<br />\n(A) Fragile dishes.<br />\n<b>(B) Of course, just a minute. </b><br />\n(C) I need it back soon.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nCan you pack the shipment to Toronto now?<br />\n(A) Fragile dishes.<br />\n<b>(B) Of course, just a minute. </b><br />\n(C) I need it back soon.</p>\n"
+    "explanation": "<p><b>Can you pack the shipment to Toronto now?</b> (Bạn có thể đóng gói lô hàng đi Toronto bây giờ không?)<br/>Đáp án đúng là <b>(B) Of course, just a minute.</b> (Dĩ nhiên rồi, chờ tôi một lát nhé) - thể hiện sự đồng ý lời yêu cầu. Loại (A) 'Đĩa dễ vỡ' và (C) 'Tôi cần nó sớm' không trả lời trực tiếp lời yêu cầu đóng gói.</p>",
+    "questionType": "Request",
+    "subCategory": "Request"
   },
   {
     "id": "62b694aebbc57b27fe10f7b5",
@@ -23,7 +25,9 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhere should I put the new laboratory equipment?<br />\n(A) Did you discover one?<br />\n<b>(B) I&rsquo;ll ask the professor. </b><br />\n(C) No, it&rsquo;s still functioning.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhere should I put the new laboratory equipment?<br />\n(A) Did you discover one?<br />\n<b>(B) I&rsquo;ll ask the professor. </b><br />\n(C) No, it&rsquo;s still functioning.</p>\n"
+    "explanation": "<p><b>Where should I put the new laboratory equipment?</b> (Tôi nên đặt thiết bị thí nghiệm mới ở đâu?)<br/>Đáp án đúng là <b>(B) I'll ask the professor.</b> (Tôi sẽ hỏi giáo sư) - câu trả lời gián tiếp thường gặp trong TOEIC khi người được hỏi không biết câu trả lời chính xác. Loại (A) và (C) không liên quan nơi chốn.</p>",
+    "questionType": "Where",
+    "subCategory": "Where"
   },
   {
     "id": "62b694aebbc57b27fe10f7b6",
@@ -36,7 +40,9 @@
     },
     "correctAnswer": "A",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nHas the plumber stopped the leak in the upstairs restroom?<br />\n<b>(A) Yes, it&rsquo;s working fine now. </b><br />\n(B) No, I live downstairs.<br />\n(C) Try calling a professional.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nHas the plumber stopped the leak in the upstairs restroom?<br />\n<b>(A) Yes, it&rsquo;s working fine now. </b><br />\n(B) No, I live downstairs.<br />\n(C) Try calling a professional.</p>\n"
+    "explanation": "<p><b>Has the plumber stopped the leak in the upstairs restroom?</b> (Thợ sửa ống nước đã xử lý xong chỗ rò rỉ ở nhà vệ sinh tầng trên chưa?)<br/>Đáp án đúng là <b>(A) Yes, it's working fine now.</b> (Rồi, bây giờ nó hoạt động tốt rồi). Bẫy từ liên tưởng ở (B) 'downstairs' đối lập với 'upstairs' trong câu hỏi.</p>",
+    "questionType": "Yes/No",
+    "subCategory": "Yes/No"
   },
   {
     "id": "62b694aebbc57b27fe10f7b7",
@@ -49,7 +55,9 @@
     },
     "correctAnswer": "A",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhen do you want to leave for the concert hall?<br />\n<b>(A) How about an hour from now? </b><br />\n(B) At the Montgomery Theater.<br />\n(C) My favorite band is playing.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhen do you want to leave for the concert hall?<br />\n<b>(A) How about an hour from now? </b><br />\n(B) At the Montgomery Theater.<br />\n(C) My favorite band is playing.</p>\n"
+    "explanation": "<p><b>When do you want to leave for the concert hall?</b> (Khi nào bạn muốn xuất phát đến phòng hòa nhạc?)<br/>Câu hỏi bắt đầu bằng <b>When</b> (Khi nào), đáp án chỉ thời gian là <b>(A) How about an hour from now?</b> (Khoảng 1 tiếng nữa nhé?). Bẫy ở (B) 'At the Montgomery Theater' là đáp án cho câu hỏi Where (nơi chốn).</p>",
+    "questionType": "When",
+    "subCategory": "When"
   },
   {
     "id": "62b694aebbc57b27fe10f7b8",
@@ -62,7 +70,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nIs gas also included in the monthly rent, or just electricity?<br />\n(A) The first of each month.<br />\n(B) How much is the rent?<br />\n<b>(C) It covers all utilities. </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nIs gas also included in the monthly rent, or just electricity?<br />\n(A) The first of each month.<br />\n(B) How much is the rent?<br />\n<b>(C) It covers all utilities. </b></p>\n"
+    "explanation": "<p><b>Is gas also included in the monthly rent, or just electricity?</b> (Tiền thuê hàng tháng đã bao gồm tiền gas hay chỉ có tiền điện?)<br/>Đây là câu hỏi lựa chọn (A or B). Đáp án <b>(C) It covers all utilities.</b> (Nó bao gồm tất cả các tiện ích/điện nước) trả lời bao quát cho cả hai lựa chọn. Loại (A) chỉ mốc thời gian, (B) hỏi ngược giá thuê.</p>",
+    "questionType": "Choice",
+    "subCategory": "Choice"
   },
   {
     "id": "62b694aebbc57b27fe10f7b9",
@@ -75,7 +85,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhere is the section for your imported goods?<br />\n(A) Mostly from India.<br />\n(B) These are very important.<br />\n<b>(C) Right this way. </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhere is the section for your imported goods?<br />\n(A) Mostly from India.<br />\n(B) These are very important.<br />\n<b>(C) Right this way. </b></p>\n"
+    "explanation": "<p><b>Where is the section for your imported goods?</b> (Khu vực bán hàng nhập khẩu của bạn ở đâu?)<br/>Đáp án đúng là <b>(C) Right this way.</b> (Mời đi lối này) - câu chỉ dẫn đường đi trực quan. Cảnh giác bẫy phát âm tương đồng ở (B) 'important' nghe giống 'imported', và (A) 'From India' trả lời cho câu hỏi xuất xứ.</p>",
+    "questionType": "Where",
+    "subCategory": "Where"
   },
   {
     "id": "62b694aebbc57b27fe10f7ba",
@@ -88,7 +100,9 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nI can pay the deposit by check, can&rsquo;t I?<br />\n(A) I&rsquo;ll pay the check.<br />\n<b>(B) People do it all the time. </b><br />\n(C) A studio apartment.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nI can pay the deposit by check, can&rsquo;t I?<br />\n(A) I&rsquo;ll pay the check.<br />\n<b>(B) People do it all the time. </b><br />\n(C) A studio apartment.</p>\n"
+    "explanation": "<p><b>I can pay the deposit by check, can't I?</b> (Tôi có thể đặt cọc bằng séc được không?)<br/>Đáp án <b>(B) People do it all the time.</b> (Mọi người vẫn thường làm như vậy) mang nghĩa xác nhận việc trả bằng séc hoàn toàn được chấp nhận. Bẫy lặp từ 'check' ở (A) 'I'll pay the check' (tính tiền hóa đơn nhà hàng).</p>",
+    "questionType": "Tag Question",
+    "subCategory": "Tag Question"
   },
   {
     "id": "62b694aebbc57b27fe10f7bb",
@@ -101,7 +115,9 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhat time do you catch the bus in the morning?<br />\n(A) Every day except for Sundays.<br />\n<b>(B) Between seven and seven fifteen. </b><br />\n(C) The one heading downtown.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhat time do you catch the bus in the morning?<br />\n(A) Every day except for Sundays.<br />\n<b>(B) Between seven and seven fifteen. </b><br />\n(C) The one heading downtown.</p>\n"
+    "explanation": "<p><b>What time do you catch the bus in the morning?</b> (Buổi sáng bạn bắt xe buýt lúc mấy giờ?)<br/>Câu hỏi <b>What time</b> (mấy giờ). Đáp án chỉ khung giờ là <b>(B) Between seven and seven fifteen.</b> (Trong khoảng 7 giờ đến 7 giờ 15). Loại (A) nói về ngày trong tuần, (C) chỉ tuyến xe đi về trung tâm.</p>",
+    "questionType": "When",
+    "subCategory": "When"
   },
   {
     "id": "62b694aebbc57b27fe10f7bc",
@@ -114,7 +130,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nIs your restaurant able to accommodate large groups?<br />\n(A) Food here is really tasty.<br />\n(B) For your accommodations.<br />\n<b>(C) How large is your party? </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nIs your restaurant able to accommodate large groups?<br />\n(A) Food here is really tasty.<br />\n(B) For your accommodations.<br />\n<b>(C) How large is your party? </b></p>\n"
+    "explanation": "<p><b>Is your restaurant able to accommodate large groups?</b> (Nhà hàng của bạn có đủ chỗ phục vụ các đoàn khách lớn không?)<br/>Đáp án đúng là <b>(C) How large is your party?</b> (Đoàn của bạn có bao nhiêu người?) - người nói hỏi lại số lượng để xác nhận sức chứa. Bẫy cùng gốc từ ở (B) 'accommodations' (chỗ ở khách sạn).</p>",
+    "questionType": "Yes/No",
+    "subCategory": "Yes/No"
   },
   {
     "id": "62b694aebbc57b27fe10f7bd",
@@ -127,7 +145,9 @@
     },
     "correctAnswer": "A",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nThe lead singer gave an amazing performance.<br />\n<b>(A) She really did, didn&rsquo;t she? </b><br />\n(B) To improve engine performance.<br />\n(C) Seats near the stage.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nThe lead singer gave an amazing performance.<br />\n<b>(A) She really did, didn&rsquo;t she? </b><br />\n(B) To improve engine performance.<br />\n(C) Seats near the stage.</p>\n"
+    "explanation": "<p><b>The lead singer gave an amazing performance.</b> (Ca sĩ chính đã có một màn trình diễn thật tuyệt vời.)<br/>Đây là câu trần thuật đưa ra lời khen. Đáp án <b>(A) She really did, didn't she?</b> (Cô ấy hát tuyệt thật đấy nhỉ?) thể hiện sự đồng tình cao. Bẫy lặp từ 'performance' ở (B) với nghĩa 'hiệu năng động cơ máy móc'.</p>",
+    "questionType": "Statement",
+    "subCategory": "Statement"
   },
   {
     "id": "62b694aebbc57b27fe10f7be",
@@ -140,7 +160,9 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nThe economic analyst finished the report, didn&rsquo;t he?<br />\n(A) It has a smooth finish.<br />\n<b>(B) I&rsquo;d have to ask him. </b><br />\n(C) Please start right away.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nThe economic analyst finished the report, didn&rsquo;t he?<br />\n(A) It has a smooth finish.<br />\n<b>(B) I&rsquo;d have to ask him. </b><br />\n(C) Please start right away.</p>\n"
+    "explanation": "<p><b>The economic analyst finished the report, didn't he?</b> (Chuyên viên phân tích kinh tế đã hoàn thành bản báo cáo rồi phải không?)<br/>Đáp án đúng là <b>(B) I'd have to ask him.</b> (Tôi sẽ phải hỏi anh ấy) - câu trả lời gián tiếp khi chưa có thông tin xác thực. Bẫy đa nghĩa ở (A) 'smooth finish' (lớp phủ mịn bề mặt).</p>",
+    "questionType": "Tag Question",
+    "subCategory": "Tag Question"
   },
   {
     "id": "62b694aebbc57b27fe10f7bf",
@@ -153,7 +175,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhich frame would you prefer, wooden or metal?<br />\n(A) How many frames do you need?<br />\n(B) I don&rsquo;t like that kind of music.<br />\n<b>(C) Do you carry plastic ones? </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhich frame would you prefer, wooden or metal?<br />\n(A) How many frames do you need?<br />\n(B) I don&rsquo;t like that kind of music.<br />\n<b>(C) Do you carry plastic ones? </b></p>\n"
+    "explanation": "<p><b>Which frame would you prefer, wooden or metal?</b> (Bạn thích khung gỗ hay khung kim loại hơn?)<br/>Câu hỏi lựa chọn 'wooden or metal'. Đáp án đúng là <b>(C) Do you carry plastic ones?</b> (Cửa hàng có bán loại khung nhựa không?) - người hỏi đưa ra một phương án thứ ba thay thế.</p>",
+    "questionType": "Choice",
+    "subCategory": "Choice"
   },
   {
     "id": "62b694aebbc57b27fe10f7c0",
@@ -166,7 +190,9 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhy don&rsquo;t you get an estimate for the repair costs?<br />\n(A) Yes, it cost me a fortune.<br />\n<b>(B) I&rsquo;ve already called the mechanic. </b><br />\n(C) There seems to be an error.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhy don&rsquo;t you get an estimate for the repair costs?<br />\n(A) Yes, it cost me a fortune.<br />\n<b>(B) I&rsquo;ve already called the mechanic. </b><br />\n(C) There seems to be an error.</p>\n"
+    "explanation": "<p><b>Why don't you get an estimate for the repair costs?</b> (Sao bạn không xin một bản ước tính chi phí sửa chữa?)<br/>Cấu trúc 'Why don't you...' dùng để đưa ra lời gợi ý. Đáp án <b>(B) I've already called the mechanic.</b> (Tôi đã gọi cho thợ cơ khí rồi) giải thích rằng hành động đã được thực hiện.</p>",
+    "questionType": "Why",
+    "subCategory": "Why"
   },
   {
     "id": "62b694aebbc57b27fe10f7c1",
@@ -179,7 +205,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nHow will you get to the staff picnic?<br />\n(A) Around twelve o&rsquo;clock.<br />\n(B) Gilbert Nature Reserve.<br />\n<b>(C) I&rsquo;ll take my car. </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nHow will you get to the staff picnic?<br />\n(A) Around twelve o&rsquo;clock.<br />\n(B) Gilbert Nature Reserve.<br />\n<b>(C) I&rsquo;ll take my car. </b></p>\n"
+    "explanation": "<p><b>How will you get to the staff picnic?</b> (Bạn sẽ đến buổi dã ngoại của nhân viên bằng cách nào?)<br/>Câu hỏi phương tiện/cách thức đi lại <b>How</b>. Đáp án đúng là <b>(C) I'll take my car.</b> (Tôi sẽ tự lái xe của mình đi). Loại (A) vì trả lời mốc giờ, (B) là địa điểm dã ngoại.</p>",
+    "questionType": "How",
+    "subCategory": "How"
   },
   {
     "id": "62b694aebbc57b27fe10f7c2",
@@ -192,7 +220,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nIsn&rsquo;t admission free at this museum?<br />\n(A) Mostly contemporary art.<br />\n(B) He finally admitted it.<br />\n<b>(C) No. There&rsquo;s a small charge. </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nIsn&rsquo;t admission free at this museum?<br />\n(A) Mostly contemporary art.<br />\n(B) He finally admitted it.<br />\n<b>(C) No. There&rsquo;s a small charge. </b></p>\n"
+    "explanation": "<p><b>Isn't admission free at this museum?</b> (Vé vào cửa bảo tàng này miễn phí phải không?)<br/>Đáp án đúng là <b>(C) No. There's a small charge.</b> (Không, có một khoản phí nhỏ) - đính chính lại thông tin vé vào cửa. Bẫy cùng gốc từ ở (B) 'admitted' (thừa nhận).</p>",
+    "questionType": "Yes/No",
+    "subCategory": "Yes/No"
   },
   {
     "id": "62b694aebbc57b27fe10f7c3",
@@ -205,7 +235,9 @@
     },
     "correctAnswer": "A",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nI&rsquo;ll help you carry your luggage to your room.<br />\n<b>(A) I&rsquo;d really appreciate that. </b><br />\n(B) It won&rsquo;t fit under my seat.<br />\n(C) It&rsquo;s in my carry-on, I think.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nI&rsquo;ll help you carry your luggage to your room.<br />\n<b>(A) I&rsquo;d really appreciate that. </b><br />\n(B) It won&rsquo;t fit under my seat.<br />\n(C) It&rsquo;s in my carry-on, I think.</p>\n"
+    "explanation": "<p><b>I'll help you carry your luggage to your room.</b> (Tôi sẽ giúp bạn mang hành lý lên phòng nhé.)<br/>Người nói đưa ra lời đề nghị giúp đỡ. Đáp án đúng là <b>(A) I'd really appreciate that.</b> (Thế thì tôi rất cảm kích/biết ơn) - lời đáp lại sự giúp đỡ tiêu chuẩn trong giao tiếp.</p>",
+    "questionType": "Statement",
+    "subCategory": "Statement"
   },
   {
     "id": "62b694aebbc57b27fe10f7c4",
@@ -218,7 +250,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhy did you run out of notepads so quickly?<br />\n(A) I will order more next month.<br />\n(B) No, I just got them yesterday.<br />\n<b>(C) I used a lot for my recent proposal. </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhy did you run out of notepads so quickly?<br />\n(A) I will order more next month.<br />\n(B) No, I just got them yesterday.<br />\n<b>(C) I used a lot for my recent proposal. </b></p>\n"
+    "explanation": "<p><b>Why did you run out of notepads so quickly?</b> (Tại sao bạn lại dùng hết sổ ghi chép nhanh thế?)<br/>Câu hỏi lý do <b>Why</b>. Đáp án <b>(C) I used a lot for my recent proposal.</b> (Tôi đã dùng rất nhiều cho bản đề xuất gần đây) giải thích trực tiếp nguyên nhân sử dụng nhiều.</p>",
+    "questionType": "Why",
+    "subCategory": "Why"
   },
   {
     "id": "62b694aebbc57b27fe10f7c5",
@@ -231,7 +265,9 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nThree microphones have been set up on the main stage.<br />\n(A) Woud you like to do it?<br />\n<b>(B) That should be enough. </b><br />\n(C) I ordered the microscopes.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nThree microphones have been set up on the main stage.<br />\n(A) Woud you like to do it?<br />\n<b>(B) That should be enough. </b><br />\n(C) I ordered the microscopes.</p>\n"
+    "explanation": "<p><b>Three microphones have been set up on the main stage.</b> (Ba chiếc micro đã được lắp đặt trên sân khấu chính rồi.)<br/>Đáp án đúng là <b>(B) That should be enough.</b> (Số lượng như thế chắc là đủ rồi đấy) - nhận xét về số lượng đã chuẩn bị. Cảnh giác bẫy âm thanh tương đồng ở (C) 'microscopes' (kính hiển vi).</p>",
+    "questionType": "Statement",
+    "subCategory": "Statement"
   },
   {
     "id": "62b694aebbc57b27fe10f7c6",
@@ -244,7 +280,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWho attended the convention last year?<br />\n(A) With Ms. Timmons.<br />\n(B) At the Clairidge Center.<br />\n<b>(C) Mostly young job seekers. </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWho attended the convention last year?<br />\n(A) With Ms. Timmons.<br />\n(B) At the Clairidge Center.<br />\n<b>(C) Mostly young job seekers. </b></p>\n"
+    "explanation": "<p><b>Who attended the convention last year?</b> (Ai đã tham dự hội nghị vào năm ngoái?)<br/>Câu hỏi chỉ đối tượng người <b>Who</b>. Đáp án <b>(C) Mostly young job seekers.</b> (Phần lớn là các ứng viên tìm việc trẻ tuổi) chỉ nhóm người tham dự. Loại (B) vì là địa điểm tổ chức hội nghị.</p>",
+    "questionType": "Who",
+    "subCategory": "Who"
   },
   {
     "id": "62b694aebbc57b27fe10f7c7",
@@ -257,7 +295,9 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nLet&rsquo;s assign the resume screening to Tim instead of Stacey.<br />\n(A) She&rsquo;s already submitted it.<br />\n<b>(B) He might be too busy. </b><br />\n(C) A flat-screen television.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nLet&rsquo;s assign the resume screening to Tim instead of Stacey.<br />\n(A) She&rsquo;s already submitted it.<br />\n<b>(B) He might be too busy. </b><br />\n(C) A flat-screen television.</p>\n"
+    "explanation": "<p><b>Let's assign the resume screening to Tim instead of Stacey.</b> (Chúng ta hãy giao việc sàng lọc hồ sơ ứng viên cho Tim thay vì Stacey đi.)<br/>Đáp án đúng là <b>(B) He might be too busy.</b> (Anh ấy có thể đang bận quá đấy) - phản hồi e ngại về tính khả thi của đề xuất. Bẫy ở (C) 'flat-screen' (màn hình phẳng) do nghe giống 'resume screening'.</p>",
+    "questionType": "Statement",
+    "subCategory": "Statement"
   },
   {
     "id": "62b694aebbc57b27fe10f7c8",
@@ -270,7 +310,9 @@
     },
     "correctAnswer": "A",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nDo you have any furnished studio apartments in this neighborhood?<br />\n<b>(A) I&rsquo;ll have to check our database. </b><br />\n(B) Yes, we sell furniture here.<br />\n(C) A one-year lease.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nDo you have any furnished studio apartments in this neighborhood?<br />\n<b>(A) I&rsquo;ll have to check our database. </b><br />\n(B) Yes, we sell furniture here.<br />\n(C) A one-year lease.</p>\n"
+    "explanation": "<p><b>Do you have any furnished studio apartments in this neighborhood?</b> (Khu vực này bạn có căn hộ studio nào có sẵn nội thất không?)<br/>Đáp án đúng là <b>(A) I'll have to check our database.</b> (Tôi sẽ phải kiểm tra cơ sở dữ liệu của chúng tôi đã) - câu trả lời trì hoãn để tra cứu thông tin. Bẫy cùng gốc từ ở (B) 'furniture' (đồ nội thất).</p>",
+    "questionType": "Yes/No",
+    "subCategory": "Yes/No"
   },
   {
     "id": "62b694aebbc57b27fe10f7c9",
@@ -283,7 +325,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nThere&rsquo;s an exhibit of 19th-century paintings at the Hanover Gallery.<br />\n(A) I didn&rsquo;t know you could paint.<br />\n(B) Yes, the color looks great.<br />\n<b>(C) I saw a commercial for it yesterday. </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nThere&rsquo;s an exhibit of 19th-century paintings at the Hanover Gallery.<br />\n(A) I didn&rsquo;t know you could paint.<br />\n(B) Yes, the color looks great.<br />\n<b>(C) I saw a commercial for it yesterday. </b></p>\n"
+    "explanation": "<p><b>There's an exhibit of 19th-century paintings at the Hanover Gallery.</b> (Đang có buổi triển lãm tranh thế kỷ 19 ở phòng trưng bày Hanover đấy.)<br/>Đáp án <b>(C) I saw a commercial for it yesterday.</b> (Hôm qua tôi vừa xem một đoạn quảng cáo về nó xong) tiếp nối chủ đề về buổi triển lãm. Bẫy lặp từ ở (A) 'paint' (vẽ).</p>",
+    "questionType": "Statement",
+    "subCategory": "Statement"
   },
   {
     "id": "62b694aebbc57b27fe10f7ca",
@@ -296,7 +340,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWhen will we arrange the display for the new air purifier?<br />\n(A) The arrangement looks beautiful<br />\n(B) Would you mind if I kirn it on?<br />\n<b>(C) As soon as the brochures arrive. </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWhen will we arrange the display for the new air purifier?<br />\n(A) The arrangement looks beautiful<br />\n(B) Would you mind if I kirn it on?<br />\n<b>(C) As soon as the brochures arrive. </b></p>\n"
+    "explanation": "<p><b>When will we arrange the display for the new air purifier?</b> (Khi nào chúng ta sẽ bố trí quầy trưng bày máy lọc không khí mới?)<br/>Câu hỏi <b>When</b> (khi nào). Đáp án chỉ mốc thời điểm điều kiện là <b>(C) As soon as the brochures arrive.</b> (Ngay sau khi tập tài liệu giới thiệu được chuyển tới). Bẫy lặp từ ở (A) 'arrangement'.</p>",
+    "questionType": "When",
+    "subCategory": "When"
   },
   {
     "id": "62b694aebbc57b27fe10f7cb",
@@ -309,7 +355,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nInvesting in mining companies is risky, isn&rsquo;t it?<br />\n(A) Yes, he is a promising investor.<br />\n(B) I&rsquo;m glad no one was hurt.<br />\n<b>(C) My stock broker believes it is. </b></p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nInvesting in mining companies is risky, isn&rsquo;t it?<br />\n(A) Yes, he is a promising investor.<br />\n(B) I&rsquo;m glad no one was hurt.<br />\n<b>(C) My stock broker believes it is. </b></p>\n"
+    "explanation": "<p><b>Investing in mining companies is risky, isn't it?</b> (Đầu tư vào các công ty khai thác mỏ khá rủi ro đúng không?)<br/>Câu hỏi đuôi xác nhận tính rủi ro. Đáp án <b>(C) My stock broker believes it is.</b> (Người môi giới chứng khoán của tôi cũng tin là như vậy) xác nhận rủi ro qua ý kiến chuyên gia. Bẫy lặp từ ở (A) 'investor'.</p>",
+    "questionType": "Tag Question",
+    "subCategory": "Tag Question"
   },
   {
     "id": "62b694aebbc57b27fe10f7cc",
@@ -322,6 +370,8 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\nWho will inspect the machinery on the production floor?<br />\n(A) Joseph works on the second floor.<br />\n<b>(B) They&rsquo;re still deciding. </b><br />\n(C) For packaging items.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\nWho will inspect the machinery on the production floor?<br />\n(A) Joseph works on the second floor.<br />\n<b>(B) They&rsquo;re still deciding. </b><br />\n(C) For packaging items.</p>\n"
+    "explanation": "<p><b>Who will inspect the machinery on the production floor?</b> (Ai sẽ kiểm tra máy móc tại phân xưởng sản xuất?)<br/>Câu hỏi <b>Who</b> (ai chịu trách nhiệm). Đáp án <b>(B) They're still deciding.</b> (Họ vẫn đang bàn bạc quyết định) - dạng câu trả lời không cung cấp tên cụ thể nhưng trả lời trực tiếp trạng thái nhân sự. Bẫy lặp từ ở (A) 'floor'.</p>",
+    "questionType": "Who",
+    "subCategory": "Who"
   }
 ]

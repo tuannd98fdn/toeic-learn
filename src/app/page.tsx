@@ -21,13 +21,19 @@ import {
   CompassIcon,
   TargetIcon,
   LightbulbIcon,
+  AwardIcon,
 } from '@/components/icons/AppIcons';
+import { soundEffects } from '@/utils/soundEffects';
+import { preloadUpcomingListening } from '@/utils/audioPreloader';
+import PredictiveScoreMeter from '@/components/PredictiveScoreMeter';
+import SmartActionFeed from '@/components/SmartActionFeed';
 import styles from './page.module.css';
 
 export default function Home() {
   const router = useRouter();
   const { mounted: streakMounted, streakData, recordStudy } = useStreak();
   const [studyPlan, setStudyPlan] = useState<StudyPlan | null>(null);
+  const [activeDayNumber, setActiveDayNumber] = useState<number | null>(null);
   
   // Onboarding Data
   const [onboardingData, setOnboardingData] = useState<{ target: string; daysLeft: number | null }>({ target: '750+', daysLeft: null });
@@ -45,6 +51,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!selectedTest) return;
+    preloadUpcomingListening(selectedTest);
     
     const fetchStats = async () => {
       try {
@@ -118,8 +125,71 @@ export default function Home() {
       .catch(err => console.error("Could not load tests index:", err));
 
     const syncRes = syncAdaptivePlan();
-    setStudyPlan(syncRes.plan || getStudyPlan());
+    const plan = syncRes.plan || getStudyPlan();
+    setStudyPlan(plan);
+    if (plan && plan.days.length > 0) {
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const celebratedToday = localStorage.getItem('toeic_celebration_date') === todayStr;
+      const firstIncomplete = plan.days.find(d => !d.completed);
+      
+      if (celebratedToday && plan.days[0].completed && firstIncomplete && firstIncomplete.dayNumber > 1) {
+        setActiveDayNumber(firstIncomplete.dayNumber - 1);
+      } else {
+        setActiveDayNumber(firstIncomplete ? firstIncomplete.dayNumber : plan.days[0].dayNumber);
+      }
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const activeDay = studyPlan
+    ? (studyPlan.days.find((d) => d.dayNumber === activeDayNumber) || studyPlan.days.find((d) => !d.completed) || studyPlan.days[0])
+    : null;
+  const completedToday = activeDay ? activeDay.tasks.filter((t) => t.completed).length : 0;
+  const totalToday = activeDay ? activeDay.tasks.length : 0;
+  const progressPercent = totalToday > 0 ? Math.round((completedToday / totalToday) * 100) : 0;
+  const isAllCompleted = totalToday > 0 && completedToday === totalToday;
+
+  // Auto-play victory sound and record celebration on 100% completion
+  useEffect(() => {
+    if (isAllCompleted) {
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const celebratedDate = localStorage.getItem('toeic_celebration_date');
+      if (celebratedDate !== todayStr) {
+        soundEffects.playVictory();
+        localStorage.setItem('toeic_celebration_date', todayStr);
+      }
+    }
+  }, [isAllCompleted]);
+
+  // Keyboard shortcut listener: Press 1, 2, 3 to navigate to corresponding daily task
+  useEffect(() => {
+    if (!activeDay || !activeDay.tasks || activeDay.tasks.length === 0) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target) {
+        const tagName = target.tagName;
+        if (tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT' || target.isContentEditable) {
+          return;
+        }
+      }
+
+      if (document.querySelector('[role="dialog"]')) {
+        return;
+      }
+
+      if (['1', '2', '3'].includes(e.key)) {
+        const idx = parseInt(e.key, 10) - 1;
+        const targetTask = activeDay.tasks[idx];
+        if (targetTask && targetTask.link) {
+          e.preventDefault();
+          router.push(targetTask.link);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeDay, router]);
 
   if (!streakMounted) {
     return (
@@ -143,9 +213,23 @@ export default function Home() {
               <span className="text-gradient">TOEIC {onboardingData.target}</span>
             </h1>
             <p className={styles.heroSubtitle}>
-              {onboardingData.daysLeft !== null 
-                ? <span className={styles.countdown}>Chỉ còn <strong>{onboardingData.daysLeft}</strong> ngày nữa là thi. Cố lên!</span>
-                : 'Cùng AI Master lộ trình luyện thi chuẩn ETS'}
+              {onboardingData.daysLeft !== null ? (
+                <span className={styles.countdown}>
+                  {onboardingData.daysLeft === 0 ? (
+                    'Hôm nay là ngày thi! Chúc bạn tự tin đạt điểm tối đa.'
+                  ) : onboardingData.daysLeft === 1 ? (
+                    'Chỉ còn 1 ngày nữa là thi. Giữ tâm lý thật thoải mái nhé!'
+                  ) : onboardingData.daysLeft > 1 ? (
+                    <>
+                      Chỉ còn <strong>{onboardingData.daysLeft}</strong> ngày nữa là thi. Cố lên!
+                    </>
+                  ) : (
+                    'Cùng AI Master lộ trình luyện thi chuẩn ETS'
+                  )}
+                </span>
+              ) : (
+                'Cùng AI Master lộ trình luyện thi chuẩn ETS'
+              )}
             </p>
             <div className={styles.heroCtaRow}>
               <Link href={nextStudyTask.link} className={styles.heroPrimaryCta}>
@@ -158,13 +242,24 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.heroRight}>
-            <StreakCounter currentStreak={streakData.currentStreak} bestStreak={streakData.bestStreak} />
+            <StreakCounter 
+              currentStreak={streakData.currentStreak} 
+              bestStreak={streakData.bestStreak} 
+              freezeCount={streakData.freezeCount}
+              isFrozenToday={streakData.isFrozenToday}
+            />
             <div className={styles.mascotFloat}>
               <MascotSVG mood={streakData.currentStreak > 0 ? 'happy' : 'idle'} size={80} />
             </div>
           </div>
         </div>
       </section>
+
+      {/* ═══════════════ PREDICTIVE SCORE METER ═══════════════ */}
+      <PredictiveScoreMeter />
+
+      {/* ═══════════════ SMART ADAPTIVE FEED ═══════════════ */}
+      <SmartActionFeed />
 
       {/* ═══════════════ DAILY GOALS ═══════════════ */}
       <section className={styles.section}>
@@ -178,67 +273,94 @@ export default function Home() {
           </div>
         </div>
 
-        {studyPlan ? (() => {
-          const activeDay = studyPlan.days.find((d) => !d.completed) || studyPlan.days[0];
-          const completedToday = activeDay.tasks.filter((t) => t.completed).length;
-          const totalToday = activeDay.tasks.length;
-          const progressPercent = Math.round((completedToday / totalToday) * 100);
-
-          return (
-            <div className={`${styles.dailyCard} card-glow`}>
-              <div className={styles.dailyHeader}>
-                <div className={styles.dailyInfo}>
-                  <span className={styles.dayLabel}>Ngày {activeDay.dayNumber}/{studyPlan.daysTotal}</span>
-                  <span className={styles.progressLabel}>{progressPercent}%</span>
+        {studyPlan && activeDay ? (
+          <div className={`${styles.dailyCard} card-glow`}>
+            {isAllCompleted && (
+              <div className={styles.celebrationBanner} data-testid="celebration-banner">
+                <div className={styles.celebrationIconWrap}>
+                  <AwardIcon size={22} />
                 </div>
-                <Link
-                  href="/study-plan"
-                  className="btn-ghost btn-sm"
-                  style={{ fontSize: '0.8rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
-                >
-                  <span>Chi tiết lộ trình</span>
-                  <ArrowRightIcon size={14} />
-                </Link>
-                <div className={styles.progressBarBg}>
-                  <div className={styles.progressBarFill} style={{ width: `${progressPercent}%` }} />
+                <div className={styles.celebrationText}>
+                  <div className={styles.celebrationHeader}>
+                    <h4 className={styles.celebrationTitle}>Mục tiêu hôm nay hoàn thành xuất sắc!</h4>
+                    <span className={styles.celebrationBadge}>+50 XP</span>
+                  </div>
+                  <p className={styles.celebrationSub}>
+                    Bạn đã hoàn thành toàn bộ bài học hôm nay và giữ vững phong độ bứt phá TOEIC {onboardingData.target}.
+                  </p>
                 </div>
               </div>
+            )}
 
-              <div className={styles.planList}>
-                {activeDay.tasks.map((task: any) => (
-                  <div key={task.id} className={styles.planItem} data-completed={task.completed}>
-                    <div className={styles.planItemInfo}>
-                      <button
-                        className={styles.checkButton}
-                        onClick={(e) => {
-                          const btn = e.currentTarget;
-                          btn.classList.remove('animate-bounce-check');
-                          void btn.offsetWidth;
-                          btn.classList.add('animate-bounce-check');
-                          const updated = toggleTaskCompleted(activeDay.dayNumber, task.id);
-                          if (updated) setStudyPlan({ ...updated });
-                        }}
-                      >
-                        {task.completed && '✓'}
-                      </button>
-                      <div className={styles.planItemTextGroup}>
-                        <div className={styles.planItemHeaderRow}>
-                          <span className={styles.planItemTitle}>{task.title}</span>
-                          {task.subCategory && (
-                            <span className={styles.subCatTag}>{task.subCategory}</span>
-                          )}
-                        </div>
+            <div className={styles.dailyHeader}>
+              <div className={styles.dailyInfo}>
+                <div className={styles.dailyTitleGroup}>
+                  <span className={styles.dayLabel}>Ngày {activeDay.dayNumber}/{studyPlan.daysTotal}</span>
+                  <Link
+                    href="/study-plan"
+                    className="btn-ghost btn-sm"
+                    style={{ fontSize: '0.8rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '4px 8px' }}
+                  >
+                    <span>Chi tiết lộ trình</span>
+                    <ArrowRightIcon size={14} />
+                  </Link>
+                </div>
+                <span className={styles.progressLabel}>{progressPercent}%</span>
+              </div>
+              <div className={styles.progressBarBg}>
+                <div className={styles.progressBarFill} style={{ width: `${progressPercent}%` }} />
+              </div>
+            </div>
+
+            <div className={styles.planList}>
+              {activeDay.tasks.map((task: any, index: number) => (
+                <div key={task.id} className={styles.planItem} data-completed={task.completed}>
+                  <div className={styles.planItemInfo}>
+                    <button
+                      className={styles.checkButton}
+                      onClick={(e) => {
+                        const btn = e.currentTarget;
+                        btn.classList.remove('animate-bounce-check');
+                        void btn.offsetWidth;
+                        btn.classList.add('animate-bounce-check');
+                        const updated = toggleTaskCompleted(activeDay.dayNumber, task.id);
+                        if (updated) {
+                          setStudyPlan({ ...updated });
+                          setActiveDayNumber(activeDay.dayNumber);
+                          const updatedDay = updated.days.find(d => d.dayNumber === activeDay.dayNumber);
+                          if (updatedDay && updatedDay.tasks.every(t => t.completed)) {
+                            soundEffects.playVictory();
+                            localStorage.setItem('toeic_celebration_date', new Date().toISOString().slice(0, 10));
+                          }
+                        }
+                      }}
+                    >
+                      {task.completed && '✓'}
+                    </button>
+                    <div className={styles.planItemTextGroup}>
+                      <div className={styles.planItemHeaderRow}>
+                        <span className={styles.planItemTitle}>{task.title}</span>
+                        {task.subCategory && (
+                          <span className={styles.subCatTag}>{task.subCategory}</span>
+                        )}
                       </div>
                     </div>
+                  </div>
+                  <div className={styles.planItemActionGroup}>
+                    {index < 3 && (
+                      <span className={styles.shortcutKeyBadge} title={`Bấm phím ${index + 1} để học ngay`}>
+                        {index + 1}
+                      </span>
+                    )}
                     <Link href={task.link} className={`${task.completed ? 'btn-secondary' : 'btn-primary'} btn-sm`}>
                       {task.completed ? 'ÔN LẠI' : 'HỌC NGAY'}
                     </Link>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          );
-        })() : (
+          </div>
+        ) : (
           <div className={styles.noPlanCard}>
             <div className={styles.noPlanContent}>
               <MascotSVG mood="thinking" size={72} />
@@ -404,14 +526,14 @@ export default function Home() {
             <div className={`${styles.toolIcon} ${styles.iconInfo}`}>
               <LightbulbIcon size={22} />
             </div>
-            <h3>Mẹo thi</h3>
+            <h4>Mẹo thi</h4>
             <p>Chiến thuật làm bài</p>
           </Link>
           <Link href="/notebook" className={`${styles.toolCard} card-glow`}>
             <div className={`${styles.toolIcon} ${styles.iconSuccess}`}>
               <NotebookIcon size={22} />
             </div>
-            <h3>Sổ tay lỗi</h3>
+            <h4>Sổ tay lỗi</h4>
             <p>Khắc phục điểm yếu</p>
           </Link>
         </div>

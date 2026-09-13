@@ -12,7 +12,9 @@
     },
     "correctAnswer": "D",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\n(A) They&rsquo;re greeting each other.<br />\n(B)They&rsquo;re walking beside the lake.<br />\n(C)They&rsquo;re suntanning on the grass.<br />\n(D)They&rsquo;re carrying backpacks on their shoulders.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\n(A) They&rsquo;re greeting each other.<br />\n(B)They&rsquo;re walking beside the lake.<br />\n(C)They&rsquo;re suntanning on the grass.<br />\n(D)They&rsquo;re carrying backpacks on their shoulders.</p>\n"
+    "explanation": "<p>Trong bức ảnh, các nhân vật đang đeo ba lô trên vai (<i>'carrying backpacks on their shoulders'</i>). Do đó đáp án <b>(D)</b> miêu tả chính xác nhất. Loại (A) vì họ không chào nhau, loại (B) vì không đi bộ cạnh hồ nước, loại (C) vì không tắm nắng trên bãi cỏ.</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
   },
   {
     "id": "62b694aebbc57b27fe10f7af",
@@ -27,7 +29,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\n(A) The passengers are boarding the aircraft.<br />\n(B)The flight is departing for the destination.<br />\n(C)The plane has landed at the airport for a time.<br />\n(D)The surface of the plane is damaged.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\n(A) The passengers are boarding the aircraft.<br />\n(B)The flight is departing for the destination.<br />\n(C)The plane has landed at the airport for a time.<br />\n(D)The surface of the plane is damaged.</p>\n"
+    "explanation": "<p>Bức ảnh chụp máy bay đã hạ cánh và đang đỗ ở sân bay (<i>'The plane has landed at the airport'</i>). Đáp án <b>(C)</b> chính xác. Loại (A) vì không có hành khách đang lên máy bay, loại (B) vì máy bay không đang cất cánh, loại (D) vì bề mặt thân máy bay không bị hư hại.</p>",
+    "questionType": "Object & Scene",
+    "subCategory": "Object & Scene"
   },
   {
     "id": "62b694aebbc57b27fe10f7b0",
@@ -42,7 +46,9 @@
     },
     "correctAnswer": "A",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\n(A) Several ships are docked at a pier.<br />\n(B)The liner is passing under the bridge.<br />\n(C) The sailors are lowering the sails.<br />\n(D) The motorboat is cruising through the harbor.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\n(A) Several ships are docked at a pier.<br />\n(B)The liner is passing under the bridge.<br />\n(C) The sailors are lowering the sails.<br />\n(D) The motorboat is cruising through the harbor.</p>\n"
+    "explanation": "<p>Bức ảnh chụp nhiều con tàu đang neo đậu tại cầu cảng (<i>'Several ships are docked at a pier'</i>). Do đó đáp án <b>(A)</b> miêu tả đúng nhất. Loại (B) vì không có tàu đi dưới cầu, loại (C) vì không có thủy thủ hạ buồm, loại (D) vì không có tàu ca-nô đang lướt sóng.</p>",
+    "questionType": "Object & Scene",
+    "subCategory": "Object & Scene"
   },
   {
     "id": "62b694aebbc57b27fe10f7b1",
@@ -57,7 +63,9 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\n(A) A woman is setting the table.<br />\n(B)The restaurant is open for business.<br />\n(C)People are sitting outdoors.<br />\n(D)All the seats are not occupied.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\n(A) A woman is setting the table.<br />\n(B)The restaurant is open for business.<br />\n(C)People are sitting outdoors.<br />\n(D)All the seats are not occupied.</p>\n"
+    "explanation": "<p>Bức ảnh chụp một nhà hàng đang mở cửa phục vụ đón khách (<i>'The restaurant is open for business'</i>). Đáp án <b>(B)</b> đúng. Loại (A) vì không có người phụ nữ nào đang dọn bàn, loại (C) vì không có người ngồi ngoài trời, loại (D) vì ghế vẫn còn nhiều chỗ trống.</p>",
+    "questionType": "Object & Scene",
+    "subCategory": "Object & Scene"
   },
   {
     "id": "62b694aebbc57b27fe10f7b2",
@@ -72,7 +80,9 @@
     },
     "correctAnswer": "C",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\n(A) People are waiting for a bus.<br />\n(B)People are blocking the entrance.<br />\n(C)People are crossing the street.<br />\n(D)People are standing in a line.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\n(A) People are waiting for a bus.<br />\n(B)People are blocking the entrance.<br />\n(C)People are crossing the street.<br />\n(D)People are standing in a line.</p>\n"
+    "explanation": "<p>Bức ảnh chụp dòng người đang đi bộ băng qua đường trên vạch kẻ sang đường (<i>'People are crossing the street'</i>). Đáp án <b>(C)</b> miêu tả đúng hành động tập thể. Loại (A) vì không ai đợi xe buýt, loại (B) vì không ai chặn lối vào, loại (D) vì mọi người không xếp hàng dọc.</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
   },
   {
     "id": "62b694aebbc57b27fe10f7b3",
@@ -87,6 +97,8 @@
     },
     "correctAnswer": "B",
     "transcript": "<p><br />\n<b>Transcript: </b><br />\n(A) Some products are stacked on the rack.<br />\n(B)A boat is floating on the water.<br />\n(C)Some people are rowing a boat.<br />\n(D)A man is putting on a cap.</p>\n",
-    "explanation": "<p><br />\n<b>Transcript: </b><br />\n(A) Some products are stacked on the rack.<br />\n(B)A boat is floating on the water.<br />\n(C)Some people are rowing a boat.<br />\n(D)A man is putting on a cap.</p>\n"
+    "explanation": "<p>Bức ảnh chụp một chiếc thuyền đang bồng bềnh/trôi trên mặt nước (<i>'A boat is floating on the water'</i>). Đáp án <b>(B)</b> miêu tả đúng chủ thể tĩnh. Loại (A) vì không có sản phẩm nào trên giá, loại (C) vì không có ai đang chèo thuyền, loại (D) vì không có người đàn ông đội mũ.</p>",
+    "questionType": "Object & Scene",
+    "subCategory": "Object & Scene"
   }
 ]

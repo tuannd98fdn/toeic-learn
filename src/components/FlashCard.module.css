@@ -109,18 +109,19 @@
 }
 
 .audioButton {
-  width: 48px;
-  height: 48px;
+  position: relative;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--primary-light);
   color: var(--primary);
-  border: none;
+  border: 1.5px solid rgba(var(--primary-rgb), 0.25);
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 16px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 18px;
 }
 
 .audioButton:hover {
@@ -128,12 +129,68 @@
   color: #fff;
   transform: scale(1.08);
   box-shadow: var(--glow-primary);
+  border-color: var(--primary);
+}
+
+.audioKeyBadge {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  background: var(--surface);
+  color: var(--primary);
+  border: 1.5px solid var(--border);
+  font-size: 0.65rem;
+  font-weight: 800;
+  border-radius: 5px;
+  padding: 1px 5px;
+  line-height: 1.2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.speaking {
+  animation: speakingPulse 1.2s infinite ease-in-out;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+@keyframes speakingPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(var(--primary-rgb), 0);
+    transform: scale(1.06);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
+    transform: scale(1);
+  }
 }
 
 .hint {
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
   font-weight: 500;
+}
+
+.hint strong {
+  color: var(--foreground);
+  font-weight: 700;
+  background: var(--surface-sunken);
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+
+.hintDot {
+  color: var(--text-tertiary);
+  font-size: 0.7rem;
 }
 
 /* ============================================
@@ -142,8 +199,8 @@
 .back {
   transform: rotateY(180deg);
   justify-content: flex-start;
-  padding-top: 36px;
-  gap: 16px;
+  padding: 24px 28px 20px;
+  gap: 12px;
 }
 
 .backGlow {
@@ -157,18 +214,79 @@
   pointer-events: none;
 }
 
+.backHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.backAudioBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--surface-sunken);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backAudioBtn:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.backAudioBadge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  font-size: 0.55rem;
+  font-weight: 800;
+  border-radius: 4px;
+  padding: 0 4px;
+  line-height: 1.2;
+}
+
+.backHint {
+  margin-top: auto;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.backHint strong {
+  color: var(--text-secondary);
+  font-weight: 700;
+  background: var(--surface-sunken);
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
 .meaningContainer {
   text-align: center;
+  margin: 4px 0;
 }
 
 .partOfSpeech {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-tertiary);
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  display: block;
+  font-weight: 700;
+  display: inline-block;
 }
 
 .meaning {

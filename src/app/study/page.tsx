@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import FlashCard from '@/components/FlashCard';
 import Confetti from '@/components/Confetti';
-import { SparklesIcon, AwardIcon, CompassIcon, ArrowRightIcon, RotateCcwIcon, HomeIcon } from '@/components/icons/AppIcons';
+import { SparklesIcon, AwardIcon, CompassIcon, ArrowRightIcon, RotateCcwIcon, HomeIcon, VolumeIcon, VolumeXIcon } from '@/components/icons/AppIcons';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useStreak } from '@/hooks/useStreak';
 import { useDailyMission } from '@/hooks/useDailyMission';
@@ -29,16 +29,32 @@ export default function StudyPage() {
   const [sessionStats, setSessionStats] = useState({ reviewCount: 0, newCount: 0 });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [autoPlayAudio, setAutoPlayAudio] = useState(true);
 
-  // Initialize band from user's onboarding target score
+  // Initialize autoplay setting & band from user's onboarding target score
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      const savedAutoPlay = localStorage.getItem('toeic_vocab_autoplay');
+      if (savedAutoPlay !== null) {
+        setAutoPlayAudio(savedAutoPlay === 'true');
+      }
+
       const targetScore = localStorage.getItem('toeic_target_score');
       if (targetScore === '500+') setSelectedBand('450+');
       else if (targetScore === '600+' || targetScore === '750+') setSelectedBand('650+');
       else if (targetScore === '900+') setSelectedBand('800+');
     }
   }, []);
+
+  const toggleAutoPlay = () => {
+    setAutoPlayAudio(prev => {
+      const next = !prev;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('toeic_vocab_autoplay', String(next));
+      }
+      return next;
+    });
+  };
 
   const loadSession = useCallback((band: string) => {
     if (!mounted) return;
@@ -168,10 +184,23 @@ export default function StudyPage() {
           ))}
         </div>
 
-        {/* Session Stats */}
-        <div className={styles.sessionStats}>
-          <span>Hôm nay:</span>
-          <strong>{sessionStats.reviewCount}</strong> từ cần ôn + <strong>{sessionStats.newCount}</strong> từ mới
+        {/* Session Stats & Auto-play Toggle */}
+        <div className={styles.controlsRow}>
+          <div className={styles.sessionStats}>
+            <span>Hôm nay:</span>
+            <strong>{sessionStats.reviewCount}</strong> từ cần ôn + <strong>{sessionStats.newCount}</strong> từ mới
+          </div>
+
+          <button
+            type="button"
+            className={`${styles.autoPlayToggle} ${autoPlayAudio ? styles.autoPlayActive : ''}`}
+            onClick={toggleAutoPlay}
+            title={autoPlayAudio ? 'Đang bật tự động phát âm (Click để tắt)' : 'Đang tắt tự động phát âm (Click để bật)'}
+            aria-label="Tự động phát âm"
+          >
+            {autoPlayAudio ? <VolumeIcon size={15} /> : <VolumeXIcon size={15} />}
+            <span>Tự động phát âm: <strong>{autoPlayAudio ? 'Bật' : 'Tắt'}</strong></span>
+          </button>
         </div>
 
         <div className={styles.progressText}>
@@ -188,7 +217,8 @@ export default function StudyPage() {
       <main className={styles.main}>
         <FlashCard 
           word={words[currentIndex]} 
-          onRate={handleRate} 
+          onRate={handleRate}
+          autoPlay={autoPlayAudio}
         />
       </main>
     </div>

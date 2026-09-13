@@ -10,6 +10,8 @@ export const Part1QuestionSchema = z.object({
   correctAnswer: z.string(),
   transcript: z.string().optional(),
   explanation: z.string().optional(),
+  questionType: z.string().optional(),
+  subCategory: z.string().optional(),
 });
 export const Part1DataSchema = z.array(Part1QuestionSchema);
 
@@ -22,6 +24,8 @@ export const Part2QuestionSchema = z.object({
   correctAnswer: z.string(),
   transcript: z.string().optional(),
   explanation: z.string().optional(),
+  questionType: z.string().optional(),
+  subCategory: z.string().optional(),
 });
 export const Part2DataSchema = z.array(Part2QuestionSchema);
 
@@ -33,6 +37,8 @@ export const ListeningSubQuestionSchema = z.object({
   options: z.record(z.string(), z.string()),
   correctAnswer: z.string(),
   explanation: z.string().optional(),
+  questionType: z.string().optional(),
+  subCategory: z.string().optional(),
 });
 
 // Part 3: Short Conversations (13 sets)
