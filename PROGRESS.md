@@ -795,9 +795,46 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### ✅ Vấn Đề 36: Nâng Cấp Âm Thanh Bản Xứ Chuẩn ETS Studio HD Cho Masterclass 30 Phút, Bóc Tách Âm Học Tương Tác Từng Từ (Chữ Viết vs Phiên Âm IPA) & Tích Hợp Lộ Trình Mục Tiêu [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Người học phản ánh trình phát âm thanh của Trạm 1 Masterclass trước đây sử dụng Web Speech API (`window.speechSynthesis`) của hệ thống máy tính nên âm thanh phát ra khô cứng, máy móc, khó nghe và **không thể hiện được các hiện tượng biến âm tinh tế chuẩn ETS** (Glottal Stop /ʔ/ giọng Anh, Flapped /t/ giọng Mỹ, biến âm /eɪ/ -> /aɪ/ giọng Úc, Weak forms).
+  - Hai dòng hiển thị "Chữ Viết Trong Đề ETS" và "Âm Thanh Thực Tế Phát Ra (Phonetics)" chỉ là văn bản tĩnh, chưa cho phép người học chạm vào từng từ để bóc tách hiện tượng âm học và nghe phát âm độc lập.
+  - Lộ trình mục tiêu (`/study-plan`) chưa tích hợp nhiệm vụ Trạm Học Chuyên Sâu 30 Phút Masterclass cho các band điểm cao 800+, và tồn đọng các ký tự checkmark unicode `✓` vi phạm quy tắc `NO UI EMOJIS (STRICT)`.
+* **Chi tiết triển khai**:
+  1. **Hệ thống Âm Thanh Bản Xứ Chuẩn ETS Studio HD (`public/audio/masterclass/`)**:
+     - Sử dụng Neural Speech Engine chuẩn quốc tế sinh 8 tệp MP3 chất lượng cao cho 4 bài học Connected Speech:
+       - *Giọng British (`en-GB-RyanNeural`)*: Câu “The quarterly report is certainly not written yet.” phát âm tự nhiên âm ngắt họng Glottal Stop /ʔ/ và vần câm non-rhotic.
+       - *Giọng American (`en-US-JennyNeural`)*: Câu “Put it on the desk and meet us at eight.” phát âm âm vỗ Flapped /t/ và linking.
+       - *Giọng Australian (`en-AU-NatashaNeural`)*: Câu “The conference date has been changed to late May.” phát âm chuyển đổi /eɪ/ -> /aɪ/.
+       - *Giọng American Weak Forms (`en-US-JennyNeural`)*: Câu “He could have told her that we were going to arrive.” phát âm nuốt âm /h/ và giảm âm.
+     - Hai phiên bản âm thanh cho mỗi bài học: **Nghe chuẩn 1.0x** (ngữ điệu tự nhiên) và **Nghe chậm 0.75x bóc tách âm** (pitch-preserved, tách rõ từng âm tiết, không méo tiếng).
+     - Trình phát `ConnectedSpeechPlayer.tsx` phát trực tiếp tệp MP3 Studio HD qua HTML5 Audio API (0ms latency, chạy mượt trên mọi thiết bị), tự động fallback sang Web Speech API nếu tệp âm thanh gặp sự cố.
+     - Huy hiệu `Giọng Bản Xứ Chuẩn ETS (Studio HD)` với chỉ báo đèn xanh phát quang tinh tế.
+  2. **Bộ Bóc Tách Âm Học Đối Chiếu Từng Từ (Word-by-Word Acoustic Alignment Grid)**:
+     - Mở rộng schema `ConnectedSpeechLesson` bổ sung `audioNormalUrl`, `audioSlowUrl`, và `wordAlignments`.
+     - Dải thẻ từ tương tác song song: Chữ viết (trên) ⇄ Phiên âm IPA thực tế (dưới).
+     - Làm nổi bật các từ có hiện tượng âm học trọng tâm (*certainly*, *not*, *written* mang Glottal Stop /ʔ/) với viền vàng hổ phách phát quang và nhãn `[Trọng tâm]`.
+     - Click vào từng từ để mở hộp phân tích cơ chế âm học chuyên sâu (`phenomenonNote`) và nút "Nghe từ này" phát âm riêng biệt.
+  3. **Tích Hợp Toàn Diện Lộ Trình Mục Tiêu (`/study-plan` & `studyPlanEngine.ts`)**:
+     - Mở rộng task type `'masterclass'` trong `PlanTask`.
+     - Tự động phân bổ nhiệm vụ Masterclass 30' vào Lộ trình học cho học viên mục tiêu 800+ hoặc trong giai đoạn tăng tốc phản xạ.
+     - Bổ sung hàm `markMasterclassCompletedInPlan`: tự động đánh dấu hoàn thành nhiệm vụ trong lộ trình khi học viên hoàn tất phiên học 30 phút trong `DailyMasterclassHub.tsx`.
+     - Thay thế toàn bộ ký tự `✓` trong `src/app/study-plan/page.tsx` bằng SVG `CheckIcon` từ `AppIcons.tsx`, bảo đảm 100% quy tắc `NO UI EMOJIS (STRICT)`.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ nghiêm ngặt **NO UI EMOJIS (STRICT)**: 0 emoji trong mã nguồn và rendered DOM.
+  - Zero Dependencies: 0 KB thư viện ngoài thêm vào production bundle.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với toàn bộ 34 routes.
+  - Kiểm thử tự động:
+    - `scratch/test_masterclass_milestone36_integrity.mjs`: 100% PASS (8 tệp MP3, schema, 0 emoji).
+    - `scratch/test_masterclass_milestone36_e2e.mjs`: 100% PASS (1.0x & 0.75x audio, click "certainly" Glottal Stop, drill question, Study Plan, 0 emoji DOM).
+    - `scratch/test_masterclass_e2e.mjs`: 100% PASS toàn bộ 4 trạm Masterclass.
+
+---
+
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 36: Hệ Thống Bóc Tách Bẫy Đề Thi TOEIC Reading (Distractor Analysis & Trap Classifier) & Chế Độ Luyện Đọc Thích Ứng Theo Target Band (500 / 700 / 850+) Trong Sổ Tay Lỗi Sai
+### Vấn Đề 37: Hệ Thống Bóc Tách Bẫy Đề Thi TOEIC Reading (Distractor Analysis & Trap Classifier) & Chế Độ Luyện Đọc Thích Ứng Theo Target Band (500 / 700 / 850+) Trong Sổ Tay Lỗi Sai
 * **Bối cảnh & Vấn đề**:
   - Khi làm sai các câu Part 5, 6, 7, người học thường chỉ biết đáp án đúng mà chưa nhận diện được bản chất "bẫy" mà đề thi ETS đã cài cắm (ví dụ: bẫy từ loại đồng âm giả, bẫy đại từ sở hữu đứng trước danh từ ghép, bẫy thông tin đúng ngữ pháp nhưng sai nghĩa theo ngữ cảnh, bẫy chi tiết có xuất hiện trong bài nhưng không trả lời đúng trọng tâm câu hỏi trong Part 7).
   - Cần nâng cấp hệ thống phân loại bẫy đề thi cho toàn bộ các câu hỏi Reading trong Sổ tay câu hỏi sai (`/notebook`) và phòng thi:
@@ -812,11 +849,9 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm thử E2E Playwright mẫu**:
-  * `node scratch/test_rc_mock_exam.mjs` (Kiểm thử RC Mock Exam, Pacing, CEFR RC & Emoji Compliance).
-  * `node scratch/test_part7_font_zoom_evidence_e2e.mjs` (Kiểm thử Part 7 Font Zoom A-/A+, LocalStorage, Evidence Highlighting & Multi-passage).
-  * `node scratch/test_part7_full_pacing_e2e.mjs` (Kiểm thử Live Target Badge, Session Pacing Report & Exam Part 7 Pacing).
-  * `node scratch/test_part7_targeted_reading_e2e.mjs` (Kiểm thử Part 7 Targeted Reading theo 6 dạng & cấu trúc đoạn).
-  * `node scratch/test_bottleneck_widget_e2e.mjs` (Kiểm thử Widget Điểm nghẽn trên Dashboard).
+  * `node scratch/test_masterclass_milestone36_e2e.mjs` (Kiểm thử Masterclass Studio Audio 1.0x, 0.75x, Glottal Stop, Lộ Trình Mục Tiêu & Emoji Audit).
+  * `node scratch/test_masterclass_milestone36_integrity.mjs` (Kiểm thử tệp âm thanh, schema, bóc tách âm & data integrity).
+  * `node scratch/test_masterclass_e2e.mjs` (Kiểm thử 4 trạm Masterclass 30 phút).
 
 
 
