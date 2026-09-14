@@ -18,6 +18,7 @@ export default function NotebookQuizPage() {
   const [isFinished, setIsFinished] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [clearedWords, setClearedWords] = useState(0);
+  const [sessionKey, setSessionKey] = useState(0);
 
   useEffect(() => {
     if (!vocabMounted || !notebookMounted) return;
@@ -45,7 +46,8 @@ export default function NotebookQuizPage() {
     });
 
     setQuestions(generatedQuestions);
-  }, [vocabMounted, notebookMounted, allWords, getMistakes, getRandomWords]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [vocabMounted, notebookMounted, sessionKey]);
 
   const handleAnswer = (isCorrect: boolean) => {
     if (isCorrect) {

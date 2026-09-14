@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 130px);
-  max-width: 600px;
+  max-width: 660px;
   margin: 0 auto;
-  padding: 12px 16px 36px;
+  padding: 8px 16px 36px;
   justify-content: flex-start;
   transition: max-width 0.25s ease;
 }
@@ -20,8 +20,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .topHubTitleArea {
@@ -29,40 +29,43 @@
 }
 
 .topHubTitle {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: var(--foreground);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
 }
 
 .topHubSubtitle {
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
-  max-width: 500px;
+  max-width: 540px;
+  line-height: 1.4;
 }
 
 .topHubTabs {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   background: var(--surface-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  padding: 5px;
-  max-width: 500px;
+  padding: 4px;
+  max-width: 520px;
   width: 100%;
+  backdrop-filter: blur(8px);
 }
 
 .topHubTab {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 7px;
   flex: 1;
-  padding: 8px 14px;
+  padding: 7px 12px;
   border-radius: var(--radius-lg);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--text-secondary);
   background: transparent;
@@ -79,7 +82,7 @@
 .topHubTabActive {
   background: var(--surface);
   color: var(--primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .loading {
@@ -90,29 +93,101 @@
   color: var(--text-secondary);
 }
 
-.header {
-  margin-bottom: 24px;
+/* ============================================
+   Study Header & Unified Control Box
+   ============================================ */
+.studyHeader {
+  margin-bottom: 12px;
+  width: 100%;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Band Selector */
+.studyControlBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 8px 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.modeRow {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.modeSwitcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: var(--surface-sunken);
+  padding: 3px;
+  border-radius: var(--radius-lg);
+  width: 100%;
+}
+
+.modeTab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.modeTab:hover {
+  color: var(--foreground);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.activeModeTab {
+  background: var(--surface);
+  color: var(--primary);
+  border-color: rgba(var(--primary-rgb), 0.25);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.bandRow {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .bandSelector {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 6px;
-  margin-bottom: 14px;
+  width: 100%;
   flex-wrap: wrap;
 }
 
 .bandPill {
-  background: var(--surface);
+  background: transparent;
   border: 1px solid var(--border);
   color: var(--text-secondary);
-  padding: 5px 14px;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  padding: 4px 11px;
+  border-radius: 16px;
+  font-size: 0.76rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
+  white-space: nowrap;
 }
 
 .bandPill:hover {
@@ -125,91 +200,117 @@
   background: var(--primary);
   border-color: var(--primary);
   color: white;
-  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.3);
+  box-shadow: 0 2px 6px rgba(var(--primary-rgb), 0.28);
 }
 
-/* Controls Row (Session Stats & Auto-play Toggle) */
-.controlsRow {
+/* ============================================
+   Streamlined Session Status Strip (Single Row)
+   ============================================ */
+.sessionStatusBar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 10px;
+  padding: 6px 12px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font-size: 0.78rem;
   gap: 10px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
 }
 
-/* Session Stats */
-.sessionStats {
-  display: inline-flex;
+.statusBarLeft {
+  display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 6px 14px;
-  border-radius: 20px;
-  margin: 0;
+  flex-shrink: 0;
 }
 
-.sessionStats strong {
-  color: var(--foreground);
-}
-
-/* Auto-play Toggle */
-.autoPlayToggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 6px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-.autoPlayToggle:hover {
-  background: var(--surface-hover);
-  color: var(--foreground);
-  border-color: var(--border-focus);
-}
-
-.autoPlayActive {
-  background: rgba(var(--primary-rgb), 0.1);
-  border-color: rgba(var(--primary-rgb), 0.35);
-  color: var(--primary);
-}
-
-.autoPlayActive strong {
-  color: var(--primary);
-}
-
-/* Progress */
+.progressCounter,
 .progressText {
-  text-align: center;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--foreground);
-  margin-bottom: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
 }
 
-.progressBarBg {
-  width: 100%;
-  height: 6px;
-  background: var(--surface-sunken);
+.progressCounter strong {
+  color: var(--foreground);
+  font-weight: 800;
+}
+
+.miniProgressBar {
+  width: 60px;
+  height: 5px;
+  background: var(--border);
   border-radius: 3px;
   overflow: hidden;
 }
 
-.progressBarFill {
+.miniProgressBarFill {
   height: 100%;
   background: linear-gradient(90deg, var(--primary), var(--secondary));
-  transition: width 0.4s var(--ease-out-expo);
   border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.statusBarCenter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.statChip {
+  color: var(--text-secondary);
+}
+
+.statChip strong {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.statDivider {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.statusBarRight {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.compactAutoPlayBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.compactAutoPlayBtn:hover {
+  background: var(--surface-hover);
+  color: var(--foreground);
+}
+
+.compactAutoPlayActive {
+  color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.08);
+  border-color: rgba(var(--primary-rgb), 0.2);
 }
 
 /* Card Container */
@@ -717,5 +818,48 @@
   }
   .drillOptionsGrid {
     grid-template-columns: 1fr;
+  }
+  .topHubTabs {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 3px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .topHubTabs::-webkit-scrollbar {
+    display: none;
+  }
+  .topHubTab {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    font-size: 0.76rem;
+  }
+  .modeSwitcher {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 2px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .modeSwitcher::-webkit-scrollbar {
+    display: none;
+  }
+  .modeTab {
+    flex: 0 0 auto;
+    padding: 5px 9px;
+    font-size: 0.74rem;
+  }
+  .sessionStatusBar {
+    padding: 5px 8px;
+    gap: 6px;
+  }
+  .miniProgressBar {
+    width: 36px;
+  }
+  .compactAutoPlayBtn span {
+    display: none;
+  }
+  .compactAutoPlayBtn {
+    padding: 4px 6px;
   }
 }

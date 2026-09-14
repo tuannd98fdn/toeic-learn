@@ -2,7 +2,9 @@ import { chromium } from 'playwright';
 
 async function run() {
   const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext();
+  const context = await browser.newContext({
+    extraHTTPHeaders: { 'x-playwright-test': 'true' }
+  });
   const page = await context.newPage();
 
   const consoleLogs = [];

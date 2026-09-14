@@ -18,10 +18,13 @@ export default function ExamNotebookQuizPage() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [sessionKey, setSessionKey] = useState(0);
 
   useEffect(() => {
     if (!mounted) return;
     
+    let isCancelled = false;
+
     const loadQuiz = async () => {
       setLoading(true);
       const allMistakeIds = getMistakes();
@@ -33,8 +36,10 @@ export default function ExamNotebookQuizPage() {
       });
 
       if (dueExamIds.length === 0) {
-        setIsFinished(true);
-        setLoading(false);
+        if (!isCancelled) {
+          setIsFinished(true);
+          setLoading(false);
+        }
         return;
       }
 
@@ -42,12 +47,21 @@ export default function ExamNotebookQuizPage() {
       const quizIds = dueExamIds.sort(() => 0.5 - Math.random()).slice(0, 15);
       
       const loaded = await fetchMistakeQuestions(quizIds, mistakes);
-      setQuestions(loaded);
-      setLoading(false);
+      if (!isCancelled) {
+        setQuestions(loaded);
+        setCurrentIndex(0);
+        setSelectedAnswer(null);
+        setLoading(false);
+      }
     };
 
     loadQuiz();
-  }, [mounted, getMistakes, mistakes]);
+
+    return () => {
+      isCancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted, sessionKey]);
 
   const handleAnswer = (answer: string) => {
     if (selectedAnswer !== null) return;

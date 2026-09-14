@@ -35,7 +35,7 @@ const BANDS = [
   { value: '450+', label: 'Band 450+' },
   { value: '650+', label: 'Band 650+' },
   { value: '800+', label: 'Band 800+' },
-  { value: 'Reading Part 6 & 7', label: 'Part 6 & 7: Collocations & Paraphrase' },
+  { value: 'Reading Part 6 & 7', label: 'Part 6 & 7' },
 ];
 
 type StudyMode = 'flashcard' | 'match' | 'drill';
@@ -227,36 +227,45 @@ function StudyPageContent() {
 
     return (
       <>
-        {/* Session Stats & Auto-play Toggle */}
-        <div className={styles.controlsRow}>
-          <div className={styles.sessionStats}>
-            <span>Hôm nay:</span>
-            <strong>{sessionStats.reviewCount}</strong> từ cần ôn + <strong>{sessionStats.newCount}</strong> từ mới
+        {/* Streamlined Session Status Strip */}
+        <div className={styles.sessionStatusBar}>
+          <div className={styles.statusBarLeft}>
+            <span className={`${styles.progressCounter} ${styles.progressText}`}>
+              Từ <strong>{currentIndex + 1}</strong> / {words.length}
+            </span>
+            <div className={styles.miniProgressBar}>
+              <div 
+                className={styles.miniProgressBarFill} 
+                style={{ width: `${progressPercent}%` }} 
+              />
+            </div>
           </div>
 
-          <button
-            type="button"
-            className={`${styles.autoPlayToggle} ${autoPlayAudio ? styles.autoPlayActive : ''}`}
-            onClick={toggleAutoPlay}
-            title={autoPlayAudio ? 'Đang bật tự động phát âm (Click để tắt)' : 'Đang tắt tự động phát âm (Click để bật)'}
-            aria-label="Tự động phát âm"
-          >
-            {autoPlayAudio ? <VolumeIcon size={15} /> : <VolumeXIcon size={15} />}
-            <span>Tự động phát âm: <strong>{autoPlayAudio ? 'Bật' : 'Tắt'}</strong></span>
-          </button>
+          <div className={styles.statusBarCenter}>
+            <span className={styles.statChip}>
+              <strong>{sessionStats.reviewCount}</strong> cần ôn
+            </span>
+            <span className={styles.statDivider}>•</span>
+            <span className={styles.statChip}>
+              <strong>{sessionStats.newCount}</strong> từ mới
+            </span>
+          </div>
+
+          <div className={styles.statusBarRight}>
+            <button
+              type="button"
+              className={`${styles.compactAutoPlayBtn} ${autoPlayAudio ? styles.compactAutoPlayActive : ''}`}
+              onClick={toggleAutoPlay}
+              title={autoPlayAudio ? 'Đang bật tự động phát âm (Click để tắt)' : 'Đang tắt tự động phát âm (Click để bật)'}
+              aria-label="Tự động phát âm"
+            >
+              {autoPlayAudio ? <VolumeIcon size={14} /> : <VolumeXIcon size={14} />}
+              <span>Tự động phát âm: <strong>{autoPlayAudio ? 'Bật' : 'Tắt'}</strong></span>
+            </button>
+          </div>
         </div>
 
-        <div className={styles.progressText}>
-          Từ {currentIndex + 1} / {words.length}
-        </div>
-        <div className={styles.progressBarBg}>
-          <div 
-            className={styles.progressBarFill} 
-            style={{ width: `${progressPercent}%` }} 
-          />
-        </div>
-
-        <main className={styles.main} style={{ marginTop: '20px' }}>
+        <main className={styles.main}>
           <FlashCard 
             word={words[currentIndex]} 
             onRate={handleRate}
@@ -286,7 +295,7 @@ function StudyPageContent() {
             Trung Tâm Từ Vựng <span className="text-gradient">TOEIC Master</span>
           </h1>
           <p className={styles.topHubSubtitle}>
-            Luyện trí nhớ dài hạn Spaced Repetition (SRS), kiểm tra phản xạ Quiz 10 câu và tra cứu kho 400+ từ chuẩn ETS
+            Luyện trí nhớ dài hạn Spaced Repetition (SRS) • Kiểm tra phản xạ Quiz 10 câu • Tra cứu kho 400+ từ chuẩn ETS
           </p>
         </div>
 
@@ -296,7 +305,7 @@ function StudyPageContent() {
             className={`${styles.topHubTab} ${vocabTab === 'flashcard' ? styles.topHubTabActive : ''}`}
             onClick={() => handleTabChange('flashcard')}
           >
-            <CardsIcon size={18} />
+            <CardsIcon size={17} />
             <span>Thẻ Flashcards SRS</span>
           </button>
           <button
@@ -304,7 +313,7 @@ function StudyPageContent() {
             className={`${styles.topHubTab} ${vocabTab === 'quiz' ? styles.topHubTabActive : ''}`}
             onClick={() => handleTabChange('quiz')}
           >
-            <QuizIcon size={18} />
+            <QuizIcon size={17} />
             <span>Làm Quiz 10 Câu</span>
           </button>
           <button
@@ -312,7 +321,7 @@ function StudyPageContent() {
             className={`${styles.topHubTab} ${vocabTab === 'dictionary' ? styles.topHubTabActive : ''}`}
             onClick={() => handleTabChange('dictionary')}
           >
-            <BookIcon size={18} />
+            <BookIcon size={17} />
             <span>Kho Từ &amp; Tra Cứu</span>
           </button>
         </div>
@@ -322,49 +331,55 @@ function StudyPageContent() {
       {vocabTab === 'dictionary' && <VocabularyPage />}
       {vocabTab === 'flashcard' && (
         <>
-          <header className={styles.header}>
-            {/* Mode Switcher */}
-            <div className={styles.modeSwitcher}>
-              <button
-                type="button"
-                className={`${styles.modeTab} ${studyMode === 'flashcard' ? styles.activeModeTab : ''}`}
-                onClick={() => setStudyMode('flashcard')}
-              >
-                <CardsIcon size={16} />
-                <span>Thẻ Ghi Nhớ SRS</span>
-              </button>
-              <button
-                type="button"
-                className={`${styles.modeTab} ${studyMode === 'match' ? styles.activeModeTab : ''}`}
-                onClick={() => setStudyMode('match')}
-              >
-                <LinkIcon size={16} />
-                <span>Ghép Cặp Paraphrase</span>
-              </button>
-              <button
-                type="button"
-                className={`${styles.modeTab} ${studyMode === 'drill' ? styles.activeModeTab : ''}`}
-                onClick={() => setStudyMode('drill')}
-              >
-                <ZapIcon size={16} />
-                <span>Phản Xạ Collocations</span>
-              </button>
-            </div>
-
-            {/* Band Selector (Used for Flashcard SRS) */}
-            {studyMode === 'flashcard' && (
-              <div className={styles.bandSelector}>
-                {BANDS.map(b => (
+          <header className={styles.studyHeader}>
+            <div className={styles.studyControlBox}>
+              {/* Mode Switcher */}
+              <div className={styles.modeRow}>
+                <div className={styles.modeSwitcher}>
                   <button
-                    key={b.value}
-                    className={`${styles.bandPill} ${selectedBand === b.value ? styles.activeBandPill : ''}`}
-                    onClick={() => handleBandChange(b.value)}
+                    type="button"
+                    className={`${styles.modeTab} ${studyMode === 'flashcard' ? styles.activeModeTab : ''}`}
+                    onClick={() => setStudyMode('flashcard')}
                   >
-                    {b.label}
+                    <CardsIcon size={15} />
+                    <span>Thẻ Ghi Nhớ SRS</span>
                   </button>
-                ))}
+                  <button
+                    type="button"
+                    className={`${styles.modeTab} ${studyMode === 'match' ? styles.activeModeTab : ''}`}
+                    onClick={() => setStudyMode('match')}
+                  >
+                    <LinkIcon size={15} />
+                    <span>Ghép Cặp Paraphrase</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`${styles.modeTab} ${studyMode === 'drill' ? styles.activeModeTab : ''}`}
+                    onClick={() => setStudyMode('drill')}
+                  >
+                    <ZapIcon size={15} />
+                    <span>Phản Xạ Collocations</span>
+                  </button>
+                </div>
               </div>
-            )}
+
+              {/* Band Selector (Used for Flashcard SRS) */}
+              {studyMode === 'flashcard' && (
+                <div className={styles.bandRow}>
+                  <div className={styles.bandSelector}>
+                    {BANDS.map(b => (
+                      <button
+                        key={b.value}
+                        className={`${styles.bandPill} ${selectedBand === b.value ? styles.activeBandPill : ''}`}
+                        onClick={() => handleBandChange(b.value)}
+                      >
+                        {b.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </header>
 
           {/* Main Body depending on Active Study Mode */}

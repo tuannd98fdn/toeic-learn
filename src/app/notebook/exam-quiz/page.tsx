@@ -14,6 +14,7 @@ import { soundEffects } from '@/utils/soundEffects';
 import {
   RotateCcwIcon,
   ArrowRightIcon,
+  ArrowLeftIcon,
   CheckCircleIcon,
   SparklesIcon,
   HelpCircleIcon,
@@ -69,10 +70,13 @@ function ExamMistakeQuizContent() {
   const [isFinished, setIsFinished] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
+  const [sessionKey, setSessionKey] = useState(0);
 
-  // Load and filter mistake questions
+  // Load and filter mistake questions once per practice session
   useEffect(() => {
     if (!mounted) return;
+
+    let isCancelled = false;
 
     const loadQuestions = async () => {
       setLoading(true);
@@ -115,8 +119,10 @@ function ExamMistakeQuizContent() {
         }
 
         if (targetMistakeIds.length === 0) {
-          setQuestions([]);
-          setLoading(false);
+          if (!isCancelled) {
+            setQuestions([]);
+            setLoading(false);
+          }
           return;
         }
 
@@ -124,16 +130,29 @@ function ExamMistakeQuizContent() {
         const sessionIds = targetMistakeIds.sort(() => 0.5 - Math.random()).slice(0, 20);
         const loaded = await fetchMistakeQuestions(sessionIds, mistakes);
 
-        setQuestions(loaded);
+        if (!isCancelled) {
+          setQuestions(loaded);
+          setCurrentIndex(0);
+          setSelectedAnswer(null);
+          setShowAnswer(false);
+          setShowClueHint(false);
+          setLoading(false);
+        }
       } catch (err) {
         console.error('Failed to load mistake questions:', err);
-      } finally {
-        setLoading(false);
+        if (!isCancelled) {
+          setLoading(false);
+        }
       }
     };
 
     loadQuestions();
-  }, [mounted, filterPart, filterType, targetId, filterRootCause, getMistakes, mistakes]);
+
+    return () => {
+      isCancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted, filterPart, filterType, targetId, filterRootCause, sessionKey]);
 
   const currentQ = questions[currentIndex];
   const isAnswered = showAnswer;
@@ -146,7 +165,7 @@ function ExamMistakeQuizContent() {
       setSelectedAnswer(key);
       setShowAnswer(true);
 
-      const correct = key === currentQ.qData.correctAnswer;
+      const correct = key.trim().toUpperCase() === currentQ.qData.correctAnswer?.trim().toUpperCase();
       if (correct) {
         setScore((prev) => prev + 1);
         setClearedCount((prev) => prev + 1);
@@ -277,6 +296,7 @@ function ExamMistakeQuizContent() {
                 setSelectedAnswer(null);
                 setShowClueHint(false);
                 setMasteredThisSession({});
+                setSessionKey((prev) => prev + 1);
               }}
               className="btn-primary"
             >
@@ -326,7 +346,8 @@ function ExamMistakeQuizContent() {
       <header className={styles.header}>
         <div className={styles.topRow}>
           <Link href="/notebook" className={styles.backBtn}>
-            ← Sổ tay lỗi sai
+            <ArrowLeftIcon size={16} style={{ marginRight: '6px', verticalAlign: 'middle', display: 'inline' }} />
+            Sổ tay lỗi sai
           </Link>
           <div className={styles.badgeRow}>
             {filterRootCause && (
@@ -374,11 +395,9 @@ function ExamMistakeQuizContent() {
         )}
 
         {/* Question Text */}
-        {qData.text && (
-          <h2 className={styles.questionText}>
-            {qData.number}. {qData.text}
-          </h2>
-        )}
+        <h2 className={styles.questionText}>
+          {qData.number ? `Câu ${qData.number}` : ''}{qData.number && qData.text ? ': ' : ''}{qData.text || ''}
+        </h2>
 
         {/* Clue Hint Scaffolding */}
         {!showAnswer && (

@@ -952,9 +952,78 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+---
+
+### ✅ Vấn Đề 41: Khắc Phục Triệt Để Lỗi Tự Động Nhảy Câu & Reshuffle Khi Nộp Đáp Án Tại Trang Ôn Tập Lỗi Sai Đề Thi (`/notebook/exam-quiz`) [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Khi người học làm bài ôn tập lỗi sai tại `http://localhost:3000/notebook/exam-quiz?part=all`, ngay khi click chọn một đáp án (A/B/C/D), câu hỏi lập tức bị biến mất và tự động nhảy sang một câu hỏi khác (hoặc tải lại ngẫu nhiên) kèm trạng thái bị đánh dấu đã trả lời sai lệch.
+  - **Nguyên nhân gốc rễ (Root Cause)**:
+    - Trong `src/app/notebook/exam-quiz/page.tsx`, `useEffect` nạp danh sách câu hỏi đặt `mistakes` và `getMistakes` vào dependency array `[mounted, filterPart, filterType, targetId, filterRootCause, getMistakes, mistakes]`.
+    - Khi người học chọn đáp án, `handleSelectAnswer` gọi `updateMistakeProgress(currentQ.mistakeId, correct)` làm cập nhật state `mistakes` trong `useMistakeNotebook`.
+    - Việc state `mistakes` thay đổi đã kích hoạt `useEffect` chạy lại ngay lập tức giữa bài làm, gọi `targetMistakeIds.sort(() => 0.5 - Math.random())` làm xáo trộn lại ngẫu nhiên thứ tự câu hỏi và ghi đè lại mảng `questions` với câu hỏi mới tại `currentIndex = 0`.
+    - `selectedAnswer` và `showAnswer = true` của câu hỏi cũ vẫn giữ nguyên, khiến câu hỏi mới hiện ra bị hiển thị như đã nộp đáp án, người học không kịp đọc giải thích chi tiết và luồng làm bài bị đứt gãy hoàn toàn.
+    - Lỗi tương tự cũng tồn tại trong `src/app/notebook/quiz/exam/page.tsx` và `src/app/notebook/quiz/page.tsx`.
+* **Chi tiết khắc phục**:
+  1. **Cố Định Danh Sách Câu Hỏi Trong Suốt Phiên Học (Session Stability Pattern)**:
+     - Giới thiệu `sessionKey`: câu hỏi chỉ được nạp một lần duy nhất khi bắt đầu phiên luyện tập hoặc khi người học bấm nút `"Luyện tập lại lượt mới"`.
+     - Loại bỏ hoàn toàn `mistakes` và `getMistakes` khỏi dependency array của `useEffect` nạp câu hỏi trong cả 3 trang: `src/app/notebook/exam-quiz/page.tsx`, `src/app/notebook/quiz/exam/page.tsx`, và `src/app/notebook/quiz/page.tsx`.
+     - Bổ sung cờ dọn dẹp `isCancelled` phòng chống race-condition.
+  2. **Trải Nghiệm Sư Phạm Chuẩn**:
+     - Khi chọn đáp án, câu hỏi hiện tại được giữ nguyên ổn định trên màn hình 100%.
+     - Hiển thị đầy đủ hộp giải thích chi tiết (`qData.explanation`), thẻ tốt nghiệp câu hỏi ("Đã khắc phục hoàn toàn"), thanh điều khiển chân trang `<PracticeFooter>` với nút "Tiếp tục" và phím tắt `Enter` / `Space` / `ArrowRight`.
+     - Người học chủ động đọc giải thích và bấm "Tiếp tục" mới chuyển sang câu hỏi tiếp theo.
+  3. **Tối Ưu Hiển Thị Tiêu Đề Câu Hỏi & Nút Quay Lại**:
+     - Hiển thị rõ ràng số thứ tự câu hỏi: `Câu {qData.number}: {qData.text}` ngay cả với Part 1, 2, 6 vốn không có trường `text` riêng.
+     - Thay thế ký tự unicode `←` bằng SVG `ArrowLeftIcon` từ `AppIcons.tsx`, bảo đảm 100% tuân thủ quy tắc **NO UI EMOJIS (STRICT)**.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Kiểm thử Playwright E2E tự động: `node scratch/test_exam_quiz_full_flow.mjs` đạt 100% PASS (giữ nguyên câu hỏi khi nộp đáp án, hiển thị lời giải, chuyển câu bằng nút Tiếp tục và phím Enter, tốt nghiệp câu hỏi, màn hình kết quả, 0 emoji).
+  - Kiểm thử Anti-regression: `test_streamlined_daily_flow_e2e.mjs` đạt 100% PASS.
+
+---
+
+### ✅ Vấn Đề 42: Tinh Giản & Khắc Phục Triệt Để Giao Diện Quá Tải Tại Trung Tâm Từ Vựng (`/study`) [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Người học phản ánh giao diện tại `http://localhost:3000/study` bị rối quá mức:
+    - 6 tầng nút bấm và thẻ thông tin xếp chồng theo chiều dọc (Top Hub Tabs, Mode Switcher, Band Filters, Stats Pill, Audio Toggle, Progress Bar), chiếm hơn 250px chiều dọc trước khi chạm đến thẻ Flashcard.
+    - Trùng lặp nhận diện giữa hai thanh tab cùng cấp (*"Thẻ Flashcards SRS"* ở tầng trên và *"Thẻ Ghi Nhớ SRS"* ở tầng dưới).
+    - Nút lọc *"Part 6 & 7: Collocations & Paraphrase"* quá dài (35 ký tự) làm gãy bộ lọc Band thành 2 dòng, có 1 nút đứng trơ trọi.
+    - Thẻ Flashcard bị đẩy xuống quá sâu dưới tầm mắt, gây phân tâm và mỏi mắt.
+* **Chi tiết khắc phục**:
+  1. **Tái Cấu Trúc Phân Tầng Điều Hướng Rõ Ràng (Study Control Box)**:
+     - Giữ Top Hub Tabs làm thanh điều hướng chính của Trung tâm từ vựng (*Thẻ Flashcards SRS*, *Làm Quiz 10 Câu*, *Kho Từ & Tra Cứu*).
+     - Gom nhóm các chế độ học (*Thẻ Ghi Nhớ SRS*, *Ghép Cặp Paraphrase*, *Phản Xạ Collocations*) và bộ lọc Band vào một hộp điều khiển `studyControlBox` thanh lịch chuẩn Dark Glassmorphism, phân biệt rành mạch về mặt thị giác với thanh tab cấp cao.
+  2. **Chuẩn Hóa Bộ Lọc Band Thành 1 Dòng Cân Đối**:
+     - Rút gọn nhãn `'Part 6 & 7: Collocations & Paraphrase'` thành `'Part 6 & 7'`.
+     - Cả 5 nút Band (`Tất cả Band`, `Band 450+`, `Band 650+`, `Band 800+`, `Part 6 & 7`) dàn đều hoàn hảo trên **1 dòng duy nhất**, thẳng hàng với chiều rộng thẻ Flashcard (500px).
+  3. **Hợp Nhất Thanh Trạng Thái Phiên Học (Single-Row Session Status Strip)**:
+     - Gom 4 thành phần phân mảnh thành 1 thanh ngang 38px duy nhất:
+       - Bên trái: `Từ 1 / 10` + thanh tiến độ mini (`miniProgressBar`) mượt mà.
+       - Ở giữa: Thống kê số từ `0 cần ôn • 10 từ mới`.
+       - Bên phải: Nút bật/tắt phát âm tự động `[Loa] Tự động phát âm: Bật/Tắt` (tự động ẩn chữ trên mobile để chống tràn).
+  4. **Nâng Thẻ Flashcard Lên Tầm Mắt Vàng**:
+     - Tiết kiệm hơn 120px chiều dọc, đưa Flashcard vào ngay vị trí trung tâm tập trung tối đa, không còn cảm giác accordion nút bấm.
+  5. **Tối Ưu Hiển Thị Di Động**:
+     - Thêm thanh cuộn ngang mượt mà cho các tab trên màn hình hẹp (< 520px) mà không bị vỡ giao diện hay tràn ngang.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trên rendered DOM.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với toàn bộ 35 static routes.
+  - Kiểm thử Playwright E2E:
+    - `scratch/test_streamlined_daily_flow_e2e.mjs`: 100% PASS (Vocab Hub 3 tabs, Quiz, Dictionary, 0 emoji).
+    - `scratch/test_reading_vocab_e2e.mjs`: 100% PASS (3 chế độ Thẻ Ghi Nhớ, Ghép Cặp, Phản Xạ Collocation, Band Part 6 & 7, 0 emoji).
+    - `scratch/test_vocab_shortcuts_e2e.mjs`: 100% PASS (Phím Space, A, R, 1-4, toggle auto-play, 0 emoji).
+  - Ảnh nghiệm thu giao diện:
+    - Desktop Light: `scratch/study_decluttered_verified.png`.
+    - Desktop Dark: `scratch/study_dark_mode.png`.
+    - Mobile 390px: `scratch/study_mobile_fixed.png`.
+
+---
+
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 41: Tìm Nguồn Dữ Liệu Audio Gốc Phòng Thu & Ảnh Scan Đề Thật ETS 2022 Test 2, 3, 4 để Nạp Vào Pipeline `ingest_real_ets.mjs`
+### Vấn Đề 43: Tìm Nguồn Dữ Liệu Audio Gốc Phòng Thu & Ảnh Scan Đề Thật ETS 2022 Test 2, 3, 4 để Nạp Vào Pipeline `ingest_real_ets.mjs`
 * **Bối cảnh & Vấn đề**:
   - Hiện tại toàn hệ thống chỉ mới có Test 1 là đề thi chuẩn 100% có file audio phòng thu và câu hỏi ETS thật.
   - Cần thu thập bộ audio và ảnh scan gốc của Test 2, 3, 4 từ nguồn chuẩn để mở rộng kho đề mà không bị lẫn đề giả lập.
@@ -967,10 +1036,11 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm thử E2E Playwright mẫu**:
-  * `node scratch/test_reproduce_study_popover_error.mjs` (Kiểm thử triệt tiêu lỗi setState in render giữa TextSelectionToolbar và StudyPageContent).
+  * `node scratch/test_vocab_shortcuts_e2e.mjs` (Kiểm thử phím tắt flashcard, toggle phát âm và chuyển câu).
+  * `node scratch/test_reading_vocab_e2e.mjs` (Kiểm thử 3 chế độ học từ vựng và chọn band Part 6 & 7).
   * `node scratch/test_streamlined_daily_flow_e2e.mjs` (Kiểm thử Toàn Diện Daily Learning Flow 3 bước, Navbar tinh gọn, Vocab Hub 3 tabs, 0 emoji).
+  * `node scratch/test_exam_quiz_full_flow.mjs` (Kiểm thử ôn tập lỗi sai /notebook/exam-quiz, giữ câu hỏi khi nộp đáp án).
   * `node scratch/test_in_context_lookup_e2e.mjs` (Kiểm thử Tra Từ Tức Thì Tại Chỗ In-Context Popover, phát âm, 1-click Flashcard, 0 emoji).
-  * `node scratch/test_hide_fake_tests_e2e.mjs` (Kiểm thử ẩn Test 2 & 3, chỉ kích hoạt Test 1 chuẩn ETS, 0 emoji).
 
 
 
