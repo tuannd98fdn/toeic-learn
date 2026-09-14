@@ -46,26 +46,25 @@ export function useVocabulary() {
   }, [userWords]);
 
   const addWord = useCallback((newWord: Omit<VocabularyWord, 'id' | 'source'>) => {
-    setUserWords(prev => {
-      const wordId = `u_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
-      const wordToAdd: VocabularyWord = {
-        ...newWord,
-        id: wordId,
-        source: 'user',
-        targetBand: newWord.targetBand || '650+',
-      };
-      const updated = [...prev, wordToAdd];
-      storage.set(USER_VOCAB_STORAGE_KEY, updated);
-      return updated;
-    });
+    const wordId = `u_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
+    const wordToAdd: VocabularyWord = {
+      ...newWord,
+      id: wordId,
+      source: 'user',
+      targetBand: newWord.targetBand || '650+',
+    };
+
+    const current = storage.get<VocabularyWord[]>(USER_VOCAB_STORAGE_KEY, []);
+    const updated = [...current.filter(w => w.id !== wordId), wordToAdd];
+    storage.set(USER_VOCAB_STORAGE_KEY, updated);
+    setUserWords(updated);
   }, []);
 
   const removeWord = useCallback((id: string) => {
-    setUserWords(prev => {
-      const updated = prev.filter(w => w.id !== id);
-      storage.set(USER_VOCAB_STORAGE_KEY, updated);
-      return updated;
-    });
+    const current = storage.get<VocabularyWord[]>(USER_VOCAB_STORAGE_KEY, []);
+    const updated = current.filter(w => w.id !== id);
+    storage.set(USER_VOCAB_STORAGE_KEY, updated);
+    setUserWords(updated);
   }, []);
 
   const getWordsByCategory = useCallback((category: string) => {

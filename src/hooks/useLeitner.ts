@@ -53,37 +53,36 @@ export function useLeitner() {
    * 4 = Easy (Mastered) -> Move up 2 boxes
    */
   const rateWord = useCallback((wordId: string, rating: 1 | 2 | 3 | 4) => {
-    setProgress(prev => {
-      const current = prev[wordId] || { box: 0, lastReview: '', nextReview: '' };
-      
-      let newBox = current.box;
-      
-      if (rating === 1) {
-        newBox = MIN_BOX;
-      } else if (rating === 2) {
-        newBox = Math.max(current.box, MIN_BOX);
-      } else if (rating === 3) {
-        newBox = current.box === 0 ? MIN_BOX : Math.min(current.box + 1, MAX_BOX);
-      } else if (rating === 4) {
-        newBox = current.box === 0 ? MIN_BOX + 1 : Math.min(current.box + 2, MAX_BOX);
-      }
+    const currentProgress = storage.get<LeitnerState>(STORAGE_KEY, {});
+    const current = currentProgress[wordId] || { box: 0, lastReview: '', nextReview: '' };
+    
+    let newBox = current.box;
+    
+    if (rating === 1) {
+      newBox = MIN_BOX;
+    } else if (rating === 2) {
+      newBox = Math.max(current.box, MIN_BOX);
+    } else if (rating === 3) {
+      newBox = current.box === 0 ? MIN_BOX : Math.min(current.box + 1, MAX_BOX);
+    } else if (rating === 4) {
+      newBox = current.box === 0 ? MIN_BOX + 1 : Math.min(current.box + 2, MAX_BOX);
+    }
 
-      const nextReviewDate = calculateNextReviewDate(newBox);
-      
-      const updatedRecord: LeitnerRecord = {
-        box: newBox,
-        lastReview: new Date().toISOString(),
-        nextReview: nextReviewDate
-      };
+    const nextReviewDate = calculateNextReviewDate(newBox);
+    
+    const updatedRecord: LeitnerRecord = {
+      box: newBox,
+      lastReview: new Date().toISOString(),
+      nextReview: nextReviewDate
+    };
 
-      const newState = {
-        ...prev,
-        [wordId]: updatedRecord
-      };
-      
-      storage.set(STORAGE_KEY, newState);
-      return newState;
-    });
+    const newState = {
+      ...currentProgress,
+      [wordId]: updatedRecord
+    };
+    
+    storage.set(STORAGE_KEY, newState);
+    setProgress(newState);
   }, []);
 
   const getDueWords = useCallback((): VocabularyWord[] => {

@@ -926,9 +926,35 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### ✅ Vấn Đề 40: Khắc Phục Triệt Để Lỗi Console setState Trong Khi Render Giữa `TextSelectionToolbar` và `StudyPageContent` [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Gặp lỗi cảnh báo console: `Cannot update a component (StudyPageContent) while rendering a different component (TextSelectionToolbar). To locate the bad setState() call inside TextSelectionToolbar, follow the stack trace as described in https://react.dev/link/setstate-in-render`.
+  - **Nguyên nhân gốc rễ (Root Cause)**:
+    - Trong `src/hooks/useVocabulary.ts`, hàm `addWord` và `removeWord` đã gọi `storage.set(USER_VOCAB_STORAGE_KEY, updated)` bên trong callback updater của `setUserWords(prev => ...)`.
+    - Khi React re-render `TextSelectionToolbar`, React thực thi hàm updater queued trong pha render.
+    - `storage.set` trong `src/utils/storage.ts` lại phát sự kiện `app-storage-update` qua `window.dispatchEvent` một cách đồng bộ (synchronous).
+    - Cùng lúc đó trên trang `/study`, `StudyPageContent` cũng gắn hook `useVocabulary` (thông qua `useLeitner`), lắng nghe sự kiện `app-storage-update` và gọi ngay `loadWords()` -> `setUserWords(saved)`.
+    - Việc gọi `setState` trên `StudyPageContent` ngay giữa pha render của `TextSelectionToolbar` vi phạm quy tắc React render purity.
+* **Chi tiết khắc phục**:
+  1. **Tách Biệt Side-Effect Khỏi React State Updater**:
+     - Cập nhật `src/hooks/useVocabulary.ts`: đưa `storage.set` ra ngoài hoàn toàn khỏi `setUserWords`. Đọc trực tiếp từ kho lưu trữ, cập nhật storage trước rồi mới cập nhật state React.
+     - Rà soát và chuẩn hóa toàn bộ các hook liên quan: `useLeitner.ts`, `useMistakeNotebook.ts`, `useDailyMission.ts`, `useStreak.ts`, `useAIHistory.ts` để loại bỏ 100% việc gọi `storage.set` bên trong `setState(prev => ...)`.
+  2. **Bất Đồng Bộ Hóa Sự Kiện Lưu Trữ Toàn Cục (`storage.ts`)**:
+     - Trong `src/utils/storage.ts`: bọc `window.dispatchEvent` trong `setTimeout(() => { ... }, 0)` cho các phương thức `set`, `remove`, `clear`.
+     - Đảm bảo việc phát thông báo storage update luôn diễn ra ở microtask/macrotask tiếp theo, tách rời hoàn toàn khỏi bất kỳ chu kỳ render hay lifecyle đồng bộ nào của React.
+* **Quy chuẩn & Kiểm định**:
+  - Tái hiện lỗi thành công 100% trước khi sửa với script `scratch/test_reproduce_study_popover_error.mjs`.
+  - Sau khi sửa: `node scratch/test_reproduce_study_popover_error.mjs` đạt 100% PASS không còn bất kỳ warning nào.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với 35 routes.
+  - Anti-regression tests: `test_in_context_lookup_e2e.mjs` và `test_streamlined_daily_flow_e2e.mjs` đạt 100% PASS.
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**.
+
+---
+
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 40: Tìm Nguồn Dữ Liệu Audio Gốc Phòng Thu & Ảnh Scan Đề Thật ETS 2022 Test 2, 3, 4 để Nạp Vào Pipeline `ingest_real_ets.mjs`
+### Vấn Đề 41: Tìm Nguồn Dữ Liệu Audio Gốc Phòng Thu & Ảnh Scan Đề Thật ETS 2022 Test 2, 3, 4 để Nạp Vào Pipeline `ingest_real_ets.mjs`
 * **Bối cảnh & Vấn đề**:
   - Hiện tại toàn hệ thống chỉ mới có Test 1 là đề thi chuẩn 100% có file audio phòng thu và câu hỏi ETS thật.
   - Cần thu thập bộ audio và ảnh scan gốc của Test 2, 3, 4 từ nguồn chuẩn để mở rộng kho đề mà không bị lẫn đề giả lập.
@@ -941,6 +967,7 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_reproduce_study_popover_error.mjs` (Kiểm thử triệt tiêu lỗi setState in render giữa TextSelectionToolbar và StudyPageContent).
   * `node scratch/test_streamlined_daily_flow_e2e.mjs` (Kiểm thử Toàn Diện Daily Learning Flow 3 bước, Navbar tinh gọn, Vocab Hub 3 tabs, 0 emoji).
   * `node scratch/test_in_context_lookup_e2e.mjs` (Kiểm thử Tra Từ Tức Thì Tại Chỗ In-Context Popover, phát âm, 1-click Flashcard, 0 emoji).
   * `node scratch/test_hide_fake_tests_e2e.mjs` (Kiểm thử ẩn Test 2 & 3, chỉ kích hoạt Test 1 chuẩn ETS, 0 emoji).

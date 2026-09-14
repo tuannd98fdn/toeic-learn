@@ -61,7 +61,9 @@ export const storage = {
 
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
-      window.dispatchEvent(new CustomEvent('app-storage-update', { detail: { key, value } }));
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('app-storage-update', { detail: { key, value } }));
+      }, 0);
     } catch (error) {
       console.error(`Error setting localStorage key "${key}":`, error);
     }
@@ -74,7 +76,9 @@ export const storage = {
 
     try {
       window.localStorage.removeItem(key);
-      window.dispatchEvent(new CustomEvent('app-storage-update', { detail: { key, value: null } }));
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('app-storage-update', { detail: { key, value: null } }));
+      }, 0);
     } catch (error) {
       console.error(`Error removing localStorage key "${key}":`, error);
     }
@@ -87,7 +91,9 @@ export const storage = {
 
     try {
       window.localStorage.clear();
-      window.dispatchEvent(new CustomEvent('app-storage-update', { detail: { key: '*', value: null } }));
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('app-storage-update', { detail: { key: '*', value: null } }));
+      }, 0);
     } catch (error) {
       console.error(`Error clearing localStorage:`, error);
     }

@@ -48,24 +48,28 @@ export function useDailyMission() {
   }, []);
 
   const updateMission = useCallback((updater: (prev: DailyMissionData) => DailyMissionData) => {
-    setMissionData(prev => {
-      const today = new Date().toISOString().split('T')[0];
-      
-      // If it's a new day when updating, reset first
-      let currentData = prev;
-      if (prev.date !== today) {
-        currentData = {
-          date: today,
-          newWords: 0,
-          reviewedWords: 0,
-          quizzes: 0
-        };
-      }
-
-      const newData = updater(currentData);
-      storage.set(MISSION_KEY, newData);
-      return newData;
+    const today = new Date().toISOString().split('T')[0];
+    const prev = storage.get<DailyMissionData>(MISSION_KEY, {
+      date: today,
+      newWords: 0,
+      reviewedWords: 0,
+      quizzes: 0
     });
+    
+    // If it's a new day when updating, reset first
+    let currentData = prev;
+    if (prev.date !== today) {
+      currentData = {
+        date: today,
+        newWords: 0,
+        reviewedWords: 0,
+        quizzes: 0
+      };
+    }
+
+    const newData = updater(currentData);
+    storage.set(MISSION_KEY, newData);
+    setMissionData(newData);
   }, []);
 
   const recordNewWordLearned = useCallback(() => {

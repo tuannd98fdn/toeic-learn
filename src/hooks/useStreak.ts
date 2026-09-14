@@ -62,51 +62,58 @@ export function useStreak() {
   }, []);
 
   const recordStudy = useCallback(() => {
-    setStreakData(prev => {
-      let newStreak = prev.currentStreak;
-      let newFreezeCount = typeof prev.freezeCount === 'number' ? prev.freezeCount : 1;
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+    const raw = storage.get<Partial<StreakData>>(STREAK_KEY, {});
+    const current: StreakData = {
+      currentStreak: raw.currentStreak || 0,
+      bestStreak: raw.bestStreak || 0,
+      lastStudyDate: raw.lastStudyDate || '',
+      freezeCount: typeof raw.freezeCount === 'number' ? raw.freezeCount : 1,
+      isFrozenToday: raw.isFrozenToday || false
+    };
 
-      if (!prev.lastStudyDate) {
-        // First time studying
-        newStreak = 1;
-      } else {
-        const lastStudy = new Date(prev.lastStudyDate);
-        lastStudy.setHours(0, 0, 0, 0);
-        
-        const diffTime = today.getTime() - lastStudy.getTime();
-        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-        
-        if (diffDays === 0) {
-          // Already studied today
-          return prev;
-        } else if (diffDays === 1) {
-          // Continuous streak
-          newStreak += 1;
-          // Reward an extra streak freeze when hitting milestones like 7 days (max 2)
-          if (newStreak % 7 === 0 && newFreezeCount < 2) {
-            newFreezeCount += 1;
-          }
-        } else if (diffDays > 1) {
-          // Streak broken
-          newStreak = 1;
+    let newStreak = current.currentStreak;
+    let newFreezeCount = current.freezeCount;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (!current.lastStudyDate) {
+      // First time studying
+      newStreak = 1;
+    } else {
+      const lastStudy = new Date(current.lastStudyDate);
+      lastStudy.setHours(0, 0, 0, 0);
+      
+      const diffTime = today.getTime() - lastStudy.getTime();
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (diffDays === 0) {
+        // Already studied today
+        return;
+      } else if (diffDays === 1) {
+        // Continuous streak
+        newStreak += 1;
+        // Reward an extra streak freeze when hitting milestones like 7 days (max 2)
+        if (newStreak % 7 === 0 && newFreezeCount < 2) {
+          newFreezeCount += 1;
         }
+      } else if (diffDays > 1) {
+        // Streak broken
+        newStreak = 1;
       }
+    }
 
-      const bestStreak = Math.max(prev.bestStreak, newStreak);
-      
-      const newData: StreakData = {
-        currentStreak: newStreak,
-        bestStreak,
-        lastStudyDate: new Date().toISOString(),
-        freezeCount: newFreezeCount,
-        isFrozenToday: prev.isFrozenToday ?? false
-      };
-      
-      storage.set(STREAK_KEY, newData);
-      return newData;
-    });
+    const bestStreak = Math.max(current.bestStreak, newStreak);
+    
+    const newData: StreakData = {
+      currentStreak: newStreak,
+      bestStreak,
+      lastStudyDate: new Date().toISOString(),
+      freezeCount: newFreezeCount,
+      isFrozenToday: current.isFrozenToday ?? false
+    };
+    
+    storage.set(STREAK_KEY, newData);
+    setStreakData(newData);
   }, []);
 
   return {

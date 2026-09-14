@@ -34,46 +34,43 @@ export function useAIHistory() {
     chatLog: Message[],
     note: string
   ) => {
-    setSessions((prev) => {
-      const current = prev[id];
-      const newData = {
-        ...prev,
-        [id]: {
-          id,
-          title,
-          timestamp: current?.timestamp || new Date().toISOString(),
-          chatLog,
-          note,
-          summary: current?.summary,
-        },
-      };
-      storage.set(AI_HISTORY_KEY, newData);
-      return newData;
-    });
+    const currentSessions = storage.get<Record<string, AISession>>(AI_HISTORY_KEY, {});
+    const current = currentSessions[id];
+    const newData = {
+      ...currentSessions,
+      [id]: {
+        id,
+        title,
+        timestamp: current?.timestamp || new Date().toISOString(),
+        chatLog,
+        note,
+        summary: current?.summary,
+      },
+    };
+    storage.set(AI_HISTORY_KEY, newData);
+    setSessions(newData);
   };
 
   const updateSummary = (id: string, summary: string) => {
-    setSessions((prev) => {
-      if (!prev[id]) return prev;
-      const newData = {
-        ...prev,
-        [id]: {
-          ...prev[id],
-          summary,
-        },
-      };
-      storage.set(AI_HISTORY_KEY, newData);
-      return newData;
-    });
+    const currentSessions = storage.get<Record<string, AISession>>(AI_HISTORY_KEY, {});
+    if (!currentSessions[id]) return;
+    const newData = {
+      ...currentSessions,
+      [id]: {
+        ...currentSessions[id],
+        summary,
+      },
+    };
+    storage.set(AI_HISTORY_KEY, newData);
+    setSessions(newData);
   };
 
   const deleteSession = (id: string) => {
-    setSessions((prev) => {
-      const newData = { ...prev };
-      delete newData[id];
-      storage.set(AI_HISTORY_KEY, newData);
-      return newData;
-    });
+    const currentSessions = storage.get<Record<string, AISession>>(AI_HISTORY_KEY, {});
+    const newData = { ...currentSessions };
+    delete newData[id];
+    storage.set(AI_HISTORY_KEY, newData);
+    setSessions(newData);
   };
 
   const getAllSessions = (): AISession[] => {

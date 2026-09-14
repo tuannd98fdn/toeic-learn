@@ -33,110 +33,105 @@ export function useMistakeNotebook() {
   }, []);
 
   const addMistake = useCallback((id: string, metadata?: Partial<MistakeRecord>) => {
-    setMistakes(prev => {
-      const current = prev[id] || { wrongCount: 0, lastMistakeDate: '', type: 'vocabulary', box: 1, nextReviewDate: calculateNextReviewDate(1) };
-      const newData = {
-        ...prev,
-        [id]: {
-          ...current,
-          ...metadata,
-          wrongCount: current.wrongCount + 1,
-          lastMistakeDate: new Date().toISOString(),
-          box: 1, // Reset box if they get it wrong again during practice
-          isMastered: false, // Reactivate mistake if answered incorrectly
-          nextReviewDate: calculateNextReviewDate(1)
-        }
-      };
-      storage.set(MISTAKE_KEY, newData);
-      return newData;
-    });
+    const currentData = storage.get<MistakeData>(MISTAKE_KEY, {});
+    const current = currentData[id] || { wrongCount: 0, lastMistakeDate: '', type: 'vocabulary', box: 1, nextReviewDate: calculateNextReviewDate(1) };
+    const newData: MistakeData = {
+      ...currentData,
+      [id]: {
+        ...current,
+        ...metadata,
+        wrongCount: current.wrongCount + 1,
+        lastMistakeDate: new Date().toISOString(),
+        box: 1, // Reset box if they get it wrong again during practice
+        isMastered: false, // Reactivate mistake if answered incorrectly
+        nextReviewDate: calculateNextReviewDate(1)
+      }
+    };
+    storage.set(MISTAKE_KEY, newData);
+    setMistakes(newData);
   }, []);
 
   const removeMistake = useCallback((id: string) => {
-    setMistakes(prev => {
-      const newData = { ...prev };
-      delete newData[id];
-      storage.set(MISTAKE_KEY, newData);
-      return newData;
-    });
+    const currentData = storage.get<MistakeData>(MISTAKE_KEY, {});
+    const newData = { ...currentData };
+    delete newData[id];
+    storage.set(MISTAKE_KEY, newData);
+    setMistakes(newData);
   }, []);
 
   const updateMistakeProgress = useCallback((id: string, isCorrect: boolean) => {
-    setMistakes(prev => {
-      const current = prev[id];
-      if (!current) return prev;
+    const currentData = storage.get<MistakeData>(MISTAKE_KEY, {});
+    const current = currentData[id];
+    if (!current) return;
 
-      let newBox = current.box || 1;
-      let isMastered = current.isMastered || false;
-      let masteredAt = current.masteredAt;
+    let newBox = current.box || 1;
+    let isMastered = current.isMastered || false;
+    let masteredAt = current.masteredAt;
 
-      if (isCorrect) {
-        newBox = Math.min(newBox + 1, MAX_BOX);
-        if (newBox >= MAX_BOX) {
-          isMastered = true;
-          masteredAt = new Date().toISOString();
-        }
-      } else {
-        newBox = 1;
-        isMastered = false;
-        masteredAt = undefined;
+    if (isCorrect) {
+      newBox = Math.min(newBox + 1, MAX_BOX);
+      if (newBox >= MAX_BOX) {
+        isMastered = true;
+        masteredAt = new Date().toISOString();
       }
+    } else {
+      newBox = 1;
+      isMastered = false;
+      masteredAt = undefined;
+    }
 
-      const newData = {
-        ...prev,
-        [id]: {
-          ...current,
-          box: newBox,
-          isMastered,
-          masteredAt,
-          nextReviewDate: calculateNextReviewDate(newBox)
-        }
-      };
-      
-      storage.set(MISTAKE_KEY, newData);
-      return newData;
-    });
+    const newData: MistakeData = {
+      ...currentData,
+      [id]: {
+        ...current,
+        box: newBox,
+        isMastered,
+        masteredAt,
+        nextReviewDate: calculateNextReviewDate(newBox)
+      }
+    };
+    
+    storage.set(MISTAKE_KEY, newData);
+    setMistakes(newData);
   }, []);
 
   const masterMistake = useCallback((id: string) => {
-    setMistakes(prev => {
-      const current = prev[id];
-      if (!current) return prev;
+    const currentData = storage.get<MistakeData>(MISTAKE_KEY, {});
+    const current = currentData[id];
+    if (!current) return;
 
-      const newData = {
-        ...prev,
-        [id]: {
-          ...current,
-          isMastered: true,
-          masteredAt: new Date().toISOString(),
-          box: MAX_BOX
-        }
-      };
-      
-      storage.set(MISTAKE_KEY, newData);
-      return newData;
-    });
+    const newData: MistakeData = {
+      ...currentData,
+      [id]: {
+        ...current,
+        isMastered: true,
+        masteredAt: new Date().toISOString(),
+        box: MAX_BOX
+      }
+    };
+    
+    storage.set(MISTAKE_KEY, newData);
+    setMistakes(newData);
   }, []);
 
   const unmasterMistake = useCallback((id: string) => {
-    setMistakes(prev => {
-      const current = prev[id];
-      if (!current) return prev;
+    const currentData = storage.get<MistakeData>(MISTAKE_KEY, {});
+    const current = currentData[id];
+    if (!current) return;
 
-      const newData = {
-        ...prev,
-        [id]: {
-          ...current,
-          isMastered: false,
-          masteredAt: undefined,
-          box: 1,
-          nextReviewDate: calculateNextReviewDate(1)
-        }
-      };
-      
-      storage.set(MISTAKE_KEY, newData);
-      return newData;
-    });
+    const newData: MistakeData = {
+      ...currentData,
+      [id]: {
+        ...current,
+        isMastered: false,
+        masteredAt: undefined,
+        box: 1,
+        nextReviewDate: calculateNextReviewDate(1)
+      }
+    };
+    
+    storage.set(MISTAKE_KEY, newData);
+    setMistakes(newData);
   }, []);
 
   const getMistakes = useCallback((): string[] => {
@@ -145,21 +140,20 @@ export function useMistakeNotebook() {
   }, [mounted, mistakes]);
 
   const updateMistakeRootCause = useCallback((id: string, cause: string) => {
-    setMistakes(prev => {
-      const current = prev[id];
-      if (!current) return prev;
+    const currentData = storage.get<MistakeData>(MISTAKE_KEY, {});
+    const current = currentData[id];
+    if (!current) return;
 
-      const newData = {
-        ...prev,
-        [id]: {
-          ...current,
-          rootCause: cause
-        }
-      };
-      
-      storage.set(MISTAKE_KEY, newData);
-      return newData;
-    });
+    const newData: MistakeData = {
+      ...currentData,
+      [id]: {
+        ...current,
+        rootCause: cause
+      }
+    };
+    
+    storage.set(MISTAKE_KEY, newData);
+    setMistakes(newData);
   }, []);
 
   return {
