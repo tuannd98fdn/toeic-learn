@@ -1,362 +1,408 @@
 'use client';
-import { useState, useEffect, useMemo } from 'react';
+
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { useVocabulary } from '@/hooks/useVocabulary';
-import { CloseIcon, FileTextIcon, CheckCircleIcon, VolumeIcon, ZapIcon } from '@/components/icons/AppIcons';
+import { 
+  VolumeIcon, 
+  CheckIcon, 
+  PlusIcon, 
+  CloseIcon, 
+  BookmarkIcon, 
+  SparklesIcon 
+} from '@/components/icons/AppIcons';
 import styles from './TextSelectionToolbar.module.css';
 
-interface ToolbarPosition {
+interface PopoverPosition {
   top: number;
   left: number;
+  placement: 'top' | 'bottom';
 }
 
+interface LookupResult {
+  word: string;
+  ipa: string;
+  partOfSpeech: string;
+  vietnamese: string;
+  targetBand: string;
+  example?: string;
+  isLocalMatch: boolean;
+}
+
+// In-session cache for fast fallback queries
+const sessionLookupCache = new Map<string, LookupResult>();
+
 export default function TextSelectionToolbar() {
-  const [position, setPosition] = useState<ToolbarPosition | null>(null);
-  const [selectedText, setSelectedText] = useState('');
+  const [position, setPosition] = useState<PopoverPosition | null>(null);
+  const [selectedWord, setSelectedWord] = useState('');
   const [contextSentence, setContextSentence] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { addWord, allWords } = useVocabulary();
+  const [lookupResult, setLookupResult] = useState<LookupResult | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [justSaved, setJustSaved] = useState(false);
   
-  const [vietnamese, setVietnamese] = useState('');
-  const [partOfSpeech, setPartOfSpeech] = useState('Danh từ');
-  const [matchedIpa, setMatchedIpa] = useState('');
-  const [isAutoFilled, setIsAutoFilled] = useState(false);
-  const [isAIFetching, setIsAIFetching] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  
-  // Build a lookup map for O(1) word matching
-  const wordLookup = useMemo(() => {
-    const map = new Map<string, { vietnamese: string; partOfSpeech: string; ipa: string }>();
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const { addWord, allWords, userWords } = useVocabulary();
+
+  // O(1) map of local 400+ TOEIC vocabulary words
+  const localWordMap = useMemo(() => {
+    const map = new Map<string, {
+      word: string;
+      ipa: string;
+      partOfSpeech: string;
+      vietnamese: string;
+      targetBand: string;
+      examples: string[];
+    }>();
+    
     for (const w of allWords) {
-      const key = w.word.toLowerCase();
+      const key = w.word.trim().toLowerCase();
       if (!map.has(key)) {
-        map.set(key, { vietnamese: w.vietnamese, partOfSpeech: w.partOfSpeech, ipa: w.ipa });
+        map.set(key, {
+          word: w.word,
+          ipa: w.ipa || '',
+          partOfSpeech: w.partOfSpeech || 'Từ vựng',
+          vietnamese: w.vietnamese || '',
+          targetBand: w.targetBand || '650+',
+          examples: w.examples || [],
+        });
       }
     }
     return map;
   }, [allWords]);
-  
+
+  // Set of user-saved words for instant 'Saved' detection
+  const userSavedSet = useMemo(() => {
+    const set = new Set<string>();
+    for (const w of userWords) {
+      set.add(w.word.trim().toLowerCase());
+    }
+    return set;
+  }, [userWords]);
+
+  // Check if current word is already saved in notebook
+  const isAlreadySaved = useMemo(() => {
+    if (!selectedWord) return false;
+    return justSaved || userSavedSet.has(selectedWord.toLowerCase());
+  }, [selectedWord, justSaved, userSavedSet]);
+
+  // Speak pronunciation using Web Speech API (0ms latency, native voices)
+  const playAudio = useCallback((textToSpeak: string) => {
+    if (!textToSpeak || typeof window === 'undefined' || !window.speechSynthesis) return;
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+
+    const voices = window.speechSynthesis.getVoices();
+    const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('US')));
+    if (englishVoice) {
+      utterance.voice = englishVoice;
+    }
+
+    setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+
+    window.speechSynthesis.speak(utterance);
+  }, []);
+
+  // Fetch definition and translation
+  const performLookup = useCallback(async (word: string, context: string) => {
+    const clean = word.toLowerCase();
+    
+    // Tier 1: Check Local 400+ TOEIC Word Bank (0ms instant)
+    const localMatch = localWordMap.get(clean);
+    if (localMatch) {
+      const result: LookupResult = {
+        word: localMatch.word,
+        ipa: localMatch.ipa,
+        partOfSpeech: localMatch.partOfSpeech,
+        vietnamese: localMatch.vietnamese,
+        targetBand: localMatch.targetBand,
+        example: localMatch.examples?.[0],
+        isLocalMatch: true,
+      };
+      setLookupResult(result);
+      setIsLoading(false);
+      return;
+    }
+
+    // Tier 2: Check Session Cache
+    if (sessionLookupCache.has(clean)) {
+      setLookupResult(sessionLookupCache.get(clean)!);
+      setIsLoading(false);
+      return;
+    }
+
+    // Tier 3: Fetch from Quick Dict API (~150ms fallback)
+    setIsLoading(true);
+    try {
+      const res = await fetch(`/api/quick-dict?word=${encodeURIComponent(clean)}`);
+      if (res.ok) {
+        const data = await res.json();
+        const result: LookupResult = {
+          word: data.word || word,
+          ipa: data.ipa || '',
+          partOfSpeech: data.partOfSpeech || 'Từ vựng',
+          vietnamese: data.vietnamese || '',
+          targetBand: 'Cơ bản',
+          example: data.example || (context ? context.slice(0, 100) : undefined),
+          isLocalMatch: false,
+        };
+        sessionLookupCache.set(clean, result);
+        setLookupResult(result);
+      } else {
+        setLookupResult({
+          word,
+          ipa: '',
+          partOfSpeech: 'Từ vựng',
+          vietnamese: 'Chưa có bản dịch',
+          targetBand: '',
+          isLocalMatch: false,
+        });
+      }
+    } catch (err) {
+      setLookupResult({
+        word,
+        ipa: '',
+        partOfSpeech: 'Từ vựng',
+        vietnamese: 'Lỗi tra từ',
+        targetBand: '',
+        isLocalMatch: false,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [localWordMap]);
+
+  // Handle text selection
   useEffect(() => {
+    let timer: NodeJS.Timeout;
+
     const handleSelection = () => {
-      if (isModalOpen) return;
-      
-      // Delay slightly to let the selection finish updating
-      setTimeout(() => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
         const selection = window.getSelection();
         if (!selection || selection.isCollapsed) {
           setPosition(null);
           return;
         }
-        
-        const text = selection.toString().trim();
-        // Ignore if text is too long (likely not trying to select a vocab word) or empty
-        if (!text || text.length > 60 || text.split(/\s+/).length > 6) {
+
+        // Avoid popover when selecting inside input or textarea
+        const activeEl = document.activeElement;
+        if (
+          activeEl &&
+          (activeEl.tagName === 'INPUT' ||
+            activeEl.tagName === 'TEXTAREA' ||
+            activeEl.getAttribute('contenteditable') === 'true')
+        ) {
           setPosition(null);
           return;
         }
-        
+
+        const rawText = selection.toString().trim();
+        // Clean leading and trailing punctuation (e.g. "revenue," -> "revenue")
+        const cleanText = rawText.replace(/^[^\w]+|[^\w]+$/g, '').trim();
+
+        // Only pop up for single words or short phrases (1 to 4 words, <= 40 chars)
+        if (!cleanText || cleanText.length > 40 || cleanText.split(/\s+/).length > 4) {
+          setPosition(null);
+          return;
+        }
+
+        // Don't trigger on pure numbers or symbols
+        if (!/[a-zA-Z]/.test(cleanText)) {
+          setPosition(null);
+          return;
+        }
+
         const range = selection.getRangeAt(0);
         const rect = range.getBoundingClientRect();
-        
-        // Don't show if the selection is somehow not visible or invalid bounds
+
         if (rect.width === 0 && rect.height === 0) {
           setPosition(null);
           return;
         }
-        
+
         // Extract context sentence
         let context = '';
         if (selection.anchorNode) {
-          const parentElement = selection.anchorNode.parentElement;
-          if (parentElement) {
-            context = parentElement.textContent || '';
-          } else {
-            context = selection.anchorNode.textContent || '';
-          }
+          const parent = selection.anchorNode.parentElement;
+          context = parent ? parent.textContent || '' : selection.anchorNode.textContent || '';
         }
-        
-        setSelectedText(text);
+
+        // Calculate positioning & Viewport Boundary Detection
+        const popoverHeight = 180;
+        const popoverWidth = 300;
+        const fitsAbove = rect.top >= popoverHeight + 20;
+
+        const placement: 'top' | 'bottom' = fitsAbove ? 'top' : 'bottom';
+        const top = fitsAbove
+          ? rect.top + window.scrollY - 10
+          : rect.bottom + window.scrollY + 10;
+
+        // Clamp horizontal position within viewport
+        const centerLeft = rect.left + window.scrollX + rect.width / 2;
+        const minLeft = popoverWidth / 2 + 16;
+        const maxLeft = window.innerWidth - popoverWidth / 2 - 16;
+        const left = Math.max(minLeft, Math.min(centerLeft, maxLeft));
+
+        setSelectedWord(cleanText);
         setContextSentence(context.trim());
-        
-        setPosition({
-          top: rect.top + window.scrollY - 10,
-          left: rect.left + window.scrollX + rect.width / 2,
-        });
-      }, 50);
+        setJustSaved(false);
+        setPosition({ top, left, placement });
+
+        // Trigger lookup
+        performLookup(cleanText, context.trim());
+      }, 80);
     };
-    
-    document.addEventListener('mouseup', handleSelection);
-    document.addEventListener('keyup', (e) => {
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setPosition(null);
+        window.getSelection()?.removeAllRanges();
+      }
       if (e.key === 'Shift' || e.key.startsWith('Arrow')) {
         handleSelection();
       }
-    });
-    
-    // Hide when scrolling to prevent floating away
-    const handleScroll = () => {
-      if (position && !isModalOpen) {
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
         setPosition(null);
       }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      document.removeEventListener('mouseup', handleSelection);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isModalOpen, position]);
-  
-  const handleOpenModal = async (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsModalOpen(true);
-    setPosition(null);
-    
-    // Auto-fill from existing vocabulary
-    const match = wordLookup.get(selectedText.toLowerCase());
-    if (match) {
-      setVietnamese(match.vietnamese);
-      setPartOfSpeech(match.partOfSpeech);
-      setMatchedIpa(match.ipa);
-      setIsAutoFilled(true);
-      setIsAIFetching(false);
-    } else {
-      setVietnamese('');
-      setPartOfSpeech('Danh từ');
-      setMatchedIpa('');
-      setIsAutoFilled(false);
-      setIsAIFetching(true);
-      
-      try {
-        const res = await fetch('/api/generate-vocab', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            type: 'context_word',
-            payload: { word: selectedText, context: contextSentence }
-          })
-        });
-        
-        if (res.ok) {
-          const data = await res.json();
-          if (data.words && data.words.length > 0) {
-            const wordData = data.words[0];
-            setVietnamese(wordData.vietnamese);
-            const posMap: Record<string, string> = {
-              noun: 'Danh từ', verb: 'Động từ', adjective: 'Tính từ', adverb: 'Trạng từ',
-              preposition: 'Giới từ', conjunction: 'Liên từ', idiom: 'Thành ngữ', 'phrasal verb': 'Cụm động từ'
-            };
-            setPartOfSpeech(posMap[wordData.partOfSpeech] || 'Danh từ');
-            setMatchedIpa(wordData.ipa);
-          }
-        }
-      } catch (error) {
-        console.error('Failed to fetch AI vocab', error);
-      } finally {
-        setIsAIFetching(false);
-      }
-    }
-  };
 
-  const handleQuickSave = async (e: React.MouseEvent) => {
+    document.addEventListener('mouseup', handleSelection);
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('mouseup', handleSelection);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [performLookup]);
+
+  // Save word into personal notebook
+  const handleSaveToNotebook = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setPosition(null);
-    setToastMessage('Đang dịch tự động...');
-    
-    try {
-      // 1. Check if it's already in DB
-      const match = wordLookup.get(selectedText.toLowerCase());
-      if (match) {
-        setToastMessage('Từ này đã có trong sổ!');
-        setTimeout(() => setToastMessage(''), 2000);
-        return;
-      }
-      
-      // 2. Fetch AI translation
-      const res = await fetch('/api/generate-vocab', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'context_word',
-          payload: { word: selectedText, context: contextSentence }
-        })
-      });
-      
-      if (res.ok) {
-        const data = await res.json();
-        if (data.words && data.words.length > 0) {
-          const wordData = data.words[0];
-          const posMap: Record<string, string> = {
-            noun: 'Danh từ', verb: 'Động từ', adjective: 'Tính từ', adverb: 'Trạng từ',
-            preposition: 'Giới từ', conjunction: 'Liên từ', idiom: 'Thành ngữ', 'phrasal verb': 'Cụm động từ'
-          };
-          
-          // 3. Save to DB directly
-          addWord({
-            word: selectedText,
-            ipa: wordData.ipa,
-            vietnamese: wordData.vietnamese,
-            partOfSpeech: posMap[wordData.partOfSpeech] || 'Danh từ',
-            category: 'Lưu nhanh bằng AI',
-            examples: contextSentence ? [contextSentence] : [],
-            mnemonicTip: '',
-            emoji: '',
-            targetBand: '650+',
-          });
-          
-          setToastMessage(`Đã lưu: ${selectedText} - ${wordData.vietnamese}`);
-        } else {
-          setToastMessage('Lỗi dịch từ vựng');
-        }
-      }
-    } catch (error) {
-      setToastMessage('Lỗi kết nối mạng');
-    }
-    
-    window.getSelection()?.removeAllRanges();
-    setTimeout(() => setToastMessage(''), 3000);
-  };
-  
-  const playAudio = () => {
-    if (!selectedText) return;
-    // Ngắt các âm thanh đang phát (nếu có) để tránh đè nhau
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(selectedText);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9;
-    window.speechSynthesis.speak(utterance);
-  };
-  
-  const handleSave = () => {
+    if (!lookupResult || isAlreadySaved) return;
+
     addWord({
-      word: selectedText,
-      ipa: matchedIpa,
-      vietnamese,
-      partOfSpeech,
-      category: 'Từ vựng mới (Lưu thủ công)',
-      examples: contextSentence ? [contextSentence] : [],
+      word: lookupResult.word,
+      ipa: lookupResult.ipa || '',
+      vietnamese: lookupResult.vietnamese || '',
+      partOfSpeech: lookupResult.partOfSpeech || 'Từ vựng',
+      category: 'Tra cứu nhanh trong bài',
+      examples: lookupResult.example ? [lookupResult.example] : (contextSentence ? [contextSentence] : []),
       mnemonicTip: '',
       emoji: '',
-      targetBand: '650+',
+      targetBand: (lookupResult.targetBand as any) || '650+',
     });
-    setIsModalOpen(false);
-    window.getSelection()?.removeAllRanges();
+
+    setJustSaved(true);
   };
-  
+
+  if (!position) return null;
+
   return (
-    <>
-      {position && !isModalOpen && (
-        <div 
-          className={styles.toolbar}
-          style={{ top: position.top, left: position.left }}
+    <div
+      ref={popoverRef}
+      className={`${styles.popoverCard} ${
+        position.placement === 'top' ? styles.placementTop : styles.placementBottom
+      }`}
+      style={{ top: position.top, left: position.left }}
+    >
+      {/* Popover Header */}
+      <div className={styles.header}>
+        <div className={styles.wordInfo}>
+          <span className={styles.wordText}>{lookupResult ? lookupResult.word : selectedWord}</span>
+          {lookupResult?.ipa && (
+            <span className={styles.ipaText}>{lookupResult.ipa}</span>
+          )}
+        </div>
+
+        <div className={styles.headerActions}>
+          <button
+            type="button"
+            className={`${styles.audioBtn} ${isSpeaking ? styles.speaking : ''}`}
+            onClick={() => playAudio(lookupResult?.word || selectedWord)}
+            title="Phát âm chuẩn bản xứ"
+          >
+            <VolumeIcon size={16} />
+          </button>
+          <button
+            type="button"
+            className={styles.closeBtn}
+            onClick={() => setPosition(null)}
+            title="Đóng (Esc)"
+          >
+            <CloseIcon size={14} />
+          </button>
+        </div>
+      </div>
+
+      {/* Popover Body: Meaning & Details */}
+      <div className={styles.body}>
+        {isLoading ? (
+          <div className={styles.loadingSkeleton}>
+            <div className={styles.skeletonLineShort}></div>
+            <div className={styles.skeletonLine}></div>
+          </div>
+        ) : (
+          <>
+            <div className={styles.tagsRow}>
+              {lookupResult?.partOfSpeech && (
+                <span className={styles.posBadge}>{lookupResult.partOfSpeech}</span>
+              )}
+              {lookupResult?.targetBand && (
+                <span className={styles.bandBadge}>TOEIC {lookupResult.targetBand}</span>
+              )}
+              {lookupResult?.isLocalMatch && (
+                <span className={styles.officialBadge}>
+                  <SparklesIcon size={11} style={{ display: 'inline', marginRight: 3, verticalAlign: 'middle' }} />
+                  Cốt lõi ETS
+                </span>
+              )}
+            </div>
+
+            <div className={styles.meaningText}>
+              {lookupResult?.vietnamese || 'Đang tải nghĩa...'}
+            </div>
+
+            {lookupResult?.example && (
+              <div className={styles.exampleText}>
+                &ldquo;{lookupResult.example}&rdquo;
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      {/* Popover Footer: 1-Click Flashcard Save */}
+      <div className={styles.footer}>
+        <button
+          type="button"
+          className={`${styles.saveFlashcardBtn} ${isAlreadySaved ? styles.savedActive : ''}`}
+          onClick={handleSaveToNotebook}
+          disabled={isLoading || isAlreadySaved}
         >
-          <div className={styles.toolbarButtonGroup}>
-            <button className={styles.toolbarBtnQuick} onClick={handleQuickSave}>
-              <ZapIcon size={14} style={{ marginRight: 6 }} /> Lưu Nhanh
-            </button>
-            <div className={styles.toolbarDivider}></div>
-            <button className={styles.toolbarBtn} onClick={handleOpenModal} title="Xem và sửa">
-              <FileTextIcon size={14} />
-            </button>
-          </div>
-        </div>
-      )}
-      
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div className={styles.toastNotification}>
-          {toastMessage}
-        </div>
-      )}
-      
-      {isModalOpen && (
-        <div className={styles.modalOverlay} onClick={() => setIsModalOpen(false)}>
-          <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <h3>Thêm vào Sổ từ vựng</h3>
-              <button onClick={() => setIsModalOpen(false)} className={styles.closeBtn}>
-                <CloseIcon size={20} />
-              </button>
-            </div>
-            <div className={styles.modalBody}>
-              {/* Auto-match status badge */}
-              <div className={`${styles.matchBadge} ${isAutoFilled ? styles.matchFound : (isAIFetching ? styles.matchPending : styles.matchNotFound)}`}>
-                {isAutoFilled ? (
-                  <><CheckCircleIcon size={14} /> Đã lưu trong kho từ vựng</>
-                ) : isAIFetching ? (
-                  <>Đang phân tích nghĩa bằng AI...</>
-                ) : (
-                  <>AI đã tự động điền (Bạn có thể sửa)</>
-                )}
-              </div>
-              
-              <div className={styles.formGroup}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <label style={{ margin: 0 }}>Từ vựng (English)</label>
-                  <button type="button" onClick={playAudio} className={styles.audioBtn} title="Nghe phát âm">
-                    <VolumeIcon size={16} /> Phát âm
-                  </button>
-                </div>
-                <input type="text" value={selectedText} onChange={e => setSelectedText(e.target.value)} className={styles.input} />
-                {matchedIpa && (
-                  <div className={styles.ipaRow}>
-                    <span className={styles.ipaText}>{matchedIpa}</span>
-                  </div>
-                )}
-              </div>
-              
-              <div className={styles.formGroup}>
-                <label>Nghĩa tiếng Việt</label>
-                <input 
-                  type="text" 
-                  value={vietnamese} 
-                  onChange={e => setVietnamese(e.target.value)} 
-                  placeholder="Nhập nghĩa (vd: phát triển, cải thiện...)" 
-                  className={`${styles.input} ${isAIFetching ? styles.loadingInput : ''}`}
-                  autoFocus={!isAutoFilled}
-                  disabled={isAIFetching}
-                />
-              </div>
-              
-              <div className={styles.formGroup}>
-                <label>Từ loại</label>
-                <select 
-                  value={partOfSpeech} 
-                  onChange={e => setPartOfSpeech(e.target.value)} 
-                  className={`${styles.input} ${isAIFetching ? styles.loadingInput : ''}`}
-                  disabled={isAIFetching}
-                >
-                  <option value="Danh từ">Danh từ (Noun)</option>
-                  <option value="Động từ">Động từ (Verb)</option>
-                  <option value="Tính từ">Tính từ (Adjective)</option>
-                  <option value="Trạng từ">Trạng từ (Adverb)</option>
-                  <option value="Cụm từ">Cụm từ (Phrase)</option>
-                  <option value="noun/adj">Danh từ / Tính từ</option>
-                  <option value="verb/noun">Động từ / Danh từ</option>
-                </select>
-              </div>
-              
-              <div className={styles.formGroup}>
-                <label>Ngữ cảnh (Câu chứa từ gốc)</label>
-                <textarea 
-                  value={contextSentence} 
-                  onChange={e => setContextSentence(e.target.value)} 
-                  className={styles.textarea}
-                  rows={3}
-                />
-              </div>
-            </div>
-              <div className={styles.modalFooter}>
-                <button className={styles.cancelBtn} onClick={() => setIsModalOpen(false)}>Hủy</button>
-                <button 
-                  className={styles.saveBtn} 
-                  onClick={handleSave} 
-                  disabled={!vietnamese.trim() || isAIFetching}
-                >
-                  {isAIFetching ? 'Đang dịch...' : 'Lưu vào sổ'}
-                </button>
-              </div>
-          </div>
-        </div>
-      )}
-    </>
+          {isAlreadySaved ? (
+            <>
+              <CheckIcon size={14} style={{ display: 'inline', marginRight: 5, verticalAlign: 'middle' }} />
+              Đã lưu vào Flashcards
+            </>
+          ) : (
+            <>
+              <PlusIcon size={14} style={{ display: 'inline', marginRight: 5, verticalAlign: 'middle' }} />
+              Lưu vào Flashcards
+            </>
+          )}
+        </button>
+      </div>
+    </div>
   );
 }

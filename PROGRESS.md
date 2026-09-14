@@ -863,13 +863,50 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 38: Bộ Tra Cứu Từ Vựng Tức Thì Tại Chỗ (Instant In-Context Popover Dictionary) & Pipeline Nạp Đề ETS Chuẩn 100% Cho Test 2, 3, 4
+### ✅ Vấn Đề 38: Bộ Tra Cứu Từ Vựng Tức Thì Tại Chỗ (Instant In-Context Popover Dictionary) & Pipeline Nạp Đề ETS Chuẩn 100% [HOÀN TẤT 100%]
 * **Bối cảnh & Vấn đề**:
-  - Người học khi đọc bài Part 7, câu hỏi Part 5 hoặc transcript Part 1-4 gặp từ mới phải rời web sang Google hoặc mở form cồng kềnh, làm đứt gãy luồng học tập.
-  - Cần nâng cấp `TextSelectionToolbar` thành **Bộ Tra Cứu Tức Thì (Instant In-Context Popover)**:
-    1. Click đúp / bôi đen từ -> Hiện ngay Popover gồm: Tên từ, Phiên âm IPA, Loa phát âm tức thì (Web Speech API US/UK), Nghĩa tiếng Việt (O(1) local TOEIC match + lightweight fallback).
-    2. Nút 1-chạm `+ Lưu Flashcard` lưu ngay vào Sổ từ vựng Spaced Repetition mà không cần mở modal form.
-  - Đồng thời thiết lập pipeline tìm kiếm và nạp lại Test 2, Test 3, Test 4 chuẩn 100% ETS (audio phòng thu gốc + hình scan gốc).
+  - Người học khi làm bài đọc Part 7, câu hỏi Part 5 hay lời thoại nghe Part 1-4 gặp từ mới thường phải bôi đen, copy và chuyển tab sang Google Translate / Từ điển ngoài. Hành động này làm đứt gãy hoàn toàn trí nhớ làm việc (working memory) và luồng tư duy.
+  - Component cũ `TextSelectionToolbar` chỉ hiển thị nút "Lưu nhanh" và mở side drawer form 360px cồng kềnh, không hiện phát âm, IPA hay nghĩa tức thì.
+* **Chi tiết triển khai**:
+  1. **Nâng Cấp Toàn Diện `TextSelectionToolbar.tsx` thành Micro-Popover Tra Cứu Tức Thì**:
+     - *Kích hoạt 0 Friction*: Nhấp đúp (Double-click) hoặc Bôi đen (Select) từ (1-4 từ) bất kỳ nơi nào trên ứng dụng -> Hiện ngay thẻ nổi tại vị trí con trỏ chuột.
+     - *Phát Âm Bản Xứ Tức Thì (0ms Latency)*: Tích hợp nút loa gọi `window.speechSynthesis` phát âm tiếng Anh chuẩn US/UK, 100% offline, miễn phí, không phụ thuộc API ngoài.
+     - *Phiên Âm IPA & Từ Loại & Nhãn Band*: Hiển thị trực quan (ví dụ: `/ˈkɒntɹækt/`, Danh từ, TOEIC 650+, Huy hiệu `Cốt lõi ETS`).
+     - *Cơ Chế Tra Nghĩa 2 Tầng Thông Minh*:
+       - **Tầng 1 (Local O(1) Match)**: Tra siêu tốc từ 400+ từ vựng cốt lõi TOEIC có sẵn (0ms).
+       - **Tầng 2 (Lightweight Fallback API `/api/quick-dict`)**: Nếu là từ lạ ngoài danh mục, tự động tra cứu nhanh từ điển và nghĩa tiếng Việt trong ~150ms và cache lại.
+     - *Nút 1-Chạm `+ Lưu Flashcard`*: 1 click duy nhất -> lưu ngay từ vựng + câu ngữ cảnh vào Sổ từ vựng cá nhân, tích hợp thẳng vào thuật toán Spaced Repetition (Leitner Box 1). Nút chuyển đổi trạng thái mượt mà sang `Đã lưu vào Flashcards` với `CheckIcon`.
+     - *Chống Tràn Màn Hình (Viewport Collision Detection)*: Tự động lật xuống dưới nếu từ ở sát mép trên trình duyệt (`top < 200px`), căn chỉnh lề an toàn.
+     - *Đóng êm ái*: Bấm `Escape` hoặc click ra ngoài để đóng ngay lập tức, không ảnh hưởng bài thi. Bỏ qua khi đang gõ trong `<input>` / `<textarea>`.
+  2. **Pipeline Kiểm Định & Nạp Đề Thi Chuẩn ETS (`scripts/ingest_real_ets.mjs`)**:
+     - Xây dựng công cụ kiểm định tự động: Chặn 100% các tệp Part 1 dùng ảnh Unsplash và audio TTS sinh từ macOS.
+     - Kiểm tra tính hợp lệ của đề thi ứng viên trước khi cho phép nạp vào `public/data/ets{year}/test{N}` và cập nhật `tests_index.json`.
+     - Đã kiểm định thành công: Test 1 đạt chuẩn 100%, Test 2 giả lập bị từ chối 100%.
+  3. **Biểu Tượng Chuẩn SVG**:
+     - Bổ sung `BookmarkIcon` và `PlusIcon` vào `src/components/icons/AppIcons.tsx`.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trong mã nguồn và rendered DOM.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với 35 routes (bao gồm `/api/quick-dict`).
+  - Kiểm thử Playwright E2E `scratch/test_in_context_lookup_e2e.mjs`:
+    - API `/api/quick-dict?word=contract`: Trả về chuẩn IPA và nghĩa.
+    - Part 7 Popover: Nổi đúng vị trí khi bôi đen từ.
+    - Native speaker button: Đạt chuẩn.
+    - 1-Click Flashcard save: Cập nhật storage `user_vocabulary`.
+    - Phím Escape: Đóng popover mượt mà.
+    - Emoji audit: 0 vi phạm.
+
+---
+
+## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
+
+### Vấn Đề 39: Hoàn Thiện Lộ Trình Mục Tiêu Chuẩn Sư Phạm (Curriculum Engine 3 Giai Đoạn) & Tìm Nguồn Đề Thi Gốc ETS 2022 Test 2, 3, 4
+* **Bối cảnh & Vấn đề**:
+  - Để đảm bảo lời hứa "người học chỉ cần học theo lộ trình là sẽ pass đúng target", lộ trình cần được tinh chỉnh bám sát theo 3 giai đoạn rõ ràng cho từng band mục tiêu:
+    1. Giai đoạn 1: Foundation (Nền tảng từ vựng + Ngữ pháp Part 5 cơ bản + Phản xạ Part 1-2).
+    2. Giai đoạn 2: Speed & Tactics (Luyện bẫy thi, Part 5 ≤ 25s, Part 7 nhịp độ chuẩn).
+    3. Giai đoạn 3: Simulation (Thi thử định kỳ, quét sạch Sổ tay lỗi sai).
+  - Thu thập bộ dữ liệu file audio phòng thu gốc và hình ảnh scan đề thi thật cho Test 2, Test 3, Test 4 để đưa vào pipeline `ingest_real_ets.mjs`.
 
 ---
 
@@ -878,6 +915,10 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Chạy Dev Server**: `npm run dev` (đang chạy ngầm tại `http://localhost:3000`).
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
+* **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_in_context_lookup_e2e.mjs` (Kiểm thử Tra Từ Tức Thì Tại Chỗ In-Context Popover, phát âm, 1-click Flashcard, 0 emoji).
+  * `node scratch/test_hide_fake_tests_e2e.mjs` (Kiểm thử ẩn Test 2 & 3, chỉ kích hoạt Test 1 chuẩn ETS).
+
 * **Kiểm thử E2E Playwright mẫu**:
   * `node scratch/test_hide_fake_tests_e2e.mjs` (Kiểm thử ẩn Test 2 & 3, chỉ kích hoạt Test 1 chuẩn ETS, 0 emoji).
   * `node scratch/test_masterclass_milestone36_e2e.mjs` (Kiểm thử Masterclass Studio Audio 1.0x, 0.75x, Glottal Stop).
