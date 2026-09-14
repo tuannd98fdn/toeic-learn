@@ -23,10 +23,12 @@ import {
   LightbulbIcon,
   AwardIcon,
   SparklesIcon,
+  CheckIcon,
 } from '@/components/icons/AppIcons';
 import { soundEffects } from '@/utils/soundEffects';
 import { preloadUpcomingListening } from '@/utils/audioPreloader';
 import PredictiveScoreMeter from '@/components/PredictiveScoreMeter';
+import BottleneckRemediationWidget from '@/components/BottleneckRemediationWidget';
 import SmartActionFeed from '@/components/SmartActionFeed';
 import styles from './page.module.css';
 
@@ -300,6 +302,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══════════════ BOTTLENECK REMEDIATION WIDGET ═══════════════ */}
+      <BottleneckRemediationWidget />
+
       {/* ═══════════════ SMART ADAPTIVE FEED ═══════════════ */}
       <SmartActionFeed />
 
@@ -377,7 +382,7 @@ export default function Home() {
                         }
                       }}
                     >
-                      {task.completed && '✓'}
+                      {task.completed && <CheckIcon size={14} />}
                     </button>
                     <div className={styles.planItemTextGroup}>
                       <div className={styles.planItemHeaderRow}>
@@ -465,7 +470,7 @@ export default function Home() {
             <div className={styles.stationActions}>
               {[1, 2, 3, 4].map(part => (
                 <Link key={part} href={`/part${part}?test=${selectedTest}`} className={`btn-secondary btn-sm ${partProgress[`part${part}`] ? styles.partCompleted : ''}`}>
-                  Part {part} {partProgress[`part${part}`] && '✓'}
+                  Part {part} {partProgress[`part${part}`] && <CheckIcon size={12} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '3px' }} />}
                 </Link>
               ))}
             </div>
@@ -485,9 +490,16 @@ export default function Home() {
             <div className={styles.stationActions}>
               {[5, 6, 7].map(part => (
                 <Link key={part} href={`/part${part}?test=${selectedTest}`} className={`btn-secondary btn-sm ${partProgress[`part${part}`] ? styles.partCompleted : ''}`}>
-                  Part {part} {partProgress[`part${part}`] && '✓'}
+                  Part {part} {partProgress[`part${part}`] && <CheckIcon size={12} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '3px' }} />}
                 </Link>
               ))}
+              <Link
+                href={`/exam?test=${selectedTest}&section=rc`}
+                className="btn-accent btn-sm"
+                style={{ fontWeight: 700 }}
+              >
+                THI THỬ RC (75P)
+              </Link>
             </div>
           </div>
 
@@ -517,12 +529,15 @@ export default function Home() {
               </div>
               <div className={styles.stationText}>
                 <h3>Đấu Trường</h3>
-                <p>200 Câu — 120 Phút mô phỏng phòng thi thật</p>
+                <p>Mô phỏng phòng thi thật: Full 120P (200 câu) hoặc Chuyên sâu Đọc RC 75P (100 câu)</p>
               </div>
             </div>
-            <div className={styles.stationActions}>
+            <div className={styles.stationActions} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              <Link href={`/exam?test=${selectedTest}&section=rc`} className="btn-secondary btn-sm" style={{ fontWeight: 700 }}>
+                THI ĐỌC RC (75P)
+              </Link>
               <Link href={`/exam?test=${selectedTest}`} className={styles.featuredBtn}>
-                VÀO THI NGAY
+                FULL TEST (120P)
                 <ArrowRightIcon size={16} />
               </Link>
             </div>

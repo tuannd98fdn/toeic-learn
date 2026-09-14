@@ -38,6 +38,8 @@ export interface ExamScoreSummary {
   testName: string;
   date: string;
   durationSeconds: number;
+  section?: 'all' | 'rc' | 'rc_sprint';
+  totalQuestions?: number;
   rawLC: number;
   rawRC: number;
   scaledLC: number;
@@ -52,6 +54,8 @@ export interface ExamScoreSummary {
     advice: string;
   };
 }
+
+export { RC_TABLE, LC_TABLE };
 
 export function calculateScaledScore(rawLC: number, rawRC: number): {
   scaledLC: number;
@@ -73,6 +77,14 @@ export function getCefrLevel(totalScore: number): 'A1' | 'A2' | 'B1' | 'B2' | 'C
   if (totalScore >= 785) return 'B2';
   if (totalScore >= 550) return 'B1';
   if (totalScore >= 225) return 'A2';
+  return 'A1';
+}
+
+export function getRcCefrLevel(scaledRC: number): 'A1' | 'A2' | 'B1' | 'B2' | 'C1' {
+  if (scaledRC >= 425) return 'C1';
+  if (scaledRC >= 390) return 'B2';
+  if (scaledRC >= 275) return 'B1';
+  if (scaledRC >= 115) return 'A2';
   return 'A1';
 }
 

@@ -19,11 +19,18 @@ import {
   LightbulbIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  EyeIcon,
+  EyeOffIcon,
 } from '@/components/icons/AppIcons';
 import { Part7PassageSet, Part7Question, Part7DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
+import {
+  extractEvidenceSnippets,
+  locateEvidenceSnippet,
+  highlightEvidenceInHtml,
+} from '@/utils/passageEvidenceLocator';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
@@ -105,6 +112,49 @@ function Part7Trainer() {
   // Highlight State
   const [isHighlightMode, setIsHighlightMode] = useState(false);
   const [isFilterExpanded, setIsFilterExpanded] = useState(false);
+
+  // Font Zoom State (85%, 100%, 115%, 130%, 145%)
+  const [fontZoom, setFontZoom] = useState<number>(() => {
+    return storage.get<number>('toeic_part7_font_zoom', 100);
+  });
+
+  const handleZoomIn = () => {
+    setFontZoom((prev) => {
+      const next = Math.min(145, prev + 15);
+      storage.set('toeic_part7_font_zoom', next);
+      return next;
+    });
+  };
+
+  const handleZoomOut = () => {
+    setFontZoom((prev) => {
+      const next = Math.max(85, prev - 15);
+      storage.set('toeic_part7_font_zoom', next);
+      return next;
+    });
+  };
+
+  const handleResetZoom = () => {
+    setFontZoom(100);
+    storage.set('toeic_part7_font_zoom', 100);
+  };
+
+  // Active Evidence Highlight in Review Mode
+  const [activeEvidenceQuestionId, setActiveEvidenceQuestionId] = useState<string | null>(null);
+
+  const handleToggleEvidence = (question: Part7Question) => {
+    if (activeEvidenceQuestionId === question.id) {
+      setActiveEvidenceQuestionId(null);
+      return;
+    }
+    setActiveEvidenceQuestionId(question.id);
+    setTimeout(() => {
+      const marker = document.getElementById('active-evidence-marker');
+      if (marker) {
+        marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 60);
+  };
 
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(Object.keys(answers).length > 0 && !isSubmitted);
@@ -363,6 +413,8 @@ function Part7Trainer() {
   const handleNextPassage = () => {
     if (!passageSet) return;
 
+    setActiveEvidenceQuestionId(null);
+
     if (currentPassageIndex < filteredPassageSets.length - 1) {
       setTotalScore((prev) => prev + currentSetScore);
       setTotalQuestions((prev) => prev + passageSet.questions.length);
@@ -389,7 +441,29 @@ function Part7Trainer() {
     }
   };
 
-  const renderContent = (content: string, type: string) => {
+  const renderContent = (content: string, type: string, passageId: string) => {
+    let finalContent = content;
+
+    // Check if active evidence should be highlighted in this passage
+    if (activeEvidenceQuestionId && passageSet) {
+      const activeQ = passageSet.questions.find((q) => q.id === activeEvidenceQuestionId);
+      if (activeQ) {
+        const snippets = extractEvidenceSnippets(activeQ.explanation);
+        const loc = locateEvidenceSnippet(snippets, passageSet.passages);
+        if (loc && loc.passageId === passageId) {
+          const res = highlightEvidenceInHtml(
+            content,
+            loc.snippet,
+            styles.evidenceHighlight,
+            'active-evidence-marker'
+          );
+          if (res.found) {
+            finalContent = res.html;
+          }
+        }
+      }
+    }
+
     if (type === 'Text Message') {
       try {
         const messages = JSON.parse(content) as { sender: string; time: string; text: string }[];
@@ -397,25 +471,44 @@ function Part7Trainer() {
           <div className={styles.chatContainer}>
             {messages.map((msg, idx) => {
               const isFirstSender = msg.sender === messages[0].sender;
+              let bubbleHtml = msg.text;
+
+              if (activeEvidenceQuestionId && passageSet) {
+                const activeQ = passageSet.questions.find((q) => q.id === activeEvidenceQuestionId);
+                if (activeQ) {
+                  const snippets = extractEvidenceSnippets(activeQ.explanation);
+                  const loc = locateEvidenceSnippet(snippets, passageSet.passages);
+                  if (loc && loc.passageId === passageId) {
+                    const res = highlightEvidenceInHtml(
+                      msg.text,
+                      loc.snippet,
+                      styles.evidenceHighlight,
+                      'active-evidence-marker'
+                    );
+                    if (res.found) bubbleHtml = res.html;
+                  }
+                }
+              }
+
               return (
                 <div key={idx} className={`${styles.chatMessage} ${isFirstSender ? styles.chatLeft : styles.chatRight}`}>
                   <div className={styles.chatHeader}>
                     <span className={styles.chatSender}>{msg.sender}</span>
                     <span className={styles.chatTime}>{msg.time}</span>
                   </div>
-                  <div className={styles.chatBubble}>{msg.text}</div>
+                  <div className={styles.chatBubble} dangerouslySetInnerHTML={{ __html: bubbleHtml }} />
                 </div>
               );
             })}
           </div>
         );
       } catch (e) {
-        return <div className={styles.passageText}>{content}</div>;
+        return <div className={styles.passageText} dangerouslySetInnerHTML={{ __html: finalContent }} />;
       }
     }
 
     return (
-      <div className={styles.passageText} dangerouslySetInnerHTML={{ __html: content }} />
+      <div className={styles.passageText} dangerouslySetInnerHTML={{ __html: finalContent }} />
     );
   };
 
@@ -706,6 +799,7 @@ function Part7Trainer() {
                         setCurrentPassageIndex(0);
                         setAnswers({});
                         setIsSubmitted(false);
+                        setActiveEvidenceQuestionId(null);
                         setTotalScore(0);
                         setTotalQuestions(0);
                         setSessionAnsweredQuestions([]);
@@ -730,6 +824,7 @@ function Part7Trainer() {
                 setActiveQuestionIndex(0);
                 setAnswers({});
                 setIsSubmitted(false);
+                setActiveEvidenceQuestionId(null);
                 setTotalScore(0);
                 setTotalQuestions(0);
                 setSessionAnsweredQuestions([]);
@@ -976,21 +1071,125 @@ function Part7Trainer() {
       ) : (
         <div className={styles.splitView}>
           {/* Left Side: Passages */}
-          <section className={styles.leftPanel} onMouseUp={handleTextHighlight}>
-            {passageSet.passages.map((passage) => (
-              <div key={passage.id} className={styles.passageCard}>
-                <div className={styles.passageHeader}>
-                  <span className={styles.passageTypeBadge}>{passage.type}</span>
-                  {passage.title && <h2 className={styles.passageTitle}>{passage.title}</h2>}
-                  <div className={styles.passageMeta}>
-                    {passage.sender && <div>{passage.sender}</div>}
-                    {passage.recipient && <div>{passage.recipient}</div>}
-                    {passage.date && <div>{passage.date}</div>}
+          <section
+            className={styles.leftPanel}
+            onMouseUp={handleTextHighlight}
+            style={{ '--passage-font-scale': fontZoom / 100 } as React.CSSProperties}
+          >
+            {/* Passage Toolbar */}
+            <div className={styles.passageToolbar}>
+              <div className={styles.passageToolbarLeft}>
+                <BookIcon size={16} style={{ color: 'var(--primary)' }} />
+                <span>
+                  {passageSet.type} ({passageSet.passages.length} văn bản)
+                </span>
+              </div>
+
+              <div className={styles.passageToolbarRight}>
+                {/* Font Zoom Controls */}
+                <div className={styles.fontZoomControl} title="Tùy chỉnh cỡ chữ bài đọc">
+                  <button
+                    type="button"
+                    className={styles.zoomBtn}
+                    onClick={handleZoomOut}
+                    disabled={fontZoom <= 85}
+                    title="Thu nhỏ cỡ chữ (A-)"
+                    aria-label="Thu nhỏ cỡ chữ"
+                  >
+                    A-
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.zoomValueBtn}
+                    onClick={handleResetZoom}
+                    title="Bấm để đặt lại 100%"
+                  >
+                    {fontZoom}%
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.zoomBtn}
+                    onClick={handleZoomIn}
+                    disabled={fontZoom >= 145}
+                    title="Phóng to cỡ chữ (A+)"
+                    aria-label="Phóng to cỡ chữ"
+                  >
+                    A+
+                  </button>
+                </div>
+
+                {/* Highlight Toggle Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsHighlightMode(!isHighlightMode)}
+                  style={{
+                    padding: '4px 10px',
+                    borderRadius: '8px',
+                    fontSize: '0.8rem',
+                    border: `1px solid ${isHighlightMode ? 'var(--primary)' : 'var(--border)'}`,
+                    backgroundColor: isHighlightMode ? 'rgba(99, 102, 241, 0.12)' : 'transparent',
+                    color: isHighlightMode ? 'var(--primary)' : 'var(--foreground)',
+                    cursor: 'pointer',
+                    fontWeight: 600,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                  }}
+                  title="Bật/tắt chế độ tự bôi vàng bằng chuột"
+                >
+                  {isHighlightMode ? 'Tắt tô vàng' : 'Tô vàng'}
+                </button>
+              </div>
+            </div>
+
+            {passageSet.passages.map((passage) => {
+              const activeQ = activeEvidenceQuestionId
+                ? passageSet.questions.find((q) => q.id === activeEvidenceQuestionId)
+                : null;
+              const activeSnippets = activeQ ? extractEvidenceSnippets(activeQ.explanation) : [];
+              const activeLoc = activeQ ? locateEvidenceSnippet(activeSnippets, passageSet.passages) : null;
+              const isEvidenceInThisPassage = activeLoc?.passageId === passage.id;
+
+              return (
+                <div
+                  key={passage.id}
+                  className={`${styles.passageCard} ${isEvidenceInThisPassage ? styles.evidenceCardHighlight : ''}`}
+                >
+                  <div className={styles.passageHeader}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span className={styles.passageTypeBadge}>{passage.type}</span>
+                      {isEvidenceInThisPassage && activeQ && (
+                        <span
+                          style={{
+                            fontSize: '0.75rem',
+                            fontWeight: 700,
+                            color: '#d97706',
+                            background: 'rgba(245, 158, 11, 0.15)',
+                            padding: '2px 8px',
+                            borderRadius: '6px',
+                            border: '1px solid rgba(245, 158, 11, 0.3)',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                          }}
+                        >
+                          <EyeIcon size={13} /> Chứa manh mối câu Q{activeQ.number}
+                        </span>
+                      )}
+                    </div>
+                    {passage.title && <h2 className={styles.passageTitle}>{passage.title}</h2>}
+                    <div className={styles.passageMeta}>
+                      {passage.sender && <div>{passage.sender}</div>}
+                      {passage.recipient && <div>{passage.recipient}</div>}
+                      {passage.date && <div>{passage.date}</div>}
+                    </div>
+                  </div>
+                  <div className={styles.passageContent}>
+                    {renderContent(passage.content, passage.type, passage.id)}
                   </div>
                 </div>
-                <div className={styles.passageContent}>{renderContent(passage.content, passage.type)}</div>
-              </div>
-            ))}
+              );
+            })}
           </section>
 
           {/* Right Side: Questions & Review */}
@@ -1105,6 +1304,10 @@ function Part7Trainer() {
                 <div className={styles.explanationsList}>
                   {passageSet.questions.map((q) => {
                     const isCorrect = answers[q.id] === q.correctAnswer;
+                    const snippets = extractEvidenceSnippets(q.explanation);
+                    const evidenceLoc = locateEvidenceSnippet(snippets, passageSet.passages);
+                    const isLocatingThis = activeEvidenceQuestionId === q.id;
+
                     return (
                       <div key={q.id} className={styles.explanationCard}>
                         <div className={styles.exHeader}>
@@ -1129,6 +1332,44 @@ function Part7Trainer() {
                             <strong>Đáp án đúng:</strong> {q.correctAnswer} -{' '}
                             {q.options[q.correctAnswer as keyof typeof q.options]}
                           </p>
+
+                          {/* Evidence Pinpointing Button */}
+                          <div className={styles.evidenceActionRow}>
+                            {evidenceLoc ? (
+                              <>
+                                <button
+                                  type="button"
+                                  className={`${styles.evidenceLocateBtn} ${
+                                    isLocatingThis ? styles.evidenceLocateBtnActive : ''
+                                  }`}
+                                  onClick={() => handleToggleEvidence(q)}
+                                  title={
+                                    isLocatingThis
+                                      ? 'Tắt highlight câu này'
+                                      : 'Định vị và làm nổi bật câu chứa bằng chứng trong bài đọc'
+                                  }
+                                >
+                                  {isLocatingThis ? <EyeOffIcon size={14} /> : <EyeIcon size={14} />}
+                                  <span>
+                                    {isLocatingThis
+                                      ? 'Đang soi manh mối (Bấm để tắt)'
+                                      : 'Soi vị trí trong bài'}
+                                  </span>
+                                </button>
+                                {passageSet.passages.length > 1 && (
+                                  <span className={styles.evidencePassageTargetBadge}>
+                                    Tại:{' '}
+                                    {passageSet.passages.find((p) => p.id === evidenceLoc.passageId)?.type ||
+                                      'Đoạn văn'}
+                                  </span>
+                                )}
+                              </>
+                            ) : (
+                              <span className={styles.evidenceSynthesisBadge}>
+                                Manh mối suy luận tổng hợp
+                              </span>
+                            )}
+                          </div>
 
                           {/* Strategy Tip Box */}
                           {q.strategyHint && (

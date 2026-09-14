@@ -150,12 +150,98 @@
 
 .passageContent {
   padding: 25px;
+  font-size: calc(1rem * var(--passage-font-scale, 1));
 }
 
 .passageText {
-  font-size: 1.1rem;
+  font-size: calc(1.1rem * var(--passage-font-scale, 1));
   line-height: 1.8;
   color: var(--foreground);
+}
+
+/* Passage Toolbar & Font Zoom */
+.passageToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 12px);
+  margin-bottom: 14px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.passageToolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+.passageToolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fontZoomControl {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.zoomBtn {
+  background: transparent;
+  border: none;
+  color: var(--foreground);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+}
+
+.zoomBtn:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--primary);
+}
+
+.zoomBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.zoomValueBtn {
+  background: transparent;
+  border: none;
+  color: var(--foreground);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-width: 44px;
+  text-align: center;
+}
+
+.zoomValueBtn:hover {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
 }
 
 /* Chat Bubbles */
@@ -999,5 +1085,87 @@
   gap: 8px;
 }
 
+/* Evidence Pinpointing & Cross-Passage Highlighting */
+.evidenceHighlight {
+  background: rgba(245, 158, 11, 0.28) !important;
+  border-bottom: 2.5px solid #d97706 !important;
+  border-radius: 4px;
+  padding: 1px 4px;
+  color: inherit;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+  animation: evidencePulse 1.8s ease-in-out infinite alternate;
+  scroll-margin-top: 120px;
+  display: inline;
+}
 
+@keyframes evidencePulse {
+  0% {
+    background: rgba(245, 158, 11, 0.22);
+    box-shadow: 0 0 4px rgba(245, 158, 11, 0.2);
+  }
+  100% {
+    background: rgba(245, 158, 11, 0.4);
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.5);
+  }
+}
 
+.evidenceCardHighlight {
+  border-color: rgba(245, 158, 11, 0.55) !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.12) !important;
+}
+
+.evidenceActionRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.evidenceLocateBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface, rgba(255, 255, 255, 0.04));
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.evidenceLocateBtn:hover {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--primary);
+}
+
+.evidenceLocateBtnActive {
+  background: rgba(245, 158, 11, 0.15) !important;
+  border-color: #d97706 !important;
+  color: #d97706 !important;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+}
+
+.evidencePassageTargetBadge {
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.evidenceSynthesisBadge {
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--muted-foreground);
+  font-weight: 600;
+  border: 1px dashed var(--border);
+}

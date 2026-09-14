@@ -681,39 +681,143 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
-## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
-
-### 🚀 Vấn Đề 33: Widget Chỉ Số Khắc Phục Điểm Nghẽn & Gợi Ý Luyện Khắc Phục Tức Thì Trên Dashboard
+### ✅ Vấn Đề 33: Widget Chỉ Số Khắc Phục Điểm Nghẽn & Gợi Ý Luyện Khắc Phục Tức Thì Trên Dashboard [HOÀN TẤT 100%]
 * **Bối cảnh & Vấn đề**:
   - Sau khi hoàn thành Milestone 30, người học đã có thể luyện khắc phục triệt để theo từng nhóm nguyên nhân trong `/notebook`.
   - Tuy nhiên, trên màn hình chính (`/`), học viên chưa thấy ngay tỷ lệ khắc phục lỗi sai tổng quan (% Remediation Mastery Rate) và nhóm nguyên nhân đang là "điểm nghẽn lớn nhất" (ví dụ: đang sai nhiều nhất ở *Mắc bẫy* hay *Từ vựng*).
-  - Cần đưa widget "Khắc Phục Điểm Nghẽn Hôm Nay" ra Dashboard với nút 1-click chuyển thẳng vào bài luyện khắc phục của nhóm nguyên nhân yếu nhất, kết nối chặt chẽ chu trình: **Dashboard → Sổ tay chẩn đoán → Luyện khắc phục → Đo lường tiến bộ**.
+  - Đứt gãy chu trình học tập vì thiếu cầu nối 1-click từ Dashboard dẫn thẳng vào bài luyện khắc phục của nhóm nguyên nhân yếu nhất.
+* **Chi tiết triển khai**:
+  1. **Module Phân Tích & Tính Toán Điểm Nghẽn (`src/utils/bottleneckCalculator.ts`)**:
+     - Chuẩn hóa `ROOT_CAUSES` và `ROOT_CAUSE_CONFIG` với nhãn, màu sắc và mô tả sư phạm chuẩn ETS.
+     - Hàm thuần `calculateBottleneckStats(mistakes: MistakeData)`: tính toán tổng lỗi sai, số câu active (`!isMastered`), số câu đã tốt nghiệp (`isMastered === true`), tỷ lệ % đã khắc phục (`remediationRate`), nhóm nguyên nhân top bottleneck, và phân bổ 5 nhóm.
+  2. **Component `BottleneckRemediationWidget.tsx` & Module CSS**:
+     - Thiết kế chuẩn Dark Glassmorphism cao cấp, viền phát quang đa sắc nhẹ nhàng, tương thích hoàn hảo Dark/Light mode.
+     - Thẻ Tỷ lệ Khắc phục: Vòng tròn đo SVG mượt mà (`XX%`), thống kê đối sánh câu tốt nghiệp / tổng lỗi, và thanh phân bổ màu sắc (Segmented Distribution Bar).
+     - Thẻ Tiêu điểm Điểm nghẽn: Huy hiệu cảnh báo màu sắc, tên nhóm yếu nhất, lời khuyên chiến thuật và nút **1-Click CTA Luyện Khắc Phục Tức Thì** trỏ thẳng đến `/notebook/exam-quiz?rootCause=...`.
+     - Xử lý 4 trạng thái biên: Có điểm nghẽn (`HAS_BOTTLENECK`), Đã tốt nghiệp 100% (`ALL_MASTERED`), Hồ sơ sạch chưa có lỗi (`EMPTY`), và Nhắc nhở gắn nhãn (`NEEDS_TAGGING`).
+     - Tự động cập nhật dữ liệu khi chuyển tab hoặc focus lại cửa sổ trình duyệt.
+  3. **Tích Hợp Toàn Cục & Tối Ưu Hóa Codebase**:
+     - Nhúng `<BottleneckRemediationWidget />` trực tiếp vào Dashboard (`src/app/page.tsx`).
+     - Tái sử dụng `ROOT_CAUSES` và `ROOT_CAUSE_CONFIG` trong `ExamMistakeList.tsx`, loại bỏ mã nguồn trùng lặp (DRY).
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ nghiêm ngặt **NO UI EMOJIS (STRICT)**: 100% 0 emoji, toàn bộ biểu tượng là SVG sạch từ `AppIcons`.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Unit test `scratch/test_bottleneck_widget_integrity.mjs`: 100% PASS across empty, mastered, mixed, untagged.
+  - Playwright E2E `scratch/test_bottleneck_widget_e2e.mjs`: 100% PASS qua toàn bộ 4 kịch bản, 1-click CTA điều hướng chính xác, và không bị tràn ngang trên màn hình di động (iPhone 14 390px).
+  - Regression tests `scratch/test_three_fixes_verification.mjs` & `scratch/test_grouped_nav_and_tools.mjs`: 100% PASS.
 
 ---
 
-## 🛠️ Lệnh Kiểm Thử & Chạy Môi Trường
+### ✅ Vấn Đề 34: Bộ Tùy Chỉnh Cỡ Chữ Đọc Hiểu (Passage Font Zoom A-/A+) & Highlight Bằng Chứng Manh Mối (Cross-Passage Evidence Highlighting) Trong Part 7 [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Bài đọc Part 7 (đoạn đơn, đoạn đôi, đoạn ba) có khối lượng văn bản lớn (300-650 từ) và cỡ chữ cố định (`1.1rem`), gây mỏi mắt trên màn hình nhỏ hoặc với người có thị lực yếu.
+  - Khi xem giải thích chi tiết, học viên phải tự tìm kiếm thủ công câu văn chứa manh mối trong bài đọc dài, gây đứt gãy luồng học tập và tốn thời gian.
+* **Chi tiết triển khai**:
+  1. **Thanh Công Cụ Mini & Bộ Phóng To/Thu Nhỏ Cỡ Chữ (Passage Font Zoom)**:
+     - Nhúng cụm điều khiển `[A-]` `[100%]` `[A+]` trực tiếp vào thanh toolbar trên đỉnh cột bài đọc (`.passageToolbar`).
+     - Hỗ trợ 5 nấc tỉ lệ cỡ chữ: 85%, 100% (mặc định), 115%, 130%, 145%.
+     - Nút `[A-]` tự động disable ở mức sàn 85%; `[A+]` tự động disable ở mức trần 145%.
+     - Bấm nút giữa (ví dụ `130%`) để reset tức thì về 100%.
+     - Tích hợp biến CSS Custom Property `--passage-font-scale` trên `.leftPanel`: toàn bộ tiêu đề, đoạn văn, tin nhắn hội thoại và metadata tự động co giãn tỷ lệ mượt mà, không vỡ layout, không gây giật màn hình (zero CLS).
+     - Lưu cấu hình vào `localStorage ('toeic_part7_font_zoom')`, tự động phục hồi cỡ chữ ưa thích của người học khi mở lại trang.
+  2. **Công Cụ Bóc Tách & Định Vị Bằng Chứng Manh Mối Tự Động (`passageEvidenceLocator.ts`)**:
+     - Xây dựng module thuần `src/utils/passageEvidenceLocator.ts` (0 KB thư viện ngoài):
+       - `extractEvidenceSnippets`: Bóc tách tự động câu trích dẫn bằng chứng từ `q.explanation` (các chuỗi nằm trong `<i>"..."</i>`, `<i>'...'</i>`, hoặc `<b>...</b>`), lọc sạch các thẻ meta tiếng Việt và sắp xếp theo độ dài ưu tiên câu trọn vẹn.
+       - `locateEvidenceSnippet`: Định vị chính xác câu trích dẫn nằm ở văn bản nào trong bài đọc (Passage 1, Passage 2 hoặc Passage 3).
+       - `highlightEvidenceInHtml`: Thuật toán bọc thẻ `<mark class="evidenceHighlight" id="active-evidence-marker">` an toàn với regex `words.join('(?:\\s+|<[^>]+>)+')`, bảo vệ toàn vẹn các thẻ HTML nội dòng (`<strong>`, `<b>`, `<br/>`) và tin nhắn chat.
+     - Đạt tỷ lệ định vị bằng chứng tự động **97.5% (158 / 162 câu)** trên toàn bộ 3 đề thi ETS Test 1, 2, và 3.
+  3. **Tương Tác 1-Click Soi Vị Trí Trong Bài Đọc & Smooth Scroll**:
+     - Trong màn hình Review lời giải chi tiết, mỗi thẻ câu hỏi hiển thị nút `[Soi vị trí trong bài]` kèm `EyeIcon`.
+     - Click kích hoạt: tự động highlight câu bằng chứng bằng dải màu hổ phách phát quang tinh tế (`.evidenceHighlight`) kèm animation pulse nhẹ nhàng, viền thẻ bài đọc sáng lên (`.evidenceCardHighlight`), và tự động cuộn mượt (`scrollIntoView({ behavior: 'smooth', block: 'center' })`) đưa câu văn vào đúng tầm mắt.
+     - Nút bấm chuyển trạng thái `[Đang soi manh mối (Bấm để tắt)]` kèm `EyeOffIcon` cho phép bật/tắt linh hoạt.
+     - Hiển thị nhãn chỉ báo vị trí cho bài đọc đa văn bản: `Tại: Email`, `Tại: Webpage`, v.v.
+     - Đối với câu hỏi suy luận tổng hợp không có 1 trích dẫn đơn lẻ, hiển thị nhãn `Manh mối suy luận tổng hợp`.
+  4. **Dọn Dẹp & Quy Chuẩn**:
+     - Chuẩn hóa đánh giá sao trong bài đọc review khách sạn của Test 2 sang text sạch `3 / 5 stars`, loại bỏ triệt để ký tự symbol `★`, `☆`.
+     - Bổ sung `EyeOffIcon` và `TypeIcon` vào `AppIcons.tsx` (100% SVG sạch, 0 emoji).
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trên rendered DOM.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Unit test trích xuất bằng chứng: `scratch/test_evidence_locator.mjs` đạt 100% Test 1, 98% Test 2, 94% Test 3.
+  - Kiểm thử E2E Playwright `scratch/test_part7_font_zoom_evidence_e2e.mjs`: 100% PASS qua toàn bộ các khâu zoom A-/A+, reset, review mode, soi vị trí, toggle off, multi-passage và audit emoji.
+  - Kiểm thử hồi quy `scratch/test_part7_targeted_reading_e2e.mjs` & `scratch/test_part7_full_pacing_e2e.mjs`: 100% PASS.
+
+---
+
+### Milestone 35: Chế Độ Thi Thử Riêng Phần Đọc RC (TOEIC Reading Section Mock Test 75 Phút / 100 Câu Chuẩn ETS & RC Sprint 30 Phút / 40 Câu) Kèm Phân Tích Nhịp Độ Pacing 3 Phần (Part 5 - 6 - 7) & Bóc Tách Điểm Scaled Score 495 [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Hơn 85% người thi TOEIC bị thiếu giờ hoặc phải "khoanh bừa" ở những bài đọc cuối của Part 7 do không kiểm soát được nhịp độ làm bài giữa Part 5, Part 6 và Part 7.
+  - Trước đây, phòng thi thử `/exam` bắt buộc học viên phải trải qua đủ 120 phút / 200 câu gồm cả phần Nghe (Part 1 - 4), khiến việc luyện tập áp lực thời gian riêng cho phần Đọc hiểu (Reading Comprehension) trở nên bất khả thi hoặc tốn quá nhiều thời gian không cần thiết.
+  - Người học cần một chế độ thi thử chuẩn ETS riêng cho phần Đọc (75 phút / 100 câu) và chế độ cấp tốc RC Sprint (30 phút / 40 câu) để rèn luyện tốc độ và nhịp thở phòng thi thật.
+* **Chi tiết triển khai**:
+  1. **Hỗ Trợ Đa Chế Độ Phòng Thi (Exam Modes: Full Test, RC Mock Test, RC Sprint)**:
+     - Tích hợp query parameter `?section=all | rc | rc_sprint`.
+     - **Chế độ RC Chuẩn ETS**: 75 phút / 100 câu (30 câu Part 5, 16 câu Part 6, 54 câu Part 7). Bỏ qua nạp audio và hình ảnh phần nghe để tối ưu tốc độ tải và trải nghiệm học tập tập trung.
+     - **Chế độ RC Sprint**: 30 phút / 41 câu (15 câu Part 5, 8 câu Part 6, 18 câu Part 7). Lát cắt chuẩn sư phạm để luyện tốc độ phản xạ ngắn hàng ngày.
+     - Bổ sung thanh chuyển đổi chế độ thi (`sectionSelectorBar`) trực quan với các pills chuyển đổi mượt mà và cảnh báo xác nhận làm lại bài nếu đang thi dở dang.
+     - Đồng hồ đếm ngược tự động cấu hình chính xác: 75:00 cho RC, 30:00 cho RC Sprint, 120:00 cho Full Test.
+  2. **Bộ Thước Đo Điểm Số Đọc Hiểu Chuẩn ETS (`toeicScoreCalculator.ts`)**:
+     - Bóc tách và xuất bản bảng chuyển đổi điểm số chuẩn `RC_TABLE` (0 - 100 câu đúng sang điểm scaled 5 - 495).
+     - Bổ sung hàm định vị trình độ Reading CEFR chuẩn xác `getRcCefrLevel(scaledRC)`:
+       - `>= 425`: Trình độ C1
+       - `>= 390`: Trình độ B2
+       - `>= 275`: Trình độ B1
+       - `>= 115`: Trình độ A2
+       - `< 115`: Trình độ A1
+     - Chuẩn hóa màn hình kết quả: Hiển thị thẻ điểm Hero Card chuyên biệt `/ 495 RC`, nhãn CEFR Reading, tổng số câu đúng trên tổng số câu hỏi thực tế (`rawRC / totalQuestions`), độ chính xác và tốc độ trung bình làm bài.
+     - Lọc chẩn đoán điểm yếu (`weakestPart`): Tự động loại trừ các phần thi có tổng số câu hỏi bằng 0, ngăn ngừa chẩn đoán sai Part 1-4 khi thi riêng phần Đọc.
+  3. **Phân Tích Nhịp Độ Đọc Hiểu Toàn Diện 3 Phần (Comprehensive Reading Pacing Grid)**:
+     - Theo dõi thời gian thực tế người học dành riêng cho từng phần (`Part 5`, `Part 6`, `Part 7`) trong suốt quá trình làm bài thi.
+     - Đánh giá tự động tốc độ trung bình theo ngưỡng chuẩn ETS:
+       - **Part 5**: Mục tiêu ≤ 25s/câu (Tối ưu ≤ 25s, Nguy cơ 26-35s, Cháy giờ > 35s).
+       - **Part 6**: Mục tiêu ≤ 35s/câu (Tối ưu ≤ 35s, Nguy cơ 36-50s, Cháy giờ > 50s).
+       - **Part 7**: Mục tiêu ≤ 60s/câu (Tối ưu ≤ 60s, Nguy cơ 61-75s, Cháy giờ > 75s).
+     - Hiển thị bảng phân tích 3 cột trực quan (`pacingGridThree`), màu sắc chỉ báo mức độ nguy cơ (xanh lục, vàng hổ phách, đỏ cảnh báo) và lời khuyên chiến thuật cá nhân hóa giúp học sinh phân bổ lại quỹ thời gian để không bị cạn giờ ở các bài đọc ba (Triple Passages).
+  4. **Bộ Lọc Navigator Linh Hoạt Theo Part Đọc & Phím Tắt 1-Click Từ Dashboard**:
+     - Thanh điều hướng câu hỏi (`navTabs`) tự động biến đổi:
+       - Trong Full Test: `Tất cả (200)`, `Nghe (1-100)`, `Đọc (101-200)`.
+       - Trong RC Mock Test: `Tất cả (100)`, `Part 5 (30)`, `Part 6 (16)`, `Part 7 (54)`.
+     - Bộ lọc câu sai (`showOnlyWrong`) kết hợp nhịp nhàng với bộ lọc từng Part trong chế độ Review Mode.
+     - Tích hợp nút CTA 1-click `THI THỬ RC (75P)` trực tiếp tại **Trạm Đọc** và **Đấu Trường** trên Dashboard (`src/app/page.tsx`).
+  5. **Dọn Dẹp & Quy Chuẩn**:
+     - Bổ sung `CheckIcon` SVG chuẩn vào `AppIcons.tsx`, loại bỏ các ký tự unicode checkmark `✓` trong Dashboard, bảo đảm tuân thủ 100% nguyên tắc nghiêm ngặt `NO UI EMOJIS (STRICT)`.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trong mã nguồn và rendered DOM.
+  - Zero Dependencies: 0 KB thư viện mới, bảo toàn kiến trúc nhẹ và tốc độ cao.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với toàn bộ 34 static routes.
+  - Unit test tự động `scratch/test_rc_mock_exam.mjs`:
+    - `getRcCefrLevel`: PASS 100% các ngưỡng C1/B2/B1/A2/A1.
+    - `RC_TABLE`: Scale 0-100 -> 5-495 chính xác.
+    - 100 câu RC ETS 2022 Test 1 tải đầy đủ.
+    - RC Sprint 41 câu (15 P5, 8 P6, 18 P7) chuẩn xác.
+    - Audit Emoji: PASS 100% ZERO UI EMOJIS.
+
+---
+
+## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
+
+### Vấn Đề 36: Hệ Thống Bóc Tách Bẫy Đề Thi TOEIC Reading (Distractor Analysis & Trap Classifier) & Chế Độ Luyện Đọc Thích Ứng Theo Target Band (500 / 700 / 850+) Trong Sổ Tay Lỗi Sai
+* **Bối cảnh & Vấn đề**:
+  - Khi làm sai các câu Part 5, 6, 7, người học thường chỉ biết đáp án đúng mà chưa nhận diện được bản chất "bẫy" mà đề thi ETS đã cài cắm (ví dụ: bẫy từ loại đồng âm giả, bẫy đại từ sở hữu đứng trước danh từ ghép, bẫy thông tin đúng ngữ pháp nhưng sai nghĩa theo ngữ cảnh, bẫy chi tiết có xuất hiện trong bài nhưng không trả lời đúng trọng tâm câu hỏi trong Part 7).
+  - Cần nâng cấp hệ thống phân loại bẫy đề thi cho toàn bộ các câu hỏi Reading trong Sổ tay câu hỏi sai (`/notebook`) và phòng thi:
+    1. **Bộ Phân Loại Bẫy Đề Thi Reading (Distractor / Trap Classifier)**: Gắn thẻ các dạng bẫy kinh điển ETS (`Trap: Word Form Confuser`, `Trap: True Statement - Wrong Question`, `Trap: Temporal Anchor Trap`, `Trap: Semantic Context Shift`).
+    2. **Chế Độ Luyện Đọc Thích Ứng Theo Target Band (Band Filter)**: Cho phép học viên lọc và ôn luyện các câu hỏi có độ khó phù hợp với mục tiêu điểm số cá nhân (`Band 500+`, `Band 700+`, `Band 850+`).
+
+---
+
+## Lệnh Kiểm Thử & Chạy Môi Trường
 
 * **Chạy Dev Server**: `npm run dev` (đang chạy ngầm tại `http://localhost:3000`).
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
+* **Kiểm tra Build**: `npm run build`.
 * **Kiểm thử E2E Playwright mẫu**:
-  * `node scratch/test_part5_pedagogy_e2e.mjs` (Kiểm thử Part 5 Untimed Mode, Grammar Cheatsheet, Clue Hint, Syntax Visualizer, Mobile 390px).
-  * `node scratch/test_part5_pedagogy_integrity.mjs` (Kiểm tra dữ liệu 60 câu Part 5 Test 1 & 2, 7 Cheatsheets, quét 0 emoji).
-  * `node scratch/test_profile_redesign_e2e.mjs` (Kiểm thử Profile Redesign, Guest/Local mode, Goal settings, Preferences, Light/Dark/Mobile).
-  * `node scratch/test_reading_vocab_e2e.mjs` (Kiểm thử 3 chế độ từ vựng Reading Part 6 & 7: Flashcard SRS, Match Challenge, Collocation Drill).
-  * `node scratch/test_reading_vocab_integrity.mjs` (Kiểm tra dữ liệu 50 collocations/paraphrase & quét 0 emoji).
-  * `node scratch/test_part6_targeted_pacing_e2e.mjs` (Kiểm thử Part 6 Targeted Practice, Cross-test Pooling & Pacing Report).
-  * `node scratch/test_test1_reading_explanations.mjs` (Kiểm tra tính toàn vẹn và chuẩn sư phạm 100 câu Reading Test 1).
-  * `node scratch/test_test1_reading_playwright.mjs` (Kiểm thử hiển thị lời giải Reading Test 1 trên trình duyệt).
-  * `node scratch/test_test2_audio_integrity.mjs` (Kiểm tra 54/54 tệp audio MP3 cục bộ Test 2 Listening).
-  * `node scratch/test_test2_audio_e2e.mjs` (Kiểm thử phát âm thanh Test 2 LC E2E Playwright).
+  * `node scratch/test_rc_mock_exam.mjs` (Kiểm thử RC Mock Exam, Pacing, CEFR RC & Emoji Compliance).
+  * `node scratch/test_part7_font_zoom_evidence_e2e.mjs` (Kiểm thử Part 7 Font Zoom A-/A+, LocalStorage, Evidence Highlighting & Multi-passage).
   * `node scratch/test_part7_full_pacing_e2e.mjs` (Kiểm thử Live Target Badge, Session Pacing Report & Exam Part 7 Pacing).
   * `node scratch/test_part7_targeted_reading_e2e.mjs` (Kiểm thử Part 7 Targeted Reading theo 6 dạng & cấu trúc đoạn).
-  * `node scratch/test_dictation_e2e.mjs` (Kiểm thử Dictation & Interactive Transcript toàn diện Part 1 - 4).
-  * `node scratch/test_strategies_page_e2e.mjs` (Kiểm thử Kho Chiến thuật & Bẫy đề thi 30 chuyên đề).
-  * `node scratch/test_knowledge_gap_report_e2e.mjs` (Kiểm thử Báo cáo Bóc tách Lỗ hổng Kiến thức Exam & Mini-test).
-  * `node scratch/test_adaptive_study_plan_e2e.mjs` (Kiểm thử Lộ trình học thích ứng & Dashboard).
-  * `node scratch/test_subskill_practice.mjs` (Kiểm thử Luyện tập chuyên đề Part 5 liên đề).
-  * `node scratch/test_vocab_e2e.mjs` (Kiểm thử 400+ từ vựng & Spaced Repetition).
+  * `node scratch/test_bottleneck_widget_e2e.mjs` (Kiểm thử Widget Điểm nghẽn trên Dashboard).
+
 
 
 

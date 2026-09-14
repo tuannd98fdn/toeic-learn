@@ -27,21 +27,7 @@ interface ExamMistakeListProps {
   unmasterMistake?: (id: string) => void;
 }
 
-const ROOT_CAUSES = [
-  'Mắc bẫy',
-  'Ngữ pháp',
-  'Từ vựng',
-  'Bất cẩn / Đọc lướt',
-  'Nghe không rõ'
-];
-
-const ROOT_CAUSE_CONFIG: Record<string, { label: string; color: string; desc: string }> = {
-  'Mắc bẫy': { label: 'Mắc bẫy ETS', color: '#ef4444', desc: 'Bị lừa bởi từ đồng âm, bẫy thì hoặc phương án nhiễu tinh vi' },
-  'Ngữ pháp': { label: 'Hổng Ngữ pháp', color: 'var(--primary, #6366f1)', desc: 'Chưa vững cấu trúc câu, từ loại, thì động từ hoặc liên từ' },
-  'Từ vựng': { label: 'Thiếu Từ vựng', color: '#f59e0b', desc: 'Chưa biết nghĩa từ vựng chuyên ngành hoặc cụm Collocation' },
-  'Bất cẩn / Đọc lướt': { label: 'Bất cẩn / Đọc lướt', color: '#ec4899', desc: 'Đọc thiếu từ khóa quan trọng (NOT/TRUE, mốc thời gian, người gửi)' },
-  'Nghe không rõ': { label: 'Nghe không rõ', color: '#06b6d4', desc: 'Bị nuốt âm, nối âm hoặc tốc độ đọc bài nói quá nhanh' },
-};
+import { ROOT_CAUSES, ROOT_CAUSE_CONFIG } from '@/utils/bottleneckCalculator';
 
 export default function ExamMistakeList({ 
   mistakeIds, 

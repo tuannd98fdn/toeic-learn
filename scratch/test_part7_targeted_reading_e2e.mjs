@@ -54,6 +54,11 @@ async function runE2ETests() {
 
     // 2. Verify Targeted Filters Presence
     console.log('2. Verifying Targeted Reading Filters...');
+    const filterToggleBtn = page.locator('button[class*="filterToggleBtn"]');
+    if (await filterToggleBtn.isVisible()) {
+      await filterToggleBtn.click();
+      await page.waitForTimeout(300);
+    }
     const filterContainer = page.locator('div[class*="filterContainer"]');
     await filterContainer.waitFor({ state: 'visible', timeout: 5000 });
 
