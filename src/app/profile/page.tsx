@@ -66,7 +66,8 @@ export default function ProfilePage() {
 
   // Load stored state on mount
   useEffect(() => {
-    const storedTarget = storage.get<string>('toeic_target_score', '750+');
+    const rawTarget = storage.get<string | number>('toeic_target_score', '750+');
+    const storedTarget = String(rawTarget || '750+').replace(/^["']|["']$/g, '').trim() || '750+';
     setTargetScore(storedTarget);
     setSelectedTargetScore(storedTarget);
 
@@ -95,8 +96,11 @@ export default function ProfilePage() {
 
   // Save goal changes
   const handleSaveGoals = () => {
-    setTargetScore(selectedTargetScore);
-    storage.set('toeic_target_score', selectedTargetScore);
+    const cleanTarget = selectedTargetScore.replace(/^["']|["']$/g, '').trim();
+    setTargetScore(cleanTarget);
+    setSelectedTargetScore(cleanTarget);
+    storage.set('toeic_target_score', cleanTarget);
+    localStorage.setItem('toeic_target_score', cleanTarget);
 
     if (examDate) {
       storage.set('toeic_exam_date', examDate);
@@ -181,7 +185,11 @@ export default function ProfilePage() {
       try {
         const json = JSON.parse(event.target?.result as string);
         if (json && typeof json === 'object') {
-          if (json.targetScore) storage.set('toeic_target_score', json.targetScore);
+          if (json.targetScore) {
+            const cleanScore = String(json.targetScore).replace(/^["']|["']$/g, '').trim();
+            storage.set('toeic_target_score', cleanScore);
+            localStorage.setItem('toeic_target_score', cleanScore);
+          }
           if (json.examDate) storage.set('toeic_exam_date', json.examDate);
           if (json.streak) storage.set('toeic_study_streak', json.streak);
           if (json.mistakes) storage.set('mistake_notebook', json.mistakes);

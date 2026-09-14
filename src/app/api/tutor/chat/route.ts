@@ -24,6 +24,7 @@ export interface QuestionContext {
   grammarTag?: string;
   questionId?: string;
   testId?: string;
+  rootCause?: string;
 }
 
 const SYSTEM_PROMPT = `
@@ -97,6 +98,7 @@ ${questionContext.subCategory ? `- Chủ điểm ngữ pháp (Sub-skill): ${ques
 ${questionContext.transcript ? `- Transcript bài nghe: "${questionContext.transcript}"` : ''}
 ${questionContext.passageText ? `- Đoạn văn tham khảo: "${questionContext.passageText}"` : ''}
 ${questionContext.explanation ? `- Lời giải có sẵn: "${questionContext.explanation}"` : ''}
+${questionContext.rootCause ? `- Nguyên nhân gốc rễ học viên hay sai ở câu này: "${questionContext.rootCause}". Hãy phân tích sâu và hướng dẫn khắc phục triệt để lỗi này!` : ''}
 `;
     }
 
@@ -125,7 +127,7 @@ ${questionContext.explanation ? `- Lời giải có sẵn: "${questionContext.ex
     const dynamicSystem = `${SYSTEM_PROMPT}\n\n${contextString}`;
 
     const result = await streamText({
-      model: google('gemini-1.5-flash'),
+      model: google('gemini-3.6-flash'),
       system: dynamicSystem,
       messages,
       onFinish: async (event) => {

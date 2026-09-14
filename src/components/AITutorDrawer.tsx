@@ -35,6 +35,7 @@ export interface QuestionContext {
   grammarTag?: string;
   questionId?: string;
   testId?: string;
+  rootCause?: string;
 }
 
 interface AITutorDrawerProps {

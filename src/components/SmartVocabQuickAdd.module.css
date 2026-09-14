@@ -1,0 +1,572 @@
+/* ============================================
+   Smart Vocab Quick Add Module CSS
+   ============================================ */
+
+.container {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 24px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.titleArea {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.closeBtn:hover {
+  background-color: var(--surface-hover);
+  color: var(--foreground);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.tabBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.tabBtn:hover {
+  background-color: var(--surface-hover);
+  color: var(--foreground);
+}
+
+.activeTab {
+  background-color: var(--primary-light);
+  color: var(--primary);
+}
+
+/* Success Toast */
+.successBanner {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* --- QUICK ADD TAB --- */
+.quickAddSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputWrapper {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  align-items: center;
+}
+
+.mainInput {
+  flex: 1;
+  background-color: var(--surface-sunken);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px 14px 44px;
+  font-size: 1.05rem;
+  color: var(--foreground);
+  outline: none;
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mainInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  background-color: var(--surface);
+}
+
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  color: var(--text-tertiary);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.aiTriggerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 18px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  background: var(--gradient-primary, linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%));
+  color: #ffffff;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.aiTriggerBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.aiTriggerBtn:not(:disabled):hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+/* Not Found Local Prompt */
+.notFoundBox {
+  background-color: var(--surface-hover);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.notFoundText {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Loading State */
+.loadingBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  background-color: var(--surface-sunken);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  color: var(--primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.spinningIcon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Preview Card */
+.previewCard {
+  background-color: var(--surface-sunken);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.previewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.previewWordTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.wordText {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--foreground);
+  letter-spacing: -0.01em;
+}
+
+.ipaText {
+  font-size: 0.95rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--text-secondary);
+}
+
+.posBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-hover);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.previewBadges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sourceBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sourceBadgeLocal {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.sourceBadgeAi {
+  background-color: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.duplicateBadge {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.previewMeaning {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.previewExamples {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-left: 2px solid var(--primary);
+  padding-left: 12px;
+  margin-top: 2px;
+}
+
+.exampleItem {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.previewMnemonic {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  background-color: var(--surface);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.previewMeta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+.previewActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.editToggleBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 0.82rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.editToggleBtn:hover {
+  color: var(--foreground);
+}
+
+.saveBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  background-color: #10b981;
+  color: #ffffff;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.saveBtn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* Edit Form inside Preview */
+.inlineEditForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+.editInputRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.editInput {
+  flex: 1;
+  min-width: 140px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  font-size: 0.88rem;
+}
+
+.editTextarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* --- BATCH & MANUAL TABS --- */
+.batchSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.aiInputTypes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.aiTypeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--surface-sunken);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aiTypeBtn:hover {
+  background-color: var(--surface-hover);
+  color: var(--foreground);
+}
+
+.activeAiType {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.batchTextarea {
+  width: 100%;
+  min-height: 100px;
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  color: var(--foreground);
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.batchActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.resultsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.resultItem {
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resultHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.resultWord {
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--foreground);
+}
+
+.resultIpa {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono, monospace);
+}
+
+.resultMeaning {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* Manual Form */
+.manualForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.formInput {
+  flex: 1;
+  min-width: 130px;
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  color: var(--foreground);
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.formInput:focus {
+  border-color: var(--primary);
+}
+
+.formTextarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}

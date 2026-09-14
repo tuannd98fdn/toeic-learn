@@ -13,6 +13,9 @@ import {
   ZapIcon,
   ArrowRightIcon,
   HeadphonesIcon,
+  TargetIcon,
+  ShieldCheckIcon,
+  CheckCircleIcon,
 } from '@/components/icons/AppIcons';
 import styles from './page.module.css';
 
@@ -20,17 +23,33 @@ interface ExamMistakeListProps {
   mistakeIds: string[];
   mistakes: MistakeData;
   updateMistakeRootCause?: (id: string, cause: string) => void;
+  masterMistake?: (id: string) => void;
+  unmasterMistake?: (id: string) => void;
 }
 
 const ROOT_CAUSES = [
-  'Từ vựng',
-  'Ngữ pháp',
-  'Nghe không rõ',
   'Mắc bẫy',
-  'Bất cẩn / Đọc lướt'
+  'Ngữ pháp',
+  'Từ vựng',
+  'Bất cẩn / Đọc lướt',
+  'Nghe không rõ'
 ];
 
-export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRootCause }: ExamMistakeListProps) {
+const ROOT_CAUSE_CONFIG: Record<string, { label: string; color: string; desc: string }> = {
+  'Mắc bẫy': { label: 'Mắc bẫy ETS', color: '#ef4444', desc: 'Bị lừa bởi từ đồng âm, bẫy thì hoặc phương án nhiễu tinh vi' },
+  'Ngữ pháp': { label: 'Hổng Ngữ pháp', color: 'var(--primary, #6366f1)', desc: 'Chưa vững cấu trúc câu, từ loại, thì động từ hoặc liên từ' },
+  'Từ vựng': { label: 'Thiếu Từ vựng', color: '#f59e0b', desc: 'Chưa biết nghĩa từ vựng chuyên ngành hoặc cụm Collocation' },
+  'Bất cẩn / Đọc lướt': { label: 'Bất cẩn / Đọc lướt', color: '#ec4899', desc: 'Đọc thiếu từ khóa quan trọng (NOT/TRUE, mốc thời gian, người gửi)' },
+  'Nghe không rõ': { label: 'Nghe không rõ', color: '#06b6d4', desc: 'Bị nuốt âm, nối âm hoặc tốc độ đọc bài nói quá nhanh' },
+};
+
+export default function ExamMistakeList({ 
+  mistakeIds, 
+  mistakes, 
+  updateMistakeRootCause,
+  masterMistake,
+  unmasterMistake,
+}: ExamMistakeListProps) {
   const searchParams = useSearchParams();
   const initialSubCat = searchParams?.get('subCategory') || 'all';
 
@@ -40,6 +59,7 @@ export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRoo
   const [filterPart, setFilterPart] = useState<string>('all');
   const [filterSubCategory, setFilterSubCategory] = useState<string>(initialSubCat);
   const [filterRootCause, setFilterRootCause] = useState<string>('all');
+  const [statusFilter, setStatusFilter] = useState<'active' | 'mastered' | 'all'>('active');
 
   useEffect(() => {
     const sub = searchParams?.get('subCategory');
@@ -65,8 +85,40 @@ export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRoo
     }
   }, [mistakeIds, mistakes]);
 
+  const rootCauseStats = useMemo(() => {
+    const counts: Record<string, number> = {
+      'Mắc bẫy': 0,
+      'Ngữ pháp': 0,
+      'Từ vựng': 0,
+      'Bất cẩn / Đọc lướt': 0,
+      'Nghe không rõ': 0,
+    };
+    let unassigned = 0;
+    let activeTotal = 0;
+    let masteredTotal = 0;
+
+    loadedQuestions.forEach(q => {
+      const isMastered = Boolean(mistakes[q.mistakeId]?.isMastered);
+      if (isMastered) {
+        masteredTotal++;
+      } else {
+        activeTotal++;
+        const rc = mistakes[q.mistakeId]?.rootCause;
+        if (rc && counts[rc] !== undefined) {
+          counts[rc]++;
+        } else {
+          unassigned++;
+        }
+      }
+    });
+
+    return { counts, unassigned, activeTotal, masteredTotal, total: loadedQuestions.length };
+  }, [loadedQuestions, mistakes]);
+
   const dueQuestions = useMemo(() => {
     return loadedQuestions.filter(q => {
+      const isMastered = Boolean(mistakes[q.mistakeId]?.isMastered);
+      if (isMastered) return false;
       const nextDate = mistakes[q.mistakeId]?.nextReviewDate;
       return nextDate ? isDueForReview(nextDate) : false;
     });
@@ -83,6 +135,10 @@ export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRoo
 
   const filteredQuestions = useMemo(() => {
     return loadedQuestions.filter(q => {
+      const isMastered = Boolean(mistakes[q.mistakeId]?.isMastered);
+      if (statusFilter === 'active' && isMastered) return false;
+      if (statusFilter === 'mastered' && !isMastered) return false;
+
       const matchPart = filterPart === 'all' 
         ? true 
         : q.part.replace(/^p(art)?/, '') === filterPart.replace(/^p(art)?/, '');
@@ -99,7 +155,7 @@ export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRoo
 
       return matchPart && matchSub && matchRC;
     });
-  }, [loadedQuestions, filterPart, filterSubCategory, filterRootCause, mistakes]);
+  }, [loadedQuestions, statusFilter, filterPart, filterSubCategory, filterRootCause, mistakes]);
 
   const partLabels: Record<string, string> = {
     p1: 'Part 1: Photographs',
@@ -134,14 +190,96 @@ export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRoo
 
   return (
     <div>
+      {/* Root-Cause Diagnostic Matrix */}
+      <section className={styles.matrixSection}>
+        <div className={styles.matrixHeaderGroup}>
+          <div>
+            <h3 className={styles.matrixTitle}>
+              <TargetIcon size={18} /> Ma Trận Chẩn Đoán & Khắc Phục Lỗi Sai Theo Nguyên Nhân
+            </h3>
+            <p className={styles.matrixSubtitle}>
+              Bóc tách {rootCauseStats.activeTotal} câu sai đang cần ôn theo 5 nhóm nguyên nhân gốc để tập trung luyện đúng điểm nghẽn
+            </p>
+          </div>
+          <div className={styles.statusTabs}>
+            <button
+              type="button"
+              className={`${styles.statusTabBtn} ${statusFilter === 'active' ? styles.statusTabBtnActive : ''}`}
+              onClick={() => setStatusFilter('active')}
+            >
+              Cần ôn ({rootCauseStats.activeTotal})
+            </button>
+            <button
+              type="button"
+              className={`${styles.statusTabBtn} ${statusFilter === 'mastered' ? styles.statusTabBtnActive : ''}`}
+              onClick={() => setStatusFilter('mastered')}
+            >
+              Đã khắc phục ({rootCauseStats.masteredTotal})
+            </button>
+            <button
+              type="button"
+              className={`${styles.statusTabBtn} ${statusFilter === 'all' ? styles.statusTabBtnActive : ''}`}
+              onClick={() => setStatusFilter('all')}
+            >
+              Tất cả ({rootCauseStats.total})
+            </button>
+          </div>
+        </div>
+
+        <div className={styles.matrixGrid}>
+          {ROOT_CAUSES.map(rc => {
+            const count = rootCauseStats.counts[rc] || 0;
+            const cfg = ROOT_CAUSE_CONFIG[rc];
+            const pct = rootCauseStats.activeTotal > 0 ? Math.round((count / rootCauseStats.activeTotal) * 100) : 0;
+
+            return (
+              <div key={rc} className={styles.matrixCard}>
+                <div className={styles.matrixCardTop}>
+                  <span className={styles.matrixCardLabel}>{cfg.label}</span>
+                  <span className={`${styles.matrixCardCount} ${count > 0 ? styles.matrixCardCountActive : ''}`}>
+                    {count} câu ({pct}%)
+                  </span>
+                </div>
+                <div className={styles.matrixProgressBar}>
+                  <div 
+                    className={styles.matrixProgressFill} 
+                    style={{ width: `${pct}%`, background: cfg.color }} 
+                  />
+                </div>
+                <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', lineHeight: 1.3 }}>
+                  {cfg.desc}
+                </span>
+                {count > 0 ? (
+                  <Link
+                    href={`/notebook/exam-quiz?rootCause=${encodeURIComponent(rc)}`}
+                    className={styles.matrixDrillBtn}
+                    style={{ background: cfg.color }}
+                  >
+                    <ZapIcon size={13} />
+                    <span>Luyện khắc phục ({count})</span>
+                  </Link>
+                ) : (
+                  <span className={`${styles.matrixDrillBtn} ${styles.matrixDrillBtnDisabled}`}>
+                    Không có lỗi
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       {/* Top CTA Banner to start Practice */}
       <section className={styles.actionSection} style={{ marginBottom: '1.5rem' }}>
         <div className={`${styles.ctaCard} card-minimal`}>
           <h2>Sẵn sàng khắc phục câu sai?</h2>
           <p>
-            Bạn đang có <strong>{loadedQuestions.length}</strong> câu hỏi đề thi cần ôn tập
+            Bạn đang có <strong>{rootCauseStats.activeTotal}</strong> câu hỏi cần ôn tập
             {dueQuestions.length > 0 && (
               <> (trong đó <strong>{dueQuestions.length}</strong> câu đã tới hạn ôn hôm nay)</>
+            )}
+            {rootCauseStats.masteredTotal > 0 && (
+              <>, đã khắc phục thành công <strong>{rootCauseStats.masteredTotal}</strong> câu</>
             )}.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
@@ -253,12 +391,17 @@ export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRoo
         {filteredQuestions.map(({ mistakeId, wrongCount, testId, part, qData, subCategory: qSubCat, grammarTag: qGrammarTag }) => {
           const testName = testId === 'ets2022_test1' ? 'ETS 2022 Test 1' : testId;
           const m = mistakes[mistakeId];
+          const isMastered = Boolean(m?.isMastered);
           const due = m?.nextReviewDate ? isDueForReview(m.nextReviewDate) : false;
           const subCategory = qSubCat || qData.subCategory || qData.type;
           const grammarTag = qGrammarTag || qData.grammarTag;
           
           return (
-            <div key={mistakeId} className={`${styles.wordCard} card-minimal`}>
+            <div 
+              key={mistakeId} 
+              className={`${styles.wordCard} card-minimal`}
+              style={isMastered ? { opacity: 0.85, border: '1px solid rgba(16, 185, 129, 0.4)' } : undefined}
+            >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '0.6rem' }}>
                 <div>
                   <div style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--foreground)' }}>
@@ -281,12 +424,21 @@ export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRoo
                   </div>
                 </div>
                 <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', flexShrink: 0 }}>
-                  {due && (
-                    <span style={{ fontSize: '0.7rem', background: 'var(--danger)', color: 'white', padding: '2px 8px', borderRadius: '6px', fontWeight: 700 }}>
-                      Tới hạn ôn
+                  {isMastered ? (
+                    <span className={styles.masteredBadge}>
+                      <ShieldCheckIcon size={13} />
+                      Đã khắc phục
                     </span>
+                  ) : (
+                    <>
+                      {due && (
+                        <span style={{ fontSize: '0.7rem', background: 'var(--danger)', color: 'white', padding: '2px 8px', borderRadius: '6px', fontWeight: 700 }}>
+                          Tới hạn ôn
+                        </span>
+                      )}
+                      <span className={styles.wrongCountBadge}>Sai {wrongCount} lần</span>
+                    </>
                   )}
-                  <span className={styles.wrongCountBadge}>Sai {wrongCount} lần</span>
                 </div>
               </div>
 
@@ -350,6 +502,48 @@ export default function ExamMistakeList({ mistakeIds, mistakes, updateMistakeRoo
                   <RotateCcwIcon size={14} />
                   <span>Luyện câu này</span>
                 </Link>
+
+                {isMastered ? (
+                  <button
+                    type="button"
+                    onClick={() => unmasterMistake?.(mistakeId)}
+                    className="btn-secondary btn-sm"
+                    style={{
+                      borderRadius: '8px',
+                      padding: '0.45rem 0.85rem',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <RotateCcwIcon size={14} />
+                    <span>Mở lại câu này</span>
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => masterMistake?.(mistakeId)}
+                    className="btn-secondary btn-sm"
+                    style={{
+                      borderRadius: '8px',
+                      padding: '0.45rem 0.85rem',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      cursor: 'pointer',
+                      color: '#10b981',
+                      borderColor: 'rgba(16, 185, 129, 0.4)'
+                    }}
+                  >
+                    <ShieldCheckIcon size={14} />
+                    <span>Đã nắm vững</span>
+                  </button>
+                )}
 
                 <button
                   type="button"

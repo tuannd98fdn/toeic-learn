@@ -597,10 +597,15 @@
 
 .iconPrimary { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); box-shadow: 0 6px 16px rgba(var(--primary-rgb), 0.25); }
 .iconWarning { background: linear-gradient(135deg, var(--warning), #f57c00); box-shadow: 0 6px 16px rgba(var(--warning-rgb), 0.25); }
-.iconSecondary { background: linear-gradient(135deg, var(--accent), var(--accent-hover)); box-shadow: 0 6px 16px rgba(var(--accent-rgb), 0.25); }
+.iconSecondary { background: linear-gradient(135deg, #a855f7, #7c3aed); box-shadow: 0 6px 16px rgba(168, 85, 247, 0.25); }
 .iconSuccess { background: linear-gradient(135deg, var(--success), var(--success-hover)); box-shadow: 0 6px 16px rgba(var(--success-rgb), 0.25); }
 .iconInfo { background: linear-gradient(135deg, #0ea5e9, #0284c7); box-shadow: 0 6px 16px rgba(14, 165, 233, 0.25); }
-.iconFeatured { background: rgba(255, 255, 255, 0.15); color: #fff; }
+.iconFeatured {
+  background: linear-gradient(135deg, rgba(var(--secondary-rgb), 0.25) 0%, rgba(var(--secondary-rgb), 0.1) 100%);
+  color: var(--secondary);
+  border: 1px solid rgba(var(--secondary-rgb), 0.3);
+  box-shadow: 0 4px 14px rgba(var(--secondary-rgb), 0.2);
+}
 
 .stationText h3 {
   font-size: 1.15rem;
@@ -622,12 +627,14 @@
   flex-wrap: wrap;
 }
 
-/* Featured Full Test Card */
+/* Featured Full Test Card — Dark Glassmorphism Premium */
 .stationFeatured {
-  background: linear-gradient(135deg, var(--secondary) 0%, #0369a1 100%);
-  border: none;
+  background: linear-gradient(135deg, rgba(var(--secondary-rgb), 0.1) 0%, rgba(14, 165, 233, 0.03) 60%, var(--surface) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(var(--secondary-rgb), 0.35);
   border-radius: var(--radius-xl);
-  box-shadow: 0 8px 24px rgba(var(--secondary-rgb), 0.3);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(var(--secondary-rgb), 0.08);
   transition: all 0.3s var(--ease-out-expo);
   overflow: hidden;
   position: relative;
@@ -636,48 +643,50 @@
 .stationFeatured::before {
   content: '';
   position: absolute;
-  top: -50%;
-  right: -30%;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  top: -40%;
+  right: -20%;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(var(--secondary-rgb), 0.15) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
 
 .stationFeatured:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(var(--secondary-rgb), 0.4);
+  border-color: rgba(var(--secondary-rgb), 0.6);
+  box-shadow: var(--shadow-lg), 0 0 28px rgba(var(--secondary-rgb), 0.18);
 }
 
 .stationFeatured .stationText h3 {
-  color: #fff;
+  color: var(--foreground);
 }
 
 .stationFeatured .stationText p {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text-secondary);
 }
 
 .featuredBtn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.95);
-  color: var(--secondary);
-  border: none;
+  background: linear-gradient(135deg, var(--secondary) 0%, #0284c7 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-lg);
   font-weight: 700;
   font-size: 0.9rem;
-  padding: 10px 20px;
-  transition: all 0.2s ease;
+  padding: 10px 22px;
+  transition: all 0.25s var(--ease-spring);
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 14px rgba(var(--secondary-rgb), 0.35);
 }
 
 .featuredBtn:hover {
-  background: #fff;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 20px rgba(var(--secondary-rgb), 0.5);
+  color: #ffffff;
 }
 
 /* ============================================
@@ -746,4 +755,122 @@
   background-color: var(--success-light) !important;
   color: var(--success-hover) !important;
   border-color: var(--success) !important;
+}
+
+/* Masterclass 30-Minute Feature Banner */
+.masterclassBanner {
+  position: relative;
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.55) 0%, rgba(15, 23, 42, 0.85) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.masterclassBannerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.masterclassInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.masterclassTagRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.masterclassPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(168, 85, 247, 0.18);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.masterclassBandBadge {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.masterclassTitle {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+.masterclassSub {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  max-width: 680px;
+}
+
+.masterclassPillRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.pillItem {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.masterclassAction {
+  flex-shrink: 0;
+}
+
+.masterclassCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.4);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.masterclassCtaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.55);
 }

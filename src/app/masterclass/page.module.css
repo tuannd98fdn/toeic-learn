@@ -1,0 +1,43 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 24px 16px 64px 16px;
+  width: 100%;
+}
+
+.heroHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  padding: 12px 0 8px 0;
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+@media (max-width: 640px) {
+  .heroTitle {
+    font-size: 1.45rem;
+  }
+}
+
+.heroSubtitle {
+  margin: 0 auto;
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  max-width: 680px;
+  line-height: 1.55;
+}
+
+.hubSection {
+  width: 100%;
+}

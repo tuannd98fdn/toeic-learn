@@ -87,7 +87,7 @@ export const fetchMistakeQuestions = async (
         const neededItems = fetchGroup[testId][partKey];
         
         neededItems.forEach(({ id, qid, origPart }) => {
-          const q = flatQuestions.find((item: any) => item.id === qid);
+          const q = flatQuestions.find((item: any) => item.id === qid || String(item.number) === String(qid));
           if (q) {
             results.push({
               mistakeId: id,

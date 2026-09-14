@@ -54,12 +54,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={plusJakartaSans.variable}>
+    <html lang="vi" className={plusJakartaSans.variable} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var c=localStorage.getItem('toeic_sidebar_collapsed');var w=localStorage.getItem('toeic_sidebar_width');if(window.innerWidth>=860){if(c==='true'){document.documentElement.style.setProperty('--sidebar-width','80px');}else if(w){document.documentElement.style.setProperty('--sidebar-width',w+'px');}}}catch(e){}})();`,
+          }}
+        />
       </head>
       <body>
         <AuthProvider>

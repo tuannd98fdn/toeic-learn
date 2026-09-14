@@ -16,7 +16,11 @@ export const storage = {
       }
 
       try {
-        return JSON.parse(item) as T;
+        const parsed = JSON.parse(item);
+        if (typeof defaultValue === 'string' && typeof parsed === 'number') {
+          return String(parsed) as unknown as T;
+        }
+        return parsed as T;
       } catch {
         // If caller expects an object or array (and defaultValue is not null),
         // but JSON.parse failed, do not return raw string.

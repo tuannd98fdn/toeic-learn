@@ -593,13 +593,101 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### 🚀 Vấn Đề 30: Chế Độ Luyện Tập Sâu Khắc Phục Lỗi Sai Thông Minh (Smart Mistake Remediation Drill & AI Root-Cause Tutor) Trong Sổ Tay Lỗi Sai
+### ✅ Vấn Đề 30: Chế Độ Luyện Tập Sâu Khắc Phục Lỗi Sai Thông Minh (Smart Mistake Remediation Drill & AI Root-Cause Tutor) Trong Sổ Tay Lỗi Sai
 * **Bối cảnh & Vấn đề**:
   - Người học sau khi làm bài thi thử hoặc luyện tập các đề (Test 1, 2, 3) có một lượng lớn câu sai được lưu vào Sổ tay lỗi sai (`/notebook`).
-  - Hiện tại, Sổ tay lỗi sai chỉ hỗ trợ xem lại danh sách câu hỏi và gắn nhãn nguyên nhân gốc (Root Cause). Người học thiếu một **Chế độ Luyện Tập Tức Thì (Remediation Drill)**:
-    1. Tự động lọc ra các câu sai theo nhóm nguyên nhân gốc (Bẫy từ đồng âm, Quên công thức thì, Bẫy phân từ, Thiếu từ vựng, Nhầm liên từ).
-    2. Cho phép người học làm lại ngay các câu sai này dưới dạng mini-quiz thích ứng (5-10 câu) kèm hướng dẫn tư duy từng bước.
-    3. Tự động tháo nhãn "Câu hỏi cần ôn tập" (mastered status) và cập nhật điểm số tiềm năng trong `KnowledgeEvaluator` khi người học trả lời đúng.
+  - Trước đây, Sổ tay lỗi sai chỉ hỗ trợ xem lại danh sách câu hỏi và gắn nhãn nguyên nhân gốc (Root Cause). Người học thiếu một chế độ luyện tập tức thì để kiểm chứng đã khắc phục được lỗi hay chưa.
+* **Chi tiết triển khai**:
+  1. **Ma Trận Điểm Nghẽn & Bảng Điều Khiển Khắc Phục Lỗi Sai**:
+     - Phân loại trực quan toàn bộ câu hỏi sai thành 5 nhóm: *Mắc bẫy (Traps)*, *Ngữ pháp (Grammar)*, *Từ vựng (Vocabulary)*, *Bất cẩn / Đọc lướt (Careless / Skimming)*, và *Nghe không rõ (Acoustic Mishearing)*.
+     - Thanh tiến độ % khắc phục và nút 1-click `Luyện khắc phục` cho từng nhóm nguyên nhân.
+  2. **Bộ Lọc Trạng Thái 3 Tầng (Status Tabs)**:
+     - Tách biệt rõ: `Cần ôn (Active)`, `Đã khắc phục (Mastered)`, và `Tất cả (Total)`.
+     - Cho phép người học mở lại câu đã khắc phục hoặc đánh dấu nắm vững ngay tại danh sách câu hỏi.
+  3. **Chế Độ Luyện Tập Khắc Phục Thông Minh (`/notebook/exam-quiz?rootCause=...`)**:
+     - Hỗ trợ tham số URL `rootCause`, ưu tiên các câu hỏi chưa khắc phục (`!isMastered`).
+     - Hiển thị huy hiệu `Khắc phục: [Tên nguyên nhân]` nổi bật trên thanh header.
+  4. **Giàn Giáo Sư Phạm (Pedagogical Clue Hint Scaffolding)**:
+     - Tích hợp nút bật/tắt `Gợi ý manh mối tư duy` trước khi trả lời, gợi ý ngữ cảnh hoặc cấu trúc câu dựa trên `clueHint` hoặc `subCategory` mà không làm lộ đáp án.
+  5. **Tốt Nghiệp Lỗi Sai Tức Thì (In-Drill Mastery Graduation)**:
+     - Khi trả lời đúng, xuất hiện thẻ hành động `Đã khắc phục hoàn toàn`.
+     - Click kích hoạt `masterMistake(id)`, thăng hạng Box 5 (Spaced Repetition) và lưu `isMastered: true`.
+     - Tích hợp ngay vào `knowledgeEvaluator.ts`: chỉ tính `grammarMistakesCount` cho các lỗi chưa khắc phục (`!m.isMastered`), giúp điểm trần dự đoán (predicted score) tăng ngay khi học viên khắc phục thành công điểm yếu.
+  6. **Cá Nhân Hóa Gia Sư AI (AI Tutor Enrichment)**:
+     - Mở rộng `QuestionContext` với trường `rootCause`, truyền ngữ cảnh nguyên nhân gốc vào `api/tutor/chat/route.ts` để Gia sư AI tập trung bóc tách bẫy và phương pháp chống sai đúng trọng tâm.
+  7. **Kiểm Định & Tuân Thủ Quy Chuẩn**:
+     - 100% tuân thủ **NO UI EMOJIS (STRICT)** với các icon SVG chuyên nghiệp (`ShieldCheckIcon`, `LightbulbIcon`, `HelpCircleIcon`, `TargetIcon`).
+     - `npx tsc --noEmit`: 0 lỗi typecheck.
+     - Script E2E Playwright tự động kiểm thử toàn bộ luồng: mở Ma trận, click Luyện khắc phục, mở Clue Hint, trả lời đúng, click Tốt nghiệp, kiểm tra `localStorage` và quét toàn bộ DOM 0 emoji thành công 100%.
+
+### ✅ Vấn Đề 31: Tinh Chỉnh UI/UX Dashboard & Tái Cấu Trúc Nhóm Điều Hướng Sidebar (Sửa Dứt Điểm Bug "990", Thẻ Đấu Trường Dark Glassmorphism, Grouped Sidebar Navigation)
+* **Bối cảnh & Vấn đề**:
+  - Tiêu đề Hero và Banner chúc mừng gặp lỗi in escaped quotes `"990"` thay vì `990` do lưu trữ và phân tích chuỗi chưa đồng bộ giữa `storage.set` (`JSON.stringify`) và `page.tsx` (`localStorage.getItem`).
+  - Thẻ "Đấu Trường" (Full test 200 câu) dùng nền đặc gradient Cyan rực rỡ chiếm trọn thị giác của toàn bộ màn hình, lấn át các trạm quan trọng hàng ngày (*Trạm Nghe*, *Trạm Đọc*, *Trạm Nhanh*).
+  - Mục active "Học" trên Sidebar có viền sáng và bóng đổ quá dày, trông nặng nề; badge "MỚI" dùng màu đỏ báo động (`var(--danger)`) gây cảm giác lỗi hoặc cảnh báo thay vì tính năng mới.
+  - Các công cụ học tập hữu ích trong Kho Vũ Khí (*Flashcards*, *Làm Quiz*, *Từ điển*, *Mẹo thi*, *Sổ tay lỗi*) bị cô lập trên trang chủ mà không xuất hiện trên thanh Sidebar điều hướng toàn cục.
+* **Chi tiết triển khai**:
+  1. **Sửa dứt điểm bug chuỗi `"990"`**:
+     - Nâng cấp [storage.ts](file:///Users/bravee06/toeic-learn/src/utils/storage.ts): `storage.get` tự động ép kiểu string khi `defaultValue` là string và kết quả parse là number.
+     - Đồng bộ [page.tsx](file:///Users/bravee06/toeic-learn/src/app/page.tsx), [profile/page.tsx](file:///Users/bravee06/toeic-learn/src/app/profile/page.tsx), [onboarding/page.tsx](file:///Users/bravee06/toeic-learn/src/app/onboarding/page.tsx) làm sạch chuỗi mục tiêu điểm qua regex unquote và tự động sanitize in-place trong localStorage nếu phát hiện dấu ngoặc kép thừa.
+  2. **Tái thiết kế thẻ "Đấu Trường" theo chuẩn Dark Glassmorphism cao cấp**:
+     - Cập nhật [page.module.css](file:///Users/bravee06/toeic-learn/src/app/page.module.css): Thay thế khối nền solid cyan chói mắt bằng nền `linear-gradient` tinh tế với độ trong suốt mềm mại, viền phát quang cyan sang trọng (`rgba(var(--secondary-rgb), 0.35)`), hiệu ứng vầng sáng phản xạ và nút bấm CTA `VÀO THI NGAY` chuyển sang gradient hiện đại.
+     - Khôi phục sự cân bằng thị giác hoàn hảo cho khu vực Bản Đồ Đề Thi.
+  3. **Chuẩn hóa Active State Sidebar & Badge "MỚI" theo phong cách Linear/Raycast**:
+     - Cập nhật [Navbar.module.css](file:///Users/bravee06/toeic-learn/src/components/Navbar.module.css): Loại bỏ box-shadow glow cồng kềnh, chuyển sang viền mềm mại mờ (`border: 1px solid rgba(var(--primary-rgb), 0.22)`), nền trong suốt 12%, chỉ báo dọc thanh mảnh cách điệu bên trái.
+     - Đổi badge `"MỚI"` và dot mobile từ màu đỏ cảnh báo sang gradient tím/indigo thời thượng (`linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)`) có viền nhẹ và đổ bóng tinh tế.
+  4. **Tái Cấu Trúc Thông Tin & Nhóm Điều Hướng Sidebar (Grouped Navigation)**:
+     - Phân nhóm điều hướng [Navbar.tsx](file:///Users/bravee06/toeic-learn/src/components/Navbar.tsx) thành 3 cụm logic rõ ràng với tiêu đề vi mô tinh tế:
+       - **Luyện Thi**: Học (`/`), Lộ trình (`/study-plan`), Thi thử (`/exam`), Thống kê (`/stats`).
+       - **Kho Công Cụ**: Flashcards (`/study`), Từ điển (`/vocabulary`), Làm Quiz (`/quiz`), Mẹo thi (`/tips`), Sổ tay lỗi (`/notebook`).
+       - **Cá Nhân**: Tài khoản (`/profile`).
+     - Bổ sung quy tắc CSS hiển thị rõ ràng cho `.groupHeader` và `.groupDivider` trên Desktop, tự động ẩn khi thu gọn sidebar.
+     - Giữ nguyên thanh Bottom Navigation 5 nút chuẩn công thái học ngón tay cái cho màn hình di động (< 860px).
+     - Sửa lỗi biến CSS `--accent` chưa định nghĩa khiến icon Từ điển bị xám xịt/disable trong [page.module.css](file:///Users/bravee06/toeic-learn/src/app/page.module.css); nâng cấp sang gradient tím ngọc sang trọng (`linear-gradient(135deg, #a855f7, #7c3aed)`).
+     - Chuẩn hóa phụ đề Kho Vũ Khí thành *"Bộ công cụ luyện tập & tối ưu điểm số"* phản ánh chính xác giá trị học thuật.
+  5. **Quy chuẩn & Kiểm định**:
+     - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trên rendered DOM.
+     - Typecheck `npx tsc --noEmit`: 0 lỗi.
+     - Kiểm thử tự động E2E Playwright `scratch/test_three_fixes_verification.mjs` & `scratch/test_grouped_nav_and_tools.mjs`: 100% PASS (đầy đủ 10 liên kết, 3 tiêu đề nhóm, chế độ thu gọn sidebar, kiểm tra màu icon và 0 emoji).
+     - Ảnh chụp màn hình nghiệm thu: `scratch/three_fixes_verified.png` & `scratch/sidebar_expanded_verified.png`.
+
+---
+
+### ✅ Vấn Đề 32: Trạm Học Chuyên Sâu 30 Phút TOEIC Masterclass (800 - 990+) — Bẻ Khóa Âm Nối ETS, Ma Trận Paraphrase Thương Mại & Đấu Trường Bẫy Ngữ Pháp Đảo Ngữ [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Học viên phản ánh chỉ có nội dung luyện đề (Exam Content) là chưa đủ để bứt phá lên 800 - 990: làm đề chỉ đo lường kiến thức sẵn có chứ không dạy kiến thức tầng cao (*"Testing is not Teaching"*).
+  - Áp lực khi mở web chỉ thấy làm đề dài (200 câu) hoặc giải trắc nghiệm khô khan gây nản lòng (*Test Fatigue & Cognitive Overload*), khiến người học rời trang sau 2-3 phút thay vì ở lại học đủ 30 phút.
+* **Chi tiết triển khai**:
+  1. **Kiến Trúc Dữ Liệu Sư Phạm Chuyên Sâu 800 - 990+ (`src/data/masterclass/`)**:
+     - *Connected Speech Lab (`connectedSpeechLab.ts`)*: Bẻ khóa các hiện tượng âm thanh phân loại điểm 800+ của ETS: Glottal Stop /ʔ/ và vần câm non-rhotic của giọng British, âm vỗ Flapped /t/ và linking của giọng American, Vowel shift /eɪ/ -> /aɪ/ của giọng Australian, và Weak forms của trợ động từ / giới từ.
+     - *Authentic Business Scenarios (`businessScenarios.ts`)*: Kịch bản tiếng Anh thương mại cao cấp (Logistics Bán dẫn Apex Maritime, Thẩm định M&A NexaPharma) kèm Ma trận Paraphrase 4 tầng ETS (Đồng nghĩa trực tiếp, Khái quát hóa sang chi tiết, Biến đổi nguyên nhân -> kết quả, và Phủ định của trái nghĩa).
+     - *Advanced Grammar Inversions (`advancedGrammarInversions.ts`)*: Đấu trường câu hỏi bẫy điểm 850-990 (Đảo ngữ Should/Had, đảo ngữ phó từ phủ định Rarely/Seldom, thể giả định subjunctive mandate, giới từ nhượng bộ notwithstanding).
+     - *Masterclass Day Packs (`masterclassPacks.ts`)*: Điều phối các gói học 30 phút theo ngày.
+  2. **Bộ Tứ Trạm Học Tương Tác 30 Phút**:
+     - *Trạm 1 (7 phút)*: [ConnectedSpeechPlayer.tsx](file:///Users/bravee06/toeic-learn/src/components/masterclass/ConnectedSpeechPlayer.tsx) — Nghe chuẩn 1.0x và nghe chậm 0.75x bóc tách âm, đối chiếu chữ viết vs âm thanh thực tế, làm bài drill phản xạ.
+     - *Trạm 2 (10 phút)*: [ParaphraseDecoderCard.tsx](file:///Users/bravee06/toeic-learn/src/components/masterclass/ParaphraseDecoderCard.tsx) — Bài đọc thương mại tương tác, click từ vựng nổi bật xem nghĩa, IPA và collocation, mở bảng đối chiếu Ma trận Paraphrase 4 tầng.
+     - *Trạm 3 (8 phút)*: [HighScoreChallengeCard.tsx](file:///Users/bravee06/toeic-learn/src/components/masterclass/HighScoreChallengeCard.tsx) — Đấu trường 850+, nút gợi ý tư duy (Clue Hint), phân tích cú pháp câu (Syntax Visualizer) 4 màu và lời giải sư phạm chi tiết.
+     - *Trạm 4 (5 phút)*: [DailyMasterclassHub.tsx](file:///Users/bravee06/toeic-learn/src/components/masterclass/DailyMasterclassHub.tsx) — Khắc sâu 5 cụm từ vựng vàng vào Leitner Box 2, đồng hồ đếm ngược 30:00, nhận thưởng +100 XP, tăng chuỗi Streak và nâng trần tri thức (`Knowledge Ceiling`).
+  3. **Tích Hợp Toàn Cục & Điều Hướng**:
+     - Tạo tuyến đường mới `/masterclass` ([page.tsx](file:///Users/bravee06/toeic-learn/src/app/masterclass/page.tsx)).
+     - Bổ sung banner *Trạm Học Chuyên Sâu 30 Phút (TOEIC Masterclass 800 - 990)* nổi bật trên Dashboard ([page.tsx](file:///Users/bravee06/toeic-learn/src/app/page.tsx)).
+     - Gắn mục *Masterclass 30'* có huy hiệu `800+` vào nhóm Luyện Thi trên Sidebar toàn cục ([Navbar.tsx](file:///Users/bravee06/toeic-learn/src/components/Navbar.tsx)).
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ nghiêm ngặt **NO UI EMOJIS (STRICT)**: 100% 0 emoji, toàn bộ biểu tượng là SVG sạch từ `AppIcons`.
+  - Thêm đúng **0.0 KB** thư viện ngoài (dùng Web Speech API và CSS thuần).
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Script kiểm tra toàn vẹn & audit emoji `scratch/test_masterclass_integrity.mjs`: 100% PASS.
+  - Kiểm thử E2E Playwright `scratch/test_masterclass_e2e.mjs`: 100% PASS qua toàn bộ 4 trạm, đồng bộ LocalStorage, và kiểm tra DOM 0 emoji.
+
+---
+
+## 🎯 Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
+
+### 🚀 Vấn Đề 33: Widget Chỉ Số Khắc Phục Điểm Nghẽn & Gợi Ý Luyện Khắc Phục Tức Thì Trên Dashboard
+* **Bối cảnh & Vấn đề**:
+  - Sau khi hoàn thành Milestone 30, người học đã có thể luyện khắc phục triệt để theo từng nhóm nguyên nhân trong `/notebook`.
+  - Tuy nhiên, trên màn hình chính (`/`), học viên chưa thấy ngay tỷ lệ khắc phục lỗi sai tổng quan (% Remediation Mastery Rate) và nhóm nguyên nhân đang là "điểm nghẽn lớn nhất" (ví dụ: đang sai nhiều nhất ở *Mắc bẫy* hay *Từ vựng*).
+  - Cần đưa widget "Khắc Phục Điểm Nghẽn Hôm Nay" ra Dashboard với nút 1-click chuyển thẳng vào bài luyện khắc phục của nhóm nguyên nhân yếu nhất, kết nối chặt chẽ chu trình: **Dashboard → Sổ tay chẩn đoán → Luyện khắc phục → Đo lường tiến bộ**.
 
 ---
 

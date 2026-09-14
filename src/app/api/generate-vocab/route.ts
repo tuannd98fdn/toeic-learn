@@ -1,8 +1,12 @@
-import { google } from '@ai-sdk/google';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { generateObject } from 'ai';
 import { z } from 'zod';
 import { NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
+
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+});
 
 const vocabSchema = z.object({
   words: z.array(z.object({
@@ -14,7 +18,7 @@ const vocabSchema = z.object({
     targetBand: z.enum(["450+", "650+", "800+"]).describe("The TOEIC difficulty band for this word."),
     examples: z.array(z.string()).min(1).max(2).describe("1 or 2 practical example sentences in English that frequently appear in TOEIC tests."),
     mnemonicTip: z.string().describe("A short Vietnamese mnemonic tip (mẹo nhớ) to help remember the word."),
-    emoji: z.string().describe("A single emoji that represents the word's meaning visually.")
+    emoji: z.string().optional().default("")
   }))
 });
 
@@ -30,14 +34,26 @@ export async function POST(req: Request) {
     }
 
     let userPrompt = "";
-    if (type === 'text_list') {
-      userPrompt = `Tạo flashcard chi tiết cho các từ vựng sau: ${payload}. Hãy đảm bảo bao gồm đầy đủ nghĩa, ví dụ sát đề thi TOEIC, mẹo nhớ tiếng Việt và phiên âm chuẩn.`;
+    if (type === 'single_word') {
+      userPrompt = `Tạo thông tin flashcard từ vựng TOEIC chi tiết cho đúng 1 từ hoặc cụm từ tiếng Anh sau: "${payload}".
+Yêu cầu bắt buộc:
+- Bắt buộc trả về đúng 1 từ trong mảng words.
+- word: chính xác từ/cụm từ được yêu cầu.
+- ipa: phiên âm chuẩn quốc tế IPA.
+- partOfSpeech: từ loại chính xác (noun, verb, adjective, adverb, preposition, conjunction, idiom, phrasal verb).
+- vietnamese: nghĩa tiếng Việt ngắn gọn, thông dụng nhất trong ngữ cảnh công sở / bài thi TOEIC.
+- category: chủ đề TOEIC phù hợp (ví dụ: 'Doanh nghiệp', 'Nhân sự', 'Hợp đồng', 'Tài chính', 'Văn phòng', 'Bán lẻ'...).
+- targetBand: phân loại band điểm TOEIC ("450+", "650+", hoặc "800+").
+- examples: 1 đến 2 câu ví dụ tiếng Anh thực tế trong môi trường kinh doanh/công sở thường gặp trong đề thi TOEIC.
+- mnemonicTip: mẹo ghi nhớ ngắn gọn, thú vị bằng tiếng Việt (tuyệt đối KHÔNG dùng emoji).`;
+    } else if (type === 'text_list') {
+      userPrompt = `Tạo flashcard chi tiết cho các từ vựng sau: ${payload}. Hãy đảm bảo bao gồm đầy đủ nghĩa, ví dụ sát đề thi TOEIC, mẹo nhớ tiếng Việt và phiên âm chuẩn. Tuyệt đối KHÔNG dùng emoji.`;
     } else if (type === 'topic') {
-      userPrompt = `Hãy gợi ý danh sách 10 từ vựng cốt lõi nhất thường xuất hiện trong đề thi TOEIC thuộc chủ đề: "${payload}". Cung cấp đầy đủ thông tin cho từng từ.`;
+      userPrompt = `Hãy gợi ý danh sách 10 từ vựng cốt lõi nhất thường xuất hiện trong đề thi TOEIC thuộc chủ đề: "${payload}". Cung cấp đầy đủ thông tin cho từng từ. Tuyệt đối KHÔNG dùng emoji.`;
     } else if (type === 'context_word') {
       const payloadObj = payload as { word: string; context: string };
       userPrompt = `Hãy giải nghĩa từ vựng tiếng Anh "${payloadObj.word}" DỰA TRÊN NGỮ CẢNH của câu sau đây: "${payloadObj.context}".
-Chỉ trả về 1 từ duy nhất. Phần giải nghĩa tiếng Việt (vietnamese) cần ngắn gọn, chính xác tuyệt đối với ngữ cảnh câu trên. Từ loại (partOfSpeech) cũng phải chuẩn theo ngữ cảnh.`;
+Chỉ trả về 1 từ duy nhất. Phần giải nghĩa tiếng Việt (vietnamese) cần ngắn gọn, chính xác tuyệt đối với ngữ cảnh câu trên. Từ loại (partOfSpeech) cũng phải chuẩn theo ngữ cảnh. Tuyệt đối KHÔNG dùng emoji.`;
     } else if (type === 'url') {
       try {
         const response = await fetch(payload);
@@ -70,17 +86,32 @@ Hãy phân tích nội dung trên và chọn ra 10 từ vựng hoặc cụm từ
       return NextResponse.json({ error: "Type không hợp lệ." }, { status: 400 });
     }
 
-    const { object } = await generateObject({
-      model: google('gemini-1.5-flash'),
-      schema: vocabSchema,
-      system: `Bạn là một chuyên gia đào tạo và luyện thi TOEIC hàng đầu. 
-      Nhiệm vụ của bạn là cung cấp dữ liệu từ vựng TOEIC cực kỳ chuẩn xác và dễ hiểu cho người Việt học tiếng Anh.
-      Các câu ví dụ (examples) cần phải là những mẫu câu thường gặp trong part 5, part 6, hoặc part 7 của bài thi TOEIC.
-      Mẹo nhớ (mnemonicTip) nên sử dụng kỹ thuật âm thanh tương tự (từ đồng âm) hoặc hình ảnh liên tưởng hài hước bằng tiếng Việt để dễ nhớ.`,
-      prompt: userPrompt,
-    });
+    const systemPrompt = `Bạn là một chuyên gia đào tạo và luyện thi TOEIC hàng đầu. 
+    Nhiệm vụ của bạn là cung cấp dữ liệu từ vựng TOEIC cực kỳ chuẩn xác và dễ hiểu cho người Việt học tiếng Anh.
+    Các câu ví dụ (examples) cần phải là những mẫu câu thường gặp trong part 5, part 6, hoặc part 7 của bài thi TOEIC.
+    Mẹo nhớ (mnemonicTip) nên sử dụng kỹ thuật âm thanh tương tự (từ đồng âm) hoặc hình ảnh liên tưởng hài hước bằng tiếng Việt để dễ nhớ.`;
 
-    return NextResponse.json({ words: object.words });
+    let generatedWords;
+    try {
+      const { object } = await generateObject({
+        model: google('gemini-3.6-flash'),
+        schema: vocabSchema,
+        system: systemPrompt,
+        prompt: userPrompt,
+      });
+      generatedWords = object.words;
+    } catch (primaryError) {
+      console.warn('Primary model gemini-3.6-flash encountered an issue, falling back to gemini-3.5-flash-lite:', primaryError);
+      const { object } = await generateObject({
+        model: google('gemini-3.5-flash-lite'),
+        schema: vocabSchema,
+        system: systemPrompt,
+        prompt: userPrompt,
+      });
+      generatedWords = object.words;
+    }
+
+    return NextResponse.json({ words: generatedWords });
   } catch (error) {
     console.error("AI Generation Error:", error);
     const message = error instanceof Error ? error.message : String(error);

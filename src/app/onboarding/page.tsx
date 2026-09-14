@@ -22,8 +22,9 @@ export default function OnboardingPage() {
   }, []);
 
   const handleComplete = () => {
+    const cleanTarget = (targetScore || '750+').replace(/^["']|["']$/g, '').trim();
     localStorage.setItem('toeic_onboarding_done', 'true');
-    localStorage.setItem('toeic_target_score', targetScore);
+    localStorage.setItem('toeic_target_score', cleanTarget);
     localStorage.setItem('toeic_exam_date', examDate);
     localStorage.setItem('toeic_current_level', level);
     

@@ -6,7 +6,8 @@ import { useVocabulary } from '@/hooks/useVocabulary';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useAudio } from '@/hooks/useAudio';
 import EmptyState from '@/components/illustrations/EmptyState';
-import { VolumeIcon, SparklesIcon, FileTextIcon, TargetIcon, CheckCircleIcon, BrainIcon, LinkIcon } from '@/components/icons/AppIcons';
+import { VolumeIcon } from '@/components/icons/AppIcons';
+import SmartVocabQuickAdd from '@/components/SmartVocabQuickAdd';
 import styles from './page.module.css';
 
 const LEVELS = ["All", 1, 2, 3, 4, 5];
@@ -23,7 +24,7 @@ const TARGET_BANDS = [
 ];
 
 export default function VocabularyPage() {
-  const { mounted: vocabMounted, allWords, addWord, removeWord } = useVocabulary();
+  const { mounted: vocabMounted, allWords, userWords, addWord, removeWord } = useVocabulary();
   const { progress, mounted: leitnerMounted } = useLeitner();
   const { speak } = useAudio();
   const [searchTerm, setSearchTerm] = useState('');
@@ -33,28 +34,7 @@ export default function VocabularyPage() {
   const [selectedBand, setSelectedBand] = useState<string>('All');
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
-
   const [isAddingWord, setIsAddingWord] = useState(false);
-  const [newWordData, setNewWordData] = useState<{
-    word: string;
-    ipa: string;
-    vietnamese: string;
-    partOfSpeech: string;
-    category: string;
-    targetBand: TargetBand;
-    examples: string;
-    mnemonicTip: string;
-    emoji: string;
-  }>({
-    word: '', ipa: '', vietnamese: '', partOfSpeech: 'noun', category: 'Custom', targetBand: '650+', examples: '', mnemonicTip: '', emoji: ''
-  });
-
-  // AI Generator States
-  const [addMode, setAddMode] = useState<'manual' | 'ai'>('manual');
-  const [aiInputType, setAiInputType] = useState<'text_list' | 'topic' | 'url'>('text_list');
-  const [aiPayload, setAiPayload] = useState('');
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedWords, setGeneratedWords] = useState<Omit<VocabularyWord, 'id' | 'source'>[]>([]);
 
   const mounted = vocabMounted && leitnerMounted;
   if (!mounted) return (
@@ -100,49 +80,7 @@ export default function VocabularyPage() {
     return `var(--box-${box})`;
   };
 
-  const handleAddWord = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newWordData.word || !newWordData.vietnamese) return;
-    addWord({
-      ...newWordData,
-      examples: newWordData.examples.split('\n').filter(ex => ex.trim() !== '')
-    });
-    setIsAddingWord(false);
-    setNewWordData({ word: '', ipa: '', vietnamese: '', partOfSpeech: 'noun', category: 'Custom', targetBand: '650+', examples: '', mnemonicTip: '', emoji: '' });
-  };
 
-  const handleGenerateAI = async () => {
-    if (!aiPayload.trim()) return;
-    setIsGenerating(true);
-    setGeneratedWords([]);
-    try {
-      const res = await fetch('/api/generate-vocab', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: aiInputType, payload: aiPayload })
-      });
-      const data = await res.json();
-      if (data.words) {
-        setGeneratedWords(data.words);
-      } else {
-        alert(data.error || 'Có lỗi xảy ra.');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Có lỗi xảy ra khi tạo từ vựng.');
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
-  const handleSaveGenerated = () => {
-    generatedWords.forEach(word => {
-      addWord({ ...word, examples: word.examples || [] });
-    });
-    setGeneratedWords([]);
-    setAiPayload('');
-    setIsAddingWord(false);
-  };
 
   const clearAllFilters = () => {
     setSelectedBand('All');
@@ -265,132 +203,12 @@ export default function VocabularyPage() {
 
       {/* ═══════════════ ADD WORD ═══════════════ */}
       {isAddingWord && (
-        <div className={`${styles.addWordContainer} animate-scale-in`}>
-          <div className={styles.addWordTabs}>
-            <button 
-              className={`${styles.tabBtn} ${addMode === 'manual' ? styles.activeTab : ''}`}
-              onClick={() => setAddMode('manual')}
-            >
-              <FileTextIcon size={16} /> Thêm thủ công
-            </button>
-            <button 
-              className={`${styles.tabBtn} ${addMode === 'ai' ? styles.activeTab : ''}`}
-              onClick={() => setAddMode('ai')}
-            >
-              <SparklesIcon size={16} /> Tạo bằng AI
-            </button>
-          </div>
-
-          {addMode === 'manual' && (
-            <form onSubmit={handleAddWord} className={styles.formContainer}>
-              <div className={styles.formRow}>
-                <input type="text" placeholder="Từ vựng (Ví dụ: hello)" required value={newWordData.word} onChange={e => setNewWordData({...newWordData, word: e.target.value})} className={styles.formInput} />
-                <input type="text" placeholder="Nghĩa tiếng Việt" required value={newWordData.vietnamese} onChange={e => setNewWordData({...newWordData, vietnamese: e.target.value})} className={styles.formInput} />
-              </div>
-              <div className={styles.formRow}>
-                <input type="text" placeholder="Phiên âm (/həˈləʊ/)" value={newWordData.ipa} onChange={e => setNewWordData({...newWordData, ipa: e.target.value})} className={styles.formInput} />
-                <input type="text" placeholder="Từ loại" value={newWordData.partOfSpeech} onChange={e => setNewWordData({...newWordData, partOfSpeech: e.target.value})} className={styles.formInput} />
-                <input type="text" placeholder="Chủ đề" value={newWordData.category} onChange={e => setNewWordData({...newWordData, category: e.target.value})} className={styles.formInput} />
-                <select
-                  value={newWordData.targetBand}
-                  onChange={e => setNewWordData({...newWordData, targetBand: e.target.value as TargetBand})}
-                  className={styles.formInput}
-                >
-                  <option value="450+">Band 450+</option>
-                  <option value="650+">Band 650+</option>
-                  <option value="800+">Band 800+</option>
-                </select>
-              </div>
-              <textarea placeholder="Các ví dụ (mỗi dòng 1 ví dụ)" value={newWordData.examples} onChange={e => setNewWordData({...newWordData, examples: e.target.value})} className={`${styles.formInput} ${styles.formTextarea}`} />
-              <div className={styles.formRow}>
-                <input type="text" placeholder="Mẹo nhớ" value={newWordData.mnemonicTip} onChange={e => setNewWordData({...newWordData, mnemonicTip: e.target.value})} className={styles.formInput} style={{ flex: 2 }} />
-                <input type="text" placeholder="Ghi chú thêm" value={newWordData.emoji} onChange={e => setNewWordData({...newWordData, emoji: e.target.value})} className={styles.formInput} style={{ flex: 1 }} />
-              </div>
-              <div className={styles.formActions}>
-                <button type="button" onClick={() => setIsAddingWord(false)} className="btn-secondary btn-sm">Hủy</button>
-                <button type="submit" className="btn-primary btn-sm">Lưu từ vựng</button>
-              </div>
-            </form>
-          )}
-
-          {addMode === 'ai' && (
-            <div className={styles.aiContainer}>
-              <div className={styles.aiInputTypes}>
-                <button 
-                  className={`${styles.aiTypeBtn} ${aiInputType === 'text_list' ? styles.activeAiType : ''}`}
-                  onClick={() => setAiInputType('text_list')}
-                >
-                  <FileTextIcon size={18} />
-                  Từ danh sách chữ
-                </button>
-                <button 
-                  className={`${styles.aiTypeBtn} ${aiInputType === 'topic' ? styles.activeAiType : ''}`}
-                  onClick={() => setAiInputType('topic')}
-                >
-                  <TargetIcon size={18} />
-                  Theo chủ đề
-                </button>
-                <button 
-                  className={`${styles.aiTypeBtn} ${aiInputType === 'url' ? styles.activeAiType : ''}`}
-                  onClick={() => setAiInputType('url')}
-                >
-                  <LinkIcon size={18} />
-                  Từ link bài báo
-                </button>
-              </div>
-
-              <textarea 
-                placeholder={aiInputType === 'text_list' 
-                  ? "Dán danh sách các từ tiếng Anh (ví dụ: revenue, budget, evaluate)..." 
-                  : aiInputType === 'topic' 
-                  ? "Nhập chủ đề muốn học (ví dụ: Sân bay, Ký hợp đồng, Marketing)..."
-                  : "Dán đường link bài báo hoặc trang web (ví dụ: https://www.itpro.com/...)"}
-                value={aiPayload}
-                onChange={e => setAiPayload(e.target.value)}
-                className={`${styles.formInput} ${styles.formTextarea}`}
-                disabled={isGenerating}
-              />
-
-              <div className={styles.formActions}>
-                <button type="button" onClick={() => setIsAddingWord(false)} className="btn-secondary btn-sm" disabled={isGenerating}>Hủy</button>
-                <button type="button" onClick={handleGenerateAI} className="btn-primary btn-sm" disabled={isGenerating || !aiPayload.trim()} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                  {isGenerating ? 'Đang tạo...' : <><SparklesIcon size={16} /> Bắt đầu tạo</>}
-                </button>
-              </div>
-
-              {isGenerating && (
-                <div className={styles.aiLoading}>
-                  <BrainIcon size={36} className={styles.pulseIcon} />
-                  <p>AI đang phân tích và tạo flashcard...</p>
-                  <div className={styles.loadingBar}><div className={styles.loadingFill} /></div>
-                </div>
-              )}
-
-              {generatedWords.length > 0 && !isGenerating && (
-                <div className={styles.generatedResults}>
-                  <div className={styles.resultsHeader}>
-                    <h4>Đã tạo {generatedWords.length} từ vựng!</h4>
-                    <button onClick={handleSaveGenerated} className="btn-success btn-sm">
-                      <CheckCircleIcon size={16} />
-                      Lưu tất cả vào thư viện
-                    </button>
-                  </div>
-                  <div className={styles.resultsList}>
-                    {generatedWords.map((word, idx) => (
-                      <div key={idx} className={styles.resultItem}>
-                        <div className={styles.resultWord}>
-                          <strong>{word.word}</strong> <span className={styles.resultIpa}>{word.ipa}</span>
-                        </div>
-                        <div className={styles.resultMeaning}>{word.vietnamese}</div>
-                        <div className={styles.resultMnemonic}>{word.mnemonicTip}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
+        <SmartVocabQuickAdd
+          allWords={allWords}
+          userWords={userWords}
+          onAddWord={addWord}
+          onClose={() => setIsAddingWord(false)}
+        />
       )}
 
       {/* ═══════════════ WORD COUNT ═══════════════ */}

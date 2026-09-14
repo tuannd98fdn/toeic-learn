@@ -20,6 +20,9 @@
 .logoArea,
 .toggleBtn,
 .bottomArea,
+.navGroups,
+.groupHeader,
+.groupDivider,
 .navList,
 .resizer,
 .indicator {
@@ -148,11 +151,12 @@
   right: -6px;
   width: 8px;
   height: 8px;
-  background: var(--danger);
+  background: #6366f1;
   border-radius: 50%;
   border: 2px solid var(--glass-bg);
   font-size: 0;
   line-height: 0;
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.5);
 }
 
 /* ============================================
@@ -160,18 +164,27 @@
    ============================================ */
 @media (min-width: 860px) {
   .navbar {
-    bottom: auto;
+    position: fixed;
+    left: 0;
     top: 0;
+    bottom: auto;
     width: var(--sidebar-width, 260px);
     height: 100vh;
     border-top: none;
     border-right: 1px solid var(--border);
-    padding: 28px 16px;
+    padding: 20px 12px 14px 12px;
     box-shadow: var(--shadow-md);
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 12px;
     transition: width 0.3s var(--ease-out-expo);
+    z-index: 1000;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .navbar::-webkit-scrollbar {
+    display: none;
   }
 
   .resizing {
@@ -201,14 +214,51 @@
     display: none;
   }
 
+  /* Desktop Nav Groups */
+  .navGroups {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .navGroup {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .groupHeader {
+    display: flex;
+    align-items: center;
+    padding: 10px 10px 4px 10px;
+    user-select: none;
+  }
+
+  .groupTitle {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    user-select: none;
+  }
+
+  .groupDivider {
+    display: block;
+    height: 1px;
+    background: var(--border);
+    margin: 8px 10px 6px 10px;
+    opacity: 0.4;
+  }
+
   /* Show desktop nav */
   .navList {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 4px;
+    gap: 2px;
     height: auto;
-    flex: 1;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -251,8 +301,18 @@
     justify-content: center;
   }
 
+  .collapsed .groupHeader,
+  .collapsed .groupTitle {
+    display: none;
+  }
+
+  .collapsed .groupDivider {
+    width: 24px;
+    margin: 6px auto;
+  }
+
   .collapsed .navLink {
-    padding: 12px 0;
+    padding: 9px 0;
     justify-content: center;
   }
   
@@ -266,7 +326,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 0 8px 20px 8px;
+    padding: 0 8px 16px 8px;
     border-bottom: 1px solid var(--border);
   }
 
@@ -314,8 +374,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 14px;
-    padding: 11px 14px;
+    gap: 12px;
+    padding: 8px 12px;
     border-radius: var(--radius-md);
     height: auto;
     color: var(--text-secondary);
@@ -335,9 +395,12 @@
 
   .label {
     display: block;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.88rem;
+    font-weight: 500;
     transition: color 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .navLink:hover {
@@ -349,27 +412,30 @@
     transform: scale(1.05);
   }
 
-  /* Active state — glow */
+  /* Active state — Linear / Raycast minimalist style */
   .active {
-    background: var(--primary-light);
+    background: rgba(var(--primary-rgb), 0.12);
     color: var(--primary);
     position: relative;
-    box-shadow: var(--glow-primary);
+    border: 1px solid rgba(var(--primary-rgb), 0.22);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   .active::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 6px;
-    bottom: 6px;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 3px;
-    border-radius: 0 3px 3px 0;
+    height: 18px;
+    border-radius: 3px;
     background: var(--primary);
   }
 
   .active:hover {
-    background: var(--primary-light);
+    background: rgba(var(--primary-rgb), 0.16);
+    border-color: rgba(var(--primary-rgb), 0.32);
   }
 
   .active .iconWrapper {
@@ -378,7 +444,7 @@
 
   .active .label {
     color: var(--primary);
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .badge {
@@ -386,13 +452,15 @@
     top: 0;
     right: 0;
     margin-left: auto;
-    background: var(--danger);
-    color: #fff;
-    font-size: 0.6rem;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: #ffffff;
+    font-size: 0.62rem;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 12px;
+    padding: 2px 7px;
+    border-radius: 999px;
     letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .indicator {

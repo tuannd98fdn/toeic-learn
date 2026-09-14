@@ -22,6 +22,7 @@ import {
   TargetIcon,
   LightbulbIcon,
   AwardIcon,
+  SparklesIcon,
 } from '@/components/icons/AppIcons';
 import { soundEffects } from '@/utils/soundEffects';
 import { preloadUpcomingListening } from '@/utils/audioPreloader';
@@ -104,7 +105,14 @@ export default function Home() {
       return;
     }
 
-    const target = localStorage.getItem('toeic_target_score') || '750+';
+    const rawTarget = storage.get<string | number>('toeic_target_score', '750+');
+    const target = String(rawTarget || '750+').replace(/^["']|["']$/g, '').trim() || '750+';
+    if (typeof window !== 'undefined') {
+      const rawStored = localStorage.getItem('toeic_target_score');
+      if (rawStored && (rawStored.startsWith('"') || rawStored.endsWith('"'))) {
+        localStorage.setItem('toeic_target_score', target);
+      }
+    }
     const examDate = localStorage.getItem('toeic_exam_date');
     
     let daysLeft = null;
@@ -257,6 +265,40 @@ export default function Home() {
 
       {/* ═══════════════ PREDICTIVE SCORE METER ═══════════════ */}
       <PredictiveScoreMeter />
+
+      {/* ═══════════════ 30-MINUTE HIGH-SCORE MASTERCLASS BANNER ═══════════════ */}
+      <section className={styles.masterclassBanner}>
+        <div className={styles.masterclassBannerContent}>
+          <div className={styles.masterclassInfo}>
+            <div className={styles.masterclassTagRow}>
+              <span className={styles.masterclassPill}>
+                <SparklesIcon size={14} />
+                Chương Trình Đặc Quyền • 30 Phút / Ngày
+              </span>
+              <span className={styles.masterclassBandBadge}>Target 800 - 990</span>
+            </div>
+            <h3 className={styles.masterclassTitle}>
+              Trạm Học Chuyên Sâu 30 Phút: Bứt Phá Điểm Cao TOEIC
+            </h3>
+            <p className={styles.masterclassSub}>
+              Học sâu không áp lực thi cử: Bẻ khóa âm nối giọng Anh/Úc, giải mã ma trận Paraphrase thương mại thực chiến và làm chủ câu bẫy đảo ngữ Part 5.
+            </p>
+            <div className={styles.masterclassPillRow}>
+              <span className={styles.pillItem}>Trạm 1: Bẻ Khóa Âm (7&apos;)</span>
+              <span className={styles.pillItem}>Trạm 2: Đọc Thương Mại (10&apos;)</span>
+              <span className={styles.pillItem}>Trạm 3: Bẫy 850+ (8&apos;)</span>
+              <span className={styles.pillItem}>Trạm 4: Nạp 5 Từ Vàng (5&apos;)</span>
+            </div>
+          </div>
+          <div className={styles.masterclassAction}>
+            <Link href="/masterclass" className={styles.masterclassCtaBtn}>
+              <SparklesIcon size={16} />
+              <span>VÀO PHÒNG HỌC 30&apos;</span>
+              <ArrowRightIcon size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* ═══════════════ SMART ADAPTIVE FEED ═══════════════ */}
       <SmartActionFeed />
@@ -496,7 +538,7 @@ export default function Home() {
           </div>
           <div>
             <h2 className={styles.sectionTitle}>Kho Vũ Khí</h2>
-            <p className={styles.sectionSubtitle}>Nạp từ vựng siêu tốc mỗi ngày</p>
+            <p className={styles.sectionSubtitle}>Bộ công cụ luyện tập &amp; tối ưu điểm số</p>
           </div>
         </div>
 

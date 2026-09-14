@@ -14,6 +14,10 @@ import {
   NotebookIcon,
   UserIcon,
   SearchIcon,
+  BookIcon,
+  QuizIcon,
+  LightbulbIcon,
+  SparklesIcon,
 } from '@/components/icons/AppIcons';
 import MascotSVG from '@/components/illustrations/MascotSVG';
 import styles from './Navbar.module.css';
@@ -31,6 +35,25 @@ export default function Navbar() {
   const [sidebarWidth, setSidebarWidth] = useState(260);
   const [isResizing, setIsResizing] = useState(false);
 
+  // Restore persisted state on mount
+  useEffect(() => {
+    try {
+      const savedCollapsed = localStorage.getItem('toeic_sidebar_collapsed');
+      if (savedCollapsed !== null) {
+        setIsCollapsed(savedCollapsed === 'true');
+      }
+      const savedWidth = localStorage.getItem('toeic_sidebar_width');
+      if (savedWidth !== null) {
+        const parsed = parseInt(savedWidth, 10);
+        if (!isNaN(parsed) && parsed >= 120 && parsed <= 400) {
+          setSidebarWidth(parsed);
+        }
+      }
+    } catch {
+      // Ignore storage errors in restricted contexts
+    }
+  }, []);
+
   useEffect(() => {
     // Only apply on desktop
     if (window.innerWidth >= 860) {
@@ -41,6 +64,16 @@ export default function Navbar() {
       }
     }
   }, [isCollapsed, sidebarWidth]);
+
+  const toggleCollapse = useCallback(() => {
+    setIsCollapsed((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('toeic_sidebar_collapsed', String(next));
+      } catch {}
+      return next;
+    });
+  }, []);
 
   const startResizing = useCallback((e: React.PointerEvent) => {
     e.preventDefault();
@@ -55,13 +88,21 @@ export default function Navbar() {
 
       // Snap to collapse if dragged too small
       if (newWidth < 120) {
-        if (!isCollapsed) setIsCollapsed(true);
+        if (!isCollapsed) {
+          setIsCollapsed(true);
+          try {
+            localStorage.setItem('toeic_sidebar_collapsed', 'true');
+          } catch {}
+        }
         return;
       }
 
       // Uncollapse if dragged out
       if (isCollapsed && newWidth >= 120) {
         setIsCollapsed(false);
+        try {
+          localStorage.setItem('toeic_sidebar_collapsed', 'false');
+        } catch {}
       }
 
       // Constrain width
@@ -71,6 +112,9 @@ export default function Navbar() {
         newWidth = 400; // Max width
       }
       setSidebarWidth(newWidth);
+      try {
+        localStorage.setItem('toeic_sidebar_width', String(newWidth));
+      } catch {}
     };
 
     const stopResizing = () => {
@@ -89,15 +133,42 @@ export default function Navbar() {
     };
   }, [isResizing, isCollapsed]);
 
-  const NAV_ITEMS: NavItem[] = [
-    { path: '/', label: 'Học', icon: <HomeIcon size={24} /> },
-    { path: '/study-plan', label: 'Lộ trình', icon: <CompassIcon size={24} /> },
-    { path: '/diagnostic', label: 'Mục tiêu', icon: <TargetIcon size={24} /> },
-    { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={24} />, badge: 'MỚI' },
-    { path: '/stats', label: 'Thống kê', icon: <StatsIcon size={24} /> },
-    { path: '/study', label: 'Từ vựng', icon: <CardsIcon size={24} /> },
-    { path: '/notebook', label: 'Sổ tay', icon: <NotebookIcon size={24} /> },
-    { path: '/profile', label: 'Tài khoản', icon: <UserIcon size={24} /> },
+  interface NavGroup {
+    id: string;
+    title: string;
+    items: NavItem[];
+  }
+
+  const NAV_GROUPS: NavGroup[] = [
+    {
+      id: 'learning',
+      title: 'Luyện Thi',
+      items: [
+        { path: '/', label: 'Học', icon: <HomeIcon size={20} /> },
+        { path: '/masterclass', label: 'Masterclass 30\'', icon: <SparklesIcon size={20} />, badge: '800+' },
+        { path: '/study-plan', label: 'Lộ trình', icon: <CompassIcon size={20} /> },
+        { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={20} />, badge: 'MỚI' },
+        { path: '/stats', label: 'Thống kê', icon: <StatsIcon size={20} /> },
+      ],
+    },
+    {
+      id: 'tools',
+      title: 'Kho Công Cụ',
+      items: [
+        { path: '/study', label: 'Flashcards', icon: <CardsIcon size={20} /> },
+        { path: '/vocabulary', label: 'Từ điển', icon: <BookIcon size={20} /> },
+        { path: '/quiz', label: 'Làm Quiz', icon: <QuizIcon size={20} /> },
+        { path: '/tips', label: 'Mẹo thi', icon: <LightbulbIcon size={20} /> },
+        { path: '/notebook', label: 'Sổ tay lỗi', icon: <NotebookIcon size={20} /> },
+      ],
+    },
+    {
+      id: 'account',
+      title: 'Cá Nhân',
+      items: [
+        { path: '/profile', label: 'Tài khoản', icon: <UserIcon size={20} /> },
+      ],
+    },
   ];
 
   // Mobile: 5 items — merge Mục tiêu into Lộ trình, highlight Học center
@@ -146,29 +217,39 @@ export default function Navbar() {
         <kbd className={styles.searchShortcutBadge}>⌘K</kbd>
       </button>
 
-      {/* Desktop Nav */}
-      <ul className={styles.navList}>
-        {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(`${item.path}/`));
-          
-          return (
-            <li key={item.path} className={styles.navItem}>
-              <Link
-                href={item.path}
-                className={`${styles.navLink} ${isActive ? styles.active : ''}`}
-                title={item.label}
-              >
-                <div className={styles.iconWrapper}>
-                  {item.icon}
-                  {item.badge && <span className={styles.badge}>{item.badge}</span>}
-                </div>
-                <span className={styles.label}>{item.label}</span>
-                {isActive && <div className={styles.indicator} />}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      {/* Desktop Nav Groups */}
+      <div className={styles.navGroups}>
+        {NAV_GROUPS.map((group, groupIdx) => (
+          <div key={group.id} className={styles.navGroup}>
+            <div className={styles.groupHeader}>
+              <span className={styles.groupTitle}>{group.title}</span>
+            </div>
+            <ul className={styles.navList}>
+              {group.items.map((item) => {
+                const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(`${item.path}/`));
+                
+                return (
+                  <li key={item.path} className={styles.navItem}>
+                    <Link
+                      href={item.path}
+                      className={`${styles.navLink} ${isActive ? styles.active : ''}`}
+                      title={item.label}
+                    >
+                      <div className={styles.iconWrapper}>
+                        {item.icon}
+                        {item.badge && <span className={styles.badge}>{item.badge}</span>}
+                      </div>
+                      <span className={styles.label}>{item.label}</span>
+                      {isActive && <div className={styles.indicator} />}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            {groupIdx < NAV_GROUPS.length - 1 && <div className={styles.groupDivider} />}
+          </div>
+        ))}
+      </div>
 
       {/* Mobile Bottom Nav */}
       <ul className={styles.mobileNavList}>
@@ -197,7 +278,7 @@ export default function Navbar() {
       <div className={styles.bottomArea}>
         <button 
           className={styles.toggleBtn}
-          onClick={() => setIsCollapsed(!isCollapsed)}
+          onClick={toggleCollapse}
           title={isCollapsed ? 'Mở rộng menu' : 'Thu gọn menu'}
         >
           <div style={{ transform: isCollapsed ? 'none' : 'rotate(180deg)', transition: 'transform 0.3s', display: 'flex' }}>

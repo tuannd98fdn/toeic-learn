@@ -16,6 +16,9 @@ import {
   ArrowRightIcon,
   CheckCircleIcon,
   SparklesIcon,
+  HelpCircleIcon,
+  LightbulbIcon,
+  ShieldCheckIcon,
 } from '@/components/icons/AppIcons';
 import styles from './page.module.css';
 
@@ -50,14 +53,17 @@ function ExamMistakeQuizContent() {
   const filterPart = searchParams.get('part') || 'all';
   const filterType = searchParams.get('filter') || 'all'; // 'due' or 'all'
   const targetId = searchParams.get('id');
+  const filterRootCause = searchParams.get('rootCause');
 
-  const { mounted, mistakes, updateMistakeProgress, getMistakes } = useMistakeNotebook();
+  const { mounted, mistakes, updateMistakeProgress, masterMistake, getMistakes } = useMistakeNotebook();
 
   const [questions, setQuestions] = useState<LoadedQuestion[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [showClueHint, setShowClueHint] = useState(false);
+  const [masteredThisSession, setMasteredThisSession] = useState<Record<string, boolean>>({});
   const [score, setScore] = useState(0);
   const [clearedCount, setClearedCount] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
@@ -78,6 +84,17 @@ function ExamMistakeQuizContent() {
         if (targetId) {
           targetMistakeIds = targetMistakeIds.filter((id) => id === targetId);
         } else {
+          // Filter by root cause if specified
+          if (filterRootCause) {
+            const matchedRootCause = targetMistakeIds.filter((id) => {
+              const m = mistakes[id];
+              return m?.rootCause === filterRootCause;
+            });
+            // Prioritize unmastered questions in this root cause if available
+            const unmastered = matchedRootCause.filter((id) => !mistakes[id]?.isMastered);
+            targetMistakeIds = unmastered.length > 0 ? unmastered : matchedRootCause;
+          }
+
           // Filter by part if specified
           if (filterPart !== 'all') {
             const filterNum = filterPart.replace(/^p(art)?/, '');
@@ -116,7 +133,7 @@ function ExamMistakeQuizContent() {
     };
 
     loadQuestions();
-  }, [mounted, filterPart, filterType, targetId, getMistakes, mistakes]);
+  }, [mounted, filterPart, filterType, targetId, filterRootCause, getMistakes, mistakes]);
 
   const currentQ = questions[currentIndex];
   const isAnswered = showAnswer;
@@ -143,6 +160,7 @@ function ExamMistakeQuizContent() {
 
   const handleNext = useCallback(() => {
     setTutorContext(null);
+    setShowClueHint(false);
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
       setSelectedAnswer(null);
@@ -257,6 +275,8 @@ function ExamMistakeQuizContent() {
                 setClearedCount(0);
                 setShowAnswer(false);
                 setSelectedAnswer(null);
+                setShowClueHint(false);
+                setMasteredThisSession({});
               }}
               className="btn-primary"
             >
@@ -278,6 +298,7 @@ function ExamMistakeQuizContent() {
   const qData = currentQ.qData;
   const partTitle = PART_NAMES[currentQ.part] || currentQ.part;
   const progressPercent = Math.round(((currentIndex + 1) / questions.length) * 100);
+  const isCurrentMastered = currentQ.isMastered || !!masteredThisSession[currentQ.mistakeId];
 
   const openAITutor = () => {
     setTutorContext({
@@ -291,6 +312,11 @@ function ExamMistakeQuizContent() {
       passageText: qData.passageText,
       explanation: qData.explanation,
       audioUrl: qData.audioUrl,
+      subCategory: currentQ.subCategory,
+      grammarTag: currentQ.grammarTag,
+      questionId: currentQ.questionId,
+      testId: currentQ.testId,
+      rootCause: currentQ.rootCause || filterRootCause || undefined,
     });
   };
 
@@ -303,6 +329,9 @@ function ExamMistakeQuizContent() {
             ← Sổ tay lỗi sai
           </Link>
           <div className={styles.badgeRow}>
+            {filterRootCause && (
+              <span className={styles.rootCauseBadge}>Khắc phục: {filterRootCause}</span>
+            )}
             <span className={styles.partBadge}>{partTitle}</span>
             <span className={styles.wrongBadge}>Đã sai {currentQ.wrongCount} lần</span>
           </div>
@@ -351,6 +380,33 @@ function ExamMistakeQuizContent() {
           </h2>
         )}
 
+        {/* Clue Hint Scaffolding */}
+        {!showAnswer && (
+          <div className={styles.clueHintRow}>
+            <button
+              type="button"
+              className={`${styles.clueHintToggleBtn} ${showClueHint ? styles.clueHintToggleBtnActive : ''}`}
+              onClick={() => setShowClueHint((prev) => !prev)}
+            >
+              <HelpCircleIcon size={14} />
+              <span>{showClueHint ? 'Ẩn manh mối' : 'Gợi ý manh mối tư duy'}</span>
+            </button>
+          </div>
+        )}
+
+        {showClueHint && !showAnswer && (
+          <div className={`${styles.clueHintBox} animate-fade-in`}>
+            <div className={styles.clueHintTitle}>
+              <LightbulbIcon size={15} />
+              <span>Manh Mối Tư Duy (Clue Hint)</span>
+            </div>
+            <p style={{ margin: 0 }}>
+              {qData.clueHint ||
+                `Quan sát ngữ cảnh câu: Câu này thuộc chuyên đề ${currentQ.subCategory || currentQ.grammarTag || 'ngữ pháp'}. Hãy chú ý các thành phần bổ ngữ và dấu hiệu liên từ để loại trừ phương án sai.`}
+            </p>
+          </div>
+        )}
+
         {/* Options list */}
         <div className={styles.optionsGrid}>
           {qData.options &&
@@ -389,6 +445,41 @@ function ExamMistakeQuizContent() {
               style={{ margin: 0 }}
               dangerouslySetInnerHTML={{ __html: qData.explanation }}
             />
+          </div>
+        )}
+
+        {/* In-drill Remediation Graduation */}
+        {isAnswered && isCorrect && (
+          <div className={`${styles.remediationActionRow} animate-slide-up`}>
+            <div className={styles.remediationInfo}>
+              <span className={styles.remediationTitle}>
+                {currentQ.rootCause ? `Khắc phục: ${currentQ.rootCause}` : 'Khắc phục lỗi sai'}
+              </span>
+              <span className={styles.remediationDesc}>
+                {isCurrentMastered
+                  ? 'Câu hỏi này đã được ghi nhận vào danh sách Đã Khắc Phục.'
+                  : 'Đã nắm vững bản chất? Đánh dấu tốt nghiệp để tăng điểm thực chiến.'}
+              </span>
+            </div>
+            {isCurrentMastered ? (
+              <div className={styles.masterBtnDone}>
+                <ShieldCheckIcon size={16} />
+                <span>Đã nắm vững</span>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className={styles.masterBtn}
+                onClick={() => {
+                  masterMistake(currentQ.mistakeId);
+                  setMasteredThisSession((prev) => ({ ...prev, [currentQ.mistakeId]: true }));
+                  soundEffects.playCorrect();
+                }}
+              >
+                <ShieldCheckIcon size={16} />
+                <span>Đã khắc phục hoàn toàn</span>
+              </button>
+            )}
           </div>
         )}
       </div>
