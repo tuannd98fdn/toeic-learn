@@ -22,9 +22,7 @@ import PracticeFooter from '@/components/PracticeFooter';
 import styles from './page.module.css';
 
 export const TEST_OPTIONS = [
-  { key: 'ets2022_test1', label: 'ETS 2022 Test 1' },
-  { key: 'ets2022_test2', label: 'ETS 2022 Test 2' },
-  { key: 'all', label: 'Liên đề (Test 1 + Test 2)' },
+  { key: 'ets2022_test1', label: 'ETS 2022 Test 1 (Chuẩn ETS)' },
 ];
 
 export const PART6_SUB_SKILLS = [

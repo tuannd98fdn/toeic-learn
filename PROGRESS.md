@@ -832,14 +832,44 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### ✅ Vấn Đề 37: Làm Sạch Dữ Liệu: Ẩn Hoàn Toàn Test 2 & Test 3 Giả Lập Khỏi Toàn Hệ Thống, Bảo Đảm Tính Liêm Chính Đề Thi Thật 100% [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Đối soát kỹ thuật phát hiện dữ liệu Test 2 và Test 3 trước đây là dữ liệu phỏng tác/giả lập: Part 1 dùng ảnh stock Unsplash, phần Nghe (Part 1 - 4) dùng lệnh `say` của macOS TTS (Samantha, Daniel, Karen, Alex) qua script `scripts/generate_test2_audio.mjs`, và câu hỏi Part 5-7 do AI tự sinh dựa trên ngữ pháp chứ không phải đề thi gốc ETS 2022.
+  - Người học luyện tập trên đề giả sẽ bị sai lệch phản xạ phòng thi và không phản ánh đúng chuẩn ETS.
+* **Chi tiết triển khai**:
+  1. **Làm Sạch Chỉ Mục Đề Thi (`public/data/tests_index.json`)**:
+     - Loại bỏ hoàn toàn `ets2022_test2` và `ets2022_test3`.
+     - Chỉ giữ lại duy nhất đề thi chuẩn ETS 100%: `ETS 2022 - Test 1`.
+  2. **Chuẩn Hóa Giao Diện & Logic Luyện Tập (Part 5, Part 6, Part 7)**:
+     - *Part 5 (`/part5`)*: Xóa nút chọn Test 2 trên thanh điều hướng; trong chế độ luyện chuyên sâu theo chủ điểm ngữ pháp, chỉ tải từ nguồn chuẩn `test1/part5.json`, loại bỏ tải `test2`.
+     - *Part 6 (`/part6`)*: Cập nhật `TEST_OPTIONS` chỉ hiển thị `ETS 2022 Test 1 (Chuẩn ETS)`.
+     - *Part 7 (`/part7`)*: Cập nhật `TESTS_LIST` chỉ hiển thị `ETS 2022 Test 1 (Chuẩn ETS)`.
+  3. **Bảo Vệ Phòng Thi (`/exam`)**:
+     - Tự động fallback mọi truy vấn `testId` không hợp lệ (như `ets2022_test2` hay `ets2022_test3`) về `ets2022_test1` an toàn, không gây crash ứng dụng.
+  4. **Giữ Nguyên File Dự Phòng**:
+     - Giữ nguyên các tệp JSON và script trong `public/data/` và `scripts/` làm tài liệu tham khảo kỹ thuật, không xóa mất dấu vết.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trong mã nguồn và rendered DOM.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với 34 routes.
+  - Kiểm thử Playwright E2E `scratch/test_hide_fake_tests_e2e.mjs`:
+    - `tests_index.json`: 1 đề chuẩn duy nhất.
+    - Dashboard: 1 option `ETS 2022 - Test 1`.
+    - Part 5, 6, 7: 0 nút/tùy chọn Test 2.
+    - Exam query fallback: Vượt qua 100% không crash.
+    - Emoji audit: 0 vi phạm.
+
+---
+
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 37: Hệ Thống Bóc Tách Bẫy Đề Thi TOEIC Reading (Distractor Analysis & Trap Classifier) & Chế Độ Luyện Đọc Thích Ứng Theo Target Band (500 / 700 / 850+) Trong Sổ Tay Lỗi Sai
+### Vấn Đề 38: Bộ Tra Cứu Từ Vựng Tức Thì Tại Chỗ (Instant In-Context Popover Dictionary) & Pipeline Nạp Đề ETS Chuẩn 100% Cho Test 2, 3, 4
 * **Bối cảnh & Vấn đề**:
-  - Khi làm sai các câu Part 5, 6, 7, người học thường chỉ biết đáp án đúng mà chưa nhận diện được bản chất "bẫy" mà đề thi ETS đã cài cắm (ví dụ: bẫy từ loại đồng âm giả, bẫy đại từ sở hữu đứng trước danh từ ghép, bẫy thông tin đúng ngữ pháp nhưng sai nghĩa theo ngữ cảnh, bẫy chi tiết có xuất hiện trong bài nhưng không trả lời đúng trọng tâm câu hỏi trong Part 7).
-  - Cần nâng cấp hệ thống phân loại bẫy đề thi cho toàn bộ các câu hỏi Reading trong Sổ tay câu hỏi sai (`/notebook`) và phòng thi:
-    1. **Bộ Phân Loại Bẫy Đề Thi Reading (Distractor / Trap Classifier)**: Gắn thẻ các dạng bẫy kinh điển ETS (`Trap: Word Form Confuser`, `Trap: True Statement - Wrong Question`, `Trap: Temporal Anchor Trap`, `Trap: Semantic Context Shift`).
-    2. **Chế Độ Luyện Đọc Thích Ứng Theo Target Band (Band Filter)**: Cho phép học viên lọc và ôn luyện các câu hỏi có độ khó phù hợp với mục tiêu điểm số cá nhân (`Band 500+`, `Band 700+`, `Band 850+`).
+  - Người học khi đọc bài Part 7, câu hỏi Part 5 hoặc transcript Part 1-4 gặp từ mới phải rời web sang Google hoặc mở form cồng kềnh, làm đứt gãy luồng học tập.
+  - Cần nâng cấp `TextSelectionToolbar` thành **Bộ Tra Cứu Tức Thì (Instant In-Context Popover)**:
+    1. Click đúp / bôi đen từ -> Hiện ngay Popover gồm: Tên từ, Phiên âm IPA, Loa phát âm tức thì (Web Speech API US/UK), Nghĩa tiếng Việt (O(1) local TOEIC match + lightweight fallback).
+    2. Nút 1-chạm `+ Lưu Flashcard` lưu ngay vào Sổ từ vựng Spaced Repetition mà không cần mở modal form.
+  - Đồng thời thiết lập pipeline tìm kiếm và nạp lại Test 2, Test 3, Test 4 chuẩn 100% ETS (audio phòng thu gốc + hình scan gốc).
 
 ---
 
@@ -849,9 +879,9 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm thử E2E Playwright mẫu**:
-  * `node scratch/test_masterclass_milestone36_e2e.mjs` (Kiểm thử Masterclass Studio Audio 1.0x, 0.75x, Glottal Stop, Lộ Trình Mục Tiêu & Emoji Audit).
-  * `node scratch/test_masterclass_milestone36_integrity.mjs` (Kiểm thử tệp âm thanh, schema, bóc tách âm & data integrity).
-  * `node scratch/test_masterclass_e2e.mjs` (Kiểm thử 4 trạm Masterclass 30 phút).
+  * `node scratch/test_hide_fake_tests_e2e.mjs` (Kiểm thử ẩn Test 2 & 3, chỉ kích hoạt Test 1 chuẩn ETS, 0 emoji).
+  * `node scratch/test_masterclass_milestone36_e2e.mjs` (Kiểm thử Masterclass Studio Audio 1.0x, 0.75x, Glottal Stop).
+
 
 
 

@@ -88,7 +88,9 @@ export default function ExamPage() {
 
 function ExamSimulation() {
   const searchParams = useSearchParams();
-  const testId = searchParams.get('test') || 'ets2022_test1';
+  const rawTestId = searchParams.get('test') || 'ets2022_test1';
+  // Chỉ chấp nhận đề thi chuẩn đã xác thực (hiện tại là ets2022_test1)
+  const testId = rawTestId === 'ets2022_test1' ? 'ets2022_test1' : 'ets2022_test1';
   const sectionParam = searchParams.get('section');
   const currentSection: 'all' | 'rc' | 'rc_sprint' =
     sectionParam === 'rc' || sectionParam === 'rc_sprint' ? sectionParam : 'all';

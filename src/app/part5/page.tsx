@@ -133,10 +133,9 @@ function Part5SpeedTrainer() {
         setError(null);
 
         if (selectedSubSkill !== 'all') {
-          // Cross-test pooling across ETS Test 1 and Test 2
+          // Official ETS tests (currently ETS 2022 Test 1)
           const testPaths = [
             '/data/ets2022/test1/part5.json',
-            '/data/ets2022/test2/part5.json',
           ];
           const responses = await Promise.all(testPaths.map(p => fetch(p)));
           const allData: any[] = [];
@@ -209,7 +208,7 @@ function Part5SpeedTrainer() {
     if (timerRef.current) clearInterval(timerRef.current);
     
     // Xử lý testId tương tự recordMistake
-    const qTestId = q.id.includes('t2') ? 'ets2022_test2' : (selectedSubSkill !== 'all' ? (q.id.includes('t1') ? 'ets2022_test1' : selectedTest) : selectedTest);
+    const qTestId = 'ets2022_test1';
 
     setTutorContext({
       partTitle: 'Part 5: Incomplete Sentences',
@@ -278,7 +277,7 @@ function Part5SpeedTrainer() {
   }, [currentIndex, isFinished, showAnswer, questions, loading, tutorContext, practiceMode]);
 
   const recordMistake = (currentQ: Part5Question) => {
-    const qTestId = currentQ.id.includes('t2') ? 'ets2022_test2' : (selectedSubSkill !== 'all' ? (currentQ.id.includes('t1') ? 'ets2022_test1' : selectedTest) : selectedTest);
+    const qTestId = 'ets2022_test1';
     addMistake(`exam_${qTestId}_part5_${currentQ.id}`, {
       type: 'exam',
       testId: qTestId,
@@ -726,14 +725,7 @@ function Part5SpeedTrainer() {
                 className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test1' ? styles.testOptionActive : ''}`}
                 onClick={() => handleSelectTest('ets2022_test1')}
               >
-                Test 1
-              </button>
-              <button
-                type="button"
-                className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test2' ? styles.testOptionActive : ''}`}
-                onClick={() => handleSelectTest('ets2022_test2')}
-              >
-                Test 2
+                Test 1 (Chuẩn ETS)
               </button>
             </div>
           )}

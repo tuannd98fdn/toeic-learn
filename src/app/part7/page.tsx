@@ -53,9 +53,7 @@ export const PASSAGE_TYPES = [
 ];
 
 export const TESTS_LIST = [
-  { key: 'ets2022_test1', label: 'ETS 2022 Test 1' },
-  { key: 'ets2022_test2', label: 'ETS 2022 Test 2' },
-  { key: 'all', label: 'Liên đề (Test 1 + Test 2)' },
+  { key: 'ets2022_test1', label: 'ETS 2022 Test 1 (Chuẩn ETS)' },
 ];
 
 export default function Part7Page() {
