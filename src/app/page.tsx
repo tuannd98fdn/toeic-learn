@@ -27,9 +27,7 @@ import {
 } from '@/components/icons/AppIcons';
 import { soundEffects } from '@/utils/soundEffects';
 import { preloadUpcomingListening } from '@/utils/audioPreloader';
-import PredictiveScoreMeter from '@/components/PredictiveScoreMeter';
-import BottleneckRemediationWidget from '@/components/BottleneckRemediationWidget';
-import SmartActionFeed from '@/components/SmartActionFeed';
+import CompactInsightBar from '@/components/CompactInsightBar';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -212,6 +210,26 @@ export default function Home() {
     );
   }
 
+  const incompleteTaskIndex = activeDay ? activeDay.tasks.findIndex((t: any) => !t.completed) : -1;
+  const currentStepNum = incompleteTaskIndex >= 0 ? incompleteTaskIndex + 1 : 1;
+  const primaryCtaLink = isAllCompleted 
+    ? `/exam?test=${selectedTest || 'ets2022_test1'}` 
+    : nextStudyTask.link;
+  const primaryCtaTitle = isAllCompleted
+    ? 'THI THỬ ETS HOẶC TỰ LUYỆN'
+    : completedToday === 0
+      ? 'BẮT ĐẦU PHIÊN HỌC HÔM NAY'
+      : `TIẾP TỤC: ${nextStudyTask.title}`;
+  const primaryCtaTag = isAllCompleted
+    ? 'Đã hoàn thành 100% mục tiêu hôm nay'
+    : `Bước ${currentStepNum}/3 • ~15-20 phút • 1-Click`;
+
+  const STEP_METAS = [
+    { num: '01', phase: 'Khởi động', time: '~5 phút' },
+    { num: '02', phase: 'Trọng tâm', time: '~15 phút' },
+    { num: '03', phase: 'Củng cố', time: '~5 phút' },
+  ];
+
   return (
     <div className={`${styles.container} stagger-children`}>
       {/* ═══════════════ HERO SECTION ═══════════════ */}
@@ -242,10 +260,10 @@ export default function Home() {
               )}
             </p>
             <div className={styles.heroCtaRow}>
-              <Link href={nextStudyTask.link} className={styles.heroPrimaryCta}>
+              <Link href={primaryCtaLink} className={styles.heroPrimaryCta}>
                 <div className={styles.heroCtaInfo}>
-                  <span className={styles.heroCtaTag}>Tiếp tục lộ trình • 1-Click</span>
-                  <span className={styles.heroCtaTitle}>HỌC TIẾP: {nextStudyTask.title}</span>
+                  <span className={styles.heroCtaTag}>{primaryCtaTag}</span>
+                  <span className={styles.heroCtaTitle}>{primaryCtaTitle}</span>
                 </div>
                 <span className={styles.heroCtaArrow}><ArrowRightIcon size={18} /></span>
               </Link>
@@ -265,58 +283,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════ PREDICTIVE SCORE METER ═══════════════ */}
-      <PredictiveScoreMeter />
+      {/* ═══════════════ COMPACT INSIGHT BAR ═══════════════ */}
+      <CompactInsightBar />
 
-      {/* ═══════════════ 30-MINUTE HIGH-SCORE MASTERCLASS BANNER ═══════════════ */}
-      <section className={styles.masterclassBanner}>
-        <div className={styles.masterclassBannerContent}>
-          <div className={styles.masterclassInfo}>
-            <div className={styles.masterclassTagRow}>
-              <span className={styles.masterclassPill}>
-                <SparklesIcon size={14} />
-                Chương Trình Đặc Quyền • 30 Phút / Ngày
-              </span>
-              <span className={styles.masterclassBandBadge}>Target 800 - 990</span>
-            </div>
-            <h3 className={styles.masterclassTitle}>
-              Trạm Học Chuyên Sâu 30 Phút: Bứt Phá Điểm Cao TOEIC
-            </h3>
-            <p className={styles.masterclassSub}>
-              Học sâu không áp lực thi cử: Bẻ khóa âm nối giọng Anh/Úc, giải mã ma trận Paraphrase thương mại thực chiến và làm chủ câu bẫy đảo ngữ Part 5.
-            </p>
-            <div className={styles.masterclassPillRow}>
-              <span className={styles.pillItem}>Trạm 1: Bẻ Khóa Âm (7&apos;)</span>
-              <span className={styles.pillItem}>Trạm 2: Đọc Thương Mại (10&apos;)</span>
-              <span className={styles.pillItem}>Trạm 3: Bẫy 850+ (8&apos;)</span>
-              <span className={styles.pillItem}>Trạm 4: Nạp 5 Từ Vàng (5&apos;)</span>
-            </div>
-          </div>
-          <div className={styles.masterclassAction}>
-            <Link href="/masterclass" className={styles.masterclassCtaBtn}>
-              <SparklesIcon size={16} />
-              <span>VÀO PHÒNG HỌC 30&apos;</span>
-              <ArrowRightIcon size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ BOTTLENECK REMEDIATION WIDGET ═══════════════ */}
-      <BottleneckRemediationWidget />
-
-      {/* ═══════════════ SMART ADAPTIVE FEED ═══════════════ */}
-      <SmartActionFeed />
-
-      {/* ═══════════════ DAILY GOALS ═══════════════ */}
+      {/* ═══════════════ TODAY'S 3-STEP LEARNING ROUTINE ═══════════════ */}
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <div className={styles.sectionIcon} data-color="primary">
             <TargetIcon size={20} />
           </div>
           <div>
-            <h2 className={styles.sectionTitle}>Mục tiêu Vàng hôm nay</h2>
-            <p className={styles.sectionSubtitle}>Hoàn thành để nhận XP &amp; giữ chuỗi</p>
+            <h2 className={styles.sectionTitle}>Hành Trình Học Hôm Nay</h2>
+            <p className={styles.sectionSubtitle}>
+              {studyPlan && activeDay 
+                ? `Ngày ${activeDay.dayNumber}/${studyPlan.daysTotal} • Hoàn thành 3 bước để nhận +50 XP và giữ chuỗi` 
+                : '3 bước chuẩn sư phạm mỗi ngày để tăng điểm thực chất'}
+            </p>
           </div>
         </div>
 
@@ -333,7 +315,7 @@ export default function Home() {
                     <span className={styles.celebrationBadge}>+50 XP</span>
                   </div>
                   <p className={styles.celebrationSub}>
-                    Bạn đã hoàn thành toàn bộ bài học hôm nay và giữ vững phong độ bứt phá TOEIC {onboardingData.target}.
+                    Bạn đã hoàn thành toàn bộ 3 bước hôm nay và giữ vững phong độ bứt phá TOEIC {onboardingData.target}.
                   </p>
                 </div>
               </div>
@@ -342,13 +324,13 @@ export default function Home() {
             <div className={styles.dailyHeader}>
               <div className={styles.dailyInfo}>
                 <div className={styles.dailyTitleGroup}>
-                  <span className={styles.dayLabel}>Ngày {activeDay.dayNumber}/{studyPlan.daysTotal}</span>
+                  <span className={styles.dayLabel}>Tiến độ phiên học: {completedToday}/{totalToday} bước</span>
                   <Link
                     href="/study-plan"
                     className="btn-ghost btn-sm"
                     style={{ fontSize: '0.8rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '4px 8px' }}
                   >
-                    <span>Chi tiết lộ trình</span>
+                    <span>Lộ trình 30 ngày</span>
                     <ArrowRightIcon size={14} />
                   </Link>
                 </div>
@@ -359,52 +341,79 @@ export default function Home() {
               </div>
             </div>
 
-            <div className={styles.planList}>
-              {activeDay.tasks.map((task: any, index: number) => (
-                <div key={task.id} className={styles.planItem} data-completed={task.completed}>
-                  <div className={styles.planItemInfo}>
-                    <button
-                      className={styles.checkButton}
-                      onClick={(e) => {
-                        const btn = e.currentTarget;
-                        btn.classList.remove('animate-bounce-check');
-                        void btn.offsetWidth;
-                        btn.classList.add('animate-bounce-check');
-                        const updated = toggleTaskCompleted(activeDay.dayNumber, task.id);
-                        if (updated) {
-                          setStudyPlan({ ...updated });
-                          setActiveDayNumber(activeDay.dayNumber);
-                          const updatedDay = updated.days.find(d => d.dayNumber === activeDay.dayNumber);
-                          if (updatedDay && updatedDay.tasks.every(t => t.completed)) {
-                            soundEffects.playVictory();
-                            localStorage.setItem('toeic_celebration_date', new Date().toISOString().slice(0, 10));
+            <div className={styles.routineContainer}>
+              {activeDay.tasks.map((task: any, index: number) => {
+                const meta = STEP_METAS[index] || { num: `0${index + 1}`, phase: 'Luyện tập', time: '~10 phút' };
+                const isCurrent = !task.completed && index === incompleteTaskIndex;
+
+                return (
+                  <div
+                    key={task.id}
+                    className={styles.routineStepCard}
+                    data-completed={task.completed}
+                    data-current={isCurrent}
+                  >
+                    <div className={styles.stepLeftArea}>
+                      <button
+                        className={styles.checkButton}
+                        onClick={(e) => {
+                          const btn = e.currentTarget;
+                          btn.classList.remove('animate-bounce-check');
+                          void btn.offsetWidth;
+                          btn.classList.add('animate-bounce-check');
+                          const updated = toggleTaskCompleted(activeDay.dayNumber, task.id);
+                          if (updated) {
+                            setStudyPlan({ ...updated });
+                            setActiveDayNumber(activeDay.dayNumber);
+                            const updatedDay = updated.days.find((d: any) => d.dayNumber === activeDay.dayNumber);
+                            if (updatedDay && updatedDay.tasks.every((t: any) => t.completed)) {
+                              soundEffects.playVictory();
+                              localStorage.setItem('toeic_celebration_date', new Date().toISOString().slice(0, 10));
+                            }
                           }
-                        }
-                      }}
-                    >
-                      {task.completed && <CheckIcon size={14} />}
-                    </button>
-                    <div className={styles.planItemTextGroup}>
-                      <div className={styles.planItemHeaderRow}>
-                        <span className={styles.planItemTitle}>{task.title}</span>
-                        {task.subCategory && (
-                          <span className={styles.subCatTag}>{task.subCategory}</span>
-                        )}
+                        }}
+                        title={task.completed ? 'Đã hoàn thành' : 'Đánh dấu hoàn thành'}
+                      >
+                        {task.completed && <CheckIcon size={14} />}
+                      </button>
+
+                      <div className={styles.stepNumberCircle}>
+                        {task.completed ? <CheckIcon size={18} /> : meta.num}
+                      </div>
+
+                      <div className={styles.stepBody}>
+                        <div className={styles.stepMetaRow}>
+                          <span className={styles.stepPhaseBadge}>{meta.phase}</span>
+                          <span className={styles.stepTimeLabel}>{meta.time}</span>
+                          {task.subCategory && (
+                            <span className={styles.stepSubCategoryBadge}>{task.subCategory}</span>
+                          )}
+                        </div>
+                        <span className={styles.stepTitleText}>{task.title}</span>
                       </div>
                     </div>
+
+                    <div className={styles.stepRightArea}>
+                      {isCurrent && (
+                        <span className={styles.stepCurrentChip}>
+                          Bước cần làm
+                        </span>
+                      )}
+                      {index < 3 && (
+                        <span className={styles.shortcutKeyBadge} title={`Bấm phím ${index + 1} để học ngay`}>
+                          {index + 1}
+                        </span>
+                      )}
+                      <Link
+                        href={task.link}
+                        className={`${task.completed ? 'btn-secondary' : isCurrent ? 'btn-primary' : 'btn-secondary'} btn-sm`}
+                      >
+                        {task.completed ? 'ÔN LẠI' : 'HỌC NGAY'}
+                      </Link>
+                    </div>
                   </div>
-                  <div className={styles.planItemActionGroup}>
-                    {index < 3 && (
-                      <span className={styles.shortcutKeyBadge} title={`Bấm phím ${index + 1} để học ngay`}>
-                        {index + 1}
-                      </span>
-                    )}
-                    <Link href={task.link} className={`${task.completed ? 'btn-secondary' : 'btn-primary'} btn-sm`}>
-                      {task.completed ? 'ÔN LẠI' : 'HỌC NGAY'}
-                    </Link>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         ) : (
@@ -414,7 +423,7 @@ export default function Home() {
               <div>
                 <h3 className={styles.noPlanTitle}>Bạn chưa có lộ trình!</h3>
                 <p className={styles.noPlanDesc}>
-                  Làm bài Test Nhanh (28 câu) để AI thiết kế lộ trình riêng cho bạn.
+                  Làm bài Test Nhanh (28 câu) để AI thiết kế lộ trình 3 bước mỗi ngày riêng cho bạn.
                 </p>
               </div>
             </div>
@@ -431,7 +440,7 @@ export default function Home() {
         )}
       </section>
 
-      {/* ═══════════════ EXAM MAP ═══════════════ */}
+      {/* ═══════════════ ON-DEMAND PRACTICE & MOCK TEST HUB ═══════════════ */}
       <section className={styles.section}>
         <div className={styles.sectionHeaderRow}>
           <div className={styles.sectionHeader}>
@@ -439,8 +448,8 @@ export default function Home() {
               <CompassIcon size={20} />
             </div>
             <div>
-              <h2 className={styles.sectionTitle}>Bản Đồ Đề Thi</h2>
-              <p className={styles.sectionSubtitle}>Chọn đề và chinh phục các trạm</p>
+              <h2 className={styles.sectionTitle}>Khu Tự Luyện &amp; Thi Thử Mở Rộng</h2>
+              <p className={styles.sectionSubtitle}>Dành cho tự học thêm ngoài giờ: Luyện 7 Phần đề thật ETS và phòng thi mô phỏng</p>
             </div>
           </div>
           
@@ -463,8 +472,8 @@ export default function Home() {
                 <HeadphonesIcon size={28} />
               </div>
               <div className={styles.stationText}>
-                <h3>Trạm Nghe</h3>
-                <p>{testStats ? `${testStats.p1 + testStats.p2 + testStats.p3 + testStats.p4} câu chuẩn ETS` : 'Listening Station'}</p>
+                <h3>Trạm Nghe ETS (Part 1 - 4)</h3>
+                <p>{testStats ? `${testStats.p1 + testStats.p2 + testStats.p3 + testStats.p4} câu chuẩn ETS • Audio phòng thu & Dictation` : 'Listening Station'}</p>
               </div>
             </div>
             <div className={styles.stationActions}>
@@ -483,8 +492,8 @@ export default function Home() {
                 <ReadingIcon size={28} />
               </div>
               <div className={styles.stationText}>
-                <h3>Trạm Đọc</h3>
-                <p>{testStats ? `${testStats.p5 + testStats.p6 + testStats.p7} câu sát đề thật` : 'Reading Station'}</p>
+                <h3>Trạm Đọc ETS (Part 5 - 7)</h3>
+                <p>{testStats ? `${testStats.p5 + testStats.p6 + testStats.p7} câu sát đề thật • Phân loại ngữ pháp & 6 dạng Part 7` : 'Reading Station'}</p>
               </div>
             </div>
             <div className={styles.stationActions}>
@@ -503,36 +512,21 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mini Test */}
-          <div className={`${styles.stationCard} card-glow`}>
-            <div className={styles.stationInfo}>
-              <div className={`${styles.stationIcon} ${styles.iconSuccess}`}>
-                <ZapIcon size={28} />
-              </div>
-              <div className={styles.stationText}>
-                <h3>Trạm Nhanh</h3>
-                <p>20 câu ngẫu nhiên — 15 phút</p>
-              </div>
-            </div>
-            <div className={styles.stationActions}>
-              <Link href={`/mini-test?test=${selectedTest}`} className="btn-accent btn-sm">
-                THI NGAY (15P)
-              </Link>
-            </div>
-          </div>
-
-          {/* Full Test — Featured */}
+          {/* Full Test Arena */}
           <div className={`${styles.stationCard} ${styles.stationFeatured}`}>
             <div className={styles.stationInfo}>
               <div className={`${styles.stationIcon} ${styles.iconFeatured}`}>
                 <ExamIcon size={28} />
               </div>
               <div className={styles.stationText}>
-                <h3>Đấu Trường</h3>
-                <p>Mô phỏng phòng thi thật: Full 120P (200 câu) hoặc Chuyên sâu Đọc RC 75P (100 câu)</p>
+                <h3>Đấu Trường Thi Thử Chuẩn ETS</h3>
+                <p>Mô phỏng áp lực phòng thi: Mini Test 15P (20 câu) hoặc Full Test 120P (200 câu) có bóc tách lỗ hổng</p>
               </div>
             </div>
             <div className={styles.stationActions} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              <Link href={`/mini-test?test=${selectedTest}`} className="btn-secondary btn-sm">
+                MINI-TEST (15P)
+              </Link>
               <Link href={`/exam?test=${selectedTest}&section=rc`} className="btn-secondary btn-sm" style={{ fontWeight: 700 }}>
                 THI ĐỌC RC (75P)
               </Link>
@@ -543,55 +537,44 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ═══════════════ VOCABULARY TOOLS ═══════════════ */}
-      <section className={styles.section}>
-        <div className={styles.sectionHeader}>
-          <div className={styles.sectionIcon} data-color="warning">
-            <ZapIcon size={20} />
-          </div>
-          <div>
-            <h2 className={styles.sectionTitle}>Kho Vũ Khí</h2>
-            <p className={styles.sectionSubtitle}>Bộ công cụ luyện tập &amp; tối ưu điểm số</p>
-          </div>
-        </div>
-
-        <div className={styles.toolsGrid}>
-          <Link href="/study" className={`${styles.toolCard} card-glow`}>
-            <div className={`${styles.toolIcon} ${styles.iconPrimary}`}>
-              <CardsIcon size={22} />
+        {/* Supplementary Tools Row */}
+        <div className={styles.onDemandToolsRow} style={{ marginTop: '16px' }}>
+          <Link href="/study" className={styles.onDemandToolCard}>
+            <div className={styles.onDemandToolIcon}>
+              <CardsIcon size={20} />
             </div>
-            <h4>Flashcards</h4>
-            <p>Học lặp lại ngắt quãng</p>
+            <div className={styles.onDemandToolText}>
+              <span className={styles.onDemandToolTitle}>Từ vựng &amp; Flashcards</span>
+              <span className={styles.onDemandToolDesc}>SRS Leitner, Quiz 10 câu &amp; Tra từ</span>
+            </div>
           </Link>
-          <Link href="/quiz" className={`${styles.toolCard} card-glow`}>
-            <div className={`${styles.toolIcon} ${styles.iconWarning}`}>
-              <QuizIcon size={22} />
+          <Link href="/notebook" className={styles.onDemandToolCard}>
+            <div className={styles.onDemandToolIcon}>
+              <NotebookIcon size={20} />
             </div>
-            <h4>Làm Quiz</h4>
-            <p>Kiểm tra trí nhớ</p>
+            <div className={styles.onDemandToolText}>
+              <span className={styles.onDemandToolTitle}>Sổ tay lỗi sai</span>
+              <span className={styles.onDemandToolDesc}>Bóc tách nguyên nhân &amp; chữa điểm nghẽn</span>
+            </div>
           </Link>
-          <Link href="/vocabulary" className={`${styles.toolCard} card-glow`}>
-            <div className={`${styles.toolIcon} ${styles.iconSecondary}`}>
-              <BookIcon size={22} />
+          <Link href="/tips" className={styles.onDemandToolCard}>
+            <div className={styles.onDemandToolIcon}>
+              <LightbulbIcon size={20} />
             </div>
-            <h4>Từ điển</h4>
-            <p>Khám phá kho từ</p>
+            <div className={styles.onDemandToolText}>
+              <span className={styles.onDemandToolTitle}>Mẹo &amp; Bẫy thi ETS</span>
+              <span className={styles.onDemandToolDesc}>30 chiến thuật phòng thi 7 Parts</span>
+            </div>
           </Link>
-          <Link href="/tips" className={`${styles.toolCard} card-glow`}>
-            <div className={`${styles.toolIcon} ${styles.iconInfo}`}>
-              <LightbulbIcon size={22} />
+          <Link href="/masterclass" className={styles.onDemandToolCard}>
+            <div className={styles.onDemandToolIcon}>
+              <SparklesIcon size={20} />
             </div>
-            <h4>Mẹo thi</h4>
-            <p>Chiến thuật làm bài</p>
-          </Link>
-          <Link href="/notebook" className={`${styles.toolCard} card-glow`}>
-            <div className={`${styles.toolIcon} ${styles.iconSuccess}`}>
-              <NotebookIcon size={22} />
+            <div className={styles.onDemandToolText}>
+              <span className={styles.onDemandToolTitle}>Trạm Masterclass 30&apos;</span>
+              <span className={styles.onDemandToolDesc}>Bẻ khóa âm bản xứ &amp; bẫy 800+</span>
             </div>
-            <h4>Sổ tay lỗi</h4>
-            <p>Khắc phục điểm yếu</p>
           </Link>
         </div>
       </section>

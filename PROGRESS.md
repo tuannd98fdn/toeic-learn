@@ -898,15 +898,40 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### ✅ Vấn Đề 39: Tối Ưu Hóa & Tinh Giản Toàn Diện Daily Learning Flow: Trải Nghiệm Học Tiếng Anh Mỗi Ngày Liền Mạch & Không Phân Mảnh [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Người học mở ứng dụng bị quá tải quyết định (decision paralysis) vì Dashboard trước đây có tới hơn 15 nút kêu gọi hành động cạnh tranh và 8 khối nội dung xếp chồng (Hero, Predictive Score Meter, Banner Masterclass 30', Bottleneck Widget, Smart Action Feed, Daily Goals, Station Grid, Vocabulary Tools).
+  - Nội dung từ vựng bị xé lẻ thành 3 trang rời rạc (`/study`, `/quiz`, `/vocabulary`) và thanh điều hướng có tới 10 mục rải rác. Người học không biết bắt đầu học từ đâu mỗi ngày.
+* **Chi tiết triển khai**:
+  1. **Tái Cấu Trúc Dashboard thành Trung Tâm Điều Phối Ngày (Daily Learning Command Center)**:
+     - *Hero CTA 1-Chạm Duy Nhất*: Tự động định vị bài học tiếp theo cần làm: "BẮT ĐẦU PHIÊN HỌC HÔM NAY" (`Bước 01/3 • ~15-20 phút • 1-Click`) hoặc "TIẾP TỤC: [Tên bước]" giúp người học vào bài ngay trong 0 giây.
+     - *Hành Trình Học Hôm Nay (Today's 3-Step Routine)*: Chuẩn hóa 3 bước sư phạm tuần tự:
+       - **Bước 01 (5')**: Khởi động (SRS Flashcards / Sổ tay câu hỏi đến hạn).
+       - **Bước 02 (15')**: Trọng tâm hôm nay (Part 5 chuyên đề yếu nhất / Part 2 phản xạ / Masterclass 800+).
+       - **Bước 03 (5')**: Củng cố & Sửa sai (Ôn tập Sổ tay lỗi sai / Mini Quiz).
+       - Tích hợp phím tắt `1`, `2`, `3` và nhãn `Bước cần làm`.
+     - *Thanh Năng Lực Tinh Gọn (`CompactInsightBar.tsx`)*: Thay thế 2 khối cồng kềnh bằng 1 thanh ngang thanh lịch hiển thị Điểm Dự Đoán ETS (`550 / 990`), điểm nghẽn số 1 cần phá vỡ, nút tháo gỡ và link biểu đồ Radar (`/stats`).
+     - *Khu Vực Tự Luyện & Thi Thử Mở Rộng*: Gom gọn Trạm Nghe (Part 1-4), Trạm Đọc (Part 5-7), Đấu trường thi thử (Mini-test, RC, Full test) và 4 công cụ bổ trợ xuống khu vực tự học thêm ngoài giờ.
+  2. **Hợp Nhất Trung Tâm Từ Vựng (`src/app/study/page.tsx`)**:
+     - Sáp nhập 3 trang thành 1 Vocab Hub thống nhất với 3 Tab: `[Thẻ Flashcards SRS] | [Làm Quiz 10 Câu] | [Kho Từ & Tra Cứu]`.
+     - Tự động đồng bộ URL query `?tab=quiz` và `?tab=dictionary`.
+  3. **Tinh Giản Thanh Điều Hướng Navbar (`src/components/Navbar.tsx`)**:
+     - Rút gọn menu Desktop thành 2 nhóm khoa học: **Học Tập Hàng Ngày** (Học hôm nay, Lộ trình, Thi thử) và **Công Cụ & Ôn Tập** (Từ vựng, Sổ tay lỗi, Mẹo thi, Thống kê).
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trong mã nguồn và rendered DOM.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với 35 routes.
+  - Kiểm thử Playwright E2E `scratch/test_streamlined_daily_flow_e2e.mjs`: Vượt qua 100% (Hero CTA, Compact bar, 3 bước routine, Vocab Hub 3 tabs, 0 emoji).
+  - Kiểm thử Anti-regression: `test_hide_fake_tests_e2e.mjs` và `test_in_context_lookup_e2e.mjs` đạt 100% PASS.
+
+---
+
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 39: Hoàn Thiện Lộ Trình Mục Tiêu Chuẩn Sư Phạm (Curriculum Engine 3 Giai Đoạn) & Tìm Nguồn Đề Thi Gốc ETS 2022 Test 2, 3, 4
+### Vấn Đề 40: Tìm Nguồn Dữ Liệu Audio Gốc Phòng Thu & Ảnh Scan Đề Thật ETS 2022 Test 2, 3, 4 để Nạp Vào Pipeline `ingest_real_ets.mjs`
 * **Bối cảnh & Vấn đề**:
-  - Để đảm bảo lời hứa "người học chỉ cần học theo lộ trình là sẽ pass đúng target", lộ trình cần được tinh chỉnh bám sát theo 3 giai đoạn rõ ràng cho từng band mục tiêu:
-    1. Giai đoạn 1: Foundation (Nền tảng từ vựng + Ngữ pháp Part 5 cơ bản + Phản xạ Part 1-2).
-    2. Giai đoạn 2: Speed & Tactics (Luyện bẫy thi, Part 5 ≤ 25s, Part 7 nhịp độ chuẩn).
-    3. Giai đoạn 3: Simulation (Thi thử định kỳ, quét sạch Sổ tay lỗi sai).
-  - Thu thập bộ dữ liệu file audio phòng thu gốc và hình ảnh scan đề thi thật cho Test 2, Test 3, Test 4 để đưa vào pipeline `ingest_real_ets.mjs`.
+  - Hiện tại toàn hệ thống chỉ mới có Test 1 là đề thi chuẩn 100% có file audio phòng thu và câu hỏi ETS thật.
+  - Cần thu thập bộ audio và ảnh scan gốc của Test 2, 3, 4 từ nguồn chuẩn để mở rộng kho đề mà không bị lẫn đề giả lập.
 
 ---
 
@@ -916,12 +941,10 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_streamlined_daily_flow_e2e.mjs` (Kiểm thử Toàn Diện Daily Learning Flow 3 bước, Navbar tinh gọn, Vocab Hub 3 tabs, 0 emoji).
   * `node scratch/test_in_context_lookup_e2e.mjs` (Kiểm thử Tra Từ Tức Thì Tại Chỗ In-Context Popover, phát âm, 1-click Flashcard, 0 emoji).
-  * `node scratch/test_hide_fake_tests_e2e.mjs` (Kiểm thử ẩn Test 2 & 3, chỉ kích hoạt Test 1 chuẩn ETS).
-
-* **Kiểm thử E2E Playwright mẫu**:
   * `node scratch/test_hide_fake_tests_e2e.mjs` (Kiểm thử ẩn Test 2 & 3, chỉ kích hoạt Test 1 chuẩn ETS, 0 emoji).
-  * `node scratch/test_masterclass_milestone36_e2e.mjs` (Kiểm thử Masterclass Studio Audio 1.0x, 0.75x, Glottal Stop).
+
 
 
 

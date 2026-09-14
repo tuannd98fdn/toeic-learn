@@ -1,11 +1,14 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import FlashCard from '@/components/FlashCard';
 import Confetti from '@/components/Confetti';
 import ParaphraseMatchGame from '@/components/ParaphraseMatchGame';
 import CollocationDrill from '@/components/CollocationDrill';
+import QuizPage from '@/app/quiz/page';
+import VocabularyPage from '@/app/vocabulary/page';
 import {
   SparklesIcon,
   AwardIcon,
@@ -18,6 +21,8 @@ import {
   CardsIcon,
   LinkIcon,
   ZapIcon,
+  QuizIcon,
+  BookIcon,
 } from '@/components/icons/AppIcons';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useStreak } from '@/hooks/useStreak';
@@ -34,8 +39,25 @@ const BANDS = [
 ];
 
 type StudyMode = 'flashcard' | 'match' | 'drill';
+type VocabTab = 'flashcard' | 'quiz' | 'dictionary';
 
 export default function StudyPage() {
+  return (
+    <Suspense fallback={<div className={styles.loading}>Đang tải trung tâm từ vựng...</div>}>
+      <StudyPageContent />
+    </Suspense>
+  );
+}
+
+function StudyPageContent() {
+  const searchParams = useSearchParams();
+  const initialTab: VocabTab = searchParams?.get('tab') === 'quiz'
+    ? 'quiz'
+    : (searchParams?.get('tab') === 'dictionary' || searchParams?.get('tab') === 'vocab')
+      ? 'dictionary'
+      : 'flashcard';
+
+  const [vocabTab, setVocabTab] = useState<VocabTab>(initialTab);
   const { mounted, getPacedStudyQueue, rateWord, progress } = useLeitner();
   const { recordStudy } = useStreak();
   const { recordNewWordLearned, recordWordReviewed } = useDailyMission();
@@ -245,66 +267,121 @@ export default function StudyPage() {
     );
   };
 
+  const handleTabChange = (tab: VocabTab) => {
+    setVocabTab(tab);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (tab === 'flashcard') url.searchParams.delete('tab');
+      else url.searchParams.set('tab', tab);
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
+
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        {/* Mode Switcher */}
-        <div className={styles.modeSwitcher}>
-          <button
-            type="button"
-            className={`${styles.modeTab} ${studyMode === 'flashcard' ? styles.activeModeTab : ''}`}
-            onClick={() => setStudyMode('flashcard')}
-          >
-            <CardsIcon size={16} />
-            <span>Thẻ Ghi Nhớ SRS</span>
-          </button>
-          <button
-            type="button"
-            className={`${styles.modeTab} ${studyMode === 'match' ? styles.activeModeTab : ''}`}
-            onClick={() => setStudyMode('match')}
-          >
-            <LinkIcon size={16} />
-            <span>Ghép Cặp Paraphrase</span>
-          </button>
-          <button
-            type="button"
-            className={`${styles.modeTab} ${studyMode === 'drill' ? styles.activeModeTab : ''}`}
-            onClick={() => setStudyMode('drill')}
-          >
-            <ZapIcon size={16} />
-            <span>Phản Xạ Collocations</span>
-          </button>
+    <div className={`${styles.container} ${vocabTab !== 'flashcard' ? styles.wideContainer : ''}`}>
+      {/* ═══════════════ TOP HUB HEADER & TABS ═══════════════ */}
+      <div className={styles.topHubHeader}>
+        <div className={styles.topHubTitleArea}>
+          <h1 className={styles.topHubTitle}>
+            Trung Tâm Từ Vựng <span className="text-gradient">TOEIC Master</span>
+          </h1>
+          <p className={styles.topHubSubtitle}>
+            Luyện trí nhớ dài hạn Spaced Repetition (SRS), kiểm tra phản xạ Quiz 10 câu và tra cứu kho 400+ từ chuẩn ETS
+          </p>
         </div>
 
-        {/* Band Selector (Used for Flashcard SRS) */}
-        {studyMode === 'flashcard' && (
-          <div className={styles.bandSelector}>
-            {BANDS.map(b => (
-              <button
-                key={b.value}
-                className={`${styles.bandPill} ${selectedBand === b.value ? styles.activeBandPill : ''}`}
-                onClick={() => handleBandChange(b.value)}
-              >
-                {b.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </header>
+        <div className={styles.topHubTabs}>
+          <button
+            type="button"
+            className={`${styles.topHubTab} ${vocabTab === 'flashcard' ? styles.topHubTabActive : ''}`}
+            onClick={() => handleTabChange('flashcard')}
+          >
+            <CardsIcon size={18} />
+            <span>Thẻ Flashcards SRS</span>
+          </button>
+          <button
+            type="button"
+            className={`${styles.topHubTab} ${vocabTab === 'quiz' ? styles.topHubTabActive : ''}`}
+            onClick={() => handleTabChange('quiz')}
+          >
+            <QuizIcon size={18} />
+            <span>Làm Quiz 10 Câu</span>
+          </button>
+          <button
+            type="button"
+            className={`${styles.topHubTab} ${vocabTab === 'dictionary' ? styles.topHubTabActive : ''}`}
+            onClick={() => handleTabChange('dictionary')}
+          >
+            <BookIcon size={18} />
+            <span>Kho Từ &amp; Tra Cứu</span>
+          </button>
+        </div>
+      </div>
 
-      {/* Main Body depending on Active Study Mode */}
-      {studyMode === 'flashcard' && renderFlashCardView()}
-      {studyMode === 'match' && (
-        <ParaphraseMatchGame
-          onWordReviewed={recordWordReviewed}
-          onSwitchMode={setStudyMode}
-        />
-      )}
-      {studyMode === 'drill' && (
-        <CollocationDrill
-          onWordReviewed={recordWordReviewed}
-          onSwitchMode={setStudyMode}
-        />
+      {vocabTab === 'quiz' && <QuizPage />}
+      {vocabTab === 'dictionary' && <VocabularyPage />}
+      {vocabTab === 'flashcard' && (
+        <>
+          <header className={styles.header}>
+            {/* Mode Switcher */}
+            <div className={styles.modeSwitcher}>
+              <button
+                type="button"
+                className={`${styles.modeTab} ${studyMode === 'flashcard' ? styles.activeModeTab : ''}`}
+                onClick={() => setStudyMode('flashcard')}
+              >
+                <CardsIcon size={16} />
+                <span>Thẻ Ghi Nhớ SRS</span>
+              </button>
+              <button
+                type="button"
+                className={`${styles.modeTab} ${studyMode === 'match' ? styles.activeModeTab : ''}`}
+                onClick={() => setStudyMode('match')}
+              >
+                <LinkIcon size={16} />
+                <span>Ghép Cặp Paraphrase</span>
+              </button>
+              <button
+                type="button"
+                className={`${styles.modeTab} ${studyMode === 'drill' ? styles.activeModeTab : ''}`}
+                onClick={() => setStudyMode('drill')}
+              >
+                <ZapIcon size={16} />
+                <span>Phản Xạ Collocations</span>
+              </button>
+            </div>
+
+            {/* Band Selector (Used for Flashcard SRS) */}
+            {studyMode === 'flashcard' && (
+              <div className={styles.bandSelector}>
+                {BANDS.map(b => (
+                  <button
+                    key={b.value}
+                    className={`${styles.bandPill} ${selectedBand === b.value ? styles.activeBandPill : ''}`}
+                    onClick={() => handleBandChange(b.value)}
+                  >
+                    {b.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </header>
+
+          {/* Main Body depending on Active Study Mode */}
+          {studyMode === 'flashcard' && renderFlashCardView()}
+          {studyMode === 'match' && (
+            <ParaphraseMatchGame
+              onWordReviewed={recordWordReviewed}
+              onSwitchMode={setStudyMode}
+            />
+          )}
+          {studyMode === 'drill' && (
+            <CollocationDrill
+              onWordReviewed={recordWordReviewed}
+              onSwitchMode={setStudyMode}
+            />
+          )}
+        </>
       )}
     </div>
   );

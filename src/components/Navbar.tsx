@@ -142,24 +142,21 @@ export default function Navbar() {
   const NAV_GROUPS: NavGroup[] = [
     {
       id: 'learning',
-      title: 'Luyện Thi',
+      title: 'Học Tập Hàng Ngày',
       items: [
-        { path: '/', label: 'Học', icon: <HomeIcon size={20} /> },
-        { path: '/masterclass', label: 'Masterclass 30\'', icon: <SparklesIcon size={20} />, badge: '800+' },
-        { path: '/study-plan', label: 'Lộ trình', icon: <CompassIcon size={20} /> },
-        { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={20} />, badge: 'MỚI' },
-        { path: '/stats', label: 'Thống kê', icon: <StatsIcon size={20} /> },
+        { path: '/', label: 'Học hôm nay', icon: <HomeIcon size={20} /> },
+        { path: '/study-plan', label: 'Lộ trình 30 ngày', icon: <CompassIcon size={20} /> },
+        { path: '/exam', label: 'Thi thử ETS', icon: <ExamIcon size={20} />, badge: 'Chuẩn ETS' },
       ],
     },
     {
       id: 'tools',
-      title: 'Kho Công Cụ',
+      title: 'Công Cụ & Ôn Tập',
       items: [
-        { path: '/study', label: 'Flashcards', icon: <CardsIcon size={20} /> },
-        { path: '/vocabulary', label: 'Từ điển', icon: <BookIcon size={20} /> },
-        { path: '/quiz', label: 'Làm Quiz', icon: <QuizIcon size={20} /> },
-        { path: '/tips', label: 'Mẹo thi', icon: <LightbulbIcon size={20} /> },
-        { path: '/notebook', label: 'Sổ tay lỗi', icon: <NotebookIcon size={20} /> },
+        { path: '/study', label: 'Từ vựng & Flashcards', icon: <CardsIcon size={20} /> },
+        { path: '/notebook', label: 'Sổ tay lỗi sai', icon: <NotebookIcon size={20} /> },
+        { path: '/tips', label: 'Mẹo & Bẫy thi', icon: <LightbulbIcon size={20} /> },
+        { path: '/stats', label: 'Thống kê & Radar', icon: <StatsIcon size={20} /> },
       ],
     },
     {
@@ -171,12 +168,12 @@ export default function Navbar() {
     },
   ];
 
-  // Mobile: 5 items — merge Mục tiêu into Lộ trình, highlight Học center
+  // Mobile: 5 items — highlight Học center
   const MOBILE_ITEMS: NavItem[] = [
     { path: '/study-plan', label: 'Lộ trình', icon: <CompassIcon size={22} /> },
-    { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={22} />, badge: '•' },
-    { path: '/', label: 'Học', icon: <HomeIcon size={26} /> },
     { path: '/study', label: 'Từ vựng', icon: <CardsIcon size={22} /> },
+    { path: '/', label: 'Học', icon: <HomeIcon size={26} /> },
+    { path: '/exam', label: 'Thi thử', icon: <ExamIcon size={22} />, badge: '•' },
     { path: '/profile', label: 'Tài khoản', icon: <UserIcon size={22} /> },
   ];
 
@@ -226,7 +223,9 @@ export default function Navbar() {
             </div>
             <ul className={styles.navList}>
               {group.items.map((item) => {
-                const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(`${item.path}/`));
+                const isActive = pathname === item.path || 
+                  (item.path !== '/' && pathname.startsWith(`${item.path}/`)) ||
+                  (item.path === '/study' && (pathname === '/quiz' || pathname === '/vocabulary'));
                 
                 return (
                   <li key={item.path} className={styles.navItem}>
@@ -254,7 +253,9 @@ export default function Navbar() {
       {/* Mobile Bottom Nav */}
       <ul className={styles.mobileNavList}>
         {MOBILE_ITEMS.map((item) => {
-          const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(`${item.path}/`));
+          const isActive = pathname === item.path || 
+            (item.path !== '/' && pathname.startsWith(`${item.path}/`)) ||
+            (item.path === '/study' && (pathname === '/quiz' || pathname === '/vocabulary'));
           const isCenter = item.path === '/';
           
           return (
