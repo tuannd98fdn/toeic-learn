@@ -5,11 +5,12 @@ export interface PlanTask {
   title: string;
   description: string;
   link: string;
-  type: 'vocab' | 'practice' | 'review' | 'exam';
+  type: 'vocab' | 'practice' | 'review' | 'exam' | 'masterclass';
   estimatedMinutes: number;
   completed: boolean;
   subCategory?: string; // e.g. 'Word Form' or 'Verb Tense'
   part?: string;        // e.g. 'p5' or 'p7'
+  packDay?: number;     // For masterclass pack day
 }
 
 export interface PlanDay {
@@ -192,7 +193,20 @@ export function rebalanceStudyPlan(plan: StudyPlan, gaps: LearnerGaps): StudyPla
       // Preserve completed tasks
       if (task.completed) return;
 
-      if (task.type === 'practice') {
+      if (task.type === 'practice' || task.type === 'masterclass') {
+        if ((plan.targetScore >= 800 || gaps.latestScore >= 750) && uncompletedDayCount % 3 === 0) {
+          const packNum = ((uncompletedDayCount % 4) || 4);
+          task.type = 'masterclass';
+          task.title = `Trạm Học Chuyên Sâu 30 Phút TOEIC Masterclass (Day ${packNum})`;
+          task.description = 'Làm chủ âm nối ETS, giải mã ma trận paraphrase thương mại & đấu trường bẫy 850+';
+          task.link = `/masterclass?pack=${packNum}`;
+          task.packDay = packNum;
+          task.estimatedMinutes = 30;
+          task.subCategory = undefined;
+          task.part = undefined;
+          return;
+        }
+
         const weakPart = gaps.weakestParts[(uncompletedDayCount - 1) % gaps.weakestParts.length] || 'p5';
 
         if (weakPart === 'p5') {
@@ -352,8 +366,19 @@ export function generateAdaptivePlan(params: {
         });
       }
     } else if (i <= phase1Days + phase2Days) {
-      const isListeningDay = i % 2 === 0;
-      if (isListeningDay) {
+      if (targetScore >= 800 && i % 3 === 0) {
+        const packNum = ((i % 4) || 4);
+        tasks.push({
+          id: `task_${i}_masterclass`,
+          title: `Trạm Học Chuyên Sâu 30 Phút TOEIC Masterclass (Day ${packNum})`,
+          description: 'Làm chủ âm nối ETS, giải mã ma trận paraphrase thương mại & đấu trường bẫy 850+',
+          link: `/masterclass?pack=${packNum}`,
+          type: 'masterclass',
+          estimatedMinutes: 30,
+          completed: false,
+          packDay: packNum,
+        });
+      } else if (i % 2 === 0) {
         tasks.push({
           id: `task_${i}_practice`,
           title: 'Luyện Nghe Chuyên sâu Part 3 & 4',
@@ -386,6 +411,18 @@ export function generateAdaptivePlan(params: {
           type: 'exam',
           estimatedMinutes: dailyMinutes,
           completed: false,
+        });
+      } else if (targetScore >= 800 && i % 2 === 1) {
+        const packNum = ((i % 4) || 4);
+        tasks.push({
+          id: `task_${i}_masterclass`,
+          title: `Trạm Học Chuyên Sâu 30 Phút TOEIC Masterclass (Day ${packNum})`,
+          description: 'Làm chủ âm nối ETS, giải mã ma trận paraphrase thương mại & đấu trường bẫy 850+',
+          link: `/masterclass?pack=${packNum}`,
+          type: 'masterclass',
+          estimatedMinutes: 30,
+          completed: false,
+          packDay: packNum,
         });
       } else {
         tasks.push({
@@ -460,3 +497,29 @@ export function getNextStudyTask(): { title: string; link: string; type: string;
     type: 'practice',
   };
 }
+
+export function markMasterclassCompletedInPlan(packDayNumber: number): StudyPlan | null {
+  const plan = getStudyPlan();
+  if (!plan) return null;
+
+  let hasChanged = false;
+  plan.days.forEach((day) => {
+    day.tasks.forEach((task) => {
+      if (
+        task.type === 'masterclass' &&
+        (!task.packDay || task.packDay === packDayNumber) &&
+        !task.completed
+      ) {
+        task.completed = true;
+        hasChanged = true;
+      }
+    });
+    day.completed = day.tasks.every((t) => t.completed);
+  });
+
+  if (hasChanged) {
+    saveStudyPlan(plan);
+  }
+  return plan;
+}
+

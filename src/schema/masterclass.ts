@@ -1,5 +1,12 @@
 export type MasterclassAccent = 'British' | 'American' | 'Australian' | 'Canadian';
 
+export interface WordAlignmentItem {
+  word: string;
+  ipa: string;
+  isKeyPhenomenon?: boolean;
+  phenomenonNote?: string;
+}
+
 export interface ConnectedSpeechLesson {
   id: string;
   title: string;
@@ -9,6 +16,9 @@ export interface ConnectedSpeechLesson {
   spokenTranscription: string;
   explanation: string;
   audioSimulatedText: string;
+  audioNormalUrl?: string;
+  audioSlowUrl?: string;
+  wordAlignments?: WordAlignmentItem[];
   drillQuestion: {
     question: string;
     options: string[];

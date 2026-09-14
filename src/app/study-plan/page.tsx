@@ -25,6 +25,8 @@ import {
   ExamIcon,
   MapIcon,
   ZapIcon,
+  HeadphonesIcon,
+  CheckIcon,
 } from '@/components/icons/AppIcons';
 import { storage } from '@/utils/storage';
 import styles from './page.module.css';
@@ -312,6 +314,8 @@ function StudyPlanContainer() {
         return <ExamIcon size={18} />;
       case 'review':
         return <NotebookIcon size={18} />;
+      case 'masterclass':
+        return <HeadphonesIcon size={18} />;
       default:
         return <QuizIcon size={18} />;
     }
@@ -429,6 +433,11 @@ function StudyPlanContainer() {
                       {task.subCategory && (
                         <span className={styles.subCatTag}>{task.subCategory}</span>
                       )}
+                      {task.type === 'masterclass' && (
+                        <span className={styles.subCatTag} style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', borderColor: 'rgba(99, 102, 241, 0.3)' }}>
+                          Masterclass 30&apos;
+                        </span>
+                      )}
                     </div>
                     <div className={styles.taskDesc}>{task.description}</div>
                   </div>
@@ -524,7 +533,7 @@ function StudyPlanContainer() {
                       color: day.completed ? '#16a34a' : 'var(--text-secondary)',
                     }}
                   >
-                    {day.completed ? '✓ Hoàn thành' : `${day.tasks.filter((t) => t.completed).length}/${day.tasks.length}`}
+                    {day.completed ? 'Đã hoàn thành' : `${day.tasks.filter((t) => t.completed).length}/${day.tasks.length}`}
                   </span>
                 </div>
 
@@ -560,12 +569,17 @@ function StudyPlanContainer() {
                             padding: 0,
                           }}
                         >
-                          {task.completed && '✓'}
+                          {task.completed && <CheckIcon size={12} />}
                         </button>
                         <span style={{ textDecoration: task.completed ? 'line-through' : 'none', opacity: task.completed ? 0.6 : 1 }}>
                           {task.title}
                           {task.subCategory && (
                             <span className={styles.subCatTag}>{task.subCategory}</span>
+                          )}
+                          {task.type === 'masterclass' && (
+                            <span className={styles.subCatTag} style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', borderColor: 'rgba(99, 102, 241, 0.3)' }}>
+                              Masterclass 30&apos;
+                            </span>
                           )}
                         </span>
                       </div>

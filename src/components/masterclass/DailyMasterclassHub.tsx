@@ -24,6 +24,7 @@ import {
 import { soundEffects } from '@/utils/soundEffects';
 import { useStreak } from '@/hooks/useStreak';
 import { storage } from '@/utils/storage';
+import { markMasterclassCompletedInPlan } from '@/utils/studyPlanEngine';
 import styles from './DailyMasterclassHub.module.css';
 
 interface DailyMasterclassHubProps {
@@ -85,6 +86,9 @@ export default function DailyMasterclassHub({ initialDay = 1 }: DailyMasterclass
     if (!completedDays.includes(pack.dayNumber)) {
       storage.set('toeic_masterclass_completed_days', [...completedDays, pack.dayNumber]);
     }
+
+    // Sync completion with adaptive study plan
+    markMasterclassCompletedInPlan(pack.dayNumber);
   };
 
   const stages = [
