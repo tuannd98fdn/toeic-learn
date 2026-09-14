@@ -9,9 +9,34 @@ export function useVocabulary() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const saved = storage.get<VocabularyWord[]>(USER_VOCAB_STORAGE_KEY, []);
-    setUserWords(saved);
+    const loadWords = () => {
+      const saved = storage.get<VocabularyWord[]>(USER_VOCAB_STORAGE_KEY, []);
+      setUserWords(saved);
+    };
+
+    loadWords();
     setMounted(true);
+
+    const handleStorageUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent<{ key: string }>;
+      if (!customEvent.detail || customEvent.detail.key === USER_VOCAB_STORAGE_KEY || customEvent.detail.key === '*') {
+        loadWords();
+      }
+    };
+
+    const handleWindowStorage = (e: StorageEvent) => {
+      if (e.key === USER_VOCAB_STORAGE_KEY || !e.key) {
+        loadWords();
+      }
+    };
+
+    window.addEventListener('app-storage-update', handleStorageUpdate);
+    window.addEventListener('storage', handleWindowStorage);
+
+    return () => {
+      window.removeEventListener('app-storage-update', handleStorageUpdate);
+      window.removeEventListener('storage', handleWindowStorage);
+    };
   }, []);
 
   const allWords = useMemo(() => {

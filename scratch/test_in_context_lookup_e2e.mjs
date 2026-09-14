@@ -29,20 +29,33 @@ for (const relPath of filesToCheck) {
 }
 console.log('✓ NO UI EMOJIS check passed 100%');
 
-console.log('\n--- 2. Testing /api/quick-dict API directly ---');
+console.log('\n--- 2. Testing /api/quick-dict API directly for "values" and "housing" ---');
 async function testApi() {
-  const res = await fetch('http://localhost:3000/api/quick-dict?word=contract');
-  console.assert(res.ok, `Expected 200 from quick-dict API, got ${res.status}`);
-  const data = await res.json();
-  console.log('quick-dict("contract") result:', {
-    word: data.word,
-    ipa: data.ipa,
-    partOfSpeech: data.partOfSpeech,
-    vietnamese: data.vietnamese,
-  });
-  console.assert(data.word === 'contract', `Expected word 'contract', got ${data.word}`);
-  console.assert(!!data.partOfSpeech, 'Expected part of speech');
-  console.log('✓ /api/quick-dict returns valid dictionary metadata');
+  const wordsToTest = [
+    { word: 'values', expectedVi: 'giá trị' },
+    { word: 'housing', expectedVi: 'nhà ở' },
+    { word: 'dropped', expectedVi: 'sụt giảm' },
+    { word: 'peak', expectedVi: 'đỉnh điểm' },
+  ];
+
+  for (const item of wordsToTest) {
+    const t0 = Date.now();
+    const res = await fetch(`http://localhost:3000/api/quick-dict?word=${item.word}`);
+    const elapsed = Date.now() - t0;
+    console.assert(res.ok, `Expected 200 from quick-dict API for ${item.word}, got ${res.status}`);
+    const data = await res.json();
+    console.log(`quick-dict("${item.word}") [${elapsed}ms]:`, {
+      word: data.word,
+      ipa: data.ipa,
+      partOfSpeech: data.partOfSpeech,
+      vietnamese: data.vietnamese,
+      source: data.source,
+    });
+    console.assert(data.word === item.word, `Expected word '${item.word}', got ${data.word}`);
+    console.assert(data.vietnamese.includes(item.expectedVi), `Expected Vietnamese meaning to include '${item.expectedVi}', got '${data.vietnamese}'`);
+    console.assert(elapsed < 150, `Expected instant lookup under 150ms, took ${elapsed}ms`);
+  }
+  console.log('✓ /api/quick-dict returns instant Vietnamese definitions for all test words (< 150ms)');
 }
 
 console.log('\n--- 3. Playwright E2E: In-Context Popover in Part 7 ---');

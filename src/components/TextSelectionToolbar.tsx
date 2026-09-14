@@ -7,9 +7,10 @@ import {
   CheckIcon, 
   PlusIcon, 
   CloseIcon, 
-  BookmarkIcon, 
   SparklesIcon 
 } from '@/components/icons/AppIcons';
+import { getWordCandidates } from '@/utils/stemmer';
+import { BILINGUAL_LEXICON } from '@/data/bilingualLexicon';
 import styles from './TextSelectionToolbar.module.css';
 
 interface PopoverPosition {
@@ -28,8 +29,15 @@ interface LookupResult {
   isLocalMatch: boolean;
 }
 
-// In-session cache for fast fallback queries
+// In-session fast memory cache (0ms)
 const sessionLookupCache = new Map<string, LookupResult>();
+
+// Format IPA cleanly (strips awkward spaces like "/ 'vælju:z/")
+function cleanIpaDisplay(rawIpa?: string): string {
+  if (!rawIpa) return '';
+  const trimmed = rawIpa.trim().replace(/^\/+|\/+$/g, '').trim();
+  return trimmed ? `/${trimmed}/` : '';
+}
 
 export default function TextSelectionToolbar() {
   const [position, setPosition] = useState<PopoverPosition | null>(null);
@@ -43,7 +51,7 @@ export default function TextSelectionToolbar() {
   const popoverRef = useRef<HTMLDivElement>(null);
   const { addWord, allWords, userWords } = useVocabulary();
 
-  // O(1) map of local 400+ TOEIC vocabulary words
+  // O(1) indexed map of local 400+ TOEIC vocabulary words
   const localWordMap = useMemo(() => {
     const map = new Map<string, {
       word: string;
@@ -70,7 +78,7 @@ export default function TextSelectionToolbar() {
     return map;
   }, [allWords]);
 
-  // Set of user-saved words for instant 'Saved' detection
+  // Set of user-saved words for instant 'Saved' reactive detection
   const userSavedSet = useMemo(() => {
     const set = new Set<string>();
     for (const w of userWords) {
@@ -82,10 +90,11 @@ export default function TextSelectionToolbar() {
   // Check if current word is already saved in notebook
   const isAlreadySaved = useMemo(() => {
     if (!selectedWord) return false;
-    return justSaved || userSavedSet.has(selectedWord.toLowerCase());
-  }, [selectedWord, justSaved, userSavedSet]);
+    const clean = selectedWord.toLowerCase();
+    return justSaved || userSavedSet.has(clean) || (lookupResult?.word ? userSavedSet.has(lookupResult.word.toLowerCase()) : false);
+  }, [selectedWord, justSaved, userSavedSet, lookupResult]);
 
-  // Speak pronunciation using Web Speech API (0ms latency, native voices)
+  // Speak pronunciation using Web Speech API (0ms latency, native local engine)
   const playAudio = useCallback((textToSpeak: string) => {
     if (!textToSpeak || typeof window === 'undefined' || !window.speechSynthesis) return;
 
@@ -95,7 +104,14 @@ export default function TextSelectionToolbar() {
     utterance.rate = 0.9;
 
     const voices = window.speechSynthesis.getVoices();
-    const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('US')));
+    const englishVoice = voices.find(v => 
+      v.lang.startsWith('en') && (
+        v.name.includes('Natural') || 
+        v.name.includes('Samantha') || 
+        v.name.includes('Google') || 
+        v.name.includes('US')
+      )
+    );
     if (englishVoice) {
       utterance.voice = englishVoice;
     }
@@ -107,67 +123,117 @@ export default function TextSelectionToolbar() {
     window.speechSynthesis.speak(utterance);
   }, []);
 
-  // Fetch definition and translation
+  // Multi-tier fast lookup: Lexicon -> Local Store -> LocalStorage -> API Fallback
   const performLookup = useCallback(async (word: string, context: string) => {
-    const clean = word.toLowerCase();
-    
-    // Tier 1: Check Local 400+ TOEIC Word Bank (0ms instant)
-    const localMatch = localWordMap.get(clean);
-    if (localMatch) {
-      const result: LookupResult = {
-        word: localMatch.word,
-        ipa: localMatch.ipa,
-        partOfSpeech: localMatch.partOfSpeech,
-        vietnamese: localMatch.vietnamese,
-        targetBand: localMatch.targetBand,
-        example: localMatch.examples?.[0],
-        isLocalMatch: true,
-      };
-      setLookupResult(result);
-      setIsLoading(false);
-      return;
+    const clean = word.toLowerCase().trim();
+    const candidates = getWordCandidates(clean);
+
+    // Tier 1: Check High-Speed Bilingual Lexicon (0ms instant)
+    for (const cand of candidates) {
+      const entry = BILINGUAL_LEXICON[cand];
+      if (entry) {
+        const result: LookupResult = {
+          word: clean,
+          ipa: cleanIpaDisplay(entry.ipa),
+          partOfSpeech: entry.pos,
+          vietnamese: entry.vi,
+          targetBand: entry.band || '650+',
+          example: entry.example || (context ? context.slice(0, 120) : undefined),
+          isLocalMatch: true,
+        };
+        sessionLookupCache.set(clean, result);
+        setLookupResult(result);
+        setIsLoading(false);
+        return;
+      }
     }
 
-    // Tier 2: Check Session Cache
+    // Tier 2: Check Local 400+ TOEIC Word Bank with stemmer candidates (0ms instant)
+    for (const cand of candidates) {
+      const localMatch = localWordMap.get(cand);
+      if (localMatch) {
+        const result: LookupResult = {
+          word: clean,
+          ipa: cleanIpaDisplay(localMatch.ipa),
+          partOfSpeech: localMatch.partOfSpeech,
+          vietnamese: localMatch.vietnamese,
+          targetBand: localMatch.targetBand,
+          example: localMatch.examples?.[0] || (context ? context.slice(0, 120) : undefined),
+          isLocalMatch: true,
+        };
+        sessionLookupCache.set(clean, result);
+        setLookupResult(result);
+        setIsLoading(false);
+        return;
+      }
+    }
+
+    // Tier 3: Check Session Cache (0ms)
     if (sessionLookupCache.has(clean)) {
       setLookupResult(sessionLookupCache.get(clean)!);
       setIsLoading(false);
       return;
     }
 
-    // Tier 3: Fetch from Quick Dict API (~150ms fallback)
+    // Tier 4: Check Persistent LocalStorage Cache (0ms)
+    try {
+      const cachedItem = localStorage.getItem(`toeic_dict_cache_${clean}`);
+      if (cachedItem) {
+        const parsed = JSON.parse(cachedItem) as LookupResult;
+        sessionLookupCache.set(clean, parsed);
+        setLookupResult(parsed);
+        setIsLoading(false);
+        return;
+      }
+    } catch (_) {}
+
+    // Tier 5: Fetch from Quick Dict API (~100-300ms fallback)
     setIsLoading(true);
+    // Provide an immediate placeholder so user can already press Audio button
+    setLookupResult({
+      word: clean,
+      ipa: '',
+      partOfSpeech: 'Từ vựng',
+      vietnamese: '',
+      targetBand: 'Cơ bản',
+      example: context ? context.slice(0, 120) : undefined,
+      isLocalMatch: false,
+    });
+
     try {
       const res = await fetch(`/api/quick-dict?word=${encodeURIComponent(clean)}`);
       if (res.ok) {
         const data = await res.json();
         const result: LookupResult = {
-          word: data.word || word,
-          ipa: data.ipa || '',
+          word: data.word || clean,
+          ipa: cleanIpaDisplay(data.ipa),
           partOfSpeech: data.partOfSpeech || 'Từ vựng',
-          vietnamese: data.vietnamese || '',
-          targetBand: 'Cơ bản',
-          example: data.example || (context ? context.slice(0, 100) : undefined),
-          isLocalMatch: false,
+          vietnamese: data.vietnamese || clean,
+          targetBand: data.targetBand || 'Cơ bản',
+          example: data.example || (context ? context.slice(0, 120) : undefined),
+          isLocalMatch: data.source === 'lexicon',
         };
         sessionLookupCache.set(clean, result);
+        try {
+          localStorage.setItem(`toeic_dict_cache_${clean}`, JSON.stringify(result));
+        } catch (_) {}
         setLookupResult(result);
       } else {
         setLookupResult({
-          word,
+          word: clean,
           ipa: '',
           partOfSpeech: 'Từ vựng',
-          vietnamese: 'Chưa có bản dịch',
+          vietnamese: clean,
           targetBand: '',
           isLocalMatch: false,
         });
       }
     } catch (err) {
       setLookupResult({
-        word,
+        word: clean,
         ipa: '',
         partOfSpeech: 'Từ vựng',
-        vietnamese: 'Lỗi tra từ',
+        vietnamese: clean,
         targetBand: '',
         isLocalMatch: false,
       });
@@ -202,7 +268,7 @@ export default function TextSelectionToolbar() {
         }
 
         const rawText = selection.toString().trim();
-        // Clean leading and trailing punctuation (e.g. "revenue," -> "revenue")
+        // Clean leading and trailing punctuation (e.g. "values," -> "values")
         const cleanText = rawText.replace(/^[^\w]+|[^\w]+$/g, '').trim();
 
         // Only pop up for single words or short phrases (1 to 4 words, <= 40 chars)
@@ -255,7 +321,7 @@ export default function TextSelectionToolbar() {
 
         // Trigger lookup
         performLookup(cleanText, context.trim());
-      }, 80);
+      }, 60);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -319,7 +385,7 @@ export default function TextSelectionToolbar() {
       {/* Popover Header */}
       <div className={styles.header}>
         <div className={styles.wordInfo}>
-          <span className={styles.wordText}>{lookupResult ? lookupResult.word : selectedWord}</span>
+          <span className={styles.wordText}>{lookupResult?.word || selectedWord}</span>
           {lookupResult?.ipa && (
             <span className={styles.ipaText}>{lookupResult.ipa}</span>
           )}
@@ -347,7 +413,7 @@ export default function TextSelectionToolbar() {
 
       {/* Popover Body: Meaning & Details */}
       <div className={styles.body}>
-        {isLoading ? (
+        {isLoading && !lookupResult?.vietnamese ? (
           <div className={styles.loadingSkeleton}>
             <div className={styles.skeletonLineShort}></div>
             <div className={styles.skeletonLine}></div>
