@@ -16,6 +16,7 @@ import {
 import {
   ClockIcon,
   ArrowRightIcon,
+  ArrowLeftIcon,
   RotateCcwIcon,
   CheckCircleIcon,
   TargetIcon,
@@ -39,6 +40,8 @@ interface DiagnosticQuestion {
   correctAnswer: string;
   explanation?: string;
   transcript?: string;
+  subCategory?: string;
+  grammarTag?: string;
 }
 
 export interface DiagnosticResult {
@@ -123,6 +126,7 @@ export default function DiagnosticPage() {
             correctAnswer: q.correctAnswer,
             transcript: q.transcript,
             explanation: q.explanation,
+            subCategory: q.subCategory,
           });
         });
 
@@ -139,6 +143,7 @@ export default function DiagnosticPage() {
             correctAnswer: q.correctAnswer,
             transcript: q.transcript,
             explanation: q.explanation,
+            subCategory: q.subCategory,
           });
         });
 
@@ -157,6 +162,7 @@ export default function DiagnosticPage() {
               correctAnswer: q.correctAnswer,
               transcript: p3[0].transcript,
               explanation: q.explanation,
+              subCategory: q.subCategory,
             });
           });
         }
@@ -174,6 +180,7 @@ export default function DiagnosticPage() {
             correctAnswer: q.correctAnswer,
             transcript: p3[1].transcript,
             explanation: q.explanation,
+            subCategory: q.subCategory,
           });
         }
 
@@ -192,6 +199,7 @@ export default function DiagnosticPage() {
               correctAnswer: q.correctAnswer,
               transcript: p4[0].transcript,
               explanation: q.explanation,
+              subCategory: q.subCategory,
             });
           });
         }
@@ -209,6 +217,7 @@ export default function DiagnosticPage() {
             correctAnswer: q.correctAnswer,
             transcript: p4[1].transcript,
             explanation: q.explanation,
+            subCategory: q.subCategory,
           });
         }
 
@@ -223,6 +232,8 @@ export default function DiagnosticPage() {
             options: q.options,
             correctAnswer: q.correctAnswer,
             explanation: q.explanation,
+            subCategory: q.subCategory,
+            grammarTag: q.grammarTag,
           });
         });
 
@@ -239,6 +250,7 @@ export default function DiagnosticPage() {
               options: q.options,
               correctAnswer: q.correctAnswer,
               explanation: q.explanation,
+              subCategory: q.subCategory,
             });
           });
         }
@@ -260,6 +272,7 @@ export default function DiagnosticPage() {
               options: q.options,
               correctAnswer: q.correctAnswer,
               explanation: q.explanation,
+              subCategory: q.questionType || q.subCategory,
             });
           });
         }
@@ -354,7 +367,9 @@ export default function DiagnosticPage() {
           type: 'exam',
           testId: 'ets2022_test1',
           part: q.part,
-          questionId: q.id
+          questionId: q.id,
+          subCategory: q.subCategory,
+          grammarTag: q.grammarTag,
         });
       }
     });
@@ -523,14 +538,25 @@ export default function DiagnosticPage() {
               Bắt đầu lộ trình bứt phá điểm số mục tiêu!
             </h3>
             <p style={{ margin: 0, opacity: 0.9, fontSize: '0.95rem', maxWidth: '520px' }}>
-              Hệ thống AI đã phân tích điểm mạnh & điểm yếu của bạn. Nhận kế hoạch ôn luyện chia theo ngày được thiết kế riêng.
+              Hệ thống AI đã phân tích điểm mạnh &amp; điểm yếu của bạn. Lộ trình học 30 ngày đã được tự động tối ưu hóa theo kết quả chẩn đoán này.
             </p>
-            <Link
-              href={`/study-plan?fromDiagnostic=true&score=${result.totalScore}&weak=${result.weakestPartsList.join(',')}`}
-              className={styles.planCTA}
-            >
-              <TargetIcon size={20} /> Tạo Lộ Trình Cá Nhân Hóa Ngay
-            </Link>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '8px' }}>
+              <Link
+                href="/"
+                className={styles.planCTA}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+              >
+                <TargetIcon size={20} /> Bắt đầu Ngày 01 với Lộ trình Thích ứng
+              </Link>
+              <Link
+                href={`/study-plan?fromDiagnostic=true&score=${result.totalScore}&weak=${result.weakestPartsList.join(',')}`}
+                className={styles.retakeBtn}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.1)' }}
+              >
+                <span>Xem chi tiết 30 ngày</span>
+                <ArrowRightIcon size={16} />
+              </Link>
+            </div>
           </div>
 
           {/* Buttons to Review or Retake */}
@@ -570,7 +596,7 @@ export default function DiagnosticPage() {
                         Câu {idx + 1} (ETS #{q.number}) - {q.partTitle}
                       </span>
                       <span style={{ fontWeight: 700, fontSize: '0.85rem', color: isCorrect ? '#15803d' : '#b91c1c' }}>
-                        {isCorrect ? '✓ Đúng' : `✗ Sai (Đã chọn: ${userAns || 'Chưa chọn'})`}
+                        {isCorrect ? 'Đúng' : `Sai (Đã chọn: ${userAns || 'Chưa chọn'})`}
                       </span>
                     </div>
 
@@ -747,8 +773,10 @@ export default function DiagnosticPage() {
             disabled={currentIndex === 0}
             onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
             className={styles.navBtn}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
           >
-            ← Câu trước
+            <ArrowLeftIcon size={14} />
+            <span>Câu trước</span>
           </button>
 
           {isLastQuestion ? (
@@ -757,15 +785,17 @@ export default function DiagnosticPage() {
               onClick={handleSubmit}
               className={styles.submitBtn}
             >
-              Hoàn thành bài test ✓
+              Hoàn thành bài test
             </button>
           ) : (
             <button
               type="button"
               onClick={() => setCurrentIndex((prev) => Math.min(questions.length - 1, prev + 1))}
               className={styles.navBtn}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
             >
-              Câu tiếp theo →
+              <span>Câu tiếp theo</span>
+              <ArrowRightIcon size={14} />
             </button>
           )}
         </div>

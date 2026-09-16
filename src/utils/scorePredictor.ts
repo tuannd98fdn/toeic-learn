@@ -61,10 +61,10 @@ export function getPredictiveScore(): PredictiveScoreData {
 
   // 3. Check diagnostic test result
   const diagResult = storage.get<any>('toeic_diagnostic_result', null);
-  if (diagResult && diagResult.estimatedScore) {
-    const total = Number(diagResult.estimatedScore);
-    const listeningScore = Number(diagResult.listeningScore) || Math.round(total * 0.5);
-    const readingScore = Number(diagResult.readingScore) || (total - listeningScore);
+  if (diagResult && (diagResult.totalScore || diagResult.estimatedScore)) {
+    const total = Number(diagResult.totalScore ?? diagResult.estimatedScore);
+    const listeningScore = Number(diagResult.scaledLC ?? diagResult.listeningScore) || Math.round(total * 0.5);
+    const readingScore = Number(diagResult.scaledRC ?? diagResult.readingScore) || (total - listeningScore);
     const predictedMin = Math.max(10, Math.floor((total - 40) / 10) * 10);
     const predictedMax = Math.min(990, Math.ceil((total + 40) / 10) * 10);
     const predictedMid = Math.round((predictedMin + predictedMax) / 2);

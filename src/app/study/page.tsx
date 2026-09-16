@@ -28,6 +28,7 @@ import { useLeitner } from '@/hooks/useLeitner';
 import { useStreak } from '@/hooks/useStreak';
 import { useDailyMission } from '@/hooks/useDailyMission';
 import { VocabularyWord } from '@/data/vocabulary';
+import { completeActiveTaskByType, AutoCompleteTaskResult } from '@/utils/studyPlanEngine';
 import styles from './page.module.css';
 
 const BANDS = [
@@ -70,6 +71,7 @@ function StudyPageContent() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [autoPlayAudio, setAutoPlayAudio] = useState(true);
+  const [nextRoutine, setNextRoutine] = useState<AutoCompleteTaskResult | null>(null);
 
   // Initialize autoplay setting & band from user's onboarding target score
   useEffect(() => {
@@ -132,6 +134,8 @@ function StudyPageContent() {
       setCurrentIndex(prev => prev + 1);
     } else {
       setIsFinished(true);
+      const autoRes = completeActiveTaskByType('vocab');
+      setNextRoutine(autoRes);
     }
   };
 
@@ -196,6 +200,49 @@ function StudyPageContent() {
             <p>
               Bạn đã hoàn thành <strong>{words.length}</strong> từ ({sessionStats.reviewCount} từ ôn tập + {sessionStats.newCount} từ mới) trong phiên này.
             </p>
+
+            {/* Next Routine Step Bridging Card */}
+            {nextRoutine?.nextTask ? (
+              <div className={styles.nextStepCard}>
+                <div className={styles.nextStepBadgeRow}>
+                  <span className={styles.stepDoneBadge}>Bước 01 Hoàn Thành</span>
+                  <span className={styles.stepXpBadge}>+15 XP</span>
+                </div>
+                <h3 className={styles.nextStepTitle}>
+                  Tiếp tục Bước 02: {nextRoutine.nextTask.title}
+                </h3>
+                <p className={styles.nextStepDesc}>{nextRoutine.nextTask.description}</p>
+                <Link
+                  href={nextRoutine.nextTask.link}
+                  className="btn-primary"
+                  style={{ width: '100%', justifyContent: 'center', fontWeight: 700 }}
+                >
+                  <span>Học Bước 02 Ngay</span>
+                  <ArrowRightIcon size={16} />
+                </Link>
+              </div>
+            ) : nextRoutine?.isDayCompleted ? (
+              <div className={styles.nextStepCard}>
+                <div className={styles.nextStepBadgeRow}>
+                  <span className={styles.stepDoneBadge} style={{ background: 'var(--success-light)', color: 'var(--success)' }}>
+                    100% Mục Tiêu Hoàn Thành
+                  </span>
+                  <span className={styles.stepXpBadge}>+50 XP</span>
+                </div>
+                <h3 className={styles.nextStepTitle}>
+                  Xuất sắc! Bạn đã hoàn thành toàn bộ mục tiêu hôm nay
+                </h3>
+                <Link
+                  href="/"
+                  className="btn-primary"
+                  style={{ width: '100%', justifyContent: 'center', fontWeight: 700 }}
+                >
+                  <span>Về Dashboard xem tiến độ</span>
+                  <ArrowRightIcon size={16} />
+                </Link>
+              </div>
+            ) : null}
+
             <div className={styles.actions}>
               <button onClick={() => loadSession(selectedBand)} className="btn-secondary" style={{ cursor: 'pointer' }}>
                 <RotateCcwIcon size={18} style={{ marginRight: '8px' }} />

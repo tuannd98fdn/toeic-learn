@@ -21,6 +21,7 @@ import {
   LightbulbIcon,
   ShieldCheckIcon,
 } from '@/components/icons/AppIcons';
+import { completeActiveTaskByType, AutoCompleteTaskResult } from '@/utils/studyPlanEngine';
 import styles from './page.module.css';
 
 export default function ExamMistakeQuizPage() {
@@ -71,6 +72,7 @@ function ExamMistakeQuizContent() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
   const [sessionKey, setSessionKey] = useState(0);
+  const [nextRoutine, setNextRoutine] = useState<AutoCompleteTaskResult | null>(null);
 
   // Load and filter mistake questions once per practice session
   useEffect(() => {
@@ -190,6 +192,8 @@ function ExamMistakeQuizContent() {
         setShowConfetti(true);
         soundEffects.playVictory();
       }
+      const autoRes = completeActiveTaskByType('review');
+      setNextRoutine(autoRes);
     }
   }, [currentIndex, questions.length, score]);
 
@@ -285,7 +289,33 @@ function ExamMistakeQuizContent() {
             </div>
           </div>
 
+          {nextRoutine?.isDayCompleted && (
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(59, 130, 246, 0.12))',
+              border: '1px solid var(--success)',
+              borderRadius: '16px',
+              padding: '16px 20px',
+              margin: '16px 0',
+              textAlign: 'center',
+            }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--success)', fontWeight: 800, fontSize: '0.85rem', marginBottom: '4px' }}>
+                <CheckCircleIcon size={16} />
+                <span>BƯỚC 03 HOÀN THÀNH • MỤC TIÊU HÔM NAY ĐẠT 100% (+50 XP)</span>
+              </div>
+              <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--foreground)' }}>
+                Bạn đã xuất sắc hoàn thành trọn vẹn 3 bước của Ngày hôm nay và giữ vững chuỗi Streak!
+              </p>
+            </div>
+          )}
+
           <div className={styles.finishedActions}>
+            {nextRoutine?.isDayCompleted ? (
+              <Link href="/" className="btn-primary">
+                <CheckCircleIcon size={16} style={{ marginRight: '6px', verticalAlign: 'middle', display: 'inline' }} />
+                Về Dashboard nhận thưởng
+              </Link>
+            ) : null}
+
             <button
               onClick={() => {
                 setIsFinished(false);
@@ -298,7 +328,7 @@ function ExamMistakeQuizContent() {
                 setMasteredThisSession({});
                 setSessionKey((prev) => prev + 1);
               }}
-              className="btn-primary"
+              className={nextRoutine?.isDayCompleted ? 'btn-secondary' : 'btn-primary'}
             >
               <RotateCcwIcon size={16} style={{ marginRight: '6px', verticalAlign: 'middle', display: 'inline' }} />
               Luyện tập lại lượt mới
@@ -306,9 +336,11 @@ function ExamMistakeQuizContent() {
             <Link href="/notebook" className="btn-secondary">
               Về Sổ tay lỗi sai
             </Link>
-            <Link href="/" className="btn-secondary">
-              Về Trang chủ
-            </Link>
+            {!nextRoutine?.isDayCompleted && (
+              <Link href="/" className="btn-secondary">
+                Về Trang chủ
+              </Link>
+            )}
           </div>
         </div>
       </div>

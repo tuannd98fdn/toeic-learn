@@ -260,7 +260,12 @@ export function syncAdaptivePlan(): { plan: StudyPlan | null; gaps: LearnerGaps 
   if (plan) {
     plan = rebalanceStudyPlan(plan, gaps);
   } else {
-    const target = gaps.latestScore < 500 ? 650 : (gaps.latestScore < 700 ? 800 : 900);
+    const userRawTarget = storage.get<string | number>('toeic_target_score', '');
+    const userTargetNum = parseInt(String(userRawTarget || '').replace(/\D/g, ''), 10);
+    const target = userTargetNum && userTargetNum >= 500
+      ? userTargetNum
+      : (gaps.latestScore < 500 ? 650 : (gaps.latestScore < 700 ? 800 : 900));
+
     plan = generateAdaptivePlan({
       currentScore: gaps.latestScore,
       targetScore: target,
@@ -521,5 +526,116 @@ export function markMasterclassCompletedInPlan(packDayNumber: number): StudyPlan
     saveStudyPlan(plan);
   }
   return plan;
+}
+
+export interface AutoCompleteTaskResult {
+  plan: StudyPlan | null;
+  completedTask: PlanTask | null;
+  dayNumber: number;
+  isDayCompleted: boolean;
+  nextTask: PlanTask | null;
+}
+
+/**
+ * Automatically marks an active daily routine task as completed based on activity type.
+ * Triggers storage update and preserves all other days and completed tasks.
+ */
+export function completeActiveTaskByType(
+  type: 'vocab' | 'practice' | 'review' | 'exam' | 'masterclass',
+  options?: { subCategory?: string; part?: string }
+): AutoCompleteTaskResult {
+  const plan = getStudyPlan();
+  if (!plan || !plan.days || plan.days.length === 0) {
+    return { plan: null, completedTask: null, dayNumber: 0, isDayCompleted: false, nextTask: null };
+  }
+
+  // Find active day: first day where completed is false, or days[0]
+  const activeDay = plan.days.find((d) => !d.completed) || plan.days[0];
+  if (!activeDay) {
+    return { plan, completedTask: null, dayNumber: 0, isDayCompleted: false, nextTask: null };
+  }
+
+  let targetTask: PlanTask | undefined;
+
+  // Specific matching for practice if subCategory or part provided
+  if (type === 'practice' && (options?.subCategory || options?.part)) {
+    targetTask = activeDay.tasks.find(
+      (t) =>
+        !t.completed &&
+        t.type === 'practice' &&
+        ((options.subCategory && t.subCategory?.toLowerCase() === options.subCategory.toLowerCase()) ||
+         (options.part && t.part?.toLowerCase() === options.part.toLowerCase()))
+    );
+  }
+
+  // Fallback: match first incomplete task by type
+  if (!targetTask) {
+    targetTask = activeDay.tasks.find((t) => !t.completed && t.type === type);
+  }
+
+  // If still not found (task of this type already completed today)
+  if (!targetTask) {
+    const nextIncomplete = activeDay.tasks.find((t) => !t.completed) || null;
+    return {
+      plan,
+      completedTask: null,
+      dayNumber: activeDay.dayNumber,
+      isDayCompleted: activeDay.completed,
+      nextTask: nextIncomplete,
+    };
+  }
+
+  // Mark task completed
+  targetTask.completed = true;
+  activeDay.completed = activeDay.tasks.every((t) => t.completed);
+
+  saveStudyPlan(plan);
+
+  // If active day is now 100% completed, record celebration date
+  if (activeDay.completed && typeof window !== 'undefined') {
+    const todayStr = new Date().toISOString().slice(0, 10);
+    localStorage.setItem('toeic_celebration_date', todayStr);
+  }
+
+  const nextIncomplete = activeDay.tasks.find((t) => !t.completed) || null;
+
+  return {
+    plan,
+    completedTask: targetTask,
+    dayNumber: activeDay.dayNumber,
+    isDayCompleted: activeDay.completed,
+    nextTask: nextIncomplete,
+  };
+}
+
+/**
+ * Returns current daily routine step information to support next-step bridging.
+ */
+export function getNextRoutineStep(): {
+  currentDayNumber: number;
+  currentStepIndex: number;
+  nextTask: PlanTask | null;
+  isAllCompleted: boolean;
+} {
+  const plan = getStudyPlan();
+  if (!plan || !plan.days || plan.days.length === 0) {
+    return {
+      currentDayNumber: 1,
+      currentStepIndex: 1,
+      nextTask: null,
+      isAllCompleted: false,
+    };
+  }
+
+  const activeDay = plan.days.find((d) => !d.completed) || plan.days[0];
+  const incompleteIdx = activeDay.tasks.findIndex((t) => !t.completed);
+  const nextTask = incompleteIdx >= 0 ? activeDay.tasks[incompleteIdx] : null;
+
+  return {
+    currentDayNumber: activeDay.dayNumber,
+    currentStepIndex: incompleteIdx >= 0 ? incompleteIdx + 1 : activeDay.tasks.length,
+    nextTask,
+    isAllCompleted: activeDay.completed,
+  };
 }
 

@@ -863,3 +863,59 @@
     padding: 4px 6px;
   }
 }
+
+/* ============================================
+   Next Routine Step Bridging Card
+   ============================================ */
+.nextStepCard {
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.nextStepBadgeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.stepDoneBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 3px 9px;
+  border-radius: 12px;
+  letter-spacing: 0.02em;
+}
+
+.stepXpBadge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--warning);
+  background: rgba(245, 158, 11, 0.12);
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+.nextStepTitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--foreground);
+  margin: 0 0 6px 0;
+  line-height: 1.35;
+}
+
+.nextStepDesc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+}

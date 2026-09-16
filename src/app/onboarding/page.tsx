@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import Confetti from '@/components/Confetti';
+import { ArrowLeftIcon, ArrowRightIcon, TargetIcon } from '@/components/icons/AppIcons';
 
 const TOTAL_STEPS = 3;
 
@@ -21,7 +22,7 @@ export default function OnboardingPage() {
     setStep(nextStep);
   }, []);
 
-  const handleComplete = () => {
+  const handleComplete = (destination: '/' | '/diagnostic' = '/') => {
     const cleanTarget = (targetScore || '750+').replace(/^["']|["']$/g, '').trim();
     localStorage.setItem('toeic_onboarding_done', 'true');
     localStorage.setItem('toeic_target_score', cleanTarget);
@@ -30,8 +31,8 @@ export default function OnboardingPage() {
     
     setShowConfetti(true);
     setTimeout(() => {
-      router.push('/');
-    }, 2000);
+      router.push(destination);
+    }, 1500);
   };
 
   return (
@@ -77,7 +78,8 @@ export default function OnboardingPage() {
         {step === 2 && (
           <div key={`step2-${animKey}`} className={styles.slideEnter}>
             <button className={styles.backBtn} onClick={() => goToStep(1)}>
-              ← Quay lại
+              <ArrowLeftIcon size={14} style={{ marginRight: '6px', verticalAlign: 'middle', display: 'inline' }} />
+              Quay lại
             </button>
             <h1 className={styles.title}>Trình độ hiện tại?</h1>
             <p className={styles.subtitle}>Chúng tôi sẽ điều chỉnh độ khó bài tập.</p>
@@ -108,7 +110,8 @@ export default function OnboardingPage() {
         {step === 3 && (
           <div key={`step3-${animKey}`} className={styles.slideEnter}>
             <button className={styles.backBtn} onClick={() => goToStep(2)}>
-              ← Quay lại
+              <ArrowLeftIcon size={14} style={{ marginRight: '6px', verticalAlign: 'middle', display: 'inline' }} />
+              Quay lại
             </button>
             <h1 className={styles.title}>Khi nào bạn thi?</h1>
             <p className={styles.subtitle}>Để chúng tôi lên lịch nhắc nhở mỗi ngày.</p>
@@ -123,14 +126,43 @@ export default function OnboardingPage() {
               />
             </div>
             
-            <button 
-              className={styles.submitBtn}
-              onClick={handleComplete}
-              disabled={!examDate}
-              style={{ opacity: !examDate ? 0.5 : 1 }}
-            >
-              Bắt đầu lộ trình ngay
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '14px' }}>
+              <button 
+                className={styles.submitBtn}
+                onClick={() => handleComplete('/diagnostic')}
+                disabled={!examDate}
+                style={{
+                  opacity: !examDate ? 0.5 : 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                }}
+              >
+                <TargetIcon size={18} />
+                <span>Làm Test Chẩn Đoán (20P • 28 câu)</span>
+                <span style={{ fontSize: '0.72rem', background: 'rgba(255,255,255,0.22)', padding: '2px 7px', borderRadius: '10px', fontWeight: 700 }}>
+                  Khuyên dùng
+                </span>
+              </button>
+              
+              <button 
+                type="button"
+                className="btn-secondary"
+                onClick={() => handleComplete('/')}
+                disabled={!examDate}
+                style={{
+                  opacity: !examDate ? 0.5 : 1,
+                  padding: '12px',
+                  borderRadius: '12px',
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
+                  cursor: examDate ? 'pointer' : 'not-allowed',
+                }}
+              >
+                Vào học ngay với lộ trình đề xuất
+              </button>
+            </div>
           </div>
         )}
       </div>

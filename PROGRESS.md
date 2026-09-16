@@ -1021,9 +1021,52 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+---
+
+### ✅ Vấn Đề 43: Khắc Phục Triệt Để 4 Điểm Đứt Gãy Trong Luồng Người Học (Learner Flow Audit & End-to-End Bridging) [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Đánh giá toàn diện hành trình người học (Learner Journey Audit) phát hiện 4 điểm đứt gãy ảnh hưởng trực tiếp đến trải nghiệm và hiệu quả tăng điểm:
+    1. **Đứt gãy Tự động Đánh dấu Nhiệm vụ (No Auto Task Completion)**: Học xong 10 từ flashcard tại `/study`, hoàn thành bài tập Part 5 tại `/part5`, hay hoàn tất ôn câu sai tại `/notebook/exam-quiz` đều không tự động tích xanh nhiệm vụ trong Lộ trình Thích ứng, khiến người học cảm giác tiến độ bị kẹt.
+    2. **Lỗi Hiệu Chuẩn Điểm Dự Đoán (Score Predictor Calibration Bug)**: `scorePredictor.ts` đọc sai trường dữ liệu `diagResult` (`estimatedScore`, `listeningScore`, `readingScore` thay vì `totalScore`, `scaledLC`, `scaledRC`), khiến điểm dự đoán ban đầu không được hiệu chuẩn từ bài test chẩn đoán.
+    3. **Mất Dấu Sub-Category & Grammar Tag trong Test Chẩn Đoán (`/diagnostic`)**: Câu hỏi Part 5 & 6 trong Diagnostic Test không lưu `subCategory` và `grammarTag`, khi sai đẩy vào Sổ tay câu hỏi sai bị gán là `'General'`, làm hỏng Biểu đồ Radar lỗ hổng kiến thức (`/stats`). Đồng thời còn tồn tại ký tự unicode chưa đồng bộ.
+    4. **Thiếu Cầu Nối Liền Mạch Giữa Các Bước (Broken Next-Step Bridging)**: Kết thúc Bước 01 không gợi ý Bước 02; Onboarding bước 3 thiếu lựa chọn làm bài Test Chẩn Đoán ngay; người học phải tự mò mẫm qua lại giữa các trang.
+* **Chi tiết khắc phục**:
+  1. **Hệ Thống Tự Động Hoàn Thành Nhiệm Vụ (`completeActiveTaskByType`)**:
+     - Xây dựng hàm `completeActiveTaskByType(type, options)` và `getNextRoutineStep()` trong `src/utils/studyPlanEngine.ts`.
+     - Tự động nhận diện nhiệm vụ của ngày hiện tại, đánh dấu `completed: true`, kiểm tra và cập nhật `isDayCompleted` khi toàn bộ nhiệm vụ trong ngày hoàn thành, lưu đồng bộ vào `toeic_adaptive_study_plan`.
+     - Tích hợp gọi tự động tại:
+       - `/study`: Hoàn thành 10 flashcards SRS -> hoàn thành task `vocab`.
+       - `/part5`: Nộp bài luyện chuyên sâu -> hoàn thành task `practice` theo đúng `subCategory`.
+       - `/notebook/exam-quiz`: Hoàn tất ôn câu sai -> hoàn thành task `review`.
+  2. **Hiệu Chuẩn Dự Đoán Điểm Số Chính Xác (`scorePredictor.ts`)**:
+     - Cập nhật hàm `getStoredCalibrationData()` để đọc chính xác `diagResult.totalScore`, `diagResult.scaledLC`, `diagResult.scaledRC`.
+     - `CompactInsightBar` hiển thị huy hiệu chuẩn: `"Hiệu chuẩn qua Test Chẩn Đoán"` với điểm số thực tế.
+  3. **Bảo Toàn Siêu Dữ Liệu Ngữ Pháp & Đồng Bộ Test Chẩn Đoán (`/diagnostic`)**:
+     - Mở rộng interface `DiagnosticQuestion` với `subCategory` và `grammarTag`.
+     - Nạp đầy đủ metadata cho toàn bộ câu hỏi Part 5 & 6 trong bài test chẩn đoán.
+     - Hàm `addMistake(...)` được truyền đúng `subCategory` và `grammarTag`, lập tức nuôi dưỡng dữ liệu cho Biểu đồ Radar lỗ hổng (`/stats`) và Sổ tay câu sai (`/notebook`).
+     - Thay thế toàn bộ ký tự unicode cũ bằng SVG icons chuyên nghiệp từ `AppIcons` (`ArrowLeftIcon`, `ArrowRightIcon`, `CheckCircleIcon`).
+     - Bổ sung nút 1-click CTA "Bắt đầu ngày 01 của lộ trình ngay" trên màn hình kết quả chẩn đoán.
+  4. **Cầu Nối Liền Mạch Giữa Các Bước Trong Routine (Next-Step Routine Bridging)**:
+     - `/study`: Thẻ hoàn thành hiển thị Card chuyển tiếp trực quan: *"Bước 01 Hoàn Thành (+15 XP) -> Tiếp tục Bước 02: [Tên nhiệm vụ] -> Học Bước 02 Ngay"*.
+     - `/part5`: Thanh công cụ sau khi nộp bài hiển thị nút chuyển tiếp nhanh sang Bước 03 (Sổ tay câu sai).
+     - `/notebook/exam-quiz`: Hiển thị thông báo 100% mục tiêu ngày hoàn thành kèm nút quay về Dashboard (+50 XP).
+     - `/onboarding`: Bước 3 cung cấp 2 nút hành động rõ ràng: *"Làm Test Chẩn Đoán (20 phút, Khuyên Dùng)"* chuyển thẳng tới `/diagnostic`, hoặc *"Vào học ngay với lộ trình đề xuất"* chuyển về `/`.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trên toàn bộ code và rendered DOM.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với toàn bộ 35 routes tĩnh & động.
+  - Kiểm thử Playwright E2E tự động: `node scratch/test_learner_flow_enhancements_e2e.mjs` đạt 100% PASS:
+    - [1/4] Static check: 0 forbidden emojis trong tất cả các file sửa đổi.
+    - [2/4] Onboarding Step 3: Render đúng 2 lựa chọn (Test chẩn đoán & Vào học ngay).
+    - [3/4] Score Predictor Calibration: CompactInsightBar hiển thị đúng nhãn hiệu chuẩn từ bài test chẩn đoán.
+    - [4/4] Auto Task Completion & Next Step Bridging: Hoàn thành flashcard tự động tick task 1 `completed: true`, hiển thị Card chuyển tiếp Bước 02 mượt mà, 0 emoji trên DOM.
+
+---
+
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 43: Tìm Nguồn Dữ Liệu Audio Gốc Phòng Thu & Ảnh Scan Đề Thật ETS 2022 Test 2, 3, 4 để Nạp Vào Pipeline `ingest_real_ets.mjs`
+### Vấn Đề 44: Tìm Nguồn Dữ Liệu Audio Gốc Phòng Thu & Ảnh Scan Đề Thật ETS 2022 Test 2, 3, 4 để Nạp Vào Pipeline `ingest_real_ets.mjs`
 * **Bối cảnh & Vấn đề**:
   - Hiện tại toàn hệ thống chỉ mới có Test 1 là đề thi chuẩn 100% có file audio phòng thu và câu hỏi ETS thật.
   - Cần thu thập bộ audio và ảnh scan gốc của Test 2, 3, 4 từ nguồn chuẩn để mở rộng kho đề mà không bị lẫn đề giả lập.

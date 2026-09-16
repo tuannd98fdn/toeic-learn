@@ -26,7 +26,7 @@ import { Part5Question, Part5DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
-import { getNextStudyTask } from '@/utils/studyPlanEngine';
+import { getNextStudyTask, completeActiveTaskByType, AutoCompleteTaskResult } from '@/utils/studyPlanEngine';
 import { GRAMMAR_CHEATSHEETS } from '@/data/grammarCheatsheets';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
@@ -88,6 +88,7 @@ function Part5SpeedTrainer() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [wrongAnswers, setWrongAnswers] = useState<{ question: Part5Question; userAnswer?: string }[]>([]);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [nextRoutine, setNextRoutine] = useState<AutoCompleteTaskResult | null>(null);
 
   const nextTask = getNextStudyTask();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -335,6 +336,11 @@ function Part5SpeedTrainer() {
         if (selectedSubSkill === 'all') {
           storage.set(`progress_${selectedTest}_part5`, true);
         }
+        const autoRes = completeActiveTaskByType('practice', {
+          subCategory: selectedSubSkill !== 'all' ? selectedSubSkill : undefined,
+          part: 'p5',
+        });
+        setNextRoutine(autoRes);
         return prev;
       }
     });
@@ -497,7 +503,27 @@ function Part5SpeedTrainer() {
 
           {/* Unified Action Buttons Toolbar */}
           <div className={styles.actionToolbar}>
-            <button onClick={handleRestart} className={styles.primaryActionBtn}>
+            {nextRoutine?.nextTask ? (
+              <Link
+                href={nextRoutine.nextTask.link}
+                className={styles.primaryActionBtn}
+                style={{ background: 'var(--primary)', color: '#ffffff', fontWeight: 700 }}
+              >
+                <span>Tiếp tục: {nextRoutine.nextTask.title}</span>
+                <ArrowRightIcon size={16} />
+              </Link>
+            ) : nextRoutine?.isDayCompleted ? (
+              <Link
+                href="/"
+                className={styles.primaryActionBtn}
+                style={{ background: 'var(--success)', color: '#ffffff', fontWeight: 700 }}
+              >
+                <CheckCircleIcon size={16} />
+                <span>Mục tiêu hôm nay hoàn thành (+50 XP) • Về Dashboard</span>
+              </Link>
+            ) : null}
+
+            <button onClick={handleRestart} className={nextRoutine?.nextTask ? styles.secondaryActionBtn : styles.primaryActionBtn}>
               <RotateCcwIcon size={16} /> Luyện lại bài này
             </button>
             {isSubSkillMode ? (
@@ -509,11 +535,11 @@ function Part5SpeedTrainer() {
                   <BookIcon size={16} /> Làm đề đầy đủ 30 câu
                 </button>
               </>
-            ) : (
+            ) : !nextRoutine?.nextTask ? (
               <Link href={nextTask.link === '/part5' ? `/part6?test=${selectedTest}` : nextTask.link} className={styles.secondaryActionBtn}>
                 Học tiếp: {nextTask.link === '/part5' ? 'Part 6 (Điền đoạn văn)' : nextTask.title} <ArrowRightIcon size={16} />
               </Link>
-            )}
+            ) : null}
             <Link href="/" className={styles.ghostActionBtn}>
               <HomeIcon size={16} /> Về Dashboard
             </Link>
