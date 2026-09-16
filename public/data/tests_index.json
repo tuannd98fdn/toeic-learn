@@ -4,5 +4,11 @@
     "name": "ETS 2022 - Test 1",
     "year": 2022,
     "path": "/data/ets2022/test1"
+  },
+  {
+    "id": "ets2022_test2",
+    "name": "ETS 2022 - Test 2",
+    "year": 2022,
+    "path": "/data/ets2022/test2"
   }
 ]

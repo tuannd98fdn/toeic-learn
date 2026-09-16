@@ -89,8 +89,8 @@ export default function ExamPage() {
 function ExamSimulation() {
   const searchParams = useSearchParams();
   const rawTestId = searchParams.get('test') || 'ets2022_test1';
-  // Chỉ chấp nhận đề thi chuẩn đã xác thực (hiện tại là ets2022_test1)
-  const testId = rawTestId === 'ets2022_test1' ? 'ets2022_test1' : 'ets2022_test1';
+  // Chỉ chấp nhận đề thi chuẩn đã xác thực (ets2022_test1 và ets2022_test2)
+  const testId = rawTestId === 'ets2022_test2' ? 'ets2022_test2' : 'ets2022_test1';
   const sectionParam = searchParams.get('section');
   const currentSection: 'all' | 'rc' | 'rc_sprint' =
     sectionParam === 'rc' || sectionParam === 'rc_sprint' ? sectionParam : 'all';
@@ -1086,7 +1086,7 @@ function ExamSimulation() {
             Thoát
           </Link>
           <div className={styles.testTitle}>
-            ETS 2022 - Test 1{' '}
+            {testId === 'ets2022_test2' ? 'ETS 2022 - Test 2' : 'ETS 2022 - Test 1'}{' '}
             <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--primary)' }}>
               ({currentSection === 'rc'
                 ? 'Đọc RC 75P'

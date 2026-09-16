@@ -1066,10 +1066,46 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 44: Tìm Nguồn Dữ Liệu Audio Gốc Phòng Thu & Ảnh Scan Đề Thật ETS 2022 Test 2, 3, 4 để Nạp Vào Pipeline `ingest_real_ets.mjs`
+### ✅ Vấn Đề 44: Nạp Bộ Audio Phòng Thu & Ảnh Scan Đề Thật ETS 2022 Test 2 Vào Pipeline Ingest Qua CDN Không Làm Phình Repo (Zero-Bloat Option A) [HOÀN TẤT 100%]
 * **Bối cảnh & Vấn đề**:
-  - Hiện tại toàn hệ thống chỉ mới có Test 1 là đề thi chuẩn 100% có file audio phòng thu và câu hỏi ETS thật.
-  - Cần thu thập bộ audio và ảnh scan gốc của Test 2, 3, 4 từ nguồn chuẩn để mở rộng kho đề mà không bị lẫn đề giả lập.
+  - Toàn bộ hệ thống trước đây chỉ có Test 1 là đề thi chuẩn 100% có audio phòng thu và câu hỏi ETS thật; Test 2 trước đây chứa dữ liệu giả lập (ảnh Unsplash và audio synthetic TTS `say`).
+  - Cần tìm kiếm và tích hợp dữ liệu audio phòng thu chuẩn YBM/ETS và ảnh scan sách gốc cho Test 2 (và các đề tiếp theo), lưu trữ trên CDN công khai để đạt tiêu chí Zero Repository Bloat (Tùy chọn A).
+* **Chi tiết triển khai**:
+  1. **Khai thác Nguồn Dữ liệu Gốc Chuẩn ETS 2022**:
+     - Thu thập bộ sách scan chính thức `ETS 2022 Test 2.pdf` và file audio phòng thu chất lượng cao `TEST 2.mp3` (42 MB, 46:02 phút, do YBM sản xuất).
+     - Thu thập toàn bộ bảng đáp án chính thức 200 câu hỏi cho ETS 2022 Test 2, 3, 4 (`scratch/dap_an_test_2.png`, `dap_an_test_3.png`, `dap_an_test_4.png`).
+  2. **Bóc Tách & Xử Lý Ảnh Scan Part 1**:
+     - Trích xuất và căn chỉnh 6 bức ảnh scan Part 1 từ sách đề thật Test 2, loại bỏ viền trắng thừa, lưu ảnh chất lượng cao 300 DPI (`p1_01.jpg` đến `p1_06.jpg`).
+  3. **Cắt Audio Phòng Thu Chính Xác Bằng Whisper**:
+     - Ứng dụng OpenAI Whisper phân tích audio `TEST 2.mp3` với độ chính xác mili-giây cho từng câu Part 1 (Q1 đến Q6), cắt thành 6 đoạn audio phòng thu MP3 chuẩn 128 kbps.
+  4. **Lưu Trữ CDN Zero-Bloat (GitHub Releases CDN)**:
+     - Tạo Release `ets2022-assets` trên GitHub và tải lên toàn bộ 12 tệp media (6 ảnh + 6 audio).
+     - Sử dụng URL trực tiếp từ CDN: `https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/...` với 0 KB phình dung lượng git repository, hỗ trợ HTTP Range requests và stream audio tốc độ cao.
+  5. **Nạp & Đăng Ký Vào Pipeline `ingest_real_ets.mjs`**:
+     - Cập nhật `public/data/ets2022/test2/part1.json` với URL CDN, transcript và lời giải chi tiết bằng tiếng Việt.
+     - Vượt qua 100% các tiêu chuẩn kiểm định tính xác thực của `scripts/ingest_real_ets.mjs` (0 ảnh Unsplash, 0 audio synthetic).
+     - Đăng ký chính thức `ets2022_test2` vào `public/data/tests_index.json`.
+     - Cập nhật `src/app/exam/page.tsx` và `src/app/part1/page.tsx` hỗ trợ đề thi Test 2.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trên toàn bộ code và rendered DOM.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với toàn bộ 35 routes tĩnh & động.
+  - Kiểm thử Playwright E2E: `node scratch/test_ets2022_test2_e2e.mjs` đạt 100% PASS:
+    - [1/3] Khởi động trình duyệt Chromium với header bypass E2E.
+    - [2/3] Mở `/exam?test=ets2022_test2`: Tải ảnh scan gốc Part 1 Q1 từ CDN (naturalWidth: 963px), tải audio phòng thu Q1 (duration: 26s).
+    - [3/3] 0 UI emojis trên rendered DOM. Mở `/part1?test=ets2022_test2` tải ảnh và âm thanh mượt mà.
+  - Ảnh chụp thực tế:
+    - Thi thử Full Test 2: `scratch/exam_ets2022_test2_in_action.png`.
+    - Luyện tập chuyên sâu Part 1: `scratch/part1_trainer_test2_verified.png`.
+
+---
+
+## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
+
+### Vấn Đề 45: Mở Rộng Đồng Bộ Dữ Liệu Audio Gốc Cho Part 2-4 Và Scan Part 7 Cho Test 2, 3, 4
+* **Bối cảnh & Kế hoạch**:
+  - Đã có sẵn audio phòng thu `TEST 2.mp3`, `TEST 3.mp3`, `TEST 4.mp3` và toàn bộ bảng đáp án 200 câu hỏi.
+  - Tiến hành cắt audio Part 2 (Q7-31), Part 3 (Q32-70), Part 4 (Q71-100) và đẩy lên CDN Release để thay thế hoàn toàn các file audio synthetic cũ của Test 2, chuẩn bị nạp Test 3 và Test 4.
 
 ---
 
@@ -1079,6 +1115,8 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_ets2022_test2_e2e.mjs` (Kiểm thử nạp đề thi thật ETS 2022 Test 2, audio phòng thu CDN và ảnh scan).
+  * `node scratch/test_learner_flow_enhancements_e2e.mjs` (Kiểm thử 4 điểm đứt gãy luồng người học, Auto Task Completion, Score Predictor Calibration).
   * `node scratch/test_vocab_shortcuts_e2e.mjs` (Kiểm thử phím tắt flashcard, toggle phát âm và chuyển câu).
   * `node scratch/test_reading_vocab_e2e.mjs` (Kiểm thử 3 chế độ học từ vựng và chọn band Part 6 & 7).
   * `node scratch/test_streamlined_daily_flow_e2e.mjs` (Kiểm thử Toàn Diện Daily Learning Flow 3 bước, Navbar tinh gọn, Vocab Hub 3 tabs, 0 emoji).
