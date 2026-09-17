@@ -1102,10 +1102,58 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 45: Mở Rộng Đồng Bộ Dữ Liệu Audio Gốc Cho Part 2-4 Và Scan Part 7 Cho Test 2, 3, 4
+### ✅ Vấn Đề 45: Mở Rộng Đồng Bộ Dữ Liệu Audio Gốc Cho Part 2-4 Và Graphic Scans Cho ETS 2022 Test 2 (Zero-Bloat CDN) [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Sau khi hoàn thành Part 1, các Part 2, 3, 4 của ETS 2022 Test 2 vẫn sử dụng dữ liệu audio synthetic TTS cục bộ (54 file chiếm hơn 24 MB trong git repo) và câu hỏi/lời thoại mô phỏng.
+  - Cần đồng bộ toàn bộ câu hỏi, lời thoại, audio phòng thu chính thức YBM và các biểu đồ ảnh scan gốc cho 94 câu hỏi còn lại của phần Nghe (Part 2: Q7-31, Part 3: Q32-70, Part 4: Q71-100) theo phương án CDN Zero-Bloat (Tùy chọn A).
+* **Chi tiết triển khai**:
+  1. **Bóc Tách & Tinh Chỉnh Biểu Đồ Scan Gốc Cho Part 3 & Part 4**:
+     - Cắt và tinh chỉnh độ phân giải cao 5 biểu đồ scan gốc từ sách đề thật Test 2, loại bỏ hoàn toàn viền thừa và chữ câu hỏi:
+       - `p3_g01.jpg`: Biển báo lối ra cao tốc Hartsville Exits (Q62–Q64, trang 9).
+       - `p3_g02.jpg`: Sơ đồ 4 thùng rác phân loại Glass, Plastic, Paper, Aluminum (Q65–Q67, trang 10).
+       - `p3_g03.jpg`: Bản thảo thư mời dạ tiệc Davis Botanical Garden (Q68–Q70, trang 10).
+       - `p4_g01.jpg`: Bảng kê các loại phí xe List of Fees (Q95–Q97, trang 13).
+       - `p4_g02.jpg`: Biểu đồ tròn doanh số nhạc cụ Helgen's Music Shop (Q98–Q100, trang 13).
+  2. **Cắt Audio Phòng Thu Chuẩn Nhịp Bằng OpenAI Whisper**:
+     - Part 2 (25 câu, Q7–Q31): Cắt từ `TEST 2.mp3` thành 25 file `p2_07.mp3` đến `p2_31.mp3`.
+     - Part 3 (13 đoạn hội thoại, Q32–Q70): Cắt thành 13 file `p3_s01.mp3` đến `p3_s13.mp3` (thời lượng 67s – 123s/set).
+     - Part 4 (10 bài nói ngắn, Q71–Q100): Cắt thành 10 file `p4_s01.mp3` đến `p4_s10.mp3` (thời lượng 71s – 92s/set).
+  3. **Tải Lên Toàn Bộ Media Lên GitHub Release CDN (Zero Repository Bloat)**:
+     - Đẩy toàn bộ 53 file audio MP3 và ảnh scan biểu đồ lên tag `ets2022-assets` trên GitHub Releases.
+     - Xóa bỏ hoàn toàn 54 file audio synthetic cũ trong `public/audio/ets2022/test2/` để giải phóng 24 MB dung lượng git repo.
+  4. **Số Hóa & Chuẩn Hóa Dữ Liệu JSON Chuẩn ETS**:
+     - Trích xuất chính xác 100% câu hỏi và 4 lựa chọn (A, B, C, D) từ bản scan sách gốc.
+     - Khớp 100% bảng đáp án chính thức ETS (Official Answer Key):
+       - Part 2: `7:A, 8:C, 9:B, 10:A, 11:C, 12:B, 13:A, 14:C, 15:B, 16:A, 17:B, 18:A, 19:B, 20:B, 21:A, 22:C, 23:C, 24:B, 25:C, 26:A, 27:A, 28:B, 29:B, 30:B, 31:A`
+       - Part 3: `32:D, 33:B, 34:C, 35:D, 36:A, 37:C, 38:B, 39:C, 40:A, 41:D, 42:A, 43:C, 44:C, 45:D, 46:C, 47:B, 48:D, 49:A, 50:B, 51:C, 52:A, 53:A, 54:C, 55:B, 56:A, 57:B, 58:C, 59:D, 60:D, 61:B, 62:A, 63:C, 64:B, 65:D, 66:C, 67:A, 68:D, 69:B, 70:A`
+       - Part 4: `71:B, 72:A, 73:C, 74:D, 75:C, 76:A, 77:A, 78:D, 79:C, 80:B, 81:D, 82:A, 83:C, 84:B, 85:D, 86:D, 87:A, 88:C, 89:C, 90:D, 91:B, 92:D, 93:B, 94:D, 95:A, 96:D, 97:C, 98:C, 99:D, 100:B`
+     - Viết lời giải chi tiết tiếng Việt phân tích bẫy thi và đáp án đúng cho từng câu.
+     - Cập nhật `public/data/ets2022/test2/part2.json`, `part3.json`, `part4.json`.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**: 0 emoji trên toàn bộ code và rendered DOM.
+  - Vượt qua kiểm định tính xác thực của `scripts/ingest_real_ets.mjs public/data/ets2022/test2` (PASS 100%).
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với 35/35 routes tĩnh & động.
+  - Zod Validation: Cả 3 schema `Part2DataSchema`, `Part3DataSchema`, `Part4DataSchema` đều validate thành công.
+  - Kiểm thử Playwright E2E tự động:
+    - `scratch/test_ets2022_test2_listening_full_e2e.mjs`: Test mượt mà trên `/exam?test=ets2022_test2`, `/part2?test=ets2022_test2`, `/part3?test=ets2022_test2`, `/part4?test=ets2022_test2`.
+    - `scratch/verify_graphics_e2e.mjs`: Tải thành công các biểu đồ Q63 (Hartsville Exits, width 810px) và Q96 (List of Fees, width 970px).
+  - Ảnh chụp thực tế:
+    - Luyện tập Part 2: `scratch/part2_test2_verified.png`.
+    - Luyện tập Part 3: `scratch/part3_test2_verified.png`.
+    - Luyện tập Part 4: `scratch/part4_test2_verified.png`.
+    - Biểu đồ Part 3 trong đề thi Full Test: `scratch/exam_p3_graphic_verified.png`.
+    - Biểu đồ Part 4 trong đề thi Full Test: `scratch/exam_p4_graphic_verified.png`.
+
+---
+
+## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
+
+### Vấn Đề 46: Scan Và Đồng Bộ Dữ Liệu Gốc Part 7 (Đọc Hiểu Đoạn Văn) Cho ETS 2022 Test 2, 3, 4
 * **Bối cảnh & Kế hoạch**:
-  - Đã có sẵn audio phòng thu `TEST 2.mp3`, `TEST 3.mp3`, `TEST 4.mp3` và toàn bộ bảng đáp án 200 câu hỏi.
-  - Tiến hành cắt audio Part 2 (Q7-31), Part 3 (Q32-70), Part 4 (Q71-100) và đẩy lên CDN Release để thay thế hoàn toàn các file audio synthetic cũ của Test 2, chuẩn bị nạp Test 3 và Test 4.
+  - Sau khi toàn bộ 100 câu Listening (Part 1 - 4) của Test 2 đã đạt chuẩn 100% ETS gốc với CDN Zero-Bloat, tiến hành rà soát phần Reading, đặc biệt là các bài đọc đoạn đơn, đoạn kép, đoạn ba của Part 7 (Q147 - Q200).
+  - Trích xuất chuẩn xác văn bản và hình ảnh scan bài đọc từ sách gốc `ETS 2022 Test 2.pdf`, đồng bộ đáp án và lời giải chi tiết tiếng Việt.
+  - Chuẩn bị pipeline nạp tiếp cho Test 3 và Test 4.
 
 ---
 
@@ -1115,13 +1163,13 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm thử E2E Playwright mẫu**:
-  * `node scratch/test_ets2022_test2_e2e.mjs` (Kiểm thử nạp đề thi thật ETS 2022 Test 2, audio phòng thu CDN và ảnh scan).
+  * `node scratch/test_ets2022_test2_listening_full_e2e.mjs` (Kiểm thử toàn diện Listening Part 2-4 đề thật ETS 2022 Test 2 qua CDN).
+  * `node scratch/verify_graphics_e2e.mjs` (Kiểm thử hiển thị biểu đồ scan gốc Q63 và Q96 trong đề thi thật).
+  * `node scratch/test_ets2022_test2_e2e.mjs` (Kiểm thử Part 1 và Full Test 2 ban đầu).
   * `node scratch/test_learner_flow_enhancements_e2e.mjs` (Kiểm thử 4 điểm đứt gãy luồng người học, Auto Task Completion, Score Predictor Calibration).
   * `node scratch/test_vocab_shortcuts_e2e.mjs` (Kiểm thử phím tắt flashcard, toggle phát âm và chuyển câu).
   * `node scratch/test_reading_vocab_e2e.mjs` (Kiểm thử 3 chế độ học từ vựng và chọn band Part 6 & 7).
   * `node scratch/test_streamlined_daily_flow_e2e.mjs` (Kiểm thử Toàn Diện Daily Learning Flow 3 bước, Navbar tinh gọn, Vocab Hub 3 tabs, 0 emoji).
-  * `node scratch/test_exam_quiz_full_flow.mjs` (Kiểm thử ôn tập lỗi sai /notebook/exam-quiz, giữ câu hỏi khi nộp đáp án).
-  * `node scratch/test_in_context_lookup_e2e.mjs` (Kiểm thử Tra Từ Tức Thì Tại Chỗ In-Context Popover, phát âm, 1-click Flashcard, 0 emoji).
 
 
 

@@ -1,215 +1,215 @@
 [
   {
     "id": "ets22_t2_p3_s01",
-    "audioUrl": "/audio/ets2022/test2/p3_s01.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s01.mp3",
     "image": "",
-    "context": "Questions 32 through 34 refer to the following conversation.",
-    "transcript": "<p><b>W:</b> Excuse me, Brian. Is the color photocopier on the third floor working today? I tried printing the client brochures, but nothing happened.<br/><b>M:</b> Actually, it's jammed again. The technician was here yesterday, but he needs to return with a replacement roller.<br/><b>W:</b> Oh no, I have a presentation with prospective investors at two o'clock!<br/><b>M:</b> Don't worry. You can use the high-speed printer in the graphic design department on the first floor. I'll let Sarah know you're coming down.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>M:</b> Hi, Anusha. This afternoon I'll be meeting with our financial consultant, Ms. Jefferson, for the last time. Since she's retiring next week, I wanted to get her some flowers. Do you know a good florist?<br/>\n<b>W:</b> The place I like best is called Greenwood Flower Shop. It's located just inside the train station on the right-hand side.<br/>\n<b>M:</b> Thanks. I just need to finalize this budget proposal, and then I'll head over to the station.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q32",
+        "id": "ets22_t2_p3_32",
         "number": 32,
-        "text": "What problem does the woman mention?",
+        "text": "Why does the man want to buy Ms. Jefferson some flowers?",
         "options": {
-          "A": "An office machine is out of order",
-          "B": "A client meeting was rescheduled",
-          "C": "Some brochures were misplaced",
-          "D": "An invoice amount is incorrect"
+          "A": "She was promoted.",
+          "B": "She won an award.",
+          "C": "She is moving.",
+          "D": "She is retiring."
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Người phụ nữ nói máy photocopy không in được và người đàn ông xác nhận <i>'it's jammed again'</i> => Máy móc bị hỏng/kẹt (An office machine is out of order).</p>",
+        "correctAnswer": "D",
+        "explanation": "<p>Người đàn ông nói: <i>'Since she's retiring next week, I wanted to get her some flowers.'</i> (Vì cô ấy sẽ nghỉ hưu vào tuần tới nên tôi muốn mua hoa tặng cô ấy). Do đó chọn <b>(D) She is retiring</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p3_q33",
+        "id": "ets22_t2_p3_33",
         "number": 33,
-        "text": "What does the woman have scheduled at two o'clock?",
+        "text": "According to the woman, where is Greenwood Flower Shop?",
         "options": {
-          "A": "A staff performance review",
-          "B": "A meeting with investors",
-          "C": "A phone call with a supplier",
-          "D": "A product training session"
+          "A": "In a shopping mall",
+          "B": "In a train station",
+          "C": "Next to a cafe",
+          "D": "Across from the library"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ nói: <i>'I have a presentation with prospective investors at two o'clock'</i> => Cuộc gặp/thuyết trình với nhà đầu tư.</p>",
+        "explanation": "<p>Người phụ nữ trả lời: <i>'It's located just inside the train station on the right-hand side.'</i> (Nó nằm ngay bên trong ga xe lửa, phía bên tay phải). Do đó chọn <b>(B) In a train station</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p3_q34",
+        "id": "ets22_t2_p3_34",
         "number": 34,
-        "text": "What does the man offer to do?",
+        "text": "What does the man say he will do before he leaves the office?",
         "options": {
-          "A": "Call the repair company",
-          "B": "Postpone the woman's presentation",
-          "C": "Notify a colleague on the first floor",
-          "D": "Review the presentation slides"
+          "A": "Fill out a time sheet",
+          "B": "Send an e-mail",
+          "C": "Finish a budget proposal",
+          "D": "Arrange a meeting"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Người đàn ông nói: <i>'I'll let Sarah know you're coming down'</i> => Thông báo cho đồng nghiệp ở tầng một.</p>",
-        "questionType": "Offer",
-        "subCategory": "Offer"
+        "explanation": "<p>Người đàn ông nói: <i>'I just need to finalize this budget proposal, and then I'll head over to the station.'</i> (Tôi chỉ cần hoàn thiện bản đề xuất ngân sách này rồi sẽ qua ga tàu). Chọn <b>(C) Finish a budget proposal</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
   {
     "id": "ets22_t2_p3_s02",
-    "audioUrl": "/audio/ets2022/test2/p3_s02.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s02.mp3",
     "image": "",
-    "context": "Questions 35 through 37 refer to the following conversation.",
-    "transcript": "<p><b>M:</b> Good morning, Rachel. Have you booked a meeting room for our quarterly strategy session next Thursday?<br/><b>W:</b> I tried to reserve Conference Room B, but the marketing team already has it reserved all day. Conference Room A is open, but the projector is broken.<br/><b>M:</b> That's fine. We only need the digital screen and whiteboard anyway. Let's book Room A.<br/><b>W:</b> Great, I will log onto the facilities portal right now and lock in the reservation.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>M:</b> Ms. Webber, I just booked the accommodations for your trip to Melbourne next week. I found you a hotel within a mile of the conference center.<br/>\n<b>W:</b> That's great. Thank you for arranging that.<br/>\n<b>M:</b> No problem. And remember to keep your receipts. You'll need them to get reimbursed.<br/>\n<b>W:</b> Okay, I'll do that. Oh, and does the hotel have a restaurant on site? I'll be working in the hotel a lot, so it'd be convenient if I could eat there.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q35",
+        "id": "ets22_t2_p3_35",
         "number": 35,
-        "text": "What are the speakers discussing?",
+        "text": "What did the man just do?",
         "options": {
-          "A": "Upgrading audiovisual equipment",
-          "B": "Reserving a meeting space",
-          "C": "Hiring a new marketing director",
-          "D": "Planning a company luncheon"
+          "A": "He upgraded a flight.",
+          "B": "He arranged for a rental car.",
+          "C": "He prepared some presentation slides.",
+          "D": "He made a hotel reservation."
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Họ bàn về việc đặt phòng họp (<i>'booked a meeting room... reserve Conference Room B'</i>).</p>",
-        "questionType": "Topic / Main Idea",
-        "subCategory": "Topic / Main Idea"
-      },
-      {
-        "id": "ets22_t2_p3_q36",
-        "number": 36,
-        "text": "Why can't the speakers use Conference Room B?",
-        "options": {
-          "A": "It is under renovation",
-          "B": "It is already booked by another team",
-          "C": "It is too small for their group",
-          "D": "The air conditioning is not working"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ nói: <i>'the marketing team already has it reserved all day'</i> => Đã bị nhóm khác đặt.</p>",
+        "correctAnswer": "D",
+        "explanation": "<p>Người đàn ông nói: <i>'I just booked the accommodations for your trip to Melbourne next week. I found you a hotel...'</i> (Tôi vừa đặt chỗ nghỉ cho chuyến đi Melbourne của cô. Tôi tìm được khách sạn...). Do đó chọn <b>(D) He made a hotel reservation</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p3_q37",
-        "number": 37,
-        "text": "What will the woman do next?",
+        "id": "ets22_t2_p3_36",
+        "number": 36,
+        "text": "What does the man remind the woman to do?",
         "options": {
-          "A": "Submit an online room reservation",
-          "B": "Repair a broken projector",
-          "C": "Cancel next week's session",
-          "D": "Order whiteboard supplies"
+          "A": "Save her receipts",
+          "B": "Bring her ID badge",
+          "C": "Sign a form",
+          "D": "Arrive early"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người phụ nữ nói: <i>'I will log onto the facilities portal right now and lock in the reservation'</i> => Đặt phòng qua cổng trực tuyến.</p>",
-        "questionType": "Next Action",
-        "subCategory": "Next Action"
+        "explanation": "<p>Người đàn ông nhắc nhở: <i>'And remember to keep your receipts. You'll need them to get reimbursed.'</i> (Và hãy nhớ giữ lại hóa đơn của cô. Cô sẽ cần chúng để được hoàn tiền). Do đó chọn <b>(A) Save her receipts</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t2_p3_37",
+        "number": 37,
+        "text": "What does the woman ask the man about?",
+        "options": {
+          "A": "A bank",
+          "B": "A post office",
+          "C": "A restaurant",
+          "D": "A conference center"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người phụ nữ hỏi: <i>'Oh, and does the hotel have a restaurant on site?'</i> (Ồ, và khách sạn có nhà hàng bên trong không?). Do đó chọn <b>(C) A restaurant</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
   {
     "id": "ets22_t2_p3_s03",
-    "audioUrl": "/audio/ets2022/test2/p3_s03.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s03.mp3",
     "image": "",
-    "context": "Questions 38 through 40 refer to the following conversation.",
-    "transcript": "<p><b>W:</b> Hello, Mark. I was looking over the inventory in the supply closet, and we are almost out of blue file folders and printer paper.<br/><b>M:</b> Thanks for checking, Karen. We usually place our supply order at the end of the month with OfficeDepot Supply.<br/><b>W:</b> Since we have a large training seminar next week, could we expedite the order this time so we don't run out during the workshop?<br/><b>M:</b> Good point. I'll get manager approval and submit the rush order before noon.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>W:</b> Antonio, I'd like your input about how we can make our spring athletic clothing line more original.<br/>\n<b>M:</b> How about designing some geometric patterns that we can have printed onto our fabric? That would set our clothing apart from other brands that use muted solid colors.<br/>\n<b>W:</b> I like that idea, but I'm worried it would add a step or two to our production schedule. We have several hard deadlines coming up soon.<br/>\n<b>M:</b> Let's try designing one patterned fabric for now and see how the production goes.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q38",
+        "id": "ets22_t2_p3_38",
         "number": 38,
-        "text": "What item is in short supply?",
+        "text": "What industry do the speakers most likely work in?",
         "options": {
-          "A": "Laptop chargers",
-          "B": "Desk chairs",
-          "C": "File folders and paper",
-          "D": "Coffee and tea bags"
-        },
-        "correctAnswer": "C",
-        "explanation": "<p>Người phụ nữ nói: <i>'we are almost out of blue file folders and printer paper'</i>.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p3_q39",
-        "number": 39,
-        "text": "Why does the woman want to expedite the order?",
-        "options": {
-          "A": "A supplier offers a temporary discount",
-          "B": "A major training seminar is scheduled next week",
-          "C": "The company is relocating offices",
-          "D": "Auditors will inspect the facility tomorrow"
+          "A": "Television",
+          "B": "Fashion",
+          "C": "Home furnishings",
+          "D": "Advertising"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ giải thích: <i>'Since we have a large training seminar next week...'</i>.</p>",
+        "explanation": "<p>Người phụ nữ nhắc đến: <i>'our spring athletic clothing line'</i> (dòng trang phục thể thao mùa xuân) và người đàn ông nhắc đến <i>'fabric'</i> (vải). Do đó họ làm trong ngành thời trang may mặc <b>(B) Fashion</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t2_p3_39",
+        "number": 39,
+        "text": "What does the man suggest doing?",
+        "options": {
+          "A": "Providing tours of a facility",
+          "B": "Opening a branch office",
+          "C": "Designing special fabric",
+          "D": "Installing brighter lights"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người đàn ông gợi ý: <i>'How about designing some geometric patterns that we can have printed onto our fabric?'</i> (Thiết kế các họa tiết hình học in lên vải). Do đó chọn <b>(C) Designing special fabric</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p3_q40",
+        "id": "ets22_t2_p3_40",
         "number": 40,
-        "text": "What will the man do before noon?",
+        "text": "What is the woman concerned about?",
         "options": {
-          "A": "Submit an expedited supply order",
-          "B": "Clean out the supply closet",
-          "C": "Interview training candidates",
-          "D": "Deliver folders to participants"
+          "A": "A plan would be time-consuming.",
+          "B": "A color is too bright.",
+          "C": "Some sales figures have declined.",
+          "D": "Some supplies will be expensive."
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người đàn ông nói: <i>'I'll get manager approval and submit the rush order before noon'</i> => Đặt hàng hoả tốc.</p>",
-        "questionType": "Next Action",
-        "subCategory": "Next Action"
+        "explanation": "<p>Người phụ nữ bày tỏ lo ngại: <i>'I'm worried it would add a step or two to our production schedule. We have several hard deadlines coming up soon.'</i> (Tôi lo nó sẽ tốn thêm thời gian trong tiến độ sản xuất). Chọn <b>(A) A plan would be time-consuming</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
       }
     ]
   },
   {
     "id": "ets22_t2_p3_s04",
-    "audioUrl": "/audio/ets2022/test2/p3_s04.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s04.mp3",
     "image": "",
-    "context": "Questions 41 through 43 refer to the following conversation.",
-    "transcript": "<p><b>M:</b> Hi, Sophia. Did your flight from Seattle arrive on schedule?<br/><b>W:</b> Unfortunately, no. We were delayed on the tarmac for over an hour due to thunderstorm activity in Denver.<br/><b>M:</b> That must have been frustrating. Were you able to make your connecting flight to Atlanta?<br/><b>W:</b> No, I missed it. But the airline customer agent rebooked me onto a morning flight and gave me a voucher for a nearby hotel.<br/><b>M:</b> That's a relief. Let's reschedule our morning debrief meeting to three in the afternoon so you can rest.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>W:</b> Hi, Yoon-Ho. Do you have a minute? Anita and I need your assistance with our email.<br/>\n<b>M:</b> Sure, what's going on?<br/>\n<b>W:</b> Well, neither of us can send or receive messages today. We called IT, but no one's answering.<br/>\n<b>M:</b> I had the same issue earlier this morning. It turns out the network router for our department was unplugged. Let me go check if it's still plugged into the wall.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q41",
+        "id": "ets22_t2_p3_41",
         "number": 41,
-        "text": "What caused the woman's travel delay?",
+        "text": "What problem is being discussed?",
         "options": {
-          "A": "Mechanical airplane issues",
-          "B": "Severe weather conditions",
-          "C": "Air traffic control strike",
-          "D": "A lost luggage search"
+          "A": "A company manual contains some errors.",
+          "B": "A shipment was not delivered on time.",
+          "C": "Some materials are missing from a cabinet.",
+          "D": "An e-mail system is not functioning properly."
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ nói: <i>'delayed on the tarmac for over an hour due to thunderstorm activity'</i> => Thời tiết xấu (Severe weather).</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
+        "correctAnswer": "D",
+        "explanation": "<p>Người phụ nữ nói: <i>'neither of us can send or receive messages today... called IT'</i>. Hệ thống thư điện tử không hoạt động. Chọn <b>(D) An e-mail system is not functioning properly</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p3_q42",
+        "id": "ets22_t2_p3_42",
         "number": 42,
-        "text": "What did the airline agent give the woman?",
+        "text": "Who most likely is the man?",
         "options": {
-          "A": "A free upgrade to first class",
-          "B": "A hotel accommodation voucher",
-          "C": "A full ticket refund",
-          "D": "A meal coupon for the airport lounge"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ nói: <i>'gave me a voucher for a nearby hotel'</i> => Phiếu khách sạn.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p3_q43",
-        "number": 43,
-        "text": "What do the speakers agree to do?",
-        "options": {
-          "A": "Move a meeting to the afternoon",
-          "B": "Cancel the client contract",
-          "C": "File an insurance claim",
-          "D": "Book a direct train ticket"
+          "A": "A coworker",
+          "B": "A security guard",
+          "C": "A warehouse manager",
+          "D": "A sales representative"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người đàn ông đề xuất: <i>'Let's reschedule our morning debrief meeting to three in the afternoon'</i> và cả hai thống nhất.</p>",
+        "explanation": "<p>Người phụ nữ gọi tên 'Yoon-Ho' và người đàn ông nói 'I had the same issue earlier this morning... for our department'. Anh ấy là đồng nghiệp cùng phòng ban <b>(A) A coworker</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t2_p3_43",
+        "number": 43,
+        "text": "What will the man do next?",
+        "options": {
+          "A": "Replace a lightbulb",
+          "B": "Read an instruction manual",
+          "C": "Check a piece of equipment",
+          "D": "Contact an administrator"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người đàn ông nói: <i>'Let me go check if it's still plugged into the wall.'</i> (Để tôi đi kiểm tra xem cục phát mạng có cắm vào tường không). Chọn <b>(C) Check a piece of equipment</b>.</p>",
         "questionType": "Next Action",
         "subCategory": "Next Action"
       }
@@ -217,53 +217,53 @@
   },
   {
     "id": "ets22_t2_p3_s05",
-    "audioUrl": "/audio/ets2022/test2/p3_s05.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s05.mp3",
     "image": "",
-    "context": "Questions 44 through 46 refer to the following conversation.",
-    "transcript": "<p><b>W:</b> Welcome to Vertex Technologies, Daniel. I'm Elena from human resources. Today is your orientation day.<br/><b>M:</b> Thank you, Elena! I'm really excited to join the software engineering division.<br/><b>W:</b> First, we need to take your photo at security to print your employee ID badge. After that, I'll escort you to the fourth floor to meet your department supervisor, Mr. Tanaka.<br/><b>M:</b> Sounds great. Should I fill out these health insurance forms now or take them home tonight?<br/><b>W:</b> You can submit them to me by tomorrow afternoon.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>W:</b> Hello, I'm calling from Summit Bicycle Tours. I'd like to reserve an outdoor table for a group of twelve this coming Thursday at 7:00 P.M.<br/>\n<b>M:</b> I'm sorry, but our patio seating is completely booked for Thursday evening due to a corporate dinner. We do have indoor tables available, though.<br/>\n<b>W:</b> Our clients specifically requested patio seating so they can enjoy the view of the bay. How about the following Monday?<br/>\n<b>M:</b> Yes, Monday evening is wide open. I can reserve a large patio table for you then.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q44",
+        "id": "ets22_t2_p3_44",
         "number": 44,
-        "text": "Who most likely is the woman?",
+        "text": "Where does the woman work?",
         "options": {
-          "A": "A human resources representative",
-          "B": "A software development manager",
-          "C": "A building security guard",
-          "D": "A payroll accountant"
+          "A": "At an amusement park",
+          "B": "At a fitness center",
+          "C": "At a bicycle-tour company",
+          "D": "At an automobile dealership"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Người phụ nữ tự giới thiệu: <i>'I'm Elena from human resources'</i> => Nhân viên phòng nhân sự (HR).</p>",
-        "questionType": "Speaker / Listener",
-        "subCategory": "Speaker / Listener"
+        "correctAnswer": "C",
+        "explanation": "<p>Người phụ nữ giới thiệu: <i>'Hello, I'm calling from Summit Bicycle Tours.'</i> Do đó chọn <b>(C) At a bicycle-tour company</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p3_q45",
+        "id": "ets22_t2_p3_45",
         "number": 45,
-        "text": "What will the speakers do first?",
+        "text": "Why is the man unable to make a reservation for next Thursday?",
         "options": {
-          "A": "Sign insurance documents",
-          "B": "Take a photo for an ID card",
-          "C": "Tour the software laboratory",
-          "D": "Have lunch with the department head"
+          "A": "A calendar is fully booked.",
+          "B": "A restaurant is closed for renovations.",
+          "C": "A deposit has not been received.",
+          "D": "The outdoor seating area is reserved."
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ nói: <i>'First, we need to take your photo at security to print your employee ID badge'</i> => Chụp ảnh làm thẻ ID.</p>",
-        "questionType": "Next Action",
-        "subCategory": "Next Action"
+        "correctAnswer": "D",
+        "explanation": "<p>Người đàn ông giải thích: <i>'our patio seating is completely booked for Thursday evening due to a corporate dinner'</i>. Chỗ ngồi ngoài trời đã được đặt hết. Chọn <b>(D) The outdoor seating area is reserved</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p3_q46",
+        "id": "ets22_t2_p3_46",
         "number": 46,
-        "text": "When are the forms due?",
+        "text": "What does the man agree to do?",
         "options": {
-          "A": "By the end of today",
-          "B": "Tomorrow afternoon",
-          "C": "Next Monday morning",
-          "D": "At the end of the month"
+          "A": "Provide a discount",
+          "B": "Serve a special dish",
+          "C": "Book a table for a different date",
+          "D": "Send a confirmation e-mail"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ bảo: <i>'You can submit them to me by tomorrow afternoon'</i> => Chiều mai.</p>",
+        "correctAnswer": "C",
+        "explanation": "<p>Người đàn ông đồng ý đặt bàn vào tối thứ Hai tuần sau: <i>'Yes, Monday evening is wide open. I can reserve a large patio table for you then.'</i> Chọn <b>(C) Book a table for a different date</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       }
@@ -271,53 +271,53 @@
   },
   {
     "id": "ets22_t2_p3_s06",
-    "audioUrl": "/audio/ets2022/test2/p3_s06.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s06.mp3",
     "image": "",
-    "context": "Questions 47 through 49 refer to the following conversation.",
-    "transcript": "<p><b>M:</b> Jessica, have you checked the analytics dashboard for our new organic skincare line since yesterday's campaign launch?<br/><b>W:</b> Yes, website traffic jumped by nearly forty percent! The short video ads on social media seem to be driving most of the engagement.<br/><b>M:</b> That's phenomenal news. But how are conversion rates? Are people actually buying the products?<br/><b>W:</b> The facial cleanser is selling rapidly, but the night cream isn't performing as well. I think we should bundle the night cream with a discounted moisturizer to incentivize sales.<br/><b>M:</b> Excellent idea. Let's draft a promotional email with that offer for our newsletter subscribers.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>M:</b> Ms. Khan, this is James Wilson, one of the freelance photographers for your magazine. I've finished taking the pictures for the feature story on historic architecture in Montreal.<br/>\n<b>W:</b> That was fast! The article isn't scheduled to run until next month. Did you have any trouble finding the buildings on the list?<br/>\n<b>M:</b> Not at all. I've already uploaded the high-resolution files to the shared folder. Also, I wanted to ask about submitting my travel expenses for reimbursement.<br/>\n<b>W:</b> Just fill out the standard expense form on our contributor portal and attach your train tickets and hotel receipts.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q47",
+        "id": "ets22_t2_p3_47",
         "number": 47,
-        "text": "What industry do the speakers work in?",
+        "text": "Who is the man?",
         "options": {
-          "A": "Cosmetics and skincare",
-          "B": "Automobile manufacturing",
-          "C": "Commercial real estate",
-          "D": "Financial consulting"
-        },
-        "correctAnswer": "A",
-        "explanation": "<p>Họ thảo luận về: <i>'organic skincare line... facial cleanser... night cream'</i> => Ngành mỹ phẩm chăm sóc da.</p>",
-        "questionType": "Topic / Main Idea",
-        "subCategory": "Topic / Main Idea"
-      },
-      {
-        "id": "ets22_t2_p3_q48",
-        "number": 48,
-        "text": "What does the woman propose to increase sales of the night cream?",
-        "options": {
-          "A": "Hiring a celebrity spokesperson",
-          "B": "Bundling it with another discounted item",
-          "C": "Lowering the manufacturing cost",
-          "D": "Extending the return policy"
+          "A": "An architect",
+          "B": "A photographer",
+          "C": "A travel agent",
+          "D": "A museum curator"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ đề xuất: <i>'bundle the night cream with a discounted moisturizer'</i> => Bán combo kèm sản phẩm giảm giá.</p>",
-        "questionType": "Recommendation",
-        "subCategory": "Recommendation"
+        "explanation": "<p>Người đàn ông giới thiệu: <i>'this is James Wilson, one of the freelance photographers for your magazine.'</i> Chọn <b>(B) A photographer</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p3_q49",
-        "number": 49,
-        "text": "What will the speakers do next?",
+        "id": "ets22_t2_p3_48",
+        "number": 48,
+        "text": "What has the man already done?",
         "options": {
-          "A": "Contact a shipping company",
-          "B": "Interview new models",
-          "C": "Draft a promotional newsletter email",
-          "D": "Discontinue the product line"
+          "A": "Purchased train tickets",
+          "B": "Interviewed a historian",
+          "C": "Updated a contact list",
+          "D": "Uploaded some files"
         },
-        "correctAnswer": "C",
-        "explanation": "<p>Người đàn ông kết luận: <i>'Let's draft a promotional email with that offer for our newsletter subscribers'</i>.</p>",
+        "correctAnswer": "D",
+        "explanation": "<p>Người đàn ông nói: <i>'I've already uploaded the high-resolution files to the shared folder.'</i> Chọn <b>(D) Uploaded some files</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t2_p3_49",
+        "number": 49,
+        "text": "What does the woman instruct the man to do?",
+        "options": {
+          "A": "Fill out an expense form",
+          "B": "Appear in a feature story",
+          "C": "Contact an editor",
+          "D": "Review an article draft"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Người phụ nữ hướng dẫn: <i>'Just fill out the standard expense form on our contributor portal and attach your train tickets and hotel receipts.'</i> Chọn <b>(A) Fill out an expense form</b>.</p>",
         "questionType": "Next Action",
         "subCategory": "Next Action"
       }
@@ -325,53 +325,53 @@
   },
   {
     "id": "ets22_t2_p3_s07",
-    "audioUrl": "/audio/ets2022/test2/p3_s07.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s07.mp3",
     "image": "",
-    "context": "Questions 50 through 52 refer to the following conversation.",
-    "transcript": "<p><b>W:</b> Good evening, Seaside Palms Resort. How may I assist you today?<br/><b>M:</b> Hi, my name is Arthur Pendelton. I have a reservation starting tomorrow for three nights, confirmation number SP-8492.<br/><b>W:</b> Yes, Mr. Pendelton, I see your booking for an oceanfront king room right here.<br/><b>M:</b> Because of a delayed flight, I won't be arriving until roughly midnight tomorrow. Will someone be at the front desk to check me in?<br/><b>W:</b> Absolutely. Our reception desk is staffed twenty-four hours a day. I will also add a late-arrival note to your account so your room is guaranteed.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>M:</b> Emiko and Susan, could you give me an update on the negotiations with the city to build our new manufacturing facility there?<br/>\n<b>W1:</b> The city council was very receptive. They offered us a substantial property tax reduction for the first five years.<br/>\n<b>W2:</b> However, they asked that we commit to hiring at least sixty percent of our assembly line workers from the local community.<br/>\n<b>M:</b> That sounds reasonable and aligns with our corporate social responsibility goals. Let's schedule a formal signing ceremony with the mayor next week.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q50",
+        "id": "ets22_t2_p3_50",
         "number": 50,
-        "text": "Where does the woman work?",
+        "text": "What kind of business do the speakers most likely work for?",
         "options": {
-          "A": "At a travel agency",
-          "B": "At a resort hotel",
-          "C": "At an airline ticket desk",
-          "D": "At a car rental counter"
+          "A": "An automobile manufacturer",
+          "B": "A manufacturing company",
+          "C": "A county hospital",
+          "D": "A real estate agency"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ chào: <i>'Seaside Palms Resort'</i> => Khách sạn khu nghỉ dưỡng.</p>",
-        "questionType": "Speaker / Listener",
-        "subCategory": "Speaker / Listener"
+        "explanation": "<p>Người đàn ông hỏi về <i>'build our new manufacturing facility'</i> và <i>'assembly line workers'</i>. Do đó họ làm việc cho công ty sản xuất <b>(B) A manufacturing company</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p3_q51",
+        "id": "ets22_t2_p3_51",
         "number": 51,
-        "text": "Why is the man calling?",
+        "text": "What incentive did the city council offer?",
         "options": {
-          "A": "To cancel his reservation",
-          "B": "To request a room upgrade",
-          "C": "To notify about a late check-in",
-          "D": "To ask for driving directions"
+          "A": "Free utility connections",
+          "B": "Subsidized public transit",
+          "C": "A tax reduction",
+          "D": "Zoning exemptions"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Người đàn ông nói: <i>'I won't be arriving until roughly midnight tomorrow. Will someone be at the front desk to check me in?'</i> => Báo nhận phòng muộn.</p>",
-        "questionType": "Topic / Main Idea",
-        "subCategory": "Topic / Main Idea"
+        "explanation": "<p>Người phụ nữ 1 nói: <i>'They offered us a substantial property tax reduction for the first five years.'</i> (Họ đề xuất giảm đáng kể thuế bất động sản trong 5 năm đầu). Chọn <b>(C) A tax reduction</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p3_q52",
+        "id": "ets22_t2_p3_52",
         "number": 52,
-        "text": "What reassurance does the woman give?",
+        "text": "What condition did the city attach to their proposal?",
         "options": {
-          "A": "Front desk staff is available 24 hours",
-          "B": "Breakfast is complimentary",
-          "C": "Airport shuttle runs every ten minutes",
-          "D": "A cancellation fee will be waived"
+          "A": "Hiring local workers",
+          "B": "Building a public park",
+          "C": "Completing construction by December",
+          "D": "Installing solar panels"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người phụ nữ khẳng định: <i>'Our reception desk is staffed twenty-four hours a day'</i> => Lễ tân trực 24/24.</p>",
+        "explanation": "<p>Người phụ nữ 2 nêu điều kiện: <i>'they asked that we commit to hiring at least sixty percent of our assembly line workers from the local community.'</i> Tuyển dụng nhân sự địa phương. Chọn <b>(A) Hiring local workers</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       }
@@ -379,325 +379,325 @@
   },
   {
     "id": "ets22_t2_p3_s08",
-    "audioUrl": "/audio/ets2022/test2/p3_s08.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s08.mp3",
     "image": "",
-    "context": "Questions 53 through 55 refer to the following conversation.",
-    "transcript": "<p><b>M:</b> Good afternoon, Bella Italia Bistro. Can I take your reservation?<br/><b>W:</b> Hi, yes! I'd like to reserve a table for a party of eight this Friday evening at seven o'clock.<br/><b>M:</b> Let me check our registry... yes, we can seat your group in our private dining nook. Are there any special dietary requirements we should inform our chef about?<br/><b>W:</b> Two of our guests are strictly gluten-intolerant, and one is vegetarian.<br/><b>M:</b> Not a problem at all. We have a dedicated gluten-free pasta and pizza menu, and several vegetarian entrées. I'll make a note for your server.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>M:</b> Ms. Moreau, thank you for volunteering to participate in this product testing session for our upcoming kitchen appliance.<br/>\n<b>W:</b> I'm glad to help. I enjoy trying out new culinary gadgets.<br/>\n<b>M:</b> Today you'll be evaluating our new high-speed blender model. We have prepared several ingredients for you to make smoothies and soup.<br/>\n<b>W:</b> Sounds delicious. Should I write down my feedback as I go, or after I finish?<br/>\n<b>M:</b> Please fill out this short survey after trying each recipe. We're especially interested in your rating of the noise level and ease of cleaning.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q53",
+        "id": "ets22_t2_p3_53",
         "number": 53,
-        "text": "How many people are in the woman's party?",
+        "text": "What has the woman volunteered to do?",
         "options": {
-          "A": "Four",
-          "B": "Six",
-          "C": "Eight",
-          "D": "Ten"
-        },
-        "correctAnswer": "C",
-        "explanation": "<p>Người phụ nữ nói: <i>'reserve a table for a party of eight'</i> => 8 người.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p3_q54",
-        "number": 54,
-        "text": "What special request does the woman mention?",
-        "options": {
-          "A": "A surprise birthday cake",
-          "B": "Dietary restrictions for some guests",
-          "C": "Live musical entertainment",
-          "D": "Outdoor patio seating"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ nói: <i>'Two of our guests are strictly gluten-intolerant, and one is vegetarian'</i> => Yêu cầu ăn kiêng.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p3_q55",
-        "number": 55,
-        "text": "How does the man respond to the request?",
-        "options": {
-          "A": "He mentions available gluten-free and vegetarian options",
-          "B": "He advises bringing their own meals",
-          "C": "He requests an extra preparation fee",
-          "D": "He states the kitchen cannot accommodate them"
+          "A": "Try out some new products",
+          "B": "Purchase beverages for a luncheon",
+          "C": "Clean a laboratory",
+          "D": "Host a cooking show"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người đàn ông giải thích: <i>'We have a dedicated gluten-free pasta and pizza menu, and several vegetarian entrées'</i>.</p>",
+        "explanation": "<p>Người đàn ông cảm ơn: <i>'thank you for volunteering to participate in this product testing session for our upcoming kitchen appliance.'</i> Chọn <b>(A) Try out some new products</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t2_p3_54",
+        "number": 54,
+        "text": "What item will the woman be testing?",
+        "options": {
+          "A": "A microwave oven",
+          "B": "A coffee machine",
+          "C": "A food blender",
+          "D": "A dishwasher"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người đàn ông nói: <i>'Today you'll be evaluating our new high-speed blender model.'</i> Chọn <b>(C) A food blender</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t2_p3_55",
+        "number": 55,
+        "text": "What is the woman asked to complete?",
+        "options": {
+          "A": "A safety waiver",
+          "B": "A feedback survey",
+          "C": "A recipe booklet",
+          "D": "An equipment log"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người đàn ông yêu cầu: <i>'Please fill out this short survey after trying each recipe.'</i> Chọn <b>(B) A feedback survey</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
   {
     "id": "ets22_t2_p3_s09",
-    "audioUrl": "/audio/ets2022/test2/p3_s09.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s09.mp3",
     "image": "",
-    "context": "Questions 56 through 58 refer to the following conversation.",
-    "transcript": "<p><b>W:</b> George, have you looked over the prototype for our new beverage bottles?<br/><b>M:</b> I just saw it this morning. I really like the minimalist label design, but the cap feels a bit difficult to twist open with one hand.<br/><b>W:</b> You're right. Our recent consumer focus group highlighted the exact same issue. Convenience is crucial for people drinking on the go.<br/><b>M:</b> In that case, let's ask our industrial design partner to test a textured grip on the cap.<br/><b>W:</b> Good idea. I'll send them an email with our design revision request right after this meeting.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>M:</b> Hi, Irina. Are you all finished styling your client's hair?<br/>\n<b>W:</b> Yes, I cut and blow-dried her hair, and she just left. We've had a steady stream of appointments all morning.<br/>\n<b>M:</b> That's great, but remember that weekday afternoons are usually much slower. They don't have as many clients, though.<br/>\n<b>W:</b> That's true. While it's quiet, I can restock the shampoo bottles and sanitizing solution at all the stations.<br/>\n<b>M:</b> Good idea. The health and safety inspector will be here at 3:00 P.M. for our annual salon inspection.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q56",
+        "id": "ets22_t2_p3_56",
         "number": 56,
-        "text": "What product are the speakers evaluating?",
+        "text": "Where most likely are the speakers?",
         "options": {
-          "A": "A smartphone case",
-          "B": "A beverage bottle packaging",
-          "C": "A kitchen blender",
-          "D": "An office coffee maker"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ nói: <i>'prototype for our new beverage bottles'</i> => Chai nước uống.</p>",
-        "questionType": "Topic / Main Idea",
-        "subCategory": "Topic / Main Idea"
-      },
-      {
-        "id": "ets22_t2_p3_q57",
-        "number": 57,
-        "text": "What flaw was identified by both the man and focus group?",
-        "options": {
-          "A": "The bottle leaks when tilted",
-          "B": "The cap is difficult to open",
-          "C": "The label colors fade in sunlight",
-          "D": "The plastic material feels brittle"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người đàn ông nói: <i>'the cap feels a bit difficult to twist open with one hand'</i> và người phụ nữ đồng tình.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p3_q58",
-        "number": 58,
-        "text": "What will the woman do after the meeting?",
-        "options": {
-          "A": "Contact the design partner with revisions",
-          "B": "Conduct another customer survey",
-          "C": "Approve mass production",
-          "D": "Order new sample materials"
+          "A": "At a hair salon",
+          "B": "At a catering hall",
+          "C": "At a laundry service",
+          "D": "At an energy company"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người phụ nữ nói: <i>'I'll send them an email with our design revision request right after this meeting'</i>.</p>",
-        "questionType": "Next Action",
-        "subCategory": "Next Action"
+        "explanation": "<p>Người đàn ông hỏi: <i>'Are you all finished styling your client's hair?'</i> và người phụ nữ nhắc đến <i>'cut and blow-dried her hair'</i>, <i>'shampoo bottles'</i>, <i>'salon'</i>. Do đó họ ở tiệm làm tóc <b>(A) At a hair salon</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t2_p3_57",
+        "number": 57,
+        "text": "Why does the woman say, \"They don't have as many clients, though\"?",
+        "options": {
+          "A": "To express pride in her company's growth",
+          "B": "To explain why an expense is so high",
+          "C": "To acknowledge that business will slow down",
+          "D": "To question the accuracy of a client list"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người nói đề cập rằng buổi chiều ngày trong tuần thường vắng khách để giải thích việc có thời gian làm việc dọn dẹp, sắp xếp. Chọn <b>(B) To acknowledge that business will slow down</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
+      },
+      {
+        "id": "ets22_t2_p3_58",
+        "number": 58,
+        "text": "What will happen later today?",
+        "options": {
+          "A": "Some supplies will be delivered.",
+          "B": "An employee meeting will be held.",
+          "C": "An inspection will be conducted.",
+          "D": "An expense report will be submitted."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người đàn ông thông báo: <i>'The health and safety inspector will be here at 3:00 P.M. for our annual salon inspection.'</i> Chọn <b>(C) An inspection will be conducted</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
   {
     "id": "ets22_t2_p3_s10",
-    "audioUrl": "/audio/ets2022/test2/p3_s10.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s10.mp3",
     "image": "",
-    "context": "Questions 59 through 61 refer to the following conversation.",
-    "transcript": "<p><b>M:</b> Good morning, Sandra. During yesterday's inventory cycle count in aisle four, we found a discrepancy of fifteen cordless drills.<br/><b>W:</b> That's concerning. Did you cross-check with the shipping records from Tuesday's dispatch?<br/><b>M:</b> Yes, and according to the log, those units were never scanned into outgoing trucks. They might have been misplaced in overflow storage area C.<br/><b>W:</b> Let's go down to area C and inspect the upper racking shelves. If they're there, we will update the digital warehouse management system immediately.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>W:</b> Thanks for meeting with me today, Diego. Our firm's been contracted by a ferry company to design a boat that runs on clean energy.<br/>\n<b>M:</b> That's an exciting project, but a hydrogen power source is going to need a lot of space. Since ferries usually transport cars, I'm concerned about where we'd place the fuel tanks without losing vehicle capacity.<br/>\n<b>W:</b> Actually, this ferry will operate purely for harbor sightseeing tours. It won't be carrying any cars, just foot passengers.<br/>\n<b>M:</b> In that case, we could install the hydrogen storage units beneath the passenger seating decks. Could you send me the vessel's exterior dimensions so I can run some weight distribution simulations?<br/>\n<b>W:</b> Absolutely, I'll email the CAD drawings right away.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q59",
+        "id": "ets22_t2_p3_59",
         "number": 59,
-        "text": "What issue did the man discover?",
+        "text": "Which industry do the speakers most likely work in?",
         "options": {
-          "A": "A damaged shipment pallet",
-          "B": "An inventory discrepancy of drills",
-          "C": "A software synchronization error",
-          "D": "A delayed supplier delivery"
+          "A": "Tourism",
+          "B": "Agriculture",
+          "C": "Education",
+          "D": "Engineering"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Người đàn ông nói: <i>'we found a discrepancy of fifteen cordless drills'</i> => Chênh lệch số lượng tồn kho máy khoan.</p>",
+        "correctAnswer": "D",
+        "explanation": "<p>Họ bàn về việc thiết kế tàu phà chạy năng lượng sạch, bố trí khoang nhiên liệu và mô phỏng phân bố trọng lượng. Do đó họ làm trong ngành kỹ thuật thiết kế <b>(D) Engineering</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t2_p3_60",
+        "number": 60,
+        "text": "What does the man say he is concerned about?",
+        "options": {
+          "A": "Expenses",
+          "B": "Safety",
+          "C": "Competition",
+          "D": "Space"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người đàn ông nói: <i>'a hydrogen power source is going to need a lot of space... I'm concerned about where we'd place the fuel tanks...'</i> (lo ngại về không gian/diện tích). Chọn <b>(D) Space</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p3_q60",
-        "number": 60,
-        "text": "Where does the man suspect the items might be?",
-        "options": {
-          "A": "In the shipping container",
-          "B": "In the repair workshop",
-          "C": "In overflow storage area C",
-          "D": "At the customer's job site"
-        },
-        "correctAnswer": "C",
-        "explanation": "<p>Người đàn ông nói: <i>'They might have been misplaced in overflow storage area C'</i>.</p>",
-        "questionType": "Inference",
-        "subCategory": "Inference"
-      },
-      {
-        "id": "ets22_t2_p3_q61",
+        "id": "ets22_t2_p3_61",
         "number": 61,
-        "text": "What will the speakers do next?",
+        "text": "What does the man agree to do?",
         "options": {
-          "A": "Inspect the shelves in storage area C",
-          "B": "Hire a third-party auditor",
-          "C": "Order fifteen new units",
-          "D": "Contact law enforcement"
+          "A": "Apply for some funding",
+          "B": "Do some research",
+          "C": "Organize a business trip",
+          "D": "Assemble a work crew"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Người phụ nữ nói: <i>'Let's go down to area C and inspect the upper racking shelves'</i>.</p>",
-        "questionType": "Next Action",
-        "subCategory": "Next Action"
+        "correctAnswer": "B",
+        "explanation": "<p>Người đàn ông đồng ý nhận bản vẽ kích thước để nghiên cứu và chạy mô phỏng: <i>'run some weight distribution simulations'</i>. Chọn <b>(B) Do some research</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
   {
     "id": "ets22_t2_p3_s11",
-    "audioUrl": "/audio/ets2022/test2/p3_s11.mp3",
-    "image": "",
-    "context": "Questions 62 through 64 refer to the following conversation.",
-    "transcript": "<p><b>W:</b> Hi, Marcus. Has management announced when our enterprise accounting software upgrade will take place?<br/><b>M:</b> Yes, IT will perform the system migration this Saturday night between midnight and four in the morning to minimize downtime.<br/><b>W:</b> That's good. Will there be any training on the new interface for our billing team?<br/><b>M:</b> Definitely. There's a mandatory one-hour virtual webinar next Monday at ten o'clock. Recorded tutorials will also be available on the company intranet.<br/><b>W:</b> Perfect. I will remind my staff to register for the morning session.</p>",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s11.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_g01.jpg",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>M:</b> Dolores, thanks again for offering to drive to the technology seminar. I'm not very familiar with this highway.<br/>\n<b>W:</b> Don't worry, I used to live in this area, so I know the roads well. According to the event invitation, the convention center is located on Berk Street.<br/>\n<b>M:</b> Great. Let's look at the exit sign ahead so we don't miss our turn.<br/>\n<b>W:</b> There it is. We need Exit 8 for Berk Street.<br/>\n<b>M:</b> Perfect. I'll text our colleagues who are already there to save a few seats for us near the front of the auditorium.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q62",
+        "id": "ets22_t2_p3_62",
         "number": 62,
-        "text": "When will the software upgrade be performed?",
+        "text": "What does the woman remind the man about?",
         "options": {
-          "A": "Saturday night",
-          "B": "Monday morning",
-          "C": "Wednesday afternoon",
-          "D": "Next month"
+          "A": "She used to live in the area.",
+          "B": "She needs to stop at a store.",
+          "C": "She attended a seminar last year.",
+          "D": "She has just bought a new car."
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người đàn ông nói: <i>'IT will perform the system migration this Saturday night'</i>.</p>",
+        "explanation": "<p>Người phụ nữ nói: <i>'Don't worry, I used to live in this area, so I know the roads well.'</i> Chọn <b>(A) She used to live in the area</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p3_q63",
+        "id": "ets22_t2_p3_63",
         "number": 63,
-        "text": "How will staff be trained on the new interface?",
+        "text": "Look at the graphic. Which exit will the speakers take?",
         "options": {
-          "A": "Through an external consultant seminar",
-          "B": "Through a virtual webinar and recorded videos",
-          "C": "By reading a printed guidebook",
-          "D": "Through individual one-on-one coaching"
+          "A": "Maple Road",
+          "B": "Carter Lane",
+          "C": "Berk Street",
+          "D": "High Road"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Người đàn ông nêu rõ: <i>'virtual webinar... Recorded tutorials will also be available'</i>.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
+        "correctAnswer": "C",
+        "explanation": "<p>Người phụ nữ nói: <i>'the convention center is located on Berk Street... We need Exit 8 for Berk Street.'</i> Nhìn vào biển báo, Berk Street ứng với Exit 8. Chọn <b>(C) Berk Street</b>.</p>",
+        "questionType": "Graphic",
+        "subCategory": "Graphic"
       },
       {
-        "id": "ets22_t2_p3_q64",
+        "id": "ets22_t2_p3_64",
         "number": 64,
-        "text": "What does the woman promise to do?",
+        "text": "What will the man ask his coworkers to do?",
         "options": {
-          "A": "Back up financial databases",
-          "B": "Remind her team to register for training",
-          "C": "Submit an overtime pay request",
-          "D": "Call the IT help desk"
+          "A": "Cancel a reservation",
+          "B": "Save some seats",
+          "C": "Sign in at an event",
+          "D": "Print some materials"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Người phụ nữ nói: <i>'I will remind my staff to register for the morning session'</i>.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
+        "explanation": "<p>Người đàn ông nói: <i>'I'll text our colleagues who are already there to save a few seats for us near the front...'</i> (nhờ đồng nghiệp giữ chỗ ngồi). Chọn <b>(B) Save some seats</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
   {
     "id": "ets22_t2_p3_s12",
-    "audioUrl": "/audio/ets2022/test2/p3_s12.mp3",
-    "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80",
-    "context": "Questions 65 through 67 refer to the following conversation and floor plan.",
-    "transcript": "<p><b>M:</b> Clara, have you reviewed the exhibition hall map for the International Tech Expo?<br/><b>W:</b> Yes, our company has been allocated Booth 14, right next to the main conference auditorium entrance.<br/><b>M:</b> Looking at the floor plan, Booth 14 gets tremendous foot traffic, but Booth 12 is directly across from the refreshment lounge.<br/><b>W:</b> Actually, Booth 14 has twice the power outlets and a dedicated ethernet port, which we need to demonstrate our live server software.<br/><b>M:</b> Good catch. Let's keep Booth 14 and finalize our booth banner dimensions.</p>",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s12.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_g02.jpg",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>W:</b> Good work helping the school go paperless, Kentaro. You've scanned and shredded hundreds of outdated student records this week.<br/>\n<b>M:</b> Thanks, Principal Vance. I've filled three large bags with shredded white paper. Which recycling bin should I take them out to?<br/>\n<b>W:</b> Outside the back entrance by the cafeteria, there are four large colored bins. Paper goes into Bin 3.<br/>\n<b>M:</b> Got it, Bin 3. Those bags are quite heavy though.<br/>\n<b>W:</b> Why don't you use the hand cart in the custodial closet? That'll make transporting them much easier.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q65",
+        "id": "ets22_t2_p3_65",
         "number": 65,
-        "text": "What event are the speakers preparing for?",
+        "text": "Where does the conversation most likely take place?",
         "options": {
-          "A": "A technology trade expo",
-          "B": "A university career fair",
-          "C": "An internal company retreat",
-          "D": "An annual shareholder summit"
+          "A": "At a hotel",
+          "B": "At an accounting firm",
+          "C": "At a doctor's office",
+          "D": "At a school"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Người đàn ông nói: <i>'International Tech Expo'</i> => Triển lãm công nghệ quốc tế.</p>",
-        "questionType": "Topic / Main Idea",
-        "subCategory": "Topic / Main Idea"
+        "correctAnswer": "D",
+        "explanation": "<p>Người phụ nữ nói: <i>'helping the school go paperless... student records'</i> và người đàn ông gọi cô là <i>'Principal Vance'</i> (Hiệu trưởng Vance). Do đó cuộc trò chuyện diễn ra ở trường học <b>(D) At a school</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p3_q66",
+        "id": "ets22_t2_p3_66",
         "number": 66,
-        "text": "Look at the conversation. Why does Clara prefer Booth 14?",
+        "text": "Look at the graphic. Which bin will the man use?",
         "options": {
-          "A": "It has lower rental rates",
-          "B": "It provides better electrical and internet access",
-          "C": "It is quieter than other areas",
-          "D": "It has natural outdoor lighting"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Clara chỉ ra: <i>'Booth 14 has twice the power outlets and a dedicated ethernet port'</i> => Đủ ổ cắm và cổng mạng.</p>",
-        "questionType": "Graphic / Map",
-        "subCategory": "Graphic / Map"
-      },
-      {
-        "id": "ets22_t2_p3_q67",
-        "number": 67,
-        "text": "What will the speakers finalize next?",
-        "options": {
-          "A": "Hotel reservations",
-          "B": "Catering food items",
-          "C": "Booth banner dimensions",
-          "D": "Staff flight tickets"
+          "A": "Bin 1",
+          "B": "Bin 2",
+          "C": "Bin 3",
+          "D": "Bin 4"
         },
         "correctAnswer": "C",
-        "explanation": "<p>Người đàn ông kết luận: <i>'finalize our booth banner dimensions'</i> => Kích thước băng rôn gian hàng.</p>",
-        "questionType": "Next Action",
-        "subCategory": "Next Action"
+        "explanation": "<p>Người phụ nữ hướng dẫn: <i>'Paper goes into Bin 3.'</i> Nhìn vào hình vẽ 4 thùng rác phân loại, Bin 3 có nhãn 'Paper'. Do đó chọn <b>(C) Bin 3</b>.</p>",
+        "questionType": "Graphic",
+        "subCategory": "Graphic"
+      },
+      {
+        "id": "ets22_t2_p3_67",
+        "number": 67,
+        "text": "What does the woman suggest?",
+        "options": {
+          "A": "Using a cart",
+          "B": "Waiting for a confirmation",
+          "C": "Giving an assignment to a colleague",
+          "D": "Rescheduling an appointment with a client"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Người phụ nữ gợi ý: <i>'Why don't you use the hand cart in the custodial closet? That'll make transporting them much easier.'</i> (Sao bạn không dùng chiếc xe đẩy trong phòng lao công?). Chọn <b>(A) Using a cart</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
   {
     "id": "ets22_t2_p3_s13",
-    "audioUrl": "/audio/ets2022/test2/p3_s13.mp3",
-    "image": "",
-    "context": "Questions 68 through 70 refer to the following conversation.",
-    "transcript": "<p><b>W:</b> Robert, our client in Tokyo needs three hundred catalog copies by Thursday afternoon. Which shipping carrier should we choose?<br/><b>M:</b> Let me look at the rate sheet. Standard air freight takes four business days, which is too late. Express Global guarantees delivery in two days, but it costs $450.<br/><b>W:</b> That exceeds our normal shipping budget, but the contract is worth $50,000, so we can't afford to miss their review deadline.<br/><b>M:</b> Agreed. I'll print the express customs documentation right away and request a courier pickup at three.</p>",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_s13.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p3_g03.jpg",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\n<b>W:</b> Ricardo, could you take a look at this invitation? It's a draft I put together for our botanical society's annual charity gala and fund-raiser.<br/>\n<b>M:</b> It looks very professional! I notice on the schedule that you have dinner at 6:00 P.M. and live music at 7:00 P.M. Most guests will probably still be eating and chatting at 7:00. I think the musical performance should start at 8:00 P.M. instead.<br/>\n<b>W:</b> Good point. We can swap the speeches to 7:00 P.M. and have the live band play at 8:00 P.M.<br/>\n<b>M:</b> Also, guests will need to purchase admission tickets ahead of time, so let's make sure to include our event website address at the bottom of the card.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p3_q68",
+        "id": "ets22_t2_p3_68",
         "number": 68,
-        "text": "Where must the catalogs be delivered?",
+        "text": "What type of event are the speakers organizing?",
         "options": {
-          "A": "To Tokyo",
-          "B": "To London",
-          "C": "To Toronto",
-          "D": "To Sydney"
+          "A": "An award ceremony",
+          "B": "A grand-opening celebration",
+          "C": "A foreign official's reception",
+          "D": "A fund-raiser"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Người phụ nữ nói: <i>'our client in Tokyo needs three hundred catalog copies'</i> => Tokyo.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
+        "correctAnswer": "D",
+        "explanation": "<p>Người phụ nữ nói: <i>'for our botanical society's annual charity gala and fund-raiser'</i>. Chọn <b>(D) A fund-raiser</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p3_q69",
+        "id": "ets22_t2_p3_69",
         "number": 69,
-        "text": "Why do the speakers select the more expensive shipping tier?",
+        "text": "Look at the graphic. What time does the man think the music should begin?",
         "options": {
-          "A": "It includes insurance coverage",
-          "B": "It meets the strict Thursday delivery deadline",
-          "C": "The client agreed to pay for freight",
-          "D": "The cheaper carrier was fully booked"
+          "A": "At 6:00 P.M.",
+          "B": "At 8:00 P.M.",
+          "C": "At 5:00 P.M.",
+          "D": "At 7:00 P.M."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Họ cần giao trước thứ Năm và Standard quá trễ, do đó Express Global là lựa chọn duy nhất kịp hạn.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
+        "explanation": "<p>Người đàn ông nhận xét lịch trình hiện tại (7:00 P.M. Live Music) và đề xuất: <i>'I think the musical performance should start at 8:00 P.M. instead.'</i> Chọn <b>(B) At 8:00 P.M.</b>.</p>",
+        "questionType": "Graphic",
+        "subCategory": "Graphic"
       },
       {
-        "id": "ets22_t2_p3_q70",
+        "id": "ets22_t2_p3_70",
         "number": 70,
-        "text": "What will Robert do next?",
+        "text": "What information does the man suggest adding to the invitation?",
         "options": {
-          "A": "Prepare customs forms and schedule pickup",
-          "B": "Call the client to ask for an extension",
-          "C": "Reprint all the catalogs in color",
-          "D": "Negotiate a lower price with the courier"
+          "A": "A Web site address",
+          "B": "The name of a sponsor",
+          "C": "The location of a concert hall",
+          "D": "A list of performers"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Robert nói: <i>'I'll print the express customs documentation right away and request a courier pickup'</i>.</p>",
-        "questionType": "Next Action",
-        "subCategory": "Next Action"
+        "explanation": "<p>Người đàn ông đề xuất: <i>'so let's make sure to include our event website address at the bottom of the card.'</i> Chọn <b>(A) A Web site address</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   }

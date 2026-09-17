@@ -1,107 +1,107 @@
 [
   {
     "id": "ets22_t2_p4_s01",
-    "audioUrl": "/audio/ets2022/test2/p4_s01.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s01.mp3",
     "image": "",
-    "context": "Questions 71 through 73 refer to the following telephone message.",
-    "transcript": "<p>Hello, this message is for Mr. Douglas Chen. This is Sarah calling from Cedar Creek Dental Clinic. I am calling to remind you of your scheduled routine cleaning appointment tomorrow, Tuesday, at two-thirty in the afternoon with Dr. Patel. Please remember to arrive fifteen minutes early to complete our updated patient health declaration form. If you need to reschedule or have any questions about parking availability, please call us back at 555-0194 before 5 P.M. today. Thank you, and we look forward to seeing you tomorrow.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nYou're listening to Radio Station WKXL. Turning to local business updates, Monday marked the official opening of Starbright Corporation's newest manufacturing plant right here in Millfield. Starbright, renowned nationwide for its line of athletic footwear, expects this five-million-dollar facility to create more than three hundred new jobs by the end of the fiscal year. Company executives stated that the plant utilizes state-of-the-art automated machinery to assemble sneakers using recycled rubber and organic textiles. If you're interested in applying for a position, HR representatives will be holding a series of video interviews throughout this month. Visit starbright.com/careers to book your interview slot.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p4_q71",
+        "id": "ets22_t2_p4_71",
         "number": 71,
-        "text": "Where does the caller work?",
+        "text": "What did Starbright Corporation recently do?",
         "options": {
-          "A": "At an insurance agency",
-          "B": "At a dental clinic",
-          "C": "At a pharmacy",
-          "D": "At a fitness center"
+          "A": "It changed its company logo.",
+          "B": "It opened a new factory.",
+          "C": "It conducted a financial audit.",
+          "D": "It upgraded a product line."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Người gọi nói: <i>'Sarah calling from Cedar Creek Dental Clinic'</i> => Phòng khám nha khoa.</p>",
-        "questionType": "Speaker / Listener",
-        "subCategory": "Speaker / Listener"
+        "explanation": "<p>Phát thanh viên đưa tin: <i>'Monday marked the official opening of Starbright Corporation's newest manufacturing plant...'</i> (nhà máy sản xuất mới). Chọn <b>(B) It opened a new factory</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p4_q72",
+        "id": "ets22_t2_p4_72",
         "number": 72,
-        "text": "What is the purpose of the call?",
+        "text": "What type of product does Starbright Corporation make?",
         "options": {
-          "A": "To remind the listener of an appointment",
-          "B": "To discuss medical test results",
-          "C": "To request payment for an overdue bill",
-          "D": "To confirm a prescription pickup"
+          "A": "Footwear",
+          "B": "Cosmetics",
+          "C": "Housewares",
+          "D": "Electronics"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người gọi nói: <i>'I am calling to remind you of your scheduled routine cleaning appointment'</i> => Nhắc lịch hẹn.</p>",
-        "questionType": "Purpose",
-        "subCategory": "Purpose"
+        "explanation": "<p>Bản tin nhắc đến: <i>'renowned nationwide for its line of athletic footwear... assemble sneakers'</i>. Chọn <b>(A) Footwear</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p4_q73",
+        "id": "ets22_t2_p4_73",
         "number": 73,
-        "text": "What is the listener asked to do upon arrival?",
+        "text": "What is available online?",
         "options": {
-          "A": "Present a photo ID",
-          "B": "Complete a health form",
-          "C": "Pay an initial deposit",
-          "D": "Wait in his car"
+          "A": "An application",
+          "B": "A schedule",
+          "C": "A video interview",
+          "D": "A virtual tour"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Người gọi dặn: <i>'arrive fifteen minutes early to complete our updated patient health declaration form'</i> => Điền đơn khai báo sức khỏe.</p>",
-        "questionType": "Request",
-        "subCategory": "Request"
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói thông báo: <i>'HR representatives will be holding a series of video interviews throughout this month. Visit starbright.com/careers to book your interview slot.'</i> Chọn <b>(C) A video interview</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
       }
     ]
   },
   {
     "id": "ets22_t2_p4_s02",
-    "audioUrl": "/audio/ets2022/test2/p4_s02.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s02.mp3",
     "image": "",
-    "context": "Questions 74 through 76 refer to the following airport announcement.",
-    "transcript": "<p>Attention all passengers on Pacific Rim Airlines Flight 482 with service to Tokyo Narita. Due to late arrival of incoming aircraft and necessary cabin servicing, boarding will be delayed by approximately twenty-five minutes. Additionally, please note that our departure gate has been changed from Gate 14 to Gate 22 at the north end of Terminal 2. Passengers requiring special assistance or traveling with small children are invited to proceed to Gate 22 immediately for early boarding. We apologize for the inconvenience and appreciate your patience.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nThank you all for coming to this celebration. I know I speak for everyone here at Apex Advertising when I say how much we will miss working alongside Mustafa Perez. Over his thirty-five years with our agency, Mustafa has directed campaigns for some of the biggest brand names in the world. He has been a mentor, a leader, and a dear friend to countless colleagues. While we are sad to see him retire, we are excited for his upcoming travels across Europe. To commemorate tonight, our graphic design department created a personalized slideshow chronicling his most iconic advertisements. Let's dim the lights and enjoy the retrospective.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p4_q74",
+        "id": "ets22_t2_p4_74",
         "number": 74,
-        "text": "What is the destination of Flight 482?",
+        "text": "What event is taking place?",
         "options": {
-          "A": "Seoul",
-          "B": "Tokyo",
-          "C": "Singapore",
-          "D": "San Francisco"
+          "A": "An orientation session",
+          "B": "A gallery opening",
+          "C": "An awards ceremony",
+          "D": "A retirement party"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Thông báo nêu rõ: <i>'service to Tokyo Narita'</i> => Đi Tokyo.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói chia sẻ: <i>'how much we will miss working alongside Mustafa Perez... While we are sad to see him retire...'</i>. Đây là bữa tiệc chia tay nghỉ hưu. Chọn <b>(D) A retirement party</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p4_q75",
+        "id": "ets22_t2_p4_75",
         "number": 75,
-        "text": "What change is announced for the flight?",
+        "text": "What type of business does Mustafa Perez work for?",
         "options": {
-          "A": "The flight has been cancelled",
-          "B": "The departure gate has changed",
-          "C": "Free meals are offered in the lounge",
-          "D": "Carry-on luggage size is restricted"
+          "A": "An art gallery",
+          "B": "A newspaper publisher",
+          "C": "An advertising agency",
+          "D": "A camera shop"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Thông báo nói: <i>'departure gate has been changed from Gate 14 to Gate 22'</i> => Đổi cổng ra máy bay.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói nhắc đến: <i>'everyone here at Apex Advertising... Over his thirty-five years with our agency...'</i>. Chọn <b>(C) An advertising agency</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p4_q76",
+        "id": "ets22_t2_p4_76",
         "number": 76,
-        "text": "Who is invited to board early?",
+        "text": "What has the speaker created for the event?",
         "options": {
-          "A": "Business class ticket holders",
-          "B": "Passengers needing assistance or with children",
-          "C": "Members of the frequent flyer club",
-          "D": "Airport flight crew"
+          "A": "A slideshow",
+          "B": "A T-shirt design",
+          "C": "A Web site",
+          "D": "A brochure"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Thông báo: <i>'Passengers requiring special assistance or traveling with small children are invited to proceed... for early boarding'</i>.</p>",
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói giới thiệu: <i>'our graphic design department created a personalized slideshow chronicling his most iconic advertisements.'</i> Chọn <b>(A) A slideshow</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       }
@@ -109,53 +109,53 @@
   },
   {
     "id": "ets22_t2_p4_s03",
-    "audioUrl": "/audio/ets2022/test2/p4_s03.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s03.mp3",
     "image": "",
-    "context": "Questions 77 through 79 refer to the following advertisement.",
-    "transcript": "<p>Are you looking to upgrade your home office with modern, ergonomic furniture? Look no further than Apex Office Supply! This weekend only, we are celebrating our grand reopening at our flagship downtown showroom. Enjoy up to forty percent off all adjustable standing desks, ergonomic chairs, and LED task lamps. Plus, the first fifty customers on Saturday morning will receive a complimentary high-capacity power strip. Visit us at 450 Market Street or shop online at apexoffice.com to explore our complete catalog. Apex Office Supply: comfort and productivity in one place.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nThe last point on our safety meeting agenda concerns the cleanroom protocols at our pharmaceutical laboratory. As manufacturers of prescription medications, maintaining strict sterile conditions is non-negotiable. Recently, our compliance officers noticed that several technicians failed to secure their hairnets and protective footwear before entering Cleanroom B. Please remember that contamination risks could ruin entire production batches. We ask all shift supervisors to inspect their teams before each entry. You can review the updated safety manual and equipment donning procedures directly on our staff intranet portal.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p4_q77",
+        "id": "ets22_t2_p4_77",
         "number": 77,
-        "text": "What is being advertised?",
+        "text": "What does the speaker's company produce?",
         "options": {
-          "A": "A commercial real estate development",
-          "B": "An office furniture store event",
-          "C": "A computer hardware sale",
-          "D": "An interior design consultation service"
+          "A": "Medications",
+          "B": "Textbooks",
+          "C": "Exercise clothing",
+          "D": "Construction materials"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Quảng cáo về: <i>'Apex Office Supply... ergonomic furniture... standing desks, ergonomic chairs'</i> => Cửa hàng nội thất văn phòng.</p>",
-        "questionType": "Purpose",
-        "subCategory": "Purpose"
-      },
-      {
-        "id": "ets22_t2_p4_q78",
-        "number": 78,
-        "text": "What discount is offered this weekend?",
-        "options": {
-          "A": "Up to 20 percent",
-          "B": "Up to 30 percent",
-          "C": "Up to 40 percent",
-          "D": "Buy one, get one free"
-        },
-        "correctAnswer": "C",
-        "explanation": "<p>Quảng cáo nói: <i>'Enjoy up to forty percent off all adjustable standing desks...'</i> => Giảm tới 40%.</p>",
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói nêu rõ: <i>'cleanroom protocols at our pharmaceutical laboratory. As manufacturers of prescription medications...'</i>. Chọn <b>(A) Medications</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p4_q79",
-        "number": 79,
-        "text": "What will the first 50 customers on Saturday receive?",
+        "id": "ets22_t2_p4_78",
+        "number": 78,
+        "text": "What are the listeners reminded to do?",
         "options": {
-          "A": "A gift card worth $100",
-          "B": "A free power strip",
-          "C": "An ergonomic mouse pad",
-          "D": "Free home delivery"
+          "A": "Recruit some staff",
+          "B": "Enter some data",
+          "C": "Attend some training sessions",
+          "D": "Follow safety procedures"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Quảng cáo nói: <i>'the first fifty customers... will receive a complimentary high-capacity power strip'</i> => Ổ cắm điện miễn phí.</p>",
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói nhắc nhở nhân viên tuân thủ quy trình phòng sạch: <i>'maintaining strict sterile conditions... inspect their teams before each entry'</i>. Chọn <b>(D) Follow safety procedures</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t2_p4_79",
+        "number": 79,
+        "text": "What can be found online?",
+        "options": {
+          "A": "A product database",
+          "B": "An employee directory",
+          "C": "A handbook",
+          "D": "A contract"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói kết luận: <i>'You can review the updated safety manual and equipment donning procedures directly on our staff intranet portal.'</i> Cẩm nang/sổ tay an toàn (manual / handbook). Chọn <b>(C) A handbook</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       }
@@ -163,161 +163,161 @@
   },
   {
     "id": "ets22_t2_p4_s04",
-    "audioUrl": "/audio/ets2022/test2/p4_s04.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s04.mp3",
     "image": "",
-    "context": "Questions 80 through 82 refer to the following speech.",
-    "transcript": "<p>Good morning, team, and thank you for gathering on short notice. As our chief executive officer announced yesterday, our company is launching a company-wide sustainability initiative called Green Horizons. Starting next month, our facility will transition entirely to solar-powered electricity, and we will eliminate single-use plastics across all company cafeterias and break rooms. To recognize teams that contribute the most innovative waste-reduction ideas, we are establishing a quarterly Green Innovation Award, which includes a grant of five thousand dollars for departmental projects. Please speak with your team leads this week to begin brainstorming your project proposals.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nHi, Aisha. I'm here at Oakridge Park setting up our booth for the weekend farmer's market. I just unloaded all the crates of fresh organic strawberries and blueberries we picked yesterday. Everything looks fantastic, though I did accidentally forget the canopy tent we normally use to shield the produce. I know you're worried about the berries spoiling in direct heat, but it's supposed to be cloudy all day, so they should stay cool and fresh without any problem. Anyway, the main reason I called was to remind you to submit our entry form for the regional agriculture competition by noon today. I really think our berries have a winning shot this year.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p4_q80",
+        "id": "ets22_t2_p4_80",
         "number": 80,
-        "text": "What is the subject of the speech?",
+        "text": "What will the speaker do at a park?",
         "options": {
-          "A": "A corporate sustainability initiative",
-          "B": "An upcoming employee health fair",
-          "C": "Annual financial performance results",
-          "D": "An office space expansion plan"
+          "A": "Watch a performance",
+          "B": "Sell fruit",
+          "C": "Plant trees",
+          "D": "Take photographs"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người nói đang ở quầy chợ nông sản bán dâu tây và việt quất: <i>'setting up our booth for the weekend farmer's market... crates of fresh organic strawberries and blueberries'</i>. Chọn <b>(B) Sell fruit</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t2_p4_81",
+        "number": 81,
+        "text": "Why does the speaker say, \"but it's supposed to be cloudy all day\"?",
+        "options": {
+          "A": "To ask for help",
+          "B": "To express frustration",
+          "C": "To reject the listener's suggestion",
+          "D": "To reassure the listener"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nghe lo hoa quả bị hỏng do nắng nóng khi quên mang lều bạt, người nói trấn an rằng trời râm mát cả ngày nên không sao: <i>'I know you're worried... but it's supposed to be cloudy all day, so they should stay cool'</i>. Chọn <b>(D) To reassure the listener</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
+      },
+      {
+        "id": "ets22_t2_p4_82",
+        "number": 82,
+        "text": "What does the speaker remind the listener to do?",
+        "options": {
+          "A": "Register for a competition",
+          "B": "Purchase some supplies",
+          "C": "Prepare a shipment",
+          "D": "Speak to a customer"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người nói giới thiệu: <i>'company-wide sustainability initiative called Green Horizons'</i> => Sáng kiến phát triển bền vững / bảo vệ môi trường.</p>",
-        "questionType": "Topic / Main Idea",
-        "subCategory": "Topic / Main Idea"
-      },
-      {
-        "id": "ets22_t2_p4_q81",
-        "number": 81,
-        "text": "What change will occur in the company cafeterias?",
-        "options": {
-          "A": "Prices will increase",
-          "B": "Single-use plastics will be eliminated",
-          "C": "Operating hours will be extended",
-          "D": "A new catering vendor will take over"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người nói nêu: <i>'eliminate single-use plastics across all company cafeterias'</i> => Loại bỏ đồ nhựa dùng 1 lần.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p4_q82",
-        "number": 82,
-        "text": "What incentive is offered for the Green Innovation Award?",
-        "options": {
-          "A": "Additional paid vacation days",
-          "B": "A $5,000 project grant",
-          "C": "A promotion to senior management",
-          "D": "Stock options in the company"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người nói thông báo: <i>'includes a grant of five thousand dollars for departmental projects'</i> => Khoản tài trợ dự án 5.000 USD.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      }
-    ]
-  },
-  {
-    "id": "ets22_t2_p4_s05",
-    "audioUrl": "/audio/ets2022/test2/p4_s05.mp3",
-    "image": "",
-    "context": "Questions 83 through 85 refer to the following tour guide instructions.",
-    "transcript": "<p>Welcome to the historical Henderson Manor. My name is Gregory, and I will be guiding you through the restored nineteenth-century estate this afternoon. Before we step inside, I must remind everyone that flash photography is strictly prohibited, as bright light damages the historic tapestries and antique oil paintings. However, you are welcome to take non-flash photos in the outdoor rose garden at the end of the tour. The tour will take approximately forty-five minutes, followed by complimentary tea in the greenhouse. Please keep your visitor badges visible and stay with the group at all times.</p>",
-    "questions": [
-      {
-        "id": "ets22_t2_p4_q83",
-        "number": 83,
-        "text": "Where is the tour taking place?",
-        "options": {
-          "A": "At a modern art gallery",
-          "B": "At a historical estate",
-          "C": "At a science museum",
-          "D": "At a botanical research facility"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người hướng dẫn nói: <i>'Welcome to the historical Henderson Manor... restored nineteenth-century estate'</i> => Khu dinh thự lịch sử thế kỷ 19.</p>",
-        "questionType": "Topic / Main Idea",
-        "subCategory": "Topic / Main Idea"
-      },
-      {
-        "id": "ets22_t2_p4_q84",
-        "number": 84,
-        "text": "What rule must visitors follow inside the building?",
-        "options": {
-          "A": "No speaking loudly",
-          "B": "No flash photography",
-          "C": "No food or drink allowed anywhere on the grounds",
-          "D": "No touching the handrails"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người hướng dẫn dặn: <i>'flash photography is strictly prohibited'</i> => Nghiêm cấm chụp ảnh có đèn flash.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p4_q85",
-        "number": 85,
-        "text": "What will happen at the end of the tour?",
-        "options": {
-          "A": "A lecture by an architect",
-          "B": "A souvenir auction",
-          "C": "Complimentary tea in the greenhouse",
-          "D": "A screening of a documentary film"
-        },
-        "correctAnswer": "C",
-        "explanation": "<p>Người hướng dẫn nói: <i>'followed by complimentary tea in the greenhouse'</i> => Thưởng trà miễn phí ở nhà kính.</p>",
+        "explanation": "<p>Người nói nhắc nhở: <i>'remind you to submit our entry form for the regional agriculture competition by noon today.'</i> Đăng ký tham gia cuộc thi. Chọn <b>(A) Register for a competition</b>.</p>",
         "questionType": "Next Action",
         "subCategory": "Next Action"
       }
     ]
   },
   {
-    "id": "ets22_t2_p4_s06",
-    "audioUrl": "/audio/ets2022/test2/p4_s06.mp3",
+    "id": "ets22_t2_p4_s05",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s05.mp3",
     "image": "",
-    "context": "Questions 86 through 88 refer to the following traffic report.",
-    "transcript": "<p>This is Lisa Martinez with your Metro Transit News at eight-fifteen on Tuesday morning. Commuters heading northbound on Interstate 95 should expect severe delays of up to forty minutes due to an overturned cargo van near Exit 18. Emergency response teams and tow trucks are on the scene, but two right lanes remain blocked. Traffic authorities strongly advise motorists to take Route 4 bypass or consider using the commuter rail from Oakwood Station. On the southbound side, traffic is flowing smoothly at regular speeds. We will bring you another live traffic update in twenty minutes.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nAttention, all assembly line staff here at Highland Furniture Factory. Please be aware that our electronic time-tracking system is currently offline due to a server malfunction. That means you won't be able to swipe your ID badges at the digital kiosks when clocking out at the end of your shift today. Instead, please report to the receptionist's desk in the main lobby and sign the paper attendance sheet before exiting the building. Our network engineering team is working on the problem, and they assure us that the software will be fully operational by tomorrow morning. Thank you for your patience and cooperation.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p4_q86",
-        "number": 86,
-        "text": "What caused the traffic delay on Interstate 95?",
+        "id": "ets22_t2_p4_83",
+        "number": 83,
+        "text": "Where is the announcement being made?",
         "options": {
-          "A": "A road resurfacing project",
-          "B": "An overturned vehicle",
-          "C": "Dense fog and rain",
-          "D": "A malfunctioning traffic signal"
+          "A": "At a technology firm",
+          "B": "At a repair shop",
+          "C": "At a factory",
+          "D": "At a law office"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Thông báo mở đầu: <i>'Attention, all assembly line staff here at Highland Furniture Factory.'</i> (nhà máy nội thất). Chọn <b>(C) At a factory</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t2_p4_84",
+        "number": 84,
+        "text": "Where should the listeners go at the end of their shifts?",
+        "options": {
+          "A": "To the company cafeteria",
+          "B": "To the receptionist's desk",
+          "C": "To the locker room",
+          "D": "To the parking area"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Bản tin giao thông nêu: <i>'due to an overturned cargo van near Exit 18'</i> => Xe tải chở hàng bị lật.</p>",
+        "explanation": "<p>Người nói hướng dẫn: <i>'Instead, please report to the receptionist's desk in the main lobby and sign the paper attendance sheet...'</i>. Chọn <b>(B) To the receptionist's desk</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       },
       {
-        "id": "ets22_t2_p4_q87",
-        "number": 87,
-        "text": "What alternative does the speaker suggest to drivers?",
+        "id": "ets22_t2_p4_85",
+        "number": 85,
+        "text": "What will happen tomorrow?",
         "options": {
-          "A": "Taking the Route 4 bypass or the commuter rail",
-          "B": "Waiting until afternoon to commute",
-          "C": "Taking the city subway lines",
-          "D": "Carpooling on the expressway"
+          "A": "Some office furniture will be delivered.",
+          "B": "New board members will be elected.",
+          "C": "A city official will conduct an inspection.",
+          "D": "Some time-reporting software will be fixed."
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Phát thanh viên khuyên: <i>'advise motorists to take Route 4 bypass or consider using the commuter rail'</i>.</p>",
-        "questionType": "Recommendation",
-        "subCategory": "Recommendation"
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói thông báo: <i>'they assure us that the software will be fully operational by tomorrow morning.'</i> Phần mềm chấm công sẽ được khắc phục xong. Chọn <b>(D) Some time-reporting software will be fixed</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t2_p4_s06",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s06.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nThe final item on our staff meeting agenda concerns the upcoming Community Health Expo next Saturday. As a family medical clinic, we've had an informational booth at this event for five consecutive years. However, since Nurse Jenkins recently retired, we currently do not have anyone designated to organize our health screening materials and oversee the volunteers. We need one staff member to step forward and take charge of coordinating our booth. The clinic will provide complimentary catered lunches for everyone who participates, and you'll receive overtime pay for your hours on Saturday.</p>",
+    "questions": [
+      {
+        "id": "ets22_t2_p4_86",
+        "number": 86,
+        "text": "Where do the listeners work?",
+        "options": {
+          "A": "At an employment agency",
+          "B": "At a sports arena",
+          "C": "At a conference center",
+          "D": "At a medical clinic"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói nhắc đến: <i>'As a family medical clinic, we've had an informational booth...'</i> (phòng khám y tế gia đình). Chọn <b>(D) At a medical clinic</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p4_q88",
-        "number": 88,
-        "text": "When will the next traffic update air?",
+        "id": "ets22_t2_p4_87",
+        "number": 87,
+        "text": "What does the speaker imply when she says, \"Nurse Jenkins has retired\"?",
         "options": {
-          "A": "In 10 minutes",
-          "B": "In 20 minutes",
-          "C": "At noon",
-          "D": "At 5 P.M."
+          "A": "A role needs to be filled.",
+          "B": "An e-mail will not be answered.",
+          "C": "A marketing strategy should be revised.",
+          "D": "A process will be less efficient."
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Kết thúc bản tin: <i>'We will bring you another live traffic update in twenty minutes'</i> => Trong 20 phút nữa.</p>",
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói giải thích lý do hiện tại chưa có người phụ trách gian hàng vì cô Jenkins đã nghỉ hưu, ngụ ý cần ai đó đảm nhận vị trí này: <i>'we currently do not have anyone designated... We need one staff member to step forward'</i>. Chọn <b>(A) A role needs to be filled</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
+      },
+      {
+        "id": "ets22_t2_p4_88",
+        "number": 88,
+        "text": "What will be provided for those who volunteer?",
+        "options": {
+          "A": "Free medical checkups",
+          "B": "Gift certificates",
+          "C": "A meal",
+          "D": "Transportation"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói nêu đãi ngộ: <i>'The clinic will provide complimentary catered lunches for everyone who participates...'</i> (bữa ăn trưa miễn phí). Chọn <b>(C) A meal</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       }
@@ -325,53 +325,53 @@
   },
   {
     "id": "ets22_t2_p4_s07",
-    "audioUrl": "/audio/ets2022/test2/p4_s07.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s07.mp3",
     "image": "",
-    "context": "Questions 89 through 91 refer to the following in-store announcement.",
-    "transcript": "<p>Attention shoppers of Westside Home & Garden. Our store will be closing in thirty minutes at nine o'clock. If you have not yet finished your shopping, please bring your selections to the cash registers located at the front entrance. All checkout lanes are open to expedite payment. Also, don't miss our seasonal clearance sale on outdoor patio furniture and gardening tools, where all marked items are an additional twenty percent off the tagged price. If you require assistance carrying heavy soil bags or potted shrubs to your vehicle, our courteous staff members in green shirts are ready to assist you. Thank you for shopping with us tonight.</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nGood morning, Martina. I'm calling about our upcoming client dinner with NVC Industries this Friday evening. As you know, the advertising business is very competitive, and keeping NVC satisfied is vital for our agency's quarterly revenue. I wanted to let you know that I've invited Isabel to join us for dinner. Since she was recently promoted to Senior Account Executive, she'll be taking over daily communications with NVC starting next month. Could you please call the restaurant and add one more person to our table reservation? Let me know once the reservation has been updated.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p4_q89",
+        "id": "ets22_t2_p4_89",
         "number": 89,
-        "text": "What time will the store close?",
+        "text": "What is scheduled for Friday?",
         "options": {
-          "A": "At 8:30",
-          "B": "At 9:00",
-          "C": "At 9:30",
-          "D": "At 10:00"
+          "A": "A job fair",
+          "B": "A wellness workshop",
+          "C": "A client meeting",
+          "D": "An employee luncheon"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người gọi nhắc đến: <i>'our upcoming client dinner with NVC Industries this Friday evening'</i>. Bữa tối làm việc với khách hàng. Chọn <b>(C) A client meeting</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t2_p4_90",
+        "number": 90,
+        "text": "Why does the speaker say, \"the advertising business is very competitive\"?",
+        "options": {
+          "A": "To explain a decision to retire",
+          "B": "To justify an employee's promotion",
+          "C": "To question the listener's abilities",
+          "D": "To emphasize the importance of a client"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói nhấn mạnh sự cạnh tranh gay gắt nhằm giải thích tại sao việc giữ chân khách hàng lớn NVC lại quan trọng sống còn: <i>'and keeping NVC satisfied is vital for our agency's quarterly revenue'</i>. Chọn <b>(D) To emphasize the importance of a client</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
+      },
+      {
+        "id": "ets22_t2_p4_91",
+        "number": 91,
+        "text": "What does the speaker say about Isabel?",
+        "options": {
+          "A": "She has recently joined the company.",
+          "B": "She was recently promoted.",
+          "C": "She will approve expense reports.",
+          "D": "She used to work on the NVC Industries account."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Thông báo nêu: <i>'closing in thirty minutes at nine o'clock'</i> => Lúc 9 giờ.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p4_q90",
-        "number": 90,
-        "text": "What merchandise is discounted in the clearance sale?",
-        "options": {
-          "A": "Patio furniture and gardening tools",
-          "B": "Indoor kitchen appliances",
-          "C": "Lawn mowers and generators",
-          "D": "House paint and brushes"
-        },
-        "correctAnswer": "A",
-        "explanation": "<p>Thông báo nói rõ: <i>'clearance sale on outdoor patio furniture and gardening tools'</i>.</p>",
-        "questionType": "Detail",
-        "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p4_q91",
-        "number": 91,
-        "text": "How can customers identify staff members who can help carry heavy items?",
-        "options": {
-          "A": "They wear green shirts",
-          "B": "They wear orange vests",
-          "C": "They carry walkie-talkies",
-          "D": "They stand at customer service desk"
-        },
-        "correctAnswer": "A",
-        "explanation": "<p>Thông báo: <i>'our courteous staff members in green shirts are ready to assist you'</i> => Mặc áo màu xanh lá.</p>",
+        "explanation": "<p>Người nói cho biết: <i>'Since she was recently promoted to Senior Account Executive...'</i> (vừa mới được thăng chức). Chọn <b>(B) She was recently promoted</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
       }
@@ -379,163 +379,163 @@
   },
   {
     "id": "ets22_t2_p4_s08",
-    "audioUrl": "/audio/ets2022/test2/p4_s08.mp3",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s08.mp3",
     "image": "",
-    "context": "Questions 92 through 94 refer to the following introduction.",
-    "transcript": "<p>Welcome, ladies and gentlemen, to the opening keynote of the Annual Global Marketing Symposium. It is my immense privilege to introduce Dr. Evelyn Vance. Dr. Vance has spent over twenty-five years leading digital transformation strategies for Fortune 500 enterprises and currently chairs the department of consumer psychology at Oxford University. Her recent best-selling book, 'The Connected Consumer', has revolutionized how brands leverage artificial intelligence to personalize customer journeys. Today, she will share insights on emerging trends in consumer behavior for the upcoming decade. Please join me in giving a warm symposium welcome to Dr. Evelyn Vance!</p>",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nGood morning, team. Over the past six months, our grocery chain has invested heavily in developing a home grocery delivery app. However, data shows that only fifteen percent of our regular supermarket customers have downloaded and placed orders through the app. Customers seem hesitant because they prefer selecting their own produce in person. To overcome this hurdle, our marketing team plans to upload a series of short demonstration videos to our website and social media channels. The videos will highlight how our personal shoppers carefully inspect and select only the freshest fruits and vegetables for each delivery order.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p4_q92",
+        "id": "ets22_t2_p4_92",
         "number": 92,
-        "text": "Who is Dr. Evelyn Vance?",
+        "text": "What type of business does the speaker most likely work for?",
         "options": {
-          "A": "A university professor and author",
-          "B": "A government trade official",
-          "C": "A software sales representative",
-          "D": "A symposium event planner"
+          "A": "A television studio",
+          "B": "A hardware store",
+          "C": "A publishing company",
+          "D": "A grocery store"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Giới thiệu nêu: <i>'chairs the department of consumer psychology at Oxford University... Her recent best-selling book'</i> => Giáo sư đại học kiêm tác giả.</p>",
-        "questionType": "Speaker / Listener",
-        "subCategory": "Speaker / Listener"
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói nhắc đến: <i>'our grocery chain... supermarket customers... produce... vegetables'</i>. Chuỗi cửa hàng tạp hóa/siêu thị thực phẩm. Chọn <b>(D) A grocery store</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p4_q93",
+        "id": "ets22_t2_p4_93",
         "number": 93,
-        "text": "What is the topic of Dr. Vance's presentation?",
+        "text": "What is the speaker concerned about?",
         "options": {
-          "A": "Trends in consumer behavior",
-          "B": "Budgeting for academic research",
-          "C": "Publishing scientific books",
-          "D": "Legal copyright regulations"
-        },
-        "correctAnswer": "A",
-        "explanation": "<p>Người giới thiệu nói: <i>'share insights on emerging trends in consumer behavior'</i> => Xu hướng hành vi người tiêu dùng.</p>",
-        "questionType": "Topic / Main Idea",
-        "subCategory": "Topic / Main Idea"
-      },
-      {
-        "id": "ets22_t2_p4_q94",
-        "number": 94,
-        "text": "What are the audience members asked to do?",
-        "options": {
-          "A": "Silence their mobile phones",
-          "B": "Applaud for the speaker",
-          "C": "Submit written questions",
-          "D": "Purchase copies of a book"
+          "A": "A business has lost customers.",
+          "B": "Low adoption of a service",
+          "C": "A stockroom is overcrowded.",
+          "D": "A Web site is not working."
         },
         "correctAnswer": "B",
-        "explanation": "<p>Lời kêu gọi cuối: <i>'Please join me in giving a warm symposium welcome to Dr. Evelyn Vance!'</i> => Vỗ tay chào đón diễn giả.</p>",
-        "questionType": "Request",
-        "subCategory": "Request"
+        "explanation": "<p>Người nói lo lắng vì khách hàng chưa chịu dùng dịch vụ mới: <i>'only fifteen percent of our regular supermarket customers have downloaded and placed orders through the app'</i>. Chọn <b>(B) Low adoption of a service</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference"
+      },
+      {
+        "id": "ets22_t2_p4_94",
+        "number": 94,
+        "text": "What does the speaker plan to do?",
+        "options": {
+          "A": "Transfer to another location",
+          "B": "Offer discounts online",
+          "C": "Hire more employees",
+          "D": "Add videos to a Web site"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói công bố kế hoạch: <i>'our marketing team plans to upload a series of short demonstration videos to our website...'</i>. Chọn <b>(D) Add videos to a Web site</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
       }
     ]
   },
   {
     "id": "ets22_t2_p4_s09",
-    "audioUrl": "/audio/ets2022/test2/p4_s09.mp3",
-    "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&auto=format&fit=crop&q=80",
-    "context": "Questions 95 through 97 refer to the following talk and bar chart.",
-    "transcript": "<p>Good afternoon, regional sales directors. Let's take a look at our regional revenue breakdown for the third quarter shown on the chart. As you can see, our Western branch led the company with twelve million dollars in sales, driven primarily by strong commercial fleet contracts. The Central and Southern branches also met their projected targets comfortably. However, looking at the Eastern region, revenue fell fifteen percent short of our quarterly expectations. After conducting an internal audit, we discovered that prolonged warehouse renovation disrupted order fulfillment throughout August. Fortunately, the facility is now fully operational, and we anticipate a strong rebound in quarter four.</p>",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s09.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_g01.jpg",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nHello, Mr. Harris. This is Nadia calling from Crestview Auto Dealership. I've been finalizing the documentation for the pre-owned sedan you purchased yesterday. When you come in to pick up the keys, you'll need to settle the administrative fees listed on your closing sheet. Please note that while most charges can be paid by credit card, the one-hundred-dollar fee must be paid strictly in cash or money order. Once everything is finalized, your official vehicle title will be processed and mailed to your home address within ten days. Don't forget that your purchase includes complimentary car washes at our facility for six months. Just show your customer account barcode to the attendant.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p4_q95",
+        "id": "ets22_t2_p4_95",
         "number": 95,
-        "text": "Which branch generated the highest revenue in the third quarter?",
+        "text": "Who most likely is the speaker?",
         "options": {
-          "A": "Western branch",
-          "B": "Central branch",
-          "C": "Southern branch",
-          "D": "Eastern branch"
+          "A": "A car salesperson",
+          "B": "An auto mechanic",
+          "C": "A car rental agent",
+          "D": "A vehicle inspector"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Người nói khẳng định: <i>'our Western branch led the company with twelve million dollars in sales'</i> => Chi nhánh miền Tây.</p>",
+        "explanation": "<p>Người nói gọi từ: <i>'Nadia calling from Crestview Auto Dealership... sedan you purchased yesterday'</i> (đại lý bán xe ô tô). Chọn <b>(A) A car salesperson</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t2_p4_96",
+        "number": 96,
+        "text": "Look at the graphic. Which fee must be paid in cash?",
+        "options": {
+          "A": "Filing",
+          "B": "Contract processing",
+          "C": "Vehicle title",
+          "D": "Vehicle registration"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói lưu ý: <i>'the one-hundred-dollar fee must be paid strictly in cash'</i>. Nhìn vào bảng chi phí (List of Fees), khoản phí đúng $100.00 là <b>Vehicle registration</b>. Do đó chọn <b>(D) Vehicle registration</b>.</p>",
+        "questionType": "Graphic",
+        "subCategory": "Graphic"
+      },
+      {
+        "id": "ets22_t2_p4_97",
+        "number": 97,
+        "text": "What service does the speaker remind the listener about?",
+        "options": {
+          "A": "Shuttle service",
+          "B": "Maintenance reminders",
+          "C": "Free car washes",
+          "D": "Replacement keys"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói nhắc nhở: <i>'Don't forget that your purchase includes complimentary car washes at our facility for six months.'</i> (dịch vụ rửa xe miễn phí). Chọn <b>(C) Free car washes</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
-      },
-      {
-        "id": "ets22_t2_p4_q96",
-        "number": 96,
-        "text": "Look at the talk. Why did the Eastern region experience lower sales?",
-        "options": {
-          "A": "Loss of key sales personnel",
-          "B": "Warehouse renovation disrupted fulfillment",
-          "C": "Increased competition in the area",
-          "D": "Severe seasonal flooding"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người nói giải thích: <i>'prolonged warehouse renovation disrupted order fulfillment throughout August'</i> => Sửa chữa nhà kho làm gián đoạn xử lý đơn hàng.</p>",
-        "questionType": "Graphic / Map",
-        "subCategory": "Graphic / Map"
-      },
-      {
-        "id": "ets22_t2_p4_q97",
-        "number": 97,
-        "text": "What does the speaker anticipate for the fourth quarter?",
-        "options": {
-          "A": "A strong sales rebound",
-          "B": "Further budget reductions",
-          "C": "Closure of unprofitable branches",
-          "D": "A merger with another firm"
-        },
-        "correctAnswer": "A",
-        "explanation": "<p>Người nói kết luận: <i>'we anticipate a strong rebound in quarter four'</i> => Sự phục hồi mạnh mẽ.</p>",
-        "questionType": "Inference",
-        "subCategory": "Inference"
       }
     ]
   },
   {
     "id": "ets22_t2_p4_s10",
-    "audioUrl": "/audio/ets2022/test2/p4_s10.mp3",
-    "image": "",
-    "context": "Questions 98 through 100 refer to the following talk and retreat schedule.",
-    "transcript": "<p>Attention everyone, welcome to the Highlands Conference Resort for our annual executive leadership retreat. Before we break for lunch, I have an important announcement regarding this afternoon's workshop schedule. Due to an unexpected maintenance issue in the Pine Hall audiovisual room, the seminar titled 'Navigating International Mergers' originally slated for Pine Hall at two o'clock has been moved to the Grand Ballroom. All other workshops will proceed according to the printed program in your welcome packets. Also, please remember to join us on the outdoor terrace at six-thirty this evening for our welcome reception and networking dinner. Have a great afternoon!</p>",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_s10.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/p4_g02.jpg",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nWelcome to this morning's staff meeting at Helgen's Music Shop. First, to celebrate our store's tenth anniversary and draw new foot traffic, we'll be hosting a local talent contest in September. I've already confirmed three regional musicians who have agreed to serve as guest judges. Second, take a look at the pie chart from our annual sales report on the screen. While guitars and keyboards continue to generate strong revenue, look at the slice representing twenty units sold. Pianos account for only twenty sales the entire year, yet they occupy nearly forty percent of our display showroom floor. Consequently, management has decided to discontinue stocking acoustic pianos and reallocate that floor space to band instruments and rental gear.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p4_q98",
+        "id": "ets22_t2_p4_98",
         "number": 98,
-        "text": "What type of event is taking place?",
+        "text": "Who most likely is the speaker?",
         "options": {
-          "A": "A leadership retreat",
-          "B": "A product launch press conference",
-          "C": "A shareholder election meeting",
-          "D": "A college graduation ceremony"
+          "A": "A jazz singer",
+          "B": "A music teacher",
+          "C": "A shop manager",
+          "D": "A radio host"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Người nói chào đón: <i>'annual executive leadership retreat'</i> => Kỳ nghỉ/khóa huấn luyện lãnh đạo thường niên.</p>",
-        "questionType": "Topic / Main Idea",
-        "subCategory": "Topic / Main Idea"
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói phát biểu trong cuộc họp nhân viên tại cửa hàng nhạc cụ: <i>'staff meeting at Helgen's Music Shop... management has decided'</i> (quản lý cửa hàng). Chọn <b>(C) A shop manager</b>.</p>",
+        "questionType": "Overview",
+        "subCategory": "Overview"
       },
       {
-        "id": "ets22_t2_p4_q99",
+        "id": "ets22_t2_p4_99",
         "number": 99,
-        "text": "Look at the talk. Where has the seminar 'Navigating International Mergers' been relocated to?",
+        "text": "What event will take place in September?",
         "options": {
-          "A": "Pine Hall",
-          "B": "The Grand Ballroom",
-          "C": "The Maple Suite",
-          "D": "The Outdoor Pavilion"
+          "A": "A music festival",
+          "B": "A press conference",
+          "C": "A charity dinner",
+          "D": "A talent contest"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Người nói thông báo chuyển sang: <i>'has been moved to the Grand Ballroom'</i> => Phòng đại tiệc Grand Ballroom.</p>",
-        "questionType": "Graphic / Map",
-        "subCategory": "Graphic / Map"
-      },
-      {
-        "id": "ets22_t2_p4_q100",
-        "number": 100,
-        "text": "What is scheduled for 6:30 this evening?",
-        "options": {
-          "A": "A keynote speech",
-          "B": "A welcome reception and dinner",
-          "C": "A bus tour of the city",
-          "D": "A team-building athletic contest"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p>Người nói nhắc lịch: <i>'at six-thirty this evening for our welcome reception and networking dinner'</i> => Tiệc tối giao lưu và chào mừng.</p>",
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói thông báo: <i>'we'll be hosting a local talent contest in September.'</i> Chọn <b>(D) A talent contest</b>.</p>",
         "questionType": "Detail",
         "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t2_p4_100",
+        "number": 100,
+        "text": "Look at the graphic. Which type of instrument does the speaker focus on?",
+        "options": {
+          "A": "Keyboards",
+          "B": "Pianos",
+          "C": "Drums",
+          "D": "Guitars"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người nói chỉ vào phần có số lượng 20 chiếc bán ra: <i>'look at the slice representing twenty units sold. Pianos account for only twenty sales the entire year... discontinue stocking acoustic pianos'</i>. Nhìn vào biểu đồ tròn, 20 ứng với Pianos. Chọn <b>(B) Pianos</b>.</p>",
+        "questionType": "Graphic",
+        "subCategory": "Graphic"
       }
     ]
   }
