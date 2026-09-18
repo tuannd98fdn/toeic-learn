@@ -1,0 +1,403 @@
+[
+  {
+    "type": "p1",
+    "num": 1,
+    "start": 97.0,
+    "end": 122.0,
+    "filename": "t5_p1_01.mp3"
+  },
+  {
+    "type": "p1",
+    "num": 2,
+    "start": 122.0,
+    "end": 156.0,
+    "filename": "t5_p1_02.mp3"
+  },
+  {
+    "type": "p1",
+    "num": 3,
+    "start": 156.0,
+    "end": 182.0,
+    "filename": "t5_p1_03.mp3"
+  },
+  {
+    "type": "p1",
+    "num": 4,
+    "start": 182.0,
+    "end": 209.0,
+    "filename": "t5_p1_04.mp3"
+  },
+  {
+    "type": "p1",
+    "num": 5,
+    "start": 209.0,
+    "end": 233.0,
+    "filename": "t5_p1_05.mp3"
+  },
+  {
+    "type": "p1",
+    "num": 6,
+    "start": 233.0,
+    "end": 265.0,
+    "filename": "t5_p1_06.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 7,
+    "start": 296.0,
+    "end": 315.0,
+    "filename": "t5_p2_07.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 8,
+    "start": 315.0,
+    "end": 334.0,
+    "filename": "t5_p2_08.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 9,
+    "start": 334.0,
+    "end": 354.0,
+    "filename": "t5_p2_09.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 10,
+    "start": 354.0,
+    "end": 373.0,
+    "filename": "t5_p2_10.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 11,
+    "start": 373.0,
+    "end": 387.0,
+    "filename": "t5_p2_11.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 12,
+    "start": 387.0,
+    "end": 411.0,
+    "filename": "t5_p2_12.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 13,
+    "start": 411.0,
+    "end": 430.0,
+    "filename": "t5_p2_13.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 14,
+    "start": 430.0,
+    "end": 451.0,
+    "filename": "t5_p2_14.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 15,
+    "start": 451.0,
+    "end": 473.0,
+    "filename": "t5_p2_15.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 16,
+    "start": 473.0,
+    "end": 494.0,
+    "filename": "t5_p2_16.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 17,
+    "start": 494.0,
+    "end": 513.0,
+    "filename": "t5_p2_17.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 18,
+    "start": 513.0,
+    "end": 530.0,
+    "filename": "t5_p2_18.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 19,
+    "start": 530.0,
+    "end": 551.0,
+    "filename": "t5_p2_19.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 20,
+    "start": 551.0,
+    "end": 572.0,
+    "filename": "t5_p2_20.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 21,
+    "start": 572.0,
+    "end": 592.0,
+    "filename": "t5_p2_21.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 22,
+    "start": 592.0,
+    "end": 612.0,
+    "filename": "t5_p2_22.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 23,
+    "start": 612.0,
+    "end": 631.0,
+    "filename": "t5_p2_23.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 24,
+    "start": 631.0,
+    "end": 651.0,
+    "filename": "t5_p2_24.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 25,
+    "start": 651.0,
+    "end": 672.0,
+    "filename": "t5_p2_25.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 26,
+    "start": 672.0,
+    "end": 689.0,
+    "filename": "t5_p2_26.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 27,
+    "start": 689.0,
+    "end": 712.0,
+    "filename": "t5_p2_27.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 28,
+    "start": 712.0,
+    "end": 733.0,
+    "filename": "t5_p2_28.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 29,
+    "start": 733.0,
+    "end": 754.0,
+    "filename": "t5_p2_29.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 30,
+    "start": 754.0,
+    "end": 771.0,
+    "filename": "t5_p2_30.mp3"
+  },
+  {
+    "type": "p2",
+    "num": 31,
+    "start": 771.0,
+    "end": 790.0,
+    "filename": "t5_p2_31.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 1,
+    "q_start": 32,
+    "start": 826.0,
+    "end": 897.0,
+    "filename": "t5_p3_s01.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 2,
+    "q_start": 35,
+    "start": 897.0,
+    "end": 983.0,
+    "filename": "t5_p3_s02.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 3,
+    "q_start": 38,
+    "start": 983.0,
+    "end": 1063.0,
+    "filename": "t5_p3_s03.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 4,
+    "q_start": 41,
+    "start": 1063.0,
+    "end": 1154.0,
+    "filename": "t5_p3_s04.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 5,
+    "q_start": 44,
+    "start": 1154.0,
+    "end": 1235.0,
+    "filename": "t5_p3_s05.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 6,
+    "q_start": 47,
+    "start": 1235.0,
+    "end": 1311.0,
+    "filename": "t5_p3_s06.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 7,
+    "q_start": 50,
+    "start": 1311.0,
+    "end": 1395.0,
+    "filename": "t5_p3_s07.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 8,
+    "q_start": 53,
+    "start": 1395.0,
+    "end": 1474.0,
+    "filename": "t5_p3_s08.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 9,
+    "q_start": 56,
+    "start": 1474.0,
+    "end": 1566.0,
+    "filename": "t5_p3_s09.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 10,
+    "q_start": 59,
+    "start": 1566.0,
+    "end": 1647.0,
+    "filename": "t5_p3_s10.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 11,
+    "q_start": 62,
+    "start": 1647.0,
+    "end": 1742.0,
+    "filename": "t5_p3_s11.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 12,
+    "q_start": 65,
+    "start": 1742.0,
+    "end": 1831.0,
+    "filename": "t5_p3_s12.mp3"
+  },
+  {
+    "type": "p3",
+    "set": 13,
+    "q_start": 68,
+    "start": 1831.0,
+    "end": 1916.0,
+    "filename": "t5_p3_s13.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 1,
+    "q_start": 71,
+    "start": 1947.0,
+    "end": 2023.0,
+    "filename": "t5_p4_s01.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 2,
+    "q_start": 74,
+    "start": 2023.0,
+    "end": 2100.0,
+    "filename": "t5_p4_s02.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 3,
+    "q_start": 77,
+    "start": 2100.0,
+    "end": 2178.0,
+    "filename": "t5_p4_s03.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 4,
+    "q_start": 80,
+    "start": 2178.0,
+    "end": 2260.0,
+    "filename": "t5_p4_s04.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 5,
+    "q_start": 83,
+    "start": 2260.0,
+    "end": 2339.0,
+    "filename": "t5_p4_s05.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 6,
+    "q_start": 86,
+    "start": 2339.0,
+    "end": 2420.0,
+    "filename": "t5_p4_s06.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 7,
+    "q_start": 89,
+    "start": 2420.0,
+    "end": 2507.0,
+    "filename": "t5_p4_s07.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 8,
+    "q_start": 92,
+    "start": 2507.0,
+    "end": 2589.0,
+    "filename": "t5_p4_s08.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 9,
+    "q_start": 95,
+    "start": 2589.0,
+    "end": 2674.0,
+    "filename": "t5_p4_s09.mp3"
+  },
+  {
+    "type": "p4",
+    "set": 10,
+    "q_start": 98,
+    "start": 2674.0,
+    "end": 2760.0,
+    "filename": "t5_p4_s10.mp3"
+  }
+]

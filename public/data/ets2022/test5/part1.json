@@ -1,0 +1,104 @@
+[
+  {
+    "id": "ets22_t5_p1_01",
+    "number": 1,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_01.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_01.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "D",
+    "transcript": "<p><b>Transcript:</b><br/>(A) The people are watching a presentation.<br/>(B) Some books are being placed on a cart.<br/>(C) The people are kneeling in front of a shelf.<br/><b>(D) The people are visiting a library.</b></p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Mọi người đang xem một bài thuyết trình.<br/>(B) Một số cuốn sách đang được xếp lên xe đẩy.<br/>(C) Mọi người đang quỳ trước giá sách.<br/>(D) Mọi người đang đến thăm/ở trong một thư viện.</p><p><b>Phân tích chi tiết:</b><br/>Bức tranh chụp cảnh một nhóm người đang đứng và đi lại giữa các dãy kệ sách lớn trong một thư viện công cộng (<i>visiting a library</i>). Đáp án <b>(D)</b> miêu tả chính xác bối cảnh tổng quát của bức ảnh. Các đáp án (A), (B), (C) đều chứa chi tiết sai (không có bài thuyết trình, không có xe đẩy sách, không có ai đang quỳ gối).</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
+  },
+  {
+    "id": "ets22_t5_p1_02",
+    "number": 2,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_02.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_02.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><b>Transcript:</b><br/>(A) The women are facing each other.<br/>(B) The women are walking together.<br/><b>(C) One of the women is removing an item from her purse.</b><br/>(D) One of the women is drinking from a coffee cup.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Những người phụ nữ đang đối mặt nhau.<br/>(B) Những người phụ nữ đang đi bộ cùng nhau.<br/>(C) Một trong những người phụ nữ đang lấy một món đồ ra khỏi túi xách.<br/>(D) Một trong những người phụ nữ đang uống nước từ tách cà phê.</p><p><b>Phân tích chi tiết:</b><br/>Trong bức ảnh, một trong hai người phụ nữ đang mở túi xách và thò tay lấy đồ ra (<i>removing an item from her purse</i>). Đáp án <b>(C)</b> miêu tả chính xác hành động cụ thể này. (A) sai vì họ không đối diện nhau, (B) không phản ánh hành động nổi bật nhất, (D) không ai uống nước.</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
+  },
+  {
+    "id": "ets22_t5_p1_03",
+    "number": 3,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_03.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_03.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><b>Transcript:</b><br/>(A) One of the men is emptying out a plastic bag.<br/>(B) They're waiting in line at a checkout counter.<br/><b>(C) One of the men is pointing at some flowers.</b><br/>(D) They're selecting some fruits and vegetables.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một người đàn ông đang đổ một túi nhựa ra ngoài.<br/>(B) Họ đang xếp hàng tại quầy thanh toán.<br/>(C) Một người đàn ông đang chỉ tay vào những bông hoa.<br/>(D) Họ đang lựa chọn một số loại trái cây và rau củ quả.</p><p><b>Phân tích chi tiết:</b><br/>Người đàn ông đứng phía trước đang đưa tay chỉ vào những bó hoa được bày bán ở quầy (<i>pointing at some flowers</i>). Đáp án <b>(C)</b> là miêu tả hành động chính xác nhất của nhân vật. (A), (B), (D) đều chứa hành động không xuất hiện trong hình.</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
+  },
+  {
+    "id": "ets22_t5_p1_04",
+    "number": 4,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_04.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_04.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><b>Transcript:</b><br/><b>(A) Some plants have been arranged in a row.</b><br/>(B) The woman is leaning against a window sill.<br/>(C) Some cabinets have been opened at a workstation.<br/>(D) The woman is reading a billboard.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một số cây cảnh đã được sắp xếp thành một hàng.<br/>(B) Người phụ nữ đang tựa vào bậu cửa sổ.<br/>(C) Một số tủ hồ sơ đã được mở tại nơi làm việc.<br/>(D) Người phụ nữ đang đọc một biển quảng cáo.</p><p><b>Phân tích chi tiết:</b><br/>Trên bậu cửa sổ hoặc giá kệ có một dãy các chậu cây nhỏ được xếp thẳng hàng ngay ngắn (<i>arranged in a row</i>). Đáp án <b>(A)</b> miêu tả chính xác trạng thái của đồ vật trong ảnh. Người phụ nữ không tựa vào cửa sổ (B), không có tủ mở (C), không có biển quảng cáo (D).</p>",
+    "questionType": "Objects / Scene",
+    "subCategory": "Objects"
+  },
+  {
+    "id": "ets22_t5_p1_05",
+    "number": 5,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_05.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_05.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "D",
+    "transcript": "<p><b>Transcript:</b><br/>(A) A house overlooks a fishing pier.<br/>(B) Ducks are swimming in a lake.<br/>(C) A bridge crosses over a river.<br/><b>(D) Some trees border a pond.</b></p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một ngôi nhà nhìn ra cầu tàu câu cá.<br/>(B) Những con vịt đang bơi trong hồ.<br/>(C) Một cây cầu bắc qua sông.<br/>(D) Một số cây cối viền quanh một cái ao.</p><p><b>Phân tích chi tiết:</b><br/>Bức tranh chụp một hồ/ao nước phẳng lặng với hàng cây xanh mọc bao bọc xung quanh bờ (<i>trees border a pond</i>). Đáp án <b>(D)</b> miêu tả đúng cảnh vật thiên nhiên. Không có cầu tàu (A), không có vịt bơi (B), không có cầu bắc qua (C).</p>",
+    "questionType": "Scene",
+    "subCategory": "Scene"
+  },
+  {
+    "id": "ets22_t5_p1_06",
+    "number": 6,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_06.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t5_p1_06.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><b>Transcript:</b><br/>(A) One of the women is picking up a suitcase.<br/><b>(B) One of the women is holding a notebook under her arm.</b><br/>(C) One of the women is standing in the doorway.<br/>(D) One of the women is posting a sign on the wall.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một trong những người phụ nữ đang nhấc vali lên.<br/>(B) Một trong những người phụ nữ đang kẹp một cuốn sổ dưới cánh tay.<br/>(C) Một trong những người phụ nữ đang đứng ở ngưỡng cửa.<br/>(D) Một trong những người phụ nữ đang dán một biển báo lên tường.</p><p><b>Phân tích chi tiết:</b><br/>Một trong những người phụ nữ đang kẹp sổ tay/tài liệu dưới nách (<i>holding a notebook under her arm</i>). Đáp án <b>(B)</b> miêu tả cụ thể và chính xác nhất hành động/đặc điểm của nhân vật trong hình.</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
+  }
+]

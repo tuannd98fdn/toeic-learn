@@ -1,0 +1,577 @@
+import json
+import os
+
+CDN_BASE = "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets"
+
+part4_data = [
+    # Set 1: Q71 - Q73
+    {
+        "id": "ets22_t5_p4_s01",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s01.mp3",
+        "context": "Questions 71-73 refer to the following advertisement.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "Are you looking for a location to host your next company event? Well, look no further than Morelli's. With our delicious food and private dining rooms, Morelli's is the perfect place for everything from small to large business gatherings. But that's not the only reason to choose Morelli's. We're famous for our friendly wait staff. They are always ready to help. Planning to hold an event with food at your office? No problem. We'll bring the food to you. You can view our catering packages on our website.</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_71",
+                "number": 71,
+                "text": "What is most likely being advertised?",
+                "options": {
+                    "A": "A convention center",
+                    "B": "A restaurant",
+                    "C": "A supermarket",
+                    "D": "A shipping company"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Thứ gì nhiều khả năng đang được quảng cáo?<br/>(A) Một trung tâm hội nghị.<br/>(B) Một nhà hàng (A restaurant).<br/>(C) Một siêu thị.<br/>(D) Một công ty vận chuyển.</p><p><b>Phân tích:</b> Bài quảng cáo giới thiệu Morelli's với món ăn ngon và các phòng ăn riêng: <i>'With our delicious food and private dining rooms... friendly wait staff... catering packages'</i>. Do đó đây là một nhà hàng.</p>",
+                "questionType": "Product / Service",
+                "subCategory": "Overview"
+            },
+            {
+                "id": "ets22_t5_p4_72",
+                "number": 72,
+                "text": "What is the business famous for?",
+                "options": {
+                    "A": "Its prices",
+                    "B": "Its location",
+                    "C": "Its history",
+                    "D": "Its staff"
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Doanh nghiệp nổi tiếng về điều gì?<br/>(A) Giá cả.<br/>(B) Vị trí.<br/>(C) Lịch sử.<br/>(D) Đội ngũ nhân viên (Its staff).</p><p><b>Phân tích:</b> Người nói nêu rõ: <i>'We're famous for our friendly wait staff. They are always ready to help.'</i> (Chúng tôi nổi tiếng với đội ngũ nhân viên phục vụ bàn thân thiện). Chọn <b>(D)</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_73",
+                "number": 73,
+                "text": "What does the speaker say is on a Web site?",
+                "options": {
+                    "A": "Some catering options",
+                    "B": "Some driving directions",
+                    "C": "Current discounts",
+                    "D": "Business hours"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nói cho biết thứ gì có trên trang web?<br/>(A) Một số lựa chọn gói dịch vụ ăn uống (Some catering options).<br/>(B) Chỉ dẫn đường đi.<br/>(C) Các chương trình giảm giá hiện tại.<br/>(D) Giờ mở cửa.</p><p><b>Phân tích:</b> Câu cuối cùng nêu: <i>'You can view our catering packages on our website.'</i> (Bạn có thể xem các gói dịch vụ phục vụ tiệc ăn uống trên trang web của chúng tôi).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            }
+        ]
+    },
+
+    # Set 2: Q74 - Q76
+    {
+        "id": "ets22_t5_p4_s02",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s02.mp3",
+        "context": "Questions 74-76 refer to the following excerpt from a meeting.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "I have an update about the video game you've been working hard to develop. As you know, we'll be partnering with a video game publishing company to get our product on the market. I just received their initial contract and I'm pleased to say the terms they are proposing are quite favorable. We're promised a payment as soon as we sign on. Our legal team wants to make sure the programmers are happy before they negotiate some other provisions in the contract. I'll send you the document later.</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_74",
+                "number": 74,
+                "text": "Who most likely are the listeners?",
+                "options": {
+                    "A": "Product developers",
+                    "B": "Investment bankers",
+                    "C": "Book publishers",
+                    "D": "Building contractors"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nghe nhiều khả năng là ai?<br/>(A) Những người phát triển sản phẩm (Product developers).<br/>(B) Nhân viên ngân hàng đầu tư.<br/>(C) Nhà xuất bản sách.<br/>(D) Nhà thầu xây dựng.</p><p><b>Phân tích:</b> Người nói mở đầu: <i>'I have an update about the video game you've been working hard to develop.'</i> (Tôi có thông tin cập nhật về trò chơi điện tử mà các bạn đang nỗ lực phát triển) và sau đó nhắc đến <i>'the programmers'</i>. Do đó người nghe là các nhà phát triển sản phẩm/lập trình viên.</p>",
+                "questionType": "Audience",
+                "subCategory": "Overview"
+            },
+            {
+                "id": "ets22_t5_p4_75",
+                "number": 75,
+                "text": "What does the speaker say is favorable about a contract?",
+                "options": {
+                    "A": "There is 24-hour service call availability.",
+                    "B": "There is an extended warranty.",
+                    "C": "There is an immediate payment.",
+                    "D": "There is a low interest rate."
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nói cho biết điều gì là thuận lợi trong hợp đồng?<br/>(A) Có dịch vụ cuộc gọi hỗ trợ 24 giờ.<br/>(B) Có bảo hành mở rộng.<br/>(C) Có một khoản thanh toán ngay lập tức (There is an immediate payment).<br/>(D) Có mức lãi suất thấp.</p><p><b>Phân tích:</b> Người nói nêu rõ: <i>'We're promised a payment as soon as we sign on.'</i> (Chúng ta được hứa thanh toán một khoản tiền ngay khi ký hợp đồng = immediate payment).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_76",
+                "number": 76,
+                "text": "What does the speaker imply when he says, “I’ll send you the document later”?",
+                "options": {
+                    "A": "He is having computer problems.",
+                    "B": "He wants the listeners’ opinions.",
+                    "C": "He has missed a deadline.",
+                    "D": "He is almost finished with some work."
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nói ám chỉ điều gì khi nói: 'Tôi sẽ gửi tài liệu cho các bạn sau'?<br/>(A) Anh ấy đang gặp sự cố máy tính.<br/>(B) Anh ấy muốn lấy ý kiến của người nghe (He wants the listeners’ opinions).<br/>(C) Anh ấy đã trễ hạn chót.<br/>(D) Anh ấy sắp hoàn thành công việc.</p><p><b>Phân tích:</b> Trước đó người nói cho biết đội ngũ pháp lý muốn chắc chắn các lập trình viên hài lòng với các điều khoản trước khi đàm phán tiếp (<i>'Our legal team wants to make sure the programmers are happy...'</i>), vì vậy anh ấy gửi tài liệu hợp đồng để các lập trình viên xem và cho ý kiến phản hồi.</p>",
+                "questionType": "Speaker Meaning",
+                "subCategory": "Inference"
+            }
+        ]
+    },
+
+    # Set 3: Q77 - Q79
+    {
+        "id": "ets22_t5_p4_s03",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s03.mp3",
+        "context": "Questions 77-79 refer to the following tour information.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "Thank you for joining me on this tour of our solar panel manufacturing plant. Here at Nature's Solar Energy Incorporated, we believe our customers should have the chance to see the production of the solar panels that power their homes and businesses. Before we begin, I want to remind you about our main safety rule. Make sure you wear the hard hats we provided and keep them on at all times. Okay, our first stop will be in the showroom. I'll show you the latest models of our solar panels so you understand exactly how they work.</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_77",
+                "number": 77,
+                "text": "Where is the tour taking place?",
+                "options": {
+                    "A": "At an art gallery",
+                    "B": "At a construction site",
+                    "C": "At a solar-panel factory",
+                    "D": "At a car-part warehouse"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Chuyến tham quan đang diễn ra ở đâu?<br/>(A) Tại một phòng triển lãm nghệ thuật.<br/>(B) Tại một công trường xây dựng.<br/>(C) Tại nhà máy sản xuất pin mặt trời (At a solar-panel factory).<br/>(D) Tại nhà kho phụ tùng ô tô.</p><p><b>Phân tích:</b> Câu đầu tiên: <i>'Thank you for joining me on this tour of our solar panel manufacturing plant.'</i> (Cảm ơn quý vị đã tham gia chuyến tham quan nhà máy sản xuất tấm pin mặt trời của chúng tôi).</p>",
+                "questionType": "Location",
+                "subCategory": "Overview"
+            },
+            {
+                "id": "ets22_t5_p4_78",
+                "number": 78,
+                "text": "What does the speaker remind the listeners to do?",
+                "options": {
+                    "A": "Wear protective hats",
+                    "B": "Follow posted signs",
+                    "C": "Stay together as a group",
+                    "D": "Store personal belongings"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nói nhắc nhở người nghe làm gì?<br/>(A) Đội mũ bảo hộ (Wear protective hats).<br/>(B) Làm theo các biển báo được dán.<br/>(C) Đi cùng nhau theo nhóm.<br/>(D) Cất giữ đồ dùng cá nhân.</p><p><b>Phân tích:</b> Người nói nhấn mạnh: <i>'Make sure you wear the hard hats we provided and keep them on at all times.'</i> Trong đó <i>hard hats</i> = <i>protective hats</i> (mũ bảo hộ).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_79",
+                "number": 79,
+                "text": "What will the listeners see first on the tour?",
+                "options": {
+                    "A": "A map of the grounds",
+                    "B": "An informational video",
+                    "C": "Some product models",
+                    "D": "Some historic photographs"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nghe sẽ nhìn thấy thứ gì đầu tiên trong chuyến tham quan?<br/>(A) Bản đồ khu đất.<br/>(B) Video thông tin.<br/>(C) Một số mẫu sản phẩm (Some product models).<br/>(D) Một số bức ảnh lịch sử.</p><p><b>Phân tích:</b> Người hướng dẫn nói: <i>'our first stop will be in the showroom. I'll show you the latest models of our solar panels...'</i> (điểm dừng đầu tiên là phòng trưng bày nơi tôi sẽ giới thiệu các mẫu sản phẩm mới nhất).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            }
+        ]
+    },
+
+    # Set 4: Q80 - Q82
+    {
+        "id": "ets22_t5_p4_s04",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s04.mp3",
+        "context": "Questions 80-82 refer to the following broadcast.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "Thanks for tuning in to Business World. On today's episode, we'll be taking a deep dive into the topic of making a career change. Transitioning to a new industry can be challenging. It's important to highlight any transferable skills you have to offer. What abilities do you currently possess that could be useful in a new role? And how can you promote them on professional networking sites? To help us explore this, So-Hee Chung, Chief Executive Officer of the popular job search app Zantage, is joining us in the studio today. Welcome, So-Hee!</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_80",
+                "number": 80,
+                "text": "What is the focus of the episode?",
+                "options": {
+                    "A": "Improving training programs",
+                    "B": "Changing careers",
+                    "C": "Designing Web sites",
+                    "D": "Increasing sales"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Trọng tâm của tập phát sóng này là gì?<br/>(A) Cải thiện chương trình đào tạo.<br/>(B) Thay đổi nghề nghiệp (Changing careers).<br/>(C) Thiết kế trang web.<br/>(D) Gia tăng doanh số.</p><p><b>Phân tích:</b> Người dẫn chương trình giới thiệu: <i>'On today's episode, we'll be taking a deep dive into the topic of making a career change.'</i> (Trong tập hôm nay, chúng ta sẽ đi sâu vào chủ đề chuyển đổi nghề nghiệp = Changing careers).</p>",
+                "questionType": "Topic",
+                "subCategory": "Overview"
+            },
+            {
+                "id": "ets22_t5_p4_81",
+                "number": 81,
+                "text": "What does the speaker say is important?",
+                "options": {
+                    "A": "Complying with industry regulations",
+                    "B": "Emphasizing transferable skills",
+                    "C": "Offering promotional discounts",
+                    "D": "Attending networking events"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nói cho biết điều gì là quan trọng?<br/>(A) Tuân thủ các quy định ngành.<br/>(B) Nhấn mạnh các kỹ năng có thể chuyển đổi (Emphasizing transferable skills).<br/>(C) Đưa ra các khuyến mãi giảm giá.<br/>(D) Tham dự các sự kiện kết nối.</p><p><b>Phân tích:</b> Người nói nêu: <i>'It's important to highlight any transferable skills you have to offer.'</i> Trong đó <i>highlight</i> đồng nghĩa với <i>emphasize</i>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_82",
+                "number": 82,
+                "text": "Who is So-Hee Chung?",
+                "options": {
+                    "A": "A company executive",
+                    "B": "A government official",
+                    "C": "A news reporter",
+                    "D": "A financial analyst"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> So-Hee Chung là ai?<br/>(A) Giám đốc điều hành công ty (A company executive).<br/>(B) Một quan chức chính phủ.<br/>(C) Phóng viên tin tức.<br/>(D) Chuyên viên phân tích tài chính.</p><p><b>Phân tích:</b> Người dẫn chương trình giới thiệu: <i>'So-Hee Chung, Chief Executive Officer of the popular job search app Zantage...'</i> (CEO của ứng dụng tìm việc Zantage = company executive).</p>",
+                "questionType": "Occupation",
+                "subCategory": "Overview"
+            }
+        ]
+    },
+
+    # Set 5: Q83 - Q85
+    {
+        "id": "ets22_t5_p4_s05",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s05.mp3",
+        "context": "Questions 83-85 refer to the following telephone message.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "Hello, this is Adriana Ortiz, set designer from the Summer Theatre. We met last week. Since you're directing the new play we're featuring, I'd like to get together to discuss some ideas I have. I've read the script and started sketching possible backgrounds we could use. You mentioned being concerned about the short amount of time we have for creating a set. Well, we have a large team, and there are lots of props in storage. I'm going out of town to see some relatives tomorrow, but if you're free to meet this weekend, my schedule's flexible then.</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_83",
+                "number": 83,
+                "text": "What is the message mainly about?",
+                "options": {
+                    "A": "Scheduling auditions",
+                    "B": "Purchasing tickets",
+                    "C": "Designing a set",
+                    "D": "Revising a script"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Tin nhắn chủ yếu nói về điều gì?<br/>(A) Lên lịch thử vai.<br/>(B) Mua vé.<br/>(C) Thiết kế bối cảnh / sân khấu (Designing a set).<br/>(D) Sửa đổi kịch bản.</p><p><b>Phân tích:</b> Adriana Ortiz tự giới thiệu là <i>'set designer from the Summer Theatre'</i> và gọi để bàn về ý tưởng thiết kế sân khấu: <i>'started sketching possible backgrounds we could use... creating a set'</i>.</p>",
+                "questionType": "Gist / Purpose",
+                "subCategory": "Overview"
+            },
+            {
+                "id": "ets22_t5_p4_84",
+                "number": 84,
+                "text": "Why does the speaker say, “we have a large team”?",
+                "options": {
+                    "A": "To make a complaint",
+                    "B": "To provide reassurance",
+                    "C": "To express surprise",
+                    "D": "To refuse an offer"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Tại sao người nói lại nói: 'chúng tôi có một đội ngũ đông đảo'?<br/>(A) Để phàn nàn.<br/>(B) Để trấn an người nghe (To provide reassurance).<br/>(C) Để bày tỏ sự ngạc nhiên.<br/>(D) Để từ chối lời đề nghị.</p><p><b>Phân tích:</b> Người đạo diễn lo lắng về thời gian quá ngắn để dựng sân khấu (<i>'concerned about the short amount of time we have for creating a set'</i>), người nói đáp: 'Chúng tôi có đội ngũ đông và nhiều đạo cụ trong kho' nhằm giúp người nghe yên tâm rằng công việc sẽ hoàn thành kịp tiến độ.</p>",
+                "questionType": "Speaker Meaning",
+                "subCategory": "Inference"
+            },
+            {
+                "id": "ets22_t5_p4_85",
+                "number": 85,
+                "text": "Why is the speaker unable to meet tomorrow?",
+                "options": {
+                    "A": "Her car needs repairs.",
+                    "B": "She is moving to a new apartment.",
+                    "C": "She is going hiking.",
+                    "D": "She is visiting family."
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Tại sao người nói không thể gặp vào ngày mai?<br/>(A) Xe của cô ấy cần sửa chữa.<br/>(B) Cô ấy đang chuyển đến căn hộ mới.<br/>(C) Cô ấy đi bộ đường dài leo núi.<br/>(D) Cô ấy đi thăm người thân trong gia đình (She is visiting family).</p><p><b>Phân tích:</b> Người nói giải thích: <i>'I'm going out of town to see some relatives tomorrow'</i> (Ngày mai tôi phải đi xa để thăm một số người họ hàng/thân nhân = visiting family).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            }
+        ]
+    },
+
+    # Set 6: Q86 - Q88
+    {
+        "id": "ets22_t5_p4_s06",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s06.mp3",
+        "context": "Questions 86-88 refer to the following talk.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "Welcome to Cornerway Industries. I'm Sunita Yadav, Coordinator of the Internship Program. I'm sure you'll find your summer experience here rewarding. Before we begin the first training session, we have to take care of some administrative matters. As you entered the room, you received a packet of documents. It includes information about logging into your email and submitting time sheets. I'll briefly go over those procedures now. Then, in an hour, you'll head to the Security Office to get identification badges. You'll need those to enter and exit the building.</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_86",
+                "number": 86,
+                "text": "Who most likely are the listeners?",
+                "options": {
+                    "A": "Board members",
+                    "B": "Government officials",
+                    "C": "Clients",
+                    "D": "Interns"
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nghe nhiều khả năng là ai?<br/>(A) Thành viên hội đồng quản trị.<br/>(B) Quan chức chính phủ.<br/>(C) Khách hàng.<br/>(D) Các thực tập sinh (Interns).</p><p><b>Phân tích:</b> Người nói giới thiệu: <i>'I'm Sunita Yadav, Coordinator of the Internship Program. I'm sure you'll find your summer experience here rewarding.'</i> (Tôi là điều phối viên chương trình thực tập sinh... kỳ trải nghiệm mùa hè tại đây). Do đó đối tượng nghe là các thực tập sinh.</p>",
+                "questionType": "Audience",
+                "subCategory": "Overview"
+            },
+            {
+                "id": "ets22_t5_p4_87",
+                "number": 87,
+                "text": "What did the listeners receive?",
+                "options": {
+                    "A": "An event ticket",
+                    "B": "An information packet",
+                    "C": "A project invoice",
+                    "D": "An annual report"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nghe đã nhận được thứ gì?<br/>(A) Vé tham dự sự kiện.<br/>(B) Một tập tài liệu thông tin (An information packet).<br/>(C) Hóa đơn dự án.<br/>(D) Báo cáo thường niên.</p><p><b>Phân tích:</b> Người nói nhắc: <i>'As you entered the room, you received a packet of documents. It includes information about...'</i> (Khi bước vào phòng quý vị đã nhận được một tập tài liệu chứa thông tin = an information packet).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_88",
+                "number": 88,
+                "text": "According to the speaker, what will the listeners do in an hour?",
+                "options": {
+                    "A": "Have lunch",
+                    "B": "Join a conference call",
+                    "C": "Get security badges",
+                    "D": "Take a building tour"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Theo người nói, người nghe sẽ làm gì trong một giờ nữa?<br/>(A) Ăn trưa.<br/>(B) Tham gia cuộc gọi hội nghị.<br/>(C) Nhận thẻ an ninh (Get security badges).<br/>(D) Tham quan tòa nhà.</p><p><b>Phân tích:</b> Người nói thông báo: <i>'Then, in an hour, you'll head to the Security Office to get identification badges.'</i> (Sau đó trong một giờ nữa, các bạn sẽ đến Phòng An ninh để nhận thẻ nhận dạng/thẻ an ninh).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            }
+        ]
+    },
+
+    # Set 7: Q89 - Q91
+    {
+        "id": "ets22_t5_p4_s07",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s07.mp3",
+        "context": "Questions 89-91 refer to the following excerpt from a meeting.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "Last month, I went to a conference that allowed me the opportunity to meet other small business owners from the region and have discussions with them. A number of helpful ideas were exchanged. For example, several speakers pointed out that it can be difficult for customers to navigate corporate websites, especially when looking for information like a phone number they can call when they need service. I've asked the IT department to redesign our website to make it more navigable. If you look up here, I'll demonstrate the new layout that'll go live in a few weeks.</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_89",
+                "number": 89,
+                "text": "What did the speaker do last month?",
+                "options": {
+                    "A": "She relocated to another building.",
+                    "B": "She hired additional employees.",
+                    "C": "She organized a luncheon.",
+                    "D": "She attended a conference."
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nói đã làm gì vào tháng trước?<br/>(A) Cô ấy đã chuyển đến tòa nhà khác.<br/>(B) Cô ấy đã tuyển thêm nhân viên.<br/>(C) Cô ấy đã tổ chức tiệc trưa.<br/>(D) Cô ấy đã tham dự một hội nghị (She attended a conference).</p><p><b>Phân tích:</b> Người nói mở đầu: <i>'Last month, I went to a conference that allowed me the opportunity to meet other small business owners...'</i> (Tháng trước tôi đã đi dự một hội nghị).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_90",
+                "number": 90,
+                "text": "What do some customers have trouble locating?",
+                "options": {
+                    "A": "Delivery schedules",
+                    "B": "Password requirements",
+                    "C": "Contact information",
+                    "D": "Account archives"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Một số khách hàng gặp khó khăn khi tìm kiếm thứ gì?<br/>(A) Lịch giao hàng.<br/>(B) Yêu cầu mật khẩu.<br/>(C) Thông tin liên hệ (Contact information).<br/>(D) Lưu trữ tài khoản.</p><p><b>Phân tích:</b> Người nói chỉ ra: <i>'it can be difficult for customers to navigate corporate websites, especially when looking for information like a phone number they can call when they need service.'</i> Tìm số điện thoại để gọi khi cần dịch vụ chính là tìm thông tin liên hệ (contact information).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_91",
+                "number": 91,
+                "text": "What will the speaker do next?",
+                "options": {
+                    "A": "Give a demonstration",
+                    "B": "Introduce a guest",
+                    "C": "Distribute some documents",
+                    "D": "Hand out some awards"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nói sẽ làm gì tiếp theo?<br/>(A) Trình diễn / minh họa một bản thử nghiệm (Give a demonstration).<br/>(B) Giới thiệu một vị khách.<br/>(C) Phân phát tài liệu.<br/>(D) Trao giải thưởng.</p><p><b>Phân tích:</b> Câu kết bài nói: <i>'If you look up here, I'll demonstrate the new layout that'll go live in a few weeks.'</i> (Nếu các bạn nhìn lên đây, tôi sẽ minh họa bố cục trang web mới sắp hoạt động).</p>",
+                "questionType": "Next Action",
+                "subCategory": "Next Action"
+            }
+        ]
+    },
+
+    # Set 8: Q92 - Q94
+    {
+        "id": "ets22_t5_p4_s08",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s08.mp3",
+        "context": "Questions 92-94 refer to the following speech.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "Thank you all for coming to this town hall meeting. I'm the mayor of Madison, and the first topic on our agenda is tourism. We're all very excited that the documentary about our historic town center, which was filmed here last year, is a box office success. My office has already received hundreds of inquiries from travel agencies around the world asking about hotel capacity and tour buses. Good news for local businesses. However, some people are wondering about the damage that the influx of tourists on their streets may cause, and they do have a point. Those roads weren't designed for traffic.</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_92",
+                "number": 92,
+                "text": "Who is the speaker?",
+                "options": {
+                    "A": "A real-estate developer",
+                    "B": "A city official",
+                    "C": "A history professor",
+                    "D": "A television reporter"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nói là ai?<br/>(A) Nhà phát triển bất động sản.<br/>(B) Một quan chức thành phố (A city official).<br/>(C) Giáo sư lịch sử.<br/>(D) Phóng viên truyền hình.</p><p><b>Phân tích:</b> Người nói tự giới thiệu: <i>'I'm the mayor of Madison'</i> (Tôi là thị trưởng thành phố Madison = city official).</p>",
+                "questionType": "Occupation",
+                "subCategory": "Overview"
+            },
+            {
+                "id": "ets22_t5_p4_93",
+                "number": 93,
+                "text": "What happened last year in Madison?",
+                "options": {
+                    "A": "An international hotel convention was held.",
+                    "B": "A national sports event was hosted.",
+                    "C": "A documentary movie was filmed.",
+                    "D": "A historic landmark was named."
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Điều gì đã diễn ra vào năm ngoái ở Madison?<br/>(A) Hội nghị khách sạn quốc tế được tổ chức.<br/>(B) Một sự kiện thể thao quốc gia được đăng cai.<br/>(C) Một bộ phim tài liệu đã được ghi hình (A documentary movie was filmed).<br/>(D) Một di tích lịch sử được đặt tên.</p><p><b>Phân tích:</b> Thị trưởng cho biết: <i>'the documentary about our historic town center, which was filmed here last year, is a box office success.'</i> (bộ phim tài liệu về trung tâm lịch sử được quay ở đây năm ngoái đã thành công vang dội tại phòng vé).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_94",
+                "number": 94,
+                "text": "Why does the speaker say, “Those roads weren’t designed for traffic”?",
+                "options": {
+                    "A": "To make a complaint",
+                    "B": "To show surprise",
+                    "C": "To express concern",
+                    "D": "To offer an apology"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Tại sao người nói lại nói: 'Những con đường đó không được thiết kế cho lưu lượng giao thông đông đúc'?<br/>(A) Để phàn nàn.<br/>(B) Để thể hiện sự ngạc nhiên.<br/>(C) Để bày tỏ sự lo ngại (To express concern).<br/>(D) Để đưa ra lời xin lỗi.</p><p><b>Phân tích:</b> Thị trưởng nêu ra nỗi băn khoăn về sự xuống cấp hư hỏng của đường sá trước lượng du khách đổ về quá đông (<i>'wondering about the damage that the influx of tourists on their streets may cause... Those roads weren’t designed for traffic.'</i>). Câu nói bày tỏ sự lo ngại về cơ sở hạ tầng giao thông.</p>",
+                "questionType": "Speaker Meaning",
+                "subCategory": "Inference"
+            }
+        ]
+    },
+
+    # Set 9: Q95 - Q97 (Graphic)
+    {
+        "id": "ets22_t5_p4_s09",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s09.mp3",
+        "graphicImage": f"{CDN_BASE}/t5_p4_g01.jpg",
+        "context": "Questions 95-97 refer to the following announcement and store layout.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "Attention book lovers. The Regal Reader Bookstore is excited to announce the beginning of its summer author series. Join us this Friday when renowned author Karima Sameer will visit the store to read from her books, sign copies, and chat with customers. Stop by our history aisle to find her latest book about fascinating North Africa. And make sure you enter our annual drawing while you're here to win a $5 gift card for our cafe. Use it to purchase any of our freshly brewed coffees or homemade pastries.</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_95",
+                "number": 95,
+                "text": "According to the speaker, what will happen this Friday?",
+                "options": {
+                    "A": "A delivery will arrive.",
+                    "B": "A holiday sale will begin.",
+                    "C": "An employee will retire.",
+                    "D": "An author will visit."
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Theo người nói, điều gì sẽ diễn ra vào thứ Sáu này?<br/>(A) Một chuyến hàng sẽ tới.<br/>(B) Đợt giảm giá ngày lễ sẽ bắt đầu.<br/>(C) Một nhân viên sẽ nghỉ hưu.<br/>(D) Một tác giả sẽ đến thăm hiệu sách (An author will visit).</p><p><b>Phân tích:</b> Thông báo nêu: <i>'Join us this Friday when renowned author Karima Sameer will visit the store to read from her books...'</i> (Hãy tham gia cùng chúng tôi vào thứ Sáu tuần này khi tác giả nổi tiếng Karima Sameer đến thăm cửa hàng).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_96",
+                "number": 96,
+                "text": "Look at the graphic. Which aisle does the speaker direct the listeners to?",
+                "options": {
+                    "A": "Aisle 1",
+                    "B": "Aisle 2",
+                    "C": "Aisle 3",
+                    "D": "Aisle 4"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Nhìn vào hình ảnh. Người nói hướng dẫn người nghe đến lối đi nào?<br/>(A) Lối đi 1.<br/>(B) Lối đi 2.<br/>(C) Lối đi 3 (Aisle 3).<br/>(D) Lối đi 4.</p><p><b>Phân tích:</b> Người nói nhắc: <i>'Stop by our history aisle to find her latest book...'</i> (Hãy ghé qua dãy sách lịch sử để tìm cuốn sách mới nhất của cô ấy). Nhìn sơ đồ mặt bằng cửa hàng sách, gian hàng <b>History</b> nằm ở dãy số <b>3</b>.</p>",
+                "questionType": "Graphic",
+                "subCategory": "Graphic"
+            },
+            {
+                "id": "ets22_t5_p4_97",
+                "number": 97,
+                "text": "What can the listeners win?",
+                "options": {
+                    "A": "A gift card",
+                    "B": "A book",
+                    "C": "A free membership",
+                    "D": "A calendar"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nghe có cơ hội trúng thưởng thứ gì?<br/>(A) Một thẻ quà tặng (A gift card).<br/>(B) Một cuốn sách.<br/>(C) Thẻ thành viên miễn phí.<br/>(D) Một cuốn lịch.</p><p><b>Phân tích:</b> Người nói khuyến khích: <i>'make sure you enter our annual drawing while you're here to win a $5 gift card for our cafe.'</i> (hãy tham gia bốc thăm may mắn thường niên để giành thẻ quà tặng trị giá 5 đô la cho quán cà phê của chúng tôi).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            }
+        ]
+    },
+
+    # Set 10: Q98 - Q100 (Graphic)
+    {
+        "id": "ets22_t5_p4_s10",
+        "audioUrl": f"{CDN_BASE}/t5_p4_s10.mp3",
+        "graphicImage": f"{CDN_BASE}/t5_p4_g02.jpg",
+        "context": "Questions 98-100 refer to the following telephone message and notice.",
+        "transcript": "<p><b>Transcript:</b><br/>"
+                      "Hello, Ms. Kapoor. My name is Mark Giordano. I'm a forklift operator in the shipping department. I'm calling because I'm supposed to complete the training session on refueling equipment, but I need to change my date. I signed up for the session on January 23, but our department just received notice that a large order will ship out at the end of the month. I'll have a lot of work to do earlier in the day all month, so I can only attend the session that starts at 3 p.m. Could you reschedule me? Please let me know.</p>",
+        "questions": [
+            {
+                "id": "ets22_t5_p4_98",
+                "number": 98,
+                "text": "Where does the speaker most likely work?",
+                "options": {
+                    "A": "At a boat dock",
+                    "B": "At an auto repair shop",
+                    "C": "At a warehouse",
+                    "D": "At a job training school"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Người nói nhiều khả năng làm việc ở đâu nhất?<br/>(A) Tại bến thuyền.<br/>(B) Tại xưởng sửa xe ô tô.<br/>(C) Tại nhà kho (At a warehouse).<br/>(D) Tại trường đào tạo nghề.</p><p><b>Phân tích:</b> Người nói tự giới thiệu: <i>'I'm a forklift operator in the shipping department.'</i> (Tôi là người vận hành xe nâng ở bộ phận giao hàng). Người lái xe nâng trong bộ phận giao hàng làm việc tại nhà kho (warehouse).</p>",
+                "questionType": "Occupation / Location",
+                "subCategory": "Overview"
+            },
+            {
+                "id": "ets22_t5_p4_99",
+                "number": 99,
+                "text": "What will the speaker’s department be doing at the end of the month?",
+                "options": {
+                    "A": "Fixing some equipment",
+                    "B": "Attending a trade show",
+                    "C": "Interviewing job candidates",
+                    "D": "Preparing a large order"
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Bộ phận của người nói sẽ làm gì vào cuối tháng?<br/>(A) Sửa chữa thiết bị.<br/>(B) Tham dự triển lãm thương mại.<br/>(C) Phỏng vấn ứng viên xin việc.<br/>(D) Chuẩn bị một đơn hàng lớn (Preparing a large order).</p><p><b>Phân tích:</b> Người nói giải thích: <i>'our department just received notice that a large order will ship out at the end of the month.'</i> (bộ phận chúng tôi vừa nhận thông báo có một đơn hàng lớn sẽ xuất kho giao đi vào cuối tháng).</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail"
+            },
+            {
+                "id": "ets22_t5_p4_100",
+                "number": 100,
+                "text": "Look at the graphic. Which session does the man request to attend?",
+                "options": {
+                    "A": "January 14",
+                    "B": "January 23",
+                    "C": "January 26",
+                    "D": "January 31"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Nhìn vào hình ảnh. Người đàn ông yêu cầu tham dự buổi đào tạo nào?<br/>(A) Ngày 14 tháng 1.<br/>(B) Ngày 23 tháng 1.<br/>(C) Ngày 26 tháng 1 (January 26).<br/>(D) Ngày 31 tháng 1.</p><p><b>Phân tích:</b> Người đàn ông nói: <i>'I'll have a lot of work to do earlier in the day all month, so I can only attend the session that starts at 3 p.m.'</i> (Tôi bận rộn vào buổi sáng suốt cả tháng nên chỉ có thể tham dự buổi học bắt đầu lúc 3 giờ chiều). Đối chiếu hình ảnh thông báo các buổi đào tạo Refueling Equipment:<br/>- January 14: 2 P.M.-5 P.M.<br/>- January 23: 10 A.M.-1 P.M.<br/>- <b>January 26: 3 P.M.-6 P.M.</b><br/>- January 31: 9 A.M-12 noon.<br/>Buổi duy nhất bắt đầu lúc 3 giờ chiều (3 P.M.) là ngày <b>January 26</b>.</p>",
+                "questionType": "Graphic",
+                "subCategory": "Graphic"
+            }
+        ]
+    }
+]
+
+os.makedirs("public/data/ets2022/test5", exist_ok=True)
+out_path = "public/data/ets2022/test5/part4.json"
+
+with open(out_path, "w", encoding="utf-8") as f:
+    json.dump(part4_data, f, ensure_ascii=False, indent=2)
+
+total_q = sum(len(s["questions"]) for s in part4_data)
+print(f"Generated {len(part4_data)} sets and {total_q} questions in {out_path}")
