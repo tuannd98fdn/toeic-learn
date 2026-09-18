@@ -140,6 +140,7 @@ function Part5SpeedTrainer() {
             '/data/ets2022/test2/part5.json',
             '/data/ets2022/test3/part5.json',
             '/data/ets2022/test4/part5.json',
+            '/data/ets2022/test5/part5.json',
           ];
           const responses = await Promise.all(testPaths.map(p => fetch(p)));
           const allData: any[] = [];
@@ -776,6 +777,13 @@ function Part5SpeedTrainer() {
                 onClick={() => handleSelectTest('ets2022_test4')}
               >
                 Test 4 (Chuẩn ETS)
+              </button>
+              <button
+                type="button"
+                className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test5' ? styles.testOptionActive : ''}`}
+                onClick={() => handleSelectTest('ets2022_test5')}
+              >
+                Test 5 (Chuẩn ETS)
               </button>
             </div>
           )}
