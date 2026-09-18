@@ -27,7 +27,8 @@ export const TEST_OPTIONS = [
   { key: 'ets2022_test3', label: 'ETS 2022 Test 3 (Chuẩn ETS)' },
   { key: 'ets2022_test4', label: 'ETS 2022 Test 4 (Chuẩn ETS)' },
   { key: 'ets2022_test5', label: 'ETS 2022 Test 5 (Chuẩn ETS)' },
-  { key: 'all', label: 'Liên đề (Test 1, 2, 3, 4, 5)' },
+  { key: 'ets2022_test6', label: 'ETS 2022 Test 6 (Chuẩn ETS)' },
+  { key: 'all', label: 'Liên đề (Test 1 - 6)' },
 ];
 
 export const PART6_SUB_SKILLS = [
@@ -161,23 +162,25 @@ function Part6Trainer() {
         let rawLoadedPassages: any[] = [];
 
         if (testId === 'all') {
-          // Cross-test pooling: Load Test 1, Test 2, Test 3, Test 4, and Test 5
-          const [res1, res2, res3, res4, res5] = await Promise.all([
+          // Cross-test pooling: Load Test 1, Test 2, Test 3, Test 4, Test 5, and Test 6
+          const [res1, res2, res3, res4, res5, res6] = await Promise.all([
             fetch('/data/ets2022/test1/part6.json'),
             fetch('/data/ets2022/test2/part6.json'),
             fetch('/data/ets2022/test3/part6.json'),
             fetch('/data/ets2022/test4/part6.json'),
             fetch('/data/ets2022/test5/part6.json'),
+            fetch('/data/ets2022/test6/part6.json'),
           ]);
 
-          if (!res1.ok || !res2.ok || !res3.ok || !res4.ok || !res5.ok) throw new Error('Không thể tải dữ liệu liên đề');
-          const [d1, d2, d3, d4, d5] = await Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()]);
+          if (!res1.ok || !res2.ok || !res3.ok || !res4.ok || !res5.ok || !res6.ok) throw new Error('Không thể tải dữ liệu liên đề');
+          const [d1, d2, d3, d4, d5, d6] = await Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json(), res6.json()]);
           const v1 = Part6DataSchema.parse(d1).map(p => ({ ...p, source: 'ETS 2022 Test 1' }));
           const v2 = Part6DataSchema.parse(d2).map(p => ({ ...p, source: 'ETS 2022 Test 2' }));
           const v3 = Part6DataSchema.parse(d3).map(p => ({ ...p, source: 'ETS 2022 Test 3' }));
           const v4 = Part6DataSchema.parse(d4).map(p => ({ ...p, source: 'ETS 2022 Test 4' }));
           const v5 = Part6DataSchema.parse(d5).map(p => ({ ...p, source: 'ETS 2022 Test 5' }));
-          rawLoadedPassages = [...v1, ...v2, ...v3, ...v4, ...v5];
+          const v6 = Part6DataSchema.parse(d6).map(p => ({ ...p, source: 'ETS 2022 Test 6' }));
+          rawLoadedPassages = [...v1, ...v2, ...v3, ...v4, ...v5, ...v6];
         } else {
           const match = testId.match(/ets(\d+)_test(\d+)/);
           if (!match) throw new Error('Mã đề thi không hợp lệ');

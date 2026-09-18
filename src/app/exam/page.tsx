@@ -89,8 +89,8 @@ export default function ExamPage() {
 function ExamSimulation() {
   const searchParams = useSearchParams();
   const rawTestId = searchParams.get('test') || 'ets2022_test1';
-  // Chỉ chấp nhận đề thi chuẩn đã xác thực (ets2022_test1, ets2022_test2, ets2022_test3, ets2022_test4, ets2022_test5)
-  const testId = ['ets2022_test1', 'ets2022_test2', 'ets2022_test3', 'ets2022_test4', 'ets2022_test5'].includes(rawTestId)
+  // Chỉ chấp nhận đề thi chuẩn đã xác thực (ets2022_test1 .. ets2022_test6)
+  const testId = ['ets2022_test1', 'ets2022_test2', 'ets2022_test3', 'ets2022_test4', 'ets2022_test5', 'ets2022_test6'].includes(rawTestId)
     ? rawTestId
     : 'ets2022_test1';
   const sectionParam = searchParams.get('section');
@@ -1088,7 +1088,7 @@ function ExamSimulation() {
             Thoát
           </Link>
           <div className={styles.testTitle}>
-            {testId === 'ets2022_test5' ? 'ETS 2022 - Test 5' : testId === 'ets2022_test4' ? 'ETS 2022 - Test 4' : testId === 'ets2022_test3' ? 'ETS 2022 - Test 3' : testId === 'ets2022_test2' ? 'ETS 2022 - Test 2' : 'ETS 2022 - Test 1'}{' '}
+            {testId === 'ets2022_test6' ? 'ETS 2022 - Test 6' : testId === 'ets2022_test5' ? 'ETS 2022 - Test 5' : testId === 'ets2022_test4' ? 'ETS 2022 - Test 4' : testId === 'ets2022_test3' ? 'ETS 2022 - Test 3' : testId === 'ets2022_test2' ? 'ETS 2022 - Test 2' : 'ETS 2022 - Test 1'}{' '}
             <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--primary)' }}>
               ({currentSection === 'rc'
                 ? 'Đọc RC 75P'

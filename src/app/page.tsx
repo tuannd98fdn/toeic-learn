@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import StreakCounter from '@/components/StreakCounter';
@@ -24,6 +24,7 @@ import {
   AwardIcon,
   SparklesIcon,
   CheckIcon,
+  ChevronDownIcon,
 } from '@/components/icons/AppIcons';
 import { soundEffects } from '@/utils/soundEffects';
 import { preloadUpcomingListening } from '@/utils/audioPreloader';
@@ -42,11 +43,30 @@ export default function Home() {
   // Test selection state
   const [testsIndex, setTestsIndex] = useState<{id: string, name: string}[]>([]);
   const [selectedTest, setSelectedTest] = useState<string>('');
+  const [isTestDropdownOpen, setIsTestDropdownOpen] = useState<boolean>(false);
+  const testDropdownRef = useRef<HTMLDivElement>(null);
   const [testStats, setTestStats] = useState<{
     p1: number; p2: number; p3: number; p4: number;
     p5: number; p6: number; p7: number;
   } | null>(null);
   const [partProgress, setPartProgress] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (testDropdownRef.current && !testDropdownRef.current.contains(e.target as Node)) {
+        setIsTestDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsTestDropdownOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   const nextStudyTask = getNextStudyTask();
 
@@ -448,20 +468,70 @@ export default function Home() {
               <CompassIcon size={20} />
             </div>
             <div>
-              <h2 className={styles.sectionTitle}>Khu Tự Luyện &amp; Thi Thử Mở Rộng</h2>
-              <p className={styles.sectionSubtitle}>Dành cho tự học thêm ngoài giờ: Luyện 7 Phần đề thật ETS và phòng thi mô phỏng</p>
+              <div className={styles.sectionTitleGroup}>
+                <h2 className={styles.sectionTitle}>Khu Tự Luyện &amp; Thi Thử Mở Rộng</h2>
+                <span className={styles.sectionBadge}>Tự học ngoài giờ</span>
+              </div>
+              <p className={styles.sectionSubtitle}>Luyện 7 Phần đề thật ETS có audio phòng thu hoặc làm bài thi thử áp lực</p>
             </div>
           </div>
           
-          <select 
-            className={styles.testSelector} 
-            value={selectedTest}
-            onChange={(e) => setSelectedTest(e.target.value)}
-          >
-            {testsIndex.map(test => (
-              <option key={test.id} value={test.id}>{test.name}</option>
-            ))}
-          </select>
+          <div className={styles.testDropdownWrapper} ref={testDropdownRef}>
+            <button 
+              type="button"
+              className={`${styles.testSelectorBtn} ${isTestDropdownOpen ? styles.testSelectorBtnActive : ''}`}
+              onClick={() => setIsTestDropdownOpen(!isTestDropdownOpen)}
+              aria-haspopup="listbox"
+              aria-expanded={isTestDropdownOpen}
+              aria-label="Chọn bộ đề thi ETS"
+            >
+              <div className={styles.testSelectorBtnLeft}>
+                <ExamIcon size={16} className={styles.testSelectorIcon} />
+                <span className={styles.selectedTestName}>
+                  {testsIndex.find(t => t.id === selectedTest)?.name || 'Chọn đề ETS'}
+                </span>
+                <span className={styles.testSelectorBadge}>Chuẩn ETS</span>
+              </div>
+              <ChevronDownIcon size={16} className={`${styles.testSelectorChevron} ${isTestDropdownOpen ? styles.chevronRotated : ''}`} />
+            </button>
+
+            {isTestDropdownOpen && (
+              <div className={styles.testDropdownMenu} role="listbox">
+                <div className={styles.testDropdownHeader}>
+                  <span>Bộ Đề Thi Thật ETS 2022</span>
+                  <span className={styles.testDropdownHeaderCount}>{testsIndex.length} đề thi</span>
+                </div>
+                <div className={styles.testDropdownList}>
+                  {testsIndex.map(test => {
+                    const isSelected = test.id === selectedTest;
+                    return (
+                      <button
+                        key={test.id}
+                        type="button"
+                        role="option"
+                        aria-selected={isSelected}
+                        className={`${styles.testDropdownItem} ${isSelected ? styles.testDropdownItemActive : ''}`}
+                        onClick={() => {
+                          setSelectedTest(test.id);
+                          setIsTestDropdownOpen(false);
+                        }}
+                      >
+                        <div className={styles.testDropdownItemText}>
+                          <span className={styles.testDropdownItemName}>{test.name}</span>
+                          <span className={styles.testDropdownItemMeta}>200 câu chuẩn YBM • Audio phòng thu &amp; Bản scan</span>
+                        </div>
+                        {isSelected && (
+                          <span className={styles.testItemCheck}>
+                            <CheckIcon size={14} />
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className={styles.stationGrid}>
@@ -477,8 +547,18 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.stationActions}>
-              {[1, 2, 3, 4].map(part => (
-                <Link key={part} href={`/part${part}?test=${selectedTest}`} className={`btn-secondary btn-sm ${partProgress[`part${part}`] ? styles.partCompleted : ''}`}>
+              {[
+                { part: 1, title: 'Part 1: 6 câu mô tả tranh (Audio phòng thu)' },
+                { part: 2, title: 'Part 2: 25 câu hỏi - đáp phản xạ nhanh' },
+                { part: 3, title: 'Part 3: 39 câu đối thoại (13 bài nghe)' },
+                { part: 4, title: 'Part 4: 30 câu độc thoại (10 bài nói)' },
+              ].map(({ part, title }) => (
+                <Link
+                  key={part}
+                  href={`/part${part}?test=${selectedTest}`}
+                  className={`btn-secondary btn-sm ${partProgress[`part${part}`] ? styles.partCompleted : ''}`}
+                  title={title}
+                >
                   Part {part} {partProgress[`part${part}`] && <CheckIcon size={12} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '3px' }} />}
                 </Link>
               ))}
@@ -497,8 +577,17 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.stationActions}>
-              {[5, 6, 7].map(part => (
-                <Link key={part} href={`/part${part}?test=${selectedTest}`} className={`btn-secondary btn-sm ${partProgress[`part${part}`] ? styles.partCompleted : ''}`}>
+              {[
+                { part: 5, title: 'Part 5: 30 câu ngữ pháp & từ vựng chuyên sâu' },
+                { part: 6, title: 'Part 6: 16 câu điền đoạn văn (4 bài đọc)' },
+                { part: 7, title: 'Part 7: 54 câu đọc hiểu đơn - đôi - ba (15 bài)' },
+              ].map(({ part, title }) => (
+                <Link
+                  key={part}
+                  href={`/part${part}?test=${selectedTest}`}
+                  className={`btn-secondary btn-sm ${partProgress[`part${part}`] ? styles.partCompleted : ''}`}
+                  title={title}
+                >
                   Part {part} {partProgress[`part${part}`] && <CheckIcon size={12} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '3px' }} />}
                 </Link>
               ))}
@@ -506,8 +595,9 @@ export default function Home() {
                 href={`/exam?test=${selectedTest}&section=rc`}
                 className="btn-accent btn-sm"
                 style={{ fontWeight: 700 }}
+                title="Luyện tập toàn bộ 100 câu đọc Part 5, 6, 7 trong 75 phút"
               >
-                THI THỬ RC (75P)
+                LUYỆN FULL RC (75P)
               </Link>
             </div>
           </div>
@@ -524,13 +614,26 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.stationActions} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              <Link href={`/mini-test?test=${selectedTest}`} className="btn-secondary btn-sm">
+              <Link
+                href={`/mini-test?test=${selectedTest}`}
+                className="btn-secondary btn-sm"
+                title="20 câu hỏi nhanh (Part 2 & Part 5) trong 15 phút"
+              >
                 MINI-TEST (15P)
               </Link>
-              <Link href={`/exam?test=${selectedTest}&section=rc`} className="btn-secondary btn-sm" style={{ fontWeight: 700 }}>
-                THI ĐỌC RC (75P)
+              <Link
+                href={`/exam?test=${selectedTest}&section=rc`}
+                className="btn-secondary btn-sm"
+                style={{ fontWeight: 700 }}
+                title="Thi thử phòng thi riêng phần Đọc 100 câu trong 75 phút"
+              >
+                THI THỬ RC (75P)
               </Link>
-              <Link href={`/exam?test=${selectedTest}`} className={styles.featuredBtn}>
+              <Link
+                href={`/exam?test=${selectedTest}`}
+                className={styles.featuredBtn}
+                title="Thi thử đầy đủ 200 câu Nghe & Đọc chuẩn thời gian ETS 120 phút"
+              >
                 FULL TEST (120P)
                 <ArrowRightIcon size={16} />
               </Link>

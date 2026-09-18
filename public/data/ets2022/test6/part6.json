@@ -1,0 +1,290 @@
+[
+  {
+    "id": "ets22_t6_p6_s01",
+    "title": "Questions 131-134 refer to the following letter.",
+    "type": "Letter",
+    "content": "<p><b>9 October</b></p><p>Eva Archer, Owner<br/>Archer Cafe<br/>40 Thorpe Street<br/>Port Fairy VIC 3284</p><p>Dear Ms. Archer:</p><p>An inspection of your restaurant was conducted on 16 September by [131] of the Department of Health and Safety. [132]. The purpose of the inspection was to confirm that your business is in compliance with all local regulations and that all [133] permits are up-to-date. The Department has determined that all regulations are being followed [134]. Therefore, no further action is required on your part.</p><p>Sincerely,<br/>Oliver Wu<br/>Department of Health and Safety</p>",
+    "questions": [
+      {
+        "id": "ets22_t6_p6_131",
+        "number": 131,
+        "text": "",
+        "options": {
+          "A": "represents",
+          "B": "representative",
+          "C": "representatives",
+          "D": "representations"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Một cuộc thanh tra nhà hàng của bạn đã được thực hiện vào ngày 16 tháng 9 bởi các đại diện của Bộ Y tế và An toàn.</p>\n<p><b>Phân tích ngữ pháp:</b> Sau giới từ <i>by</i> chỉ tác nhân thực hiện hành động thanh tra (người thực hiện). Danh từ đếm được chỉ người <i>representative</i> (người đại diện) khi đứng sau <i>by</i> không có mạo từ (a/the) phải ở dạng số nhiều <b>(C) representatives</b>.<br/>- (A) <i>represents</i>: động từ chia thì.<br/>- (B) <i>representative</i>: danh từ số ít (thiếu mạo từ a/the).<br/>- (D) <i>representations</i>: danh từ sự đại diện, sự miêu tả (chỉ vật, không thể là người đi thanh tra).</p>",
+        "type": "Word Form",
+        "subCategory": "Noun Plural",
+        "grammarTag": "Agent after 'By'"
+      },
+      {
+        "id": "ets22_t6_p6_132",
+        "number": 132,
+        "text": "",
+        "options": {
+          "A": "Such visits are conducted once a year.",
+          "B": "The restaurant will be closed for inspection.",
+          "C": "Regulations are posted on our Web site.",
+          "D": "The department opens at 9:00 A.M."
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Những chuyến thăm kiểm tra như vậy được tiến hành mỗi năm một lần.</p>\n<p><b>Phân tích logic liên kết:</b> Câu trước đề cập đến việc nhà hàng vừa trải qua một cuộc kiểm tra vào ngày 16/9 (<i>An inspection of your restaurant was conducted...</i>). Cụm <i>Such visits</i> (những chuyến đi/thăm như vậy) liên kết trực tiếp với từ <i>inspection</i> phía trước, giải thích đây là hoạt động định kỳ hàng năm. Chọn <b>(A)</b>.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Insertion",
+        "grammarTag": "Demonstrative Reference"
+      },
+      {
+        "id": "ets22_t6_p6_133",
+        "number": 133,
+        "text": "",
+        "options": {
+          "A": "meaningful",
+          "B": "fortunate",
+          "C": "persistent",
+          "D": "necessary"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Mục đích của cuộc kiểm tra là để xác nhận rằng doanh nghiệp của bạn tuân thủ tất cả các quy định địa phương và tất cả các giấy phép cần thiết đều còn hiệu lực.</p>\n<p><b>Phân tích từ vựng:</b> Tính từ đứng trước danh từ <i>permits</i> (giấy phép kinh doanh/an toàn) chỉ tính chất cần phải có theo luật là <b>(D) necessary</b> (cần thiết). Cụm <i>all necessary permits</i> (tất cả các giấy phép cần thiết).<br/>- (A) <i>meaningful</i>: có ý nghĩa.<br/>- (B) <i>fortunate</i>: may mắn.<br/>- (C) <i>persistent</i>: kiên trì, dai dẳng.</p>",
+        "type": "Vocabulary",
+        "subCategory": "Adjective Usage",
+        "grammarTag": "Collocation"
+      },
+      {
+        "id": "ets22_t6_p6_134",
+        "number": 134,
+        "text": "",
+        "options": {
+          "A": "potentially",
+          "B": "satisfactorily",
+          "C": "inconsistently",
+          "D": "temporarily"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Bộ xác định rằng tất cả các quy định đang được tuân thủ một cách thỏa đáng/đạt yêu cầu. Do đó, bạn không cần phải làm thêm hành động nào nữa.</p>\n<p><b>Phân tích từ vựng:</b> Câu tiếp theo nêu kết luận: <i>no further action is required on your part</i> (không cần xử lý thêm gì nữa), chứng tỏ kết quả kiểm tra hoàn toàn tốt đẹp. Trạng từ <b>(B) satisfactorily</b> (một cách thỏa đáng, đạt chuẩn) là lựa chọn duy nhất phù hợp.<br/>- (A) <i>potentially</i>: có tiềm năng.<br/>- (C) <i>inconsistently</i>: không nhất quán (tiêu cực).<br/>- (D) <i>temporarily</i>: tạm thời.</p>",
+        "type": "Vocabulary",
+        "subCategory": "Adverb Usage",
+        "grammarTag": "Adverb Modifying Passive Verb"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t6_p6_s02",
+    "title": "Questions 135-138 refer to the following e-mail.",
+    "type": "Email",
+    "content": "<p><b>To:</b> Certain Boutique &lt;info@certainboutique.co.uk&gt;<br/><b>From:</b> Premium Thai Candles &lt;orders@prethaican.com&gt;<br/><b>Date:</b> October 28<br/><b>Subject:</b> Order status</p><p>Dear Customer,</p><p>We are delighted [135] you as a customer of Premium Thai Candles. Your wholesale order for 40 boxes of candles is being processed. [136]. Most of your order is currently in stock and will arrive in the United Kingdom within ten days. [137], please be advised that the rose-scented candles are on back order. They will be available three weeks from now, and we will ship them as soon as possible.</p><p>We sincerely hope that you are happy with your [138] order as a new customer of Premium Thai Candles.</p><p>Best,<br/>Samaraya Sharma</p>",
+    "questions": [
+      {
+        "id": "ets22_t6_p6_135",
+        "number": 135,
+        "text": "",
+        "options": {
+          "A": "welcome",
+          "B": "welcomed",
+          "C": "will welcome",
+          "D": "to welcome"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chúng tôi rất vui mừng được chào đón bạn với tư cách là khách hàng của Premium Thai Candles.</p>\n<p><b>Phân tích ngữ pháp:</b> Cấu trúc tính từ chỉ cảm xúc: <i>be delighted to do something</i> (rất vui mừng/hân hạnh khi làm việc gì). Dạng động từ nguyên mẫu có 'to' <b>(D) to welcome</b> là lựa chọn chuẩn xác.</p>",
+        "type": "Verb Form",
+        "subCategory": "Adjective + To-Infinitive",
+        "grammarTag": "To-Infinitive after Adjective"
+      },
+      {
+        "id": "ets22_t6_p6_136",
+        "number": 136,
+        "text": "",
+        "options": {
+          "A": "Save now on this limited-time offer.",
+          "B": "Thank you for the purchase.",
+          "C": "We have other boxes, too.",
+          "D": "Our Web site is now available."
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Cảm ơn bạn vì đã mua hàng.</p>\n<p><b>Phân tích logic liên kết:</b> Ngay sau khi đề cập đến việc khách vừa đặt mua đơn hàng sỉ 40 hộp nến (<i>Your wholesale order for 40 boxes of candles is being processed</i>), người bán gửi lời cảm ơn đơn hàng mua sắm một cách lịch sự: <b>(B) Thank you for the purchase.</b></p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Insertion",
+        "grammarTag": "Customer Service Etiquette"
+      },
+      {
+        "id": "ets22_t6_p6_137",
+        "number": 137,
+        "text": "",
+        "options": {
+          "A": "However",
+          "B": "Given that",
+          "C": "As you can imagine",
+          "D": "At that point"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tuy nhiên, xin lưu ý rằng nến hương hoa hồng hiện đang hết hàng và chờ nhập thêm.</p>\n<p><b>Phân tích liên từ:</b> Câu trước nói hầu hết đơn hàng đều có sẵn và sẽ đến trong 10 ngày (tin tốt), câu sau báo riêng loại nến hoa hồng bị hết hàng tạm thời phải chờ 3 tuần nữa (tin cần lưu ý). Hai câu mang ý tương phản, cần liên từ trạng từ chuyển ý <b>(A) However</b> (Tuy nhiên).</p>",
+        "type": "Conjunction / Transition",
+        "subCategory": "Transition Word",
+        "grammarTag": "Contrast Transition"
+      },
+      {
+        "id": "ets22_t6_p6_138",
+        "number": 138,
+        "text": "",
+        "options": {
+          "A": "proper",
+          "B": "usual",
+          "C": "initial",
+          "D": "rapid"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chúng tôi chân thành hy vọng bạn sẽ hài lòng với đơn đặt hàng đầu tiên của mình với tư cách là khách hàng mới của Premium Thai Candles.</p>\n<p><b>Phân tích từ vựng:</b> Vế sau có cụm <i>as a new customer</i> (với tư cách khách hàng mới), do đó đây là đơn hàng đầu tiên (<i>initial order</i>). Tính từ <b>(C) initial</b> (ban đầu, đầu tiên) là đáp án hoàn toàn chuẩn xác.<br/>- (A) <i>proper</i>: thích hợp.<br/>- (B) <i>usual</i>: thường lệ (ngược với ngữ cảnh khách hàng mới).<br/>- (D) <i>rapid</i>: nhanh chóng.</p>",
+        "type": "Vocabulary",
+        "subCategory": "Adjective Usage",
+        "grammarTag": "Collocation"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t6_p6_s03",
+    "title": "Questions 139-142 refer to the following article.",
+    "type": "Article",
+    "content": "<p><b>GREENWAY (December 15)</b>—The country’s employment rose by over 40,000 jobs during October and November, [139] government statistics just released. The biggest increase was in the retail sector, with 9,000 new jobs created. The service sector came in [140] in overall activity with 8,400 added jobs. Professional and business services gained jobs as well. Health services and education each saw strong gains with 4,200 jobs. [141]. By company size, medium-sized businesses of 50 to 499 employees hired the most workers. Large businesses of 500 or more employees hired 12,000 workers. “The job market remains robust, and we [142] it to continue,” said economist Keisha Hou.</p>",
+    "questions": [
+      {
+        "id": "ets22_t6_p6_139",
+        "number": 139,
+        "text": "",
+        "options": {
+          "A": "because",
+          "B": "whereas",
+          "C": "according to",
+          "D": "instead of"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Việc làm của cả nước đã tăng hơn 40.000 việc làm trong tháng 10 và tháng 11, theo các số liệu thống kê của chính phủ vừa được công bố.</p>\n<p><b>Phân tích cụm từ:</b> Phía sau là nguồn dữ liệu <i>government statistics just released</i> (số liệu thống kê của chính phủ). Cụm giới từ dẫn nguồn thông tin chuẩn xác là <b>(C) according to</b> (theo như).<br/>- (A) <i>because</i>: liên từ chỉ nguyên nhân (cần mệnh đề S + V).<br/>- (B) <i>whereas</i>: trong khi (liên từ nối mệnh đề tương phản).<br/>- (D) <i>instead of</i>: thay vì.</p>",
+        "type": "Preposition",
+        "subCategory": "Preposition of Attribution",
+        "grammarTag": "According to"
+      },
+      {
+        "id": "ets22_t6_p6_140",
+        "number": 140,
+        "text": "",
+        "options": {
+          "A": "last",
+          "B": "second",
+          "C": "primary",
+          "D": "best"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Mức tăng lớn nhất là ở ngành bán lẻ với 9.000 việc làm. Ngành dịch vụ đứng thứ hai về hoạt động tổng thể với 8.400 việc làm được tạo thêm.</p>\n<p><b>Phân tích số thứ tự / so sánh:</b> Ngành bán lẻ đứng đầu (<i>biggest increase: 9,000 jobs</i>). Ngành dịch vụ đạt 8.400 việc làm (thấp hơn 9.000 một chút), nên vị trí của nó là đứng thứ hai (<i>came in second</i>). Chọn số thứ tự <b>(B) second</b>.</p>",
+        "type": "Vocabulary / Numbers",
+        "subCategory": "Ordinal Numbers",
+        "grammarTag": "Come in second"
+      },
+      {
+        "id": "ets22_t6_p6_141",
+        "number": 141,
+        "text": "",
+        "options": {
+          "A": "Utilities stocks rose about 5 percent on average.",
+          "B": "However, a new car manufacturing plant will open next month.",
+          "C": "The only sector with zero growth was agriculture.",
+          "D": "College enrollment increased by only 4 percent."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ngành duy nhất có mức tăng trưởng bằng không là nông nghiệp.</p>\n<p><b>Phân tích ngữ cảnh:</b> Đoạn văn đang liệt kê tình hình việc làm theo từng ngành kinh tế (bán lẻ, dịch vụ, y tế, giáo dục...). Do đó câu tiếp theo bổ sung thông tin về một ngành kinh tế cụ thể khác là nông nghiệp (<i>The only sector with zero growth was agriculture</i>). Chọn <b>(C)</b>.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Insertion",
+        "grammarTag": "Cohesion and Topic Continuity"
+      },
+      {
+        "id": "ets22_t6_p6_142",
+        "number": 142,
+        "text": "",
+        "options": {
+          "A": "expect",
+          "B": "expecting",
+          "C": "expected",
+          "D": "expectant"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> 'Thị trường việc làm vẫn mạnh mẽ và chúng tôi kỳ vọng điều đó sẽ tiếp tục,' nhà kinh tế học Keisha Hou cho biết.</p>\n<p><b>Phân tích ngữ pháp:</b> Mệnh đề <i>we _______ it to continue</i> có chủ ngữ <i>we</i> và tân ngữ <i>it</i> đi với to-V (<i>to continue</i>). Cần một động từ chính chia thì hiện tại đơn diễn tả nhận định/dự báo ở hiện tại của chuyên gia: <b>(A) expect</b> (kỳ vọng). Cấu trúc: <i>expect somebody/something to do something</i>.</p>",
+        "type": "Verb Form",
+        "subCategory": "Verb Tense",
+        "grammarTag": "Present Simple"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t6_p6_s04",
+    "title": "Questions 143-146 refer to the following notice.",
+    "type": "Notice",
+    "content": "<p><b>Loffler Mobile Banking</b></p><p>In the coming weeks, Loffler Bank will be making upgrades to its mobile application to provide a more secure and user-friendly experience. Customers will now be able to view all their Loffler accounts simultaneously and enjoy [143] security through a fingerprint identification scan. [144], users may now customize their online dashboard to track their expenses and budgets. Changes can prove to be challenging for individuals, particularly in light of rapid technological advancement. [145]. Therefore, should you ever need assistance [146] any of the features of our app, call us at 555-0133 or visit us online at www.lofflerbank.com/faq.</p>",
+    "questions": [
+      {
+        "id": "ets22_t6_p6_143",
+        "number": 143,
+        "text": "",
+        "options": {
+          "A": "enhance",
+          "B": "enhanced",
+          "C": "enhancing",
+          "D": "enhancement"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Khách hàng giờ đây sẽ có thể xem tất cả các tài khoản Loffler của mình cùng lúc và tận hưởng tính bảo mật được tăng cường thông qua quét nhận diện dấu vân tay.</p>\n<p><b>Phân tích ngữ pháp:</b> Chỗ trống đứng trước danh từ <i>security</i> (an ninh, bảo mật). Tính từ dạng quá khứ phân từ mang nghĩa bị động <b>(B) enhanced</b> (được cải tiến, được tăng cường) tạo thành cụm <i>enhanced security</i> (tính bảo mật được nâng cao).</p>",
+        "type": "Word Form",
+        "subCategory": "Participle Adjective",
+        "grammarTag": "Past Participle as Adjective"
+      },
+      {
+        "id": "ets22_t6_p6_144",
+        "number": 144,
+        "text": "",
+        "options": {
+          "A": "Additionally",
+          "B": "Consequently",
+          "C": "Ultimately",
+          "D": "Conversely"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ngoài ra/Thêm vào đó, người dùng giờ đây có thể tùy chỉnh bảng điều khiển trực tuyến của mình để theo dõi các khoản chi tiêu và ngân sách.</p>\n<p><b>Phân tích liên từ:</b> Câu trước vừa giới thiệu tính năng nâng cấp thứ nhất (xem tài khoản đồng thời và quét vân tay), câu sau giới thiệu thêm tính năng nâng cấp thứ hai (tùy chỉnh bảng điều khiển). Trạng từ liên kết mang ý bổ sung thông tin là <b>(A) Additionally</b> (Ngoài ra, thêm vào đó).<br/>- (B) <i>Consequently</i>: do đó (kết quả).<br/>- (C) <i>Ultimately</i>: cuối cùng.<br/>- (D) <i>Conversely</i>: ngược lại.</p>",
+        "type": "Conjunction / Transition",
+        "subCategory": "Transition Word",
+        "grammarTag": "Addition Transition"
+      },
+      {
+        "id": "ets22_t6_p6_145",
+        "number": 145,
+        "text": "",
+        "options": {
+          "A": "The new security measures aim to fix this problem.",
+          "B": "We will be monitoring this development closely.",
+          "C": "Our team members are well aware of this fact.",
+          "D": "We sincerely apologize for this mistake."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Các thành viên trong đội ngũ của chúng tôi nhận thức rất rõ về thực tế này.</p>\n<p><b>Phân tích logic liên kết:</b> Câu trước nêu nhận định: <i>Changes can prove to be challenging for individuals...</i> (Sự thay đổi có thể là điều khó khăn đối với nhiều cá nhân). Cụm <i>this fact</i> (thực tế này) trong câu <b>(C) Our team members are well aware of this fact</b> liên kết trực tiếp với nhận định đó, và dẫn tiếp đến câu sau: <i>Therefore, should you ever need assistance...</i> (Vì vậy nếu bạn cần bất kỳ sự hỗ trợ nào, hãy gọi cho chúng tôi). Chọn <b>(C)</b>.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Insertion",
+        "grammarTag": "Pronoun / Noun Reference"
+      },
+      {
+        "id": "ets22_t6_p6_146",
+        "number": 146,
+        "text": "",
+        "options": {
+          "A": "over",
+          "B": "for",
+          "C": "by",
+          "D": "with"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Vì vậy, nếu bạn cần sự hỗ trợ đối với bất kỳ tính năng nào của ứng dụng của chúng tôi, hãy gọi cho chúng tôi theo số 555-0133.</p>\n<p><b>Phân tích giới từ:</b> Cụm danh từ đi với giới từ: <i>assistance WITH something</i> (sự hỗ trợ về việc gì / đối với cái gì). Giới từ <b>(D) with</b> là lựa chọn chuẩn xác.<br/>- (A) <i>over</i>: trên, qua.<br/>- (B) <i>for</i>: cho.<br/>- (C) <i>by</i>: bằng cách, bởi.</p>",
+        "type": "Preposition",
+        "subCategory": "Preposition Usage",
+        "grammarTag": "Assistance With"
+      }
+    ]
+  }
+]

@@ -77,11 +77,8 @@ export default function PracticeFooter({
       <div className={styles.actionArea}>
         {onAITutor && (
           <button className={isCorrect ? 'btn-secondary' : 'btn-ai'} onClick={onAITutor} type="button">
-            {isCorrect ? (
-              <><LightbulbIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hiểu sâu hơn <span style={{ opacity: 0.7, fontSize: '0.85em', marginLeft: '2px' }}>(H)</span></>
-            ) : (
-              <><SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} /> Hỏi Gia Sư AI <span style={{ opacity: 0.7, fontSize: '0.85em', marginLeft: '2px' }}>(H)</span></>
-            )}
+            <SparklesIcon size={16} style={{ marginRight: '4px', verticalAlign: 'middle', display: 'inline' }} />
+            Hỏi Gia Sư AI <span style={{ opacity: 0.7, fontSize: '0.85em', marginLeft: '2px' }}>(H)</span>
           </button>
         )}
         <button className={isCorrect ? 'btn-success' : 'btn-primary'} onClick={onNext} type="button" style={{ textTransform: 'uppercase', minWidth: '140px' }}>

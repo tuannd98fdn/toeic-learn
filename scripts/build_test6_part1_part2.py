@@ -1,0 +1,580 @@
+import json
+import os
+
+CDN_BASE = "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets"
+
+# -------------------------------------------------------------
+# PART 1 (6 questions)
+# -------------------------------------------------------------
+part1_data = [
+    {
+        "id": "ets22_t6_p1_01",
+        "number": 1,
+        "image": f"{CDN_BASE}/t6_p1_01.jpg",
+        "audioUrl": f"{CDN_BASE}/t6_p1_01.mp3",
+        "options": {
+            "A": "(A)",
+            "B": "(B)",
+            "C": "(C)",
+            "D": "(D)"
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Transcript:</b><br/>(A) She's looking out a window.<br/><b>(B) She's taking an item out of a refrigerator.</b><br/>(C) She's grabbing a handful of carrots.<br/>(D) She's putting some items in a bag.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Cô ấy đang nhìn ra ngoài cửa sổ.<br/>(B) Cô ấy đang lấy một món đồ ra khỏi tủ lạnh.<br/>(C) Cô ấy đang nắm một nắm cà rốt.<br/>(D) Cô ấy đang đặt một số món đồ vào túi.</p><p><b>Phân tích chi tiết:</b><br/>Trong bức ảnh, người phụ nữ đang mở cửa tủ lạnh và với tay lấy một hộp/món đồ ra ngoài (<i>taking an item out of a refrigerator</i>). Đáp án <b>(B)</b> miêu tả chính xác hành động này. Các đáp án (A), (C), (D) đều sai lệch chi tiết hành động hoặc đồ vật.</p>",
+        "questionType": "Person",
+        "subCategory": "Person Doing Action"
+    },
+    {
+        "id": "ets22_t6_p1_02",
+        "number": 2,
+        "image": f"{CDN_BASE}/t6_p1_02.jpg",
+        "audioUrl": f"{CDN_BASE}/t6_p1_02.mp3",
+        "options": {
+            "A": "(A)",
+            "B": "(B)",
+            "C": "(C)",
+            "D": "(D)"
+        },
+        "correctAnswer": "A",
+        "transcript": "<p><b>Transcript:</b><br/><b>(A) One of the women is tying her shoe.</b><br/>(B) One of the women is wearing a hat.<br/>(C) One of the women is standing near a park bench.<br/>(D) One of the women is carrying a computer up some stairs.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một trong những người phụ nữ đang buộc dây giày.<br/>(B) Một trong những người phụ nữ đang đội mũ.<br/>(C) Một trong những người phụ nữ đang đứng gần ghế đá công viên.<br/>(D) Một trong những người phụ nữ đang mang máy tính lên cầu thang.</p><p><b>Phân tích chi tiết:</b><br/>Bức tranh chụp hai người phụ nữ ở khu vực cầu thang ngoài trời/công viên, trong đó một người đang cúi xuống buộc lại dây giày thể thao (<i>tying her shoe</i>). Đáp án <b>(A)</b> miêu tả đúng trọng tâm hành động. Không ai đội mũ (B), không có ghế đá công viên nào ở gần (C), không có máy tính (D).</p>",
+        "questionType": "Multiple People",
+        "subCategory": "Multiple People"
+    },
+    {
+        "id": "ets22_t6_p1_03",
+        "number": 3,
+        "image": f"{CDN_BASE}/t6_p1_03.jpg",
+        "audioUrl": f"{CDN_BASE}/t6_p1_03.mp3",
+        "options": {
+            "A": "(A)",
+            "B": "(B)",
+            "C": "(C)",
+            "D": "(D)"
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Transcript:</b><br/>(A) The man is setting a clock.<br/>(B) The man is reaching for a box.<br/><b>(C) The man is posting some information.</b><br/>(D) The woman is handing some food to the man.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Người đàn ông đang chỉnh đồng hồ.<br/>(B) Người đàn ông đang với tay lấy một chiếc hộp.<br/>(C) Người đàn ông đang ghim/dán thông tin lên bảng thông báo.<br/>(D) Người phụ nữ đang đưa đồ ăn cho người đàn ông.</p><p><b>Phân tích chi tiết:</b><br/>Người đàn ông đang gắn một tờ giấy/thông báo lên bảng thông báo (<i>posting some information</i> on a bulletin board). Đáp án <b>(C)</b> hoàn toàn trùng khớp với hành động chính. Không có chỉnh đồng hồ (A), không với lấy hộp (B), không có hành động đưa thức ăn (D).</p>",
+        "questionType": "Person",
+        "subCategory": "Person Doing Action"
+    },
+    {
+        "id": "ets22_t6_p1_04",
+        "number": 4,
+        "image": f"{CDN_BASE}/t6_p1_04.jpg",
+        "audioUrl": f"{CDN_BASE}/t6_p1_04.mp3",
+        "options": {
+            "A": "(A)",
+            "B": "(B)",
+            "C": "(C)",
+            "D": "(D)"
+        },
+        "correctAnswer": "D",
+        "transcript": "<p><b>Transcript:</b><br/>(A) He's twisting some wires.<br/>(B) He's pruning a bush next to a building.<br/>(C) He's lifting a block.<br/><b>(D) He's spreading cement with a shovel.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Anh ấy đang xoắn một số sợi dây.<br/>(B) Anh ấy đang tỉa một bụi cây cạnh tòa nhà.<br/>(C) Anh ấy đang nâng một khối đá/gạch.<br/>(D) Anh ấy đang dùng xẻng trải/san xi măng.</p><p><b>Phân tích chi tiết:</b><br/>Người đàn ông là công nhân xây dựng đang cầm chiếc xẻng để san phẳng lớp xi măng trên mặt đất (<i>spreading cement with a shovel</i>). Đáp án <b>(D)</b> miêu tả chính xác động tác và công cụ làm việc.</p>",
+        "questionType": "Person",
+        "subCategory": "Person Doing Action"
+    },
+    {
+        "id": "ets22_t6_p1_05",
+        "number": 5,
+        "image": f"{CDN_BASE}/t6_p1_05.jpg",
+        "audioUrl": f"{CDN_BASE}/t6_p1_05.mp3",
+        "options": {
+            "A": "(A)",
+            "B": "(B)",
+            "C": "(C)",
+            "D": "(D)"
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Transcript:</b><br/>(A) The women are facing a desk.<br/>(B) One of the women is holding a jacket.<br/><b>(C) A drawer has been left open.</b><br/>(D) Some folders have been placed on top of a file cabinet.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Những người phụ nữ đang đối mặt với một chiếc bàn làm việc.<br/>(B) Một trong những người phụ nữ đang cầm một chiếc áo khoác.<br/>(C) Một ngăn kéo đã bị để mở.<br/>(D) Một số bìa hồ sơ đã được đặt lên trên đầu tủ hồ sơ.</p><p><b>Phân tích chi tiết:</b><br/>Trong văn phòng làm việc, ở phía bên cạnh có một ngăn kéo tủ tài liệu đang ở trạng thái mở ra (<i>a drawer has been left open</i>). Đáp án <b>(C)</b> miêu tả chính xác trạng thái của đồ vật trong bức ảnh. Lưu ý dạng câu hỏi Part 1 có người nhưng đáp án đúng lại là câu miêu tả đồ vật/vật thể.</p>",
+        "questionType": "Objects / Scene",
+        "subCategory": "Objects"
+    },
+    {
+        "id": "ets22_t6_p1_06",
+        "number": 6,
+        "image": f"{CDN_BASE}/t6_p1_06.jpg",
+        "audioUrl": f"{CDN_BASE}/t6_p1_06.mp3",
+        "options": {
+            "A": "(A)",
+            "B": "(B)",
+            "C": "(C)",
+            "D": "(D)"
+        },
+        "correctAnswer": "A",
+        "transcript": "<p><b>Transcript:</b><br/><b>(A) Some cups have been lined up on shelves.</b><br/>(B) A fruit basket has been emptied.<br/>(C) Some pots are being filled with water.<br/>(D) Some coffee has been spilled on the counter.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một số chiếc cốc đã được xếp thẳng hàng trên các kệ.<br/>(B) Một giỏ trái cây đã bị đổ rỗng.<br/>(C) Một số chiếc nồi đang được đổ đầy nước.<br/>(D) Một ít cà phê đã bị đổ ra quầy.</p><p><b>Phân tích chi tiết:</b><br/>Bức tranh tĩnh vật không người chụp các giá kệ treo tường trong quán cà phê/nhà bếp, trên đó các dãy ly tách được xếp ngay ngắn thành hàng (<i>lined up on shelves</i>). Đáp án <b>(A)</b> miêu tả chính xác tuyệt đối sự sắp đặt này.</p>",
+        "questionType": "Objects / Scene",
+        "subCategory": "Objects"
+    }
+]
+
+# -------------------------------------------------------------
+# PART 2 (25 questions)
+# -------------------------------------------------------------
+part2_data = [
+    {
+        "id": "ets22_t6_p2_07",
+        "number": 7,
+        "audioUrl": f"{CDN_BASE}/t6_p2_07.mp3",
+        "options": {
+            "A": "The associate director.",
+            "B": "Additional funding.",
+            "C": "A range of menu options."
+        },
+        "correctAnswer": "A",
+        "transcript": "<p><b>Question:</b> Who made changes to the budget proposal?<br/>"
+                      "<b>(A) The associate director.</b><br/>"
+                      "(B) Additional funding.<br/>"
+                      "(C) A range of menu options.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ai đã thực hiện những thay đổi đối với đề xuất ngân sách?<br/>(A) Phó giám đốc.<br/>(B) Nguồn tài trợ bổ sung.<br/>(C) Một loạt các lựa chọn thực đơn.</p><p><b>Phân tích:</b> Câu hỏi bắt đầu bằng <b>Who</b> (Ai), câu trả lời trực tiếp chỉ chức danh/người chịu trách nhiệm là <i>The associate director</i> <b>(A)</b>.</p>",
+        "questionType": "Who",
+        "subCategory": "Information Question"
+    },
+    {
+        "id": "ets22_t6_p2_08",
+        "number": 8,
+        "audioUrl": f"{CDN_BASE}/t6_p2_08.mp3",
+        "options": {
+            "A": "Because they are busy.",
+            "B": "The new cover design.",
+            "C": "On Wednesday."
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Question:</b> When are they delivering the manuals?<br/>"
+                      "(A) Because they are busy.<br/>"
+                      "(B) The new cover design.<br/>"
+                      "<b>(C) On Wednesday.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Khi nào họ sẽ giao tài liệu hướng dẫn?<br/>(A) Bởi vì họ bận.<br/>(B) Thiết kế bìa mới.<br/>(C) Vào thứ Tư.</p><p><b>Phân tích:</b> Câu hỏi <b>When</b> hỏi thời gian. <i>On Wednesday</i> <b>(C)</b> chỉ mốc thời gian giao hàng chính xác.</p>",
+        "questionType": "When",
+        "subCategory": "Information Question"
+    },
+    {
+        "id": "ets22_t6_p2_09",
+        "number": 9,
+        "audioUrl": f"{CDN_BASE}/t6_p2_09.mp3",
+        "options": {
+            "A": "By living close to work.",
+            "B": "The desk measures 5 feet long.",
+            "C": "The fee is $200."
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Question:</b> How much does it cost to rent this retail space?<br/>"
+                      "(A) By living close to work.<br/>"
+                      "(B) The desk measures 5 feet long.<br/>"
+                      "<b>(C) The fee is $200.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chi phí thuê mặt bằng bán lẻ này là bao nhiêu?<br/>(A) Bằng cách sống gần nơi làm việc.<br/>(B) Chiếc bàn dài 5 feet.<br/>(C) Mức phí là 200 đô la.</p><p><b>Phân tích:</b> Câu hỏi <b>How much does it cost</b> hỏi giá tiền. Câu trả lời đưa ra mức phí cụ thể <i>$200</i> <b>(C)</b>.</p>",
+        "questionType": "How much",
+        "subCategory": "Information Question"
+    },
+    {
+        "id": "ets22_t6_p2_10",
+        "number": 10,
+        "audioUrl": f"{CDN_BASE}/t6_p2_10.mp3",
+        "options": {
+            "A": "Some items from the back room.",
+            "B": "No, I'm not a manager.",
+            "C": "She went out for lunch."
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Question:</b> Where is the store manager?<br/>"
+                      "(A) Some items from the back room.<br/>"
+                      "(B) No, I'm not a manager.<br/>"
+                      "<b>(C) She went out for lunch.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Quản lý cửa hàng đang ở đâu?<br/>(A) Một số món đồ từ phòng sau.<br/>(B) Không, tôi không phải là quản lý.<br/>(C) Cô ấy đã ra ngoài ăn trưa.</p><p><b>Phân tích:</b> Câu hỏi <b>Where</b> hỏi địa điểm người đang ở. Câu trả lời giải thích vị trí/tình trạng hiện tại của người đó: <i>She went out for lunch</i> <b>(C)</b>.</p>",
+        "questionType": "Where",
+        "subCategory": "Information Question"
+    },
+    {
+        "id": "ets22_t6_p2_11",
+        "number": 11,
+        "audioUrl": f"{CDN_BASE}/t6_p2_11.mp3",
+        "options": {
+            "A": "Please turn it off.",
+            "B": "How did you sleep?",
+            "C": "The yellow one."
+        },
+        "correctAnswer": "A",
+        "transcript": "<p><b>Question:</b> Should I turn off my computer or leave it on?<br/>"
+                      "<b>(A) Please turn it off.</b><br/>"
+                      "(B) How did you sleep?<br/>"
+                      "(C) The yellow one.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tôi nên tắt máy tính hay để nguyên?<br/>(A) Xin vui lòng tắt đi.<br/>(B) Bạn ngủ thế nào?<br/>(C) Cái màu vàng.</p><p><b>Phân tích:</b> Câu hỏi lựa chọn (A or B): <i>turn off ... or leave it on</i>. Đáp án <b>(A)</b> đưa ra quyết định chọn lựa chọn thứ nhất: <i>Please turn it off</i>.</p>",
+        "questionType": "Choice",
+        "subCategory": "Choice Question"
+    },
+    {
+        "id": "ets22_t6_p2_12",
+        "number": 12,
+        "audioUrl": f"{CDN_BASE}/t6_p2_12.mp3",
+        "options": {
+            "A": "Next Monday.",
+            "B": "I think Julia has.",
+            "C": "A copy from the public library."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Question:</b> Who has attended a public speaking workshop before?<br/>"
+                      "(A) Next Monday.<br/>"
+                      "<b>(B) I think Julia has.</b><br/>"
+                      "(C) A copy from the public library.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ai đã từng tham gia hội thảo diễn thuyết trước công chúng trước đây?<br/>(A) Thứ Hai tuần tới.<br/>(B) Tôi nghĩ là Julia đã từng tham gia.<br/>(C) Một bản sao từ thư viện công cộng.</p><p><b>Phân tích:</b> Câu hỏi <b>Who</b> hỏi người nào đã tham dự. <b>(B)</b> <i>I think Julia has</i> (rút gọn của <i>Julia has attended</i>) là câu trả lời chuẩn xác.</p>",
+        "questionType": "Who",
+        "subCategory": "Information Question"
+    },
+    {
+        "id": "ets22_t6_p2_13",
+        "number": 13,
+        "audioUrl": f"{CDN_BASE}/t6_p2_13.mp3",
+        "options": {
+            "A": "He's buying a new one.",
+            "B": "20 years ago.",
+            "C": "The next stop, please."
+        },
+        "correctAnswer": "A",
+        "transcript": "<p><b>Question:</b> Why is Min-su selling his car?<br/>"
+                      "<b>(A) He's buying a new one.</b><br/>"
+                      "(B) 20 years ago.<br/>"
+                      "(C) The next stop, please.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao Min-su lại bán xe của anh ấy?<br/>(A) Anh ấy sắp mua một chiếc mới.<br/>(B) 20 năm trước.<br/>(C) Trạm dừng tiếp theo, làm ơn.</p><p><b>Phân tích:</b> Câu hỏi <b>Why</b> hỏi lý do. <i>He's buying a new one</i> <b>(A)</b> giải thích trực tiếp lý do bán xe cũ là để mua xe mới.</p>",
+        "questionType": "Why",
+        "subCategory": "Information Question"
+    },
+    {
+        "id": "ets22_t6_p2_14",
+        "number": 14,
+        "audioUrl": f"{CDN_BASE}/t6_p2_14.mp3",
+        "options": {
+            "A": "That's what I heard.",
+            "B": "I usually take a direct flight.",
+            "C": "It's only 5 a.m. there now."
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Question:</b> When should we call the client in Beijing?<br/>"
+                      "(A) That's what I heard.<br/>"
+                      "(B) I usually take a direct flight.<br/>"
+                      "<b>(C) It's only 5 a.m. there now.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Khi nào chúng ta nên gọi cho khách hàng ở Bắc Kinh?<br/>(A) Đó là những gì tôi nghe được.<br/>(B) Tôi thường đi chuyến bay thẳng.<br/>(C) Ở đó bây giờ mới có 5 giờ sáng thôi.</p><p><b>Phân tích:</b> Câu trả lời gián tiếp kiểu TOEIC: Nhắc nhở về chênh lệch múi giờ (<i>It's only 5 a.m. there now</i>) để ngụ ý rằng bây giờ chưa thể gọi được, phải chờ sau. Đáp án <b>(C)</b> hoàn toàn hợp lý.</p>",
+        "questionType": "When",
+        "subCategory": "Indirect Answer"
+    },
+    {
+        "id": "ets22_t6_p2_15",
+        "number": 15,
+        "audioUrl": f"{CDN_BASE}/t6_p2_15.mp3",
+        "options": {
+            "A": "Many small parts.",
+            "B": "By the loading dock.",
+            "C": "Overnight delivery."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Question:</b> Where should we set up the packaging machine?<br/>"
+                      "(A) Many small parts.<br/>"
+                      "<b>(B) By the loading dock.</b><br/>"
+                      "(C) Overnight delivery.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chúng ta nên lắp đặt máy đóng gói ở đâu?<br/>(A) Nhiều bộ phận nhỏ.<br/>(B) Cạnh khu vực bốc dỡ hàng.<br/>(C) Giao hàng qua đêm.</p><p><b>Phân tích:</b> Câu hỏi <b>Where</b> hỏi địa điểm lắp đặt. Cụm giới từ chỉ nơi chốn <i>By the loading dock</i> <b>(B)</b> trả lời trực tiếp.</p>",
+        "questionType": "Where",
+        "subCategory": "Information Question"
+    },
+    {
+        "id": "ets22_t6_p2_16",
+        "number": 16,
+        "audioUrl": f"{CDN_BASE}/t6_p2_16.mp3",
+        "options": {
+            "A": "In the rehearsal hall, I think.",
+            "B": "It's cheaper to make them ourselves.",
+            "C": "I'm excited about the performance."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Question:</b> Who will we purchase costumes from?<br/>"
+                      "(A) In the rehearsal hall, I think.<br/>"
+                      "<b>(B) It's cheaper to make them ourselves.</b><br/>"
+                      "(C) I'm excited about the performance.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chúng ta sẽ mua trang phục từ ai?<br/>(A) Trong phòng tập dượt, tôi nghĩ vậy.<br/>(B) Tự may chúng sẽ rẻ hơn.<br/>(C) Tôi rất háo hức về buổi biểu diễn.</p><p><b>Phân tích:</b> Câu trả lời bác bỏ giả định: Thay vì mua từ một bên nào đó, người nói đề xuất tự làm để tiết kiệm chi phí (<i>make them ourselves</i>). Đáp án <b>(B)</b> là phản hồi tự nhiên nhất.</p>",
+        "questionType": "Who",
+        "subCategory": "Indirect Answer"
+    },
+    {
+        "id": "ets22_t6_p2_17",
+        "number": 17,
+        "audioUrl": f"{CDN_BASE}/t6_p2_17.mp3",
+        "options": {
+            "A": "No, he'll be here next week.",
+            "B": "It's a beautiful building.",
+            "C": "Some updated safety regulations."
+        },
+        "correctAnswer": "A",
+        "transcript": "<p><b>Question:</b> Isn't the building inspector coming this afternoon?<br/>"
+                      "<b>(A) No, he'll be here next week.</b><br/>"
+                      "(B) It's a beautiful building.<br/>"
+                      "(C) Some updated safety regulations.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chẳng phải thanh tra xây dựng sẽ đến vào chiều nay sao?<br/>(A) Không, tuần sau ông ấy mới tới đây.<br/>(B) Đó là một tòa nhà đẹp.<br/>(C) Một số quy định an toàn được cập nhật.</p><p><b>Phân tích:</b> Câu hỏi phủ định xác nhận thông tin. Đáp án <b>(A)</b> đính chính lại thời gian thực tế: <i>No, he'll be here next week</i>.</p>",
+        "questionType": "Negative Question",
+        "subCategory": "Yes/No Question"
+    },
+    {
+        "id": "ets22_t6_p2_18",
+        "number": 18,
+        "audioUrl": f"{CDN_BASE}/t6_p2_18.mp3",
+        "options": {
+            "A": "The event calendar?",
+            "B": "Thanks, I'll be right back.",
+            "C": "Oh, we're old friends."
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Question:</b> Do you have an appointment to see Ms. Singh?<br/>"
+                      "(A) The event calendar?<br/>"
+                      "(B) Thanks, I'll be right back.<br/>"
+                      "<b>(C) Oh, we're old friends.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Bạn có hẹn trước để gặp cô Singh không?<br/>(A) Lịch sự kiện à?<br/>(B) Cảm ơn, tôi sẽ quay lại ngay.<br/>(C) Ồ, chúng tôi là bạn cũ mà.</p><p><b>Phân tích:</b> Câu trả lời ngụ ý: Giải thích việc không cần đặt lịch hẹn trang trọng vì họ là bạn cũ thân thiết (<i>Oh, we're old friends</i>). Đáp án <b>(C)</b> hợp lý trong giao tiếp.</p>",
+        "questionType": "Yes/No Question",
+        "subCategory": "Indirect Answer"
+    },
+    {
+        "id": "ets22_t6_p2_19",
+        "number": 19,
+        "audioUrl": f"{CDN_BASE}/t6_p2_19.mp3",
+        "options": {
+            "A": "It opens at 10 o'clock on weekdays.",
+            "B": "Okay, here's my email address.",
+            "C": "I don't have the right set of keys."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Statement:</b> I could let you know when we have a job opening.<br/>"
+                      "(A) It opens at 10 o'clock on weekdays.<br/>"
+                      "<b>(B) Okay, here's my email address.</b><br/>"
+                      "(C) I don't have the right set of keys.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tôi có thể báo cho bạn biết khi bên chúng tôi có vị trí tuyển dụng.<br/>(A) Nó mở cửa lúc 10 giờ vào các ngày trong tuần.<br/>(B) Được chứ, đây là địa chỉ email của tôi.<br/>(C) Tôi không có đúng chùm chìa khóa.</p><p><b>Phân tích:</b> Lời đề nghị hỗ trợ thông báo việc làm. Người nghe đồng ý và cung cấp phương thức liên hệ: <i>Okay, here's my email address</i> <b>(B)</b>. (A) bẫy lặp từ <i>opening/opens</i>.</p>",
+        "questionType": "Statement",
+        "subCategory": "Statement Response"
+    },
+    {
+        "id": "ets22_t6_p2_20",
+        "number": 20,
+        "audioUrl": f"{CDN_BASE}/t6_p2_20.mp3",
+        "options": {
+            "A": "I'm very aware of that.",
+            "B": "One that sells clothes and accessories.",
+            "C": "Yes, many different hobbies."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Question:</b> What kind of business are you interested in launching?<br/>"
+                      "(A) I'm very aware of that.<br/>"
+                      "<b>(B) One that sells clothes and accessories.</b><br/>"
+                      "(C) Yes, many different hobbies.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Bạn muốn khởi nghiệp loại hình kinh doanh nào?<br/>(A) Tôi rất nhận thức được điều đó.<br/>(B) Một cửa hàng bán quần áo và phụ kiện.<br/>(C) Vâng, nhiều sở thích khác nhau.</p><p><b>Phân tích:</b> Câu hỏi <b>What kind of business</b> hỏi về loại hình doanh nghiệp. <i>One that sells clothes and accessories</i> <b>(B)</b> (Đại từ <i>One</i> thay thế cho <i>a business</i>) trả lời trực tiếp loại hình kinh doanh.</p>",
+        "questionType": "What",
+        "subCategory": "Information Question"
+    },
+    {
+        "id": "ets22_t6_p2_21",
+        "number": 21,
+        "audioUrl": f"{CDN_BASE}/t6_p2_21.mp3",
+        "options": {
+            "A": "In several pharmacies.",
+            "B": "By offering more sessions.",
+            "C": "About a year ago."
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Question:</b> When did this pharmaceutical company move to this larger facility?<br/>"
+                      "(A) In several pharmacies.<br/>"
+                      "(B) By offering more sessions.<br/>"
+                      "<b>(C) About a year ago.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Công ty dược phẩm này đã chuyển đến cơ sở lớn hơn này khi nào?<br/>(A) Tại một số hiệu thuốc.<br/>(B) Bằng cách cung cấp thêm các phiên thảo luận.<br/>(C) Khoảng một năm trước.</p><p><b>Phân tích:</b> Câu hỏi <b>When did... move</b> hỏi thời gian chuyển địa điểm trong quá khứ. <i>About a year ago</i> <b>(C)</b> chỉ thời điểm chuẩn xác.</p>",
+        "questionType": "When",
+        "subCategory": "Information Question"
+    },
+    {
+        "id": "ets22_t6_p2_22",
+        "number": 22,
+        "audioUrl": f"{CDN_BASE}/t6_p2_22.mp3",
+        "options": {
+            "A": "It was a pleasure to meet you.",
+            "B": "Actually, it's been rescheduled.",
+            "C": "Every few hours."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Statement:</b> Ms. Johnson will be coming to today's meeting.<br/>"
+                      "(A) It was a pleasure to meet you.<br/>"
+                      "<b>(B) Actually, it's been rescheduled.</b><br/>"
+                      "(C) Every few hours.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Cô Johnson sẽ đến tham dự cuộc họp hôm nay.<br/>(A) Rất vui được gặp bạn.<br/>(B) Thực ra thì cuộc họp đã được dời lịch rồi.<br/>(C) Cứ vài giờ một lần.</p><p><b>Phân tích:</b> Lời thông báo về cuộc họp. Người đối thoại cập nhật tình hình thực tế: Cuộc họp đã bị hoãn sang ngày khác (<i>Actually, it's been rescheduled</i>) nên cô Johnson sẽ không đến hôm nay. Đáp án <b>(B)</b> là phản hồi logic.</p>",
+        "questionType": "Statement",
+        "subCategory": "Statement Response"
+    },
+    {
+        "id": "ets22_t6_p2_23",
+        "number": 23,
+        "audioUrl": f"{CDN_BASE}/t6_p2_23.mp3",
+        "options": {
+            "A": "I like that fabric too.",
+            "B": "Yes, it's easy to do.",
+            "C": "The machine in the warehouse."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Question:</b> I'll need to update the software, right?<br/>"
+                      "(A) I like that fabric too.<br/>"
+                      "<b>(B) Yes, it's easy to do.</b><br/>"
+                      "(C) The machine in the warehouse.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tôi sẽ cần phải cập nhật phần mềm, đúng không?<br/>(A) Tôi cũng thích loại vải đó.<br/>(B) Đúng vậy, và việc đó rất dễ làm.<br/>(C) Chiếc máy trong kho.</p><p><b>Phân tích:</b> Câu hỏi đuôi xác nhận yêu cầu. Đáp án <b>(B)</b> đồng tình và bổ sung thêm thông tin trấn an: <i>Yes, it's easy to do</i>.</p>",
+        "questionType": "Tag Question",
+        "subCategory": "Confirmation Question"
+    },
+    {
+        "id": "ets22_t6_p2_24",
+        "number": 24,
+        "audioUrl": f"{CDN_BASE}/t6_p2_24.mp3",
+        "options": {
+            "A": "It's a large database.",
+            "B": "A course on ancient cultures.",
+            "C": "I'm going that way now."
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Question:</b> Where's the museum sculpture exhibit?<br/>"
+                      "(A) It's a large database.<br/>"
+                      "(B) A course on ancient cultures.<br/>"
+                      "<b>(C) I'm going that way now.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Khu triển lãm điêu khắc của bảo tàng ở đâu?<br/>(A) Đó là một cơ sở dữ liệu lớn.<br/>(B) Một khóa học về các nền văn hóa cổ đại.<br/>(C) Tôi đang đi về hướng đó đây (để tôi dẫn đường).</p><p><b>Phân tích:</b> Câu trả lời gián tiếp dạng chỉ đường quen thuộc: Người nói tiện đường đi về hướng đó nên ngụ ý bảo đối phương đi cùng. Đáp án <b>(C)</b> hoàn hảo.</p>",
+        "questionType": "Where",
+        "subCategory": "Indirect Answer"
+    },
+    {
+        "id": "ets22_t6_p2_25",
+        "number": 25,
+        "audioUrl": f"{CDN_BASE}/t6_p2_25.mp3",
+        "options": {
+            "A": "Multiple references.",
+            "B": "That's a great suggestion.",
+            "C": "It went well. Thank you."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Question:</b> Why don't we interview the two candidates together?<br/>"
+                      "(A) Multiple references.<br/>"
+                      "<b>(B) That's a great suggestion.</b><br/>"
+                      "(C) It went well. Thank you.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao chúng ta không phỏng vấn hai ứng viên cùng lúc nhỉ?<br/>(A) Nhiều người tham chiếu.<br/>(B) Đó là một gợi ý tuyệt vời.<br/>(C) Mọi chuyện đã diễn ra tốt đẹp. Cảm ơn bạn.</p><p><b>Phân tích:</b> Cấu trúc <i>Why don't we...?</i> là câu đề xuất, gợi ý làm việc gì chung. Đáp án tán thành đề xuất là <i>That's a great suggestion</i> <b>(B)</b>.</p>",
+        "questionType": "Suggestion",
+        "subCategory": "Suggestion Response"
+    },
+    {
+        "id": "ets22_t6_p2_26",
+        "number": 26,
+        "audioUrl": f"{CDN_BASE}/t6_p2_26.mp3",
+        "options": {
+            "A": "For three to six months.",
+            "B": "I typed up a summary page.",
+            "C": "No, I don't have a measuring stick."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Statement:</b> This research report is unusually long.<br/>"
+                      "(A) For three to six months.<br/>"
+                      "<b>(B) I typed up a summary page.</b><br/>"
+                      "(C) No, I don't have a measuring stick.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Báo cáo nghiên cứu này dài bất thường.<br/>(A) Trong từ 3 đến 6 tháng.<br/>(B) Tôi đã soạn một trang tóm tắt rồi.<br/>(C) Không, tôi không có thước đo.</p><p><b>Phân tích:</b> Người nói nhận xét báo cáo quá dài; người đáp cung cấp giải pháp hữu ích: Đã chuẩn bị sẵn bản tóm tắt để người đọc tiết kiệm thời gian (<i>I typed up a summary page</i> <b>(B)</b>).</p>",
+        "questionType": "Statement",
+        "subCategory": "Statement Response"
+    },
+    {
+        "id": "ets22_t6_p2_27",
+        "number": 27,
+        "audioUrl": f"{CDN_BASE}/t6_p2_27.mp3",
+        "options": {
+            "A": "That sounds like a fair price.",
+            "B": "Round trip tickets to Rome, please.",
+            "C": "Yes, it was done last week."
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Question:</b> We reserved a booth at the festival, didn't we?<br/>"
+                      "(A) That sounds like a fair price.<br/>"
+                      "(B) Round trip tickets to Rome, please.<br/>"
+                      "<b>(C) Yes, it was done last week.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chúng ta đã đặt trước một gian hàng tại lễ hội rồi đúng không?<br/>(A) Nghe có vẻ là một mức giá hợp lý.<br/>(B) Cho tôi vé khứ hồi đi Rome, làm ơn.<br/>(C) Đúng vậy, việc đó đã được làm từ tuần trước rồi.</p><p><b>Phân tích:</b> Câu hỏi đuôi xác nhận hành động trong quá khứ: <i>reserved a booth ..., didn't we?</i> Đáp án <b>(C)</b> xác nhận rõ ràng: <i>Yes, it was done last week</i>.</p>",
+        "questionType": "Tag Question",
+        "subCategory": "Confirmation Question"
+    },
+    {
+        "id": "ets22_t6_p2_28",
+        "number": 28,
+        "audioUrl": f"{CDN_BASE}/t6_p2_28.mp3",
+        "options": {
+            "A": "I have no legal expertise.",
+            "B": "Those pencil drawings should be framed.",
+            "C": "It looks like a compact vehicle."
+        },
+        "correctAnswer": "A",
+        "transcript": "<p><b>Question:</b> Could you help me draw up a contract?<br/>"
+                      "<b>(A) I have no legal expertise.</b><br/>"
+                      "(B) Those pencil drawings should be framed.<br/>"
+                      "(C) It looks like a compact vehicle.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Bạn có thể giúp tôi soạn thảo một bản hợp đồng không?<br/>(A) Tôi không có chuyên môn về pháp lý.<br/>(B) Những bức vẽ bằng bút chì đó nên được đóng khung.<br/>(C) Nó trông giống như một chiếc xe nhỏ gọn.</p><p><b>Phân tích:</b> Lời nhờ vả soạn hợp đồng (<i>draw up a contract</i>). Người nghe từ chối lịch sự với lý do mình không có chuyên môn pháp luật (<i>I have no legal expertise</i> <b>(A)</b>). (B) bẫy từ đồng âm khác nghĩa <i>draw/drawings</i>.</p>",
+        "questionType": "Request",
+        "subCategory": "Request Response"
+    },
+    {
+        "id": "ets22_t6_p2_29",
+        "number": 29,
+        "audioUrl": f"{CDN_BASE}/t6_p2_29.mp3",
+        "options": {
+            "A": "At the corner of Main Street and Linden Avenue.",
+            "B": "That table is reserved.",
+            "C": "Your server will be with you momentarily."
+        },
+        "correctAnswer": "C",
+        "transcript": "<p><b>Question:</b> What are your dinner specials this evening?<br/>"
+                      "(A) At the corner of Main Street and Linden Avenue.<br/>"
+                      "(B) That table is reserved.<br/>"
+                      "<b>(C) Your server will be with you momentarily.</b></p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Món đặc biệt cho bữa tối tối nay của quán là gì?<br/>(A) Ở góc đường Main và đại lộ Linden.<br/>(B) Bàn đó đã được đặt trước.<br/>(C) Người phục vụ bàn của quý khách sẽ đến ngay trong giây lát.</p><p><b>Phân tích:</b> Khách hỏi món đặc biệt trong nhà hàng, nhân viên lễ tân/chào khách báo rằng người phục vụ bàn phụ trách sẽ tới ngay để giới thiệu thực đơn chi tiết (<i>Your server will be with you momentarily</i> <b>(C)</b>).</p>",
+        "questionType": "What",
+        "subCategory": "Indirect Answer"
+    },
+    {
+        "id": "ets22_t6_p2_30",
+        "number": 30,
+        "audioUrl": f"{CDN_BASE}/t6_p2_30.mp3",
+        "options": {
+            "A": "It's not a requirement, is it?",
+            "B": "I'll hang up the sign.",
+            "C": "Another recording studio, I think."
+        },
+        "correctAnswer": "A",
+        "transcript": "<p><b>Question:</b> Have you signed up to access your medical records online?<br/>"
+                      "<b>(A) It's not a requirement, is it?</b><br/>"
+                      "(B) I'll hang up the sign.<br/>"
+                      "(C) Another recording studio, I think.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Bạn đã đăng ký để truy cập hồ sơ bệnh án trực tuyến chưa?<br/>(A) Đó đâu phải là điều bắt buộc, đúng không?<br/>(B) Tôi sẽ treo biển hiệu lên.<br/>(C) Một phòng thu âm khác, tôi nghĩ vậy.</p><p><b>Phân tích:</b> Người nói hỏi về việc đăng ký dịch vụ, người nghe hỏi ngược lại để xác nhận xem việc đó có bắt buộc phải làm hay không: <i>It's not a requirement, is it?</i> <b>(A)</b>. (B) bẫy âm <i>signed up / sign</i>; (C) bẫy âm <i>records / recording</i>.</p>",
+        "questionType": "Yes/No Question",
+        "subCategory": "Counter Question"
+    },
+    {
+        "id": "ets22_t6_p2_31",
+        "number": 31,
+        "audioUrl": f"{CDN_BASE}/t6_p2_31.mp3",
+        "options": {
+            "A": "The lunch caterer should be arriving by 11.",
+            "B": "I have some that you can use.",
+            "C": "We haven't confirmed the hotel reservation yet."
+        },
+        "correctAnswer": "B",
+        "transcript": "<p><b>Question:</b> Didn't the office manager order more company letterhead?<br/>"
+                      "(A) The lunch caterer should be arriving by 11.<br/>"
+                      "<b>(B) I have some that you can use.</b><br/>"
+                      "(C) We haven't confirmed the hotel reservation yet.</p>",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chẳng phải người quản lý văn phòng đã đặt thêm giấy tiêu đề công ty rồi sao?<br/>(A) Nhà cung cấp dịch vụ ăn trưa sẽ đến trước 11 giờ.<br/>(B) Tôi có sẵn một ít mà bạn có thể dùng tạm.<br/>(C) Chúng tôi vẫn chưa xác nhận đặt phòng khách sạn.</p><p><b>Phân tích:</b> Người nói hỏi về giấy tiêu đề thư công ty (<i>letterhead</i>) khi đang cần dùng. Người đáp đưa ra giải pháp trực tiếp: Tôi còn dư một ít để bạn dùng tạm (<i>I have some that you can use</i> <b>(B)</b>).</p>",
+        "questionType": "Negative Question",
+        "subCategory": "Indirect Answer"
+    }
+]
+
+out_dir = "public/data/ets2022/test6"
+os.makedirs(out_dir, exist_ok=True)
+
+with open(f"{out_dir}/part1.json", "w", encoding="utf-8") as f:
+    json.dump(part1_data, f, ensure_ascii=False, indent=2)
+
+with open(f"{out_dir}/part2.json", "w", encoding="utf-8") as f:
+    json.dump(part2_data, f, ensure_ascii=False, indent=2)
+
+print(f"Generated {out_dir}/part1.json ({len(part1_data)} items)")
+print(f"Generated {out_dir}/part2.json ({len(part2_data)} items)")

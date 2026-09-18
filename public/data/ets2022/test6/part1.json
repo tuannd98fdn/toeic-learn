@@ -1,0 +1,104 @@
+[
+  {
+    "id": "ets22_t6_p1_01",
+    "number": 1,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_01.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_01.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><b>Transcript:</b><br/>(A) She's looking out a window.<br/><b>(B) She's taking an item out of a refrigerator.</b><br/>(C) She's grabbing a handful of carrots.<br/>(D) She's putting some items in a bag.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Cô ấy đang nhìn ra ngoài cửa sổ.<br/>(B) Cô ấy đang lấy một món đồ ra khỏi tủ lạnh.<br/>(C) Cô ấy đang nắm một nắm cà rốt.<br/>(D) Cô ấy đang đặt một số món đồ vào túi.</p><p><b>Phân tích chi tiết:</b><br/>Trong bức ảnh, người phụ nữ đang mở cửa tủ lạnh và với tay lấy một hộp/món đồ ra ngoài (<i>taking an item out of a refrigerator</i>). Đáp án <b>(B)</b> miêu tả chính xác hành động này. Các đáp án (A), (C), (D) đều sai lệch chi tiết hành động hoặc đồ vật.</p>",
+    "questionType": "Person",
+    "subCategory": "Person Doing Action"
+  },
+  {
+    "id": "ets22_t6_p1_02",
+    "number": 2,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_02.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_02.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><b>Transcript:</b><br/><b>(A) One of the women is tying her shoe.</b><br/>(B) One of the women is wearing a hat.<br/>(C) One of the women is standing near a park bench.<br/>(D) One of the women is carrying a computer up some stairs.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một trong những người phụ nữ đang buộc dây giày.<br/>(B) Một trong những người phụ nữ đang đội mũ.<br/>(C) Một trong những người phụ nữ đang đứng gần ghế đá công viên.<br/>(D) Một trong những người phụ nữ đang mang máy tính lên cầu thang.</p><p><b>Phân tích chi tiết:</b><br/>Bức tranh chụp hai người phụ nữ ở khu vực cầu thang ngoài trời/công viên, trong đó một người đang cúi xuống buộc lại dây giày thể thao (<i>tying her shoe</i>). Đáp án <b>(A)</b> miêu tả đúng trọng tâm hành động. Không ai đội mũ (B), không có ghế đá công viên nào ở gần (C), không có máy tính (D).</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
+  },
+  {
+    "id": "ets22_t6_p1_03",
+    "number": 3,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_03.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_03.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><b>Transcript:</b><br/>(A) The man is setting a clock.<br/>(B) The man is reaching for a box.<br/><b>(C) The man is posting some information.</b><br/>(D) The woman is handing some food to the man.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Người đàn ông đang chỉnh đồng hồ.<br/>(B) Người đàn ông đang với tay lấy một chiếc hộp.<br/>(C) Người đàn ông đang ghim/dán thông tin lên bảng thông báo.<br/>(D) Người phụ nữ đang đưa đồ ăn cho người đàn ông.</p><p><b>Phân tích chi tiết:</b><br/>Người đàn ông đang gắn một tờ giấy/thông báo lên bảng thông báo (<i>posting some information</i> on a bulletin board). Đáp án <b>(C)</b> hoàn toàn trùng khớp với hành động chính. Không có chỉnh đồng hồ (A), không với lấy hộp (B), không có hành động đưa thức ăn (D).</p>",
+    "questionType": "Person",
+    "subCategory": "Person Doing Action"
+  },
+  {
+    "id": "ets22_t6_p1_04",
+    "number": 4,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_04.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_04.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "D",
+    "transcript": "<p><b>Transcript:</b><br/>(A) He's twisting some wires.<br/>(B) He's pruning a bush next to a building.<br/>(C) He's lifting a block.<br/><b>(D) He's spreading cement with a shovel.</b></p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Anh ấy đang xoắn một số sợi dây.<br/>(B) Anh ấy đang tỉa một bụi cây cạnh tòa nhà.<br/>(C) Anh ấy đang nâng một khối đá/gạch.<br/>(D) Anh ấy đang dùng xẻng trải/san xi măng.</p><p><b>Phân tích chi tiết:</b><br/>Người đàn ông là công nhân xây dựng đang cầm chiếc xẻng để san phẳng lớp xi măng trên mặt đất (<i>spreading cement with a shovel</i>). Đáp án <b>(D)</b> miêu tả chính xác động tác và công cụ làm việc.</p>",
+    "questionType": "Person",
+    "subCategory": "Person Doing Action"
+  },
+  {
+    "id": "ets22_t6_p1_05",
+    "number": 5,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_05.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_05.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><b>Transcript:</b><br/>(A) The women are facing a desk.<br/>(B) One of the women is holding a jacket.<br/><b>(C) A drawer has been left open.</b><br/>(D) Some folders have been placed on top of a file cabinet.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Những người phụ nữ đang đối mặt với một chiếc bàn làm việc.<br/>(B) Một trong những người phụ nữ đang cầm một chiếc áo khoác.<br/>(C) Một ngăn kéo đã bị để mở.<br/>(D) Một số bìa hồ sơ đã được đặt lên trên đầu tủ hồ sơ.</p><p><b>Phân tích chi tiết:</b><br/>Trong văn phòng làm việc, ở phía bên cạnh có một ngăn kéo tủ tài liệu đang ở trạng thái mở ra (<i>a drawer has been left open</i>). Đáp án <b>(C)</b> miêu tả chính xác trạng thái của đồ vật trong bức ảnh. Lưu ý dạng câu hỏi Part 1 có người nhưng đáp án đúng lại là câu miêu tả đồ vật/vật thể.</p>",
+    "questionType": "Objects / Scene",
+    "subCategory": "Objects"
+  },
+  {
+    "id": "ets22_t6_p1_06",
+    "number": 6,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_06.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t6_p1_06.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><b>Transcript:</b><br/><b>(A) Some cups have been lined up on shelves.</b><br/>(B) A fruit basket has been emptied.<br/>(C) Some pots are being filled with water.<br/>(D) Some coffee has been spilled on the counter.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một số chiếc cốc đã được xếp thẳng hàng trên các kệ.<br/>(B) Một giỏ trái cây đã bị đổ rỗng.<br/>(C) Một số chiếc nồi đang được đổ đầy nước.<br/>(D) Một ít cà phê đã bị đổ ra quầy.</p><p><b>Phân tích chi tiết:</b><br/>Bức tranh tĩnh vật không người chụp các giá kệ treo tường trong quán cà phê/nhà bếp, trên đó các dãy ly tách được xếp ngay ngắn thành hàng (<i>lined up on shelves</i>). Đáp án <b>(A)</b> miêu tả chính xác tuyệt đối sự sắp đặt này.</p>",
+    "questionType": "Objects / Scene",
+    "subCategory": "Objects"
+  }
+]

@@ -40,6 +40,41 @@ function formatSeconds(sec: number) {
   return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
+interface ParsedExplanation {
+  translation?: string;
+  analysis?: string;
+  fastTip?: string;
+}
+
+function parseExplanationSections(html: string): ParsedExplanation | null {
+  if (!html || typeof html !== 'string') return null;
+
+  const pMatches = html.match(/<p[\s\S]*?<\/p>/gi);
+  if (!pMatches || pMatches.length === 0) return null;
+
+  let translation = '';
+  let analysis = '';
+  let fastTip = '';
+
+  for (const p of pMatches) {
+    const inner = p.replace(/^<p[^>]*>/i, '').replace(/<\/p>$/i, '').trim();
+
+    if (/<b>\s*Dịch nghĩa\s*:?\s*<\/b>/i.test(inner)) {
+      translation = inner.replace(/<b>\s*Dịch nghĩa\s*:?\s*<\/b>\s*:?/i, '').trim();
+    } else if (/<b>\s*Phân tích\s*(?:ngữ pháp|từ vựng)\s*:?\s*<\/b>/i.test(inner)) {
+      analysis = inner.replace(/<b>\s*Phân tích\s*(?:ngữ pháp|từ vựng)\s*:?\s*<\/b>\s*:?/i, '').trim();
+    } else if (/<b>\s*Mẹo giải nhanh[\s\S]*?<\/b>/i.test(inner)) {
+      fastTip = inner.replace(/<b>\s*Mẹo giải nhanh[\s\S]*?<\/b>\s*:?/i, '').trim();
+    }
+  }
+
+  if (!translation && !analysis && !fastTip) {
+    return null;
+  }
+
+  return { translation, analysis, fastTip };
+}
+
 export const PART5_SUB_SKILLS = [
   { key: 'all', label: 'Tất cả câu hỏi' },
   { key: 'Word Form', label: 'Từ loại' },
@@ -141,6 +176,7 @@ function Part5SpeedTrainer() {
             '/data/ets2022/test3/part5.json',
             '/data/ets2022/test4/part5.json',
             '/data/ets2022/test5/part5.json',
+            '/data/ets2022/test6/part5.json',
           ];
           const responses = await Promise.all(testPaths.map(p => fetch(p)));
           const allData: any[] = [];
@@ -684,6 +720,7 @@ function Part5SpeedTrainer() {
   }
 
   const currentQ = questions[currentIndex];
+  const parsedExp = (showAnswer && currentQ?.explanation) ? parseExplanationSections(currentQ.explanation) : null;
   const progressPercent = ((currentIndex) / questions.length) * 100;
 
   const getButtonClass = (key: string) => {
@@ -784,6 +821,13 @@ function Part5SpeedTrainer() {
                 onClick={() => handleSelectTest('ets2022_test5')}
               >
                 Test 5 (Chuẩn ETS)
+              </button>
+              <button
+                type="button"
+                className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test6' ? styles.testOptionActive : ''}`}
+                onClick={() => handleSelectTest('ets2022_test6')}
+              >
+                Test 6 (Chuẩn ETS)
               </button>
             </div>
           )}
@@ -951,7 +995,21 @@ function Part5SpeedTrainer() {
               </div>
 
               <div className={styles.explanationBoardScroll}>
-                {/* Syntax Visualizer */}
+                {/* 1. Mẹo giải nhanh & Bẫy ETS (Highlight on top) */}
+                {parsedExp?.fastTip && (
+                  <div className={styles.fastTipCallout}>
+                    <div className={styles.fastTipCalloutHeader}>
+                      <ZapIcon size={16} />
+                      <span>Mẹo giải nhanh & Bẫy ETS (3 Giây)</span>
+                    </div>
+                    <div 
+                      className={styles.fastTipCalloutContent}
+                      dangerouslySetInnerHTML={{ __html: parsedExp.fastTip }}
+                    />
+                  </div>
+                )}
+
+                {/* 2. Syntax Visualizer */}
                 {currentQ.syntaxBreakdown && (
                   <div className={styles.syntaxVisualizerBox}>
                     <div className={styles.syntaxVisualizerTitle}>Trực quan hóa cấu trúc câu (Syntax Visualizer)</div>
@@ -984,19 +1042,41 @@ function Part5SpeedTrainer() {
                   </div>
                 )}
 
-                <div 
-                  className={styles.explanationBoxContent}
-                  dangerouslySetInnerHTML={{ __html: currentQ.explanation }}
-                />
+                {/* 3. Phân tích ngữ pháp / từ vựng & Loại trừ đáp án */}
+                {parsedExp?.analysis && (
+                  <div className={styles.analysisBox}>
+                    <div className={styles.analysisBoxHeader}>
+                      <TargetIcon size={15} />
+                      <span>Phân tích chi tiết & Loại trừ</span>
+                    </div>
+                    <div 
+                      className={styles.analysisBoxContent}
+                      dangerouslySetInnerHTML={{ __html: parsedExp.analysis }}
+                    />
+                  </div>
+                )}
 
-                <button
-                  type="button"
-                  className={styles.aiTutorInlineBtn}
-                  onClick={() => openAITutor(currentQ)}
-                >
-                  <SparklesIcon size={16} />
-                  <span>Hỏi Gia Sư AI bóc tách bẫy sâu hơn (Phím H)</span>
-                </button>
+                {/* 4. Dịch nghĩa toàn câu */}
+                {parsedExp?.translation && (
+                  <div className={styles.translationBox}>
+                    <div className={styles.translationBoxHeader}>
+                      <BookOpenIcon size={15} />
+                      <span>Dịch nghĩa câu</span>
+                    </div>
+                    <div 
+                      className={styles.translationBoxContent}
+                      dangerouslySetInnerHTML={{ __html: parsedExp.translation }}
+                    />
+                  </div>
+                )}
+
+                {/* Fallback if parsing didn't find sections */}
+                {!parsedExp && (
+                  <div 
+                    className={styles.explanationBoxContent}
+                    dangerouslySetInnerHTML={{ __html: currentQ.explanation }}
+                  />
+                )}
               </div>
             </div>
           )}

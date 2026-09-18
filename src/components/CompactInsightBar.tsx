@@ -110,7 +110,7 @@ export default function CompactInsightBar() {
                 Phong độ ổn định
               </span>
               <span className={styles.bottleneckSub}>
-                Chưa phát hiện điểm nghẽn nghiêm trọng. Tiếp tục giữ vững lộ trình hôm nay!
+                Giữ vững phong độ và tiến độ học hôm nay!
               </span>
             </div>
           </>
