@@ -1,0 +1,104 @@
+[
+  {
+    "id": "ets22_t4_p1_01",
+    "number": 1,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_01.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_01.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><b>Transcript:</b><br/><b>(A) She's kneeling in front of a chalkboard.</b><br/>(B) She's sweeping a tile floor.<br/>(C) She's signing a receipt.<br/>(D) She's clearing off a countertop.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Cô ấy đang quỳ gối trước một tấm bảng đen.<br/>(B) Cô ấy đang quét sàn gạch.<br/>(C) Cô ấy đang ký vào một biên lai.<br/>(D) Cô ấy đang dọn sạch mặt quầy.</p><p><b>Phân tích chi tiết:</b><br/>Trong bức ảnh, người phụ nữ đang quỳ (<i>kneeling</i>) trên sàn và viết/vẽ lên một tấm bảng đen (<i>chalkboard</i>) đặt sát đất. Do đó đáp án <b>(A)</b> miêu tả chính xác hành động và tư thế của nhân vật. Loại (B) vì không có hành động quét dọn, loại (C) vì không ký biên lai, loại (D) vì không dọn mặt quầy.</p>",
+    "questionType": "Single Person",
+    "subCategory": "Single Person"
+  },
+  {
+    "id": "ets22_t4_p1_02",
+    "number": 2,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_02.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_02.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "D",
+    "transcript": "<p><b>Transcript:</b><br/>(A) A man is polishing the floor.<br/>(B) A man is unzipping a suitcase.<br/>(C) A man is picking up a cushion.<br/><b>(D) A man is drinking from a bottle.</b></p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Người đàn ông đang đánh bóng sàn nhà.<br/>(B) Người đàn ông đang kéo khóa vali.<br/>(C) Người đàn ông đang nhặt một chiếc đệm gối.<br/>(D) Người đàn ông đang uống nước từ một cái chai.</p><p><b>Phân tích chi tiết:</b><br/>Người đàn ông đang ngồi trên ghế sofa và cầm chai nước đưa lên miệng uống (<i>drinking from a bottle</i>). Đáp án <b>(D)</b> miêu tả trực tiếp và chính xác nhất. Các lựa chọn (A), (B), (C) đều chứa hành động không xuất hiện trong hình.</p>",
+    "questionType": "Single Person",
+    "subCategory": "Single Person"
+  },
+  {
+    "id": "ets22_t4_p1_03",
+    "number": 3,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_03.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_03.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><b>Transcript:</b><br/>(A) An announcer is setting down a microphone.<br/>(B) Some workers are constructing a platform.<br/><b>(C) There are some performers on a stage.</b><br/>(D) Some musicians are unpacking their equipment.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Người dẫn chương trình đang đặt micro xuống.<br/>(B) Một số công nhân đang xây dựng bục sân khấu.<br/>(C) Có một vài nghệ sĩ biểu diễn trên sân khấu.<br/>(D) Một số nhạc sĩ đang mở nhạc cụ thiết bị.</p><p><b>Phân tích chi tiết:</b><br/>Trên sân khấu có các nghệ sĩ/diễn viên đang đứng biểu diễn trước khán giả (<i>performers on a stage</i>). Đáp án <b>(C)</b> là câu trần thuật khách quan và chính xác về bối cảnh chung của bức tranh.</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
+  },
+  {
+    "id": "ets22_t4_p1_04",
+    "number": 4,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_04.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_04.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "B",
+    "transcript": "<p><b>Transcript:</b><br/>(A) The woman is hanging up some posters.<br/><b>(B) The woman is writing on a document.</b><br/>(C) A laptop is being put away.<br/>(D) A flower pot is being stored on a shelf.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Người phụ nữ đang treo một số áp phích.<br/>(B) Người phụ nữ đang viết lên một tài liệu.<br/>(C) Máy tính xách tay đang được cất đi.<br/>(D) Chậu hoa đang được cất trên kệ.</p><p><b>Phân tích chi tiết:</b><br/>Người phụ nữ ngồi tại bàn làm việc, tay cầm bút đang viết lên trang tài liệu đặt trước mặt (<i>writing on a document</i>). Đáp án <b>(B)</b> miêu tả đúng hành động trọng tâm của nhân vật.</p>",
+    "questionType": "Single Person",
+    "subCategory": "Single Person"
+  },
+  {
+    "id": "ets22_t4_p1_05",
+    "number": 5,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_05.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_05.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><b>Transcript:</b><br/>(A) The presenter is closing a window.<br/>(B) The presenter is standing behind a podium.<br/><b>(C) The audience is facing a screen.</b><br/>(D) The audience is seated in a circle.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Người thuyết trình đang đóng cửa sổ.<br/>(B) Người thuyết trình đang đứng sau bục phát biểu.<br/>(C) Khán giả đang hướng mặt về phía màn hình chiếu.<br/>(D) Khán giả đang ngồi thành một vòng tròn.</p><p><b>Phân tích chi tiết:</b><br/>Trong phòng hội thảo, các hàng ghế khán giả đều nhìn về phía màn hình chiếu lớn ở đầu phòng (<i>facing a screen</i>). Đáp án <b>(C)</b> miêu tả chính xác hướng nhìn và bố cục của khán phòng.</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
+  },
+  {
+    "id": "ets22_t4_p1_06",
+    "number": 6,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_06.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t4_p1_06.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "C",
+    "transcript": "<p><b>Transcript:</b><br/>(A) Some passengers are waiting on the walkway.<br/>(B) Some bicycles are mounted on a bus.<br/><b>(C) A bus is being driven down a road.</b><br/>(D) A garage door has been opened.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một số hành khách đang đợi trên lối đi bộ.<br/>(B) Một số xe đạp được gắn trên xe buýt.<br/>(C) Chiếc xe buýt đang chạy trên đường.<br/>(D) Cửa nhà để xe đã được mở ra.</p><p><b>Phân tích chi tiết:</b><br/>Bức tranh chụp một chiếc xe buýt đang di chuyển trên làn đường phố (<i>being driven down a road</i>). Chọn <b>(C)</b>.</p>",
+    "questionType": "Objects & Scenes",
+    "subCategory": "Objects & Scenes"
+  }
+]

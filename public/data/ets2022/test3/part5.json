@@ -2,691 +2,691 @@
   {
     "id": "ets22_t3_p5_101",
     "number": 101,
-    "text": "Mr. Yamamoto submitted _____ quarterly expense report to the finance department yesterday afternoon.",
+    "text": "Vantage Automotive Design has recently _____ with the Pallax Company.",
     "options": {
-      "A": "he",
-      "B": "him",
-      "C": "his",
-      "D": "himself"
+      "A": "merge",
+      "B": "merger",
+      "C": "merged",
+      "D": "merging"
     },
     "correctAnswer": "C",
-    "explanation": "<p><b>Dịch nghĩa:</b> Ông Yamamoto đã nộp báo cáo chi phí hàng quý của mình cho phòng tài chính vào chiều hôm qua.</p>\n<p><b>Phân tích ngữ pháp:</b> Chỗ trống đứng sau ngoại động từ <i>submitted</i> và đứng trước cụm danh từ <i>quarterly expense report</i>. Vị trí trước danh từ cần một tính từ sở hữu. Do đó, <b>(C) his</b> là đáp án chính xác.<br/>- (A) <i>he</i>: đại từ chủ ngữ làm S.<br/>- (B) <i>him</i>: đại từ tân ngữ làm O.<br/>- (D) <i>himself</i>: đại từ phản thân.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Trước cụm danh từ bắt buộc điền tính từ sở hữu (his/her/their/our/its). Thấy <i>expense report</i> chọn ngay <i>his</i> trong 3 giây.</p>",
-    "type": "Pronoun",
-    "subCategory": "Pronoun",
-    "grammarTag": "Possessive Adjective",
-    "clueHint": "Nhìn ngay sau chỗ trống là cụm danh từ \"quarterly expense report\". Vị trí đứng trước danh từ cần đại từ loại nào?",
+    "explanation": "<p><b>Dịch nghĩa:</b> Vantage Automotive Design gần đây đã sáp nhập với Công ty Pallax.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc thì hiện tại hoàn thành: <i>has + recently + V3/V-ed</i>. Động từ <i>merge</i> thêm -ed thành <b>(C) merged</b> tạo thành thể hoàn thành chủ động hoàn chỉnh.<br/>- (A) <i>merge</i>: động từ nguyên thể.<br/>- (B) <i>merger</i>: danh từ vụ sáp nhập.<br/>- (D) <i>merging</i>: dạng V-ing.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Nhìn thấy trợ động từ <i>has/have</i> đi kèm trạng từ <i>recently/already/just</i>, chỗ trống cần ngay một phân từ hai (V3/V-ed).</p>",
+    "type": "Verb Tense",
+    "subCategory": "Verb Tense",
+    "grammarTag": "Present Perfect",
+    "clueHint": "Phía trước chỗ trống có trợ động từ \"has\" và trạng từ \"recently\". Dạng thức động từ nào kết hợp với \"has\" tạo thì hiện tại hoàn thành?",
     "syntaxBreakdown": {
-      "subject": "Mr. Yamamoto",
-      "verb": "submitted",
-      "objectOrComplement": "[his] quarterly expense report to the finance department",
-      "blankRole": "Tính từ sở hữu bổ nghĩa cho danh từ expense report"
+      "subject": "Vantage Automotive Design",
+      "verb": "has recently [merged]",
+      "objectOrComplement": "with the Pallax Company",
+      "blankRole": "Động từ chính dạng V-ed kết hợp với has tạo thì hiện tại hoàn thành"
     }
   },
   {
     "id": "ets22_t3_p5_102",
     "number": 102,
-    "text": "The executive committee will convene _____ Conference Room A on the fifth floor at ten o'clock.",
+    "text": "Rain is predicted this weekend, _____ the office picnic will have to be postponed.",
     "options": {
-      "A": "in",
-      "B": "on",
-      "C": "to",
-      "D": "for"
+      "A": "so",
+      "B": "for",
+      "C": "but",
+      "D": "nor"
     },
     "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Ủy ban điều hành sẽ họp tại Phòng họp A ở tầng 5 vào lúc mười giờ.</p>\n<p><b>Phân tích ngữ pháp:</b> Để chỉ địa điểm bên trong một phòng họp cụ thể, ta dùng giới từ <b>in</b>: <i>in Conference Room A</i>. Do đó, <b>(A) in</b> là đáp án đúng.<br/>- (B) <i>on</i>: dùng cho số tầng (on the fifth floor), không dùng cho phòng.<br/>- (C) <i>to</i>: chỉ hướng di chuyển tới.<br/>- (D) <i>for</i>: chỉ mục đích hoặc khoảng thời gian.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Đi với tên phòng, sảnh (room, hall, office) dùng <b>IN</b>. Đi với tầng (floor) dùng <b>ON</b>.</p>",
-    "type": "Preposition",
+    "explanation": "<p><b>Dịch nghĩa:</b> Dự báo trời sẽ mưa vào cuối tuần này, vì vậy buổi dã ngoại của văn phòng sẽ phải hoãn lại.</p><p><b>Phân tích ngữ pháp:</b> Hai mệnh đề độc lập được nối với nhau qua liên từ kết hợp (coordinating conjunction) thể hiện quan hệ nguyên nhân - kết quả: Mưa (nguyên nhân) -> hoãn dã ngoại (kết quả). Do đó, liên từ <b>(A) so</b> (vì vậy/cho nên) là đáp án chuẩn xác.<br/>- (B) <i>for</i>: bởi vì (chỉ nguyên nhân đứng trước kết quả, không đảo ngược thế này).<br/>- (C) <i>but</i>: nhưng (chỉ sự tương phản).<br/>- (D) <i>nor</i>: cũng không.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Vế trước đưa ra sự kiện, vế sau là hệ quả hiển nhiên, chọn <i>so</i> nối hai mệnh đề sau dấu phẩy.</p>",
+    "type": "Conjunction",
     "subCategory": "Preposition & Conjunction",
-    "grammarTag": "Preposition of Place",
-    "clueHint": "Xem danh từ ngay sau chỗ trống là \"Conference Room A\" (tên phòng họp cụ thể). Giới từ nào dùng cho bên trong một căn phòng?",
+    "grammarTag": "Coordinating Conjunction",
+    "clueHint": "Mối quan hệ giữa trời mưa và việc hoãn dã ngoại là nguyên nhân - kết quả. Liên từ nào mang nghĩa \"vì vậy\"?",
     "syntaxBreakdown": {
-      "subject": "The executive committee",
-      "verb": "will convene",
-      "objectOrComplement": "[in] Conference Room A on the fifth floor at ten o'clock",
-      "blankRole": "Giới từ chỉ nơi chốn đi với danh từ room"
+      "subject": "Rain / the office picnic",
+      "verb": "is predicted / will have to be postponed",
+      "objectOrComplement": "this weekend",
+      "blankRole": "Liên từ kết hợp chỉ kết quả nối hai mệnh đề độc lập"
     }
   },
   {
     "id": "ets22_t3_p5_103",
     "number": 103,
-    "text": "The marketing director spoke _____ about the impressive international expansion of our brand.",
+    "text": "Use an alternative shipping firm if Greer Freight is unable to expedite delivery of _____ order.",
     "options": {
-      "A": "enthusiast",
-      "B": "enthusiastic",
-      "C": "enthusiastically",
-      "D": "enthusiasm"
+      "A": "you",
+      "B": "your",
+      "C": "yours",
+      "D": "yourselves"
     },
-    "correctAnswer": "C",
-    "explanation": "<p><b>Dịch nghĩa:</b> Giám đốc tiếp thị đã phát biểu một cách đầy hào hứng về sự mở rộng quốc tế ấn tượng của thương hiệu chúng ta.</p>\n<p><b>Phân tích ngữ pháp:</b> Câu đã có chủ ngữ <i>The marketing director</i> và động từ chính <i>spoke</i> (nội động từ). Để bổ nghĩa cho động từ thường <i>spoke</i>, vị trí chỗ trống bắt buộc là một trạng từ đuôi <i>-ly</i>. Do đó, <b>(C) enthusiastically</b> là đáp án chính xác.<br/>- (A) <i>enthusiast</i>: danh từ chỉ người.<br/>- (B) <i>enthusiastic</i>: tính từ.<br/>- (D) <i>enthusiasm</i>: danh từ trừu tượng.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cấu trúc S + V (nội động từ) + [TRẠNG TỪ ĐUÔI -LY]. Thấy <i>spoke</i> điền ngay trạng từ.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Adverb modifying Verb",
-    "clueHint": "Động từ đứng trước là \"spoke\" (phát biểu - nội động từ). Từ loại nào bổ nghĩa cho động từ thường?",
+    "correctAnswer": "B",
+    "explanation": "<p><b>Dịch nghĩa:</b> Hãy sử dụng một công ty vận chuyển thay thế nếu Greer Freight không thể đẩy nhanh tiến độ giao đơn hàng của bạn.</p><p><b>Phân tích ngữ pháp:</b> Chỗ trống đứng trước danh từ <i>order</i> (đơn hàng), do đó vị trí này cần một tính từ sở hữu để bổ nghĩa. Chọn <b>(B) your</b>.<br/>- (A) <i>you</i>: đại từ chủ ngữ/tân ngữ.<br/>- (C) <i>yours</i>: đại từ sở hữu (thay thế cho cụm tính từ sở hữu + danh từ).<br/>- (D) <i>yourselves</i>: đại từ phản thân.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Đứng trước danh từ bắt buộc điền tính từ sở hữu (my/your/his/her/their/our/its).</p>",
+    "type": "Pronoun",
+    "subCategory": "Pronoun",
+    "grammarTag": "Possessive Adjective",
+    "clueHint": "Nhìn ngay sau chỗ trống là danh từ \"order\". Vị trí đứng trước danh từ cần đại từ gì?",
     "syntaxBreakdown": {
-      "subject": "The marketing director",
-      "verb": "spoke",
-      "objectOrComplement": "[enthusiastically] about the impressive international expansion",
-      "blankRole": "Trạng từ bổ nghĩa cho động từ spoke"
+      "subject": "(You - mệnh lệnh) / Greer Freight",
+      "verb": "Use / is unable to expedite",
+      "objectOrComplement": "delivery of [your] order",
+      "blankRole": "Tính từ sở hữu bổ nghĩa cho danh từ order"
     }
   },
   {
     "id": "ets22_t3_p5_104",
     "number": 104,
-    "text": "All personnel must wear protective safety helmets _____ entering the active construction zone.",
+    "text": "The cafeteria is featuring dishes _____ different regions of the world this week.",
     "options": {
-      "A": "before",
-      "B": "during",
-      "C": "between",
-      "D": "except"
+      "A": "over",
+      "B": "through",
+      "C": "into",
+      "D": "from"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Toàn thể nhân sự phải đội mũ bảo hộ an toàn trước khi đi vào khu vực công trường đang thi công.</p>\n<p><b>Phân tích ngữ pháp:</b> <i>Entering the active construction zone</i> là một cụm danh động từ (V-ing phrase). Về mặt logic thời gian và quy tắc an toàn, việc đội mũ phải xảy ra <b>trước khi</b> bước vào. <b>(A) before</b> vừa là giới từ đi với V-ing vừa hợp nghĩa hoàn hảo.<br/>- (B) <i>during</i>: chỉ đi với danh từ, không đi trực tiếp với V-ing trong tiếng Anh chuẩn ETS.<br/>- (C) <i>between</i>: đi với <i>and</i> (between A and B).<br/>- (D) <i>except</i>: ngoại trừ (sai nghĩa).</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Bẫy kinh điển ETS: <i>Before / After + V-ing</i> là cấu trúc cực kỳ phổ biến. <i>During</i> không đi với V-ing!</p>",
+    "correctAnswer": "D",
+    "explanation": "<p><b>Dịch nghĩa:</b> Nhà ăn đang giới thiệu các món ăn đến từ các vùng miền khác nhau trên thế giới trong tuần này.</p><p><b>Phân tích ngữ pháp:</b> Giới từ <b>(D) from</b> mang nghĩa nguồn gốc, xuất xứ: <i>dishes from different regions</i> (các món ăn đến từ các vùng khác nhau).<br/>- (A) <i>over</i>: qua, trên.<br/>- (B) <i>through</i>: xuyên qua.<br/>- (C) <i>into</i>: vào trong.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cụm từ chỉ xuất xứ món ăn, sản phẩm từ đâu luôn đi với <i>from + location</i>.</p>",
     "type": "Preposition",
     "subCategory": "Preposition & Conjunction",
-    "grammarTag": "Preposition + Gerund",
-    "clueHint": "Sau chỗ trống là dạng động từ \"entering\" (V-ing). Giới từ nào mang nghĩa thời gian và đi được với V-ing?",
+    "grammarTag": "Preposition of Origin",
+    "clueHint": "Danh từ phía sau là \"different regions of the world\". Giới từ nào chỉ xuất xứ, nguồn gốc?",
     "syntaxBreakdown": {
-      "subject": "All personnel",
-      "verb": "must wear",
-      "objectOrComplement": "protective safety helmets [before] entering the active construction zone",
-      "blankRole": "Giới từ chỉ mốc thời gian đi với danh động từ entering"
+      "subject": "The cafeteria",
+      "verb": "is featuring",
+      "objectOrComplement": "dishes [from] different regions of the world this week",
+      "blankRole": "Giới từ chỉ nguồn gốc xuất xứ"
     }
   },
   {
     "id": "ets22_t3_p5_105",
     "number": 105,
-    "text": "Customer _____ with our online banking services has increased significantly over the past six months.",
+    "text": "Ms. Patel is coming to Delhi today to visit possible _____ for her company's new warehouse.",
     "options": {
-      "A": "satisfy",
-      "B": "satisfactory",
-      "C": "satisfied",
-      "D": "satisfaction"
+      "A": "locating",
+      "B": "locations",
+      "C": "located",
+      "D": "locate"
     },
-    "correctAnswer": "D",
-    "explanation": "<p><b>Dịch nghĩa:</b> Sự hài lòng của khách hàng đối với dịch vụ ngân hàng trực tuyến của chúng ta đã tăng lên đáng kể trong sáu tháng qua.</p>\n<p><b>Phân tích ngữ pháp:</b> Chỗ trống đứng sau danh từ <i>Customer</i> và đứng trước cụm giới từ <i>with our online banking services</i>, đóng vai trò làm cụm danh từ ghép chủ ngữ cho động từ <i>has increased</i>. Ta cần một danh từ để tạo thành cụm <i>Customer satisfaction</i> (sự hài lòng của khách hàng). Do đó, <b>(D) satisfaction</b> là đáp án chính xác.<br/>- (A) <i>satisfy</i>: động từ nguyên mẫu.<br/>- (B) <i>satisfactory</i>: tính từ (thỏa đáng).<br/>- (C) <i>satisfied</i>: tính từ (hài lòng).</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cụm danh từ kinh điển trong TOEIC: <i>Customer satisfaction</i> (mức độ hài lòng của khách hàng). Học thuộc cụm này chọn ngay trong 2 giây.</p>",
+    "correctAnswer": "B",
+    "explanation": "<p><b>Dịch nghĩa:</b> Cô Patel hôm nay sẽ đến Delhi để đi khảo sát các địa điểm tiềm năng cho nhà kho mới của công ty mình.</p><p><b>Phân tích ngữ pháp:</b> Sau ngoại động từ <i>visit</i> và tính từ <i>possible</i> (khả thi/tiềm năng) cần một danh từ làm tân ngữ. Danh từ số nhiều <b>(B) locations</b> (các địa điểm) hoàn toàn phù hợp về ngữ pháp và ý nghĩa.<br/>- (A) <i>locating</i>: dạng V-ing.<br/>- (C) <i>located</i>: tính từ toạ lạc.<br/>- (D) <i>locate</i>: động từ nguyên thể.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Sau tính từ <i>possible</i> cần một danh từ. Chọn <i>locations</i>.</p>",
     "type": "Word Form",
     "subCategory": "Word Form",
-    "grammarTag": "Noun Suffix (-tion)",
-    "clueHint": "Cần một danh từ ghép với \"Customer\" để làm chủ ngữ cho động từ \"has increased\". Đuôi nào là đuôi danh từ?",
+    "grammarTag": "Noun Suffix",
+    "clueHint": "Đứng sau tính từ \"possible\" và làm tân ngữ cho động từ \"visit\". Cần từ loại gì?",
     "syntaxBreakdown": {
-      "subject": "Customer [satisfaction] with our online banking services",
-      "verb": "has increased",
-      "objectOrComplement": "significantly over the past six months",
-      "blankRole": "Danh từ chính trong cụm danh từ ghép làm chủ ngữ"
+      "subject": "Ms. Patel",
+      "verb": "is coming",
+      "objectOrComplement": "to Delhi today to visit possible [locations]",
+      "blankRole": "Danh từ số nhiều làm tân ngữ cho động từ visit"
     }
   },
   {
     "id": "ets22_t3_p5_106",
     "number": 106,
-    "text": "The new warehouse management software is remarkably _____ and easy for warehouse staff to navigate.",
+    "text": "Clydeway, Inc., has grown dramatically _____ its beginnings as a small corner grocery store.",
     "options": {
-      "A": "efficient",
-      "B": "efficiently",
-      "C": "efficiency",
-      "D": "efficiencies"
+      "A": "since",
+      "B": "such",
+      "C": "except",
+      "D": "however"
     },
     "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Phần mềm quản lý kho hàng mới hoạt động hiệu quả một cách đáng kể và dễ dàng cho nhân viên kho điều hướng.</p>\n<p><b>Phân tích ngữ pháp:</b> Cấu trúc nối với liên từ <i>and</i>: <i>is remarkably [_____] and easy</i>. Động từ to-be <i>is</i> đi với trạng từ <i>remarkably</i> và liên từ <i>and</i> nối với tính từ <i>easy</i>. Vị trí này cần một tính từ song hành. Do đó, <b>(A) efficient</b> là đáp án chính xác.<br/>- (B) <i>efficiently</i>: trạng từ.<br/>- (C) <i>efficiency</i>: danh từ số ít.<br/>- (D) <i>efficiencies</i>: danh từ số nhiều.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Quy tắc song hành: [to be] + adv + [TÍNH TỪ] and [TÍNH TỪ]. Thấy <i>and easy</i> thì chỗ trống chắc chắn là tính từ.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Parallel Adjective Structure",
-    "clueHint": "Liên từ \"and\" nối chỗ trống với tính từ \"easy\". Đằng trước có to-be \"is\" và trạng từ \"remarkably\". Cần từ loại gì?",
+    "explanation": "<p><b>Dịch nghĩa:</b> Clydeway, Inc. đã phát triển vượt bậc kể từ những ngày đầu khởi nghiệp là một tiệm tạp hóa nhỏ ở góc phố.</p><p><b>Phân tích ngữ pháp:</b> Đi với thì hiện tại hoàn thành <i>has grown</i>, giới từ <b>(A) since</b> mang nghĩa \"kể từ\" (since + mốc thời gian/sự kiện trong quá khứ <i>its beginnings</i>).<br/>- (B) <i>such</i>: như thế.<br/>- (C) <i>except</i>: ngoại trừ.<br/>- (D) <i>however</i>: tuy nhiên.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Thấy câu chia thì hiện tại hoàn thành (has/have + V-ed), chú ý ngay giới từ <i>since + mốc thời gian</i>.</p>",
+    "type": "Preposition",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Preposition of Time",
+    "clueHint": "Mệnh đề chính dùng thì hiện tại hoàn thành \"has grown\". Giới từ nào đi kèm mốc khởi đầu \"its beginnings\" mang nghĩa \"kể từ\"?",
     "syntaxBreakdown": {
-      "subject": "The new warehouse management software",
-      "verb": "is",
-      "objectOrComplement": "remarkably [efficient] and easy for warehouse staff to navigate",
-      "blankRole": "Tính từ vị ngữ bổ nghĩa cho chủ ngữ software"
+      "subject": "Clydeway, Inc.",
+      "verb": "has grown",
+      "objectOrComplement": "dramatically [since] its beginnings as a small corner grocery store",
+      "blankRole": "Giới từ chỉ mốc thời gian bắt đầu"
     }
   },
   {
     "id": "ets22_t3_p5_107",
     "number": 107,
-    "text": "Next month, the regional research facility _____ a series of workshops on renewable solar energy.",
+    "text": "When booking a flight, it is wise to _____ the guidelines for luggage size on the airline’s Web site.",
     "options": {
-      "A": "host",
-      "B": "hosted",
-      "C": "will host",
-      "D": "has hosted"
+      "A": "check",
+      "B": "close",
+      "C": "approve",
+      "D": "list"
     },
-    "correctAnswer": "C",
-    "explanation": "<p><b>Dịch nghĩa:</b> Tháng tới, cơ sở nghiên cứu khu vực sẽ tổ chức một chuỗi hội thảo về năng lượng mặt trời tái tạo.</p>\n<p><b>Phân tích ngữ pháp:</b> Trạng từ chỉ thời gian ở đầu câu là <i>Next month</i> (tháng tới), báo hiệu hành động sẽ xảy ra trong tương lai. Do đó, động từ phải chia ở thì tương lai đơn. <b>(C) will host</b> là đáp án chính xác.<br/>- (A) <i>host</i>: hiện tại đơn số nhiều (chủ ngữ là facility số ít, nếu hiện tại phải là hosts).<br/>- (B) <i>hosted</i>: quá khứ đơn.<br/>- (D) <i>has hosted</i>: hiện tại hoàn thành.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Thấy trạng từ thời gian tương lai <i>Next month / Next year</i> thì ưu tiên chọn ngay thì tương lai <i>will + V</i>.</p>",
-    "type": "Verb Tense",
-    "subCategory": "Verb Tense",
-    "grammarTag": "Future Simple",
-    "clueHint": "Quan sát dấu hiệu thời gian ở đầu câu: \"Next month\" (tháng tới). Động từ cần chia ở thì nào?",
+    "correctAnswer": "A",
+    "explanation": "<p><b>Dịch nghĩa:</b> Khi đặt vé máy bay, bạn nên kiểm tra kỹ các hướng dẫn về kích thước hành lý trên trang web của hãng hàng không.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc giả định: <i>it is wise to + V (nguyên thể)</i>. Về nghĩa, <b>(A) check</b> (kiểm tra hướng dẫn) là lựa chọn chuẩn xác và hợp lý nhất.<br/>- (B) <i>close</i>: đóng lại.<br/>- (C) <i>approve</i>: phê duyệt.<br/>- (D) <i>list</i>: liệt kê.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Đi với <i>guidelines</i> (hướng dẫn), động từ đi kèm tự nhiên nhất trong ngữ cảnh này là <i>check guidelines</i> (kiểm tra hướng dẫn).</p>",
+    "type": "Vocabulary",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Collocation",
+    "clueHint": "Hành khách trước khi bay cần làm gì với các quy định/hướng dẫn về kích thước hành lý?",
     "syntaxBreakdown": {
-      "subject": "the regional research facility",
-      "verb": "[will host]",
-      "objectOrComplement": "a series of workshops on renewable solar energy",
-      "blankRole": "Động từ chính vị ngữ chia ở thì tương lai đơn"
+      "subject": "it (chủ ngữ giả)",
+      "verb": "is",
+      "objectOrComplement": "wise to [check] the guidelines for luggage size",
+      "blankRole": "Động từ nguyên thể sau to mang nghĩa kiểm tra"
     }
   },
   {
     "id": "ets22_t3_p5_108",
     "number": 108,
-    "text": "The board of trustees commended Ms. Foster for her _____ contributions to the educational foundation.",
+    "text": "The melody is so _____ that the composer has simplified parts of it for live performances.",
     "options": {
-      "A": "outspoken",
-      "B": "valuable",
-      "C": "temporary",
-      "D": "fragile"
+      "A": "direct",
+      "B": "complex",
+      "C": "favorable",
+      "D": "helpful"
     },
     "correctAnswer": "B",
-    "explanation": "<p><b>Dịch nghĩa:</b> Hội đồng quản trị đã tuyên dương cô Foster vì những đóng góp quý giá của cô cho quỹ giáo dục.</p>\n<p><b>Phân tích ngữ pháp:</b> Câu hỏi từ vựng chọn tính từ bổ nghĩa cho <i>contributions</i> (những đóng góp). Tính từ <b>(B) valuable</b> (quý giá, to lớn) tạo thành cụm từ kết hợp chuẩn mực <i>valuable contributions</i>.<br/>- (A) <i>outspoken</i>: thẳng thắn, bộc trực.<br/>- (C) <i>temporary</i>: tạm thời.<br/>- (D) <i>fragile</i>: dễ vỡ.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Collocation công sở kinh điển: <i>valuable contributions / significant contributions</i> (những đóng góp quý báu).</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b> Giai điệu quá phức tạp đến mức nhà soạn nhạc đã phải đơn giản hóa một số đoạn để biểu diễn trực tiếp.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc <i>so + Adj + that...</i> (quá... đến mức mà). Mệnh đề sau có <i>has simplified</i> (đã đơn giản hóa), chứng tỏ tính chất ban đầu phải là phức tạp. Do đó tính từ <b>(B) complex</b> (phức tạp) là đáp án đúng.<br/>- (A) <i>direct</i>: trực tiếp.<br/>- (C) <i>favorable</i>: thuận lợi.<br/>- (D) <i>helpful</i>: hữu ích.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Bắt từ khóa đối lập: <i>simplified</i> (đơn giản hóa) đối lập với <i>complex</i> (phức tạp).</p>",
     "type": "Vocabulary",
     "subCategory": "Business Vocabulary",
-    "grammarTag": "Adjective Collocation",
-    "clueHint": "Động từ trước đó là \"commended\" (khen ngợi, tuyên dương). Tính từ nào kết hợp với \"contributions\" (đóng góp) mang nghĩa khen thưởng?",
+    "grammarTag": "So...That Structure",
+    "clueHint": "Vế sau có từ \"simplified\" (đơn giản hóa). Vậy tính từ vế trước phải mang nghĩa trái ngược là gì?",
     "syntaxBreakdown": {
-      "subject": "The board of trustees",
-      "verb": "commended",
-      "objectOrComplement": "Ms. Foster for her [valuable] contributions to the educational foundation",
-      "blankRole": "Tính từ bổ nghĩa cho danh từ contributions"
+      "subject": "The melody",
+      "verb": "is",
+      "objectOrComplement": "so [complex] that the composer has simplified parts of it",
+      "blankRole": "Tính từ bổ nghĩa cho chủ ngữ trong cấu trúc so...that"
     }
   },
   {
     "id": "ets22_t3_p5_109",
     "number": 109,
-    "text": "_____ the flight was delayed by inclement weather, the keynote speaker arrived in time for the opening gala.",
+    "text": "The test group found the illustrations in the appliance users’ guide to be highly _____.",
     "options": {
-      "A": "Although",
-      "B": "Despite",
-      "C": "Because",
-      "D": "However"
+      "A": "inform",
+      "B": "information",
+      "C": "informatively",
+      "D": "informative"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Mặc dù chuyến bay bị hoãn do thời tiết khắc nghiệt, diễn giả chính vẫn đến kịp giờ cho đêm hội khai mạc.</p>\n<p><b>Phân tích ngữ pháp:</b> Vế trước là một mệnh đề hoàn chỉnh có S-V: <i>the flight (S) was delayed (V)</i>. Vế sau thể hiện sự tương phản <i>arrived in time</i>. Cần một liên từ chỉ sự nhượng bộ đứng trước một mệnh đề. Do đó, <b>(A) Although</b> là đáp án đúng.<br/>- (B) <i>Despite</i>: là giới từ, chỉ đi với N/V-ing, không đi với mệnh đề.<br/>- (C) <i>Because</i>: chỉ nguyên nhân (ngược nghĩa).<br/>- (D) <i>However</i>: là trạng từ liên kết, phải đi kèm dấu phẩy hoặc chấm phẩy.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Phân biệt <i>Although + Mệnh đề</i> vs <i>Despite / In spite of + Cụm danh từ</i>. Thấy có động từ <i>was delayed</i> loại ngay <i>Despite</i>!</p>",
-    "type": "Conjunction",
-    "subCategory": "Preposition & Conjunction",
-    "grammarTag": "Concession Conjunction (Although)",
-    "clueHint": "Nhìn vế sau chỗ trống là một mệnh đề có S-V: \"the flight was delayed\". Cần liên từ nhượng bộ đi với mệnh đề hay giới từ?",
+    "correctAnswer": "D",
+    "explanation": "<p><b>Dịch nghĩa:</b> Nhóm thử nghiệm nhận thấy các hình minh họa trong sổ tay hướng dẫn người dùng thiết bị cung cấp nhiều thông tin hữu ích.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc: <i>find something + to be + Adj</i> (thấy cái gì có tính chất thế nào). Đứng sau trạng từ mức độ <i>highly</i> cần một tính từ. Đuôi <i>-ive</i> là đuôi tính từ: <b>(D) informative</b> (bổ ích, nhiều thông tin).<br/>- (A) <i>inform</i>: động từ.<br/>- (B) <i>information</i>: danh từ.<br/>- (C) <i>informatively</i>: trạng từ.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> <i>highly + Adj</i> là cụm kinh điển trong TOEIC: <i>highly informative / highly successful / highly recommended</i>.</p>",
+    "type": "Word Form",
+    "subCategory": "Word Form",
+    "grammarTag": "Adjective Suffix",
+    "clueHint": "Sau trạng từ chỉ mức độ \"highly\" và đi sau \"to be\" cần từ loại gì?",
     "syntaxBreakdown": {
-      "subject": "the flight",
-      "verb": "was delayed",
-      "objectOrComplement": "by inclement weather",
-      "blankRole": "Liên từ phụ thuộc bắt đầu mệnh đề trạng ngữ chỉ sự nhượng bộ"
+      "subject": "The test group",
+      "verb": "found",
+      "objectOrComplement": "the illustrations to be highly [informative]",
+      "blankRole": "Tính từ vị ngữ bổ nghĩa cho tân ngữ illustrations"
     }
   },
   {
     "id": "ets22_t3_p5_110",
     "number": 110,
-    "text": "Candidates _____ possess at least five years of financial auditing experience are encouraged to apply.",
+    "text": "The directions for Masuda’s do-it-yourself projects are comprehensive enough for _____ a novice builder.",
     "options": {
-      "A": "who",
-      "B": "whom",
-      "C": "whose",
-      "D": "which"
+      "A": "right",
+      "B": "soon",
+      "C": "how",
+      "D": "even"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Các ứng viên người mà sở hữu ít nhất năm năm kinh nghiệm kiểm toán tài chính được khuyến khích nộp đơn.</p>\n<p><b>Phân tích ngữ pháp:</b> Danh từ đứng trước là <i>Candidates</i> (danh từ chỉ người). Ngay sau chỗ trống là động từ <i>possess</i> (sở hữu). Đại từ quan hệ thay thế cho người và làm chủ ngữ cho động từ theo sau bắt buộc là <b>who</b>. Do đó, <b>(A) who</b> là đáp án đúng.<br/>- (B) <i>whom</i>: thay cho người làm tân ngữ (sau whom phải là S + V).<br/>- (C) <i>whose</i>: đại từ quan hệ sở hữu (sau whose phải là danh từ).<br/>- (D) <i>which</i>: thay thế cho danh từ chỉ vật.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Danh từ chỉ người + [WHO] + V. Thấy <i>Candidates</i> đi với động từ <i>possess</i> chọn ngay <i>who</i> trong 2 giây.</p>",
-    "type": "Relative Clause",
-    "subCategory": "Relative Clause",
-    "grammarTag": "Relative Pronoun (who)",
-    "clueHint": "Danh từ đứng trước là \"Candidates\" (người). Từ đứng sau là động từ \"possess\". Cần đại từ quan hệ làm chủ ngữ chỉ người.",
+    "correctAnswer": "D",
+    "explanation": "<p><b>Dịch nghĩa:</b> Hướng dẫn cho các dự án tự làm của Masuda đủ toàn diện để ngay cả một thợ xây mới vào nghề cũng có thể hiểu được.</p><p><b>Phân tích ngữ pháp:</b> Trạng từ <b>(D) even</b> dùng để nhấn mạnh tính chất bao quát (\"ngay cả\"): <i>comprehensive enough for even a novice builder</i>.<br/>- (A) <i>right</i>: đúng đắn, ngay khi.<br/>- (B) <i>soon</i>: sớm.<br/>- (C) <i>how</i>: như thế nào.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cụm <i>for even a...</i> (dành cho ngay cả một...) là cấu trúc nhấn mạnh thường xuyên xuất hiện ở các câu Part 5.</p>",
+    "type": "Vocabulary",
+    "subCategory": "Sentence Structure",
+    "grammarTag": "Adverb of Emphasis",
+    "clueHint": "Cần trạng từ đứng trước danh từ \"a novice builder\" để nhấn mạnh mức độ \"ngay cả / thậm chí\".",
     "syntaxBreakdown": {
-      "subject": "Candidates [who] possess at least five years of financial auditing experience",
-      "verb": "are encouraged",
-      "objectOrComplement": "to apply",
-      "blankRole": "Đại từ quan hệ làm chủ ngữ của mệnh đề quan hệ bổ nghĩa cho Candidates"
+      "subject": "The directions for Masuda’s do-it-yourself projects",
+      "verb": "are",
+      "objectOrComplement": "comprehensive enough for [even] a novice builder",
+      "blankRole": "Trạng từ nhấn mạnh bổ nghĩa cho danh từ a novice builder"
     }
   },
   {
     "id": "ets22_t3_p5_111",
     "number": 111,
-    "text": "The architectural design was praised for its remarkable balance of functionality and _____ appeal.",
+    "text": "_____ of the two candidates for the position had the necessary qualifications.",
     "options": {
-      "A": "vision",
-      "B": "visual",
-      "C": "visually",
-      "D": "visualize"
+      "A": "Neither",
+      "B": "Nobody",
+      "C": "None",
+      "D": "Nothing"
     },
-    "correctAnswer": "B",
-    "explanation": "<p><b>Dịch nghĩa:</b> Thiết kế kiến trúc đã được khen ngợi vì sự cân bằng đáng kể giữa tính công năng và sức hút thị giác.</p>\n<p><b>Phân tích ngữ pháp:</b> Chỗ trống đứng trước danh từ <i>appeal</i> (sức hấp dẫn, sức hút) và đứng sau liên từ <i>and</i>. Cần một tính từ để bổ nghĩa cho danh từ <i>appeal</i>. Do đó, <b>(B) visual</b> (thuộc thị giác, trực quan) là đáp án đúng tạo thành cụm <i>visual appeal</i>.<br/>- (A) <i>vision</i>: danh từ (tầm nhìn).<br/>- (C) <i>visually</i>: trạng từ.<br/>- (D) <i>visualize</i>: động từ (hình dung).</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Đứng trước danh từ là TÍNH TỪ. <i>Visual appeal</i> là cụm từ chuyên dụng trong thiết kế kiến trúc và nghệ thuật.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Adjective Modifier",
-    "clueHint": "Từ đứng sau chỗ trống là danh từ \"appeal\" (sức hút). Cần từ loại gì đứng trước danh từ để bổ nghĩa cho nó?",
+    "correctAnswer": "A",
+    "explanation": "<p><b>Dịch nghĩa:</b> Cả hai ứng viên cho vị trí này đều không có đủ trình độ chuyên môn cần thiết.</p><p><b>Phân tích ngữ pháp:</b> Cụm từ <i>\"of the two candidates\"</i> chỉ rõ số lượng là 2 người. Khi phủ định cả hai đối tượng, tiếng Anh dùng đại từ <b>(A) Neither</b>: <i>Neither of the two...</i><br/>- (B) <i>Nobody</i>: không đi với cụm of the two.<br/>- (C) <i>None</i>: dùng cho 3 đối tượng trở lên (none of the three/four...).<br/>- (D) <i>Nothing</i>: chỉ vật, không chỉ người.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Thấy <i>two</i>, chọn <i>Neither</i> (không ai trong 2) hoặc <i>Either</i> / <i>Both</i>. Thấy từ 3 trở lên mới dùng <i>None</i>.</p>",
+    "type": "Pronoun",
+    "subCategory": "Pronoun",
+    "grammarTag": "Distributive Pronoun",
+    "clueHint": "Để ý số lượng \"two candidates\". Từ chỉ số lượng phủ định nào dành riêng cho 2 đối tượng?",
     "syntaxBreakdown": {
-      "subject": "The architectural design",
-      "verb": "was praised",
-      "objectOrComplement": "for its remarkable balance of functionality and [visual] appeal",
-      "blankRole": "Tính từ bổ nghĩa cho danh từ appeal"
+      "subject": "[Neither] of the two candidates for the position",
+      "verb": "had",
+      "objectOrComplement": "the necessary qualifications",
+      "blankRole": "Đại từ phủ định làm chủ ngữ chỉ 2 đối tượng"
     }
   },
   {
     "id": "ets22_t3_p5_112",
     "number": 112,
-    "text": "The delivery truck arrived _____ later than anticipated because of heavy traffic on Highway 10.",
+    "text": "The need for highly trained electricians in the construction _____ has grown rapidly in recent years.",
     "options": {
-      "A": "slight",
-      "B": "slightly",
-      "C": "slighted",
-      "D": "slighting"
+      "A": "employment",
+      "B": "activity",
+      "C": "knowledge",
+      "D": "industry"
     },
-    "correctAnswer": "B",
-    "explanation": "<p><b>Dịch nghĩa:</b> Chiếc xe tải giao hàng đã đến muộn hơn một chút so với dự kiến vì tắc đường nghiêm trọng trên Quốc lộ 10.</p>\n<p><b>Phân tích ngữ pháp:</b> Từ <i>later</i> ở đây là trạng từ so sánh hơn. Để bổ nghĩa cho một tính từ hoặc trạng từ so sánh hơn (comparative), ta dùng trạng từ mức độ. Do đó, <b>(B) slightly</b> (một chút, hơi) là đáp án chính xác.<br/>- (A) <i>slight</i>: tính từ.<br/>- (C) <i>slighted</i>: động từ quá khứ.<br/>- (D) <i>slighting</i>: tính từ miêu tả coi thường.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Các trạng từ thường đi trước cấp so sánh hơn: <i>slightly, significantly, considerably, much, far + comparative</i>.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Adverb modifying Comparative",
-    "clueHint": "Từ đứng sau chỗ trống là \"later than\" (dạng so sánh hơn). Trạng từ nào thường đứng trước cấp so sánh hơn để chỉ mức độ?",
+    "correctAnswer": "D",
+    "explanation": "<p><b>Dịch nghĩa:</b> Nhu cầu về thợ điện được đào tạo chuyên môn cao trong ngành xây dựng đã tăng trưởng nhanh chóng trong những năm gần đây.</p><p><b>Phân tích ngữ pháp:</b> Cụm danh từ ghép cố định: <i>construction industry</i> (ngành xây dựng / ngành công nghiệp xây dựng). Do đó danh từ <b>(D) industry</b> là đáp án chính xác.<br/>- (A) <i>employment</i>: việc làm.<br/>- (B) <i>activity</i>: hoạt động.<br/>- (C) <i>knowledge</i>: kiến thức.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> <i>Construction industry</i> là cụm danh từ kinh điển trong các đề thi TOEIC.</p>",
+    "type": "Vocabulary",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Compound Noun",
+    "clueHint": "Từ đi kèm với \"construction\" để tạo thành cụm danh từ mang nghĩa \"ngành xây dựng\".",
     "syntaxBreakdown": {
-      "subject": "The delivery truck",
-      "verb": "arrived",
-      "objectOrComplement": "[slightly] later than anticipated because of heavy traffic",
-      "blankRole": "Trạng từ chỉ mức độ bổ nghĩa cho trạng từ so sánh later"
+      "subject": "The need for highly trained electricians in the construction [industry]",
+      "verb": "has grown",
+      "objectOrComplement": "rapidly in recent years",
+      "blankRole": "Danh từ ghép với construction"
     }
   },
   {
     "id": "ets22_t3_p5_113",
     "number": 113,
-    "text": "The hospitality management group plans to _____ its customer loyalty reward program across all chain hotels.",
+    "text": "Ms. Daly will prepare a marketing budget and propose _____ during the client meeting.",
     "options": {
-      "A": "expand",
-      "B": "expands",
-      "C": "expansion",
-      "D": "expanded"
+      "A": "those",
+      "B": "its",
+      "C": "it",
+      "D": "her"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Tập đoàn quản lý khách sạn dự định mở rộng chương trình phần thưởng khách hàng thân thiết trên toàn bộ chuỗi khách sạn.</p>\n<p><b>Phân tích ngữ pháp:</b> Cấu trúc <i>plan + to-infinitive</i> (lên kế hoạch làm gì). Sau <i>to</i> bắt buộc là một động từ nguyên mẫu không chia. Do đó, <b>(A) expand</b> là đáp án đúng.<br/>- (B) <i>expands</i>: động từ thêm s.<br/>- (C) <i>expansion</i>: danh từ.<br/>- (D) <i>expanded</i>: động từ dạng quá khứ.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Sau cụm <i>plans to / intends to / aims to</i> luôn là ĐỘNG TỪ NGUYÊN MẪU (V-bare).</p>",
-    "type": "Verb Form",
-    "subCategory": "Verb Tense",
-    "grammarTag": "To-Infinitive Form",
-    "clueHint": "Trước chỗ trống là cấu trúc \"plans to\". Động từ sau \"to\" phải ở dạng nào?",
+    "correctAnswer": "C",
+    "explanation": "<p><b>Dịch nghĩa:</b> Cô Daly sẽ lập ngân sách tiếp thị và đề xuất nó trong cuộc họp với khách hàng.</p><p><b>Phân tích ngữ pháp:</b> Ngoại động từ <i>propose</i> cần một tân ngữ trực tiếp thay thế cho danh từ số ít <i>a marketing budget</i> đã đề cập ở mệnh đề trước. Đại từ tân ngữ số ít là <b>(C) it</b>.<br/>- (A) <i>those</i>: đại từ số nhiều.<br/>- (B) <i>its</i>: tính từ sở hữu.<br/>- (D) <i>her</i>: cô ấy (chỉ người).</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> <i>a marketing budget</i> là danh từ số ít chỉ vật, đại từ thay thế làm tân ngữ chắc chắn là <i>it</i>.</p>",
+    "type": "Pronoun",
+    "subCategory": "Pronoun",
+    "grammarTag": "Object Pronoun",
+    "clueHint": "Đại từ thay thế cho danh từ số ít chỉ vật \"a marketing budget\" ở vị trí tân ngữ là gì?",
     "syntaxBreakdown": {
-      "subject": "The hospitality management group",
-      "verb": "plans",
-      "objectOrComplement": "to [expand] its customer loyalty reward program across all chain hotels",
-      "blankRole": "Động từ nguyên mẫu trong cụm to-infinitive làm tân ngữ cho plans"
+      "subject": "Ms. Daly",
+      "verb": "will prepare ... and propose",
+      "objectOrComplement": "[it] during the client meeting",
+      "blankRole": "Đại từ tân ngữ thay thế cho a marketing budget"
     }
   },
   {
     "id": "ets22_t3_p5_114",
     "number": 114,
-    "text": "The proposed building renovations will require approval from _____ the city zoning board and the historic preservation committee.",
+    "text": "Mr. Silva asked sales staff to _____ travel expenditures to help cut costs.",
     "options": {
-      "A": "either",
-      "B": "both",
-      "C": "neither",
-      "D": "whether"
+      "A": "convince",
+      "B": "require",
+      "C": "decide",
+      "D": "limit"
     },
-    "correctAnswer": "B",
-    "explanation": "<p><b>Dịch nghĩa:</b> Việc cải tạo tòa nhà được đề xuất sẽ yêu cầu sự phê duyệt từ cả ban quy hoạch thành phố và ủy ban bảo tồn di tích lịch sử.</p>\n<p><b>Phân tích ngữ pháp:</b> Nhìn thấy liên từ tương quan <b>and</b> nối hai đối tượng <i>the city zoning board</i> và <i>the historic preservation committee</i>. Cặp liên từ tương quan chuẩn luôn là <b>both ... and</b>. Do đó chọn <b>(B) both</b>.<br/>- (A) <i>either</i>: đi với <i>or</i> (either ... or).<br/>- (C) <i>neither</i>: đi với <i>nor</i> (neither ... nor).<br/>- (D) <i>whether</i>: đi với <i>or</i> (whether ... or).</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cặp liên từ song hành kinh điển: Thấy <b>AND</b> chọn <b>BOTH</b>. Thấy <b>OR</b> chọn <b>EITHER</b>. Thấy <b>NOR</b> chọn <b>NEITHER</b>.</p>",
-    "type": "Conjunction",
-    "subCategory": "Preposition & Conjunction",
-    "grammarTag": "Correlative Conjunction (Both...and)",
-    "clueHint": "Nhìn lướt nhanh về phía sau thấy liên từ \"and\". Cặp liên từ tương quan nào đi kèm với \"and\"?",
+    "correctAnswer": "D",
+    "explanation": "<p><b>Dịch nghĩa:</b> Ông Silva đã yêu cầu nhân viên bán hàng hạn chế các khoản chi tiêu công tác để giúp cắt giảm chi phí.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc <i>ask somebody to + V (nguyên thể)</i>. Vế sau nêu rõ mục đích <i>to help cut costs</i> (để cắt giảm chi phí), vì vậy hành động tương ứng với chi tiêu là <b>(D) limit</b> (hạn chế chi tiêu).<br/>- (A) <i>convince</i>: thuyết phục.<br/>- (B) <i>require</i>: yêu cầu.<br/>- (C) <i>decide</i>: quyết định.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> <i>Limit expenditures / expenses</i> (hạn chế chi tiêu) là collocation phổ biến trong chủ đề tài chính công sở.</p>",
+    "type": "Vocabulary",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Collocation",
+    "clueHint": "Để giúp \"cut costs\" (cắt giảm chi phí), nhân viên cần làm gì với các khoản chi tiêu công tác (travel expenditures)?",
     "syntaxBreakdown": {
-      "subject": "The proposed building renovations",
-      "verb": "will require",
-      "objectOrComplement": "approval from [both] the city zoning board and the historic preservation committee",
-      "blankRole": "Thành phần đầu của liên từ tương quan both...and"
+      "subject": "Mr. Silva",
+      "verb": "asked",
+      "objectOrComplement": "sales staff to [limit] travel expenditures",
+      "blankRole": "Động từ nguyên thể sau to mang nghĩa hạn chế"
     }
   },
   {
     "id": "ets22_t3_p5_115",
     "number": 115,
-    "text": "The technical documentation provides _____ instructions for assembling the modular shelving unit.",
+    "text": "The city council will discuss certain policies, particularly those made _____ the previous administration.",
     "options": {
-      "A": "clear",
-      "B": "clearly",
-      "C": "clearness",
-      "D": "clarify"
+      "A": "any",
+      "B": "by",
+      "C": "to",
+      "D": "and"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Tài liệu kỹ thuật cung cấp các chỉ dẫn rõ ràng cho việc lắp ráp cụm kệ mô-đun.</p>\n<p><b>Phân tích ngữ pháp:</b> Chỗ trống đứng sau ngoại động từ <i>provides</i> và đứng trước danh từ tân ngữ <i>instructions</i>. Vị trí trước danh từ cần một tính từ bổ nghĩa. Do đó, <b>(A) clear</b> (rõ ràng) là đáp án đúng.<br/>- (B) <i>clearly</i>: trạng từ.<br/>- (C) <i>clearness</i>: danh từ.<br/>- (D) <i>clarify</i>: động từ (làm rõ).</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> [Động từ] + [TÍNH TỪ] + [Danh từ]. <i>Clear instructions</i> là cụm từ thông dụng nhất trong Part 5.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Adjective Modifier",
-    "clueHint": "Đứng sau chỗ trống là danh từ \"instructions\" (các chỉ dẫn). Từ loại nào đứng trước danh từ để bổ nghĩa?",
+    "correctAnswer": "B",
+    "explanation": "<p><b>Dịch nghĩa:</b> Hội đồng thành phố sẽ thảo luận về một số chính sách nhất định, đặc biệt là những chính sách được đưa ra bởi chính quyền tiền nhiệm.</p><p><b>Phân tích ngữ pháp:</b> Rút gọn mệnh đề quan hệ dạng bị động: <i>those (policies which were) made by the previous administration</i>. Giới từ chỉ tác nhân của hành động bị động là <b>(B) by</b>.<br/>- (A) <i>any</i>: bất kỳ.<br/>- (C) <i>to</i>: đến.<br/>- (D) <i>and</i>: và.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Thấy phân từ quá khứ <i>made / designed / created</i> đứng trước tác nhân thực hiện, chọn <i>by</i>.</p>",
+    "type": "Preposition",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Passive Agent",
+    "clueHint": "Phía trước là phân từ bị động \"made\". Giới từ nào chỉ tác nhân thực hiện (bởi ai)?",
     "syntaxBreakdown": {
-      "subject": "The technical documentation",
-      "verb": "provides",
-      "objectOrComplement": "[clear] instructions for assembling the modular shelving unit",
-      "blankRole": "Tính từ bổ nghĩa cho danh từ instructions"
+      "subject": "The city council",
+      "verb": "will discuss",
+      "objectOrComplement": "certain policies, particularly those made [by] the previous administration",
+      "blankRole": "Giới từ chỉ tác nhân trong cụm phân từ bị động"
     }
   },
   {
     "id": "ets22_t3_p5_116",
     "number": 116,
-    "text": "Our international sales revenue grew _____ following the launch of our updated e-commerce mobile application.",
+    "text": "Servers’ tips are pooled at the end of each shift and divided evenly _____ the entire waitstaff.",
     "options": {
-      "A": "substantially",
-      "B": "substance",
-      "C": "substantial",
-      "D": "substantiality"
+      "A": "onto",
+      "B": "among",
+      "C": "beside",
+      "D": "about"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Doanh thu bán hàng quốc tế của chúng ta đã tăng trưởng một cách đáng kể sau khi ra mắt ứng dụng di động thương mại điện tử cập nhật.</p>\n<p><b>Phân tích ngữ pháp:</b> Động từ trong câu là <i>grew</i> (quá khứ của grow - nội động từ). Để bổ nghĩa cho động từ tăng trưởng này, ta cần một trạng từ chỉ mức độ đuôi <i>-ly</i>. Do đó, <b>(A) substantially</b> (đáng kể) là đáp án đúng.<br/>- (B) <i>substance</i>: danh từ.<br/>- (C) <i>substantial</i>: tính từ.<br/>- (D) <i>substantiality</i>: danh từ trừu tượng.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Các trạng từ đi với động từ tăng/giảm (increase, grow, rise, drop): <i>substantially, dramatically, significantly, sharply</i>.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Adverb modifying Verb",
-    "clueHint": "Động từ đứng trước là \"grew\" (tăng trưởng). Cần từ loại gì để bổ nghĩa cho động từ hành động?",
+    "correctAnswer": "B",
+    "explanation": "<p><b>Dịch nghĩa:</b> Tiền tip của nhân viên phục vụ được gộp lại vào cuối mỗi ca làm việc và chia đều cho toàn bộ đội ngũ nhân viên phục vụ.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc chia sẻ/phân phát cho một tập thể từ 3 người trở lên: <i>divide evenly among + collective group</i>. Do đó giới từ <b>(B) among</b> (trong số, giữa nhiều người) là đáp án đúng.<br/>- (A) <i>onto</i>: lên trên bề mặt.<br/>- (C) <i>beside</i>: bên cạnh.<br/>- (D) <i>about</i>: về, khoảng.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Phân biệt: <i>Between</i> dùng cho 2 đối tượng, <i>Among</i> dùng cho 3 đối tượng trở lên hoặc cả một tập thể (the entire waitstaff).</p>",
+    "type": "Preposition",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Preposition of Distribution",
+    "clueHint": "Hành động chia đều (divided evenly) cho một nhóm người (the entire waitstaff) dùng giới từ nào?",
     "syntaxBreakdown": {
-      "subject": "Our international sales revenue",
-      "verb": "grew",
-      "objectOrComplement": "[substantially] following the launch of our updated e-commerce mobile application",
-      "blankRole": "Trạng từ bổ nghĩa cho động từ grew"
+      "subject": "Servers' tips",
+      "verb": "are pooled ... and divided",
+      "objectOrComplement": "evenly [among] the entire waitstaff",
+      "blankRole": "Giới từ chỉ sự phân phát trong tập thể"
     }
   },
   {
     "id": "ets22_t3_p5_117",
     "number": 117,
-    "text": "Employees interested in enrolling in the professional certificate program must notify their supervisor _____ Friday.",
+    "text": "Costpa Analytics Ltd. has made successful _____ in two emerging data companies.",
     "options": {
-      "A": "by",
-      "B": "at",
-      "C": "for",
-      "D": "in"
+      "A": "investments",
+      "B": "invested",
+      "C": "invest",
+      "D": "investor"
     },
     "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Các nhân viên quan tâm đến việc đăng ký chương trình chứng chỉ chuyên nghiệp phải thông báo cho người giám sát trước thứ Sáu.</p>\n<p><b>Phân tích ngữ pháp:</b> Để chỉ hạn chót chót (deadline - trước một thời điểm nhất định), ta dùng giới từ <b>by</b>: <i>by Friday</i> (chậm nhất là thứ Sáu). Do đó, <b>(A) by</b> là đáp án đúng.<br/>- (B) <i>at</i>: đi với giờ cụ thể (at 5 P.M.).<br/>- (C) <i>for</i>: chỉ khoảng thời gian.<br/>- (D) <i>in</i>: đi với tháng, năm, mùa.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Đi với thứ trong tuần nếu chỉ hạn chót dùng <b>BY</b> (trước thứ Sáu). Nếu chỉ ngày diễn ra thì dùng <i>ON</i> (on Friday). Ở đây không có <i>on</i> nên chọn ngay <i>by</i>.</p>",
-    "type": "Preposition",
-    "subCategory": "Preposition & Conjunction",
-    "grammarTag": "Preposition of Deadline",
-    "clueHint": "Động từ là \"must notify\" (phải thông báo - mang tính bắt buộc hoàn thành trước hạn). Giới từ nào chỉ hạn chót?",
+    "explanation": "<p><b>Dịch nghĩa:</b> Costpa Analytics Ltd. đã thực hiện các khoản đầu tư thành công vào hai công ty dữ liệu mới nổi.</p><p><b>Phân tích ngữ pháp:</b> Cụm diễn đạt: <i>make an investment in / make investments in</i> (đầu tư vào). Sau tính từ <i>successful</i> cần một danh từ làm tân ngữ cho động từ <i>made</i>. Vì không có mạo từ \"a\" phía trước nên danh từ phải ở dạng số nhiều <b>(A) investments</b>.<br/>- (B) <i>invested</i>: động từ quá khứ.<br/>- (C) <i>invest</i>: động từ nguyên thể.<br/>- (D) <i>investor</i>: danh từ chỉ người số ít (cần có mạo từ \"an\" nếu dùng).</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Không có mạo từ <i>a/an</i> trước tính từ thì danh từ đếm được bắt buộc phải ở số nhiều: <i>successful investments</i>.</p>",
+    "type": "Word Form",
+    "subCategory": "Word Form",
+    "grammarTag": "Noun Suffix",
+    "clueHint": "Đứng sau tính từ \"successful\" và làm tân ngữ cho \"made\". Lưu ý phía trước không có mạo từ a/an.",
     "syntaxBreakdown": {
-      "subject": "Employees interested in enrolling in the professional certificate program",
-      "verb": "must notify",
-      "objectOrComplement": "their supervisor [by] Friday",
-      "blankRole": "Giới từ chỉ thời hạn chót đi với danh từ Friday"
+      "subject": "Costpa Analytics Ltd.",
+      "verb": "has made",
+      "objectOrComplement": "successful [investments] in two emerging data companies",
+      "blankRole": "Danh từ số nhiều làm tân ngữ cho động từ made"
     }
   },
   {
     "id": "ets22_t3_p5_118",
     "number": 118,
-    "text": "Ms. Diaz organized the annual charity fundraising banquet entirely by _____ without external assistance.",
+    "text": "Vallentrade manages clients’ accounts more _____ than most other brokerage firms.",
     "options": {
-      "A": "she",
-      "B": "her",
-      "C": "hers",
-      "D": "herself"
+      "A": "conserves",
+      "B": "conservative",
+      "C": "conservatively",
+      "D": "conserving"
     },
-    "correctAnswer": "D",
-    "explanation": "<p><b>Dịch nghĩa:</b> Cô Diaz đã tự mình tổ chức bữa tiệc gây quỹ từ thiện thường niên hoàn toàn một mình mà không cần sự hỗ trợ bên ngoài.</p>\n<p><b>Phân tích ngữ pháp:</b> Cấu trúc thành ngữ cố định <i>by + oneself = on one's own = alone</i> (tự mình làm việc gì). Vì chủ ngữ là <i>Ms. Diaz</i> (nữ, ngôi thứ 3 số ít), đại từ phản thân tương ứng là <b>herself</b>. Do đó, <b>(D) herself</b> là đáp án chính xác.<br/>- (A) <i>she</i>: chủ ngữ.<br/>- (B) <i>her</i>: tân ngữ / tính từ sở hữu.<br/>- (C) <i>hers</i>: đại từ sở hữu.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cụm từ bất biến trong đề thi ETS: <i>by + reflex pronoun (myself, himself, herself, themselves)</i> = tự mình.</p>",
-    "type": "Pronoun",
-    "subCategory": "Pronoun",
-    "grammarTag": "Reflexive Pronoun (by oneself)",
-    "clueHint": "Nhìn thấy giới từ \"by\" đứng trước chỗ trống và cụm \"without external assistance\" (không cần trợ giúp). Cấu trúc thành ngữ nào mang nghĩa tự mình?",
+    "correctAnswer": "C",
+    "explanation": "<p><b>Dịch nghĩa:</b> Vallentrade quản lý các tài khoản của khách hàng thận trọng hơn so với hầu hết các công ty môi giới khác.</p><p><b>Phân tích ngữ pháp:</b> Câu đã có chủ ngữ <i>Vallentrade</i>, động từ hành động <i>manages</i> và tân ngữ <i>clients’ accounts</i>. Vị trí trong cấu trúc so sánh hơn <i>more _____ than</i> cần một trạng từ bổ nghĩa cho động từ thường <i>manages</i>. Do đó, trạng từ đuôi -ly <b>(C) conservatively</b> là đáp án chính xác.<br/>- (A) <i>conserves</i>: động từ số ít.<br/>- (B) <i>conservative</i>: tính từ.<br/>- (D) <i>conserving</i>: danh động từ.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Bổ nghĩa cho động từ thường <i>manages</i> luôn là trạng từ đuôi -ly.</p>",
+    "type": "Word Form",
+    "subCategory": "Word Form",
+    "grammarTag": "Adverb of Manner",
+    "clueHint": "Từ cần điền bổ nghĩa cho động từ hành động \"manages\" (quản lý như thế nào?).",
     "syntaxBreakdown": {
-      "subject": "Ms. Diaz",
-      "verb": "organized",
-      "objectOrComplement": "the annual charity fundraising banquet entirely by [herself]",
-      "blankRole": "Đại từ phản thân kết hợp với giới từ by chỉ sự tự thân làm"
+      "subject": "Vallentrade",
+      "verb": "manages",
+      "objectOrComplement": "clients' accounts more [conservatively] than most other brokerage firms",
+      "blankRole": "Trạng từ so sánh hơn bổ nghĩa cho động từ manages"
     }
   },
   {
     "id": "ets22_t3_p5_119",
     "number": 119,
-    "text": "The factory floor manager inspected each automated assembly station _____ before commencing production.",
+    "text": "The ideal operating temperature for the tablet computer is _____ 10 and 30 degrees Celsius.",
     "options": {
-      "A": "careful",
-      "B": "carefully",
-      "C": "carefulness",
-      "D": "caring"
+      "A": "between",
+      "B": "above",
+      "C": "in",
+      "D": "off"
     },
-    "correctAnswer": "B",
-    "explanation": "<p><b>Dịch nghĩa:</b> Quản lý phân xưởng nhà máy đã kiểm tra từng trạm lắp ráp tự động một cách cẩn thận trước khi bắt đầu sản xuất.</p>\n<p><b>Phân tích ngữ pháp:</b> Câu đã có đủ S (The factory floor manager), V (inspected) và O (each automated assembly station). Vị trí đứng sau tân ngữ để bổ nghĩa cho động từ hành động <i>inspected</i> bắt buộc phải là một trạng từ. Do đó, <b>(B) carefully</b> là đáp án chính xác.<br/>- (A) <i>careful</i>: tính từ.<br/>- (C) <i>carefulness</i>: danh từ.<br/>- (D) <i>caring</i>: tính từ (chu đáo, quan tâm).</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cấu trúc S + V + O + [TRẠNG TỪ ĐUÔI -LY]. Câu đã đủ thành phần thì chọn trạng từ.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Adverb modifying Verb",
-    "clueHint": "Câu đã có chủ ngữ, động từ \"inspected\" và tân ngữ \"station\". Thành phần nào đứng cuối để bổ nghĩa cho hành động kiểm tra?",
+    "correctAnswer": "A",
+    "explanation": "<p><b>Dịch nghĩa:</b> Nhiệt độ hoạt động lý tưởng cho máy tính bảng là từ 10 đến 30 độ C.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc tương liên cố định: <i>between A and B</i> (giữa khoảng A và B). Phía sau có liên từ <i>and</i> liên kết hai mốc nhiệt độ <i>10 and 30 degrees</i>, do đó giới từ bắt buộc là <b>(A) between</b>.<br/>- (B) <i>above</i>: phía trên.<br/>- (C) <i>in</i>: trong.<br/>- (D) <i>off</i>: tắt, xa.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cặp từ bất di bất dịch: <i>Between... and...</i> hoặc <i>From... to...</i>. Thấy <i>and</i> chọn ngay <i>between</i>.</p>",
+    "type": "Preposition",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Correlative Preposition",
+    "clueHint": "Nhìn ngay phía sau có liên từ \"and\" liên kết hai mốc số liệu. Cặp từ nào đi với \"and\"?",
     "syntaxBreakdown": {
-      "subject": "The factory floor manager",
-      "verb": "inspected",
-      "objectOrComplement": "each automated assembly station [carefully] before commencing production",
-      "blankRole": "Trạng từ phương thức bổ nghĩa cho động từ inspected"
+      "subject": "The ideal operating temperature for the tablet computer",
+      "verb": "is",
+      "objectOrComplement": "[between] 10 and 30 degrees Celsius",
+      "blankRole": "Giới từ trong cấu trúc tương liên between...and"
     }
   },
   {
     "id": "ets22_t3_p5_120",
     "number": 120,
-    "text": "The corporate legal counsel advised the executive board to _____ the terms of the merger agreement.",
+    "text": "Of the people who have publicly introduced _____ at the Carpentry Club meetings, about half are commercial contractors.",
     "options": {
-      "A": "modify",
-      "B": "modifies",
-      "C": "modification",
-      "D": "modified"
+      "A": "their",
+      "B": "their own",
+      "C": "they",
+      "D": "themselves"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Cố vấn pháp lý của công ty đã khuyên ban điều hành nên sửa đổi các điều khoản của thỏa thuận sáp nhập.</p>\n<p><b>Phân tích ngữ pháp:</b> Cấu trúc <i>advise someone to do something</i> (khuyên ai làm gì). Sau giới từ <i>to</i> cần một động từ nguyên mẫu không chia. Do đó, <b>(A) modify</b> (sửa đổi) là đáp án đúng.<br/>- (B) <i>modifies</i>: động từ số ít.<br/>- (C) <i>modification</i>: danh từ.<br/>- (D) <i>modified</i>: động từ quá khứ / tính từ.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cấu trúc: <i>advise / encourage / remind / allow + O + to V-bare</i>. Thấy <i>to</i> sau tân ngữ chọn ngay động từ nguyên mẫu.</p>",
-    "type": "Verb Form",
-    "subCategory": "Verb Tense",
-    "grammarTag": "To-Infinitive as Object Complement",
-    "clueHint": "Cấu trúc \"advised the executive board to [_____]\". Động từ đi sau \"to\" phải ở dạng nào?",
+    "correctAnswer": "D",
+    "explanation": "<p><b>Dịch nghĩa:</b> Trong số những người đã công khai tự giới thiệu bản thân tại các buổi họp của Câu lạc bộ Mộc, khoảng một nửa là các nhà thầu thương mại.</p><p><b>Phân tích ngữ pháp:</b> Chủ ngữ của mệnh đề quan hệ là đại từ quan hệ <i>who</i> (thay thế cho <i>the people</i>). Khi chủ ngữ và tân ngữ cùng chỉ một đối tượng, tân ngữ bắt buộc dùng đại từ phản thân: <i>introduce themselves</i> (tự giới thiệu bản thân mình). Chọn <b>(D) themselves</b>.<br/>- (A) <i>their</i>: tính từ sở hữu (cần danh từ theo sau).<br/>- (B) <i>their own</i>: của chính họ.<br/>- (C) <i>they</i>: đại từ chủ ngữ.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Hành động tự giới thiệu bản thân: <i>introduce oneself (myself / yourself / himself / herself / themselves)</i>.</p>",
+    "type": "Pronoun",
+    "subCategory": "Pronoun",
+    "grammarTag": "Reflexive Pronoun",
+    "clueHint": "Chủ ngữ là \"people\" thực hiện hành động \"introduced\" lên chính họ. Cần đại từ loại nào?",
     "syntaxBreakdown": {
-      "subject": "The corporate legal counsel",
-      "verb": "advised",
-      "objectOrComplement": "the executive board to [modify] the terms of the merger agreement",
-      "blankRole": "Động từ nguyên mẫu trong cụm to-infinitive bổ ngữ cho tân ngữ"
+      "subject": "who (thay thế cho the people)",
+      "verb": "have publicly introduced",
+      "objectOrComplement": "[themselves] at the Carpentry Club meetings",
+      "blankRole": "Đại từ phản thân làm tân ngữ"
     }
   },
   {
     "id": "ets22_t3_p5_121",
     "number": 121,
-    "text": "Due to a sudden surge in consumer demand, the electronics manufacturer will temporarily _____ production.",
+    "text": "On Thursday, the technician will be on Stratus Road _____ two gas stoves.",
     "options": {
-      "A": "increase",
-      "B": "increasing",
-      "C": "increased",
-      "D": "increasingly"
+      "A": "serviced",
+      "B": "service",
+      "C": "to service",
+      "D": "is servicing"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Do nhu cầu của người tiêu dùng tăng đột biến, nhà sản xuất thiết bị điện tử sẽ tạm thời gia tăng sản lượng.</p>\n<p><b>Phân tích ngữ pháp:</b> Vị trí chỗ trống đứng sau trợ động từ khuyết thiếu <i>will</i> và trạng từ <i>temporarily</i>. Sau <i>will + adv</i> bắt buộc là một động từ nguyên mẫu không chia (V-bare). Do đó, <b>(A) increase</b> là đáp án chính xác.<br/>- (B) <i>increasing</i>: dạng V-ing.<br/>- (C) <i>increased</i>: dạng quá khứ.<br/>- (D) <i>increasingly</i>: trạng từ.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> <i>will / can / should + [trạng từ] + ĐỘNG TỪ NGUYÊN MẪU</i>. Trạng từ xen vào giữa chỉ mang tính gây nhiễu!</p>",
-    "type": "Verb Form",
-    "subCategory": "Verb Tense",
-    "grammarTag": "Modal Verb + Bare Infinitive",
-    "clueHint": "Trước chỗ trống có trợ động từ \"will\" và trạng từ \"temporarily\". Sau \"will\" bắt buộc là động từ ở dạng nào?",
+    "correctAnswer": "C",
+    "explanation": "<p><b>Dịch nghĩa:</b> Vào thứ Năm, kỹ thuật viên sẽ có mặt trên đường Stratus để bảo trì hai chiếc bếp gas.</p><p><b>Phân tích ngữ pháp:</b> Mệnh đề chính đã có đầy đủ thành phần: <i>the technician (S) will be (V) on Stratus Road (Adv)</i>. Chỗ trống cần cụm động từ nguyên thể chỉ mục đích (to-infinitive of purpose): <b>(C) to service</b> (để bảo trì).<br/>- (A) <i>serviced</i>: dạng V-ed.<br/>- (B) <i>service</i>: động từ nguyên mẫu không to.<br/>- (D) <i>is servicing</i>: thừa thì động từ.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Khi câu đã có vị ngữ đầy đủ, thành phần đứng sau chỉ mục đích của hành động luôn dùng <i>to + V (nguyên thể)</i>.</p>",
+    "type": "Verb Tense",
+    "subCategory": "Sentence Structure",
+    "grammarTag": "Infinitive of Purpose",
+    "clueHint": "Kỹ thuật viên có mặt tại đường Stratus nhằm mục đích gì? Cấu trúc chỉ mục đích dùng dạng thức nào?",
     "syntaxBreakdown": {
-      "subject": "the electronics manufacturer",
-      "verb": "will temporarily [increase]",
-      "objectOrComplement": "production",
-      "blankRole": "Động từ nguyên mẫu đi sau trợ động từ will"
+      "subject": "the technician",
+      "verb": "will be",
+      "objectOrComplement": "on Stratus Road [to service] two gas stoves",
+      "blankRole": "To-infinitive chỉ mục đích hành động"
     }
   },
   {
     "id": "ets22_t3_p5_122",
     "number": 122,
-    "text": "The updated accounting guidelines are _____ more comprehensive than the outdated handbook published five years ago.",
+    "text": "The spreadsheet _____ data on retail sales during the fourth quarter is attached.",
     "options": {
-      "A": "significantly",
-      "B": "significant",
-      "C": "significance",
-      "D": "signify"
+      "A": "contains",
+      "B": "contained",
+      "C": "containing",
+      "D": "containable"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Các hướng dẫn kế toán cập nhật toàn diện hơn đáng kể so với cuốn sổ tay lỗi thời được xuất bản năm năm trước.</p>\n<p><b>Phân tích ngữ pháp:</b> Cụm so sánh hơn là <i>more comprehensive than</i>. Để bổ nghĩa nhấn mạnh cho dạng so sánh hơn, ta cần một trạng từ chỉ mức độ đuôi <i>-ly</i>. Do đó, <b>(A) significantly</b> (đáng kể) là đáp án đúng.<br/>- (B) <i>significant</i>: tính từ.<br/>- (C) <i>significance</i>: danh từ.<br/>- (D) <i>signify</i>: động từ.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Bổ nghĩa cho <i>more + adj</i> luôn là TRẠNG TỪ: <i>significantly more, much more, far more</i>.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Adverb modifying Comparative",
-    "clueHint": "Đứng sau chỗ trống là \"more comprehensive than\" (dạng so sánh hơn). Từ loại nào bổ nghĩa cho cấu trúc so sánh hơn?",
+    "correctAnswer": "C",
+    "explanation": "<p><b>Dịch nghĩa:</b> Bảng tính chứa dữ liệu về doanh số bán lẻ trong quý 4 được đính kèm theo đây.</p><p><b>Phân tích ngữ pháp:</b> Vị ngữ chính của câu là <i>is attached</i> (được đính kèm). Do đó động từ bổ nghĩa cho danh từ chủ ngữ <i>The spreadsheet</i> phải ở dạng rút gọn mệnh đề quan hệ chủ động (Present Participle): <i>The spreadsheet (which contains) -> containing data...</i> Chọn <b>(C) containing</b>.<br/>- (A) <i>contains</i>: thừa vị ngữ chia thì.<br/>- (B) <i>contained</i>: dạng bị động (bảng tính tự chứa dữ liệu chứ không bị chứa).<br/>- (D) <i>containable</i>: tính từ có thể chứa.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Câu có sẵn động từ chính <i>is attached</i>, chỗ trống sau danh từ chỉ có thể là phân từ rút gọn <i>V-ing</i> (chủ động) hoặc <i>V-ed</i> (bị động).</p>",
+    "type": "Participle",
+    "subCategory": "Sentence Structure",
+    "grammarTag": "Reduced Relative Clause",
+    "clueHint": "Động từ chính của câu là \"is attached\". Động từ đứng sau danh từ \"The spreadsheet\" mang nghĩa chủ động cần ở dạng nào?",
     "syntaxBreakdown": {
-      "subject": "The updated accounting guidelines",
-      "verb": "are",
-      "objectOrComplement": "[significantly] more comprehensive than the outdated handbook",
-      "blankRole": "Trạng từ mức độ bổ nghĩa cho cụm so sánh hơn more comprehensive"
+      "subject": "The spreadsheet [containing] data on retail sales",
+      "verb": "is attached",
+      "objectOrComplement": "",
+      "blankRole": "Hiện tại phân từ (V-ing) rút gọn mệnh đề quan hệ chủ động"
     }
   },
   {
     "id": "ets22_t3_p5_123",
     "number": 123,
-    "text": "The research team conducted a thorough _____ of consumer purchasing patterns across suburban markets.",
+    "text": "See our weekly promotional flyer for complete _____ of the discounted items.",
     "options": {
-      "A": "analyze",
-      "B": "analyst",
-      "C": "analysis",
-      "D": "analytical"
+      "A": "exchange",
+      "B": "support",
+      "C": "receipts",
+      "D": "descriptions"
     },
-    "correctAnswer": "C",
-    "explanation": "<p><b>Dịch nghĩa:</b> Nhóm nghiên cứu đã tiến hành một sự phân tích kỹ lưỡng về thói quen mua sắm của người tiêu dùng trên khắp các thị trường ngoại ô.</p>\n<p><b>Phân tích ngữ pháp:</b> Đứng sau mạo từ <i>a</i> và tính từ <i>thorough</i> (kỹ lưỡng), chỗ trống cần một danh từ chỉ sự việc để tạo thành tân ngữ cho động từ <i>conducted</i>. Do đó, <b>(C) analysis</b> (sự phân tích) là đáp án đúng.<br/>- (A) <i>analyze</i>: động từ.<br/>- (B) <i>analyst</i>: danh từ chỉ người (nhà phân tích - không hợp nghĩa).<br/>- (D) <i>analytical</i>: tính từ.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cụm từ phổ biến trong nghiên cứu kinh doanh: <i>conduct a thorough analysis</i> (tiến hành phân tích toàn diện).</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Noun Suffix (-is)",
-    "clueHint": "Đứng sau mạo từ \"a\" và tính từ \"thorough\". Cần danh từ chỉ sự vật/sự việc hay danh từ chỉ người?",
+    "correctAnswer": "D",
+    "explanation": "<p><b>Dịch nghĩa:</b> Hãy xem tờ rơi quảng cáo hàng tuần của chúng tôi để biết mô tả đầy đủ về các mặt hàng được giảm giá.</p><p><b>Phân tích ngữ pháp:</b> Đứng sau tính từ <i>complete</i> (đầy đủ, trọn vẹn) và trước giới từ <i>of</i> cần một danh từ. Cụm từ <i>complete descriptions of items</i> (bản mô tả đầy đủ về các mặt hàng) mang nghĩa phù hợp nhất trong bối cảnh tờ rơi quảng cáo bán hàng. Chọn <b>(D) descriptions</b>.<br/>- (A) <i>exchange</i>: sự trao đổi.<br/>- (B) <i>support</i>: sự hỗ trợ.<br/>- (C) <i>receipts</i>: hóa đơn biên lai.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Trên tờ rơi quảng cáo (flyer) luôn cung cấp <i>descriptions</i> (mô tả chi tiết sản phẩm).</p>",
+    "type": "Vocabulary",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Noun Context",
+    "clueHint": "Trên tờ rơi quảng cáo (promotional flyer), khách hàng xem được thông tin gì chi tiết về các sản phẩm giảm giá?",
     "syntaxBreakdown": {
-      "subject": "The research team",
-      "verb": "conducted",
-      "objectOrComplement": "a thorough [analysis] of consumer purchasing patterns",
-      "blankRole": "Danh từ làm tân ngữ cho động từ conducted"
+      "subject": "(You - mệnh lệnh)",
+      "verb": "See",
+      "objectOrComplement": "our weekly promotional flyer for complete [descriptions] of the discounted items",
+      "blankRole": "Danh từ số nhiều làm tân ngữ cho giới từ for"
     }
   },
   {
     "id": "ets22_t3_p5_124",
     "number": 124,
-    "text": "Passengers must present a valid boarding pass and government-issued photo identification _____ boarding the train.",
+    "text": "New salespeople are instructed to research the businesses of _____ customers before contacting them for the first time.",
     "options": {
-      "A": "upon",
-      "B": "among",
-      "C": "against",
-      "D": "between"
+      "A": "total",
+      "B": "potential",
+      "C": "equal",
+      "D": "factual"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Hành khách phải xuất trình thẻ lên tàu hợp lệ và giấy tờ tùy thân có ảnh do chính phủ cấp khi lên tàu.</p>\n<p><b>Phân tích ngữ pháp:</b> Cấu trúc <b>upon + V-ing</b> mang nghĩa \"ngay khi / vào lúc làm gì\" (tương đương với <i>when / as soon as</i>). Giới từ <b>(A) upon</b> kết hợp với <i>boarding the train</i> tạo nên câu chuẩn ngữ pháp và ngữ nghĩa.<br/>- (B) <i>among</i>: giữa nhiều người/vật (từ 3 trở lên).<br/>- (C) <i>against</i>: chống lại, tựa vào.<br/>- (D) <i>between</i>: giữa hai người/vật.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cấu trúc cố định ETS: <i>upon request</i> (khi có yêu cầu), <i>upon arrival</i> (khi đến nơi), <i>upon boarding</i> (khi lên tàu).</p>",
-    "type": "Preposition",
-    "subCategory": "Preposition & Conjunction",
-    "grammarTag": "Preposition of Time (Upon + Ving)",
-    "clueHint": "Đứng trước danh động từ \"boarding the train\". Giới từ nào mang nghĩa \"ngay khi / vào thời điểm làm việc gì\"?",
+    "correctAnswer": "B",
+    "explanation": "<p><b>Dịch nghĩa:</b> Các nhân viên bán hàng mới được hướng dẫn nghiên cứu doanh nghiệp của các khách hàng tiềm năng trước khi liên hệ với họ lần đầu tiên.</p><p><b>Phân tích ngữ pháp:</b> Cụm danh từ kinh doanh cố định: <i>potential customers / potential clients</i> (khách hàng tiềm năng). Vế sau có manh mối <i>\"before contacting them for the first time\"</i> (trước khi liên hệ lần đầu) chứng tỏ họ chưa phải khách hàng hiện tại mà là khách hàng tiềm năng. Chọn <b>(B) potential</b>.<br/>- (A) <i>total</i>: tổng cộng.<br/>- (C) <i>equal</i>: bình đẳng, ngang nhau.<br/>- (D) <i>factual</i>: thực tế, dựa trên sự thật.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> <i>Potential customers</i> là collocation xuất hiện với tần suất cực cao trong TOEIC.</p>",
+    "type": "Vocabulary",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Collocation",
+    "clueHint": "Trước khi liên hệ lần đầu tiên, đối tượng khách hàng này được gọi là khách hàng gì?",
     "syntaxBreakdown": {
-      "subject": "Passengers",
-      "verb": "must present",
-      "objectOrComplement": "a valid boarding pass and government-issued photo identification [upon] boarding the train",
-      "blankRole": "Giới từ chỉ thời điểm đi với danh động từ boarding"
+      "subject": "New salespeople",
+      "verb": "are instructed to research",
+      "objectOrComplement": "the businesses of [potential] customers",
+      "blankRole": "Tính từ bổ nghĩa cho danh từ customers"
     }
   },
   {
     "id": "ets22_t3_p5_125",
     "number": 125,
-    "text": "The chief financial officer expressed confidence that our profit margins will improve _____ over the next quarter.",
+    "text": "If you use online banking, bills can be paid _____ it is most convenient.",
     "options": {
-      "A": "steady",
-      "B": "steadily",
-      "C": "steadiness",
-      "D": "steadiest"
+      "A": "whenever",
+      "B": "simply",
+      "C": "accordingly",
+      "D": "quite"
     },
-    "correctAnswer": "B",
-    "explanation": "<p><b>Dịch nghĩa:</b> Giám đốc tài chính bày tỏ sự tin tưởng rằng biên lợi nhuận của chúng ta sẽ cải thiện một cách đều đặn trong quý tới.</p>\n<p><b>Phân tích ngữ pháp:</b> Động từ trong mệnh đề danh từ là <i>improve</i> (nội động từ). Để bổ nghĩa cho động từ <i>improve</i>, ta cần một trạng từ chỉ phương thức đuôi <i>-ly</i>. Do đó, <b>(B) steadily</b> (đều đặn, vững chắc) là đáp án chính xác.<br/>- (A) <i>steady</i>: tính từ.<br/>- (C) <i>steadiness</i>: danh từ.<br/>- (D) <i>steadiest</i>: so sánh nhất của tính từ.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Động từ + [TRẠNG TỪ ĐUÔI -LY]. Các cặp từ hay đi cùng nhau: <i>improve steadily, grow steadily, increase steadily</i>.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Adverb modifying Verb",
-    "clueHint": "Động từ đứng trước là \"improve\" (cải thiện). Từ loại nào đứng sau để bổ nghĩa cho động từ này?",
+    "correctAnswer": "A",
+    "explanation": "<p><b>Dịch nghĩa:</b> Nếu bạn sử dụng dịch vụ ngân hàng trực tuyến, các hóa đơn có thể được thanh toán bất cứ khi nào thuận tiện nhất.</p><p><b>Phân tích ngữ pháp:</b> Chỗ trống đứng trước một mệnh đề phụ <i>it is most convenient</i> (S + V + C). Để nối một mệnh đề chỉ thời gian, cần một liên từ thời gian mang nghĩa \"bất cứ khi nào\": <b>(A) whenever</b>.<br/>- (B) <i>simply</i>: trạng từ đơn giản.<br/>- (C) <i>accordingly</i>: trạng từ theo đó.<br/>- (D) <i>quite</i>: trạng từ khá là.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Đi trước mệnh đề <i>it is convenient</i> luôn là liên từ <i>whenever</i> (bất cứ khi nào thuận tiện).</p>",
+    "type": "Conjunction",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Adverbial Conjunction",
+    "clueHint": "Phía sau là mệnh đề \"it is most convenient\". Cần liên từ chỉ thời gian mang nghĩa \"bất cứ khi nào\".",
     "syntaxBreakdown": {
-      "subject": "our profit margins",
-      "verb": "will improve",
-      "objectOrComplement": "[steadily] over the next quarter",
-      "blankRole": "Trạng từ phương thức bổ nghĩa cho động từ improve"
+      "subject": "bills",
+      "verb": "can be paid",
+      "objectOrComplement": "[whenever] it is most convenient",
+      "blankRole": "Liên từ chỉ thời gian dẫn mệnh đề phụ"
     }
   },
   {
     "id": "ets22_t3_p5_126",
     "number": 126,
-    "text": "The conference keynote speaker delivered an _____ presentation regarding the future of commercial robotics.",
+    "text": "Our internship combines lectures with real-world projects to provide formal instruction _____ professional experience.",
     "options": {
-      "A": "inspire",
-      "B": "inspiring",
-      "C": "inspiration",
-      "D": "inspirational"
+      "A": "above all",
+      "B": "as well as",
+      "C": "now that",
+      "D": "in order to"
     },
     "correctAnswer": "B",
-    "explanation": "<p><b>Dịch nghĩa:</b> Diễn giả chính của hội nghị đã thuyết trình một bài thuyết trình đầy cảm hứng về tương lai của ngành robot thương mại.</p>\n<p><b>Phân tích ngữ pháp:</b> Đứng sau mạo từ <i>an</i> và đứng trước danh từ <i>presentation</i>, ta cần một tính từ mang nghĩa chủ động miêu tả tính chất của bài thuyết trình (tạo cảm hứng cho người nghe). Phân từ <b>(B) inspiring</b> (truyền cảm hứng) là tính từ tự nhiên và chuẩn mực nhất.<br/>- (A) <i>inspire</i>: động từ.<br/>- (C) <i>inspiration</i>: danh từ.<br/>- (D) <i>inspirational</i>: tính từ mang nghĩa liên quan đến tâm linh/cổ vũ (thường đi với quotes, story, speaker, còn presentation thường dùng inspiring presentation).</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Đứng trước danh từ chỉ sự vật mang tính chủ động dùng tính từ đuôi <i>-ing</i>: <i>an inspiring presentation</i>.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Participial Adjective (-ing)",
-    "clueHint": "Đứng sau mạo từ \"an\" và trước danh từ \"presentation\". Cần tính từ dạng phân từ chỉ tính chất của bài thuyết trình.",
+    "explanation": "<p><b>Dịch nghĩa:</b> Chương trình thực tập của chúng tôi kết hợp các bài giảng với các dự án thực tế để vừa cung cấp kiến thức chính quy vừa mang lại kinh nghiệm chuyên môn.</p><p><b>Phân tích ngữ pháp:</b> Liên từ đẳng lập nối hai cụm danh từ tương đương <i>formal instruction</i> và <i>professional experience</i> là <b>(B) as well as</b> (cũng như / vừa... vừa...).<br/>- (A) <i>above all</i>: trên hết.<br/>- (C) <i>now that</i>: vì giờ đây (nối mệnh đề).<br/>- (D) <i>in order to</i>: để (theo sau bởi động từ nguyên thể).</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Nối hai danh từ/cụm danh từ bổ trợ cho nhau dùng <i>as well as</i>.</p>",
+    "type": "Conjunction",
+    "subCategory": "Preposition & Conjunction",
+    "grammarTag": "Correlative Conjunction",
+    "clueHint": "Nối hai cụm danh từ \"formal instruction\" và \"professional experience\" tương đương nhau mang nghĩa \"cũng như\".",
     "syntaxBreakdown": {
-      "subject": "The conference keynote speaker",
-      "verb": "delivered",
-      "objectOrComplement": "an [inspiring] presentation regarding the future of commercial robotics",
-      "blankRole": "Tính từ phân từ bổ nghĩa cho danh từ presentation"
+      "subject": "Our internship",
+      "verb": "combines",
+      "objectOrComplement": "lectures with real-world projects to provide formal instruction [as well as] professional experience",
+      "blankRole": "Liên từ nối hai cụm danh từ đồng vị"
     }
   },
   {
     "id": "ets22_t3_p5_127",
     "number": 127,
-    "text": "The human resources manager suggested that all new employees _____ the online workplace diversity seminar.",
+    "text": "Employee _____ at Medmile Ventures include share options and scheduled raises.",
     "options": {
-      "A": "attend",
-      "B": "attends",
-      "C": "attended",
-      "D": "attending"
+      "A": "beneficial",
+      "B": "beneficially",
+      "C": "benefits",
+      "D": "benefited"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Trưởng phòng nhân sự đề xuất rằng tất cả nhân viên mới nên tham dự buổi hội thảo trực tuyến về sự đa dạng nơi công sở.</p>\n<p><b>Phân tích ngữ pháp:</b> Cấu trúc câu giả định thức (Subjunctive Mood) với các động từ yêu cầu, đề xuất: <i>suggest / recommend / demand / request + that + S + (should) + V-bare</i>. Động từ trong mệnh đề theo sau bắt buộc ở dạng nguyên mẫu không chia (dù chủ ngữ là số ít hay số nhiều). Do đó, <b>(A) attend</b> là đáp án đúng.<br/>- (B) <i>attends</i>: sai vì chia s.<br/>- (C) <i>attended</i>: sai vì chia quá khứ.<br/>- (D) <i>attending</i>: sai dạng V-ing.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Điểm ngữ pháp nâng cao ETS: Cứ thấy <i>suggest that / recommend that + S + [ĐỘNG TỪ NGUYÊN MẪU KHÔNG CHIA]</i>.</p>",
-    "type": "Sentence Structure",
-    "subCategory": "Sentence Structure",
-    "grammarTag": "Subjunctive Mood (Mandative)",
-    "clueHint": "Trước mệnh đề \"that\" có động từ \"suggested\" (đề xuất). Mệnh đề giả định thức sau \"suggest that\" chia động từ ở dạng nào?",
+    "correctAnswer": "C",
+    "explanation": "<p><b>Dịch nghĩa:</b> Các phúc lợi của nhân viên tại Medmile Ventures bao gồm quyền chọn mua cổ phiếu và các đợt tăng lương định kỳ.</p><p><b>Phân tích ngữ pháp:</b> Động từ chính của câu là <i>include</i> ở dạng số nhiều không chia (V-bare). Do đó, chủ ngữ đứng trước phải là danh từ số nhiều. Cụm danh từ ghép: <i>Employee benefits</i> (các chế độ phúc lợi nhân viên). Chọn <b>(C) benefits</b>.<br/>- (A) <i>beneficial</i>: tính từ có lợi.<br/>- (B) <i>beneficially</i>: trạng từ.<br/>- (D) <i>benefited</i>: động từ quá khứ.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Động từ <i>include</i> không chia -s/-es chứng tỏ chủ ngữ phải là danh từ số nhiều: <i>Employee benefits</i>.</p>",
+    "type": "Word Form",
+    "subCategory": "Word Form",
+    "grammarTag": "Subject-Verb Agreement",
+    "clueHint": "Động từ chính \"include\" ở dạng số nhiều. Cụm danh từ làm chủ ngữ ghép với \"Employee\" cần từ loại nào?",
     "syntaxBreakdown": {
-      "subject": "all new employees",
-      "verb": "[attend]",
-      "objectOrComplement": "the online workplace diversity seminar",
-      "blankRole": "Động từ nguyên mẫu trong mệnh đề giả định thức sau suggested that"
+      "subject": "Employee [benefits] at Medmile Ventures",
+      "verb": "include",
+      "objectOrComplement": "share options and scheduled raises",
+      "blankRole": "Danh từ số nhiều làm danh từ trung tâm của chủ ngữ"
     }
   },
   {
     "id": "ets22_t3_p5_128",
     "number": 128,
-    "text": "The contract stipulations require that both parties sign the agreement in the _____ of a certified notary public.",
+    "text": "City _____ hope to get the necessary permits to build a twenty-story office building on Minerva Street.",
     "options": {
-      "A": "presence",
-      "B": "present",
-      "C": "presently",
-      "D": "presentation"
+      "A": "agendas",
+      "B": "developers",
+      "C": "avenues",
+      "D": "boundaries"
     },
-    "correctAnswer": "A",
-    "explanation": "<p><b>Dịch nghĩa:</b> Các điều khoản hợp đồng yêu cầu cả hai bên phải ký thỏa thuận trước sự có mặt của một công chứng viên công chứng được cấp phép.</p>\n<p><b>Phân tích ngữ pháp:</b> Cụm giới từ cố định trong văn bản luật và hợp đồng là <i>in the presence of someone</i> (trước sự chứng kiến/sự hiện diện của ai). Do đó, <b>(A) presence</b> (sự hiện diện) là đáp án chính xác.<br/>- (B) <i>present</i>: tính từ / động từ.<br/>- (C) <i>presently</i>: trạng từ (hiện tại).<br/>- (D) <i>presentation</i>: bài thuyết trình.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Cụm từ pháp lý kinh điển: <i>in the presence of</i> = trước sự hiện diện của.</p>",
-    "type": "Word Form",
-    "subCategory": "Word Form",
-    "grammarTag": "Noun in Prepositional Phrase",
-    "clueHint": "Đứng sau mạo từ \"the\" và trước giới từ \"of\". Cụm thành ngữ cố định nào đi với \"in the _____ of someone\" mang nghĩa sự hiện diện?",
+    "correctAnswer": "B",
+    "explanation": "<p><b>Dịch nghĩa:</b> Các nhà phát triển đô thị hy vọng sẽ có được giấy phép cần thiết để xây dựng một tòa nhà văn phòng hai mươi tầng trên đường Minerva.</p><p><b>Phân tích ngữ pháp:</b> Động từ <i>hope to build</i> (hy vọng xây dựng) đòi hỏi chủ ngữ phải là người/tổ chức có khả năng xây dựng tòa nhà văn phòng 20 tầng. Do đó danh từ <b>(B) developers</b> (các nhà phát triển / chủ đầu tư xây dựng) là đáp án duy nhất thỏa mãn ngữ nghĩa.<br/>- (A) <i>agendas</i>: chương trình nghị sự.<br/>- (C) <i>avenues</i>: đại lộ.<br/>- (D) <i>boundaries</i>: ranh giới.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Đi với hành động xin giấy phép (permits) để xây dựng tòa nhà (build a building) chỉ có thể là <i>developers</i> (chủ đầu tư/nhà phát triển dự án).</p>",
+    "type": "Vocabulary",
+    "subCategory": "Business Vocabulary",
+    "grammarTag": "Noun Context",
+    "clueHint": "Đối tượng nào xin giấy phép (permits) để xây dựng tòa nhà văn phòng 20 tầng?",
     "syntaxBreakdown": {
-      "subject": "both parties",
-      "verb": "sign",
-      "objectOrComplement": "the agreement in the [presence] of a certified notary public",
-      "blankRole": "Danh từ trong cụm giới từ in the presence of"
+      "subject": "City [developers]",
+      "verb": "hope",
+      "objectOrComplement": "to get the necessary permits to build a twenty-story office building",
+      "blankRole": "Danh từ số nhiều chỉ người làm chủ ngữ"
     }
   },
   {
     "id": "ets22_t3_p5_129",
     "number": 129,
-    "text": "Seldom _____ such an overwhelming volume of customer inquiries in such a brief period of time.",
+    "text": "Compliance Department officers regularly monitor changes in the _____ framework.",
     "options": {
-      "A": "we have experienced",
-      "B": "have we experienced",
-      "C": "we experienced",
-      "D": "experienced we"
+      "A": "regulate",
+      "B": "regulates",
+      "C": "regulator",
+      "D": "regulatory"
     },
-    "correctAnswer": "B",
-    "explanation": "<p><b>Dịch nghĩa:</b> Hiếm khi chúng ta lại trải qua một lượng câu hỏi từ khách hàng áp đảo đến vậy trong một khoảng thời gian ngắn như thế.</p>\n<p><b>Phân tích ngữ pháp:</b> Câu bắt đầu bằng trạng từ phủ định <i>Seldom</i> (hiếm khi). Quy tắc đảo ngữ (Negative Inversion): Khi trạng từ phủ định/bán phủ định đứng đầu câu (Seldom, Rarely, Hardly, Never), mệnh đề phía sau phải đảo trợ động từ lên trước chủ ngữ: <i>Seldom + Trợ động từ + S + V</i>. Do đó, <b>(B) have we experienced</b> là đáp án đúng.<br/>- (A) <i>we have experienced</i>: sai trật tự từ (chưa đảo ngữ).<br/>- (C) <i>we experienced</i>: sai vì không đảo trợ động từ.<br/>- (D) <i>experienced we</i>: sai ngữ pháp tiếng Anh.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Thấy trạng từ phủ định <i>Seldom / Rarely / Never</i> đứng đầu câu -> Chọn ngay phương án ĐẢO TRỢ ĐỘNG TỪ lên trước S.</p>",
-    "type": "Sentence Structure",
-    "subCategory": "Sentence Structure",
-    "grammarTag": "Negative Inversion (Seldom)",
-    "clueHint": "Từ đầu câu là trạng từ phủ định \"Seldom\" (hiếm khi). Cấu trúc đảo ngữ yêu cầu đảo thành phần nào lên trước chủ ngữ?",
+    "correctAnswer": "D",
+    "explanation": "<p><b>Dịch nghĩa:</b> Các cán bộ của Phòng Tuân thủ thường xuyên theo dõi những thay đổi trong khuôn khổ quy định pháp lý.</p><p><b>Phân tích ngữ pháp:</b> Đứng trước danh từ <i>framework</i> (khuôn khổ) và sau mạo từ <i>the</i> cần một tính từ để bổ nghĩa. Tính từ đuôi -ory là <b>(D) regulatory</b>: <i>regulatory framework</i> (khuôn khổ quy định).<br/>- (A) <i>regulate</i>: động từ nguyên thể.<br/>- (B) <i>regulates</i>: động từ số ít.<br/>- (C) <i>regulator</i>: danh từ cơ quan quản lý.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> <i>Regulatory framework</i> là thuật ngữ cố định trong tiếng Anh thương mại chỉ khung pháp lý, quy định của cơ quan chức năng.</p>",
+    "type": "Word Form",
+    "subCategory": "Word Form",
+    "grammarTag": "Adjective Suffix",
+    "clueHint": "Đứng trước danh từ \"framework\" cần một tính từ bổ nghĩa.",
     "syntaxBreakdown": {
-      "subject": "we",
-      "verb": "[have] [experienced]",
-      "objectOrComplement": "such an overwhelming volume of customer inquiries",
-      "blankRole": "Cấu trúc đảo ngữ trợ động từ have lên trước chủ ngữ we"
+      "subject": "Compliance Department officers",
+      "verb": "regularly monitor",
+      "objectOrComplement": "changes in the [regulatory] framework",
+      "blankRole": "Tính từ bổ nghĩa cho danh từ framework"
     }
   },
   {
     "id": "ets22_t3_p5_130",
     "number": 130,
-    "text": "The regional division manager decided to _____ the formal contract negotiations until further legal advice was received.",
+    "text": "The X250 portable heater achieves the _____ outcomes without reaching especially high temperatures.",
     "options": {
-      "A": "call off",
-      "B": "put off",
-      "C": "take over",
-      "D": "look into"
+      "A": "practices",
+      "B": "factors",
+      "C": "desirable",
+      "D": "dimensions"
     },
-    "correctAnswer": "B",
-    "explanation": "<p><b>Dịch nghĩa:</b> Giám đốc bộ phận khu vực đã quyết định hoãn các cuộc đàm phán hợp đồng chính thức cho đến khi nhận được thêm lời khuyên pháp lý.</p>\n<p><b>Phân tích ngữ pháp:</b> Cụm động từ (Phrasal Verb): Dựa vào vế sau <i>until further legal advice was received</i> (cho đến khi nhận được tư vấn thêm), hành động ở đây là tạm hoãn lại (chứ không phải hủy bỏ hoàn toàn). Cụm động từ <b>(B) put off</b> (= postpone / delay: hoãn lại) là chính xác nhất.<br/>- (A) <i>call off</i>: hủy bỏ hoàn toàn (cancel).<br/>- (C) <i>take over</i>: tiếp quản.<br/>- (D) <i>look into</i>: điều tra, xem xét.</p>\n<p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> Phân biệt <i>put off</i> (hoãn lại chờ thời điểm sau - thường đi với <i>until</i>) vs <i>call off</i> (hủy bỏ hẳn). Thấy <i>until</i> chọn <i>put off</i>!</p>",
-    "type": "Vocabulary",
-    "subCategory": "Business Vocabulary",
-    "grammarTag": "Phrasal Verb",
-    "clueHint": "Nhìn vế sau có từ \"until\" (cho đến khi nhận được tư vấn). Cụm động từ nào mang nghĩa là tạm hoãn lại chờ đợi?",
+    "correctAnswer": "C",
+    "explanation": "<p><b>Dịch nghĩa:</b> Máy sưởi di động X250 đạt được các kết quả như mong muốn mà không cần phải đạt tới mức nhiệt độ đặc biệt cao.</p><p><b>Phân tích ngữ pháp:</b> Vị trí đứng sau mạo từ <i>the</i> và đứng trước danh từ <i>outcomes</i> (kết quả) cần một tính từ bổ nghĩa. Tính từ có đuôi -able là <b>(C) desirable</b> (được mong đợi, như mong muốn): <i>desirable outcomes</i>.<br/>- (A) <i>practices</i>: danh từ thực tiễn/thói quen.<br/>- (B) <i>factors</i>: danh từ nhân tố.<br/>- (D) <i>dimensions</i>: danh từ kích thước.</p><p><b>Mẹo giải nhanh & Cảnh báo bẫy ETS:</b> <i>Desirable outcomes / results</i> là kết hợp từ quen thuộc miêu tả hiệu năng sản phẩm đạt kết quả kỳ vọng.</p>",
+    "type": "Word Form",
+    "subCategory": "Word Form",
+    "grammarTag": "Adjective Suffix",
+    "clueHint": "Vị trí nằm giữa mạo từ \"the\" và danh từ \"outcomes\". Cần từ loại gì để bổ nghĩa?",
     "syntaxBreakdown": {
-      "subject": "The regional division manager",
-      "verb": "decided",
-      "objectOrComplement": "to [put off] the formal contract negotiations until further legal advice was received",
-      "blankRole": "Cụm động từ nguyên mẫu làm tân ngữ cho decided"
+      "subject": "The X250 portable heater",
+      "verb": "achieves",
+      "objectOrComplement": "the [desirable] outcomes without reaching especially high temperatures",
+      "blankRole": "Tính từ bổ nghĩa cho danh từ outcomes"
     }
   }
 ]

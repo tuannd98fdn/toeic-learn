@@ -1,0 +1,548 @@
+import json
+
+part4_data = [
+  {
+    "id": "ets22_t3_p4_s01",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s01.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nAttention passengers. On Monday, some of our major bus routes will be updated to improve overall traffic flow downtown. Routes 12 and 15 will now bypass the central square entirely, reducing travel times during morning rush hour. If you commute using these lines, please check the revised timetables. We strongly recommend downloading our transit mobile app, where you can view live bus locations and real-time arrival updates.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_71",
+        "number": 71,
+        "text": "Where is the announcement most likely being made?",
+        "options": {
+          "A": "At a train station",
+          "B": "At a bus station",
+          "C": "At an airport",
+          "D": "At a ferry terminal"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người nói mở đầu: <i>'Attention passengers. On Monday, some of our major bus routes will be updated...'</i> (Xin hành khách chú ý. Vào thứ Hai, một số tuyến xe buýt chính của chúng ta sẽ được cập nhật...). Do đó thông báo được phát tại bến xe buýt: <b>(B) At a bus station</b>.</p>",
+        "questionType": "Location",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t3_p4_72",
+        "number": 72,
+        "text": "Why is a change being made?",
+        "options": {
+          "A": "It will improve traffic flow.",
+          "B": "It will keep prices low.",
+          "C": "It will increase energy efficiency.",
+          "D": "It will save staff time."
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói nêu rõ lý do thay đổi: <i>'...will be updated to improve overall traffic flow downtown.'</i> (sẽ được cập nhật để cải thiện lưu lượng giao thông tổng thể tại khu trung tâm). Chọn <b>(A) It will improve traffic flow.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t3_p4_73",
+        "number": 73,
+        "text": "What does the speaker recommend?",
+        "options": {
+          "A": "Filling out a survey",
+          "B": "Printing some tickets",
+          "C": "Arriving early",
+          "D": "Downloading a mobile app"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói khuyến nghị: <i>'We strongly recommend downloading our transit mobile app...'</i> (Chúng tôi đặc biệt khuyên bạn nên tải ứng dụng di động giao thông của chúng tôi...). Chọn <b>(D) Downloading a mobile app</b>.</p>",
+        "questionType": "Recommendation",
+        "subCategory": "Next Action"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p4_s02",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s02.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nWelcome, and thank you for attending the grand opening of my new coffee shop, Bean Haven! What makes our coffee unique is that all of our beans are ethically sourced from single-origin farms in Central and South America. We roast them in small batches right here on the premises. As a token of our appreciation for joining us today, everyone will receive a punch card that gives you a 10 percent discount on your next visit. Please enjoy the refreshments and samples at the counter!</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_74",
+        "number": 74,
+        "text": "What event is taking place?",
+        "options": {
+          "A": "A grand opening",
+          "B": "An employee retirement",
+          "C": "A cooking competition",
+          "D": "A book signing"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói chào mừng: <i>'Thank you for attending the grand opening of my new coffee shop, Bean Haven!'</i> (Cảm ơn các bạn đã tham dự lễ khai trương quán cà phê mới của tôi...). Chọn <b>(A) A grand opening</b>.</p>",
+        "questionType": "Topic",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t3_p4_75",
+        "number": 75,
+        "text": "What does the speaker say is distinct about a coffee blend?",
+        "options": {
+          "A": "The brewing temperature",
+          "B": "The low price",
+          "C": "The packaging design",
+          "D": "The origin of the beans"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói giải thích điểm đặc biệt: <i>'all of our beans are ethically sourced from single-origin farms in Central and South America.'</i> (tất cả hạt cà phê đều được lấy nguồn từ các trang trại xuất xứ đơn lẻ ở Trung và Nam Mỹ). Chọn <b>(D) The origin of the beans</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t3_p4_76",
+        "number": 76,
+        "text": "What is the speaker offering customers?",
+        "options": {
+          "A": "Free delivery",
+          "B": "A complimentary mug",
+          "C": "A discount on a future purchase",
+          "D": "A free baking lesson"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói tặng quà: <i>'everyone will receive a punch card that gives you a 10 percent discount on your next visit.'</i> (mọi người sẽ nhận được thẻ giảm giá 10% cho lần ghé thăm tiếp theo). Chọn <b>(C) A discount on a future purchase</b>.</p>",
+        "questionType": "Offer",
+        "subCategory": "Detail"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p4_s03",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s03.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nIf you're looking for a unique experience for the whole family, why not try a tour of Baxter's Snack Food Factory? Each tour begins with an informative video about the history of Baxter's. Then, unlike most factory tours, we actually take you out onto the factory floor where you can watch our automated packaging lines. At the end of the tour, everyone receives a free bag of our delicious snacks. Tours are available every weekday, but if you want to see our production in action, be sure to visit us Monday through Wednesday. We can't guarantee production lines will be running on Thursdays and Fridays.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_77",
+        "number": 77,
+        "text": "How does each tour begin?",
+        "options": {
+          "A": "Refreshments are served.",
+          "B": "A quiz is given.",
+          "C": "A video is shown.",
+          "D": "Safety equipment is distributed."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói cho biết: <i>'Each tour begins with an informative video about the history of Baxter's.'</i> (Mỗi chuyến tham quan bắt đầu bằng một video cung cấp thông tin về lịch sử của Baxter's). Chọn <b>(C) A video is shown.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t3_p4_78",
+        "number": 78,
+        "text": "What kind of gift do participants receive?",
+        "options": {
+          "A": "A discount coupon",
+          "B": "A food item",
+          "C": "A branded pen",
+          "D": "A souvenir photograph"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Cuối tour, khách được nhận: <i>'everyone receives a free bag of our delicious snacks.'</i> (mọi người nhận được một túi đồ ăn nhẹ thơm ngon miễn phí). Đồ ăn vặt là thực phẩm: <b>(B) A food item</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t3_p4_79",
+        "number": 79,
+        "text": "What does the speaker warn the listeners about?",
+        "options": {
+          "A": "Parking is limited.",
+          "B": "Children must be accompanied.",
+          "C": "Ticket prices will increase.",
+          "D": "Some operations may not be running."
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói cảnh báo: <i>'We can't guarantee production lines will be running on Thursdays and Fridays.'</i> (Chúng tôi không thể đảm bảo các dây chuyền sản xuất sẽ hoạt động vào các ngày thứ Năm và thứ Sáu). Chọn <b>(D) Some operations may not be running.</b></p>",
+        "questionType": "Warning",
+        "subCategory": "Detail"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p4_s04",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s04.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nHello, this is Anna Messina from Messina Roofing, and I'm calling about the new roof for the house you're remodeling. I've learned that when our representative John visited you last week, he only talked to you about the cost of the shingles and other materials. But an official estimate includes parts and labor. It's important that we discuss this soon. I'll be in your area this afternoon and could stop by if that's convenient for you. Please let me know when you have a chance.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_80",
+        "number": 80,
+        "text": "Where does the speaker work?",
+        "options": {
+          "A": "At an architecture firm",
+          "B": "At an accounting firm",
+          "C": "At a roofing company",
+          "D": "At an auto repair shop"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói tự giới thiệu: <i>'this is Anna Messina from Messina Roofing...'</i> (đây là Anna Messina từ công ty Mái nhà Messina...). Chọn <b>(C) At a roofing company</b>.</p>",
+        "questionType": "Occupation",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t3_p4_81",
+        "number": 81,
+        "text": "Why does the speaker say, “An official estimate includes parts and labor”?",
+        "options": {
+          "A": "To dispute a contractor's bill",
+          "B": "To explain why a price might be higher",
+          "C": "To negotiate with a supplier",
+          "D": "To praise an employee's honesty"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người nói cho biết đại diện tuần trước mới chỉ báo giá vật liệu, còn dự toán chính thức bao gồm cả vật liệu và tiền công lao động (<i>includes parts and labor</i>), nhằm giải thích vì sao tổng chi phí thực tế sẽ cao hơn: <b>(B) To explain why a price might be higher</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Implication"
+      },
+      {
+        "id": "ets22_t3_p4_82",
+        "number": 82,
+        "text": "What does the speaker offer to do this afternoon?",
+        "options": {
+          "A": "Visit the listener's house",
+          "B": "Send an updated invoice",
+          "C": "Drop off some product samples",
+          "D": "Call back after five o'clock"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói đề nghị: <i>'I'll be in your area this afternoon and could stop by if that's convenient for you.'</i> (Tôi sẽ ở khu vực nhà bạn chiều nay và có thể ghé qua nếu thuận tiện). Do đó chọn <b>(A) Visit the listener's house</b>.</p>",
+        "questionType": "Offer",
+        "subCategory": "Next Action"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p4_s05",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s05.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nGood evening and welcome to the program. Today we're discussing using social media to promote your business. As you know, there are many challenges in this area. In fact, setting goals for your company's use of social media is one of the most difficult, so that's what I'm going to help you with today. I'll show you how creating goals based on your company's specific clientele will make it easier to adjust your social media presence. Joining me now in the studio is Lee Zhou, founder of Daytime Services. I'll be speaking with Lee about how she approached this task.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_83",
+        "number": 83,
+        "text": "What is the broadcast about?",
+        "options": {
+          "A": "Financing your company",
+          "B": "Using social media",
+          "C": "Recruiting staff",
+          "D": "Getting a business license"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người dẫn chương trình nói: <i>'Today we're discussing using social media to promote your business.'</i> (Hôm nay chúng ta thảo luận về việc sử dụng mạng xã hội để quảng bá doanh nghiệp của bạn). Chọn <b>(B) Using social media</b>.</p>",
+        "questionType": "Topic",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t3_p4_84",
+        "number": 84,
+        "text": "What will the speaker help the listeners with today?",
+        "options": {
+          "A": "Choosing a service",
+          "B": "Lowering costs",
+          "C": "Analyzing feedback",
+          "D": "Setting goals"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói cho biết: <i>'setting goals for your company's use of social media is one of the most difficult, so that's what I'm going to help you with today.'</i> (việc đặt ra mục tiêu cho việc sử dụng mạng xã hội... là điều tôi sẽ giúp các bạn hôm nay). Chọn <b>(D) Setting goals</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t3_p4_85",
+        "number": 85,
+        "text": "What will most likely happen next?",
+        "options": {
+          "A": "The speaker will conduct an interview.",
+          "B": "The speaker will give a weather update.",
+          "C": "An advertisement will play.",
+          "D": "A contest winner will be announced."
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói giới thiệu khách mời: <i>'Joining me now in the studio is Lee Zhou... I'll be speaking with Lee about how she approached this task.'</i> (Cùng tham gia với tôi tại trường quay là Lee Zhou... Tôi sẽ trò chuyện với Lee...). Do đó bước tiếp theo là phỏng vấn khách mời: <b>(A) The speaker will conduct an interview.</b></p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p4_s06",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s06.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nHi everyone, I've got some big news. Our company has decided to move in an interesting direction, and it's going to affect us here in the marketing department. As you know, we've had great success getting stores to carry our line of fine cotton bedding, such as sheets and blankets. Now the company has decided to switch to using bamboo cloth for these products. The fabric is soft, durable, and also environmentally sustainable. Our job, of course, is to maintain and expand our markets for this new bedding. Now, you may be worried that customers won't be happy with this change, but I use these products! Let's look at some samples now.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_86",
+        "number": 86,
+        "text": "Who most likely are the listeners?",
+        "options": {
+          "A": "Potential investors",
+          "B": "Marketing specialists",
+          "C": "Quality control inspectors",
+          "D": "Production workers"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người nói đề cập: <i>'...and it's going to affect us here in the marketing department.'</i> (và điều này sẽ ảnh hưởng tới chúng ta ở đây trong phòng tiếp thị). Do đó người nghe là các chuyên viên tiếp thị: <b>(B) Marketing specialists</b>.</p>",
+        "questionType": "Audience",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t3_p4_87",
+        "number": 87,
+        "text": "According to the speaker, what is the company going to change?",
+        "options": {
+          "A": "A type of material",
+          "B": "A delivery carrier",
+          "C": "A packaging design",
+          "D": "A return policy"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói thông báo: <i>'Now the company has decided to switch to using bamboo cloth for these products.'</i> (Bây giờ công ty đã quyết định chuyển sang sử dụng vải tre cho các sản phẩm này thay vì cotton). Đó là thay đổi về loại chất liệu: <b>(A) A type of material</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t3_p4_88",
+        "number": 88,
+        "text": "Why does the speaker say, “but I use these products”?",
+        "options": {
+          "A": "To reject an offer",
+          "B": "To correct an advertisement",
+          "C": "To provide reassurance",
+          "D": "To explain a decision"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói lường trước sự lo lắng: <i>'Now, you may be worried that customers won't be happy with this change, but I use these products!'</i> (Bây giờ các bạn có thể lo khách không hài lòng, nhưng chính tôi đang dùng các sản phẩm này!). Người nói đưa ra trải nghiệm thực tế để trấn an nhân viên: <b>(C) To provide reassurance</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Implication"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p4_s07",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s07.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nThanks for coming to this month's meeting of the Emory Bird Watching Club. I'm very excited to welcome our guest speaker, author Kentaro Nakamura. He recently led a project in the Canadian wilderness, where he spent six months researching bird migration patterns. In his lecture tonight, he'll talk about the dangers of light pollution to migrating birds and what we can do to help. After the presentation, please join us in the library for some drinks and treats.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_89",
+        "number": 89,
+        "text": "Where is the talk taking place?",
+        "options": {
+          "A": "At an awards ceremony",
+          "B": "At an exhibit opening",
+          "C": "At a club meeting",
+          "D": "At a national park tour"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói mở đầu: <i>'Thanks for coming to this month's meeting of the Emory Bird Watching Club.'</i> (Cảm ơn các bạn đã đến tham dự buổi gặp mặt tháng này của Câu lạc bộ Ngắm chim Emory). Chọn <b>(C) At a club meeting</b>.</p>",
+        "questionType": "Location",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t3_p4_90",
+        "number": 90,
+        "text": "What did Kentaro Nakamura recently do?",
+        "options": {
+          "A": "He published a book.",
+          "B": "He started a conservation society.",
+          "C": "He won an environmental prize.",
+          "D": "He conducted research in Canada."
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói giới thiệu: <i>'He recently led a project in the Canadian wilderness, where he spent six months researching bird migration patterns.'</i> (Gần đây anh ấy đã dẫn dắt một dự án tại vùng hoang dã Canada, nơi anh dành 6 tháng nghiên cứu quy luật di cư của loài chim). Chọn <b>(D) He conducted research in Canada.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t3_p4_91",
+        "number": 91,
+        "text": "What are the listeners invited to do after the event?",
+        "options": {
+          "A": "Enjoy some refreshments",
+          "B": "Purchase an autographed book",
+          "C": "Participate in a raffle",
+          "D": "Take a group photo"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói mời: <i>'After the presentation, please join us in the library for some drinks and treats.'</i> (Sau buổi thuyết trình, mời các bạn vào thư viện dùng đồ uống và đồ ăn nhẹ). Chọn <b>(A) Enjoy some refreshments</b>.</p>",
+        "questionType": "Invitation",
+        "subCategory": "Next Action"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p4_s08",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s08.mp3",
+    "image": "",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nI'm glad to see everyone here for today's monthly team meeting. I'm quite impressed with the number of sales this team has finalized this month. Everyone met their quota, so congratulations! I read through your responses to the online questionnaire I posted. Thanks for sharing your ideas about professional development. Many people suggested improving our ability to create more attractive slide presentations. I agree this will be useful when you meet with prospective clients, so I'd like to accommodate that request with an on-site training. A sign-up sheet has been posted in the employee break room. Just a heads-up that we have a limited number of computers available.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_92",
+        "number": 92,
+        "text": "What type of work do the listeners most likely do?",
+        "options": {
+          "A": "Manufacturing",
+          "B": "Accounting",
+          "C": "Legal counsel",
+          "D": "Sales"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói khen ngợi: <i>'I'm quite impressed with the number of sales this team has finalized this month. Everyone met their quota...'</i> (Tôi rất ấn tượng với số lượng đơn hàng bán ra mà nhóm đã chốt... Mọi người đều đạt chỉ tiêu). Do đó công việc của họ là kinh doanh/bán hàng: <b>(D) Sales</b>.</p>",
+        "questionType": "Audience",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t3_p4_93",
+        "number": 93,
+        "text": "What does the speaker thank the listeners for?",
+        "options": {
+          "A": "Volunteering for a project",
+          "B": "Covering a shift",
+          "C": "Completing a survey",
+          "D": "Reaching a deadline early"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói cảm ơn: <i>'I read through your responses to the online questionnaire I posted. Thanks for sharing your ideas...'</i> (Tôi đã đọc các câu trả lời cho bảng câu hỏi trực tuyến tôi đăng. Cảm ơn các bạn đã chia sẻ ý kiến...). Chọn <b>(C) Completing a survey</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t3_p4_94",
+        "number": 94,
+        "text": "Why does the speaker say, “We have a limited number of computers available”?",
+        "options": {
+          "A": "To explain why a workshop was delayed",
+          "B": "To encourage people to register quickly",
+          "C": "To justify ordering new equipment",
+          "D": "To reject a request for training"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Sau khi nhắc rằng phiếu đăng ký tham gia lớp đào tạo đã được dán trong phòng nghỉ, người nói lưu ý rằng số lượng máy tính có hạn (<i>limited number of computers available</i>), nhằm thôi thúc nhân viên đăng ký sớm trước khi hết chỗ: <b>(B) To encourage people to register quickly</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Implication"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p4_s09",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s09.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_g01.jpg",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nHello, this is Megumi from Philmetric Limited. I'm calling about our company's anniversary dinner scheduled for this Friday at your hotel. We need audio equipment set up for the event host. Looking at the dining room layout, I think it's best to set it up next to the table by the window that is farthest away from the buffet. One last thing—I've shipped a box of our company's branded vases to the hotel. There should be enough for all the flower arrangements. Thanks!</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_95",
+        "number": 95,
+        "text": "What will take place this Friday?",
+        "options": {
+          "A": "An industry award ceremony",
+          "B": "A fund-raising dinner",
+          "C": "A company anniversary event",
+          "D": "A holiday celebration"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói cho biết: <i>'I'm calling about our company's anniversary dinner scheduled for this Friday at your hotel.'</i> (Tôi gọi điện về bữa tiệc tối kỷ niệm ngày thành lập công ty được lên lịch vào thứ Sáu này tại khách sạn của bạn). Chọn <b>(C) A company anniversary event</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      },
+      {
+        "id": "ets22_t3_p4_96",
+        "number": 96,
+        "text": "Look at the graphic. Where does the speaker want some audio equipment?",
+        "options": {
+          "A": "Next to Table 1",
+          "B": "Next to Table 2",
+          "C": "Next to Table 3",
+          "D": "Next to Table 4"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p>Người nói yêu cầu: <i>'set it up next to the table by the window that is farthest away from the buffet.'</i> (đặt nó cạnh cái bàn cạnh cửa sổ mà cách xa quầy buffet nhất). Nhìn vào sơ đồ Dining Room Layout: các bàn cạnh cửa sổ là Table 1 và Table 2. Quầy Buffet nằm ở phía dưới góc đối diện (gần Table 4). Bàn cạnh cửa sổ ở xa quầy Buffet nhất chính là Table 1: <b>(A) Next to Table 1</b>.</p>",
+        "questionType": "Graphic",
+        "subCategory": "Visual Link"
+      },
+      {
+        "id": "ets22_t3_p4_97",
+        "number": 97,
+        "text": "What has the speaker shipped to the hotel?",
+        "options": {
+          "A": "Some tablecloths",
+          "B": "Some vases",
+          "C": "Some aprons",
+          "D": "Some glasses"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người nói nói: <i>'I've shipped a box of our company's branded vases to the hotel.'</i> (Tôi đã chuyển một thùng bình hoa có in thương hiệu của công ty chúng tôi đến khách sạn). Chọn <b>(B) Some vases</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p4_s10",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_s10.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p4_g02.jpg",
+    "context": "",
+    "transcript": "<p><b>Transcript:</b><br/>\nHere are the topics we're going to cover in today's workshop on effective store management. I know interviewing is listed first on your agenda, but let's start with something more fun: setting up displays at your clothing stores. Displays are important because they have the biggest impact on how your store looks during business hours. From signage to lighting, there are many factors to consider. I'm going to show some photographs of displays, and let's see if we can identify which are the most effective and why.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p4_98",
+        "number": 98,
+        "text": "Who most likely are the listeners?",
+        "options": {
+          "A": "Clothing designers",
+          "B": "Fashion models",
+          "C": "Window installers",
+          "D": "Store managers"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p>Người nói mở đầu buổi tập huấn: <i>'today's workshop on effective store management... at your clothing stores.'</i> (buổi hội thảo hôm nay về quản lý cửa hàng hiệu quả... tại các cửa hàng quần áo của các bạn). Do đó người nghe là các quản lý cửa hàng: <b>(D) Store managers</b>.</p>",
+        "questionType": "Audience",
+        "subCategory": "Overview"
+      },
+      {
+        "id": "ets22_t3_p4_99",
+        "number": 99,
+        "text": "Look at the graphic. Which topic does the speaker start the workshop with?",
+        "options": {
+          "A": "Topic 1",
+          "B": "Topic 2",
+          "C": "Topic 3",
+          "D": "Topic 4"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p>Người nói nói: <i>'let's start with something more fun: setting up displays at your clothing stores.'</i> (chúng ta hãy bắt đầu với điều thú vị hơn: bố trí trưng bày tại cửa hàng). Nhìn vào hình ảnh Agenda Topics: 1. Interviewing, 2. Training, <b>3. Displaying merchandise</b>, 4. Tracking inventory. Chủ đề trưng bày hàng hóa là Topic 3: <b>(C) Topic 3</b>.</p>",
+        "questionType": "Graphic",
+        "subCategory": "Visual Link"
+      },
+      {
+        "id": "ets22_t3_p4_100",
+        "number": 100,
+        "text": "What does the speaker say the listeners will do next?",
+        "options": {
+          "A": "Introduce a colleague",
+          "B": "Look at some photographs",
+          "C": "Assemble a clothing rack",
+          "D": "Take a short quiz"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p>Người nói hướng dẫn bước tiếp theo: <i>'I'm going to show some photographs of displays, and let's see if we can identify which are the most effective and why.'</i> (Tôi sẽ chiếu một số bức ảnh về các cách trưng bày và chúng ta hãy cùng xem cách nào hiệu quả nhất...). Chọn <b>(B) Look at some photographs</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action"
+      }
+    ]
+  }
+]
+
+with open('/Users/bravee06/toeic-learn/public/data/ets2022/test3/part4.json', 'w', encoding='utf-8') as f:
+    json.dump(part4_data, f, indent=2, ensure_ascii=False)
+print('Part 4 JSON written successfully! Total sets:', len(part4_data))

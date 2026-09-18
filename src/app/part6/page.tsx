@@ -23,6 +23,10 @@ import styles from './page.module.css';
 
 export const TEST_OPTIONS = [
   { key: 'ets2022_test1', label: 'ETS 2022 Test 1 (Chuẩn ETS)' },
+  { key: 'ets2022_test2', label: 'ETS 2022 Test 2 (Chuẩn ETS)' },
+  { key: 'ets2022_test3', label: 'ETS 2022 Test 3 (Chuẩn ETS)' },
+  { key: 'ets2022_test4', label: 'ETS 2022 Test 4 (Chuẩn ETS)' },
+  { key: 'all', label: 'Liên đề (Test 1, 2, 3, 4)' },
 ];
 
 export const PART6_SUB_SKILLS = [
@@ -156,17 +160,21 @@ function Part6Trainer() {
         let rawLoadedPassages: any[] = [];
 
         if (testId === 'all') {
-          // Cross-test pooling: Load both Test 1 and Test 2
-          const [res1, res2] = await Promise.all([
+          // Cross-test pooling: Load Test 1, Test 2, Test 3, and Test 4
+          const [res1, res2, res3, res4] = await Promise.all([
             fetch('/data/ets2022/test1/part6.json'),
             fetch('/data/ets2022/test2/part6.json'),
+            fetch('/data/ets2022/test3/part6.json'),
+            fetch('/data/ets2022/test4/part6.json'),
           ]);
 
-          if (!res1.ok || !res2.ok) throw new Error('Không thể tải dữ liệu liên đề');
-          const [d1, d2] = await Promise.all([res1.json(), res2.json()]);
+          if (!res1.ok || !res2.ok || !res3.ok || !res4.ok) throw new Error('Không thể tải dữ liệu liên đề');
+          const [d1, d2, d3, d4] = await Promise.all([res1.json(), res2.json(), res3.json(), res4.json()]);
           const v1 = Part6DataSchema.parse(d1).map(p => ({ ...p, source: 'ETS 2022 Test 1' }));
           const v2 = Part6DataSchema.parse(d2).map(p => ({ ...p, source: 'ETS 2022 Test 2' }));
-          rawLoadedPassages = [...v1, ...v2];
+          const v3 = Part6DataSchema.parse(d3).map(p => ({ ...p, source: 'ETS 2022 Test 3' }));
+          const v4 = Part6DataSchema.parse(d4).map(p => ({ ...p, source: 'ETS 2022 Test 4' }));
+          rawLoadedPassages = [...v1, ...v2, ...v3, ...v4];
         } else {
           const match = testId.match(/ets(\d+)_test(\d+)/);
           if (!match) throw new Error('Mã đề thi không hợp lệ');

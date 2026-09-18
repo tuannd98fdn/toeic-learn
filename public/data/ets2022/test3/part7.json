@@ -5,41 +5,43 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s01_p1",
-        "type": "Advertisement",
-        "title": "Commercial Courier Service",
-        "content": "<p><b>RAPIDLINK EXPRESS COURIER</b><br/><br/>Looking for reliable same-day package transit in the metropolitan area? RapidLink Express provides fast, tracked delivery for documents, legal filings, and architectural blueprints.<br/><br/><b>Service Features:</b><br/>• Guaranteed two-hour delivery within downtown limits.<br/>• Direct digital confirmation with photographic proof upon arrival.<br/>• Eco-friendly electric vehicle and bicycle courier fleet.<br/><br/>Open a corporate account before November 15 to receive an introductory 20% discount on all shipping fees during your first two months of service. Visit <b>www.rapidlinkexpress.com</b> or call 1-800-555-0199 today.</p>"
+        "type": "Text Message",
+        "title": "Text-Message Chain",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>Jun Kambayashi [10:12 A.M.]</b><br/>Rachel, it looks as if Mr. Tanaka's flight will be arriving 30 minutes earlier this afternoon. I'm on my way to pick him up.</p><p><b>Rachel Newman [10:13 A.M.]</b><br/>The staff are excited that he finally is going to be working with us here. Do you think the two of you have time to stop here in the office before the end of the workday?</p><p><b>Jun Kambayashi [10:14 A.M.]</b><br/>Probably. And I agree; Mr. Tanaka has done great work at our Chiba branch.</p><p><b>Rachel Newman [10:15 A.M.]</b><br/>So I've always heard. It would be nice for him to get a quick tour of the lab and meet some members of the team before our welcome dinner.</p><p><b>Jun Kambayashi [10:16 A.M.]</b><br/>Sounds good. Since flight schedules can be unpredictable, I'll keep you posted as I arrive at the airport.</p><p><b>Rachel Newman [10:17 A.M.]</b><br/>Perfect. See you later.</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q147",
+        "id": "ets22_t3_p7_147",
         "number": 147,
-        "text": "What service does RapidLink Express specialize in?",
+        "text": "Who most likely is Mr. Tanaka?",
         "options": {
-          "A": "Metropolitan same-day package delivery",
-          "B": "International maritime freight shipping",
-          "C": "Commercial office furniture moving",
-          "D": "Electronic hardware disposal"
+          "A": "A new laboratory owner",
+          "B": "An important client",
+          "C": "A transferred staff member",
+          "D": "An airline pilot"
         },
-        "correctAnswer": "A",
-        "explanation": "<p><b>Dịch nghĩa:</b> RapidLink Express chuyên về dịch vụ nào?<br/><b>Bằng chứng:</b> Đoạn quảng cáo mở đầu: <i>\"Looking for reliable same-day package transit in the metropolitan area?...\"</i>. Chọn <b>(A) Metropolitan same-day package delivery</b>.</p>",
-        "questionType": "Main Idea & Purpose",
-        "subCategory": "Main Idea & Purpose"
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ông Tanaka có nhiều khả năng là ai nhất?<br/>(A) Chủ sở hữu phòng thí nghiệm mới.<br/>(B) Một khách hàng quan trọng.<br/>(C) Một nhân viên được điều chuyển công tác.<br/>(D) Phi công lái máy bay.</p><p><b>Bằng chứng trích dẫn:</b> Rachel viết: <i>'The staff are excited that he finally is going to be working with us here'</i> và Jun viết: <i>'Mr. Tanaka has done great work at our Chiba branch.'</i> (Ông Tanaka đã làm việc rất tốt tại chi nhánh Chiba của chúng ta). Điều này chứng minh ông Tanaka là nhân viên cùng công ty chuyển từ chi nhánh Chiba đến: <b>(C) A transferred staff member</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Kết hợp thông tin nhân viên hào hứng vì ông ấy sắp làm việc tại đây và việc ông ấy từng làm ở chi nhánh Chiba."
       },
       {
-        "id": "ets22_t3_p7_q148",
+        "id": "ets22_t3_p7_148",
         "number": 148,
-        "text": "How can businesses receive a discount?",
+        "text": "At 10:16 A.M., what does Mr. Kambayashi mean when he writes, “Sounds good”?",
         "options": {
-          "A": "By booking weekend deliveries",
-          "B": "By opening a corporate account before November 15",
-          "C": "By shipping more than fifty packages monthly",
-          "D": "By paying through a mobile banking application"
+          "A": "He is pleased with the dinner arrangements.",
+          "B": "He likes the idea of stopping by the office before dinner.",
+          "C": "He appreciates Mr. Tanaka’s professional reputation.",
+          "D": "He is glad that team members have completed their work."
         },
         "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Các doanh nghiệp có thể nhận được giảm giá bằng cách nào?<br/><b>Bằng chứng:</b> <i>\"Open a corporate account before November 15 to receive an introductory 20% discount...\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Vào lúc 10:16 sáng, ông Kambayashi có ý gì khi viết 'Sounds good'?<br/>(A) Ông ấy hài lòng với việc sắp xếp bữa tối.<br/>(B) Ông ấy thích ý tưởng ghé qua văn phòng trước bữa tối.<br/>(C) Ông ấy đánh giá cao danh tiếng chuyên môn của ông Tanaka.<br/>(D) Ông ấy mừng vì các thành viên trong nhóm đã hoàn thành công việc.</p><p><b>Bằng chứng trích dẫn:</b> Ngay trước đó, lúc 10:15, Rachel gợi ý: <i>'It would be nice for him to get a quick tour of the lab and meet some members of the team before our welcome dinner.'</i> Câu trả lời <i>'Sounds good'</i> ở 10:16 của Jun thể hiện sự đồng ý với đề xuất dẫn ông Tanaka ghé qua văn phòng/lab trước bữa tối: <b>(B) He likes the idea of stopping by the office before dinner.</b></p>",
+        "questionType": "Inference",
+        "subCategory": "Implication",
+        "strategyHint": "Đọc tin nhắn ngay trước câu nói ở 10:16 để tìm đối tượng được phản hồi."
       }
     ]
   },
@@ -49,41 +51,43 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s02_p1",
-        "type": "Text Message",
-        "title": "Discussion Chain",
-        "content": "<p><b>Derek Cole [10:04 A.M.]:</b> Hi Claire, did the client from Horizon Media approve the proposed digital banner designs?<br/><br/><b>Claire Dupont [10:06 A.M.]:</b> Yes, they loved the color scheme, but they asked us to replace the background photograph on the home page slide with an image showing our mobile tablet app.<br/><br/><b>Derek Cole [10:08 A.M.]:</b> That's an easy fix. I have several high-resolution tablet screenshots in the shared asset folder.<br/><br/><b>Claire Dupont [10:10 A.M.]:</b> Great! Please export the revised mockups by 1:00 P.M. so I can present them during our afternoon review call.</p>"
+        "type": "E-mail",
+        "title": "E-Mail Message",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>From:</b> jenkins@ourmarketfocus.au<br/><b>To:</b> hardesty@gallusmail.au<br/><b>Date:</b> 11 August<br/><b>Subject:</b> Workshop Notice</p><p>Dear Ms. Hardesty,</p><p>This is to share an important change concerning the 18 August, 4 P.M. Marketing Skills Workshop. Because many more attendees have signed up, we have changed the location of our event to The Rill Inn, PERTH.</p><p>Please acknowledge you are aware of the update. I would appreciate it if you could treat this request as urgent and reply as soon as convenient. Should you have any questions about participation, you can e-mail me.</p><p>Thank you,<br/>Andrew Jenkins<br/>Workshop Organizer</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q149",
+        "id": "ets22_t3_p7_149",
         "number": 149,
-        "text": "What modification did Horizon Media request?",
+        "text": "What is the purpose of the e-mail?",
         "options": {
-          "A": "Changing the primary brand colors",
-          "B": "Using an image showing a mobile tablet application",
-          "C": "Adding pricing text to all banner slides",
-          "D": "Shortening the headline copy"
+          "A": "To cancel an event",
+          "B": "To announce a new venue",
+          "C": "To recruit new workshop presenters",
+          "D": "To request volunteers for a workshop"
         },
         "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Horizon Media đã yêu cầu chỉnh sửa điều gì?<br/><b>Bằng chứng:</b> Claire nhắn: <i>\"...replace the background photograph on the home page slide with an image showing our mobile tablet app\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Mục đích của email là gì?<br/>(A) Hủy một sự kiện.<br/>(B) Thông báo một địa điểm tổ chức mới.<br/>(C) Tuyển người thuyết trình hội thảo mới.<br/>(D) Yêu cầu tình nguyện viên cho hội thảo.</p><p><b>Bằng chứng trích dẫn:</b> Email viết: <i>'Because many more attendees have signed up, we have changed the location of our event to The Rill Inn, PERTH.'</i> (Vì có nhiều người đăng ký tham dự hơn, chúng tôi đã thay đổi địa điểm sự kiện sang The Rill Inn, Perth). Do đó mục đích là thông báo địa điểm mới: <b>(B) To announce a new venue</b>.</p>",
+        "questionType": "Purpose",
+        "subCategory": "Overview",
+        "strategyHint": "Tìm cụm từ 'changed the location of our event to...' để xác định mục đích."
       },
       {
-        "id": "ets22_t3_p7_q150",
+        "id": "ets22_t3_p7_150",
         "number": 150,
-        "text": "At 10:08 A.M., what does Mr. Cole mean when he writes, \"That's an easy fix\"?",
+        "text": "What is Ms. Hardesty asked to do?",
         "options": {
-          "A": "He has already completed the revision.",
-          "B": "He will have no trouble making the requested change.",
-          "C": "The client agreed to lower their expectations.",
-          "D": "He can borrow an electronic device from a colleague."
+          "A": "Share the notice with other attendees",
+          "B": "Choose a convenient time to meet",
+          "C": "Confirm receipt of the message",
+          "D": "Update her contact information"
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Vào lúc 10:08 sáng, ông Cole có ý gì khi viết \"That's an easy fix\"?<br/><b>Bằng chứng:</b> Anh ấy tiếp lời ngay: <i>\"I have several high-resolution tablet screenshots in the shared asset folder\"</i> cho thấy việc chỉnh sửa rất dễ dàng không gặp trở ngại gì. Chọn <b>(B)</b>.</p>",
-        "questionType": "Inference & Suggestion",
-        "subCategory": "Inference & Suggestion"
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Cô Hardesty được yêu cầu làm gì?<br/>(A) Chia sẻ thông báo với những người tham dự khác.<br/>(B) Chọn thời gian thuận tiện để gặp mặt.<br/>(C) Xác nhận đã nhận được tin nhắn.<br/>(D) Cập nhật thông tin liên hệ của mình.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 2 nêu rõ: <i>'Please acknowledge you are aware of the update. I would appreciate it if you could treat this request as urgent and reply as soon as convenient.'</i> (Vui lòng xác nhận bạn đã nắm được thông tin cập nhật...). Xác nhận đã biết/nhận tin tương đương với <b>(C) Confirm receipt of the message</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm 'Please acknowledge' đồng nghĩa với 'Confirm receipt'."
       }
     ]
   },
@@ -93,41 +97,43 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s03_p1",
-        "type": "Notice",
-        "title": "Employee Notice",
-        "content": "<p><b>MEMORANDUM: PARKING LOT SEALCOATING</b><br/><br/>To: All Apex Tower Tenants<br/>From: Property Management Office<br/>Date: August 14<br/><br/>Please note that asphalt sealcoating and line striping for the North Visitor Parking Lot will take place this Saturday, August 18, starting at 7:00 A.M. and concluding by 6:00 P.M.<br/><br/>During this timeframe, the North Visitor Lot will be barricaded and completely closed to vehicular traffic. Employees and visitors who need to park on the premises this Saturday must use the underground multi-level parking garage accessible via Elm Street. Normal access to the north surface lot will resume on Sunday morning at 8:00 A.M.<br/><br/>Thank you for your cooperation as we maintain our facility infrastructure.</p>"
+        "type": "Advertisement",
+        "title": "Advertisement",
+        "content": "<div style='border: 2px dashed var(--border-color, #444); border-radius: 8px; padding: 20px; text-align: center;'><h2 style='margin-top:0;'>Virens</h2><p style='font-size: 1.1em;'>Come to Virens for the best televisions, phones, tablets, and more!</p><h3 style='color: #0284c7;'>Grand Opening Celebration</h3><p>featuring comedian and DJ Declan Gibb from radio station KYX 93.8<br/><b>Saturday, October 2, 10:00 A.M.-8:00 P.M.</b><br/>234 Morris Avenue, next to Mike's Pizza</p><p style='font-style: italic;'>Complimentary snacks from Sarah's Bakery—home of Sarah's delicious pastries!</p><div style='border: 1px solid #999; padding: 10px; margin-top: 15px;'><p style='margin:0;'><b>Bring this ad for $5 off a purchase of $10 or more.</b><br/>Valid throughout October.</p></div></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q151",
+        "id": "ets22_t3_p7_151",
         "number": 151,
-        "text": "What maintenance work is scheduled for Saturday?",
+        "text": "What type of business is Virens?",
         "options": {
-          "A": "Roof waterproofing repairs",
-          "B": "Parking lot asphalt sealcoating and restriping",
-          "C": "Elevator mechanical upgrades",
-          "D": "Exterior window pressure washing"
+          "A": "A pastry shop",
+          "B": "A radio station",
+          "C": "An electronics store",
+          "D": "A pizza restaurant"
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Công việc bảo trì nào được lên lịch vào thứ Bảy?<br/><b>Bằng chứng:</b> <i>\"asphalt sealcoating and line striping for the North Visitor Parking Lot will take place this Saturday...\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Virens là loại hình kinh doanh nào?<br/>(A) Tiệm bánh ngọt.<br/>(B) Đài phát thanh.<br/>(C) Cửa hàng đồ điện tử.<br/>(D) Quán pizza.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn quảng cáo mở đầu: <i>'Come to Virens for the best televisions, phones, tablets, and more!'</i> (Hãy đến Virens để có tivi, điện thoại, máy tính bảng tốt nhất...). Đây là các thiết bị điện tử, do đó Virens là cửa hàng điện tử: <b>(C) An electronics store</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Nhìn vào danh mục sản phẩm: televisions, phones, tablets."
       },
       {
-        "id": "ets22_t3_p7_q152",
+        "id": "ets22_t3_p7_152",
         "number": 152,
-        "text": "Where should weekend drivers park on August 18?",
+        "text": "According to the advertisement, what will happen on October 2?",
         "options": {
-          "A": "Along Elm Street sidewalks",
-          "B": "In the underground multi-level parking garage",
-          "C": "At a municipal transit center nearby",
-          "D": "In the reserved executive delivery bay"
+          "A": "Declan Gibb will perform at an event.",
+          "B": "Two businesses will move to new locations.",
+          "C": "A new product will be launched.",
+          "D": "A coupon will expire."
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Các tài xế nên đỗ xe ở đâu vào ngày 18 tháng 8?<br/><b>Bằng chứng:</b> <i>\"must use the underground multi-level parking garage accessible via Elm Street\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Theo quảng cáo, điều gì sẽ diễn ra vào ngày 2 tháng 10?<br/>(A) Declan Gibb sẽ biểu diễn tại một sự kiện.<br/>(B) Hai doanh nghiệp sẽ chuyển đến địa điểm mới.<br/>(C) Một sản phẩm mới sẽ được ra mắt.<br/>(D) Một phiếu giảm giá sẽ hết hạn.</p><p><b>Bằng chứng trích dẫn:</b> Dòng thông tin về sự kiện khai trương: <i>'Grand Opening Celebration featuring comedian and DJ Declan Gibb... Saturday, October 2, 10:00 A.M.-8:00 P.M.'</i>. Declan Gibb là diễn viên hài và DJ sẽ biểu diễn tại sự kiện: <b>(A) Declan Gibb will perform at an event.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Quét mốc thời gian Saturday, October 2 và đối chiếu người biểu diễn Declan Gibb."
       }
     ]
   },
@@ -137,56 +143,43 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s04_p1",
-        "type": "Webpage",
-        "title": "Company Careers",
-        "content": "<p><b>VALIANT BIOTECH: SENIOR CLINICAL RESEARCH COORDINATOR</b><br/><br/><b>Location:</b> Cambridge, Massachusetts | <b>Department:</b> Pharmaceutical Trials | <b>Type:</b> Full-Time<br/><br/><b>Position Overview:</b><br/>Valiant Biotech is seeking an experienced Clinical Research Coordinator to manage phase-two oncology drug trials. The coordinator will oversee patient scheduling, monitor regulatory compliance with federal health guidelines, and coordinate laboratory data collection across four regional clinics.<br/><br/><b>Qualifications:</b><br/>• Bachelor's degree in biological sciences, nursing, or a related discipline.<br/>• Minimum of four years of experience coordinating clinical trials.<br/>• Demonstrated proficiency with digital trial management databases.<br/>• Exceptional written and verbal communication skills.<br/><br/>Valiant Biotech offers comprehensive health benefits, generous 401(k) matching, and tuition reimbursement for continuing education. To apply, submit your resume and cover letter to <b>careers@valiantbio.com</b> before September 30.</p>"
+        "type": "Web Page",
+        "title": "Web Page",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p style='color: #666; font-size: 0.9em; margin-top:0;'>http://www.officenature.com</p><h3>Want to boost the health and morale of your employees?</h3><p>Office Nature delivers a box filled with delicious food right to your break room.</p><p><b>We focus on the following:</b></p><ul><li>providing natural treats such as nuts, granola, and dried fruit</li><li>working with local farmers to provide the freshest options</li><li>reducing impact on the environment</li><li>offering foods at reasonable prices</li></ul><p>Just choose your selections and delivery day, and a fresh box of healthy food items will be brought automatically each week. First-time customers receive 10% off their order with code YUM.</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q153",
+        "id": "ets22_t3_p7_153",
         "number": 153,
-        "text": "What is a stated responsibility of the position?",
+        "text": "For whom is the Web page most likely intended?",
         "options": {
-          "A": "Designing promotional brochures for medical equipment",
-          "B": "Overseeing patient scheduling and regulatory compliance",
-          "C": "Developing proprietary laboratory testing chemicals",
-          "D": "Negotiating insurance contracts with hospitals"
+          "A": "Farmers",
+          "B": "Business owners",
+          "C": "Company employees",
+          "D": "Office Nature staff"
         },
         "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Nhiệm vụ nào được nêu của vị trí này?<br/><b>Bằng chứng:</b> <i>\"oversee patient scheduling, monitor regulatory compliance with federal health guidelines...\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Trang web này có nhiều khả năng hướng tới đối tượng nào nhất?<br/>(A) Nông dân.<br/>(B) Chủ doanh nghiệp.<br/>(C) Nhân viên công ty.<br/>(D) Nhân viên Office Nature.</p><p><b>Bằng chứng trích dẫn:</b> Câu tiêu đề: <i>'Want to boost the health and morale of your employees? Office Nature delivers a box filled with delicious food right to your break room.'</i> (Bạn muốn nâng cao sức khỏe và tinh thần của nhân viên mình? Office Nature giao hộp đồ ăn trực tiếp đến phòng nghỉ của bạn). Người có nhân viên (your employees) là người sử dụng lao động/chủ doanh nghiệp: <b>(B) Business owners</b>.</p>",
+        "questionType": "Audience",
+        "subCategory": "Overview",
+        "strategyHint": "Cụm 'boost the health and morale of your employees' hướng tới người quản lý hoặc chủ doanh nghiệp."
       },
       {
-        "id": "ets22_t3_p7_q154",
+        "id": "ets22_t3_p7_154",
         "number": 154,
-        "text": "What requirement is mentioned for applicants?",
+        "text": "What is indicated about Office Nature?",
         "options": {
-          "A": "A doctorate in biochemistry",
-          "B": "At least four years of clinical trial coordination experience",
-          "C": "Fluency in three languages",
-          "D": "A state medical doctor license"
+          "A": "It delivers healthy snacks.",
+          "B": "It offers weekly discounts.",
+          "C": "It makes its own baked goods.",
+          "D": "It grows its own fruit."
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Yêu cầu nào được đề cập cho ứng viên?<br/><b>Bằng chứng:</b> <i>\"Minimum of four years of experience coordinating clinical trials\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q155",
-        "number": 155,
-        "text": "Which employee benefit is listed on the webpage?",
-        "options": {
-          "A": "A company vehicle allowance",
-          "B": "Tuition reimbursement for continuing education",
-          "C": "Free daily on-site cafeteria meals",
-          "D": "Subsidized corporate housing"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Phúc lợi nhân viên nào được liệt kê trên trang web?<br/><b>Bằng chứng:</b> <i>\"offers comprehensive health benefits, generous 401(k) matching, and tuition reimbursement for continuing education\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được chỉ ra về Office Nature?<br/>(A) Công ty giao đồ ăn nhẹ lành mạnh.<br/>(B) Công ty giảm giá hàng tuần.<br/>(C) Công ty tự nướng bánh ngọt.<br/>(D) Công ty tự trồng trái cây.</p><p><b>Bằng chứng trích dẫn:</b> Các đặc điểm được liệt kê: <i>'providing natural treats such as nuts, granola, and dried fruit'</i> và <i>'delivers a fresh box of healthy food items... automatically each week'</i>. Các loại hạt, ngũ cốc, hoa quả khô là đồ ăn nhẹ lành mạnh (healthy snacks): <b>(A) It delivers healthy snacks.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Đối chiếu 'natural treats (nuts, granola, dried fruit)' với 'healthy snacks'."
       }
     ]
   },
@@ -196,56 +189,59 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s05_p1",
-        "type": "Email",
-        "title": "Conference Registration",
-        "content": "<p><b>To:</b> Martin Lindstrom &lt;mlindstrom@zenithenergy.com&gt;<br/><b>From:</b> Event Operations &lt;registrations@cleantechforum.org&gt;<br/><b>Date:</b> March 18<br/><b>Subject:</b> Registration Confirmation: CleanTech World Forum 2026</p><p>Dear Mr. Lindstrom,</p><p>Thank you for registering for the CleanTech World Forum, taking place April 12–14 at the Vancouver International Convention Centre. Your delegate pass grants you full admission to all plenary keynotes, exhibition pavilions, and catered luncheon sessions.</p><p>Your electronic registration badge is attached to this email as a digital QR code. To expedite check-in on the opening morning, please save this code to your mobile device or print a physical copy. Badge scanning kiosks will open at 7:30 A.M. on April 12 in the Grand Atrium.</p><p>Please note that hotel reservation blocks at our partner hotels (The Fairmont Waterfront and Pan Pacific) are filling quickly. Discounted attendee rates expire on March 25, so we advise booking your lodging through our portal as soon as possible.</p><p>Warm regards,<br/>CleanTech Event Team</p>"
+        "type": "Article",
+        "title": "Magazine Article",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><h3 style='margin-top:0;'>Spotlight on Geiger Travel</h3><p>Wanting to combine his passion for exploring places and cultures with his career as a corporate travel consultant, Marcus Geiger founded Geiger Travel Management (GTM). Now, ten years later, the company has offices in the United States, Canada, and several South American nations. It crafts itineraries and facilitates travel and accommodation arrangements for business professionals.</p><p>GTM also offers its clients secure, high-speed computers, conference call systems, and file management software through an agreement with Balefire Electronics, located in Mumbai. “We owe a lot of our success to Balefire,” says Mr. Geiger, “because their services enable our clients to work efficiently wherever they are.”</p><p>Mr. Geiger is optimistic that further growth is on the horizon for GTM. Two additional businesses, Apura Airways, based in Paramaribo, Suriname, and the restaurant chain Triggerfish, headquartered in Bridgetown, Barbados, have agreed to enter into strategic partnerships with GTM in August. And looking to launch operations in Europe, the company is currently in discussions with Krokushaus AG, a hospitality company with locations throughout Germany.</p><p>For more information about Geiger Travel Management, visit www.gtm.com.</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q156",
+        "id": "ets22_t3_p7_155",
+        "number": 155,
+        "text": "What is indicated about Mr. Geiger?",
+        "options": {
+          "A": "He regularly goes to Mumbai for business.",
+          "B": "He has overseen the expansion of a business.",
+          "C": "He decided to become a travel writer ten years ago.",
+          "D": "He used to work for a hospitality company."
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được chỉ ra về ông Geiger?<br/>(A) Ông ấy thường xuyên đến Mumbai để công tác.<br/>(B) Ông ấy đã giám sát sự mở rộng của một doanh nghiệp.<br/>(C) Ông ấy quyết định trở thành người viết về du lịch 10 năm trước.<br/>(D) Ông ấy từng làm việc cho một công ty dịch vụ lưu trú.</p><p><b>Bằng chứng trích dẫn:</b> Bài báo viết: <i>'Marcus Geiger founded Geiger Travel Management (GTM). Now, ten years later, the company has offices in the United States, Canada, and several South American nations.'</i> (Marcus Geiger sáng lập GTM. Mười năm sau, công ty đã có văn phòng tại Mỹ, Canada và nhiều quốc gia Nam Mỹ). Việc mở rộng mạng lưới văn phòng quốc tế chứng minh ông ấy đã điều hành/giám sát sự mở rộng của doanh nghiệp: <b>(B) He has overseen the expansion of a business.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Tìm chi tiết về sự phát triển của công ty từ khi thành lập đến khi mở thêm nhiều văn phòng."
+      },
+      {
+        "id": "ets22_t3_p7_156",
         "number": 156,
-        "text": "What did Mr. Lindstrom register for?",
+        "text": "What service does GTM offer?",
         "options": {
-          "A": "A corporate board meeting",
-          "B": "An international clean technology forum",
-          "C": "An energy trade union negotiation",
-          "D": "A university research lecture series"
+          "A": "Booking hotels for executives",
+          "B": "Leading cross-cultural training workshops",
+          "C": "Providing translation services at conferences",
+          "D": "Furnishing overseas branch offices"
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Ông Lindstrom đã đăng ký sự kiện nào?<br/><b>Bằng chứng:</b> <i>\"Registration Confirmation: CleanTech World Forum 2026\"</i>. Chọn <b>(B) An international clean technology forum</b>.</p>",
-        "questionType": "Main Idea & Purpose",
-        "subCategory": "Main Idea & Purpose"
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> GTM cung cấp dịch vụ gì?<br/>(A) Đặt phòng khách sạn cho các cấp quản lý/doanh nhân.<br/>(B) Tổ chức hội thảo đào tạo đa văn hóa.<br/>(C) Cung cấp dịch vụ dịch thuật tại hội nghị.<br/>(D) Trang bị nội thất cho văn phòng chi nhánh nước ngoài.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 1 viết: <i>'It crafts itineraries and facilitates travel and accommodation arrangements for business professionals.'</i> (Công ty xây dựng lịch trình và hỗ trợ sắp xếp việc đi lại và nơi ở cho các chuyên gia kinh doanh/doanh nhân). Sắp xếp nơi ở (accommodation arrangements) cho business professionals tương đương với <b>(A) Booking hotels for executives</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm 'accommodation arrangements for business professionals' đồng nghĩa với 'booking hotels for executives'."
       },
       {
-        "id": "ets22_t3_p7_q157",
+        "id": "ets22_t3_p7_157",
         "number": 157,
-        "text": "What is attached to the email?",
+        "text": "GTM does NOT have an agreement in place with which company?",
         "options": {
-          "A": "A hotel invoice receipt",
-          "B": "A digital badge with a QR code",
-          "C": "A speaker slide presentation",
-          "D": "A city transit subway map"
+          "A": "Balefire Electronics",
+          "B": "Apura Airways",
+          "C": "Triggerfish",
+          "D": "Krokushaus AG"
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Thứ gì được đính kèm vào email?<br/><b>Bằng chứng:</b> <i>\"Your electronic registration badge is attached to this email as a digital QR code\"</i>. Chọn <b>(B) A digital badge with a QR code</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q158",
-        "number": 158,
-        "text": "What deadline is mentioned regarding hotel lodging?",
-        "options": {
-          "A": "March 18",
-          "B": "March 25",
-          "C": "April 12",
-          "D": "April 14"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Hạn chót nào được đề cập liên quan đến đặt phòng khách sạn?<br/><b>Bằng chứng:</b> <i>\"Discounted attendee rates expire on March 25...\"</i>. Chọn <b>(B) March 25</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> GTM KHÔNG có thỏa thuận sẵn có với công ty nào?<br/>(A) Balefire Electronics.<br/>(B) Apura Airways.<br/>(C) Triggerfish.<br/>(D) Krokushaus AG.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 2 và 3 nêu rõ: GTM đã có thỏa thuận với Balefire Electronics (<i>'agreement with Balefire Electronics'</i>), đã đạt thỏa thuận hợp tác chiến lược với Apura Airways và Triggerfish vào tháng 8 (<i>'have agreed to enter into strategic partnerships'</i>). Riêng với Krokushaus AG, công ty mới chỉ đang đàm phán (<i>'is currently in discussions with Krokushaus AG'</i>) chứ chưa có thỏa thuận chính thức: <b>(D) Krokushaus AG</b>.</p>",
+        "questionType": "Negative",
+        "subCategory": "Detail",
+        "strategyHint": "Lưu ý câu phủ định NOT: phân biệt giữa 'agreement in place' (đã có) và 'currently in discussions' (mới đang thảo luận)."
       }
     ]
   },
@@ -255,56 +251,59 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s06_p1",
-        "type": "Article",
-        "title": "Business News",
-        "content": "<p><b>Meridian Logistics Expands Cold-Chain Network</b></p><p><b>CHICAGO (June 4)</b> — Meridian Logistics, a leading North American transport provider, revealed plans on Tuesday to construct a state-of-the-art temperature-controlled distribution hub in suburban Indianapolis. The 350,000-square-foot facility represents an $85 million investment in the company's expanding refrigerated pharmaceutical supply chain.</p><p>Equipped with automated robotic retrieval cranes and advanced climate monitoring sensors, the facility will maintain consistent temperature zones ranging from minus twenty degrees Celsius to ambient storage. Company spokespersons stated that the complex will create approximately 250 skilled logistics jobs upon reaching operational status next spring.</p><p>\"The surging demand for biologic medicines and vaccine distribution requires unprecedented temperature integrity,\" said Elena Ortiz, Meridian's Chief Operating Officer. \"This new central Midwest hub will enable us to reach over seventy percent of the United States population within twenty-four hours of dispatch.\" Construction is slated to break ground early next month.</p>"
+        "type": "Press Release",
+        "title": "Press Release",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p style='color: #666; font-size: 0.9em; margin-top:0;'><b>FOR IMMEDIATE RELEASE</b><br/><b>Contact:</b> Sherylin Stevens, sstevens@tearsoncorp.ca</p><p><b>CALGARY (2 November)</b>—Yves Vernier, the Chief Information Officer of the Tearson Corporation, announced on Monday that 200 robots will soon appear in Tearson's grocery stores. The robots, which are all named Bailey, will be used to locate areas where boxes or bottles have fallen and broken, spilling cereal, juice, or other substances onto the floor. The robots will report the spills so that the locations can be cleaned by store employees before they become safety hazards.</p><p>The robots were tested in Calgary, where Tearson's head office is located. During the eighteen-month pilot programme, store managers consistently gave the robots high marks. Although the robots have been used in the company's warehouses for several years, this will be their first time working in stores and interacting with customers. All Tearson stores should have the robots by the beginning of December.</p><p style='font-size: 0.9em;'>For more information, visit Tearson Corporation at www.tearsoncorporation.ca.</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q159",
+        "id": "ets22_t3_p7_158",
+        "number": 158,
+        "text": "What is the topic of the press release?",
+        "options": {
+          "A": "The promotion of a company executive",
+          "B": "The use of technology in stores",
+          "C": "The launch of new product lines",
+          "D": "The relocation of a company’s head office"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chủ đề của thông cáo báo chí là gì?<br/>(A) Sự thăng chức của một giám đốc công ty.<br/>(B) Việc sử dụng công nghệ trong các cửa hàng.<br/>(C) Việc ra mắt các dòng sản phẩm mới.<br/>(D) Việc chuyển địa điểm trụ sở chính của công ty.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 1 thông báo: <i>'200 robots will soon appear in Tearson’s grocery stores. The robots, which are all named Bailey, will be used to locate areas where boxes or bottles have fallen...'</i>. Việc đưa 200 robot vào hoạt động trong các cửa hàng tạp hóa là việc áp dụng công nghệ vào cửa hàng: <b>(B) The use of technology in stores</b>.</p>",
+        "questionType": "Topic",
+        "subCategory": "Overview",
+        "strategyHint": "Xác định chủ đề chính qua câu mở đầu về việc triển khai 200 robot trong các cửa hàng."
+      },
+      {
+        "id": "ets22_t3_p7_159",
         "number": 159,
-        "text": "What project is Meridian Logistics planning?",
+        "text": "What can Bailey do?",
         "options": {
-          "A": "Purchasing a regional airline carrier",
-          "B": "Building a refrigerated distribution center",
-          "C": "Upgrading corporate headquarters offices",
-          "D": "Closing an unprofitable transport division"
+          "A": "Clean a mess on the floor",
+          "B": "Create labels for products",
+          "C": "Find areas that have spills",
+          "D": "Locate items for customers"
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Meridian Logistics đang lên kế hoạch cho dự án nào?<br/><b>Bằng chứng:</b> <i>\"construct a state-of-the-art temperature-controlled distribution hub...\"</i> (xây dựng trung tâm phân phối kiểm soát nhiệt độ). Chọn <b>(B) Building a refrigerated distribution center</b>.</p>",
-        "questionType": "Main Idea & Purpose",
-        "subCategory": "Main Idea & Purpose"
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Bailey có thể làm gì?<br/>(A) Dọn dẹp đồ bẩn trên sàn.<br/>(B) Tạo nhãn cho sản phẩm.<br/>(C) Tìm các khu vực bị đổ tràn chất lỏng/thức ăn.<br/>(D) Định vị mặt hàng cho khách hàng.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 1 nêu rõ chức năng của robot Bailey: <i>'will be used to locate areas where boxes or bottles have fallen and broken, spilling cereal, juice, or other substances onto the floor. The robots will report the spills so that the locations can be cleaned by store employees...'</i>. Lưu ý: nhân viên cửa hàng mới là người dọn, còn robot làm nhiệm vụ phát hiện/định vị nơi bị đổ tràn: <b>(C) Find areas that have spills</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Tránh bẫy đáp án (A): robot chỉ phát hiện (locate/find) chứ không tự dọn (clean)."
       },
       {
-        "id": "ets22_t3_p7_q160",
+        "id": "ets22_t3_p7_160",
         "number": 160,
-        "text": "In the article, the word \"integrity\" in paragraph 3 is closest in meaning to",
+        "text": "What is suggested in the press release?",
         "options": {
-          "A": "honesty",
-          "B": "reliability",
-          "C": "complexity",
-          "D": "novelty"
+          "A": "A pilot program in Calgary was a success.",
+          "B": "Tearson stores will be renovated in December.",
+          "C": "A warehouse earned high marks for safety features.",
+          "D": "Managers will be hired in several stores."
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Từ \"integrity\" trong đoạn 3 có nghĩa gần nhất với từ nào?<br/><b>Bằng chứng:</b> Trong ngữ cảnh <i>\"temperature integrity\"</i> (sự chuẩn xác, tính ổn định và độ tin cậy về nhiệt độ của chuỗi cung ứng lạnh), từ <i>reliability</i> (độ tin cậy/vững chắc) là tương đương nhất. Chọn <b>(B) reliability</b>.</p>",
-        "questionType": "Vocabulary in Context",
-        "subCategory": "Vocabulary in Context"
-      },
-      {
-        "id": "ets22_t3_p7_q161",
-        "number": 161,
-        "text": "What strategic advantage does Ms. Ortiz mention about the hub's location?",
-        "options": {
-          "A": "Proximity to international deep-water seaports",
-          "B": "Ability to reach 70% of the US population within 24 hours",
-          "C": "Exemption from state corporate payroll taxes",
-          "D": "Abundant on-site geothermal electrical power"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Lợi thế chiến lược nào được bà Ortiz đề cập về vị trí trung tâm?<br/><b>Bằng chứng:</b> <i>\"enable us to reach over seventy percent of the United States population within twenty-four hours of dispatch\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được ngụ ý trong thông cáo báo chí?<br/>(A) Chương trình thử nghiệm tại Calgary đã thành công.<br/>(B) Các cửa hàng Tearson sẽ được cải tạo vào tháng 12.<br/>(C) Một nhà kho nhận được điểm đánh giá cao về tính năng an toàn.<br/>(D) Các nhà quản lý sẽ được tuyển dụng tại một số cửa hàng.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 2 viết: <i>'The robots were tested in Calgary... During the eighteen-month pilot programme, store managers consistently gave the robots high marks.'</i> (Các robot đã được thử nghiệm tại Calgary... Trong suốt chương trình thí điểm 18 tháng, các quản lý cửa hàng liên tục cho robot điểm số cao). Điểm đánh giá cao liên tục chứng tỏ chương trình thử nghiệm đã thành công: <b>(A) A pilot program in Calgary was a success.</b></p>",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Cụm 'store managers consistently gave the robots high marks' ngụ ý 'pilot program was a success'."
       }
     ]
   },
@@ -314,71 +313,59 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s07_p1",
-        "type": "Email",
-        "title": "Vendor Selection",
-        "content": "<p><b>To:</b> Department Managers &lt;deptmanagers@crestviewcorp.com&gt;<br/><b>From:</b> Procurement Committee &lt;procurement@crestviewcorp.com&gt;<br/><b>Date:</b> July 19<br/><b>Subject:</b> Adoption of New Cloud Document Collaboration Platform</p><p>Dear Colleagues,</p><p>Following a rigorous three-month evaluation of enterprise software vendors, the Procurement Committee has selected SyncSphere as our corporation's standardized cloud document collaboration and storage platform, replacing our aging on-premise servers.</p><p>SyncSphere was chosen primarily because of its robust end-to-end encryption protocols, intuitive real-time multi-author editing features, and seamless compatibility with our existing mobile devices. [1] Transitioning to this modern cloud solution will streamline cross-departmental project workflows and drastically decrease file synchronization latency. [2]</p><p>The data migration process will occur in phased stages over the next four weeks. [3] IT specialists will host mandatory forty-minute interactive orientation webinars next Tuesday and Thursday to introduce employees to folder permission management and digital signature tools. [4] Please review the attached transition timeline document for specific department migration dates.</p><p>Sincerely,<br/>Procurement & IT Steering Committee</p>"
+        "type": "E-mail",
+        "title": "E-mail",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>From:</b> Helen Dietrich &lt;hdietrich@morphospublishing.ca&gt;<br/><b>To:</b> Alia Cervantes &lt;alia.cervantes@gotomail.ca&gt;<br/><b>Date:</b> 3 March<br/><b>Subject:</b> Practical Gardening</p><p>Dear Ms. Cervantes:</p><p>I am sorry to report that next month's issue of <i>Practical Gardening</i> will be our last. After 62 years of monthly issues, we at Morphos Publishing have decided that <i>Practical Gardening</i> will be among the periodicals that we must discontinue. We plan to redirect the resources gained through cost-cutting toward growing our book publishing and instructional video production businesses.</p><p>We are grateful for your support as a longtime subscriber to <i>Practical Gardening</i>. For the remainder of your subscription term, we hope you will allow us to instead send you <i>Flora Discovery</i>, our popular publication about wild plants. However, if you would rather have the balance of your subscription account refunded to you, please contact us at (822) 555-0127.</p><p>Sincerely,<br/>Helen Dietrich<br/>Subscription Manager, Morphos Publishing</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q162",
+        "id": "ets22_t3_p7_161",
+        "number": 161,
+        "text": "What is the purpose of the e-mail?",
+        "options": {
+          "A": "To apologize for a delay",
+          "B": "To promote a new product",
+          "C": "To announce a cancellation",
+          "D": "To address a billing error"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Mục đích của email là gì?<br/>(A) Xin lỗi vì sự chậm trễ.<br/>(B) Quảng bá một sản phẩm mới.<br/>(C) Thông báo về việc ngừng xuất bản/hủy bỏ.<br/>(D) Giải quyết lỗi thanh toán.</p><p><b>Bằng chứng trích dẫn:</b> Người gửi thông báo: <i>'I am sorry to report that next month’s issue of Practical Gardening will be our last... among the periodicals that we must discontinue.'</i> (Tôi rất tiếc phải thông báo số báo tháng tới sẽ là số cuối cùng... nằm trong số các ấn phẩm định kỳ chúng tôi phải ngừng phát hành). Do đó mục đích là thông báo dừng xuất bản: <b>(C) To announce a cancellation</b>.</p>",
+        "questionType": "Purpose",
+        "subCategory": "Overview",
+        "strategyHint": "Từ khóa 'will be our last' và 'discontinue' đồng nghĩa với 'announcing a cancellation'."
+      },
+      {
+        "id": "ets22_t3_p7_162",
         "number": 162,
-        "text": "What is the main purpose of the email?",
+        "text": "What most likely is Practical Gardening?",
         "options": {
-          "A": "To announce the adoption of a new software platform",
-          "B": "To solicit feedback on mobile phone models",
-          "C": "To notify employees of office workstation upgrades",
-          "D": "To reprimand staff for data security violations"
+          "A": "A film",
+          "B": "A book",
+          "C": "A Web site",
+          "D": "A magazine"
         },
-        "correctAnswer": "A",
-        "explanation": "<p><b>Dịch nghĩa:</b> Mục đích chính của email là gì?<br/><b>Bằng chứng:</b> Đoạn 1 nêu rõ: <i>\"selected SyncSphere as our corporation's standardized cloud document collaboration and storage platform...\"</i>. Chọn <b>(A) To announce the adoption of a new software platform</b>.</p>",
-        "questionType": "Main Idea & Purpose",
-        "subCategory": "Main Idea & Purpose"
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Practical Gardening nhiều khả năng là gì nhất?<br/>(A) Một bộ phim.<br/>(B) Một cuốn sách.<br/>(C) Một trang web.<br/>(D) Một cuốn tạp chí.</p><p><b>Bằng chứng trích dẫn:</b> Văn bản nói: <i>'After 62 years of monthly issues... among the periodicals...'</i> và <i>'subscriber'</i>. Một ấn phẩm phát hành định kỳ hàng tháng (monthly issues / periodicals) với độc giả đăng ký định kỳ chính là tạp chí: <b>(D) A magazine</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Các từ khóa 'monthly issues', 'periodicals', 'subscriber' đặc trưng cho tạp chí."
       },
       {
-        "id": "ets22_t3_p7_q163",
+        "id": "ets22_t3_p7_163",
         "number": 163,
-        "text": "What is NOT mentioned as a reason SyncSphere was chosen?",
+        "text": "The word “balance” in paragraph 2, line 4 is closest in meaning to",
         "options": {
-          "A": "Robust end-to-end encryption",
-          "B": "Real-time collaborative editing features",
-          "C": "The lowest monthly subscription cost on the market",
-          "D": "Compatibility with corporate mobile devices"
-        },
-        "correctAnswer": "C",
-        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì KHÔNG được đề cập là lý do SyncSphere được chọn?<br/><b>Bằng chứng:</b> Đoạn 2 liệt kê mã hóa (encryption), chỉnh sửa thời gian thực (real-time editing) và tương thích di động (compatibility with mobile devices). Không hề đề cập đến chi phí rẻ nhất (lowest subscription cost). Chọn <b>(C)</b>.</p>",
-        "questionType": "NOT / TRUE",
-        "subCategory": "NOT / TRUE"
-      },
-      {
-        "id": "ets22_t3_p7_q164",
-        "number": 164,
-        "text": "What will IT specialists do next week?",
-        "options": {
-          "A": "Conduct mandatory training webinars",
-          "B": "Reinstall operating systems on all computers",
-          "C": "Conduct one-on-one performance reviews",
-          "D": "Shut down the corporate email servers"
+          "A": "amount remaining",
+          "B": "stability",
+          "C": "increase in cost",
+          "D": "production"
         },
         "correctAnswer": "A",
-        "explanation": "<p><b>Dịch nghĩa:</b> Các chuyên gia IT sẽ làm gì vào tuần tới?<br/><b>Bằng chứng:</b> <i>\"IT specialists will host mandatory forty-minute interactive orientation webinars next Tuesday and Thursday...\"</i>. Chọn <b>(A) Conduct mandatory training webinars</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q165",
-        "number": 165,
-        "text": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong?<br/>\"During this period, access to legacy network drives will remain functional in read-only mode.\"",
-        "options": {
-          "A": "[1]",
-          "B": "[2]",
-          "C": "[3]",
-          "D": "[4]"
-        },
-        "correctAnswer": "C",
-        "explanation": "<p><b>Dịch nghĩa:</b> Câu \"Trong giai đoạn này, quyền truy cập vào các ổ mạng cũ sẽ vẫn duy trì ở chế độ chỉ đọc\" phù hợp nhất ở vị trí nào?<br/><b>Bằng chứng:</b> Vị trí <b>[3]</b> đứng ngay sau câu: <i>\"The data migration process will occur in phased stages over the next four weeks.\"</i> Từ \"During this period\" quy chiếu trực tiếp đến khoảng thời gian 4 tuần chuyển đổi dữ liệu. Chọn <b>(C) [3]</b>.</p>",
-        "questionType": "Sentence Placement & Intent",
-        "subCategory": "Sentence Placement & Intent"
+        "explanation": "<p><b>Dịch nghĩa:</b> Từ 'balance' ở đoạn 2, dòng 4 có nghĩa gần nhất với từ nào?<br/>(A) số tiền còn lại.<br/>(B) sự ổn định.<br/>(C) sự tăng chi phí.<br/>(D) sự sản xuất.</p><p><b>Bằng chứng trích dẫn:</b> Trong ngữ cảnh tài chính tài khoản đăng ký báo: <i>'have the balance of your subscription account refunded to you'</i> (nhận lại số dư/khoản tiền còn lại trong tài khoản đăng ký). Từ <i>balance</i> ở đây mang nghĩa số dư tài khoản hay số tiền còn lại: <b>(A) amount remaining</b>.</p>",
+        "questionType": "Vocabulary",
+        "subCategory": "Vocabulary in Context",
+        "strategyHint": "Trong ngữ cảnh tài chính ngân hàng/thuê bao, 'balance' luôn mang nghĩa số dư (amount remaining)."
       }
     ]
   },
@@ -388,56 +375,75 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s08_p1",
-        "type": "Schedule",
-        "title": "Workshop Schedule",
-        "content": "<p><b>NORTHWEST LEADERSHIP SUMMIT — PROGRAM TIMETABLE</b><br/><br/><b>Thursday, September 14 | Seattle Grand Convention Center</b><br/><br/>• <b>8:30 A.M. – 9:15 A.M.:</b> Registration & Continental Breakfast (Cascade Foyer)<br/>• <b>9:15 A.M. – 10:30 A.M.:</b> Opening Keynote: \"Agile Organizational Management in Uncertain Markets\" by Dr. Samuel Thorne (Ballroom A)<br/>• <b>10:45 A.M. – 12:00 P.M.:</b> Breakout Session 1: \"Data-Driven Decision Making\" (Room 201) OR \"Building Cross-Functional High-Performance Teams\" (Room 204)<br/>• <b>12:00 P.M. – 1:30 P.M.:</b> Catered Luncheon & Executive Networking (Skyline Terrace)<br/>• <b>1:30 P.M. – 2:45 P.M.:</b> Breakout Session 2: \"Negotiating International Supply Contracts\" (Room 201) OR \"AI Tools for Business Process Automation\" (Room 204)<br/>• <b>3:00 P.M. – 4:00 P.M.:</b> Panel Discussion: Future Outlook of Pacific Northwest Commercial Trade (Ballroom A)<br/><br/><i>Note: Attendees wishing to earn Continuing Professional Education (CPE) credits must sign attendance rosters before and after each breakout session.</i></p>"
+        "type": "Chat",
+        "title": "Online Chat Discussion",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>Lindsay Pokora [2:15 P.M.]</b><br/>Hello, Mr. Kopalinski. I need to place the monthly office supplies order. In addition to the regular items, can you let me know if anything extra is needed?</p><p><b>Craig Kopalinski [2:17 P.M.]</b><br/>Let me check with the other managers. Kaitlyn and Jeffrey, do you have any requests for office supplies in your departments?</p><p><b>Kaitlyn Daley [2:18 P.M.]</b><br/>Yes, we need more whiteboard markers.</p><p><b>Craig Kopalinski [2:19 P.M.]</b><br/>And how about accounting?</p><p><b>Jeffrey Carden [2:20 P.M.]</b><br/>Nothing here.</p><p><b>Lindsay Pokora [2:22 P.M.]</b><br/>Markers? I just checked our inventory and we still have a box in the supply room. Do you need a special kind?</p><p><b>Kaitlyn Daley [2:23 P.M.]</b><br/>No, just regular black markers. Three boxes should be enough. I tried some markers from the box we have, but they seem to have dried up. A group of new employees will be starting next week, and we'll need markers for the orientation and training sessions.</p><p><b>Craig Kopalinski [2:24 P.M.]</b><br/>OK. Lindsay, in addition to those markers, could you please order a new chair for the second-floor conference room to replace the one that is broken? You'll need to look up the model number. Thanks.</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q166",
-        "number": 166,
-        "text": "Where will Dr. Thorne deliver his keynote speech?",
+        "id": "ets22_t3_p7_164",
+        "number": 164,
+        "text": "At 2:20 P.M., what does Mr. Carden most likely mean when he writes, “Nothing here”?",
         "options": {
-          "A": "Cascade Foyer",
-          "B": "Ballroom A",
-          "C": "Room 201",
-          "D": "Skyline Terrace"
+          "A": "He has not heard from Ms. Pokora.",
+          "B": "He does not need to place an order.",
+          "C": "He does not have extra markers.",
+          "D": "He has not checked the supply room."
         },
         "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Tiến sĩ Thorne sẽ có bài phát biểu khai mạc ở đâu?<br/><b>Bằng chứng:</b> Lịch trình ghi: <i>\"Opening Keynote... by Dr. Samuel Thorne (Ballroom A)\"</i>. Chọn <b>(B) Ballroom A</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Vào lúc 2:20 chiều, ông Carden có ý gì nhất khi viết 'Nothing here'?<br/>(A) Ông ấy chưa nhận được tin từ cô Pokora.<br/>(B) Ông ấy không cần đặt thêm món đồ nào.<br/>(C) Ông ấy không có bút dạ thừa.<br/>(D) Ông ấy chưa kiểm tra phòng vật tư.</p><p><b>Bằng chứng trích dẫn:</b> Craig hỏi lúc 2:19: <i>'And how about accounting?'</i> (sau khi đã hỏi các bộ phận xem có cần thêm văn phòng phẩm gì không). Jeffrey trả lời <i>'Nothing here'</i> ngụ ý bộ phận kế toán của anh ấy không cần yêu cầu thêm đồ gì trong đợt đặt hàng này: <b>(B) He does not need to place an order.</b></p>",
+        "questionType": "Inference",
+        "subCategory": "Implication",
+        "strategyHint": "Xem xét câu hỏi trước đó của Craig về nhu cầu đặt đồ của các phòng ban."
       },
       {
-        "id": "ets22_t3_p7_q167",
-        "number": 167,
-        "text": "What session is offered at 1:30 P.M. in Room 204?",
+        "id": "ets22_t3_p7_165",
+        "number": 165,
+        "text": "What problem does Ms. Daley report?",
         "options": {
-          "A": "Data-Driven Decision Making",
-          "B": "Building Cross-Functional High-Performance Teams",
-          "C": "AI Tools for Business Process Automation",
-          "D": "Negotiating International Supply Contracts"
+          "A": "Some presentations are too long.",
+          "B": "Expenses in the office have increased.",
+          "C": "Some office supplies cannot be used.",
+          "D": "The conference room is not big enough."
         },
         "correctAnswer": "C",
-        "explanation": "<p><b>Dịch nghĩa:</b> Buổi thảo luận nào diễn ra lúc 1:30 chiều ở Phòng 204?<br/><b>Bằng chứng:</b> Khung giờ 1:30 - 2:45 ghi rõ: <i>\"'AI Tools for Business Process Automation' (Room 204)\"</i>. Chọn <b>(C)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Cô Daley báo cáo vấn đề gì?<br/>(A) Một số bài thuyết trình quá dài.<br/>(B) Chi phí văn phòng đã tăng lên.<br/>(C) Một số đồ dùng văn phòng không thể sử dụng được.<br/>(D) Phòng hội nghị không đủ lớn.</p><p><b>Bằng chứng trích dẫn:</b> Kaitlyn Daley nói ở 2:23: <i>'I tried some markers from the box we have, but they seem to have dried up.'</i> (Tôi đã thử vài cây bút trong hộp chúng ta có sẵn nhưng chúng dường như đã bị khô mực hết rồi). Bút dạ bị khô không viết được tức là đồ dùng văn phòng không sử dụng được: <b>(C) Some office supplies cannot be used.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Chi tiết 'markers seem to have dried up' đồng nghĩa với 'supplies cannot be used'."
       },
       {
-        "id": "ets22_t3_p7_q168",
-        "number": 168,
-        "text": "How can attendees receive Continuing Professional Education credits?",
+        "id": "ets22_t3_p7_166",
+        "number": 166,
+        "text": "In what department does Ms. Daley most likely work?",
         "options": {
-          "A": "By taking an online multiple-choice quiz",
-          "B": "By signing attendance rosters before and after breakout sessions",
-          "C": "By submitting a written summary of the keynote address",
-          "D": "By paying an additional certification fee at registration"
+          "A": "Accounting",
+          "B": "Human Resources",
+          "C": "Purchasing",
+          "D": "Shipping"
         },
         "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Người tham gia có thể nhận tín chỉ đào tạo chuyên môn liên tục bằng cách nào?<br/><b>Bằng chứng:</b> Dòng chú thích cuối bảng: <i>\"Attendees wishing to earn Continuing Professional Education (CPE) credits must sign attendance rosters before and after each breakout session\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Cô Daley nhiều khả năng làm việc ở bộ phận nào nhất?<br/>(A) Kế toán.<br/>(B) Nhân sự (HR).<br/>(C) Thu mua.<br/>(D) Vận chuyển.</p><p><b>Bằng chứng trích dẫn:</b> Cô Daley giải thích lý do cần bút dạ: <i>'A group of new employees will be starting next week, and we'll need markers for the orientation and training sessions.'</i> (Một nhóm nhân viên mới sẽ bắt đầu đi làm vào tuần tới và chúng tôi cần bút cho các buổi định hướng và đào tạo). Bộ phận phụ trách đón nhân viên mới, định hướng và đào tạo chính là phòng Nhân sự: <b>(B) Human Resources</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Cụm từ 'new employees... orientation and training sessions' gắn liền với chức năng của phòng Nhân sự."
+      },
+      {
+        "id": "ets22_t3_p7_167",
+        "number": 167,
+        "text": "What will Ms. Pokora most likely do next?",
+        "options": {
+          "A": "Locate some information",
+          "B": "Review a training document",
+          "C": "Conduct an orientation session",
+          "D": "Contact department managers"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Cô Pokora có nhiều khả năng sẽ làm gì tiếp theo?<br/>(A) Tìm kiếm một số thông tin.<br/>(B) Xem lại tài liệu đào tạo.<br/>(C) Tiến hành buổi định hướng.<br/>(D) Liên hệ với các quản lý bộ phận.</p><p><b>Bằng chứng trích dẫn:</b> Craig Kopalinski dặn dò cô Pokora ở tin nhắn cuối: <i>'could you please order a new chair for the second-floor conference room to replace the one that is broken? You’ll need to look up the model number.'</i> (Bạn sẽ cần phải tra cứu số hiệu mẫu mã của chiếc ghế). Việc tra cứu mã sản phẩm (look up the model number) tương đương với việc tìm kiếm thông tin: <b>(A) Locate some information</b>.</p>",
+        "questionType": "Next Action",
+        "subCategory": "Next Action",
+        "strategyHint": "Cụm từ 'look up the model number' đồng nghĩa với 'locate some information'."
       }
     ]
   },
@@ -447,56 +453,75 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s09_p1",
-        "type": "Policy",
-        "title": "Company Return Policy",
-        "content": "<p><b>NEXUS OFFICE SOLUTIONS: RETURN & REFUND POLICY</b><br/><br/>At Nexus Office Solutions, customer satisfaction is our top priority. If you are not completely satisfied with your commercial furniture or office hardware purchase, please review our standard return procedures below:<br/><br/>• <b>Return Period:</b> Items in original, unused condition with complete packaging may be returned within thirty days of the delivery date for a full refund.<br/>• <b>Damaged Shipments:</b> If merchandise arrives damaged or defective, notify our freight claim desk within 48 hours of receipt. Replacement units will be dispatched without additional shipping charges.<br/>• <b>Custom-Ordered Furniture:</b> Made-to-order conference tables and customized upholstered seating are subject to a twenty percent restocking fee upon return unless arriving damaged.<br/>• <b>Refund Processing:</b> Once returned goods are inspected at our central depot, refunds will be credited to the original form of payment within 5–7 business days.<br/><br/>To initiate a return, visit <b>www.nexusofficesolutions.com/returns</b> to generate a prepaid return shipping label.</p>"
+        "type": "E-mail",
+        "title": "E-mail",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>To:</b> All staff<br/><b>From:</b> Jan Merchant<br/><b>Date:</b> October 15<br/><b>Subject:</b> Reginald Carmen</p><p>Dear Colleagues,</p><p>It is my pleasure to welcome Reginald Carmen to Edmonton Engineering Consultants, LLC. With his expertise in engineering and education, Dr. Carmen will be a valuable addition to our distinguished staff. — [1] —. Upon graduating from university, he spent six years designing telecommunications systems for AstroPart, Inc. — [2] —. He comes to us directly from the Glasse School of Engineering, where he spent the past nineteen years. While there, he served as a full-time professor for ten years, teaching advanced mathematics and various special courses in engineering. — [3] —. He was then appointed president of the school and served in that position for the remaining nine years of his tenure. During that time, he led the team that redesigned the school's electrical engineering curriculum. — [4] —.</p><p>Dr. Carmen's first day will be next Tuesday.</p><p>Jan Merchant, Director of Personnel</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q169",
+        "id": "ets22_t3_p7_168",
+        "number": 168,
+        "text": "Why did Ms. Merchant send the e-mail?",
+        "options": {
+          "A": "To announce that she is retiring",
+          "B": "To provide details about a new employee",
+          "C": "To welcome a distinguished guest presenter",
+          "D": "To publicize expansion into a new line of business"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao cô Merchant gửi email?<br/>(A) Để thông báo cô ấy sắp nghỉ hưu.<br/>(B) Để cung cấp thông tin chi tiết về một nhân viên mới.<br/>(C) Để chào đón một diễn giả khách mời xuất sắc.<br/>(D) Để công bố việc mở rộng sang lĩnh vực kinh doanh mới.</p><p><b>Bằng chứng trích dẫn:</b> Email mở đầu: <i>'It is my pleasure to welcome Reginald Carmen to Edmonton Engineering Consultants, LLC... Dr. Carmen’s first day will be next Tuesday.'</i>. Toàn bộ nội dung nêu kinh nghiệm và học vấn của Tiến sĩ Carmen chuẩn bị vào làm việc, do đó mục đích là giới thiệu nhân viên mới: <b>(B) To provide details about a new employee</b>.</p>",
+        "questionType": "Purpose",
+        "subCategory": "Overview",
+        "strategyHint": "Nhận diện thể loại email chào mừng nhân viên mới (welcome ... Dr. Carmen's first day will be next Tuesday)."
+      },
+      {
+        "id": "ets22_t3_p7_169",
         "number": 169,
-        "text": "Within how many days can standard unused merchandise be returned?",
+        "text": "What is indicated about Dr. Carmen?",
         "options": {
-          "A": "14 days",
-          "B": "30 days",
-          "C": "48 hours",
-          "D": "60 days"
+          "A": "He has experience designing communications systems.",
+          "B": "He worked as a consultant for Edmonton Engineering Consultants in the past.",
+          "C": "He mentored Ms. Merchant at another company.",
+          "D": "He graduated from the Glasse School of Engineering."
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Hàng hóa thông thường chưa qua sử dụng có thể được trả lại trong vòng bao nhiêu ngày?<br/><b>Bằng chứng:</b> Mục đầu tiên: <i>\"may be returned within thirty days of the delivery date for a full refund\"</i>. Chọn <b>(B) 30 days</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được chỉ ra về Tiến sĩ Carmen?<br/>(A) Ông ấy có kinh nghiệm thiết kế hệ thống truyền thông.<br/>(B) Ông ấy từng làm cố vấn cho Edmonton Engineering Consultants trong quá khứ.<br/>(C) Ông ấy từng cố vấn cho cô Merchant tại công ty khác.<br/>(D) Ông ấy đã tốt nghiệp từ Trường Kỹ thuật Glasse.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn văn viết: <i>'Upon graduating from university, he spent six years designing telecommunications systems for AstroPart, Inc.'</i> (Sau khi tốt nghiệp đại học, ông dành 6 năm thiết kế hệ thống viễn thông cho AstroPart, Inc.). Telecommunications systems tương đương với communications systems: <b>(A) He has experience designing communications systems.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Đối chiếu 'designing telecommunications systems' với 'designing communications systems'."
       },
       {
-        "id": "ets22_t3_p7_q170",
+        "id": "ets22_t3_p7_170",
         "number": 170,
-        "text": "What condition applies to custom-ordered furniture returns?",
+        "text": "How long did Dr. Carmen teach at the Glasse School of Engineering?",
         "options": {
-          "A": "They cannot be returned under any circumstances.",
-          "B": "They are subject to a 20 percent restocking fee.",
-          "C": "Store credit is provided instead of cash refunds.",
-          "D": "Customers must pay for international shipping return freight."
+          "A": "6 years",
+          "B": "9 years",
+          "C": "10 years",
+          "D": "19 years"
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Điều kiện nào áp dụng cho việc hoàn trả đồ nội thất đặt làm theo yêu cầu?<br/><b>Bằng chứng:</b> <i>\"Custom-Ordered Furniture: ...are subject to a twenty percent restocking fee upon return...\"</i>. Chọn <b>(B) They are subject to a 20 percent restocking fee</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tiến sĩ Carmen đã giảng dạy tại Trường Kỹ thuật Glasse trong bao lâu?<br/>(A) 6 năm.<br/>(B) 9 năm.<br/>(C) 10 năm.<br/>(D) 19 năm.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn văn nêu: <i>'where he spent the past nineteen years. While there, he served as a full-time professor for ten years, teaching advanced mathematics and various special courses in engineering. He was then appointed president of the school and served in that position for the remaining nine years...'</i>. Trong tổng số 19 năm ở trường, thời gian ông trực tiếp làm giáo sư giảng dạy (teaching) là 10 năm (9 năm còn lại làm hiệu trưởng): <b>(C) 10 years</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Đọc kỹ câu hỏi hỏi thời gian 'teach' (giảng dạy) chứ không phải tổng thời gian làm việc tại trường."
       },
       {
-        "id": "ets22_t3_p7_q171",
+        "id": "ets22_t3_p7_171",
         "number": 171,
-        "text": "How should customers initiate a product return?",
+        "text": "In which of the positions marked [1], [2], [3] and [4] does the following sentence best belong? “He is thus the perfect choice for redesigning our client training modules.”",
         "options": {
-          "A": "By visiting an authorized retail showroom",
-          "B": "By generating a prepaid return shipping label on the website",
-          "C": "By calling a customer service manager directly",
-          "D": "By emailing photographic proof of payment receipts"
+          "A": "[1]",
+          "B": "[2]",
+          "C": "[3]",
+          "D": "[4]"
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Khách hàng nên bắt đầu quy trình đổi trả hàng bằng cách nào?<br/><b>Bằng chứng:</b> Câu cuối: <i>\"visit www.nexusofficesolutions.com/returns to generate a prepaid return shipping label\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Câu 'Do đó, ông ấy là sự lựa chọn hoàn hảo cho việc tái thiết kế các mô-đun đào tạo khách hàng của chúng tôi' phù hợp nhất ở vị trí nào?<br/>(A) [1]<br/>(B) [2]<br/>(C) [3]<br/>(D) [4]</p><p><b>Bằng chứng trích dẫn:</b> Câu ngay trước vị trí [4] viết: <i>'During that time, he led the team that redesigned the school’s electrical engineering curriculum.'</i> (Trong thời gian đó, ông đã dẫn dắt nhóm tái thiết kế chương trình giảng dạy kỹ thuật điện của trường). Trạng từ <i>thus</i> (do đó) và hành động <i>redesigning our client training modules</i> liên kết trực tiếp với kinh nghiệm tái thiết kế chương trình đào tạo ở câu trước: <b>(D) [4]</b>.</p>",
+        "questionType": "Sentence Insertion",
+        "subCategory": "Text Insertion",
+        "strategyHint": "Liên kết từ khóa 'redesigned curriculum' ở câu trước với 'redesigning our client training modules' qua liên từ 'thus'."
       }
     ]
   },
@@ -506,71 +531,75 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s10_p1",
-        "type": "Article",
-        "title": "Architecture News",
-        "content": "<p><b>Kensington Plaza Wins Urban Architecture Award</b></p><p><b>AUSTIN (November 12)</b> — The Austin Architectural Society announced yesterday that Kensington Plaza has received the prestigious 2026 Commercial Design of the Year Award. Designed by local architectural collective Studio Forma, the twelve-story mixed-use development seamlessly integrates corporate office suites, street-level retail shops, and an expansive public rooftop botanical garden.</p><p>The judging committee commended the building's pioneering environmental design. [1] Powered by over two thousand photovoltaic solar roof panels, Kensington Plaza generates more than thirty percent of its own operational electricity. [2] In addition, a sophisticated subterranean rainwater harvesting filtration system irrigates the building's landscaped terraces and rooftop trees. [3]</p><p>\"Our objective from the inception of the blueprint was to create an urban workspace that fosters community connection while minimizing energy footprint,\" said Marcus Vance, lead architect at Studio Forma. [4] Since its grand opening last January, Kensington Plaza has achieved full commercial occupancy, with anchor tenants including major financial consultancies and healthcare innovators.</p>"
+        "type": "Review",
+        "title": "Review",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><h3 style='margin-top:0;'>Patrons See Big-City Art At Local Museum</h3><p>No need to venture into the big city to see an impressive art collection. — [1] —. Locals know Janford as a quiet town situated next to a forest that is popular with hikers. — [2] —. It is likewise home to Janford University and an unexpectedly outstanding museum. Considered one of the finest university art museums in the nation, the Janford University Art Museum (JUAM) houses over 94,000 pieces, with works dating from ancient times to the present. Due to the size of its collection, the museum regularly rotates the works on display. — [3] —. It also hosts temporary exhibitions featuring loans from other institutions.</p><p>Experts consider JUAM noteworthy as a home to a comprehensive collection of twentieth-century art. — [4] —. In particular, it holds the largest public collection of works by sculptor Robert Dabulis, with more than 50 of his pieces and an assortment of his sketches. The museum offers free admission and is open daily from 10 A.M. to 5 P.M. On Friday evenings, the museum has extended hours until 10 P.M.</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q172",
+        "id": "ets22_t3_p7_172",
         "number": 172,
-        "text": "What honor did Kensington Plaza receive?",
+        "text": "What does the review indicate about the town of Janford?",
         "options": {
-          "A": "A historic preservation landmark designation",
-          "B": "The Commercial Design of the Year Award",
-          "C": "A municipal energy tax reduction grant",
-          "D": "An international real estate investment trophy"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Tòa nhà Kensington Plaza đã nhận được vinh dự nào?<br/><b>Bằng chứng:</b> Đoạn 1 nêu: <i>\"Kensington Plaza has received the prestigious 2026 Commercial Design of the Year Award\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q173",
-        "number": 173,
-        "text": "According to the article, what is true about the building's energy usage?",
-        "options": {
-          "A": "It relies entirely on wind turbine generators.",
-          "B": "It generates over 30% of its own electricity through solar panels.",
-          "C": "It shares an electric power grid with adjacent universities.",
-          "D": "It reduced electricity consumption by 50% during winter."
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Theo bài báo, điều gì đúng về mức sử dụng năng lượng của tòa nhà?<br/><b>Bằng chứng:</b> <i>\"generates more than thirty percent of its own operational electricity\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q174",
-        "number": 174,
-        "text": "What does the article mention about Kensington Plaza since January?",
-        "options": {
-          "A": "It has reached 100% commercial occupancy.",
-          "B": "Its construction budget was reduced by 15%.",
-          "C": "It opened a new public transit station.",
-          "D": "It changed property management operators."
+          "A": "It is in a peaceful setting.",
+          "B": "It is more than 100 years old.",
+          "C": "It has a thriving community of artists.",
+          "D": "It has a well-known school of forestry."
         },
         "correctAnswer": "A",
-        "explanation": "<p><b>Dịch nghĩa:</b> Bài báo đề cập điều gì về Kensington Plaza kể từ tháng Giêng?<br/><b>Bằng chứng:</b> Đoạn cuối: <i>\"Since its grand opening last January, Kensington Plaza has achieved full commercial occupancy...\"</i> (đã đạt tỷ lệ lấp đầy thương mại 100%). Chọn <b>(A)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Bài đánh giá chỉ ra điều gì về thị trấn Janford?<br/>(A) Nơi đây nằm trong một khung cảnh thanh bình, yên tĩnh.<br/>(B) Thị trấn đã hơn 100 năm tuổi.<br/>(C) Nơi đây có cộng đồng nghệ sĩ phát triển thịnh vượng.<br/>(D) Nơi đây có trường lâm nghiệp nổi tiếng.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 1 viết: <i>'Locals know Janford as a quiet town situated next to a forest that is popular with hikers.'</i> (Người dân địa phương biết đến Janford như một thị trấn yên tĩnh nằm cạnh một khu rừng...). Thị trấn yên tĩnh nằm cạnh rừng tương đương với khung cảnh thanh bình: <b>(A) It is in a peaceful setting.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Từ 'quiet town next to a forest' đồng nghĩa với 'peaceful setting'."
       },
       {
-        "id": "ets22_t3_p7_q175",
+        "id": "ets22_t3_p7_173",
+        "number": 173,
+        "text": "What is mentioned about the museum?",
+        "options": {
+          "A": "Its main focus is on ancient art.",
+          "B": "It has received several national awards.",
+          "C": "Its location makes it difficult for tourists to find.",
+          "D": "It displays some items from its collection for only a limited time."
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được đề cập về bảo tàng?<br/>(A) Trọng tâm chính của nó là nghệ thuật cổ đại.<br/>(B) Bảo tàng đã nhận được nhiều giải thưởng quốc gia.<br/>(C) Vị trí của nó khiến khách du lịch khó tìm thấy.<br/>(D) Bảo tàng chỉ trưng bày một số hiện vật trong bộ sưu tập trong thời gian có hạn.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 1 nêu: <i>'Due to the size of its collection, the museum regularly rotates the works on display. It also hosts temporary exhibitions...'</i>. Việc thường xuyên luân phiên các tác phẩm trưng bày (regularly rotates) và tổ chức các triển lãm tạm thời (temporary exhibitions) có nghĩa là một số tác phẩm chỉ được trưng bày trong thời gian có hạn: <b>(D) It displays some items from its collection for only a limited time.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm 'regularly rotates the works on display' và 'temporary exhibitions' đồng nghĩa với việc trưng bày trong thời gian có hạn."
+      },
+      {
+        "id": "ets22_t3_p7_174",
+        "number": 174,
+        "text": "What is most likely true about Mr. Dabulis?",
+        "options": {
+          "A": "He began his work as a painter.",
+          "B": "He created sculptures specifically for JUAM.",
+          "C": "He created art during the twentieth century.",
+          "D": "He studied art at Janford University."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì có nhiều khả năng đúng nhất về ông Dabulis?<br/>(A) Ông bắt đầu công việc với vai trò là một họa sĩ.<br/>(B) Ông sáng tác các tác phẩm điêu khắc dành riêng cho JUAM.<br/>(C) Ông đã sáng tác nghệ thuật trong thế kỷ 20.<br/>(D) Ông đã học nghệ thuật tại Đại học Janford.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 2 viết: <i>'home to a comprehensive collection of twentieth-century art... In particular, it holds the largest public collection of works by sculptor Robert Dabulis, with more than 50 of his pieces...'</i>. Bộ sưu tập nghệ thuật thế kỷ 20 có điểm nhấn nổi bật cụ thể là các tác phẩm của nhà điêu khắc Robert Dabulis, chứng tỏ ông là nghệ sĩ sáng tác trong thế kỷ 20: <b>(C) He created art during the twentieth century.</b></p>",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Liên kết logic: 'twentieth-century art' -> 'In particular, ... works by sculptor Robert Dabulis'."
+      },
+      {
+        "id": "ets22_t3_p7_175",
         "number": 175,
-        "text": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong?<br/>\"These sustainable features reduce municipal water consumption by nearly forty percent annually.\"",
+        "text": "In which of the positions marked [1], [2], [3] and [4] does the following sentence best belong? “Art enthusiasts can find it right here in Janford.”",
         "options": {
           "A": "[1]",
           "B": "[2]",
           "C": "[3]",
           "D": "[4]"
         },
-        "correctAnswer": "C",
-        "explanation": "<p><b>Dịch nghĩa:</b> Câu \"Những đặc tính bền vững này giúp giảm lượng nước tiêu thụ từ thành phố tới gần 40% mỗi năm\" phù hợp nhất ở vị trí nào?<br/><b>Bằng chứng:</b> Câu đứng trước vị trí <b>[3]</b> vừa đề cập đến hệ thống lọc thu gom nước mưa tưới cây: <i>\"subterranean rainwater harvesting filtration system irrigates the building's landscaped terraces and rooftop trees\"</i>. Câu chèn vào tổng kết lợi ích giảm tiêu thụ nước thành phố. Do đó vị trí <b>[3]</b> là hoàn hảo. Chọn <b>(C) [3]</b>.</p>",
-        "questionType": "Sentence Placement & Intent",
-        "subCategory": "Sentence Placement & Intent"
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Câu 'Những người đam mê nghệ thuật có thể tìm thấy điều đó ngay tại Janford' phù hợp nhất ở vị trí nào?<br/>(A) [1]<br/>(B) [2]<br/>(C) [3]<br/>(D) [4]</p><p><b>Bằng chứng trích dẫn:</b> Câu mở đầu viết: <i>'No need to venture into the big city to see an impressive art collection.'</i> (Không cần phải mạo hiểm vào thành phố lớn để chiêm ngưỡng bộ sưu tập nghệ thuật ấn tượng). Câu cần điền tiếp lời bằng đại từ <i>it</i> (thay cho impressive art collection): 'Art enthusiasts can find it right here in Janford.' Do đó vị trí [1] là vị trí tự nhiên và logic nhất: <b>(A) [1]</b>.</p>",
+        "questionType": "Sentence Insertion",
+        "subCategory": "Text Insertion",
+        "strategyHint": "Đại từ 'it' trong câu điền thay thế cho 'an impressive art collection' ở câu liền trước."
       }
     ]
   },
@@ -580,95 +609,97 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s11_p1",
-        "type": "Webpage",
-        "title": "Client Feedback Form",
-        "content": "<p><b>Customer Service Review: MetroLink Cloud Storage</b><br/><b>Submitted by:</b> Angela Hughes, IT Director, Summit Financial<br/><b>Date:</b> October 14 | <b>Overall Rating:</b> 3 out of 5 stars<br/><br/>Summit Financial migrated approximately twelve terabytes of historical financial records to MetroLink's Cloud Enterprise Tier last month. The migration process itself was relatively seamless, and our daily data access speeds have been consistently high.<br/><br/>However, we experienced significant friction regarding monthly billing invoices. Our initial sales agreement included a 15% promotional volume discount for our first year of service. Yet, both our September and October invoices were billed at the standard rate of $1,200 per month without applying the deduction. When I phoned customer support on October 8, the representative informed me that the billing ticket would be reviewed within 24 hours, but I have not received any follow-up correspondence. I expect our billing records to be reconciled promptly.</p>"
+        "type": "Order Form",
+        "title": "Order Form",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><h3 style='margin-top:0;'>Ready Barn</h3><p><b>Order #:</b> #13565<br/><b>Date:</b> June 3<br/><b>Delivery:</b> 24-hour Express Shipping<br/><b>Shipping Address:</b> Helen Kang, 45 Skyrise Road, Newten, NY 12039<br/><b>Payment Method:</b> Credit Card - Jay Shim</p><table style='width: 100%; border-collapse: collapse; margin-top: 12px;' border='1'><thead><tr style='background: var(--bg-muted, #f3f4f6);'><th>Item Number</th><th>Description</th><th style='text-align: right;'>Price</th></tr></thead><tbody><tr><td>7563</td><td>Countertop Electric Grill</td><td style='text-align: right;'>$49</td></tr><tr><td>7564</td><td>Egg Beater</td><td style='text-align: right;'>$14</td></tr><tr><td>7565</td><td>Tea Kettle</td><td style='text-align: right;'>$27</td></tr><tr><td>7566</td><td>Toaster</td><td style='text-align: right;'>$56</td></tr><tr><td>7567</td><td>Cheese Grater</td><td style='text-align: right;'>$16</td></tr><tr><td colspan='2'><b>24-hour Express Shipping</b></td><td style='text-align: right;'>$20</td></tr><tr><td colspan='2'><b>TOTAL</b></td><td style='text-align: right;'><b>$182</b></td></tr></tbody></table></div>"
       },
       {
         "id": "ets22_t3_p7_s11_p2",
-        "type": "Email",
-        "title": "Executive Resolution",
-        "sender": "d.foster@metrolinkcloud.com",
-        "recipient": "ahughes@summitfinancial.com",
-        "date": "October 16",
-        "content": "<p><b>To:</b> Angela Hughes &lt;ahughes@summitfinancial.com&gt;<br/><b>From:</b> Daniel Foster, Vice President of Client Accounts<br/><b>Date:</b> October 16<br/><b>Subject:</b> Resolution of Billing Adjustment — Account #MF-8842</p><p>Dear Ms. Hughes,</p><p>Thank you for bringing your billing concern to our leadership team's attention. I reviewed your account history and discovered that while your promotional volume discount was correctly approved during sales onboarding, our automated accounting billing system failed to apply the code to your recurring billing profile.</p><p>I have manually corrected this error. Your account has been credited $360 to cover the overcharged amounts from September and October ($180 per month). Furthermore, your November statement will reflect your discounted rate of $1,020 per month for the remainder of your annual contract.</p><p>I also apologize for the lack of communication following your support call on October 8. Our support management has instituted a mandatory ticket escalation policy to ensure that enterprise clients receive status updates within four business hours. To express our gratitude for your patience, we have enabled three months of complimentary advanced data encryption backup valued at $150 per month.</p><p>Sincerely,<br/>Daniel Foster<br/>MetroLink Cloud Services</p>"
+        "type": "E-mail",
+        "title": "E-mail",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>To:</b> customerservice@readybarn.com<br/><b>From:</b> jayshim@silyex.com<br/><b>Subject:</b> Order #13565<br/><b>Date:</b> June 6</p><p>Hello,</p><p>I recently placed an order (#13565) with Ready Barn. The items I purchased are housewarming gifts for my niece, Helen Kang, who recently purchased a new home. Therefore, her address was provided as the delivery destination. I paid higher shipping fees for 24-hour delivery, as I wanted the items to arrive well ahead of the housewarming party being held tomorrow evening. Several days have passed, and my niece has yet to receive these items. I would appreciate it if you could find out what has happened and let me know when my niece can expect delivery. Also, I would like to ask you to return the money I paid for expedited shipping.</p><p>Additionally, I do not recognize item number 7564 that I was charged $14 for on my receipt. Please let me know how to send it back.</p><p>I am a longtime customer of Ready Barn, and I am usually very satisfied with your products and services. Please reply as soon as possible.</p><p>Sincerely,<br/>Jay Shim</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q176",
+        "id": "ets22_t3_p7_176",
         "number": 176,
-        "text": "What positive aspect of MetroLink's service did Ms. Hughes mention?",
+        "text": "What most likely does Ready Barn specialize in?",
         "options": {
-          "A": "Consistently fast data access speeds",
-          "B": "Extremely affordable hardware repair costs",
-          "C": "Free 24-hour telephone customer assistance",
-          "D": "Convenient downtown data center locations"
+          "A": "Kitchen equipment",
+          "B": "Party invitations",
+          "C": "Shipping supplies",
+          "D": "Large appliances"
         },
         "correctAnswer": "A",
-        "explanation": "<p><b>Dịch nghĩa:</b> Khía cạnh tích cực nào của dịch vụ MetroLink được cô Hughes đề cập?<br/><b>Bằng chứng:</b> Trong bài đánh giá, cô Hughes nhận xét: <i>\"our daily data access speeds have been consistently high\"</i> (tốc độ truy cập dữ liệu hàng ngày luôn ở mức cao). Chọn <b>(A) Consistently fast data access speeds</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Ready Barn có nhiều khả năng chuyên về mặt hàng nào nhất?<br/>(A) Thiết bị nhà bếp.<br/>(B) Thiệp mời tiệc.<br/>(C) Vật tư đóng gói vận chuyển.<br/>(D) Thiết bị gia dụng cỡ lớn.</p><p><b>Bằng chứng trích dẫn:</b> Danh sách sản phẩm trong hóa đơn gồm: <i>Countertop Electric Grill</i> (vỉ nướng điện để bàn), <i>Egg Beater</i> (dụng cụ đánh trứng), <i>Tea Kettle</i> (ấm đun trà), <i>Toaster</i> (máy nướng bánh mì), <i>Cheese Grater</i> (bàn nạo phô mai). Toàn bộ là thiết bị dụng cụ nhà bếp: <b>(A) Kitchen equipment</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Tổng hợp các mặt hàng trong đơn hàng: grill, egg beater, kettle, toaster, grater."
       },
       {
-        "id": "ets22_t3_p7_q177",
+        "id": "ets22_t3_p7_177",
         "number": 177,
-        "text": "What was the main reason for Ms. Hughes's complaint?",
+        "text": "What is indicated about 45 Skyrise Road?",
         "options": {
-          "A": "Data loss during file migration",
-          "B": "Failure to apply an agreed promotional discount to invoices",
-          "C": "An unscheduled server outage during market trading hours",
-          "D": "Difficulty installing software on employee laptops"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Lý do chính khiến cô Hughes phàn nàn là gì?<br/><b>Bằng chứng:</b> Cô Hughes nêu rõ: <i>\"both our September and October invoices were billed at the standard rate... without applying the deduction\"</i> (cả hóa đơn tháng 9 và tháng 10 đều tính theo giá tiêu chuẩn mà không áp dụng giảm giá). Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q178",
-        "number": 178,
-        "text": "In the email, what explanation does Mr. Foster give for the billing mistake?",
-        "options": {
-          "A": "The client provided an invalid corporate credit card.",
-          "B": "The automated billing system failed to apply the discount code.",
-          "C": "The promotional period expired earlier than scheduled.",
-          "D": "An accounting employee entered incorrect bank account information."
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Trong email, ông Foster đưa ra lời giải thích nào cho sự cố hóa đơn?<br/><b>Bằng chứng:</b> Ông Foster viết: <i>\"our automated accounting billing system failed to apply the code to your recurring billing profile\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q179",
-        "number": 179,
-        "text": "What is the discounted monthly rate for Summit Financial's cloud service?",
-        "options": {
-          "A": "$150",
-          "B": "$360",
-          "C": "$1,020",
-          "D": "$1,200"
+          "A": "It is Ready Barn’s address.",
+          "B": "It is Mr. Shim’s billing address.",
+          "C": "It is Ms. Kang’s new address.",
+          "D": "It is Mr. Shim’s former address."
         },
         "correctAnswer": "C",
-        "explanation": "<p><b>Dịch nghĩa:</b> Mức giá hàng tháng sau chiết khấu của Summit Financial là bao nhiêu?<br/><b>Bằng chứng:</b> Đoạn 3 email nêu rõ: <i>\"Furthermore, your November statement will reflect your discounted rate of $1,020 per month...\"</i>. Chọn <b>(C) $1,020</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được chỉ ra về địa chỉ 45 Skyrise Road?<br/>(A) Đó là địa chỉ của Ready Barn.<br/>(B) Đó là địa chỉ thanh toán của ông Shim.<br/>(C) Đó là địa chỉ mới của cô Kang.<br/>(D) Đó là địa chỉ cũ của ông Shim.</p><p><b>Bằng chứng trích dẫn:</b> Đơn hàng ghi địa chỉ giao hàng là: <i>Helen Kang, 45 Skyrise Road</i>. Trong email, ông Shim giải thích: <i>'gifts for my niece, Helen Kang, who recently purchased a new home. Therefore, her address was provided as the delivery destination.'</i> Do đó 45 Skyrise Road là địa chỉ nhà mới của cô Kang: <b>(C) It is Ms. Kang’s new address.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Kết nối thông tin giữa địa chỉ người nhận trong hóa đơn và giải thích mua quà tân gia cho cháu gái trong email."
       },
       {
-        "id": "ets22_t3_p7_q180",
-        "number": 180,
-        "text": "What additional benefit does Mr. Foster provide to compensate Ms. Hughes?",
+        "id": "ets22_t3_p7_178",
+        "number": 178,
+        "text": "What does Mr. Shim request in his e-mail?",
         "options": {
-          "A": "Three months of free advanced data encryption backup",
-          "B": "A complimentary hardware server unit",
-          "C": "Free passes to an executive technology conference",
-          "D": "A lifetime discount on data storage expansion"
+          "A": "A discount",
+          "B": "A refund",
+          "C": "A receipt",
+          "D": "A gift list"
         },
-        "correctAnswer": "A",
-        "explanation": "<p><b>Dịch nghĩa:</b> Quyền lợi bổ sung nào được ông Foster cung cấp để đền bù cho cô Hughes?<br/><b>Bằng chứng:</b> Cuối email: <i>\"we have enabled three months of complimentary advanced data encryption backup valued at $150 per month\"</i>. Chọn <b>(A)</b>.</p>",
-        "questionType": "Inference & Suggestion",
-        "subCategory": "Inference & Suggestion"
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ông Shim yêu cầu điều gì trong email của mình?<br/>(A) Một khoản chiết khấu.<br/>(B) Một khoản hoàn tiền.<br/>(C) Một biên lai.<br/>(D) Một danh sách quà tặng.</p><p><b>Bằng chứng trích dẫn:</b> Ông Shim viết: <i>'Also, I would like to ask you to return the money I paid for expedited shipping.'</i> (Ngoài ra, tôi muốn yêu cầu bạn hoàn trả lại số tiền tôi đã trả cho dịch vụ chuyển phát nhanh). Hoàn lại tiền (return the money) tương đương với hoàn tiền (refund): <b>(B) A refund</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm từ 'return the money I paid' đồng nghĩa với 'a refund'."
+      },
+      {
+        "id": "ets22_t3_p7_179",
+        "number": 179,
+        "text": "What item did Mr. Shim not intend to buy?",
+        "options": {
+          "A": "The cheese grater",
+          "B": "The grill",
+          "C": "The toaster",
+          "D": "The egg beater"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Món đồ nào ông Shim không có ý định mua?<br/>(A) Bàn nạo phô mai.<br/>(B) Vỉ nướng.<br/>(C) Máy nướng bánh mì.<br/>(D) Dụng cụ đánh trứng.</p><p><b>Bằng chứng trích dẫn:</b> Trong email, ông Shim viết: <i>'Additionally, I do not recognize item number 7564 that I was charged $14 for on my receipt. Please let me know how to send it back.'</i> (Tôi không nhận ra mã sản phẩm 7564 bị tính $14 trong hóa đơn). Tra cứu lại bảng đơn hàng ở đoạn 1: Mã 7564 tương ứng với món <i>Egg Beater</i> ($14). Do đó món ông không có ý định mua là máy đánh trứng: <b>(D) The egg beater</b>.</p>",
+        "questionType": "Cross-Reference",
+        "subCategory": "Detail Link",
+        "strategyHint": "Liên kết chéo: tìm mã số 'item number 7564' trong email và đối chiếu với bảng đơn hàng để tìm tên sản phẩm."
+      },
+      {
+        "id": "ets22_t3_p7_180",
+        "number": 180,
+        "text": "According to the e-mail, what is true about Mr. Shim?",
+        "options": {
+          "A": "He is satisfied with the items he purchased.",
+          "B": "He has shopped with Ready Barn before.",
+          "C": "He received his order on schedule.",
+          "D": "He prefers to shop through a catalog."
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Theo email, điều gì là đúng về ông Shim?<br/>(A) Ông ấy hài lòng với những món đồ đã mua.<br/>(B) Ông ấy đã từng mua hàng tại Ready Barn trước đây.<br/>(C) Ông ấy đã nhận đơn hàng đúng hẹn.<br/>(D) Ông ấy thích mua sắm qua danh mục hơn.</p><p><b>Bằng chứng trích dẫn:</b> Ở đoạn cuối email, ông Shim khẳng định: <i>'I am a longtime customer of Ready Barn, and I am usually very satisfied with your products and services.'</i> (Tôi là khách hàng lâu năm của Ready Barn...). Khách hàng lâu năm chứng tỏ ông đã từng mua hàng tại đây trước đây: <b>(B) He has shopped with Ready Barn before.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm 'longtime customer' chứng minh 'has shopped with Ready Barn before'."
       }
     ]
   },
@@ -678,95 +709,97 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s12_p1",
-        "type": "Proposal",
-        "title": "Cost Quotation",
-        "content": "<p><b>PINNACLE PRINTING SOLUTIONS — COMMERCIAL QUOTATION</b><br/><b>Prepared For:</b> Oakridge Healthcare System<br/><b>Date:</b> September 5 | <b>Quotation Ref:</b> PPS-4412<br/><br/><b>Itemized Specifications:</b><br/>• <b>Item 1:</b> 5,000 Patient Welcome Folders (Heavy glossy cardstock, embossed silver foil logo) — $2,500<br/>• <b>Item 2:</b> 10,000 Tri-Fold Health Awareness Brochures (Full-color double-sided print, recycled satin paper) — $1,800<br/>• <b>Item 3:</b> 2,500 Medical Staff Appointment Planners (Wire-bound, custom leatherette cover) — $3,750<br/>• <b>Delivery Service:</b> Standard freight delivery (7 business days) — Free | Expedited courier delivery (3 business days) — $250<br/><br/><i>Terms & Conditions: A 10% volume discount applies to orders with a merchandise subtotal exceeding $7,000 before delivery fees. Quotation is valid for 30 calendar days from the date of issue.</i></p>"
+        "type": "E-mail",
+        "title": "E-mail",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>To:</b> Yong-Sun Che &lt;ysche@buztech.com&gt;<br/><b>From:</b> Ginny Redman &lt;gredman@silvervaleair.com&gt;<br/><b>Subject:</b> RE: Seat problem<br/><b>Date:</b> February 12<br/><b>Attachment:</b> Voucher</p><p>Dear Mr. Che:</p><p>Thank you for contacting us regarding your recent flight. We apologize for the discomfort you experienced during your flight because of the nonfunctioning air-conditioning vent above your seat.</p><p>We value you as a customer and want to make sure your experience with Silvervale Air is positive, so we have attached Voucher 789798 in the amount of $200. This may be applied to a future domestic flight with us. The voucher expires after twelve months.</p><p>Thank you for choosing Silvervale Air.</p><p>Sincerely,<br/>Ginny Redman<br/>Silvervale Air Customer Service</p></div>"
       },
       {
         "id": "ets22_t3_p7_s12_p2",
-        "type": "Email",
-        "title": "Purchase Authorization",
-        "sender": "t.nakamura@oakridgehealth.org",
-        "recipient": "sales@pinnacleprint.com",
-        "date": "September 12",
-        "content": "<p><b>To:</b> Sales Department &lt;sales@pinnacleprint.com&gt;<br/><b>From:</b> Taro Nakamura, Director of Communications<br/><b>Date:</b> September 12<br/><b>Subject:</b> Purchase Confirmation for Quotation #PPS-4412</p><p>Dear Pinnacle Sales Team,</p><p>We have approved Quotation #PPS-4412 and would like to proceed with the production of all three items listed in your proposal: the patient welcome folders, health brochures, and appointment planners.</p><p>Because our annual community wellness fair opens on Monday, September 24, we cannot risk delivery delays. Therefore, please apply the expedited 3-day courier delivery option to our purchase order. In addition, based on your stated terms, our merchandise subtotal of $8,050 qualifies for the 10% volume discount.</p><p>Enclosed is our official purchase order form signed by our Chief Financial Officer. Please send us digital proofs of the brochure layout by tomorrow afternoon so our editorial team can give final approval before you begin the press run.</p><p>Sincerely,<br/>Taro Nakamura<br/>Oakridge Healthcare System</p>"
+        "type": "Boarding Pass",
+        "title": "Boarding Pass",
+        "content": "<div style='border: 2px solid var(--border-color, #444); border-radius: 8px; padding: 16px; font-family: sans-serif;'><div style='display: flex; justify-content: space-between;'><div><b>Passenger:</b> Mr. Yong-Sun Che<br/><b>Ticket number:</b> 0272125899649</div><div><b>Confirmation code:</b> CMOAAB</div></div><hr style='margin: 12px 0;'/><table style='width: 100%; text-align: left;'><tr><th>Flight</th><th>Departs</th><th>Arrives</th><th>Seat</th></tr><tr><td>Silvervale Air 29</td><td>Atlanta, GA (ATL)<br/>Mon., May 6, 11:43 A.M.</td><td>Los Angeles, CA (LAX)<br/>Mon., May 6, 1:35 P.M.</td><td>36D</td></tr></table><hr style='margin: 12px 0;'/><h4>Summary of airfare charges</h4><table style='width: 100%; border-collapse: collapse;'><tr><td>Base fare</td><td style='text-align: right;'>$259.54</td></tr><tr><td>Taxes and fees</td><td style='text-align: right;'>$33.76</td></tr><tr><td>Voucher 789798</td><td style='text-align: right;'>-$200.00</td></tr><tr style='font-weight: bold; border-top: 1px solid #ccc;'><td>Total</td><td style='text-align: right;'>$93.30</td></tr></table><p style='font-size: 0.85em; margin-top: 12px; color: #666;'>All passengers are entitled to travel with one complimentary carry-on and one checked bag.</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q181",
+        "id": "ets22_t3_p7_181",
         "number": 181,
-        "text": "What item in the quotation has an embossed silver foil logo?",
+        "text": "Why did Ms. Redman e-mail Mr. Che?",
         "options": {
-          "A": "Patient Welcome Folders",
-          "B": "Health Awareness Brochures",
-          "C": "Staff Appointment Planners",
-          "D": "Courier Packaging Envelopes"
+          "A": "To update him on the repair of some equipment",
+          "B": "To announce changes to airfare pricing",
+          "C": "To assign him a new seat",
+          "D": "To offer him compensation"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao cô Redman gửi email cho ông Che?<br/>(A) Để cập nhật cho ông về việc sửa chữa một số thiết bị.<br/>(B) Để thông báo thay đổi giá vé máy bay.<br/>(C) Để chỉ định cho ông một chỗ ngồi mới.<br/>(D) Để đề nghị đền bù cho ông.</p><p><b>Bằng chứng trích dẫn:</b> Email viết: <i>'We apologize for the discomfort you experienced... so we have attached Voucher 789798 in the amount of $200.'</i> (Chúng tôi xin lỗi vì sự bất tiện... vì vậy chúng tôi đính kèm phiếu giảm giá trị giá $200). Việc gửi voucher $200 xin lỗi chính là hình thức đền bù: <b>(D) To offer him compensation</b>.</p>",
+        "questionType": "Purpose",
+        "subCategory": "Overview",
+        "strategyHint": "Gửi voucher đền bù sự cố lỗ thông gió hỏng chính là 'compensation'."
+      },
+      {
+        "id": "ets22_t3_p7_182",
+        "number": 182,
+        "text": "In the e-mail, the phrase “applied to” in paragraph 2, line 3, is closest in meaning to",
+        "options": {
+          "A": "asked for",
+          "B": "used for",
+          "C": "dealt with",
+          "D": "kept with"
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Trong email, cụm từ 'applied to' ở đoạn 2 dòng 3 gần nghĩa nhất với cụm từ nào?<br/>(A) yêu cầu.<br/>(B) được sử dụng cho.<br/>(C) giải quyết với.<br/>(D) giữ cùng với.</p><p><b>Bằng chứng trích dẫn:</b> Câu văn: <i>'This may be applied to a future domestic flight with us.'</i> (Phiếu này có thể được áp dụng/sử dụng cho một chuyến bay nội địa trong tương lai với chúng tôi). Cụm <i>applied to</i> ở đây có nghĩa là được sử dụng cho: <b>(B) used for</b>.</p>",
+        "questionType": "Vocabulary",
+        "subCategory": "Vocabulary in Context",
+        "strategyHint": "Cụm 'applied to a flight' đồng nghĩa với 'used for a flight'."
+      },
+      {
+        "id": "ets22_t3_p7_183",
+        "number": 183,
+        "text": "What does Ms. Redman mention about Voucher 789798?",
+        "options": {
+          "A": "It is valid for twelve months.",
+          "B": "It has not been mailed yet.",
+          "C": "It may be used for international flights.",
+          "D": "It cannot be transferred to another passenger."
         },
         "correctAnswer": "A",
-        "explanation": "<p><b>Dịch nghĩa:</b> Mặt hàng nào trong bảng báo giá có logo dập nổi lá bạc?<br/><b>Bằng chứng:</b> Mục 1 báo giá: <i>\"Item 1: 5,000 Patient Welcome Folders (Heavy glossy cardstock, embossed silver foil logo)\"</i>. Chọn <b>(A) Patient Welcome Folders</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Cô Redman đề cập điều gì về Phiếu giảm giá 789798?<br/>(A) Nó có hiệu lực trong 12 tháng.<br/>(B) Nó vẫn chưa được gửi qua đường bưu điện.<br/>(C) Nó có thể được sử dụng cho các chuyến bay quốc tế.<br/>(D) Nó không thể được chuyển nhượng cho hành khách khác.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 2 email khẳng định: <i>'The voucher expires after twelve months.'</i> (Phiếu giảm giá sẽ hết hạn sau 12 tháng). Hết hạn sau 12 tháng nghĩa là có giá trị trong 12 tháng: <b>(A) It is valid for twelve months.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Đối chiếu 'expires after twelve months' với 'valid for twelve months'."
       },
       {
-        "id": "ets22_t3_p7_q182",
-        "number": 182,
-        "text": "Why does Mr. Nakamura choose the expedited delivery option?",
-        "options": {
-          "A": "The standard shipping route is blocked by construction.",
-          "B": "Materials are needed for an upcoming community wellness fair.",
-          "C": "The expedited shipping fee was waived by the vendor.",
-          "D": "Pinnacle Printing offered a discount on courier deliveries."
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao ông Nakamura chọn dịch vụ giao hàng hỏa tốc?<br/><b>Bằng chứng:</b> Trong email, ông Nakamura giải thích: <i>\"Because our annual community wellness fair opens on Monday, September 24, we cannot risk delivery delays\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q183",
-        "number": 183,
-        "text": "What is the delivery fee Oakridge Healthcare will pay?",
-        "options": {
-          "A": "Free",
-          "B": "$100",
-          "C": "$250",
-          "D": "$805"
-        },
-        "correctAnswer": "C",
-        "explanation": "<p><b>Dịch nghĩa:</b> Phí vận chuyển mà Oakridge Healthcare sẽ trả là bao nhiêu?<br/><b>Bằng chứng:</b> Báo giá ghi: <i>\"Expedited courier delivery (3 business days) — $250\"</i> và ông Nakamura đã chọn gói này trong email. Chọn <b>(C) $250</b>.</p>",
-        "questionType": "Inference & Suggestion",
-        "subCategory": "Inference & Suggestion"
-      },
-      {
-        "id": "ets22_t3_p7_q184",
+        "id": "ets22_t3_p7_184",
         "number": 184,
-        "text": "What discount percentage will be applied to the merchandise subtotal?",
+        "text": "What can be inferred from the boarding pass about Mr. Che?",
         "options": {
-          "A": "5 percent",
-          "B": "10 percent",
-          "C": "15 percent",
-          "D": "20 percent"
+          "A": "He redeemed the full value of a voucher.",
+          "B": "He paid an additional fee for an upgrade.",
+          "C": "He booked a round-trip flight.",
+          "D": "He is a frequent flyer on Silvervale Air."
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Tỷ lệ chiết khấu nào sẽ được áp dụng cho tổng phụ tiền hàng?<br/><b>Bằng chứng:</b> Cả hai văn bản đều nêu điều kiện đơn hàng trên $7,000 được giảm 10% (subtotal là $8,050). Chọn <b>(B) 10 percent</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Có thể suy ra điều gì từ thẻ lên máy bay về ông Che?<br/>(A) Ông ấy đã quy đổi toàn bộ giá trị của một phiếu giảm giá.<br/>(B) Ông ấy đã trả thêm phí để nâng hạng vé.<br/>(C) Ông ấy đã đặt chuyến bay khứ hồi.<br/>(D) Ông ấy là hành khách bay thường xuyên của Silvervale Air.</p><p><b>Bằng chứng trích dẫn:</b> Trong email, voucher 789798 có giá trị $200 (<i>'in the amount of $200'</i>). Trong thẻ lên máy bay, mục chi phí ghi nhận: <i>'Voucher 789798: -$200.00'</i>. Toàn bộ $200 đã được trừ thẳng vào tiền vé, chứng tỏ ông đã sử dụng toàn bộ giá trị voucher: <b>(A) He redeemed the full value of a voucher.</b></p>",
+        "questionType": "Cross-Reference",
+        "subCategory": "Inference Link",
+        "strategyHint": "Liên kết chéo giá trị $200 của voucher ở email với dòng trừ $200 ở bảng tính tiền vé máy bay."
       },
       {
-        "id": "ets22_t3_p7_q185",
+        "id": "ets22_t3_p7_185",
         "number": 185,
-        "text": "What does Mr. Nakamura ask the sales team to send tomorrow afternoon?",
+        "text": "What is indicated about Silvervale Air flight 29?",
         "options": {
-          "A": "Physical paper material samples",
-          "B": "Digital layout proofs of the brochure",
-          "C": "A revised corporate billing invoice",
-          "D": "Tracking numbers for the freight containers"
+          "A": "It departs from Los Angeles.",
+          "B": "It arrives in the afternoon.",
+          "C": "Its passengers do not have assigned seats.",
+          "D": "Its passengers are allowed two free checked bags."
         },
         "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Ông Nakamura yêu cầu đội bán hàng gửi thứ gì vào chiều mai?<br/><b>Bằng chứng:</b> Cuối email: <i>\"Please send us digital proofs of the brochure layout by tomorrow afternoon...\"</i>. Chọn <b>(B) Digital layout proofs of the brochure</b>.</p>",
-        "questionType": "Next Action",
-        "subCategory": "Next Action"
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được chỉ ra về chuyến bay Silvervale Air 29?<br/>(A) Nó khởi hành từ Los Angeles.<br/>(B) Nó hạ cánh vào buổi chiều.<br/>(C) Hành khách không có ghế ngồi cố định.<br/>(D) Hành khách được mang miễn phí hai kiện hành lý ký gửi.</p><p><b>Bằng chứng trích dẫn:</b> Thông tin chuyến bay trên thẻ ghi: <i>'Arrives: Los Angeles, CA (LAX) Mon., May 6, 1:35 P.M.'</i> (Hạ cánh lúc 1:35 chiều). 1:35 P.M. là buổi chiều (in the afternoon): <b>(B) It arrives in the afternoon.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Đối chiếu giờ đến '1:35 P.M.' với 'in the afternoon'."
       }
     ]
   },
@@ -776,101 +809,103 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s13_p1",
-        "type": "Memo",
-        "title": "Relocation Announcement",
-        "content": "<p><b>INTERNAL MEMO: FACILITY EXPANSION SEARCH</b><br/><b>To:</b> Executive Leadership Committee<br/><b>From:</b> Beatrice Holloway, Chief Operations Officer<br/><b>Date:</b> May 2 | <b>Subject:</b> Downtown Office Relocation Criteria<br/><br/>Due to the hiring of thirty software engineers over the past two quarters, our current office at Parkview Center has reached maximum occupancy. The facilities committee has outlined criteria for our new corporate headquarters:<br/><br/>1. Total usable floor area between 25,000 and 30,000 square feet.<br/>2. Location within four blocks of an express subway station.<br/>3. Minimum of 60 dedicated parking spaces for staff.<br/>4. Building must hold LEED Gold or Platinum green energy certification.<br/><br/>We have retained Commercial Property Associates to identify prospective leasehold candidates.</p>"
+        "type": "Meeting Minutes",
+        "title": "Meeting Minutes",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><h3 style='margin-top:0;'>Coffer Digital Management Steering Committee<br/>Meeting Minutes</h3><p><b>November 12</b></p><ol><li>Re-pitch is ready to be pilot tested.</li><li>The pilot test will be carried out during the first quarter of the fiscal year, January 3–March 31.</li><li>Five existing clients will use the experimental version of Re-pitch during the pilot test. They will then take a survey to rate the software's effectiveness, ease of use, and affordability.</li><li>If the Re-pitch pilot is successful, a large dollar investment will be needed to design and run an extensive marketing campaign.</li><li>Our company president will explore potential funding sources for this campaign.</li></ol></div>"
       },
       {
         "id": "ets22_t3_p7_s13_p2",
-        "type": "Email",
-        "title": "Agent Proposal",
-        "sender": "g.sullivan@cpa-realty.com",
-        "recipient": "bholloway@vanguardsoft.com",
-        "date": "May 10",
-        "content": "<p><b>To:</b> Beatrice Holloway &lt;bholloway@vanguardsoft.com&gt;<br/><b>From:</b> Gregory Sullivan, Senior Broker, CPA Realty<br/><b>Date:</b> May 10<br/><b>Subject:</b> Prospective Properties for Vanguard Software</p><p>Dear Ms. Holloway,</p><p>Based on your stated relocation criteria, we have evaluated commercial properties across the Financial District. We identified two strong contenders: the Meridian Commerce Tower and the Trinity Exchange Building.</p><p>While the Meridian Tower offers 32,000 square feet, it only has 40 parking stalls. In contrast, the Trinity Exchange Building (floors 6 through 8) offers exactly 28,500 square feet, 75 underground parking spots, and sits just two blocks from City Hall Metro Station. It also received LEED Platinum certification last year.</p><p>The landlord has authorized an on-site building inspection this Thursday at 10:00 A.M. I have commissioned Apex Engineering to inspect the building's structural and climate control systems beforehand.</p><p>Best regards,<br/>Gregory Sullivan</p>"
+        "type": "E-mail",
+        "title": "E-mail",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>To:</b> sales@coffer.com<br/><b>From:</b> tcao@ewest-taipei.com.tw<br/><b>Date:</b> 13 April<br/><b>Subject:</b> Pilot test</p><p>Dear Coffer Digital,</p><p>I wanted to follow up after having just submitted our thoughts regarding your Re-pitch marketing software. You will find that our pilot-test feedback is overwhelmingly positive, which is why we would like to be notified immediately upon the rollout of this product. We are very eager to add Re-pitch to our permanent digital marketing efforts.</p><p>Sincerely,<br/>Ting Cao, Director of Global Internet Marketing<br/>Ewest Clothing Ltd., Taipei</p></div>"
       },
       {
         "id": "ets22_t3_p7_s13_p3",
-        "type": "Report",
-        "title": "Inspection Summary",
-        "content": "<p><b>APEX ENGINEERING: PRE-LEASE INSPECTION AUDIT</b><br/><b>Property:</b> Trinity Exchange Building (Floors 6–8)<br/><b>Inspected By:</b> Ronald Chang, PE | <b>Date:</b> May 12<br/><br/><b>Executive Findings:</b><br/>• <b>Structural & Electrical:</b> The electrical wiring, backup generators, and fiber-optic telecommunication cables are in pristine condition, supporting high-density server racks.<br/>• <b>Climate Controls (HVAC):</b> The primary air-handling units servicing floor 7 were modernized in 2024, providing excellent filtration.<br/>• <b>Minor Recommendation:</b> Several emergency exit signs on the 8th floor require battery replacement, which the building manager agreed to rectify within 48 hours.<br/>• <b>Conclusion:</b> The property exceeds standard commercial standards and is fully ready for tenant occupancy.</p>"
+        "type": "Article",
+        "title": "Business Briefs",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><h3 style='margin-top:0;'>Business Briefs</h3><p>Coffer Digital closed a deal yesterday with GPZ Capital. GPZ will make a significant investment in Coffer Digital, enabling the funding of a new online marketing application called Re-pitch. This sales-boosting software works by generating a pop-up window that reminds online shoppers of products they have already viewed, after they have navigated away from the product page.</p><p>GPZ's knowledge of data and marketing has enabled them to make successful investments in three other software development firms in the past five years. Coffer Digital's strong company reputation and top-notch employees easily support GPZ's decision to invest. “Coffer Digital has a solid plan for distributing Re-pitch, so it was an easy decision to invest with them,” said Jessica Gould, spokesperson for GPZ.</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q186",
+        "id": "ets22_t3_p7_186",
         "number": 186,
-        "text": "Why is Vanguard Software planning to relocate?",
+        "text": "According to the meeting minutes, what is indicated about the pilot test?",
         "options": {
-          "A": "Its existing office lease has been cancelled.",
-          "B": "Its current facility has reached maximum occupancy.",
-          "C": "It wants to downsize operational staff.",
-          "D": "It needs to reduce monthly rental expenditures."
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao Vanguard Software lên kế hoạch chuyển văn phòng?<br/><b>Bằng chứng:</b> Trong bản ghi nhớ, bà Holloway giải thích: <i>\"Due to the hiring of thirty software engineers... our current office at Parkview Center has reached maximum occupancy\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q187",
-        "number": 187,
-        "text": "Why does Mr. Sullivan consider Meridian Commerce Tower less suitable?",
-        "options": {
-          "A": "It lacks modern high-speed elevators.",
-          "B": "It does not provide enough parking spaces.",
-          "C": "It is located too far from the financial district.",
-          "D": "It lacks LEED green building certification."
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao ông Sullivan đánh giá Meridian Commerce Tower ít phù hợp hơn?<br/><b>Bằng chứng:</b> Tiêu chí yêu cầu tối thiểu 60 chỗ đỗ xe. Ông Sullivan chỉ ra: <i>\"While the Meridian Tower offers 32,000 square feet, it only has 40 parking stalls\"</i> (chỉ có 40 chỗ đỗ). Chọn <b>(B)</b>.</p>",
-        "questionType": "Inference & Suggestion",
-        "subCategory": "Inference & Suggestion"
-      },
-      {
-        "id": "ets22_t3_p7_q188",
-        "number": 188,
-        "text": "How much usable floor space does the Trinity Exchange Building provide?",
-        "options": {
-          "A": "25,000 square feet",
-          "B": "28,500 square feet",
-          "C": "30,000 square feet",
-          "D": "32,000 square feet"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Tòa nhà Trinity Exchange cung cấp diện tích sàn sử dụng là bao nhiêu?<br/><b>Bằng chứng:</b> Email của ông Sullivan nêu rõ: <i>\"the Trinity Exchange Building (floors 6 through 8) offers exactly 28,500 square feet...\"</i>. Chọn <b>(B) 28,500 square feet</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q189",
-        "number": 189,
-        "text": "What minor repair is recommended in the inspection report?",
-        "options": {
-          "A": "Replacing batteries in emergency exit signs",
-          "B": "Repairing leaking water pipes on the 6th floor",
-          "C": "Upgrading backup power diesel generators",
-          "D": "Repainting the underground parking lanes"
+          "A": "The testing period will last about three months.",
+          "B": "Problems identified during testing must be immediately reported.",
+          "C": "Running the test will be costly.",
+          "D": "The testing plan still needs the president’s approval."
         },
         "correctAnswer": "A",
-        "explanation": "<p><b>Dịch nghĩa:</b> Sửa chữa nhỏ nào được khuyến nghị trong báo cáo kiểm định?<br/><b>Bằng chứng:</b> Mục Minor Recommendation trong báo cáo ghi: <i>\"Several emergency exit signs on the 8th floor require battery replacement...\"</i>. Chọn <b>(A)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Theo biên bản cuộc họp, điều gì được chỉ ra về cuộc thử nghiệm thí điểm?<br/>(A) Giai đoạn thử nghiệm sẽ kéo dài khoảng ba tháng.<br/>(B) Các vấn đề phát hiện khi thử nghiệm phải báo cáo ngay.<br/>(C) Việc tiến hành thử nghiệm sẽ tốn kém.<br/>(D) Kế hoạch thử nghiệm vẫn cần sự phê duyệt của chủ tịch.</p><p><b>Bằng chứng trích dẫn:</b> Mục 2 trong biên bản ghi: <i>'The pilot test will be carried out during the first quarter of the fiscal year, January 3–March 31.'</i> (Từ ngày 3 tháng 1 đến 31 tháng 3). Khoảng thời gian từ đầu tháng 1 đến cuối tháng 3 kéo dài xấp xỉ 3 tháng: <b>(A) The testing period will last about three months.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Khoảng thời gian từ January 3 đến March 31 tương đương 'about three months'."
       },
       {
-        "id": "ets22_t3_p7_q190",
-        "number": 190,
-        "text": "What is indicated about the Trinity Exchange Building in all three documents?",
+        "id": "ets22_t3_p7_187",
+        "number": 187,
+        "text": "What did Mr. Cao do?",
         "options": {
-          "A": "It was constructed within the past two years.",
-          "B": "It satisfies Vanguard Software's relocation requirements.",
-          "C": "Its monthly rent is cheaper than Parkview Center.",
-          "D": "It is currently undergoing extensive exterior remodeling."
+          "A": "He redesigned a Web site.",
+          "B": "He submitted an annual report.",
+          "C": "He completed a survey.",
+          "D": "He started a new business."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ông Cao đã làm gì?<br/>(A) Ông ấy đã thiết kế lại một trang web.<br/>(B) Ông ấy đã nộp báo cáo thường niên.<br/>(C) Ông ấy đã hoàn thành một bài khảo sát.<br/>(D) Ông ấy đã khởi nghiệp một doanh nghiệp mới.</p><p><b>Bằng chứng trích dẫn:</b> Trong email, ông Cao viết: <i>'I wanted to follow up after having just submitted our thoughts regarding your Re-pitch marketing software. You will find that our pilot-test feedback...'</i>. Kết nối với mục 3 trong biên bản: khách hàng tham gia bản thử nghiệm <i>'will then take a survey to rate the software's effectiveness...'</i>. Nộp ý kiến phản hồi về phần mềm thí điểm chính là hoàn thành bài khảo sát (completed a survey): <b>(C) He completed a survey.</b></p>",
+        "questionType": "Cross-Reference",
+        "subCategory": "Inference Link",
+        "strategyHint": "Nối thông tin 'take a survey' trong biên bản với 'submitted our thoughts / pilot-test feedback' trong email của ông Cao."
+      },
+      {
+        "id": "ets22_t3_p7_188",
+        "number": 188,
+        "text": "What does Mr. Cao request?",
+        "options": {
+          "A": "To view the results of a test",
+          "B": "To participate in future testing",
+          "C": "To be notified when software is available for purchase",
+          "D": "To set up a marketing consultation appointment"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ông Cao yêu cầu điều gì?<br/>(A) Xem kết quả của một bài kiểm tra.<br/>(B) Tham gia vào các đợt thử nghiệm trong tương lai.<br/>(C) Được thông báo khi phần mềm có sẵn để mua.<br/>(D) Sắp xếp một cuộc hẹn tư vấn tiếp thị.</p><p><b>Bằng chứng trích dẫn:</b> Email của ông Cao nêu rõ: <i>'which is why we would like to be notified immediately upon the rollout of this product. We are very eager to add Re-pitch to our permanent digital marketing efforts.'</i> (chúng tôi muốn được thông báo ngay khi sản phẩm này được tung ra thị trường chính thức). Yêu cầu này tương đương với <b>(C) To be notified when software is available for purchase</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm 'notified immediately upon the rollout of this product' đồng nghĩa với việc thông báo khi sản phẩm mở bán."
+      },
+      {
+        "id": "ets22_t3_p7_189",
+        "number": 189,
+        "text": "According to the article, what does Re-pitch do?",
+        "options": {
+          "A": "It tracks the sales of online retailers.",
+          "B": "It prevents pop-up windows in Internet browsers.",
+          "C": "It offers customers discounts on products.",
+          "D": "It displays products for online shoppers to consider buying."
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Theo bài báo, Re-pitch làm gì?<br/>(A) Nó theo dõi doanh số của các nhà bán lẻ trực tuyến.<br/>(B) Nó ngăn chặn các cửa sổ bật lên trong trình duyệt Internet.<br/>(C) Nó giảm giá sản phẩm cho khách hàng.<br/>(D) Nó hiển thị các sản phẩm để người mua sắm trực tuyến cân nhắc mua.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 1 bài báo mô tả: <i>'This sales-boosting software works by generating a pop-up window that reminds online shoppers of products they have already viewed, after they have navigated away from the product page.'</i> (tạo cửa sổ bật lên nhắc nhở người mua hàng về các sản phẩm họ đã xem). Điều này tương đương với việc hiển thị sản phẩm để người mua cân nhắc: <b>(D) It displays products for online shoppers to consider buying.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Đối chiếu chức năng 'generating a pop-up window that reminds online shoppers of products they have already viewed'."
+      },
+      {
+        "id": "ets22_t3_p7_190",
+        "number": 190,
+        "text": "How will Coffer Digital most likely use the funds from GPZ Capital?",
+        "options": {
+          "A": "To purchase a smaller company",
+          "B": "To advertise a product",
+          "C": "To hire new employees",
+          "D": "To invest in new equipment"
         },
         "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được chỉ ra về tòa nhà Trinity Exchange trong cả ba tài liệu?<br/><b>Bằng chứng:</b> Đối chiếu tiêu chí trong Memo (25k-30k sq ft, gần metro, >60 chỗ đỗ, LEED Gold/Platinum), email của môi giới (28.5k sq ft, 2 block từ metro, 75 chỗ đỗ, LEED Platinum), và báo cáo kiểm định kỹ thuật (hoàn hảo sẵn sàng sử dụng). Tòa nhà đáp ứng trọn vẹn mọi tiêu chí của công ty. Chọn <b>(B)</b>.</p>",
-        "questionType": "Inference & Suggestion",
-        "subCategory": "Inference & Suggestion"
+        "explanation": "<p><b>Dịch nghĩa:</b> Coffer Digital có nhiều khả năng sẽ sử dụng số tiền từ GPZ Capital như thế nào?<br/>(A) Mua một công ty nhỏ hơn.<br/>(B) Để quảng cáo một sản phẩm.<br/>(C) Thuê nhân viên mới.<br/>(D) Đầu tư vào thiết bị mới.</p><p><b>Bằng chứng trích dẫn:</b> Trong biên bản họp, mục 4 và 5 nêu: <i>'If the Re-pitch pilot is successful, a large dollar investment will be needed to design and run an extensive marketing campaign. Our company president will explore potential funding sources for this campaign.'</i> Sau đó, bài báo đưa tin GPZ Capital đã đầu tư khoản tiền lớn cho Re-pitch. Nguồn quỹ này phục vụ chiến dịch tiếp thị/quảng bá sản phẩm (advertising a product): <b>(B) To advertise a product</b>.</p>",
+        "questionType": "Cross-Reference",
+        "subCategory": "Inference Link",
+        "strategyHint": "Liên kết mục đích tìm vốn trong biên bản (design and run an extensive marketing campaign) với khoản đầu tư của GPZ trong bài báo."
       }
     ]
   },
@@ -880,101 +915,103 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s14_p1",
-        "type": "Webpage",
-        "title": "Conference Schedule",
-        "content": "<p><b>PACIFIC HEALTHCARE INFORMATICS CONGRESS</b><br/><b>Date:</b> Friday, October 26 | <b>Venue:</b> San Diego Maritime Convention Center<br/><br/><b>Morning Program:</b><br/>• <b>9:00 A.M. – 10:15 A.M.:</b> Keynote: \"Artificial Intelligence in Medical Diagnostic Imaging\" by Dr. Alan Chen (Grand Ballroom)<br/>• <b>10:30 A.M. – 11:45 A.M.:</b> Breakout Session A: \"Cloud Security for Electronic Health Records\" by Ms. Fiona Gallagher (Room 102)<br/>• <b>10:30 A.M. – 11:45 A.M.:</b> Breakout Session B: \"Telemedicine Implementation in Rural Hospitals\" by Dr. Marcus Brody (Room 105)<br/>• <b>12:00 P.M. – 1:30 P.M.:</b> Luncheon & Healthcare Technology Exhibition (Pavilion 3)</p>"
+        "type": "Article",
+        "title": "Article",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><h3 style='margin-top:0;'>TERMINAL C TO REOPEN</h3><p><b>(May 23)</b>—Harrison City Airport's Terminal C will reopen to the public on June 1 following a two-year renovation project.</p><p>The project added eleven new gates, allowing the terminal to accommodate more flights. The three major airlines that used Terminal C before the renovation will now be back in operation there. Also at Terminal C will be newcomer Paik Airways, a regional carrier that is expanding its routes.</p><p>The terminal's new lobby features an efficient check-in process and a state-of-the-art baggage-handling system. Passengers will enjoy free Wi-Fi in the waiting area, which also contains shops and restaurants.</p><p>At one point during the renovations, it looked as if the construction team would miss its deadline. An environmental impact review conducted by the city questioned the placement of a parking lot. The planners solved the problem by moving the parking lot to the other side of the airport and instituting a shuttle bus service.</p><p>“Thanks to the cooperative efforts of all stakeholders, the project was completed by the deadline with no budget overage,” said Arturo Benetti, the airport's chief operating officer.</p></div>"
       },
       {
         "id": "ets22_t3_p7_s14_p2",
-        "type": "Memo",
-        "title": "Schedule Revision",
-        "content": "<p><b>CONFERENCE ORGANIZING COMMITTEE — URGENT NOTICE</b><br/><b>To:</b> All Registered Delegates<br/><b>Date:</b> October 22 | <b>Subject:</b> Program Revision for Morning Sessions<br/><br/>Please be advised that Dr. Alan Chen has unfortunately been called away for emergency medical duties and cannot deliver the opening keynote speech on Friday, October 26.<br/><br/>In light of this change, Ms. Fiona Gallagher has graciously agreed to move her presentation on \"Cloud Security for Electronic Health Records\" into the 9:00 A.M. keynote slot in the Grand Ballroom. Consequently, Dr. Brody's session in Room 105 will now be the sole breakout presentation at 10:30 A.M., allowing all delegates to attend without scheduling conflicts. Attendees who originally signed up for Dr. Chen's session are invited to download his research paper from the conference app.</p>"
+        "type": "E-mail",
+        "title": "E-mail",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>From:</b> Thomasina Yee &lt;thomasina.yee@cooverbrothers.com&gt;<br/><b>To:</b> Sven Paulsen &lt;sven.paulsen@cooverbrothers.com&gt;<br/><b>Date:</b> July 6<br/><b>Subject:</b> Meeting with Slonim Company buyers</p><p>Hello Sven,</p><p>I'm at the Harrison City Airport to catch the 3:30 flight home, but I want to give you a quick update. The meeting at Slonim went well. They are very pleased with Coover Brothers products and expect to double their orders next year. In fact, they offered to feature our bedroom and dining room sets at the upcoming Home and Garden Exposition. I'll give you all the details tomorrow.</p><p>Regards,<br/>Thomasina</p></div>"
       },
       {
         "id": "ets22_t3_p7_s14_p3",
-        "type": "Email",
-        "title": "Attendee Schedule",
-        "sender": "k.weber@valleyhospital.org",
-        "recipient": "s.morales@valleyhospital.org",
-        "date": "October 24",
-        "content": "<p><b>To:</b> Sofia Morales &lt;s.morales@valleyhospital.org&gt;<br/><b>From:</b> Kevin Weber, Chief Information Officer<br/><b>Date:</b> October 24<br/><b>Subject:</b> Friday's Healthcare Informatics Congress in San Diego</p><p>Hi Sofia,</p><p>I reviewed the revised schedule for this Friday's congress. Since Ms. Gallagher's cloud security presentation was moved to the opening keynote, this works out conveniently for our schedule! We can both attend her speech at 9:00 A.M. in the Grand Ballroom, which directly impacts our hospital's current cloud migration initiative.</p><p>After that, while you attend Dr. Brody's rural healthcare session at 10:30 A.M., I will visit the exhibition pavilion early to meet with medical imaging software representatives. Let's reconvene at 12:00 P.M. for the catered lunch.</p><p>See you at the airport on Thursday evening,<br/>Kevin</p>"
+        "type": "Sign",
+        "title": "Airport Departures Sign",
+        "content": "<div style='border: 2px solid #333; background: #000; color: #fff; border-radius: 8px; padding: 16px; font-family: monospace;'><h3 style='margin-top:0; color: #fbbf24; text-align: center;'>HARRISON CITY AIRPORT - TERMINAL C DEPARTURES</h3><table style='width: 100%; border-collapse: collapse; text-align: left;'><tr style='color: #9ca3af; border-bottom: 1px solid #444;'><th>Destination</th><th>Airline</th><th>Flight</th><th>Time</th><th>Gate</th><th>Status</th></tr><tr><td>Detroit</td><td>Brightway</td><td>BR417</td><td>1:25</td><td>11</td><td style='color: #4ade80;'>ON TIME</td></tr><tr><td>Omaha</td><td>Planet Z</td><td>PL700</td><td>2:06</td><td>3</td><td style='color: #ef4444;'>CANCELED</td></tr><tr><td>Cleveland</td><td>Paik</td><td>PA069</td><td>3:00</td><td>24</td><td style='color: #4ade80;'>ON TIME</td></tr><tr><td>Chicago</td><td>Windrover</td><td>WI645</td><td>3:30</td><td>6</td><td style='color: #fbbf24;'>DELAYED</td></tr></table></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q191",
+        "id": "ets22_t3_p7_191",
         "number": 191,
-        "text": "What was the original keynote topic scheduled for 9:00 A.M.?",
+        "text": "Why was it necessary to change the location of a parking lot?",
         "options": {
-          "A": "Cloud Security for Electronic Health Records",
-          "B": "Artificial Intelligence in Medical Diagnostic Imaging",
-          "C": "Telemedicine Implementation in Rural Hospitals",
-          "D": "Mobile Applications for Patient Scheduling"
+          "A": "To reduce construction costs",
+          "B": "To protect the environment",
+          "C": "To make travel easier for passengers",
+          "D": "To provide spaces for large vehicles"
         },
         "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Chủ đề bài phát biểu khai mạc ban đầu được lên lịch lúc 9:00 sáng là gì?<br/><b>Bằng chứng:</b> Trên trang web hội nghị: <i>\"9:00 A.M. – 10:15 A.M.: Keynote: 'Artificial Intelligence in Medical Diagnostic Imaging' by Dr. Alan Chen\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao cần phải thay đổi vị trí của một bãi đậu xe?<br/>(A) Để giảm chi phí xây dựng.<br/>(B) Để bảo vệ môi trường.<br/>(C) Để giúp hành khách đi lại dễ dàng hơn.<br/>(D) Để cung cấp không gian cho các phương tiện lớn.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 4 bài báo viết: <i>'An environmental impact review conducted by the city questioned the placement of a parking lot. The planners solved the problem by moving the parking lot to the other side of the airport...'</i> (Báo cáo đánh giá tác động môi trường do thành phố thực hiện đã đặt câu hỏi về vị trí bãi đậu xe...). Do đó việc di dời nhằm bảo vệ môi trường: <b>(B) To protect the environment</b>.</p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm 'environmental impact review' dẫn đến quyết định di dời bãi đậu xe để bảo vệ môi trường."
       },
       {
-        "id": "ets22_t3_p7_q192",
+        "id": "ets22_t3_p7_192",
         "number": 192,
-        "text": "Why was the conference schedule altered?",
+        "text": "What does Mr. Benetti emphasize about Terminal C?",
         "options": {
-          "A": "Severe storm damage to the convention center",
-          "B": "A key speaker had urgent professional commitments",
-          "C": "Low registration numbers for breakout sessions",
-          "D": "Audio visual equipment delivery delays"
+          "A": "It is the only terminal with free Wi-Fi.",
+          "B": "It was designed by a famous architect.",
+          "C": "Its renovation was funded by the city.",
+          "D": "Its renovation was completed on time."
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao lịch trình hội nghị bị thay đổi?<br/><b>Bằng chứng:</b> Bản ghi nhớ thông báo: <i>\"Dr. Alan Chen has unfortunately been called away for emergency medical duties...\"</i> (Tiến sĩ Chen bận nhiệm vụ y tế khẩn cấp). Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ông Benetti nhấn mạnh điều gì về Nhà ga C?<br/>(A) Đây là nhà ga duy nhất có Wi-Fi miễn phí.<br/>(B) Nó được thiết kế bởi một kiến trúc sư nổi tiếng.<br/>(C) Việc cải tạo nó được thành phố tài trợ.<br/>(D) Việc cải tạo nó đã được hoàn thành đúng thời hạn.</p><p><b>Bằng chứng trích dẫn:</b> Ông Arturo Benetti phát biểu: <i>'the project was completed by the deadline with no budget overage'</i> (dự án được hoàn thành trước thời hạn và không vượt ngân sách). Hoàn thành trước thời hạn (by the deadline) có nghĩa là hoàn thành đúng giờ/đúng hạn: <b>(D) Its renovation was completed on time.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm 'completed by the deadline' đồng nghĩa với 'completed on time'."
       },
       {
-        "id": "ets22_t3_p7_q193",
+        "id": "ets22_t3_p7_193",
         "number": 193,
-        "text": "Where will Ms. Gallagher deliver her presentation on Friday morning?",
+        "text": "What products does Coover Brothers most likely manufacture?",
         "options": {
-          "A": "Room 102",
-          "B": "Room 105",
-          "C": "The Grand Ballroom",
-          "D": "Pavilion 3"
-        },
-        "correctAnswer": "C",
-        "explanation": "<p><b>Dịch nghĩa:</b> Cô Gallagher sẽ trình bày bài thuyết trình của mình ở đâu vào sáng thứ Sáu?<br/><b>Bằng chứng:</b> Bản ghi nhớ và email đều nêu rõ bài thuyết trình của cô Gallagher được chuyển lên: <i>\"into the 9:00 A.M. keynote slot in the Grand Ballroom\"</i>. Chọn <b>(C) The Grand Ballroom</b>.</p>",
-        "questionType": "Inference & Suggestion",
-        "subCategory": "Inference & Suggestion"
-      },
-      {
-        "id": "ets22_t3_p7_q194",
-        "number": 194,
-        "text": "What will Mr. Weber do at 10:30 A.M.?",
-        "options": {
-          "A": "Attend Dr. Brody's telemedicine lecture",
-          "B": "Visit the technology exhibition pavilion",
-          "C": "Deliver a presentation on cloud security",
-          "D": "Catch a return flight to Valley Hospital"
-        },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Ông Weber sẽ làm gì lúc 10:30 sáng?<br/><b>Bằng chứng:</b> Trong email, ông Weber viết: <i>\"while you attend Dr. Brody's rural healthcare session at 10:30 A.M., I will visit the exhibition pavilion early...\"</i>. Chọn <b>(B) Visit the technology exhibition pavilion</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
-      },
-      {
-        "id": "ets22_t3_p7_q195",
-        "number": 195,
-        "text": "Why is Ms. Gallagher's presentation particularly relevant to Valley Hospital?",
-        "options": {
-          "A": "Valley Hospital is currently undergoing a cloud migration initiative.",
-          "B": "Ms. Gallagher is a former physician at Valley Hospital.",
-          "C": "The hospital is facing a government data audit next week.",
-          "D": "Valley Hospital developed the cloud software being demonstrated."
+          "A": "Furniture",
+          "B": "Clothing",
+          "C": "Kitchen appliances",
+          "D": "Gardening tools"
         },
         "correctAnswer": "A",
-        "explanation": "<p><b>Dịch nghĩa:</b> Tại sao bài thuyết trình của cô Gallagher lại đặc biệt liên quan đến Bệnh viện Valley?<br/><b>Bằng chứng:</b> Ông Weber chỉ ra trong email: <i>\"which directly impacts our hospital's current cloud migration initiative\"</i> (ảnh hưởng trực tiếp đến sáng kiến chuyển đổi dữ liệu đám mây hiện tại của bệnh viện chúng ta). Chọn <b>(A)</b>.</p>",
-        "questionType": "Inference & Suggestion",
-        "subCategory": "Inference & Suggestion"
+        "explanation": "<p><b>Dịch nghĩa:</b> Coover Brothers có nhiều khả năng sản xuất sản phẩm nào nhất?<br/>(A) Đồ nội thất.<br/>(B) Quần áo.<br/>(C) Thiết bị nhà bếp.<br/>(D) Dụng cụ làm vườn.</p><p><b>Bằng chứng trích dẫn:</b> Trong email, cô Yee viết: <i>'feature our bedroom and dining room sets at the upcoming Home and Garden Exposition.'</i> (trưng bày các bộ phòng ngủ và phòng ăn của chúng ta tại Triển lãm Nhà & Vườn). Bộ phòng ngủ và bộ bàn ăn là đồ nội thất gia đình: <b>(A) Furniture</b>.</p>",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Cụm 'bedroom and dining room sets' là các sản phẩm đồ gỗ nội thất (furniture)."
+      },
+      {
+        "id": "ets22_t3_p7_194",
+        "number": 194,
+        "text": "What is implied about Brightway Airlines?",
+        "options": {
+          "A": "It is an international carrier.",
+          "B": "It offers flights to Omaha.",
+          "C": "It used Terminal C before the renovation.",
+          "D": "It has a private waiting area for passengers."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được ngụ ý về hãng hàng không Brightway Airlines?<br/>(A) Đây là một hãng hàng không quốc tế.<br/>(B) Hãng cung cấp các chuyến bay đến Omaha.<br/>(C) Hãng đã sử dụng Nhà ga C trước khi cải tạo.<br/>(D) Hãng có khu vực chờ riêng cho hành khách.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn 2 bài báo viết: <i>'The three major airlines that used Terminal C before the renovation will now be back in operation there. Also at Terminal C will be newcomer Paik Airways...'</i>. Nhìn vào bảng điện tử các hãng bay ở Nhà ga C: có 4 hãng bay là Brightway, Planet Z, Paik, Windrover. Vì Paik là tân binh mới đến (newcomer), nên 3 hãng còn lại (Brightway, Planet Z, Windrover) chính là 3 hãng lớn từng hoạt động tại Nhà ga C trước cải tạo: <b>(C) It used Terminal C before the renovation.</b></p>",
+        "questionType": "Cross-Reference",
+        "subCategory": "Inference Link",
+        "strategyHint": "Liên kết chéo danh sách 4 hãng trên bảng điện tử với mô tả: Paik là 'newcomer', còn 3 hãng còn lại (trong đó có Brightway) đã dùng Nhà ga C trước đây."
+      },
+      {
+        "id": "ets22_t3_p7_195",
+        "number": 195,
+        "text": "What is suggested about Ms. Yee?",
+        "options": {
+          "A": "She works in Omaha.",
+          "B": "She met with Mr. Benetti.",
+          "C": "Her flight departed late.",
+          "D": "Her luggage was lost."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được ngụ ý về cô Yee?<br/>(A) Cô ấy làm việc ở Omaha.<br/>(B) Cô ấy đã gặp ông Benetti.<br/>(C) Chuyến bay của cô ấy đã khởi hành muộn.<br/>(D) Hành lý của cô ấy đã bị thất lạc.</p><p><b>Bằng chứng trích dẫn:</b> Cô Yee viết trong email: <i>'I’m at the Harrison City Airport to catch the 3:30 flight home...'</i>. Nhìn vào bảng giờ bay khởi hành lúc 3:30 (chuyến bay WI645 đi Chicago của hãng Windrover), cột trạng thái ghi rõ: <b>DELAYED</b> (Bị hoãn/chậm trễ). Do đó chuyến bay về của cô ấy bị trễ giờ: <b>(C) Her flight departed late.</b></p>",
+        "questionType": "Cross-Reference",
+        "subCategory": "Inference Link",
+        "strategyHint": "Liên kết giờ bay 3:30 trong email với dòng chuyến bay 3:30 trên bảng điện tử hiển thị trạng thái DELAYED."
       }
     ]
   },
@@ -984,101 +1021,103 @@
     "passages": [
       {
         "id": "ets22_t3_p7_s15_p1",
-        "type": "Catalog",
-        "title": "Product Specifications",
-        "content": "<p><b>MODERNOVA OFFICE SYSTEMS — ERGONOMIC DESK SERIES</b><br/><br/>• <b>Model E-100 (Standard Manual):</b> Hand-crank height adjustment (28\"–44\"), laminated desktop, maximum weight capacity 150 lbs. — $299<br/>• <b>Model E-200 (Dual-Motor Electric):</b> Digital memory keypad with 4 presets, bamboo wood top, anti-collision sensor, capacity 250 lbs. — $499<br/>• <b>Model E-300 (Executive L-Shaped):</b> Triple-motor electric lift, solid walnut desktop, integrated wireless charging pad and cable management tray, capacity 350 lbs. — $799<br/>• <b>Model E-400 (Collaborative Conference):</b> Quad-motor dual standing conference table with integrated power hubs, seating for eight, capacity 500 lbs. — $1,299<br/><br/><i>Warranty: All electric motors are covered by a five-year replacement warranty. Desktops carry a ten-year structural guarantee.</i></p>"
+        "type": "Brochure",
+        "title": "Brochure",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><h3 style='margin-top:0;'>Zell Exteriors</h3><p>Zell Exteriors' metal roofing products offer many advantages over traditional roofing materials.</p><p><b>Benefit 1—Weather resistance:</b> Technology that provides greater protection from hail, wind, and rain.<br/><b>Benefit 2—Wide selection:</b> Large selection of panel types, trim options, and paint colors to choose from.<br/><b>Benefit 3—Satisfaction guarantee:</b> 30-year warranty for added peace of mind.<br/><b>Benefit 4—Established reputation:</b> Quality roofing from a trusted company.</p><p>For questions about specific products or to request a quote from our sales staff, complete our online contact form. All our roofing panels are fabricated at one of our regional manufacturing facilities, precut to the necessary dimensions for your roof, and shipped to a branch near you. Our professional installers will then take it from there.</p></div>"
       },
       {
         "id": "ets22_t3_p7_s15_p2",
-        "type": "Order Form",
-        "title": "Purchase Order",
-        "content": "<p><b>ORDER CONFIRMATION: #MN-78902</b><br/><b>Customer:</b> Patrick O'Connor, BrightPath Consulting<br/><b>Shipping Address:</b> 450 Lexington Avenue, Suite 1200, New York, NY<br/><b>Order Date:</b> November 3 | <b>Payment Method:</b> Corporate Visa<br/><br/><b>Order Summary:</b><br/>• <b>Item:</b> Model E-200 (Dual-Motor Electric Desk)<br/>• <b>Desktop Finish:</b> Natural Bamboo<br/>• <b>Quantity:</b> 12 units @ $499.00 = $5,988.00<br/>• <b>Accessories:</b> 12 Under-Desk Cable Management Trays @ $30.00 = $360.00<br/>• <b>Freight Shipping:</b> White-Glove On-Site Assembly Delivery = $350.00<br/>• <b>Total Paid:</b> $6,698.00<br/><br/><b>Expected Delivery Window:</b> November 10–12</p>"
+        "type": "Form",
+        "title": "Contact Form",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><h3 style='margin-top:0;'>Online Contact Form</h3><p><b>Name:</b> Gus Keenan<br/><b>E-mail:</b> g.keenan@autoewrite.net<br/><b>Phone:</b> 555-0188</p><p><b>Comments:</b><br/>I have been looking at various roofing materials, and the wide range of paint options makes your company my top choice. My shed building is an odd shade of purple, and I want to find a color that complements it. But I have a question. I would like the new metal roof to be placed on top of the old shingle roof I have. This would save money on time, labor, and disposal. Is that something you recommend? I have spent a lot of time reading online forums for professional contractors, and there are mixed opinions about this.</p></div>"
       },
       {
         "id": "ets22_t3_p7_s15_p3",
-        "type": "Email",
-        "title": "Delivery Status Update",
-        "sender": "support@modernova.com",
-        "recipient": "poconnor@brightpath.com",
-        "date": "November 9",
-        "content": "<p><b>To:</b> Patrick O'Connor &lt;poconnor@brightpath.com&gt;<br/><b>From:</b> Customer Logistics &lt;support@modernova.com&gt;<br/><b>Date:</b> November 9<br/><b>Subject:</b> Update regarding Order #MN-78902 Delivery Schedule</p><p>Dear Mr. O'Connor,</p><p>We are writing to update you regarding your delivery of twelve Model E-200 standing workstations. Our carrier dispatched your shipment from our regional warehouse in Pennsylvania yesterday. However, during the assembly staging inspection, our quality team noted that the under-desk cable management trays were inadvertently omitted from the primary freight pallet.</p><p>Your twelve desks will still be delivered and assembled by our white-glove team as scheduled on Monday, November 12, between 9:00 A.M. and 1:00 P.M. The twelve missing cable management trays have been shipped separately via express priority courier and are scheduled to arrive on Tuesday, November 13.</p><p>To apologize for this packaging oversight, we have refunded the $350 white-glove assembly fee back to your corporate Visa card. Thank you for choosing Modernova Office Systems.</p><p>Best regards,<br/>Modernova Logistics Team</p>"
+        "type": "E-mail",
+        "title": "E-mail",
+        "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'><p><b>To:</b> g.keenan@autoewrite.net<br/><b>From:</b> nshertz@zellexteriors.com<br/><b>Date:</b> May 20<br/><b>Subject:</b> Roofing Inquiry<br/><b>Attachment:</b> Zell Exteriors catalog</p><p>Dear Mr. Keenan,</p><p>A sales representative will contact you by phone within 48 hours, but first please look over the attached product catalog. Here are the four basic roofing types that we offer:</p><ul><li><b>SLP Snap Lock</b> – Steel panels with a locking feature that enables rapid installation.</li><li><b>XM Panel</b> – Aluminum panels with superior corrosion resistance. Ideal for wet climates.</li><li><b>QR Rigid</b> – Low-cost panels that can be installed directly on top of an existing roof.</li><li><b>WT Panel</b> – Our most durable commercial-grade steel. Available only in white and gray.</li></ul><p>Thank you,<br/>Nicola Shertz, Administrative Assistant, Zell Exteriors</p></div>"
       }
     ],
     "questions": [
       {
-        "id": "ets22_t3_p7_q196",
+        "id": "ets22_t3_p7_196",
         "number": 196,
-        "text": "What feature distinguishes the Model E-200 from the Model E-100?",
+        "text": "What does the brochure mention about Zell Exteriors?",
         "options": {
-          "A": "A hand-crank manual adjustment mechanism",
-          "B": "A dual-motor electric lift with digital memory presets",
-          "C": "A solid walnut L-shaped desktop",
-          "D": "Seating capacity for up to eight employees"
+          "A": "It encourages people to visit a showroom.",
+          "B": "It schedules projects several months in advance.",
+          "C": "It requires an on-site inspection before installation.",
+          "D": "It custom cuts products prior to delivery."
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Đặc điểm nào phân biệt mẫu E-200 với mẫu E-100?<br/><b>Bằng chứng:</b> Bảng thông số: Model E-100 là <i>\"Hand-crank height adjustment\"</i> (tay quay thủ công), trong khi Model E-200 là <i>\"Dual-Motor Electric: Digital memory keypad with 4 presets\"</i>. Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tờ rơi đề cập điều gì về Zell Exteriors?<br/>(A) Công ty khuyến khích mọi người đến thăm phòng trưng bày.<br/>(B) Công ty lên lịch các dự án trước vài tháng.<br/>(C) Công ty yêu cầu kiểm tra tại chỗ trước khi lắp đặt.<br/>(D) Công ty cắt sản phẩm theo kích thước tùy chỉnh trước khi giao hàng.</p><p><b>Bằng chứng trích dẫn:</b> Tờ rơi nêu: <i>'All our roofing panels are fabricated at one of our regional manufacturing facilities, precut to the necessary dimensions for your roof, and shipped to a branch near you.'</i> (được cắt sẵn theo kích thước cần thiết cho mái nhà của bạn rồi mới chuyển đến chi nhánh gần bạn). Việc cắt sẵn theo kích thước trước khi chuyển hàng chính là custom cuts products prior to delivery: <b>(D) It custom cuts products prior to delivery.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm từ 'precut to the necessary dimensions... and shipped' đồng nghĩa với 'custom cuts products prior to delivery'."
       },
       {
-        "id": "ets22_t3_p7_q197",
+        "id": "ets22_t3_p7_197",
         "number": 197,
-        "text": "How much did BrightPath Consulting spend on desk units alone?",
+        "text": "Considering Mr. Keenan’s comments, what listed benefit is probably most attractive to him?",
         "options": {
-          "A": "$360.00",
-          "B": "$499.00",
-          "C": "$5,988.00",
-          "D": "$6,698.00"
+          "A": "Benefit 1",
+          "B": "Benefit 2",
+          "C": "Benefit 3",
+          "D": "Benefit 4"
         },
-        "correctAnswer": "C",
-        "explanation": "<p><b>Dịch nghĩa:</b> BrightPath Consulting đã chi bao nhiêu chỉ riêng cho các bàn làm việc?<br/><b>Bằng chứng:</b> Đơn hàng ghi: <i>\"12 units @ $499.00 = $5,988.00\"</i>. Chọn <b>(C) $5,988.00</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Dựa trên bình luận của ông Keenan, lợi ích nào được liệt kê có lẽ hấp dẫn ông nhất?<br/>(A) Lợi ích 1.<br/>(B) Lợi ích 2.<br/>(C) Lợi ích 3.<br/>(D) Lợi ích 4.</p><p><b>Bằng chứng trích dẫn:</b> Ông Keenan viết: <i>'the wide range of paint options makes your company my top choice. My shed building is an odd shade of purple, and I want to find a color that complements it.'</i>. Đối chiếu với Brochure: <b>Benefit 2—Wide selection:</b> <i>'Large selection of panel types, trim options, and paint colors to choose from.'</i> (Lựa chọn phong phú về màu sơn). Do đó đó chính là Benefit 2: <b>(B) Benefit 2</b>.</p>",
+        "questionType": "Cross-Reference",
+        "subCategory": "Inference Link",
+        "strategyHint": "Liên kết từ khóa 'paint options / color' trong bình luận với 'Benefit 2: Wide selection (...paint colors)'."
       },
       {
-        "id": "ets22_t3_p7_q198",
+        "id": "ets22_t3_p7_198",
         "number": 198,
-        "text": "What problem occurred with BrightPath Consulting's order?",
+        "text": "What does the form indicate about Mr. Keenan?",
         "options": {
-          "A": "Several bamboo desktops arrived scratched.",
-          "B": "Cable management trays were omitted from the primary shipment.",
-          "C": "The delivery address was entered incorrectly.",
-          "D": "The electric motors failed quality testing."
+          "A": "He has researched about roofing options.",
+          "B": "He made a mistake when installing some materials.",
+          "C": "He wants his project completed quickly.",
+          "D": "He is unhappy with a previous contractor."
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Vấn đề gì đã xảy ra với đơn hàng của BrightPath Consulting?<br/><b>Bằng chứng:</b> Email logistics giải thích: <i>\"under-desk cable management trays were inadvertently omitted from the primary freight pallet\"</i> (các khay luồn dây cáp đã vô tình bị bỏ quên khỏi kiện hàng chính). Chọn <b>(B)</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Biểu mẫu chỉ ra điều gì về ông Keenan?<br/>(A) Ông ấy đã tìm hiểu nghiên cứu về các lựa chọn lợp mái.<br/>(B) Ông ấy đã mắc lỗi khi lắp đặt một số vật liệu.<br/>(C) Ông ấy muốn dự án của mình hoàn thành nhanh chóng.<br/>(D) Ông ấy không hài lòng với nhà thầu trước đó.</p><p><b>Bằng chứng trích dẫn:</b> Ông Keenan cho biết: <i>'I have spent a lot of time reading online forums for professional contractors...'</i> (Tôi đã dành nhiều thời gian đọc các diễn đàn trực tuyến dành cho các nhà thầu chuyên nghiệp...). Điều này chứng minh ông đã tự mình nghiên cứu, tìm hiểu rất kỹ: <b>(A) He has researched about roofing options.</b></p>",
+        "questionType": "Inference",
+        "subCategory": "Inference",
+        "strategyHint": "Cụm 'spent a lot of time reading online forums' đồng nghĩa với 'has researched'."
       },
       {
-        "id": "ets22_t3_p7_q199",
+        "id": "ets22_t3_p7_199",
         "number": 199,
-        "text": "When will the primary desks be delivered and assembled?",
+        "text": "What kind of roofing product will Mr. Keenan most likely select?",
         "options": {
-          "A": "November 3",
-          "B": "November 9",
-          "C": "November 12",
-          "D": "November 13"
+          "A": "SLP Snap Lock",
+          "B": "XM Panel",
+          "C": "QR Rigid",
+          "D": "WT Panel"
         },
         "correctAnswer": "C",
-        "explanation": "<p><b>Dịch nghĩa:</b> Khi nào các bàn làm việc chính sẽ được giao và lắp ráp?<br/><b>Bằng chứng:</b> Email nêu: <i>\"Your twelve desks will still be delivered and assembled... on Monday, November 12, between 9:00 A.M. and 1:00 P.M.\"</i>. Chọn <b>(C) November 12</b>.</p>",
-        "questionType": "Inference & Suggestion",
-        "subCategory": "Inference & Suggestion"
+        "explanation": "<p><b>Dịch nghĩa:</b> Ông Keenan nhiều khả năng sẽ chọn loại sản phẩm lợp mái nào nhất?<br/>(A) SLP Snap Lock.<br/>(B) XM Panel.<br/>(C) QR Rigid.<br/>(D) WT Panel.</p><p><b>Bằng chứng trích dẫn:</b> Trong biểu mẫu, ông Keenan nêu yêu cầu cụ thể: <i>'I would like the new metal roof to be placed on top of the old shingle roof I have.'</i> (Tôi muốn mái kim loại mới được đặt trực tiếp lên trên mái ngói cũ sẵn có). Trong email phản hồi của cô Shertz: <b>QR Rigid</b> được mô tả là <i>'Low-cost panels that can be installed directly on top of an existing roof.'</i> (Tấm lợp có thể lắp đặt trực tiếp lên trên mái nhà hiện có). Do đó sản phẩm phù hợp hoàn hảo với yêu cầu của ông là QR Rigid: <b>(C) QR Rigid</b>.</p>",
+        "questionType": "Cross-Reference",
+        "subCategory": "Detail Link",
+        "strategyHint": "Khớp yêu cầu 'placed on top of the old shingle roof' trong form với tính năng của QR Rigid 'installed directly on top of an existing roof' trong email."
       },
       {
-        "id": "ets22_t3_p7_q200",
+        "id": "ets22_t3_p7_200",
         "number": 200,
-        "text": "What compensation does Modernova provide for the inconvenience?",
+        "text": "What does Ms. Shertz tell Mr. Keenan?",
         "options": {
-          "A": "A free upgrade to the Model E-300 desk",
-          "B": "A refund of the $350 assembly delivery fee",
-          "C": "A ten percent discount on all future orders",
-          "D": "An extension of the motor replacement warranty"
+          "A": "He can save money by not delaying a decision.",
+          "B": "He should look over a proposed contract.",
+          "C": "He will be called by a Zell representative.",
+          "D": "He ordered the wrong materials in the past."
         },
-        "correctAnswer": "B",
-        "explanation": "<p><b>Dịch nghĩa:</b> Modernova cung cấp khoản bồi thường nào cho sự bất tiện?<br/><b>Bằng chứng:</b> Cuối email: <i>\"we have refunded the $350 white-glove assembly fee back to your corporate Visa card\"</i>. Chọn <b>(B) A refund of the $350 assembly delivery fee</b>.</p>",
-        "questionType": "Detail & Factual",
-        "subCategory": "Detail & Factual"
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Cô Shertz nói gì với ông Keenan?<br/>(A) Ông có thể tiết kiệm tiền bằng cách không trì hoãn quyết định.<br/>(B) Ông nên xem qua bản hợp đồng đề xuất.<br/>(C) Ông sẽ nhận được cuộc gọi từ đại diện của Zell.<br/>(D) Ông đã đặt nhầm vật liệu trong quá khứ.</p><p><b>Bằng chứng trích dẫn:</b> Câu đầu tiên trong email của cô Shertz viết: <i>'A sales representative will contact you by phone within 48 hours...'</i> (Một đại diện bán hàng sẽ liên hệ với bạn qua điện thoại trong vòng 48 giờ...). Điều này tương đương với <b>(C) He will be called by a Zell representative.</b></p>",
+        "questionType": "Detail",
+        "subCategory": "Detail",
+        "strategyHint": "Cụm từ 'A sales representative will contact you by phone' đồng nghĩa với 'He will be called by a Zell representative'."
       }
     ]
   }

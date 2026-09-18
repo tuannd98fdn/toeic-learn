@@ -1,0 +1,296 @@
+import json
+
+part6_data = [
+  {
+    "id": "ets22_t3_p6_s01",
+    "title": "Questions 131-134 refer to the following information.",
+    "type": "Information",
+    "content": "<p>Thank you for shopping with Danforth Fashions online. Our quality-control team carefully inspects all products (131) ___ packaging to ensure customer satisfaction. (132) ___. If not, we make exchanges or returns easy. Simply contact us at service@danforthfashions.com if you need a different size, color, or pattern—or if you are dissatisfied for any reason. Your exchange (133) ___ right away. To return an item for a refund, use the prepaid return shipping label included with your order and send it back to us in its original packaging unused and undamaged. We issue refunds to the original method of payment (134) ___ the return shipping fee.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p6_131",
+        "number": 131,
+        "text": "",
+        "options": {
+          "A": "in case",
+          "B": "as much as",
+          "C": "prior to",
+          "D": "in keeping with"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Đội ngũ kiểm soát chất lượng của chúng tôi cẩn thận kiểm tra tất cả các sản phẩm trước khi đóng gói để đảm bảo sự hài lòng của khách hàng.</p><p><b>Phân tích ngữ nghĩa & ngữ pháp:</b> Cụm từ <i>prior to</i> là giới từ mang nghĩa 'trước khi' (+ danh từ/V-ing <i>packaging</i>). Phù hợp nhất về ngữ cảnh quy trình kiểm hàng trước khi đóng gói.<br/>- (A) <i>in case</i>: phòng khi.<br/>- (B) <i>as much as</i>: nhiều như.<br/>- (D) <i>in keeping with</i>: phù hợp với, tuân theo.</p>",
+        "type": "Preposition",
+        "subCategory": "Prepositions & Conjunctions",
+        "grammarTag": "Time Preposition"
+      },
+      {
+        "id": "ets22_t3_p6_132",
+        "number": 132,
+        "text": "",
+        "options": {
+          "A": "We hope you are entirely pleased with your purchase.",
+          "B": "We expect to be redesigning our Web site this summer.",
+          "C": "We value all of our loyal customers.",
+          "D": "We noticed that your billing address has changed."
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chúng tôi hy vọng bạn hoàn toàn hài lòng với đơn hàng của mình.</p><p><b>Phân tích tính liên kết văn bản:</b> Câu tiếp theo là <i>'If not, we make exchanges or returns easy.'</i> (Nếu không, chúng tôi giúp việc đổi hoặc trả hàng trở nên dễ dàng). Đại từ phủ định <i>'If not'</i> (Nếu không hài lòng) liên kết trực tiếp với giả định ở câu trước: <b>(A) We hope you are entirely pleased with your purchase</b>.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Structure",
+        "grammarTag": "Coherence & Sentence Insertion"
+      },
+      {
+        "id": "ets22_t3_p6_133",
+        "number": 133,
+        "text": "",
+        "options": {
+          "A": "will be processed",
+          "B": "was processed",
+          "C": "is processing",
+          "D": "to be processing"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Yêu cầu đổi hàng của bạn sẽ được xử lý ngay lập tức.</p><p><b>Phân tích ngữ pháp:</b> Chủ ngữ <i>Your exchange</i> (sự đổi hàng) là đối tượng chịu tác động, do đó động từ cần chia ở thể bị động. Ngữ cảnh đưa ra lời hứa hẹn trong tương lai khi khách hàng liên hệ nên dùng thì tương lai đơn bị động: <b>(A) will be processed</b>.<br/>- (B) <i>was processed</i>: thì quá khứ đơn.<br/>- (C) <i>is processing</i>: dạng chủ động thì hiện tại tiếp diễn.<br/>- (D) <i>to be processing</i>: dạng nguyên mẫu.</p>",
+        "type": "Verb Tense & Voice",
+        "subCategory": "Verbs & Tenses",
+        "grammarTag": "Passive Voice - Future Simple"
+      },
+      {
+        "id": "ets22_t3_p6_134",
+        "number": 134,
+        "text": "",
+        "options": {
+          "A": "past",
+          "B": "above",
+          "C": "aboard",
+          "D": "minus"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chúng tôi hoàn tiền theo phương thức thanh toán ban đầu trừ đi phí vận chuyển hoàn trả.</p><p><b>Phân tích từ vựng:</b> Giới từ <i>minus</i> mang nghĩa 'trừ đi, khấu trừ' (khoản tiền). Ở đây khoản tiền hoàn lại được hoàn sau khi đã khấu trừ phí vận chuyển (<i>minus the return shipping fee</i>).<br/>- (A) <i>past</i>: qua, quá.<br/>- (B) <i>above</i>: phía trên.<br/>- (C) <i>aboard</i>: trên tàu/xe.</p>",
+        "type": "Preposition",
+        "subCategory": "Prepositions & Conjunctions",
+        "grammarTag": "Preposition of Subtraction"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p6_s02",
+    "title": "Questions 135-138 refer to the following notice.",
+    "type": "Notice",
+    "content": "<p><b>Attention, Alden-Apner Industries Employees:</b></p><p>Please remember that the switch to our new e-mail software will begin at 11:00 P.M. on Sunday, May 2. All (135) ___ information in your account, including contacts and calendar events, will be moved to the new system by 4:00 A.M. on Monday, May 3. Though we are working diligently to anticipate and provide solutions for all potential issues, some employees may experience difficulty (136) ___ attempting to log in to their accounts after the switch. In addition, there is a remote possibility that some information may be lost. (137) ___, be sure to back up any critical e-mail files as soon as possible. (138) ___.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p6_135",
+        "number": 135,
+        "text": "",
+        "options": {
+          "A": "existed",
+          "B": "existence",
+          "C": "to exist",
+          "D": "existing"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tất cả thông tin hiện có trong tài khoản của bạn, bao gồm danh bạ và sự kiện lịch, sẽ được chuyển sang hệ thống mới trước 4:00 sáng thứ Hai, ngày 3 tháng 5.</p><p><b>Phân tích từ loại:</b> Chỗ trống đứng trước danh từ <i>information</i> và sau từ hạn định <i>All</i>, cần một tính từ hoặc hiện tại phân từ mang tính chất mô tả. <b>(D) existing</b> là tính từ/phân từ mang nghĩa 'hiện có, hiện hữu' (<i>existing information</i> = thông tin hiện có).<br/>- (A) <i>existed</i>: động từ quá khứ.<br/>- (B) <i>existence</i>: danh từ.<br/>- (C) <i>to exist</i>: to-infinitive.</p>",
+        "type": "Word Form",
+        "subCategory": "Word Form",
+        "grammarTag": "Participle as Adjective"
+      },
+      {
+        "id": "ets22_t3_p6_136",
+        "number": 136,
+        "text": "",
+        "options": {
+          "A": "when",
+          "B": "plus",
+          "C": "already",
+          "D": "whose"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> ...một số nhân viên có thể gặp khó khăn khi cố gắng đăng nhập vào tài khoản của mình sau khi chuyển đổi.</p><p><b>Phân tích cấu trúc:</b> Cấu trúc rút gọn mệnh đề thời gian: <i>when + V-ing</i> (<i>when attempting to log in...</i> = khi cố gắng đăng nhập).<br/>- (B) <i>plus</i>: cộng thêm.<br/>- (C) <i>already</i>: đã rồi.<br/>- (D) <i>whose</i>: đại từ quan hệ sở hữu.</p>",
+        "type": "Conjunction",
+        "subCategory": "Prepositions & Conjunctions",
+        "grammarTag": "Reduced Adverbial Clause with When"
+      },
+      {
+        "id": "ets22_t3_p6_137",
+        "number": 137,
+        "text": "",
+        "options": {
+          "A": "Previously",
+          "B": "Otherwise",
+          "C": "Even so",
+          "D": "For this reason"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Vì lý do này, hãy đảm bảo sao lưu mọi tệp email quan trọng càng sớm càng tốt.</p><p><b>Phân tích liên từ / trạng từ liên kết:</b> Câu trước nêu nguyên nhân: <i>there is a remote possibility that some information may be lost</i> (có khả năng nhỏ một số thông tin bị mất). Câu sau là biện pháp phòng ngừa. Trạng từ liên kết chỉ nguyên nhân - hệ quả phù hợp nhất là <b>(D) For this reason</b> (Vì lý do này).<br/>- (A) <i>Previously</i>: trước đây.<br/>- (B) <i>Otherwise</i>: nếu không thì.<br/>- (C) <i>Even so</i>: mặc dù vậy.</p>",
+        "type": "Transition Word",
+        "subCategory": "Prepositions & Conjunctions",
+        "grammarTag": "Cause & Effect Transition"
+      },
+      {
+        "id": "ets22_t3_p6_138",
+        "number": 138,
+        "text": "",
+        "options": {
+          "A": "The new software will be ordered this week.",
+          "B": "The current system will be reactivated in June.",
+          "C": "If you need assistance with this, please contact the IT department.",
+          "D": "In that case, you must complete the installation yourself."
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Nếu bạn cần hỗ trợ về việc này, vui lòng liên hệ bộ phận CNTT.</p><p><b>Phân tích mạch văn:</b> Câu trước vừa yêu cầu sao lưu email quan trọng (<i>back up any critical e-mail files</i>). Đại từ <i>this</i> trong phương án <b>(C) If you need assistance with this, please contact the IT department</b> thay thế cho việc sao lưu dữ liệu này. Câu sau đó thông báo về buổi đào tạo nhân viên tuần tới.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Structure",
+        "grammarTag": "Coherence & Sentence Insertion"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p6_s03",
+    "title": "Questions 139-142 refer to the following e-mail.",
+    "type": "E-mail",
+    "content": "<p><b>From:</b> Hong Truong &lt;htruong@jansenwebbfoundation.ca&gt;<br/><b>Sent:</b> Friday, 16 November<br/><b>To:</b> Staff, Friends, and Stakeholders<br/><b>Subject:</b> JWF’s new budget director</p><p>To the JWF team and our community partners:</p><p>(139) ___. I just want to let you know that Sofia Vargas (140) ___ as the Jansen-Webb Foundation’s new budget director. Ms. Vargas has a strong background in fiscal (141) ___ within the nonprofit sector. Ms. Vargas brings with her a wealth of experience in organizational finance, including most recently at The Lawton Children’s Centre in Winnipeg. Ms. Vargas started her employment with us this morning, so please stop in and introduce (142) ___ to her.</p><p>Best,<br/>Hong Truong<br/>CEO, Jansen-Webb Foundation</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p6_139",
+        "number": 139,
+        "text": "",
+        "options": {
+          "A": "This is a request to be prompt.",
+          "B": "Thanks for the generous contribution.",
+          "C": "All are welcome here.",
+          "D": "I hope that all are well."
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tôi hy vọng mọi người đều khỏe mạnh.</p><p><b>Phân tích tính liên kết văn bản:</b> Sau lời chào mở đầu thư gửi tập thể (<i>To the JWF team and our community partners:</i>), câu chào hỏi xã giao thông dụng trong thư thương mại là <b>(D) I hope that all are well</b> (Tôi hy vọng mọi người đều khỏe mạnh/mọi việc đều tốt đẹp) trước khi đi vào thông báo chính.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Structure",
+        "grammarTag": "Email Opening & Salutation Coherence"
+      },
+      {
+        "id": "ets22_t3_p6_140",
+        "number": 140,
+        "text": "",
+        "options": {
+          "A": "is hiring",
+          "B": "will be hired",
+          "C": "has been hired",
+          "D": "is being hired"
+        },
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tôi muốn cho các bạn biết rằng Sofia Vargas đã được tuyển dụng làm giám đốc ngân sách mới của Jansen-Webb Foundation.</p><p><b>Phân tích ngữ pháp:</b> Việc tuyển dụng đã hoàn tất (câu sau nêu rõ cô ấy đã bắt đầu làm việc từ sáng nay). Chủ ngữ <i>Sofia Vargas</i> là người được tuyển dụng (bị động). Do đó cần thì hiện tại hoàn thành ở thể bị động: <b>(C) has been hired</b>.</p>",
+        "type": "Verb Tense & Voice",
+        "subCategory": "Verbs & Tenses",
+        "grammarTag": "Present Perfect Passive"
+      },
+      {
+        "id": "ets22_t3_p6_141",
+        "number": 141,
+        "text": "",
+        "options": {
+          "A": "referral",
+          "B": "administrator",
+          "C": "running",
+          "D": "management"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Cô Vargas có nền tảng vững chắc về quản lý tài chính trong lĩnh vực phi lợi nhuận.</p><p><b>Phân tích ngữ cảnh & từ vựng:</b> Cụm từ cố định <i>fiscal management</i> nghĩa là 'quản lý tài chính / quản lý ngân sách'. Phù hợp hoàn hảo với chức danh <i>budget director</i> được giới thiệu.<br/>- (A) <i>referral</i>: sự giới thiệu.<br/>- (B) <i>administrator</i>: người quản trị (danh từ chỉ người).<br/>- (C) <i>running</i>: sự vận hành.</p>",
+        "type": "Vocabulary",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Collocation: Fiscal Management"
+      },
+      {
+        "id": "ets22_t3_p6_142",
+        "number": 142,
+        "text": "",
+        "options": {
+          "A": "yourself",
+          "B": "him",
+          "C": "them",
+          "D": "ourselves"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> ...vì vậy hãy ghé qua và tự giới thiệu bản thân với cô ấy.</p><p><b>Phân tích ngữ pháp:</b> Câu mệnh lệnh (<i>please stop in and introduce...</i>) ngầm hiểu chủ ngữ là <i>you</i>. Đại từ phản thân tương ứng với ngôi thứ hai là <b>(A) yourself</b> (hoặc các bạn: chính bản thân bạn). Cụm từ <i>introduce yourself to someone</i>: tự giới thiệu bản thân với ai đó.</p>",
+        "type": "Pronoun",
+        "subCategory": "Pronouns & Determiners",
+        "grammarTag": "Reflexive Pronoun in Imperative Sentence"
+      }
+    ]
+  },
+  {
+    "id": "ets22_t3_p6_s04",
+    "title": "Questions 143-146 refer to the following flyer.",
+    "type": "Flyer",
+    "content": "<p><b>Jamaica National Tourist Organization Offers Free Cultural Passes</b></p><p>The Jamaica National Tourist Organization (JAMTO) announces an exciting new program that provides free entry to a variety of cultural attractions. The program is sponsored by the JAMTO (143) ___ the hotels and businesses listed on the back of this flyer. Together we (144) ___ you to take advantage of some of the finest cultural and educational experiences that Jamaica has to offer. (145) ___ attractions include the Caribbean National Gardens, Montego Bay Potters Gallery, Jamaican Music Experience, and many others.</p><p>To obtain your pass, visit our Web site at www.jamto.org/freepass or stop by any JAMTO office. One pass is valid for up to five people. (146) ___.</p>",
+    "questions": [
+      {
+        "id": "ets22_t3_p6_143",
+        "number": 143,
+        "text": "",
+        "options": {
+          "A": "despite",
+          "B": "instead of",
+          "C": "except for",
+          "D": "along with"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chương trình được tài trợ bởi JAMTO cùng với các khách sạn và doanh nghiệp được liệt kê ở mặt sau của tờ rơi này.</p><p><b>Phân tích ngữ nghĩa:</b> Cụm liên từ/giới từ <i>along with</i> mang nghĩa 'cùng với'. Câu tiếp theo viết: <i>'Together we invite you...'</i> (Chúng tôi cùng nhau mời bạn...), chứng tỏ có sự đồng tài trợ và hợp tác.<br/>- (A) <i>despite</i>: mặc dù.<br/>- (B) <i>instead of</i>: thay vì.<br/>- (C) <i>except for</i>: ngoại trừ.</p>",
+        "type": "Preposition",
+        "subCategory": "Prepositions & Conjunctions",
+        "grammarTag": "Compound Preposition (along with)"
+      },
+      {
+        "id": "ets22_t3_p6_144",
+        "number": 144,
+        "text": "",
+        "options": {
+          "A": "invite",
+          "B": "invited",
+          "C": "may invite",
+          "D": "were inviting"
+        },
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Chúng tôi cùng nhau mời bạn tận dụng một số trải nghiệm văn hóa và giáo dục tuyệt vời nhất mà Jamaica mang lại.</p><p><b>Phân tích ngữ pháp:</b> Chủ ngữ là <i>Together we</i>, diễn tả thông điệp hiện tại gửi tới người đọc tờ rơi. Động từ chia ở thì hiện tại đơn ở dạng nguyên thể phù hợp với chủ ngữ ngôi thứ nhất số nhiều <i>we</i>: <b>(A) invite</b>.</p>",
+        "type": "Verb Tense & Voice",
+        "subCategory": "Verbs & Tenses",
+        "grammarTag": "Present Simple Tense"
+      },
+      {
+        "id": "ets22_t3_p6_145",
+        "number": 145,
+        "text": "",
+        "options": {
+          "A": "Early",
+          "B": "Past",
+          "C": "Affordable",
+          "D": "Participating"
+        },
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Các địa điểm thu hút tham gia bao gồm Vườn quốc gia Caribbean, Phòng trưng bày thợ gốm vịnh Montego...</p><p><b>Phân tích từ loại & ngữ cảnh:</b> Hiện tại phân từ <i>Participating</i> đóng vai trò tính từ bổ nghĩa cho <i>attractions</i>: <i>participating attractions</i> (các điểm tham quan tham gia vào chương trình thẻ văn hóa này).<br/>- (A) <i>Early</i>: sớm.<br/>- (B) <i>Past</i>: quá khứ.<br/>- (C) <i>Affordable</i>: giá cả phải chăng.</p>",
+        "type": "Word Form",
+        "subCategory": "Word Form",
+        "grammarTag": "Participle Adjective"
+      },
+      {
+        "id": "ets22_t3_p6_146",
+        "number": 146,
+        "text": "",
+        "options": {
+          "A": "Thank you for your order.",
+          "B": "It can be used for three days.",
+          "C": "The bus runs only on weekdays.",
+          "D": "All major credit cards are accepted."
+        },
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Thẻ có thể được sử dụng trong ba ngày.</p><p><b>Phân tích tính liên kết văn bản:</b> Câu trước vừa nêu điều kiện hiệu lực của thẻ: <i>'One pass is valid for up to five people.'</i> (Một thẻ có giá trị cho tối đa năm người). Phương án <b>(B) It can be used for three days</b> bổ sung thông tin thời hạn hiệu lực của thẻ, nối tiếp tự nhiên với chủ ngữ <i>It</i> thay thế cho <i>One pass</i>.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Structure",
+        "grammarTag": "Coherence & Sentence Insertion"
+      }
+    ]
+  }
+]
+
+with open('/Users/bravee06/toeic-learn/public/data/ets2022/test3/part6.json', 'w', encoding='utf-8') as f:
+    json.dump(part6_data, f, indent=2, ensure_ascii=False)
+print('Part 6 written successfully!')

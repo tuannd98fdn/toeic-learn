@@ -1149,11 +1149,134 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 46: Scan Và Đồng Bộ Dữ Liệu Gốc Part 7 (Đọc Hiểu Đoạn Văn) Cho ETS 2022 Test 2, 3, 4
+### ✅ Vấn Đề 46: Scan Và Đồng Bộ Dữ Liệu Gốc Reading (Part 5, 6, 7) Cho ETS 2022 Test 2 [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Tiếp nối phần Listening đã hoàn tất 100%, 100 câu phần Reading (Part 5: Q101-130, Part 6: Q131-146, Part 7: Q147-200) của ETS 2022 Test 2 cần được thay thế hoàn toàn dữ liệu giả định bằng câu hỏi, đáp án, và bài đọc thực tế từ tài liệu gốc `ETS 2022 Test 2.pdf`.
+* **Chi tiết triển khai**:
+  1. **Part 5 (Q101–Q130, 30 câu hỏi)**:
+     - Trích xuất 100% câu hỏi chuẩn từ đề thi thật (Ms. Budrow, Al's Cafe, Tanek Freight, v.v.).
+     - Khớp 100% bảng đáp án chính thức ETS/YBM (`dap_an_test_2.png`).
+     - Viết lời giải chi tiết tiếng Việt (Dịch nghĩa, Phân tích ngữ pháp, Cảnh báo bẫy thi) và gắn đầy đủ `subCategory`, `grammarTag`, `clueHint`, `syntaxBreakdown`.
+  2. **Part 6 (Q131–Q146, 4 bài đọc, 16 câu hỏi)**:
+     - Trích xuất 4 bài đọc nguyên bản: *Atzeret game launch memo*, *Technical query email*, *Uppercut Clothing Hanger web page*, *Baxter Art Supplies application*.
+     - Giữ nguyên định dạng blank tương tác `(131) ___` để hiển thị và highlight chuẩn trong giao diện chia đôi (Split View).
+     - Đáp án khớp 100% official key.
+  3. **Part 7 (Q147–Q200, 15 cụm bài đọc, 54 câu hỏi)**:
+     - Trích xuất đầy đủ 10 bài đọc đơn (Q147–Q175: Walker Booksellers, Durhamtown Orchestra, Bonnie Ruiz chat, Watford Shredding, v.v.), 2 bài đọc đôi (Q176–Q185: Drymotic, Carl Ybor), và 3 bài đọc ba (Q186–Q200: Caspi, Alacritum PRO, Charlotte's Cafe).
+     - Định dạng HTML ngữ nghĩa sạch sẽ, hỗ trợ hoàn hảo chế độ tra từ Popover Dictionary, Zoom font chữ, Responsive Split View.
+     - Lời giải phân tích bằng chứng trích dẫn chi tiết tiếng Việt cho từng câu hỏi.
+  4. **Tích Hợp Giao Diện & Sub-skill Mode**:
+     - Nút chọn bộ đề `ets2022_test2` và `all` trên trang `/part5`, `/part6`, `/part7`.
+     - Tự động gom câu hỏi (cross-test pooling) khi luyện chuyên sâu theo chủ điểm.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ nghiêm ngặt **NO UI EMOJIS (STRICT)**: 0 emoji trên toàn bộ JSON và rendered DOM.
+  - Vượt qua kiểm định tính xác thực `scripts/ingest_real_ets.mjs public/data/ets2022/test2` (PASS 100%).
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% với 35/35 routes tĩnh & động.
+  - Zod Schema: Toàn bộ 7 Parts vượt qua Zod schema validation.
+  - Kiểm thử tự động Playwright E2E (`scratch/test_ets2022_test2_reading_full_e2e.mjs`): PASS 100% trên `/part5`, `/part6`, `/part7`, và `/exam?test=ets2022_test2`.
+  - Ảnh chụp thực tế:
+    - Luyện tập Part 5 Test 2: `scratch/part5_test2_verified.png`.
+    - Luyện tập Part 6 Test 2: `scratch/part6_test2_verified.png`.
+    - Luyện tập Part 7 Test 2: `scratch/part7_test2_verified.png`.
+    - Thi thử Full Exam Test 2: `scratch/exam_ets2022_test2_reading_verified.png`.
+
+---
+
+### Vấn Đề 47: Khai Phá & Đồng Bộ Toàn Bộ Đề Thi Thật ETS 2022 Test 3 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN) - ĐÃ HOÀN THÀNH
+* **Bối cảnh & Kết quả**:
+  - Đã nạp thành công toàn diện 100% đề thi thật **ETS 2022 Test 3** (200 câu hỏi: LC 100 câu Q1–Q100, RC 100 câu Q101–Q200).
+  - Khai thác audio phòng thu YBM chính hãng `TEST 3.mp3` và cắt audio câu đơn/hội thoại/bài nói chuẩn xác bằng OpenAI Whisper.
+  - Trích xuất ảnh scan Part 1 và biểu đồ graphics Part 3 & 4 từ booklet đề thi thật gốc:
+    - 6 ảnh Part 1 (`t3_p1_01.jpg` đến `t3_p1_06.jpg`).
+    - 3 biểu đồ Part 3 (`t3_p3_g01.jpg` Q63, `t3_p3_g02.jpg` Q66, `t3_p3_g03.jpg` Q69).
+    - 2 biểu đồ Part 4 (`t3_p4_g01.jpg` Q96, `t3_p4_g02.jpg` Q99).
+  - Toàn bộ 65 tệp media phòng thu và ảnh scan được lưu trữ trên GitHub Releases CDN tag `ets2022-assets` (`tuannd98fdn/toeic-learn`), đảm bảo tiêu chuẩn **Option A Zero-Bloat** (0 KB tệp nhị phân lưu trong git repo).
+  - Số hóa toàn bộ 7 Parts theo cấu trúc chuẩn:
+    - `part1.json`: 6 câu, transcripts Whisper, giải thích chi tiết, đáp án chuẩn (1:A, 2:A, 3:C, 4:D, 5:B, 6:D).
+    - `part2.json`: 25 câu (Q7–Q31), audio cắt từng câu, đáp án chuẩn ETS (7:B..31:B).
+    - `part3.json`: 13 đoạn đối thoại (Q32–Q70), transcript 2-3 người nói, 3 biểu đồ scan chuẩn ETS (32:A..70:C).
+    - `part4.json`: 10 bài nói ngắn (Q71–Q100), transcript bài nói độc thoại, 2 biểu đồ scan chuẩn ETS (71:B..100:B).
+    - `part5.json`: 30 câu (Q101–Q130), bóc tách cấu trúc cú pháp `syntaxBreakdown`, dấu hiệu nhận biết `clueHint`, đáp án chuẩn ETS (101:C..130:C).
+    - `part6.json`: 4 đoạn văn (Q131–Q146), định dạng `(131) ___`, đáp án chuẩn ETS (131:C..146:B).
+    - `part7.json`: 15 sets (Q147–Q200: 10 single passages, 2 double passages, 3 triple passages) chuẩn ngữ cảnh bài đọc ETS, đáp án chuẩn ETS (147:C..200:C).
+  - Tích hợp hệ thống:
+    - Cập nhật `public/data/tests_index.json`.
+    - Cập nhật router kiểm định và tiêu đề trong `src/app/exam/page.tsx`.
+    - Hỗ trợ chọn lọc Test 3 và gom câu hỏi chuyên sâu (cross-test pooling) tại `/part5`, `/part6`, `/part7`.
+* **Quy chuẩn & Kiểm định**:
+  - Tuân thủ nghiêm ngặt **NO UI EMOJIS (STRICT)**: 0 emoji trên toàn bộ JSON data và giao diện người dùng.
+  - Vượt qua kiểm định tính xác thực `scripts/ingest_real_ets.mjs public/data/ets2022/test3` (PASS 100%).
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build tĩnh Next.js: `npm run build` thành công 100% (35/35 routes tối ưu).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_ets2022_test3_full_e2e.mjs`): PASS 100% trên toàn bộ 8 bài test (/part1, /part2, /part3, /part4, /part5, /part6, /part7, /exam Full & RC).
+  - Ảnh chụp thực tế:
+    - Part 1 Trainer: `scratch/part1_test3_verified.png`.
+    - Part 2 Trainer: `scratch/part2_test3_verified.png`.
+    - Part 3 Trainer: `scratch/part3_test3_verified.png`.
+    - Part 4 Trainer: `scratch/part4_test3_verified.png`.
+    - Part 5 Trainer: `scratch/part5_test3_verified.png`.
+    - Part 6 Trainer: `scratch/part6_test3_verified.png`.
+    - Part 7 Trainer: `scratch/part7_test3_verified.png`.
+    - Full Exam Test 3: `scratch/exam_ets2022_test3_verified.png`.
+    - RC Section Exam: `scratch/exam_ets2022_test3_rc_verified.png`.
+
+---
+
+### ✅ Vấn Đề 48: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 4 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
+* **Mô tả**:
+  - Số hóa và chuẩn hóa toàn diện 200 câu hỏi đề thi thật ETS 2022 Test 4 (Listening Q1–Q100 và Reading Q101–Q200) từ tài liệu gốc bản quyền YBM.
+  - Cắt và trích xuất toàn bộ media: 54 audio clips (LC Part 1–4) và 11 hình ảnh (Part 1 photos, Part 3 graphics Q63, Q67, Q69; Part 4 graphics Q96, Q100).
+* **Giải pháp & Kiến trúc Zero-Bloat**:
+  - **Zero Repository Bloat (Option A)**: 100% 65 tệp media (11 ảnh jpg và 54 file audio mp3) được lưu trữ trên GitHub Releases CDN tag `ets2022-assets` (`tuannd98fdn/toeic-learn`), tiền tố `t4_`. Dung lượng git repo tăng 0 KB media!
+  - **100% Authenticity Gate**:
+    - Ground truth đáp án chuẩn ETS được đối soát từng câu một trực tiếp từ `scratch/dap_an_test_4.png` và đối chiếu tự động bằng script `scripts/verify_test4_all_answers.py` -> 200/200 đáp án khớp 100%.
+    - Audio trích xuất từ studio recording gốc `TEST 4.mp3`, cắt bằng ffmpeg stream copy (`-vn -c:a copy`) dựa trên Whisper timestamps chuẩn mili-giây.
+    - Graphics và ảnh scan chất lượng cao từ booklet đề thi thật `test4_key.pdf`.
+  - **Dữ liệu 7 Parts Chuẩn Zod Schema**:
+    - `public/data/ets2022/test4/part1.json`: 6 câu hỏi tranh ảnh, Whisper transcript 4 lựa chọn (A, B, C, D), từ vựng & bẫy ETS.
+    - `public/data/ets2022/test4/part2.json`: 25 câu hỏi phản xạ nhanh (Q7–Q31), Whisper transcript câu hỏi và 3 lựa chọn, phân tích ngữ pháp & dịch nghĩa.
+    - `public/data/ets2022/test4/part3.json`: 13 hội thoại (Q32–Q70), audio player, đầy đủ 3 biểu đồ graphic (Q63, Q67, Q69), transcript hội thoại chi tiết.
+    - `public/data/ets2022/test4/part4.json`: 10 bài nói ngắn (Q71–Q100), audio player, 2 biểu đồ graphic (Q96, Q100), transcript bài nói.
+    - `public/data/ets2022/test4/part5.json`: 30 câu hỏi ngữ pháp (Q101–Q130), `syntaxBreakdown`, `clueHint`, `grammarTag`, dịch nghĩa và cảnh báo bẫy ETS.
+    - `public/data/ets2022/test4/part6.json`: 4 bài đọc điền từ (Q131–Q146), `title`, `type`, `content`, phân loại `Sentence Insertion`, `Grammar`, `Business Vocabulary`.
+    - `public/data/ets2022/test4/part7.json`: 15 sets (Q147–Q200), single/double/triple passages với HTML format, trích dẫn bằng chứng đáp án.
+  - **Đăng ký UI & Cross-Test Pooling**:
+    - `public/data/tests_index.json`: Thêm `ets2022_test4`.
+    - `src/app/exam/page.tsx`: Cập nhật `testId` allowed list và header title `ETS 2022 - Test 4`.
+    - `src/app/part5/page.tsx`: Thêm nút chọn đề Test 4 và cập nhật `testPaths` pooling cho sub-skills.
+    - `src/app/part6/page.tsx`: Cập nhật `TEST_OPTIONS` và pooling 4 đề cho `testId === 'all'`.
+    - `src/app/part7/page.tsx`: Cập nhật `TESTS_LIST` và pooling 4 đề cho `testId === 'all'`.
+  - **NO UI EMOJIS (STRICT)**: 0 emoji trong toàn bộ 7 file JSON và UI.
+* **Xác minh (Verification)**:
+  - `node scripts/ingest_real_ets.mjs public/data/ets2022/test4`: PASSED tất cả các tiêu chuẩn kiểm định xác thực ETS.
+  - `npx tsc --noEmit`: 0 lỗi TypeScript.
+  - `npm run build`: Thành công 100%, 35/35 routes static compiled.
+  - `node scratch/test_ets2022_test4_full_e2e.mjs`: PASSED 10/10 E2E tests, 0 emoji, đã chụp và lưu các ảnh bằng chứng:
+    - Part 1 Trainer: `scratch/part1_test4_verified.png`.
+    - Part 2 Trainer: `scratch/part2_test4_verified.png`.
+    - Part 3 Trainer: `scratch/part3_test4_verified.png`.
+    - Part 4 Trainer: `scratch/part4_test4_verified.png`.
+    - Part 5 Trainer: `scratch/part5_test4_verified.png`.
+    - Part 6 Trainer: `scratch/part6_test4_verified.png`.
+    - Part 7 Trainer: `scratch/part7_test4_verified.png`.
+    - Full Exam Test 4: `scratch/exam_ets2022_test4_verified.png`.
+    - RC Section Exam: `scratch/exam_ets2022_test4_rc_verified.png`.
+
+---
+
+## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
+
+### Vấn Đề 49: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 5 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
 * **Bối cảnh & Kế hoạch**:
-  - Sau khi toàn bộ 100 câu Listening (Part 1 - 4) của Test 2 đã đạt chuẩn 100% ETS gốc với CDN Zero-Bloat, tiến hành rà soát phần Reading, đặc biệt là các bài đọc đoạn đơn, đoạn kép, đoạn ba của Part 7 (Q147 - Q200).
-  - Trích xuất chuẩn xác văn bản và hình ảnh scan bài đọc từ sách gốc `ETS 2022 Test 2.pdf`, đồng bộ đáp án và lời giải chi tiết tiếng Việt.
-  - Chuẩn bị pipeline nạp tiếp cho Test 3 và Test 4.
+  - Hiện tại ETS 2022 Test 1, Test 2, Test 3, và Test 4 đã hoàn tất 100% chuẩn xác thực trên cả 7 Parts.
+  - Tiếp tục mở rộng kho đề chất lượng cao với **ETS 2022 Test 5**:
+    1. Trích xuất audio phòng thu chính thức `TEST 5.mp3` từ `/private/tmp/full_ets_2022.zip`.
+    2. Cắt audio Part 1 (6 câu), Part 2 (25 câu), Part 3 (13 sets), Part 4 (10 sets) bằng OpenAI Whisper timestamps.
+    3. Cắt và tối ưu ảnh scan Part 1 và các biểu đồ graphics Part 3 & 4 từ booklet đề thi thật gốc.
+    4. Tải media lên GitHub Releases tag `ets2022-assets` CDN (Option A Zero-Bloat).
+    5. Số hóa 200 câu hỏi (Q1 - Q200) chuẩn 100% theo official answer key ETS 2022 Test 5.
+    6. Đăng ký `ets2022_test5` vào `public/data/tests_index.json` và UI thi thử.
 
 ---
 
@@ -1162,8 +1285,12 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Chạy Dev Server**: `npm run dev` (đang chạy ngầm tại `http://localhost:3000`).
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
+* **Kiểm định dữ liệu chuẩn ETS**: `node scripts/ingest_real_ets.mjs public/data/ets2022/test4`.
 * **Kiểm thử E2E Playwright mẫu**:
-  * `node scratch/test_ets2022_test2_listening_full_e2e.mjs` (Kiểm thử toàn diện Listening Part 2-4 đề thật ETS 2022 Test 2 qua CDN).
+  * `node scratch/test_ets2022_test4_full_e2e.mjs` (Kiểm thử toàn diện 7 Parts và Full Exam đề thi thật ETS 2022 Test 4).
+  * `node scratch/test_ets2022_test3_full_e2e.mjs` (Kiểm thử toàn diện 7 Parts và Full Exam đề thi thật ETS 2022 Test 3).
+  * `node scratch/test_ets2022_test2_reading_full_e2e.mjs` (Kiểm thử toàn diện Reading đề thật ETS 2022 Test 2).
+  * `node scratch/test_ets2022_test2_listening_full_e2e.mjs` (Kiểm thử toàn diện Listening đề thật ETS 2022 Test 2).
   * `node scratch/verify_graphics_e2e.mjs` (Kiểm thử hiển thị biểu đồ scan gốc Q63 và Q96 trong đề thi thật).
   * `node scratch/test_ets2022_test2_e2e.mjs` (Kiểm thử Part 1 và Full Test 2 ban đầu).
   * `node scratch/test_learner_flow_enhancements_e2e.mjs` (Kiểm thử 4 điểm đứt gãy luồng người học, Auto Task Completion, Score Predictor Calibration).

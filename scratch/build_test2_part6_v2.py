@@ -1,0 +1,297 @@
+import json
+
+part6_data = [
+    {
+        "id": "ets22_t2_p6_s01",
+        "title": "Questions 131-134 refer to the following memo.",
+        "type": "Text",
+        "content": "<p><b>To:</b> All staff<br/><b>From:</b> Leonard Villalobos, Vice President of Product Development<br/><b>Date:</b> August 27<br/><b>Subject:</b> Atzeret game (Product #DS8192)</p><p>Due to the results from our trial customer testing, we have decided to postpone the launch of the Atzeret video game. Customer surveys indicated that the game was less (131) ___ than we anticipated. Over the next few months, the game development team will introduce several (132) ___ to make the product more attractive. (133) ___. If the changes are successful, we hope to launch the game by next January (134) ___ February.</p>",
+        "questions": [
+            {
+                "id": "ets22_t2_p6_131",
+                "number": 131,
+                "text": "",
+                "options": {
+                    "A": "expensive",
+                    "B": "repetitive",
+                    "C": "appealing",
+                    "D": "surprising"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Các khảo sát khách hàng chỉ ra rằng trò chơi này kém hấp dẫn hơn so với chúng tôi dự đoán.</p><p><b>Phân tích ngữ cảnh:</b> Cụm <i>less [appealing] than we anticipated</i> (kém hấp dẫn/kém thu hút hơn so với mong đợi). Câu sau nêu rõ nhóm phát triển sẽ chỉnh sửa để sản phẩm <i>more attractive</i> (hấp dẫn hơn). Do đó, <b>(C) appealing</b> (hấp dẫn, lôi cuốn) là từ phù hợp nhất về nghĩa.<br/>- (A) <i>expensive</i>: đắt đỏ.<br/>- (B) <i>repetitive</i>: lặp đi lặp lại.<br/>- (D) <i>surprising</i>: đáng ngạc nhiên.</p>",
+                "type": "Vocabulary",
+                "subCategory": "Business Vocabulary",
+                "grammarTag": "Adjective Context"
+            },
+            {
+                "id": "ets22_t2_p6_132",
+                "number": 132,
+                "text": "",
+                "options": {
+                    "A": "modification",
+                    "B": "modifies",
+                    "C": "modifying",
+                    "D": "modifications"
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Trong vài tháng tới, nhóm phát triển trò chơi sẽ đưa ra một số sửa đổi để làm cho sản phẩm trở nên hấp dẫn hơn.</p><p><b>Phân tích ngữ pháp:</b> Từ hạn định <i>several</i> (một vài, một số) luôn đi kèm với danh từ đếm được số nhiều. Do đó, <b>(D) modifications</b> (các sự sửa đổi) là đáp án đúng.<br/>- (A) <i>modification</i>: danh từ số ít.<br/>- (B) <i>modifies</i>: động từ chia thì.<br/>- (C) <i>modifying</i>: hiện tại phân từ.</p>",
+                "type": "Word Form",
+                "subCategory": "Word Form",
+                "grammarTag": "Plural Count Noun after Several"
+            },
+            {
+                "id": "ets22_t2_p6_133",
+                "number": 133,
+                "text": "",
+                "options": {
+                    "A": "At that point, more tests will be conducted.",
+                    "B": "The launch will be our biggest of the year.",
+                    "C": "However, the surveys are not reliable.",
+                    "D": "Team members must each sign the form."
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Vào thời điểm đó, nhiều bài thử nghiệm hơn sẽ được tiến hành.</p><p><b>Phân tích tính liên kết:</b> Câu trước nói về việc nhóm sẽ đưa ra các sửa đổi trong vài tháng tới. Câu tiếp sau là: <i>'If the changes are successful...'</i> (Nếu các thay đổi này thành công...). Phương án <b>(A) At that point, more tests will be conducted</b> (Vào thời điểm đó, sẽ tiến hành thêm các bài kiểm tra) đóng vai trò mắt xích logic để dẫn đến việc đánh giá xem thay đổi có thành công hay không.</p>",
+                "type": "Sentence Insertion",
+                "subCategory": "Sentence Structure",
+                "grammarTag": "Coherence & Sentence Insertion"
+            },
+            {
+                "id": "ets22_t2_p6_134",
+                "number": 134,
+                "text": "",
+                "options": {
+                    "A": "since",
+                    "B": "or",
+                    "C": "if",
+                    "D": "later"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> ...chúng tôi hy vọng sẽ ra mắt trò chơi vào khoảng tháng Giêng hoặc tháng Hai tới.</p><p><b>Phân tích ngữ pháp:</b> Nối hai mốc thời gian ước tính tương đương mang tính lựa chọn: <i>next January [or] February</i>. Liên từ <b>or</b> được dùng để chỉ khả năng xảy ra vào tháng 1 hoặc tháng 2. Do đó, <b>(B) or</b> là đáp án chính xác.</p>",
+                "type": "Conjunction",
+                "subCategory": "Preposition & Conjunction",
+                "grammarTag": "Coordinating Conjunction (or)"
+            }
+        ]
+    },
+    {
+        "id": "ets22_t2_p6_s02",
+        "title": "Questions 135-138 refer to the following e-mail.",
+        "type": "Text",
+        "content": "<p><b>To:</b> Eva Linn, Lundtalk Industries<br/><b>From:</b> Technical Services<br/><b>Date:</b> January 15<br/><b>Subject:</b> Technical query</p><p>Dear Ms. Linn,<br/>Thank you for contacting our technical department (135) ___ your query. (136) ___, our call got disconnected when we were trying to reboot your system from our remote location. (137) ___. Therefore, please call us at your earliest convenience and refer to conversation ID #TECH12-2020A to complete the system repair. We have prioritized your inquiry and look forward to helping you (138) ___ your computer to its full capabilities.<br/><br/>Sincerely,<br/>Arthur Feldt<br/>Technical Service Facilitator</p>",
+        "questions": [
+            {
+                "id": "ets22_t2_p6_135",
+                "number": 135,
+                "text": "",
+                "options": {
+                    "A": "until",
+                    "B": "besides",
+                    "C": "into",
+                    "D": "with"
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Cảm ơn bạn đã liên hệ với bộ phận kỹ thuật của chúng tôi cùng với thắc mắc của bạn.</p><p><b>Phân tích ngữ pháp:</b> Cụm cấu trúc: <i>contact someone WITH something</i> (liên hệ với ai về/cùng với vấn đề gì). Do đó, <b>(D) with</b> là giới từ chính xác.<br/>- (A) <i>until</i>: cho đến khi.<br/>- (B) <i>besides</i>: ngoài ra.<br/>- (C) <i>into</i>: vào trong.</p>",
+                "type": "Preposition",
+                "subCategory": "Preposition & Conjunction",
+                "grammarTag": "Preposition Collocation"
+            },
+            {
+                "id": "ets22_t2_p6_136",
+                "number": 136,
+                "text": "",
+                "options": {
+                    "A": "In other words",
+                    "B": "For this reason",
+                    "C": "For example",
+                    "D": "As you know"
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Như bạn đã biết, cuộc gọi của chúng ta đã bị ngắt kết nối khi chúng tôi đang cố gắng khởi động lại hệ thống của bạn từ xa.</p><p><b>Phân tích ngữ cảnh:</b> Cụm từ liên kết <b>As you know</b> (Như bạn đã biết) dùng để nhắc lại một sự việc mà cả hai bên (kỹ thuật viên và khách hàng) đều vừa trực tiếp trải qua (cuộc gọi bị ngắt giữa chừng). Do đó, (D) là đáp án chính xác.<br/>- (A) <i>In other words</i>: nói cách khác.<br/>- (B) <i>For this reason</i>: vì lý do này.<br/>- (C) <i>For example</i>: ví dụ như.</p>",
+                "type": "Conjunction",
+                "subCategory": "Preposition & Conjunction",
+                "grammarTag": "Discourse Marker"
+            },
+            {
+                "id": "ets22_t2_p6_137",
+                "number": 137,
+                "text": "",
+                "options": {
+                    "A": "We invite you to visit one of our computer repair centers in your area.",
+                    "B": "Unfortunately, we do not have a phone number at which we can reach you.",
+                    "C": "Thank you again for being one of our priority customers.",
+                    "D": "Please submit your check for the service fee promptly."
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Thật không may, chúng tôi không có số điện thoại để có thể chủ động liên lạc lại với bạn.</p><p><b>Phân tích tính liên kết:</b> Câu ngay phía sau giải thích lý do: <i>'Therefore, please call us at your earliest convenience...'</i> (Vì vậy, xin vui lòng gọi lại cho chúng tôi sớm nhất khi bạn thuận tiện...). Việc bộ phận kỹ thuật không có số của khách hàng chính là lý do trực tiếp khiến họ phải gửi email yêu cầu khách hàng chủ động gọi lại.</p>",
+                "type": "Sentence Insertion",
+                "subCategory": "Sentence Structure",
+                "grammarTag": "Coherence & Sentence Insertion"
+            },
+            {
+                "id": "ets22_t2_p6_138",
+                "number": 138,
+                "text": "",
+                "options": {
+                    "A": "restore",
+                    "B": "restoring",
+                    "C": "restored",
+                    "D": "restoration"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> ...và rất mong được giúp bạn khôi phục máy tính về trạng thái hoạt động tối đa.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc động từ: <i>help + someone + (to) + V_inf</i> (giúp ai đó làm gì). Đứng sau tân ngữ <i>you</i> là động từ nguyên thể. Do đó, <b>(A) restore</b> là đáp án đúng.</p>",
+                "type": "Verb Form",
+                "subCategory": "Verb Tense",
+                "grammarTag": "Bare Infinitive after Help"
+            }
+        ]
+    },
+    {
+        "id": "ets22_t2_p6_s03",
+        "title": "Questions 139-142 refer to the following Web page.",
+        "type": "Text",
+        "content": "<p>For a limited time, the Uppercut Clothing Hanger Company is selling its highest quality hangers at huge discounts on wholesale orders. This special (139) ___ is perfect for hotels, retailers, or anywhere hangers are used extensively. (140) ___ of lacquered walnut wood, these hangers are not only durable, but also safe for the environment. (141) ___ are strong enough to hold up to ten pounds. To order, visit www.uppercuthangerco.ca. Note that all orders require a 20 percent deposit. Uppercut will cover all shipping and insurance costs. (142) ___.</p>",
+        "questions": [
+            {
+                "id": "ets22_t2_p6_139",
+                "number": 139,
+                "text": "",
+                "options": {
+                    "A": "clothing",
+                    "B": "offer",
+                    "C": "decoration",
+                    "D": "performance"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Ưu đãi đặc biệt này rất hoàn hảo cho các khách sạn, nhà bán lẻ...</p><p><b>Phân tích ngữ cảnh:</b> Câu trước vừa đề cập đến việc công ty bán móc áo với <i>huge discounts on wholesale orders</i> (mức giảm giá khổng lồ cho các đơn bán buôn). Cụm từ <b>special offer</b> (ưu đãi đặc biệt, chương trình khuyến mãi) quy chiếu chính xác đến đợt giảm giá này. Do đó, <b>(B) offer</b> là đáp án đúng.</p>",
+                "type": "Vocabulary",
+                "subCategory": "Business Vocabulary",
+                "grammarTag": "Collocation (special offer)"
+            },
+            {
+                "id": "ets22_t2_p6_140",
+                "number": 140,
+                "text": "",
+                "options": {
+                    "A": "Made",
+                    "B": "Making",
+                    "C": "To make",
+                    "D": "They made"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Được làm từ gỗ óc chó sơn mài, những chiếc móc áo này không chỉ bền mà còn an toàn cho môi trường.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc rút gọn mệnh đề trạng ngữ đồng chủ ngữ dạng bị động: <i>[Made] of lacquered walnut wood, these hangers are...</i> (vì được làm từ... nên những chiếc móc này...). Khi chủ ngữ là vật (these hangers) chịu tác động (được làm từ), ta dùng quá khứ phân từ <b>V3/ed (Made)</b> đứng đầu câu. Do đó, <b>(A) Made</b> là đáp án chính xác.</p>",
+                "type": "Word Form",
+                "subCategory": "Verb Tense",
+                "grammarTag": "Participial Clause (Passive)"
+            },
+            {
+                "id": "ets22_t2_p6_141",
+                "number": 141,
+                "text": "",
+                "options": {
+                    "A": "Both",
+                    "B": "They",
+                    "C": "Fewer",
+                    "D": "Theirs"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Chúng đủ chắc chắn để giữ được trọng lượng lên tới mười pound.</p><p><b>Phân tích ngữ pháp:</b> Vị trí đầu câu đứng trước động từ to-be <i>are</i> cần một đại từ nhân xưng đóng vai trò chủ ngữ số nhiều thay thế cho danh từ <i>these hangers</i> ở câu trước. Do đó, <b>(B) They</b> là đáp án đúng.<br/>- (A) <i>Both</i>: cả hai (chỉ dùng cho 2 đối tượng).<br/>- (C) <i>Fewer</i>: ít hơn.<br/>- (D) <i>Theirs</i>: đại từ sở hữu.</p>",
+                "type": "Pronoun",
+                "subCategory": "Pronoun",
+                "grammarTag": "Subject Pronoun"
+            },
+            {
+                "id": "ets22_t2_p6_142",
+                "number": 142,
+                "text": "",
+                "options": {
+                    "A": "Our products make great gifts.",
+                    "B": "While sturdy, wooden hangers are also heavy.",
+                    "C": "Quality hangers are a great investment.",
+                    "D": "The balance is due when the shipment is received."
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Số tiền còn lại phải thanh toán khi nhận được hàng.</p><p><b>Phân tích tính liên kết:</b> Câu trước nói về điều khoản thanh toán: <i>'Note that all orders require a 20 percent deposit'</i> (Lưu ý rằng mọi đơn hàng đều yêu cầu đặt cọc 20%). Câu tiếp nối hợp lý nhất về mặt tài chính thương mại là nêu rõ thời điểm thanh toán số tiền còn lại (the balance): <b>(D) The balance is due when the shipment is received</b>.</p>",
+                "type": "Sentence Insertion",
+                "subCategory": "Sentence Structure",
+                "grammarTag": "Coherence & Sentence Insertion"
+            }
+        ]
+    },
+    {
+        "id": "ets22_t2_p6_s04",
+        "title": "Questions 143-146 refer to the following e-mail.",
+        "type": "Text",
+        "content": "<p><b>From:</b> mcrane@doodlemail.com<br/><b>To:</b> jkumar@baxterartsupplies.com<br/><b>Date:</b> October 14<br/><b>Subject:</b> Application<br/><b>Attachment:</b> Resume</p><p>Dear Ms. Kumar,<br/>I am writing in response to the advertisement posted in the window of Baxter Art Supplies. As a frequent visitor to your (143) ___, I have found it an invaluable source of inspiration over the years. I would be (144) ___ to display my artwork. I would also enjoy running workshops to help inspire your customers.<br/><br/>I believe I would be well suited for this role because I am both enthusiastic and friendly. (145) ___, I have led successful workshops at various locations in the area. I have attached a copy of my resume, which includes more details about these workshops. (146) ___. I look forward to hearing from you after you have reviewed my application and work.<br/><br/>Kind regards,<br/>Melania Crane</p>",
+        "questions": [
+            {
+                "id": "ets22_t2_p6_143",
+                "number": 143,
+                "text": "",
+                "options": {
+                    "A": "school",
+                    "B": "house",
+                    "C": "store",
+                    "D": "museum"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Là một khách hàng thường xuyên ghé thăm cửa hàng của bạn, tôi thấy nơi đây là một nguồn cảm hứng vô giá trong suốt những năm qua.</p><p><b>Phân tích ngữ cảnh:</b> Người gửi nộp hồ sơ xin việc theo quảng cáo dán tại cửa sổ của <i>Baxter Art Supplies</i> (cửa hàng vật phẩm nghệ thuật). Vì vậy, <b>(C) store</b> (cửa hàng) là từ chỉ nơi chốn chính xác nhất.<br/>- (A) <i>school</i>: trường học.<br/>- (B) <i>house</i>: nhà ở.<br/>- (D) <i>museum</i>: viện bảo tàng.</p>",
+                "type": "Vocabulary",
+                "subCategory": "Business Vocabulary",
+                "grammarTag": "Contextual Vocabulary"
+            },
+            {
+                "id": "ets22_t2_p6_144",
+                "number": 144,
+                "text": "",
+                "options": {
+                    "A": "thrilling",
+                    "B": "thrill",
+                    "C": "thrilled",
+                    "D": "thrills"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Tôi sẽ vô cùng hào hứng khi được trưng bày các tác phẩm nghệ thuật của mình.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc tính từ miêu tả cảm xúc của con người: <i>S (người: I) + would be + Adj_ed (thrilled) + to-V</i>. Tính từ <b>thrilled</b> (rất vui mừng, hào hứng) diễn tả cảm xúc của người viết khi có cơ hội trưng bày tranh. Do đó, <b>(C) thrilled</b> là đáp án đúng.<br/>- (A) <i>thrilling</i>: tính từ đuôi -ing (chỉ tính chất gây hồi hộp của sự vật/sự việc).</p>",
+                "type": "Word Form",
+                "subCategory": "Word Form",
+                "grammarTag": "Participial Adjective (ed vs ing)"
+            },
+            {
+                "id": "ets22_t2_p6_145",
+                "number": 145,
+                "text": "",
+                "options": {
+                    "A": "In addition",
+                    "B": "However",
+                    "C": "In general",
+                    "D": "Similarly"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Ngoài ra, tôi đã từng dẫn dắt các buổi hội thảo thành công tại nhiều địa điểm khác nhau trong khu vực.</p><p><b>Phân tích ngữ cảnh:</b> Đoạn văn nêu các thế mạnh của ứng viên: Câu trước nêu tính cách (nhiệt tình và thân thiện), câu sau bổ sung thêm kinh nghiệm thực tế (đã tổ chức nhiều workshop). Cụm từ nối mang ý bổ sung thông tin là <b>(A) In addition</b> (Ngoài ra, hơn nữa).<br/>- (B) <i>However</i>: tuy nhiên (chỉ tương phản).<br/>- (C) <i>In general</i>: nhìn chung.<br/>- (D) <i>Similarly</i>: tương tự.</p>",
+                "type": "Conjunction",
+                "subCategory": "Preposition & Conjunction",
+                "grammarTag": "Transition Adverb (Additive)"
+            },
+            {
+                "id": "ets22_t2_p6_146",
+                "number": 146,
+                "text": "",
+                "options": {
+                    "A": "I enjoyed the painting workshop last week.",
+                    "B": "Samples of my art can be found at www.mcrane.com.",
+                    "C": "I just started working with watercolors.",
+                    "D": "For a price list, please contact me at 347-555-0101."
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Các mẫu tác phẩm nghệ thuật của tôi có thể được tìm thấy tại www.mcrane.com.</p><p><b>Phân tích tính liên kết:</b> Câu ngay sau đó viết: <i>'I look forward to hearing from you after you have reviewed my application and work'</i> (Tôi rất mong nhận được phản hồi sau khi bạn xem xét đơn ứng tuyển và các tác phẩm của tôi). Phương án <b>(B) Samples of my art can be found at www.mcrane.com</b> cung cấp liên kết xem tác phẩm để người tuyển dụng có thể đánh giá 'work' của cô ấy.</p>",
+                "type": "Sentence Insertion",
+                "subCategory": "Sentence Structure",
+                "grammarTag": "Coherence & Sentence Insertion"
+            }
+        ]
+    }
+]
+
+with open('/Users/bravee06/toeic-learn/public/data/ets2022/test2/part6.json', 'w', encoding='utf-8') as f:
+    json.dump(part6_data, f, ensure_ascii=False, indent=2)
+
+print("Successfully regenerated public/data/ets2022/test2/part6.json with exact schema and (XXX) ___ blanks!")

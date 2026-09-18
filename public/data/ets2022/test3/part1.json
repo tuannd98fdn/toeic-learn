@@ -2,8 +2,8 @@
   {
     "id": "ets22_t3_p1_01",
     "number": 1,
-    "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80",
-    "audioUrl": "/audio/ets2022/test3/p1_01.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_01.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_01.mp3",
     "options": {
       "A": "(A)",
       "B": "(B)",
@@ -11,16 +11,33 @@
       "D": "(D)"
     },
     "correctAnswer": "A",
-    "transcript": "<p><b>Transcript:</b><br/><b>(A) A woman is typing on a computer keyboard.</b><br/>(B) A woman is plugging a cable into an electrical outlet.<br/>(C) A woman is writing notes in a spiral notebook.<br/>(D) A woman is organizing folders inside a filing cabinet.</p>",
-    "explanation": "<p>Trong bức ảnh, người phụ nữ đang ngồi tại bàn làm việc và gõ phím máy tính (typing on a computer keyboard). Phương án <b>(A)</b> miêu tả chính xác hành động trọng tâm. Các phương án khác đưa ra hành động không có thật trong hình.</p>",
+    "transcript": "<p><b>Transcript:</b><br/><b>(A) He's leaning over a container.</b><br/>(B) He's digging in a garden.<br/>(C) He's replacing some floor tiles.<br/>(D) He's trimming some trees.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Anh ấy đang cúi người về phía thùng chứa.<br/>(B) Anh ấy đang đào đất trong vườn.<br/>(C) Anh ấy đang thay thế gạch lát sàn.<br/>(D) Anh ấy đang tỉa cây.</p><p><b>Phân tích chi tiết:</b><br/>Trong hình, người đàn ông đang cầm xẻng và cúi người vào thùng nhựa lớn (container). Cụm từ <i>\"leaning over a container\"</i> miêu tả chính xác tư thế hành động trọng tâm. Chọn <b>(A)</b>.</p>",
     "questionType": "Single Person",
     "subCategory": "Single Person"
   },
   {
     "id": "ets22_t3_p1_02",
     "number": 2,
-    "image": "https://images.unsplash.com/photo-1580828343064-fde4fc206bc6?w=800&auto=format&fit=crop&q=80",
-    "audioUrl": "/audio/ets2022/test3/p1_02.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_02.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_02.mp3",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "correctAnswer": "A",
+    "transcript": "<p><b>Transcript:</b><br/><b>(A) A customer is picking up some clothing at a dry cleaners.</b><br/>(B) A customer is trying on a jacket.<br/>(C) A customer is handing a worker some cash.<br/>(D) A worker is typing on a computer.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Khách hàng đang nhận quần áo tại tiệm giặt khô.<br/>(B) Khách hàng đang thử áo khoác.<br/>(C) Khách hàng đang đưa tiền mặt cho nhân viên.<br/>(D) Nhân viên đang gõ trên máy tính.</p><p><b>Phân tích chi tiết:</b><br/>Khách hàng nam đang nhận túi quần áo bọc nilon từ nhân viên tiệm giặt là (dry cleaners). Cụm từ <i>\"picking up some clothing\"</i> miêu tả chính xác hoạt động nhận đồ. Chọn <b>(A)</b>.</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
+  },
+  {
+    "id": "ets22_t3_p1_03",
+    "number": 3,
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_03.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_03.mp3",
     "options": {
       "A": "(A)",
       "B": "(B)",
@@ -28,33 +45,16 @@
       "D": "(D)"
     },
     "correctAnswer": "C",
-    "transcript": "<p><b>Transcript:</b><br/>(A) A man is pushing a grocery cart down an aisle.<br/>(B) A man is paying for groceries at a cash register.<br/><b>(C) A man is arranging merchandise on a store shelf.</b><br/>(D) A man is sweeping the entrance of a supermarket.</p>",
-    "explanation": "<p>Người đàn ông đang xếp các hộp hàng hóa ngay ngắn lên kệ trưng bày trong cửa hàng (arranging merchandise on a store shelf). Đáp án <b>(C)</b> chính xác. Bẫy phương án (A) đẩy xe đẩy hàng không xuất hiện trong hình.</p>",
+    "transcript": "<p><b>Transcript:</b><br/>(A) She's paying for her meal.<br/>(B) She's pouring a beverage.<br/><b>(C) She's facing a refrigerated display case.</b><br/>(D) She's ordering her lunch from a server.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Cô ấy đang thanh toán bữa ăn.<br/>(B) Cô ấy đang rót đồ uống.<br/>(C) Cô ấy đang đứng đối diện với tủ trưng bày làm lạnh.<br/>(D) Cô ấy đang gọi bữa trưa từ người phục vụ.</p><p><b>Phân tích chi tiết:</b><br/>Người phụ nữ đang quay mặt và lấy đồ trong tủ mát trưng bày thức uống (refrigerated display case). Từ <i>\"facing\"</i> miêu tả hướng đứng chuẩn xác. Chọn <b>(C)</b>.</p>",
     "questionType": "Single Person",
     "subCategory": "Single Person"
   },
   {
-    "id": "ets22_t3_p1_03",
-    "number": 3,
-    "image": "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&auto=format&fit=crop&q=80",
-    "audioUrl": "/audio/ets2022/test3/p1_03.mp3",
-    "options": {
-      "A": "(A)",
-      "B": "(B)",
-      "C": "(C)",
-      "D": "(D)"
-    },
-    "correctAnswer": "B",
-    "transcript": "<p><b>Transcript:</b><br/>(A) Diners are standing in line to place their food orders.<br/><b>(B) Some people are seated at an outdoor restaurant table.</b><br/>(C) A waiter is clearing empty plates from a table.<br/>(D) Umbrellas are being folded up by cafe staff.</p>",
-    "explanation": "<p>Nhóm thực khách đang ngồi thưởng thức bữa ăn tại bàn ngoài trời (seated at an outdoor restaurant table). Phương án <b>(B)</b> đúng. Bẫy (A) đứng xếp hàng hay (C) bồi bàn dọn đĩa đều không có trong hình ảnh.</p>",
-    "questionType": "Multiple People",
-    "subCategory": "Multiple People"
-  },
-  {
     "id": "ets22_t3_p1_04",
     "number": 4,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&auto=format&fit=crop&q=80",
-    "audioUrl": "/audio/ets2022/test3/p1_04.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_04.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_04.mp3",
     "options": {
       "A": "(A)",
       "B": "(B)",
@@ -62,16 +62,16 @@
       "D": "(D)"
     },
     "correctAnswer": "D",
-    "transcript": "<p><b>Transcript:</b><br/>(A) A worker is climbing a tall aluminum ladder.<br/>(B) A construction vehicle is digging a trench in the dirt.<br/>(C) Building materials are being loaded onto a cargo truck.<br/><b>(D) A worker is wearing protective safety gear at a construction site.</b></p>",
-    "explanation": "<p>Người công nhân đang mặc đồ bảo hộ lao động (mũ bảo hộ, áo phản quang) tại công trường xây dựng (wearing protective safety gear). Đáp án <b>(D)</b> miêu tả chính xác trạng thái của đối tượng.</p>",
-    "questionType": "Single Person",
-    "subCategory": "Single Person"
+    "transcript": "<p><b>Transcript:</b><br/>(A) He's putting vegetables into a bag.<br/>(B) He's setting up a tent.<br/>(C) The rear doors of a van are closed.<br/><b>(D) Some boxes have been stored inside a vehicle.</b></p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Anh ấy đang cho rau củ vào túi.<br/>(B) Anh ấy đang dựng lều.<br/>(C) Các cửa sau của xe tải van đang đóng.<br/>(D) Một số thùng hàng đã được xếp bên trong xe.</p><p><b>Phân tích chi tiết:</b><br/>Bên trong thùng xe van đang mở cửa có các thùng hàng trắng (boxes stored inside a vehicle). Loại (C) vì cửa xe đang mở toang, không phải closed. Chọn <b>(D)</b>.</p>",
+    "questionType": "Objects",
+    "subCategory": "Objects"
   },
   {
     "id": "ets22_t3_p1_05",
     "number": 5,
-    "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&auto=format&fit=crop&q=80",
-    "audioUrl": "/audio/ets2022/test3/p1_05.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_05.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_05.mp3",
     "options": {
       "A": "(A)",
       "B": "(B)",
@@ -79,26 +79,26 @@
       "D": "(D)"
     },
     "correctAnswer": "B",
-    "transcript": "<p><b>Transcript:</b><br/>(A) Suitcases are being loaded onto an airplane.<br/><b>(B) Luggage has been placed on a transport trolley.</b><br/>(C) Passengers are claiming their bags at a baggage carousel.<br/>(D) A ticket counter is crowded with travelers.</p>",
-    "explanation": "<p>Các vali hành lý được đặt trên xe đẩy chuyên dụng (luggage placed on a transport trolley). Bức ảnh chụp tĩnh vật, không có người đang bốc dỡ hay nhận hành lý, nên đáp án <b>(B)</b> là chính xác nhất.</p>",
-    "questionType": "Object & Scene",
-    "subCategory": "Object & Scene"
+    "transcript": "<p><b>Transcript:</b><br/>(A) The speaker is positioned next to a podium.<br/><b>(B) The man is drawing a graph on a presentation board.</b><br/>(C) One of the women is watching a video.<br/>(D) One of the women is adjusting her glasses.</p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Diễn giả đứng cạnh bục phát biểu.<br/>(B) Người đàn ông đang vẽ biểu đồ lên bảng thuyết trình.<br/>(C) Một trong những người phụ nữ đang xem video.<br/>(D) Một trong những người phụ nữ đang chỉnh kính.</p><p><b>Phân tích chi tiết:</b><br/>Người đàn ông đang dùng bút vẽ đường cong phân phối chuẩn (graph) lên giấy thuyết trình trên giá vẽ. Câu <b>(B)</b> miêu tả chính xác nhất.</p>",
+    "questionType": "Multiple People",
+    "subCategory": "Multiple People"
   },
   {
     "id": "ets22_t3_p1_06",
     "number": 6,
-    "image": "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&auto=format&fit=crop&q=80",
-    "audioUrl": "/audio/ets2022/test3/p1_06.mp3",
+    "image": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_06.jpg",
+    "audioUrl": "https://github.com/tuannd98fdn/toeic-learn/releases/download/ets2022-assets/t3_p1_06.mp3",
     "options": {
       "A": "(A)",
       "B": "(B)",
       "C": "(C)",
       "D": "(D)"
     },
-    "correctAnswer": "C",
-    "transcript": "<p><b>Transcript:</b><br/>(A) The audience is standing up to applaud a speaker.<br/>(B) Chairs are being stacked against the rear wall.<br/><b>(C) Rows of chairs are arranged facing a stage.</b><br/>(D) A projector screen is being rolled down by an assistant.</p>",
-    "explanation": "<p>Các hàng ghế trong khán phòng được sắp xếp hướng về phía sân khấu hội trường (rows of chairs are arranged facing a stage). Đây là câu miêu tả cảnh vật không có người (empty hall), đáp án <b>(C)</b> đúng.</p>",
-    "questionType": "Object & Scene",
-    "subCategory": "Object & Scene"
+    "correctAnswer": "D",
+    "transcript": "<p><b>Transcript:</b><br/>(A) Some chairs have been arranged on a balcony.<br/>(B) A clock has been propped up on a shelf.<br/>(C) Some placemats are laid out on a bench.<br/><b>(D) A light fixture is hanging above a dining area.</b></p>",
+    "explanation": "<p><b>Dịch nghĩa:</b><br/>(A) Một số chiếc ghế đã được sắp xếp ngoài ban công.<br/>(B) Đồng hồ đang được dựa vào kệ sách.<br/>(C) Miếng lót bàn ăn được đặt trên ghế dài.<br/>(D) Một chiếc đèn chiếu sáng đang treo trên khu vực bàn ăn.</p><p><b>Phân tích chi tiết:</b><br/>Chiếc đèn thả trần tròn (light fixture) treo ngay phía trên bàn ăn nhỏ (above a dining area). Câu <b>(D)</b> mô tả đúng tình trạng vật thể. Loại (B) vì đồng hồ treo trên tường chứ không phải dựa trên kệ.</p>",
+    "questionType": "Objects",
+    "subCategory": "Objects"
   }
 ]

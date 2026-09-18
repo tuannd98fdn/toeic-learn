@@ -1,0 +1,673 @@
+import json
+
+part3_sets = [
+    # Set 11: Q176 - Q180 (Double Passage: Ad + Email)
+    {
+        "id": "ets22_t4_p7_s11",
+        "type": "Double Passage",
+        "passages": [
+            {
+                "id": "ets22_t4_p7_s11_p1",
+                "type": "Advertisement",
+                "title": "Advertisement",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<h3 style='margin-top: 0;'>Get Business Cards Custom Made by You</h3>"
+                           "<p>Loretti Printing Co. is proud to announce <b>loretticardprint.com</b>, our new online platform for creating customized business cards. While our customers can still place orders in person, as they've done for nearly a decade, we now have a system that makes ordering business cards especially quick and easy. Choose from hundreds of easy-to-use templates, include your own text and images, and create professional-quality business cards within minutes.</p>"
+                           "<p>We offer four different paper options:</p>"
+                           "<table style='width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px;'>"
+                           "<thead><tr style='background: var(--bg-subtle, #f3f4f6);'><th style='border: 1px solid #ddd; padding: 6px;'>Type</th><th style='border: 1px solid #ddd; padding: 6px;'>Description</th><th style='border: 1px solid #ddd; padding: 6px;'>Minimum Order</th></tr></thead>"
+                           "<tbody>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>Matte-M1</td><td style='border: 1px solid #ddd; padding: 6px;'>Standard card stock, reduces glare</td><td style='border: 1px solid #ddd; padding: 6px;'>50 cards</td></tr>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>Glossy-G4</td><td style='border: 1px solid #ddd; padding: 6px;'>Shiny, enhances colors and details</td><td style='border: 1px solid #ddd; padding: 6px;'>100 cards</td></tr>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>Textured-T3</td><td style='border: 1px solid #ddd; padding: 6px;'>Unique grid-like pattern, interesting to the touch</td><td style='border: 1px solid #ddd; padding: 6px;'>100 cards</td></tr>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>Metallic-M2</td><td style='border: 1px solid #ddd; padding: 6px;'>Extra shiny, unique, captures one's attention</td><td style='border: 1px solid #ddd; padding: 6px;'>200 cards</td></tr>"
+                           "</tbody></table>"
+                           "<p style='margin-top: 10px; font-style: italic;'>Contact us before placing an online order if you'd like us to send you a sample of each type of paper.</p>"
+                           "</div>"
+            },
+            {
+                "id": "ets22_t4_p7_s11_p2",
+                "type": "E-mail",
+                "title": "E-Mail",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<p><b>To:</b> hello@loretticardprint.com<br/>"
+                           "<b>From:</b> felix@thibaultautoworks.com<br/>"
+                           "<b>Date:</b> Tuesday, May 22<br/>"
+                           "<b>Subject:</b> Order 28191 - Follow-up<br/>"
+                           "<b>Attachment:</b> Logo_autoworks.png</p>"
+                           "<p>Dear Loretti Printing Team,</p>"
+                           "<p>Thanks for pausing my order right away and explaining how to make the necessary changes. I'm so glad I was able to get in touch before my business cards went off to print. It would have been such a shame to have printed 50 cards I can't use.</p>"
+                           "<p>As I mentioned over the phone, I had accidentally uploaded an older version of my logo to the Web site. I've since replaced it with the current one in the same file size, and I'm hoping you can confirm that this change reflects the image I've included here. If so, please go ahead and submit my order now.</p>"
+                           "<p>Thank you,<br/>Felix Thibault</p>"
+                           "</div>"
+            }
+        ],
+        "questions": [
+            {
+                "id": "ets22_t4_p7_176",
+                "number": 176,
+                "text": "What is implied about Loretti Printing Co.?",
+                "options": {
+                    "A": "It has a physical retail location.",
+                    "B": "It is merging with a card company.",
+                    "C": "It is seeking experienced designers.",
+                    "D": "It has expanded its paper selection."
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được ngụ ý về Loretti Printing Co.?<br/>(A) Công ty có một địa điểm cửa hàng thực tế.<br/>(B) Đang sáp nhập với công ty thiệp.<br/>(C) Đang tìm kiếm các nhà thiết kế giàu kinh nghiệm.<br/>(D) Đã mở rộng lựa chọn chất liệu giấy.</p><p><b>Bằng chứng trích dẫn:</b> Đoạn quảng cáo nêu rõ: <i>'While our customers can still place orders in person, as they've done for nearly a decade...'</i> (Trong khi khách hàng vẫn có thể đặt hàng trực tiếp như họ đã làm suốt gần một thập kỷ qua). Việc khách có thể đến đặt hàng trực tiếp chứng minh công ty có cửa hàng thực tế <b>(A) It has a physical retail location</b>.</p>",
+                "questionType": "Inference",
+                "subCategory": "Overview",
+                "strategyHint": "place orders in person = has a physical retail location."
+            },
+            {
+                "id": "ets22_t4_p7_177",
+                "number": 177,
+                "text": "According to the advertisement, what can customers do on the company’s Web site?",
+                "options": {
+                    "A": "Give feedback about the company",
+                    "B": "Design their own business cards",
+                    "C": "Join a company mailing list",
+                    "D": "Enter a code for a discount"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Theo bài quảng cáo, khách hàng có thể làm gì trên trang web của công ty?<br/>(A) Gửi phản hồi về công ty.<br/>(B) Tự thiết kế danh thiếp cho mình.<br/>(C) Tham gia danh sách nhận thư.<br/>(D) Nhập mã giảm giá.</p><p><b>Bằng chứng trích dẫn:</b> Bài viết giới thiệu: <i>'Get Business Cards Custom Made by You ... Choose from hundreds of easy-to-use templates, include your own text and images, and create professional-quality business cards within minutes.'</i>. Chọn <b>(B) Design their own business cards</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail",
+                "strategyHint": "Custom Made by You / Choose templates, text, images = Design their own business cards."
+            },
+            {
+                "id": "ets22_t4_p7_178",
+                "number": 178,
+                "text": "What type of card stock did Mr. Thibault most likely order?",
+                "options": {
+                    "A": "Matte",
+                    "B": "Glossy",
+                    "C": "Textured",
+                    "D": "Metallic"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Ông Thibault nhiều khả năng nhất đã đặt loại giấy in danh thiếp nào?<br/>(A) Giấy mờ (Matte).<br/>(B) Giấy bóng (Glossy).<br/>(C) Giấy vân gân (Textured).<br/>(D) Giấy ánh kim (Metallic).</p><p><b>Bằng chứng trích dẫn (Liên kết 2 đoạn):</b><br/>- Trong email, ông Thibault viết: <i>'It would have been such a shame to have printed 50 cards I can't use.'</i> (ông ấy đặt đúng 50 chiếc danh thiếp).<br/>- Tra bảng tùy chọn giấy trong quảng cáo, duy nhất loại <b>Matte-M1</b> có mức đặt hàng tối thiểu là <b>50 cards</b> (các loại Glossy và Textured tối thiểu 100 cards, Metallic tối thiểu 200 cards).<br/>Do đó ông ấy đã chọn loại <b>(A) Matte</b>.</p>",
+                "questionType": "Cross-passage Inference",
+                "subCategory": "Inference",
+                "strategyHint": "Kết hợp số lượng 50 danh thiếp trong email với cột Minimum Order trong bảng."
+            },
+            {
+                "id": "ets22_t4_p7_179",
+                "number": 179,
+                "text": "Why did Mr. Thibault replace the logo on his order?",
+                "options": {
+                    "A": "It was not aligned properly.",
+                    "B": "It was an incorrect file size.",
+                    "C": "It was for the wrong company.",
+                    "D": "It was an outdated image."
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Tại sao ông Thibault thay thế logo trong đơn đặt hàng của mình?<br/>(A) Logo không được căn chỉnh đúng.<br/>(B) Dung lượng tệp không đúng.<br/>(C) Đó là logo của công ty khác.<br/>(D) Đó là hình ảnh đã cũ / lỗi thời (outdated image).</p><p><b>Bằng chứng trích dẫn:</b> Ông giải thích trong email: <i>'I had accidentally uploaded an older version of my logo to the Web site.'</i> (Tôi vô tình tải lên phiên bản cũ hơn của logo). <i>Older version = outdated image</i>. Chọn <b>(D) It was an outdated image</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail",
+                "strategyHint": "older version = outdated image."
+            },
+            {
+                "id": "ets22_t4_p7_180",
+                "number": 180,
+                "text": "In the e-mail, the word “reflects” in paragraph 2, line 3, is closest in meaning to",
+                "options": {
+                    "A": "returns",
+                    "B": "matches",
+                    "C": "considers",
+                    "D": "shines"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Trong email, từ 'reflects' ở đoạn 2, dòng 3 gần nghĩa nhất với từ nào?<br/>(A) returns (trả lại).<br/>(B) matches (khớp với, giống với).<br/>(C) considers (cân nhắc).<br/>(D) shines (tỏa sáng, phản chiếu).</p><p><b>Bằng chứng trích dẫn:</b> Trong ngữ cảnh <i>'confirm that this change reflects the image I've included here'</i> (xác nhận rằng sự thay đổi này khớp đúng với hình ảnh tôi đính kèm ở đây), từ <i>reflects</i> đồng nghĩa với <b>(B) matches</b>.</p>",
+                "questionType": "Vocabulary in Context",
+                "subCategory": "Business Vocabulary",
+                "strategyHint": "reflects = matches (phản ánh đúng, trùng khớp với)."
+            }
+        ]
+    },
+
+    # Set 12: Q181 - Q185 (Double Passage: Web Page + Email)
+    {
+        "id": "ets22_t4_p7_s12",
+        "type": "Double Passage",
+        "passages": [
+            {
+                "id": "ets22_t4_p7_s12_p1",
+                "type": "Web Page",
+                "title": "Workshop Web Page",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<p style='color: #666; font-size: 13px;'>http://www.greencityscreenwriters.org/workshopseries</p>"
+                           "<h3 style='margin-top: 0;'>Green City Screenwriters' Workshop</h3>"
+                           "<p>Green City Screenwriters' Workshop (GCSW) provides aspiring and practicing screenwriters a place for interaction and exchange of ideas. For the last 25 years, GCSW has helped writers from all over the country develop creative projects.</p>"
+                           "<p>Are you working on a movie script? Or do you have an idea for the next blockbuster film? Consider applying for the next series of classes at GCSW. We offer writing groups, staged readings, and seminars with guest speakers.</p>"
+                           "<ul>"
+                           "<li>The six class sessions begin on January 10 and are held every other Thursday.</li>"
+                           "<li>Each class meets from 7 P.M. to 9 P.M. at Green City Foundation for the Arts.</li>"
+                           "<li>Tuition is $500 in total and due by January 1.</li>"
+                           "<li>A limited amount of financial aid is available to those who qualify.</li>"
+                           "<li>Classes are capped at ten students.</li>"
+                           "</ul>"
+                           "<p><b>TO APPLY:</b><br/>"
+                           "Please send a 20-page writing sample (this can be from any genre of writing) and a 200-word autobiographical statement to apply@greencityscreenwriters.org. An instructor will respond to your inquiry if you are accepted.</p>"
+                           "</div>"
+            },
+            {
+                "id": "ets22_t4_p7_s12_p2",
+                "type": "E-mail",
+                "title": "E-Mail",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<p><b>From:</b> Joshua Hartzog &lt;jhartzog@greencityscreenwriters.org&gt;<br/>"
+                           "<b>To:</b> Terry Hampton &lt;thampton@webcentral.com&gt;<br/>"
+                           "<b>Date:</b> December 10<br/>"
+                           "<b>Subject:</b> Upcoming screenwriting class series<br/>"
+                           "<b>Attachment:</b> NSI_form.pdf</p>"
+                           "<p>Dear Mr. Hampton,</p>"
+                           "<p>My name is Joshua Hartzog, and I am one of the instructors at Green City Screenwriters' Workshop. I am pleased to inform you of your acceptance to our next series of classes. Our committee was impressed with your writing sample.</p>"
+                           "<p>Here is a little about me: I have been a teacher at GCSW since it started. Additionally, I have written eight film scripts, including <i>An Incredible Summer</i> and <i>Toast of the Town</i>, both of which won National Writers' Groups awards.</p>"
+                           "<p>Please fill out the attached New Student Information form and return it to me either via e-mail or in person at the Green City Foundation for the Arts by January 1. I look forward to seeing you for our first class on January 10. Please pay attention to your inbox for your first assignment, which will be due by our first class meeting.</p>"
+                           "<p>Thank you,<br/>Joshua Hartzog</p>"
+                           "</div>"
+            }
+        ],
+        "questions": [
+            {
+                "id": "ets22_t4_p7_181",
+                "number": 181,
+                "text": "According to the Web page, what is true regarding the series of screenwriting classes?",
+                "options": {
+                    "A": "Morning classes are available.",
+                    "B": "The deadline to apply is January 10.",
+                    "C": "Class sizes are limited to ten students.",
+                    "D": "Classes are held every weekday night."
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Theo trang web, điều gì là đúng về chuỗi lớp học viết kịch bản phim?<br/>(A) Có các lớp học buổi sáng.<br/>(B) Hạn chót nộp đơn là ngày 10 tháng 1.<br/>(C) Quy mô lớp học được giới hạn tối đa 10 học viên.<br/>(D) Lớp học được tổ chức vào các tối trong tuần.</p><p><b>Bằng chứng trích dẫn:</b> Trang web nêu rõ điều kiện: <i>'Classes are capped at ten students.'</i> (Các lớp học bị giới hạn tối đa 10 học viên). Chọn <b>(C) Class sizes are limited to ten students</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail",
+                "strategyHint": "capped at ten students = limited to ten students."
+            },
+            {
+                "id": "ets22_t4_p7_182",
+                "number": 182,
+                "text": "What must be included with the application?",
+                "options": {
+                    "A": "A deposit on the tuition fee",
+                    "B": "A brief personal history",
+                    "C": "A proof of residency form",
+                    "D": "Two published screenplays"
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Hồ sơ ứng tuyển bắt buộc phải bao gồm những gì?<br/>(A) Tiền đặt cọc học phí.<br/>(B) Bản tóm tắt lý lịch cá nhân ngắn gọn.<br/>(C) Giấy tờ chứng minh nơi cư trú.<br/>(D) Hai kịch bản đã xuất bản.</p><p><b>Bằng chứng trích dẫn:</b> Hướng dẫn nộp đơn (TO APPLY) yêu cầu: <i>'Please send a 20-page writing sample ... and a 200-word autobiographical statement'</i> (Bản tự thuật cá nhân 200 từ = brief personal history). Chọn <b>(B) A brief personal history</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail",
+                "strategyHint": "autobiographical statement = brief personal history."
+            },
+            {
+                "id": "ets22_t4_p7_183",
+                "number": 183,
+                "text": "What is the purpose of Mr. Hartzog’s e-mail?",
+                "options": {
+                    "A": "To explain his numerous awards",
+                    "B": "To outline the first class assignment",
+                    "C": "To encourage a fellow writer to apply",
+                    "D": "To respond to a student’s application"
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Mục đích của email từ ông Hartzog là gì?<br/>(A) Để giải thích các giải thưởng của mình.<br/>(B) Để nêu đề cương bài tập đầu tiên.<br/>(C) Để khuyến khích một nhà văn nộp đơn.<br/>(D) Để phản hồi đơn ứng tuyển của học viên.</p><p><b>Bằng chứng trích dẫn:</b> Ông Hartzog viết: <i>'I am pleased to inform you of your acceptance to our next series of classes. Our committee was impressed with your writing sample.'</i>. Mục đích là thông báo trúng tuyển (phản hồi đơn ứng tuyển) <b>(D) To respond to a student's application</b>.</p>",
+                "questionType": "Purpose",
+                "subCategory": "Overview",
+                "strategyHint": "inform you of your acceptance = respond to an application."
+            },
+            {
+                "id": "ets22_t4_p7_184",
+                "number": 184,
+                "text": "What is indicated about Mr. Hartzog?",
+                "options": {
+                    "A": "He heads the application committee.",
+                    "B": "He has taught at GCSW for 25 years.",
+                    "C": "Eight of his screenplays have won awards.",
+                    "D": "Three of his screenplays take place in Green City."
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được chỉ ra về ông Hartzog?<br/>(A) Ông ấy đứng đầu ủy ban tuyển sinh.<br/>(B) Ông ấy đã giảng dạy tại GCSW suốt 25 năm.<br/>(C) Tám kịch bản của ông đều đoạt giải.<br/>(D) Ba kịch bản của ông lấy bối cảnh ở Green City.</p><p><b>Bằng chứng trích dẫn (Liên kết 2 đoạn):</b><br/>- Trang web cho biết: <i>'For the last 25 years, GCSW has helped writers...'</i> (GCSW đã hoạt động được 25 năm).<br/>- Trong email, ông Hartzog tự giới thiệu: <i>'I have been a teacher at GCSW since it started.'</i> (Tôi là giáo viên tại GCSW kể từ ngày thành lập).<br/>Suy ra ông ấy đã dạy ở đây 25 năm <b>(B) He has taught at GCSW for 25 years</b>.</p>",
+                "questionType": "Cross-passage Inference",
+                "subCategory": "Inference",
+                "strategyHint": "GCSW thành lập 25 năm + Hartzog dạy từ ngày đầu = 25 năm giảng dạy."
+            },
+            {
+                "id": "ets22_t4_p7_185",
+                "number": 185,
+                "text": "What is Mr. Hampton asked to do?",
+                "options": {
+                    "A": "Complete an attached form",
+                    "B": "Send contact information",
+                    "C": "Apply for financial aid",
+                    "D": "Send a sample script"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Ông Hampton được yêu cầu làm gì?<br/>(A) Điền hoàn thành biểu mẫu đính kèm.<br/>(B) Gửi thông tin liên lạc.<br/>(C) Nộp đơn xin hỗ trợ tài chính.<br/>(D) Gửi kịch bản mẫu.</p><p><b>Bằng chứng trích dẫn:</b> Ông Hartzog yêu cầu rõ: <i>'Please fill out the attached New Student Information form and return it to me either via e-mail or in person...'</i> (Vui lòng điền vào biểu mẫu Thông tin Học viên Mới đính kèm). Chọn <b>(A) Complete an attached form</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Next Action",
+                "strategyHint": "fill out the attached form = Complete an attached form."
+            }
+        ]
+    },
+
+    # Set 13: Q186 - Q190 (Triple Passage: Email + Review + Schedule)
+    {
+        "id": "ets22_t4_p7_s13",
+        "type": "Triple Passage",
+        "passages": [
+            {
+                "id": "ets22_t4_p7_s13_p1",
+                "type": "E-mail",
+                "title": "E-Mail",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<p><b>To:</b> Jane McNally &lt;jmcnally@aap.org.ie&gt;<br/>"
+                           "<b>From:</b> Yoko Nara &lt;ynara@insleyhotel.com.ie&gt;<br/>"
+                           "<b>Date:</b> 3 February<br/>"
+                           "<b>Subject:</b> Vouchers</p>"
+                           "<p>Hi, Ms. McNally,</p>"
+                           "<p>The water heater servicing the kitchen at the hotel is broken. We cannot serve meals because there is no hot water for washing pots and dishes. Technicians are diligently working on this issue.</p>"
+                           "<p>I am offering vouchers to all guests that can be used for breakfast or lunch at Sarah's Cafe next door. If there is no resolution by tomorrow, the evening's dinner will be moved to Maury's Restaurant. I have already discussed this with owner Maury Roebling, and he is preparing to welcome your professional group. Please accept my apologies for any inconvenience.</p>"
+                           "<p>Thank you,<br/>Yoko Nara</p>"
+                           "</div>"
+            },
+            {
+                "id": "ets22_t4_p7_s13_p2",
+                "type": "Review",
+                "title": "Online Review",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<h4 style='margin-top: 0;'>“The place was charming!”</h4>"
+                           "<p>I enjoyed a soup and sandwich special at Sarah's Cafe this afternoon because I received a voucher from my hotel. I arrived just at noon and had to wait almost 25 minutes for a table. I would recommend visiting at a less busy time because the cafe is relatively small. Other than that, even if my meal had not been free, I would still recommend the cafe. The atmosphere is warm and inviting and their homemade soup is delicious.</p>"
+                           "<p style='color: #666;'>—Stefan Nichols, 3 February</p>"
+                           "</div>"
+            },
+            {
+                "id": "ets22_t4_p7_s13_p3",
+                "type": "Schedule",
+                "title": "Event Schedule",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<p style='color: #666; font-size: 13px;'>https://www.aap.org.ie/annualmeeting/schedule</p>"
+                           "<h3 style='margin-top: 0;'>Association of Accounting Professionals</h3>"
+                           "<p><b>Annual Meeting—Scheduled Events</b></p>"
+                           "<p><b>Friday, 4 February</b><br/>"
+                           "• <b>Guest speaker</b> (5:30 P.M., Room 213, Insley Hotel): Mr. Ian Bagley, CFO at Colford International, will discuss “Old Concerns and Current Trends in the Accounting Profession.”<br/>"
+                           "• <b>Networking dinner</b> (7:00 P.M., Maury's Restaurant): Enjoy a gourmet dinner and relax with your colleagues at this popular eatery.</p>"
+                           "<p><b>Saturday, 5 February</b><br/>"
+                           "• <b>Job Fair</b> (11:00 A.M. to 5:00 P.M.): Meet with representatives from companies around the region. Bring copies of your resume.<br/>"
+                           "• <b>Tour of Dublin</b> (1:00 P.M. to 4:00 P.M.): Visit some interesting sites in our host city. Wear comfortable shoes, as tour participants will cover approximately two miles.</p>"
+                           "</div>"
+            }
+        ],
+        "questions": [
+            {
+                "id": "ets22_t4_p7_186",
+                "number": 186,
+                "text": "Who most likely is Ms. McNally?",
+                "options": {
+                    "A": "A receptionist",
+                    "B": "A banquet chef",
+                    "C": "An event organizer",
+                    "D": "A cafe owner"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Cô McNally nhiều khả năng là ai nhất?<br/>(A) Nhân viên lễ tân.<br/>(B) Đầu bếp tiệc.<br/>(C) Người tổ chức sự kiện.<br/>(D) Chủ quán cà phê.</p><p><b>Bằng chứng trích dẫn:</b> Email từ quản lý khách sạn gửi đến địa chỉ <i>jmcnally@aap.org.ie</i> (Association of Accounting Professionals) để phối hợp thu xếp bữa ăn cho đoàn khách tham dự hội nghị thường niên (<i>welcome your professional group</i>). Do đó cô là <b>(C) An event organizer</b>.</p>",
+                "questionType": "Occupation",
+                "subCategory": "Overview",
+                "strategyHint": "Liên kết địa chỉ email @aap.org.ie và lịch trình hội nghị thường niên."
+            },
+            {
+                "id": "ets22_t4_p7_187",
+                "number": 187,
+                "text": "What problem is described in the e-mail?",
+                "options": {
+                    "A": "An event has been canceled.",
+                    "B": "A hotel is closing.",
+                    "C": "A repair bill was not paid on time.",
+                    "D": "An industrial appliance is not working."
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Vấn đề nào được mô tả trong email?<br/>(A) Một sự kiện bị hủy bỏ.<br/>(B) Khách sạn sắp đóng cửa.<br/>(C) Hóa đơn sửa chữa không được thanh toán đúng hạn.<br/>(D) Một thiết bị công nghiệp không hoạt động.</p><p><b>Bằng chứng trích dẫn:</b> Quản lý khách sạn thông báo: <i>'The water heater servicing the kitchen at the hotel is broken. We cannot serve meals because there is no hot water for washing pots and dishes.'</i> (Máy nước nóng công nghiệp phục vụ khu bếp bị hỏng). Chọn <b>(D) An industrial appliance is not working</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail",
+                "strategyHint": "water heater is broken = industrial appliance is not working."
+            },
+            {
+                "id": "ets22_t4_p7_188",
+                "number": 188,
+                "text": "What can be concluded about Mr. Nichols?",
+                "options": {
+                    "A": "He did not enjoy a meal.",
+                    "B": "He arrived 25 minutes late for a luncheon.",
+                    "C": "He is a guest at the Insley Hotel.",
+                    "D": "He is a frequent customer at a restaurant."
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Có thể kết luận điều gì về ông Nichols?<br/>(A) Ông ấy không thích bữa ăn.<br/>(B) Ông ấy đến muộn 25 phút trong bữa trưa.<br/>(C) Ông ấy là khách lưu trú tại Khách sạn Insley.<br/>(D) Ông ấy là khách quen tại một nhà hàng.</p><p><b>Bằng chứng trích dẫn (Liên kết văn bản 1 và 2):</b><br/>- Trong bài đánh giá (văn bản 2), Stefan Nichols viết vào ngày 3/2: <i>'I enjoyed a soup and sandwich special at Sarah's Cafe this afternoon because I received a voucher from my hotel.'</i><br/>- Trong email ngày 3/2 (văn bản 1), Yoko Nara từ <b>Insley Hotel</b> thông báo phát voucher ăn tại Sarah's Cafe cho tất cả khách khách sạn.<br/>Điều này chứng minh ông Nichols là khách tại Insley Hotel <b>(C) He is a guest at the Insley Hotel</b>.</p>",
+                "questionType": "Cross-passage Inference",
+                "subCategory": "Inference",
+                "strategyHint": "Khách sạn Insley phát voucher ăn tại Sarah's Cafe + Nichols dùng voucher từ khách sạn -> Nichols ở Insley Hotel."
+            },
+            {
+                "id": "ets22_t4_p7_189",
+                "number": 189,
+                "text": "What does the event schedule indicate?",
+                "options": {
+                    "A": "Tour participants will travel on foot.",
+                    "B": "Entertainment will be provided in the lobby.",
+                    "C": "Attendees must register for the job fair.",
+                    "D": "All activities take place in the afternoon."
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Lịch trình sự kiện chỉ ra điều gì?<br/>(A) Những người tham gia chuyến tham quan sẽ đi bộ.<br/>(B) Hoạt động giải trí sẽ diễn ra ở sảnh.<br/>(C) Người tham dự phải đăng ký hội chợ việc làm.<br/>(D) Tất cả hoạt động diễn ra vào buổi chiều.</p><p><b>Bằng chứng trích dẫn:</b> Mục Tour of Dublin nêu: <i>'Wear comfortable shoes, as tour participants will cover approximately two miles.'</i> (Hãy đi giày thoải mái vì đoàn sẽ đi khoảng 2 dặm). Điều này chứng minh đoàn đi bộ <b>(A) Tour participants will travel on foot</b>.</p>",
+                "questionType": "Inference",
+                "subCategory": "Detail",
+                "strategyHint": "Wear comfortable shoes / cover two miles = travel on foot."
+            },
+            {
+                "id": "ets22_t4_p7_190",
+                "number": 190,
+                "text": "What is suggested about the networking dinner?",
+                "options": {
+                    "A": "It will feature a talk by Mr. Bagley.",
+                    "B": "It had to be postponed to a later time.",
+                    "C": "It is intended for accounting students.",
+                    "D": "It was moved from its original location."
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Điều gì được gợi ý về bữa tối giao lưu kết nối?<br/>(A) Có bài phát biểu của ông Bagley.<br/>(B) Phải hoãn lại sang giờ muộn hơn.<br/>(C) Dành cho sinh viên ngành kế toán.<br/>(D) Nó đã bị chuyển khỏi địa điểm ban đầu.</p><p><b>Bằng chứng trích dẫn (Liên kết văn bản 1 và 3):</b> Trong email ngày 3/2, khách sạn báo vì hỏng máy nước nóng: <i>'the evening's dinner will be moved to Maury's Restaurant.'</i> Trên lịch trình ngày 4/2 ghi bữa tối giao lưu diễn ra tại <i>Maury's Restaurant</i>. Do đó bữa tối đã được di dời địa điểm <b>(D) It was moved from its original location</b>.</p>",
+                "questionType": "Cross-passage Inference",
+                "subCategory": "Inference",
+                "strategyHint": "Email ghi 'will be moved to Maury's Restaurant' -> was moved from its original location."
+            }
+        ]
+    },
+
+    # Set 14: Q191 - Q195 (Triple Passage: Web Page + Email + Form)
+    {
+        "id": "ets22_t4_p7_s14",
+        "type": "Triple Passage",
+        "passages": [
+            {
+                "id": "ets22_t4_p7_s14_p1",
+                "type": "Web Page",
+                "title": "Company Web Page",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<p style='color: #666; font-size: 13px;'>http://www.antiziointernational.com</p>"
+                           "<h3 style='margin-top: 0;'>ANTIZIO International</h3>"
+                           "<p>Antizio International is a leading provider of designer ceramic, porcelain, and stone tile. Our products are suitable for both commercial and residential projects, and our mission is to be the best quality supplier in the region!</p>"
+                           "<p>When you partner with Antizio International, you have access to the most respected brands in the industry. See our Products page for a list of our suppliers from all over the world.</p>"
+                           "<p><b>This month's special: Ventana brand tiles</b><br/>"
+                           "“Brittany” series ceramic tiles—<br/>"
+                           "• Country red, violet, pink (15 percent off)<br/>"
+                           "• Taupe, tan, soft green (20 percent off)<br/>"
+                           "<i>Sale prices valid March 1–15</i></p>"
+                           "</div>"
+            },
+            {
+                "id": "ets22_t4_p7_s14_p2",
+                "type": "E-mail",
+                "title": "Inventory Notice",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<p><b>TO:</b> Purchasing agents<br/>"
+                           "<b>FROM:</b> Antizio International<br/>"
+                           "<b>DATE:</b> March 24<br/>"
+                           "<b>SUBJECT:</b> Inventory update</p>"
+                           "<p>Effective April 1, the following products will be discontinued:</p>"
+                           "<table style='width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px;'>"
+                           "<thead><tr style='background: var(--bg-subtle, #f3f4f6);'><th style='border: 1px solid #ddd; padding: 6px;'>Manufacturer</th><th style='border: 1px solid #ddd; padding: 6px;'>Product line</th></tr></thead>"
+                           "<tbody>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;' rowspan='2'>Ventana</td><td style='border: 1px solid #ddd; padding: 6px;'>“Valentina”—all colors (entire line)</td></tr>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>“Brittany”—country red, violet, taupe</td></tr>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;' rowspan='2'>Medoro</td><td style='border: 1px solid #ddd; padding: 6px;'>“Solidstone”—all colors</td></tr>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>“Elementa”—black, gray</td></tr>"
+                           "</tbody></table>"
+                           "<p style='margin-top: 8px;'>Orders for these products cannot be accepted after April 1. Return of these products cannot be accepted after May 1.</p>"
+                           "</div>"
+            },
+            {
+                "id": "ets22_t4_p7_s14_p3",
+                "type": "Form",
+                "title": "Return Form",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<h3 style='margin-top: 0; text-align: center;'>ANTIZIO International</h3>"
+                           "<h4 style='text-align: center;'>Merchandise Return Form</h4>"
+                           "<p style='font-size: 13px; color: #666;'>Please review our return policy before submitting this form. Returns must be made within 60 days of purchase and must be in original, unused condition.</p>"
+                           "<p><b>Return date:</b> May 12<br/>"
+                           "<b>Customer name:</b> William Lin, WKL Contractors, Inc.<br/>"
+                           "<b>Original invoice date:</b> March 20<br/>"
+                           "<b>Item name:</b> Medoro brand—“Elementa” tile<br/>"
+                           "<b>Color:</b> Gray<br/>"
+                           "<b>Quantity:</b> 20 boxes<br/>"
+                           "<b>Price/box:</b> $70<br/>"
+                           "<b>Reason for return:</b> Actual color does not match catalog image<br/>"
+                           "<b>Form of return requested:</b> [X] Refund &nbsp;&nbsp; [ ] Store credit</p>"
+                           "</div>"
+            }
+        ],
+        "questions": [
+            {
+                "id": "ets22_t4_p7_191",
+                "number": 191,
+                "text": "In what industry does Antizio International do business?",
+                "options": {
+                    "A": "Building materials",
+                    "B": "Commercial advertising",
+                    "C": "Computer manufacturing",
+                    "D": "Fashion design"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Antizio International kinh doanh trong ngành nào?<br/>(A) Vật liệu xây dựng.<br/>(B) Quảng cáo thương mại.<br/>(C) Sản xuất máy tính.<br/>(D) Thiết kế thời trang.</p><p><b>Bằng chứng trích dẫn:</b> Trang web giới thiệu: <i>'Antizio International is a leading provider of designer ceramic, porcelain, and stone tile. Our products are suitable for both commercial and residential projects...'</i> (nhà cung cấp gạch ốp lát gốm sứ, đá cho các công trình). Ngành nghề là <b>(A) Building materials</b>.</p>",
+                "questionType": "Occupation",
+                "subCategory": "Overview",
+                "strategyHint": "ceramic, porcelain, stone tile = Building materials."
+            },
+            {
+                "id": "ets22_t4_p7_192",
+                "number": 192,
+                "text": "What advantage does Antizio International offer to clients?",
+                "options": {
+                    "A": "Its employees are bilingual.",
+                    "B": "Its products have a good reputation.",
+                    "C": "Its delivery fees are waived for frequent customers.",
+                    "D": "Its payment plans are flexible."
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Antizio International mang lại lợi thế gì cho khách hàng?<br/>(A) Nhân viên song ngữ.<br/>(B) Các sản phẩm có danh tiếng tốt.<br/>(C) Miễn phí giao hàng cho khách quen.<br/>(D) Kế hoạch thanh toán linh hoạt.</p><p><b>Bằng chứng trích dẫn:</b> Trang web nêu: <i>'When you partner with Antizio International, you have access to the most respected brands in the industry.'</i> (bạn được tiếp cận với những thương hiệu uy tín/được kính trọng nhất trong ngành). Chọn <b>(B) Its products have a good reputation</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail",
+                "strategyHint": "most respected brands = products have a good reputation."
+            },
+            {
+                "id": "ets22_t4_p7_193",
+                "number": 193,
+                "text": "What color of the Brittany product line can be ordered after April 1?",
+                "options": {
+                    "A": "Country red",
+                    "B": "Violet",
+                    "C": "Taupe",
+                    "D": "Soft green"
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Màu sắc nào của dòng sản phẩm Brittany vẫn có thể được đặt hàng sau ngày 1 tháng 4?<br/>(A) Đỏ đồng quê (Country red).<br/>(B) Tím (Violet).<br/>(C) Nâu xám (Taupe).<br/>(D) Xanh lục nhạt (Soft green).</p><p><b>Bằng chứng trích dẫn (Liên kết văn bản 1 và 2):</b><br/>- Trang web liệt kê các màu của dòng Brittany: <i>Country red, violet, pink, taupe, tan, soft green</i>.<br/>- Thông báo ngày 24/3 cho biết các màu bị ngừng sản xuất (discontinued) từ ngày 1/4 gồm: <i>country red, violet, taupe</i>.<br/>Như vậy màu <b>(D) Soft green</b> (cùng với pink và tan) không bị ngừng và vẫn đặt được sau 1/4. Chọn <b>(D) Soft green</b>.</p>",
+                "questionType": "Cross-passage Inference",
+                "subCategory": "Detail",
+                "strategyHint": "So sánh danh sách toàn bộ màu ở văn bản 1 với danh sách màu ngừng bán ở văn bản 2."
+            },
+            {
+                "id": "ets22_t4_p7_194",
+                "number": 194,
+                "text": "Why is Mr. Lin returning merchandise?",
+                "options": {
+                    "A": "He purchased more of the product than he needed.",
+                    "B": "He is not pleased with the color of the product.",
+                    "C": "The product sent to him was the wrong size.",
+                    "D": "The product was damaged during shipping."
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Tại sao ông Lin lại trả lại hàng hóa?<br/>(A) Ông ấy mua nhiều hơn số lượng cần thiết.<br/>(B) Ông ấy không hài lòng với màu sắc của sản phẩm.<br/>(C) Sản phẩm giao sai kích cỡ.<br/>(D) Sản phẩm bị hư hại trong quá trình vận chuyển.</p><p><b>Bằng chứng trích dẫn:</b> Trong biểu mẫu trả hàng, mục Reason for return ghi: <i>'Actual color does not match catalog image'</i> (Màu thực tế không khớp với hình trong danh mục). Chọn <b>(B) He is not pleased with the color of the product</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail",
+                "strategyHint": "Actual color does not match image = not pleased with the color."
+            },
+            {
+                "id": "ets22_t4_p7_195",
+                "number": 195,
+                "text": "Why will Mr. Lin’s refund request most likely be rejected?",
+                "options": {
+                    "A": "He bought an item that was custom designed.",
+                    "B": "He failed to include proof of purchase.",
+                    "C": "He returned a product after a deadline had expired.",
+                    "D": "He forgot to ask for a return authorization number."
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Tại sao yêu cầu hoàn tiền của ông Lin nhiều khả năng sẽ bị từ chối?<br/>(A) Ông ấy mua sản phẩm được thiết kế theo yêu cầu.<br/>(B) Không gửi kèm bằng chứng mua hàng.<br/>(C) Ông ấy trả hàng sau khi hạn chót đã hết hạn.<br/>(D) Quên xin mã ủy quyền hoàn trả.</p><p><b>Bằng chứng trích dẫn (Liên kết văn bản 2 và 3):</b><br/>- Sản phẩm ông Lin trả là Medoro “Elementa” tile màu Gray (sản phẩm nằm trong danh mục ngừng sản xuất).<br/>- Thông báo trong email ngày 24/3 nêu rõ: <i>'Return of these products cannot be accepted after May 1.'</i> (Việc trả lại các sản phẩm này không được chấp nhận sau ngày 1 tháng 5).<br/>- Biểu mẫu của ông Lin có ngày trả là <b>May 12</b> (đã quá hạn 1/5).<br/>Do đó yêu cầu hoàn tiền sẽ bị từ chối vì quá hạn <b>(C) He returned a product after a deadline had expired</b>.</p>",
+                "questionType": "Cross-passage Inference",
+                "subCategory": "Inference",
+                "strategyHint": "Hạn chót trả hàng ngừng sản xuất là May 1, nhưng ngày gửi đơn là May 12 -> quá hạn."
+            }
+        ]
+    },
+
+    # Set 15: Q196 - Q200 (Triple Passage: Emails + Schedule)
+    {
+        "id": "ets22_t4_p7_s15",
+        "type": "Triple Passage",
+        "passages": [
+            {
+                "id": "ets22_t4_p7_s15_p1",
+                "type": "E-mail",
+                "title": "Staff Announcement",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<p><b>To:</b> All Staff<br/>"
+                           "<b>From:</b> Ronald Garrison<br/>"
+                           "<b>Date:</b> April 20<br/>"
+                           "<b>Subject:</b> Update</p>"
+                           "<p>Dear Colleagues,</p>"
+                           "<p>It's an exciting time here at Zikomo Solutions, and we have a lot to celebrate! Our company has shown tremendous growth over the past year. Just last month we exceeded our goals and conducted 25 customer service workshops for 18 different companies in the greater Groton area.</p>"
+                           "<p>In response to our growth, we have added three new workshop presenters with significant customer service experience in their respective industries. Lisa Okoro will focus on the telemarketing industry. Caleb Patel will train those in fields related to medicine. And Alan Gorospe will specialize mainly in customer service for the technology industry. They will begin giving workshops during the first or second week of May. Please join me in welcoming these professionals to the Zikomo family.</p>"
+                           "<p>Ronald Garrison<br/>CEO, Zikomo Solutions</p>"
+                           "</div>"
+            },
+            {
+                "id": "ets22_t4_p7_s15_p2",
+                "type": "Schedule",
+                "title": "Training Schedule",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<h3 style='margin-top: 0; text-align: center;'>Zikomo Solutions</h3>"
+                           "<p style='text-align: center; font-weight: bold;'>Tentative Training Schedule (Week of May 2)</p>"
+                           "<table style='width: 100%; border-collapse: collapse; font-size: 13px;'>"
+                           "<thead><tr style='background: var(--bg-subtle, #f3f4f6);'><th style='border: 1px solid #ddd; padding: 6px;'>Course Name</th><th style='border: 1px solid #ddd; padding: 6px;'>Length</th><th style='border: 1px solid #ddd; padding: 6px;'>Date</th><th style='border: 1px solid #ddd; padding: 6px;'>Trainer</th><th style='border: 1px solid #ddd; padding: 6px;'>Location</th></tr></thead>"
+                           "<tbody>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>Telephone Skills</td><td style='border: 1px solid #ddd; padding: 6px;'>Half Day</td><td style='border: 1px solid #ddd; padding: 6px;'>May 2</td><td style='border: 1px solid #ddd; padding: 6px;'>Lisa Okoro</td><td style='border: 1px solid #ddd; padding: 6px;'>Zikomo, Groton</td></tr>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>Customer Service in a Digital World</td><td style='border: 1px solid #ddd; padding: 6px;'>Full Day</td><td style='border: 1px solid #ddd; padding: 6px;'>May 3</td><td style='border: 1px solid #ddd; padding: 6px;'>Alan Gorospe</td><td style='border: 1px solid #ddd; padding: 6px;'>Zikomo, Groton</td></tr>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>Patient Relations for Hospital Professionals</td><td style='border: 1px solid #ddd; padding: 6px;'>Full Day</td><td style='border: 1px solid #ddd; padding: 6px;'>May 4</td><td style='border: 1px solid #ddd; padding: 6px;'>To Be Determined</td><td style='border: 1px solid #ddd; padding: 6px;'>Fitzer Medical Group, West Groton</td></tr>"
+                           "<tr><td style='border: 1px solid #ddd; padding: 6px;'>Turn Tech Problems into Marketing Opportunities</td><td style='border: 1px solid #ddd; padding: 6px;'>Half Day</td><td style='border: 1px solid #ddd; padding: 6px;'>May 5</td><td style='border: 1px solid #ddd; padding: 6px;'>Alan Gorospe</td><td style='border: 1px solid #ddd; padding: 6px;'>Callipher Technologies, Fayetteville</td></tr>"
+                           "</tbody></table>"
+                           "</div>"
+            },
+            {
+                "id": "ets22_t4_p7_s15_p3",
+                "type": "E-mail",
+                "title": "Feedback E-Mail",
+                "content": "<div style='border: 1px solid var(--border-color, #ccc); border-radius: 8px; padding: 16px; font-family: sans-serif;'>"
+                           "<p><b>To:</b> Ronald Garrison &lt;rgarrison@zikomosolutions.net&gt;<br/>"
+                           "<b>From:</b> Jana Snyder &lt;jsnyder@snyder.com&gt;<br/>"
+                           "<b>Date:</b> May 8<br/>"
+                           "<b>Subject:</b> Recent workshops</p>"
+                           "<p>Dear Mr. Garrison,</p>"
+                           "<p>Several of my employees from Snyder Goods attended Zikomo training sessions on May 2 and 3. I wanted to provide feedback and ask a question. I think the half-day session could be extended to a full day, considering the interesting topic and skill of the excellent presenter. Conversely, the full day, while interesting, would be better condensed into a half day. Additionally, could you provide more parking options? Spaces for participants were full, and a number of our Snyder Goods employees had to park in an expensive paid lot.</p>"
+                           "<p>Sincerely,<br/>Jana Snyder<br/>Snyder Goods</p>"
+                           "</div>"
+            }
+        ],
+        "questions": [
+            {
+                "id": "ets22_t4_p7_196",
+                "number": 196,
+                "text": "What is the purpose of the first e-mail?",
+                "options": {
+                    "A": "To announce the hiring of new staff members",
+                    "B": "To invite employees to a celebration",
+                    "C": "To outline a plan for a company’s growth",
+                    "D": "To recognize high-performing employees"
+                },
+                "correctAnswer": "A",
+                "explanation": "<p><b>Dịch nghĩa:</b> Mục đích của bức email đầu tiên là gì?<br/>(A) Thông báo việc tuyển dụng nhân viên mới.<br/>(B) Mời nhân viên tham dự buổi liên hoan kỷ niệm.<br/>(C) Phác thảo kế hoạch tăng trưởng của công ty.<br/>(D) Khen thưởng các nhân viên có thành tích xuất sắc.</p><p><b>Bằng chứng trích dẫn:</b> Giám đốc viết: <i>'In response to our growth, we have added three new workshop presenters with significant customer service experience... Please join me in welcoming these professionals to the Zikomo family.'</i>. Mục đích là <b>(A) To announce the hiring of new staff members</b>.</p>",
+                "questionType": "Purpose",
+                "subCategory": "Overview",
+                "strategyHint": "added three new workshop presenters / welcoming these professionals = hiring of new staff."
+            },
+            {
+                "id": "ets22_t4_p7_197",
+                "number": 197,
+                "text": "In what area does Zikomo Solutions specialize?",
+                "options": {
+                    "A": "Computer manufacturing",
+                    "B": "Accounting",
+                    "C": "Transportation",
+                    "D": "Customer service"
+                },
+                "correctAnswer": "D",
+                "explanation": "<p><b>Dịch nghĩa:</b> Zikomo Solutions chuyên về lĩnh vực nào?<br/>(A) Sản xuất máy tính.<br/>(B) Kế toán.<br/>(C) Vận tải.<br/>(D) Dịch vụ chăm sóc khách hàng.</p><p><b>Bằng chứng trích dẫn:</b> Email nêu: <i>'conducted 25 customer service workshops for 18 different companies'</i> và các khóa học đều xoay quanh kỹ năng chăm sóc khách hàng. Công ty chuyên về <b>(D) Customer service</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Overview",
+                "strategyHint": "customer service workshops = Customer service."
+            },
+            {
+                "id": "ets22_t4_p7_198",
+                "number": 198,
+                "text": "What does the schedule indicate about the workshops?",
+                "options": {
+                    "A": "Several are held on the same day.",
+                    "B": "Some are held at Zikomo’s office.",
+                    "C": "They typically last a full day.",
+                    "D": "They are usually filled to capacity."
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Lịch trình chỉ ra điều gì về các buổi hội thảo đào tạo?<br/>(A) Một số buổi tổ chức trong cùng một ngày.<br/>(B) Một số buổi được tổ chức tại văn phòng của Zikomo.<br/>(C) Các buổi học thường kéo dài trọn ngày.<br/>(D) Các buổi học thường kín chỗ.</p><p><b>Bằng chứng trích dẫn:</b> Trong cột Location của lịch trình, hai khóa ngày 2/5 và 3/5 diễn ra tại: <i>'Zikomo, Groton'</i> (tại trụ sở của Zikomo ở Groton). Chọn <b>(B) Some are held at Zikomo's office</b>.</p>",
+                "questionType": "Detail",
+                "subCategory": "Detail",
+                "strategyHint": "Location: Zikomo, Groton = at Zikomo's office."
+            },
+            {
+                "id": "ets22_t4_p7_199",
+                "number": 199,
+                "text": "Who is most qualified to lead the workshop on May 4?",
+                "options": {
+                    "A": "Mr. Garrison",
+                    "B": "Ms. Okoro",
+                    "C": "Mr. Patel",
+                    "D": "Mr. Gorospe"
+                },
+                "correctAnswer": "C",
+                "explanation": "<p><b>Dịch nghĩa:</b> Ai là người đủ tiêu chuẩn nhất để giảng dạy khóa đào tạo vào ngày 4 tháng 5?<br/>(A) Ông Garrison.<br/>(B) Cô Okoro.<br/>(C) Ông Patel.<br/>(D) Ông Gorospe.</p><p><b>Bằng chứng trích dẫn (Liên kết văn bản 1 và 2):</b><br/>- Lịch trình ngày 4/5 có khóa học: <i>'Patient Relations for Hospital Professionals'</i> diễn ra tại Fitzer Medical Group (chuyên ngành y tế/bệnh viện).<br/>- Email ngày 20/4 giới thiệu chuyên môn: <i>'Caleb Patel will train those in fields related to medicine.'</i> (Caleb Patel sẽ đào tạo nhân sự các lĩnh vực liên quan đến y tế).<br/>Do đó người phù hợp nhất là <b>(C) Mr. Patel</b>.</p>",
+                "questionType": "Cross-passage Inference",
+                "subCategory": "Inference",
+                "strategyHint": "Hospital Professionals / Medical Group -> Caleb Patel (fields related to medicine)."
+            },
+            {
+                "id": "ets22_t4_p7_200",
+                "number": 200,
+                "text": "What does Ms. Snyder suggest about her employees’ training experience?",
+                "options": {
+                    "A": "The parking options were convenient.",
+                    "B": "The May 2 session was too short.",
+                    "C": "The topics were not interesting.",
+                    "D": "The trainer arrived late."
+                },
+                "correctAnswer": "B",
+                "explanation": "<p><b>Dịch nghĩa:</b> Bà Snyder đưa ra nhận định gì về trải nghiệm đào tạo của nhân viên mình?<br/>(A) Chỗ đỗ xe thuận tiện.<br/>(B) Buổi học ngày 2 tháng 5 quá ngắn.<br/>(C) Các chủ đề không thú vị.<br/>(D) Người đào tạo đến muộn.</p><p><b>Bằng chứng trích dẫn (Liên kết văn bản 2 và 3):</b><br/>- Nhân viên của bà tham gia các khóa ngày 2 và 3 tháng 5. Lịch trình cho thấy khóa ngày 2/5 là khóa nửa ngày (Half Day).<br/>- Trong email, bà Snyder nhận xét: <i>'I think the half-day session could be extended to a full day, considering the interesting topic and skill of the excellent presenter.'</i> (Tôi nghĩ buổi học nửa ngày có thể kéo dài thành cả ngày). Điều đó ngụ ý buổi học ngày 2/5 hơi ngắn <b>(B) The May 2 session was too short</b>.</p>",
+                "questionType": "Cross-passage Inference",
+                "subCategory": "Inference",
+                "strategyHint": "half-day session (May 2) could be extended to a full day = too short."
+            }
+        ]
+    }
+]
+
+with open("scratch/test4_p7_part3.json", "w", encoding="utf-8") as f:
+    json.dump(part3_sets, f, ensure_ascii=False, indent=2)
+
+print("Part 3 (Sets 11-15, Q176-Q200) built successfully with", len(part3_sets), "sets and", sum(len(s["questions"]) for s in part3_sets), "questions.")

@@ -1,289 +1,289 @@
 [
   {
-    "id": "ets22_t2_p6_p1",
-    "title": "Part 6 Passage 1",
-    "type": "Email",
-    "content": "<p><b>To:</b> All Staff &lt;allstaff@apexsolutions.com&gt;<br/><b>From:</b> IT Security Office &lt;itsec@apexsolutions.com&gt;<br/><b>Date:</b> October 12<br/><b>Subject:</b> Important Update: Mandatory Two-Factor Authentication</p><p>Dear Apex Team Members,</p><p>In our ongoing commitment to safeguarding company information and customer privacy, our IT department will implement a mandatory two-factor authentication (2FA) protocol across all employee accounts beginning next Monday. This new security layer will (131) _____ our systems against unauthorized external access.</p><p>Starting on October 18, when logging into your enterprise workstation or accessing email from an off-site device, you will be prompted to verify your identity using a mobile authenticator app. (132) _____. If you have not yet installed the Apex Authenticator app on your company smartphone, please download it from the internal portal as soon as possible.</p><p>We recognize that adapting to updated security procedures can be (133) _____ challenging. However, our IT support specialists will be stationed in the main lobby all next week to offer hands-on assistance. Please do not (134) _____ to contact the IT Help Desk at extension 404 if you encounter any technical issues.</p><p>Sincerely,<br/>Marcus Vance<br/>Director of Information Security</p>",
+    "id": "ets22_t2_p6_s01",
+    "title": "Questions 131-134 refer to the following memo.",
+    "type": "Text",
+    "content": "<p><b>To:</b> All staff<br/><b>From:</b> Leonard Villalobos, Vice President of Product Development<br/><b>Date:</b> August 27<br/><b>Subject:</b> Atzeret game (Product #DS8192)</p><p>Due to the results from our trial customer testing, we have decided to postpone the launch of the Atzeret video game. Customer surveys indicated that the game was less (131) ___ than we anticipated. Over the next few months, the game development team will introduce several (132) ___ to make the product more attractive. (133) ___. If the changes are successful, we hope to launch the game by next January (134) ___ February.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p6_q131",
+        "id": "ets22_t2_p6_131",
         "number": 131,
         "text": "",
         "options": {
-          "A": "protect",
-          "B": "protected",
-          "C": "protection",
-          "D": "protective"
+          "A": "expensive",
+          "B": "repetitive",
+          "C": "appealing",
+          "D": "surprising"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Sau động từ khuyết thiếu <i>'will'</i> cần một động từ nguyên mẫu không 'to'. Do đó chọn <b>(A) protect</b>.</p>",
-        "blankNumber": 131,
-        "subCategory": "Verb Tense",
-        "grammarTag": "Modal Verb + Bare Infinitive"
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Các khảo sát khách hàng chỉ ra rằng trò chơi này kém hấp dẫn hơn so với chúng tôi dự đoán.</p><p><b>Phân tích ngữ cảnh:</b> Cụm <i>less [appealing] than we anticipated</i> (kém hấp dẫn/kém thu hút hơn so với mong đợi). Câu sau nêu rõ nhóm phát triển sẽ chỉnh sửa để sản phẩm <i>more attractive</i> (hấp dẫn hơn). Do đó, <b>(C) appealing</b> (hấp dẫn, lôi cuốn) là từ phù hợp nhất về nghĩa.<br/>- (A) <i>expensive</i>: đắt đỏ.<br/>- (B) <i>repetitive</i>: lặp đi lặp lại.<br/>- (D) <i>surprising</i>: đáng ngạc nhiên.</p>",
+        "type": "Vocabulary",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Adjective Context"
       },
       {
-        "id": "ets22_t2_p6_q132",
+        "id": "ets22_t2_p6_132",
         "number": 132,
         "text": "",
         "options": {
-          "A": "The old passwords will remain valid indefinitely.",
-          "B": "This step takes only a few seconds to complete.",
-          "C": "We will replace all office workstations next month.",
-          "D": "External vendors do not need to follow this rule."
+          "A": "modification",
+          "B": "modifies",
+          "C": "modifying",
+          "D": "modifications"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Câu trước đang nói về việc xác minh danh tính qua ứng dụng điện thoại. Câu <b>(B) This step takes only a few seconds to complete</b> (Bước này chỉ mất vài giây) kết nối mạch lạc giải thích rằng quy trình rất nhanh gọn.</p>",
-        "blankNumber": 132,
-        "subCategory": "Contextual Completion",
-        "grammarTag": "Sentence Insertion"
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Trong vài tháng tới, nhóm phát triển trò chơi sẽ đưa ra một số sửa đổi để làm cho sản phẩm trở nên hấp dẫn hơn.</p><p><b>Phân tích ngữ pháp:</b> Từ hạn định <i>several</i> (một vài, một số) luôn đi kèm với danh từ đếm được số nhiều. Do đó, <b>(D) modifications</b> (các sự sửa đổi) là đáp án đúng.<br/>- (A) <i>modification</i>: danh từ số ít.<br/>- (B) <i>modifies</i>: động từ chia thì.<br/>- (C) <i>modifying</i>: hiện tại phân từ.</p>",
+        "type": "Word Form",
+        "subCategory": "Word Form",
+        "grammarTag": "Plural Count Noun after Several"
       },
       {
-        "id": "ets22_t2_p6_q133",
+        "id": "ets22_t2_p6_133",
         "number": 133,
         "text": "",
         "options": {
-          "A": "initial",
-          "B": "initially",
-          "C": "initiate",
-          "D": "initiation"
+          "A": "At that point, more tests will be conducted.",
+          "B": "The launch will be our biggest of the year.",
+          "C": "However, the surveys are not reliable.",
+          "D": "Team members must each sign the form."
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Bổ nghĩa cho tính từ <i>'challenging'</i> (đầy thách thức) cần một trạng từ. <b>(B) initially</b> (ban đầu) là trạng từ thích hợp.</p>",
-        "blankNumber": 133,
-        "subCategory": "Word Form",
-        "grammarTag": "Adverb modifying Adjective"
+        "correctAnswer": "A",
+        "explanation": "<p><b>Dịch nghĩa:</b> Vào thời điểm đó, nhiều bài thử nghiệm hơn sẽ được tiến hành.</p><p><b>Phân tích tính liên kết:</b> Câu trước nói về việc nhóm sẽ đưa ra các sửa đổi trong vài tháng tới. Câu tiếp sau là: <i>'If the changes are successful...'</i> (Nếu các thay đổi này thành công...). Phương án <b>(A) At that point, more tests will be conducted</b> (Vào thời điểm đó, sẽ tiến hành thêm các bài kiểm tra) đóng vai trò mắt xích logic để dẫn đến việc đánh giá xem thay đổi có thành công hay không.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Structure",
+        "grammarTag": "Coherence & Sentence Insertion"
       },
       {
-        "id": "ets22_t2_p6_q134",
+        "id": "ets22_t2_p6_134",
         "number": 134,
         "text": "",
         "options": {
-          "A": "hesitate",
-          "B": "postpone",
-          "C": "refuse",
-          "D": "complain"
+          "A": "since",
+          "B": "or",
+          "C": "if",
+          "D": "later"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Cụm thành ngữ trang trọng kinh điển trong thư từ văn phòng: <b>do not hesitate to contact</b> (đừng ngần ngại liên hệ). Chọn <b>(A) hesitate</b>.</p>",
-        "blankNumber": 134,
-        "subCategory": "Business Vocabulary",
-        "grammarTag": "Idiomatic Phrase"
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> ...chúng tôi hy vọng sẽ ra mắt trò chơi vào khoảng tháng Giêng hoặc tháng Hai tới.</p><p><b>Phân tích ngữ pháp:</b> Nối hai mốc thời gian ước tính tương đương mang tính lựa chọn: <i>next January [or] February</i>. Liên từ <b>or</b> được dùng để chỉ khả năng xảy ra vào tháng 1 hoặc tháng 2. Do đó, <b>(B) or</b> là đáp án chính xác.</p>",
+        "type": "Conjunction",
+        "subCategory": "Preposition & Conjunction",
+        "grammarTag": "Coordinating Conjunction (or)"
       }
     ]
   },
   {
-    "id": "ets22_t2_p6_p2",
-    "title": "Part 6 Passage 2",
-    "type": "Notice",
-    "content": "<p><b>NOTICE: Facility Renovation at Central Plaza</b></p><p>Management wishes to inform all building occupants that the south parking garage will be temporarily closed for concrete resurfacing from Friday evening, November 5, through Sunday night, November 7. All vehicles must be (135) _____ from the south garage before 6:00 P.M. on Friday.</p><p>During this closure, tenants and visitors are authorized to use the north multi-level deck at no additional charge. (136) _____. Access gates at the north garage will be kept open throughout the weekend to facilitate entry and exit.</p><p>The maintenance crew will work diligently to complete the project (137) _____ schedule. We apologize for any temporary inconvenience this project may cause, and we thank you for your patience and (138) _____ as we work to enhance our parking infrastructure.</p>",
+    "id": "ets22_t2_p6_s02",
+    "title": "Questions 135-138 refer to the following e-mail.",
+    "type": "Text",
+    "content": "<p><b>To:</b> Eva Linn, Lundtalk Industries<br/><b>From:</b> Technical Services<br/><b>Date:</b> January 15<br/><b>Subject:</b> Technical query</p><p>Dear Ms. Linn,<br/>Thank you for contacting our technical department (135) ___ your query. (136) ___, our call got disconnected when we were trying to reboot your system from our remote location. (137) ___. Therefore, please call us at your earliest convenience and refer to conversation ID #TECH12-2020A to complete the system repair. We have prioritized your inquiry and look forward to helping you (138) ___ your computer to its full capabilities.<br/><br/>Sincerely,<br/>Arthur Feldt<br/>Technical Service Facilitator</p>",
     "questions": [
       {
-        "id": "ets22_t2_p6_q135",
+        "id": "ets22_t2_p6_135",
         "number": 135,
         "text": "",
         "options": {
-          "A": "removes",
-          "B": "removed",
-          "C": "removing",
-          "D": "removal"
+          "A": "until",
+          "B": "besides",
+          "C": "into",
+          "D": "with"
         },
-        "correctAnswer": "B",
-        "explanation": "<p>Cấu trúc bị động với modal verb: <i>'must be + V-P2'</i>. Do đó chọn <b>(B) removed</b> (phải được di dời).</p>",
-        "blankNumber": 135,
-        "subCategory": "Verb Tense",
-        "grammarTag": "Modal Passive Voice"
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Cảm ơn bạn đã liên hệ với bộ phận kỹ thuật của chúng tôi cùng với thắc mắc của bạn.</p><p><b>Phân tích ngữ pháp:</b> Cụm cấu trúc: <i>contact someone WITH something</i> (liên hệ với ai về/cùng với vấn đề gì). Do đó, <b>(D) with</b> là giới từ chính xác.<br/>- (A) <i>until</i>: cho đến khi.<br/>- (B) <i>besides</i>: ngoài ra.<br/>- (C) <i>into</i>: vào trong.</p>",
+        "type": "Preposition",
+        "subCategory": "Preposition & Conjunction",
+        "grammarTag": "Preposition Collocation"
       },
       {
-        "id": "ets22_t2_p6_q136",
+        "id": "ets22_t2_p6_136",
         "number": 136,
         "text": "",
         "options": {
-          "A": "The north facility has ample capacity for all vehicles.",
-          "B": "A fee of twenty dollars will be charged for overnight parking.",
-          "C": "Construction permits have not yet been granted.",
-          "D": "The cafeteria menu will change next week."
+          "A": "In other words",
+          "B": "For this reason",
+          "C": "For example",
+          "D": "As you know"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Câu trước cho phép khách gửi xe ở nhà để xe phía bắc miễn phí. Câu <b>(A) The north facility has ample capacity for all vehicles</b> (Khu nhà phía bắc có sức chứa dồi dào cho tất cả xe) bổ sung thông tin trấn an người thuê nhà.</p>",
-        "blankNumber": 136,
-        "subCategory": "Contextual Completion",
-        "grammarTag": "Sentence Insertion"
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Như bạn đã biết, cuộc gọi của chúng ta đã bị ngắt kết nối khi chúng tôi đang cố gắng khởi động lại hệ thống của bạn từ xa.</p><p><b>Phân tích ngữ cảnh:</b> Cụm từ liên kết <b>As you know</b> (Như bạn đã biết) dùng để nhắc lại một sự việc mà cả hai bên (kỹ thuật viên và khách hàng) đều vừa trực tiếp trải qua (cuộc gọi bị ngắt giữa chừng). Do đó, (D) là đáp án chính xác.<br/>- (A) <i>In other words</i>: nói cách khác.<br/>- (B) <i>For this reason</i>: vì lý do này.<br/>- (C) <i>For example</i>: ví dụ như.</p>",
+        "type": "Conjunction",
+        "subCategory": "Preposition & Conjunction",
+        "grammarTag": "Discourse Marker"
       },
       {
-        "id": "ets22_t2_p6_q137",
+        "id": "ets22_t2_p6_137",
         "number": 137,
         "text": "",
         "options": {
-          "A": "ahead of",
-          "B": "into",
-          "C": "between",
-          "D": "along"
+          "A": "We invite you to visit one of our computer repair centers in your area.",
+          "B": "Unfortunately, we do not have a phone number at which we can reach you.",
+          "C": "Thank you again for being one of our priority customers.",
+          "D": "Please submit your check for the service fee promptly."
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Cụm thành ngữ: <b>ahead of schedule</b> (vượt trước tiến độ / sớm hơn kế hoạch). Chọn <b>(A) ahead of</b>.</p>",
-        "blankNumber": 137,
-        "subCategory": "Preposition & Conjunction",
-        "grammarTag": "Prepositional Idiom"
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Thật không may, chúng tôi không có số điện thoại để có thể chủ động liên lạc lại với bạn.</p><p><b>Phân tích tính liên kết:</b> Câu ngay phía sau giải thích lý do: <i>'Therefore, please call us at your earliest convenience...'</i> (Vì vậy, xin vui lòng gọi lại cho chúng tôi sớm nhất khi bạn thuận tiện...). Việc bộ phận kỹ thuật không có số của khách hàng chính là lý do trực tiếp khiến họ phải gửi email yêu cầu khách hàng chủ động gọi lại.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Structure",
+        "grammarTag": "Coherence & Sentence Insertion"
       },
       {
-        "id": "ets22_t2_p6_q138",
+        "id": "ets22_t2_p6_138",
         "number": 138,
         "text": "",
         "options": {
-          "A": "cooperation",
-          "B": "cooperative",
-          "C": "cooperate",
-          "D": "cooperatively"
+          "A": "restore",
+          "B": "restoring",
+          "C": "restored",
+          "D": "restoration"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Sau tính từ sở hữu <i>'your'</i> và liên từ <i>'and'</i> nối với danh từ <i>'patience'</i> cần một danh từ: <b>(A) cooperation</b> (sự hợp tác).</p>",
-        "blankNumber": 138,
-        "subCategory": "Word Form",
-        "grammarTag": "Noun Suffix (-tion)"
+        "explanation": "<p><b>Dịch nghĩa:</b> ...và rất mong được giúp bạn khôi phục máy tính về trạng thái hoạt động tối đa.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc động từ: <i>help + someone + (to) + V_inf</i> (giúp ai đó làm gì). Đứng sau tân ngữ <i>you</i> là động từ nguyên thể. Do đó, <b>(A) restore</b> là đáp án đúng.</p>",
+        "type": "Verb Form",
+        "subCategory": "Verb Tense",
+        "grammarTag": "Bare Infinitive after Help"
       }
     ]
   },
   {
-    "id": "ets22_t2_p6_p3",
-    "title": "Part 6 Passage 3",
-    "type": "Article",
-    "content": "<p><b>Brighton Pharma Announces Global Expansion</b></p><p>LONDON — Brighton Pharmaceuticals revealed plans yesterday to construct a state-of-the-art research facility near Cambridge. The new laboratory complex will represent a significant capital investment and is expected to create over four hundred high-tech jobs within the next two years. Company leaders stated that the expansion is necessary to accommodate their (139) _____ clinical development pipeline.</p><p>Architectural blueprints for the campus emphasize energy efficiency and sustainable construction materials. (140) _____. In addition to advanced robotic testing suites, the campus will feature expansive green communal areas for staff.</p><p>Construction is scheduled to commence early next spring, with full operational status (141) _____ by late autumn of the following year. Local business organizations have welcomed the announcement, noting that it will bring (142) _____ economic benefits to the regional economy.</p>",
+    "id": "ets22_t2_p6_s03",
+    "title": "Questions 139-142 refer to the following Web page.",
+    "type": "Text",
+    "content": "<p>For a limited time, the Uppercut Clothing Hanger Company is selling its highest quality hangers at huge discounts on wholesale orders. This special (139) ___ is perfect for hotels, retailers, or anywhere hangers are used extensively. (140) ___ of lacquered walnut wood, these hangers are not only durable, but also safe for the environment. (141) ___ are strong enough to hold up to ten pounds. To order, visit www.uppercuthangerco.ca. Note that all orders require a 20 percent deposit. Uppercut will cover all shipping and insurance costs. (142) ___.</p>",
     "questions": [
       {
-        "id": "ets22_t2_p6_q139",
+        "id": "ets22_t2_p6_139",
         "number": 139,
         "text": "",
         "options": {
-          "A": "grows",
-          "B": "growth",
-          "C": "growing",
-          "D": "grower"
+          "A": "clothing",
+          "B": "offer",
+          "C": "decoration",
+          "D": "performance"
         },
-        "correctAnswer": "C",
-        "explanation": "<p>Trước cụm danh từ <i>'clinical development pipeline'</i> cần một phân từ đóng vai trò tính từ miêu tả xu hướng phát triển liên tục: <b>(C) growing</b> (đang ngày một tăng trưởng/mở rộng).</p>",
-        "blankNumber": 139,
-        "subCategory": "Word Form",
-        "grammarTag": "Participial Adjective (-ing)"
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Ưu đãi đặc biệt này rất hoàn hảo cho các khách sạn, nhà bán lẻ...</p><p><b>Phân tích ngữ cảnh:</b> Câu trước vừa đề cập đến việc công ty bán móc áo với <i>huge discounts on wholesale orders</i> (mức giảm giá khổng lồ cho các đơn bán buôn). Cụm từ <b>special offer</b> (ưu đãi đặc biệt, chương trình khuyến mãi) quy chiếu chính xác đến đợt giảm giá này. Do đó, <b>(B) offer</b> là đáp án đúng.</p>",
+        "type": "Vocabulary",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Collocation (special offer)"
       },
       {
-        "id": "ets22_t2_p6_q140",
+        "id": "ets22_t2_p6_140",
         "number": 140,
         "text": "",
         "options": {
-          "A": "Solar panels and rainwater capture systems will be installed throughout.",
-          "B": "The company reported a slight decrease in quarterly earnings.",
-          "C": "Pharmaceutical products must be kept refrigerated at all times.",
-          "D": "Public transportation tickets will increase in price next year."
+          "A": "Made",
+          "B": "Making",
+          "C": "To make",
+          "D": "They made"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Câu trước đề cập đến <i>'energy efficiency and sustainable construction materials'</i>. Câu <b>(A) Solar panels and rainwater capture systems will be installed throughout</b> là ví dụ minh chứng cụ thể và hợp lý nhất.</p>",
-        "blankNumber": 140,
-        "subCategory": "Contextual Completion",
-        "grammarTag": "Sentence Insertion"
+        "explanation": "<p><b>Dịch nghĩa:</b> Được làm từ gỗ óc chó sơn mài, những chiếc móc áo này không chỉ bền mà còn an toàn cho môi trường.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc rút gọn mệnh đề trạng ngữ đồng chủ ngữ dạng bị động: <i>[Made] of lacquered walnut wood, these hangers are...</i> (vì được làm từ... nên những chiếc móc này...). Khi chủ ngữ là vật (these hangers) chịu tác động (được làm từ), ta dùng quá khứ phân từ <b>V3/ed (Made)</b> đứng đầu câu. Do đó, <b>(A) Made</b> là đáp án chính xác.</p>",
+        "type": "Word Form",
+        "subCategory": "Verb Tense",
+        "grammarTag": "Participial Clause (Passive)"
       },
       {
-        "id": "ets22_t2_p6_q141",
+        "id": "ets22_t2_p6_141",
         "number": 141,
         "text": "",
         "options": {
-          "A": "anticipate",
-          "B": "anticipated",
-          "C": "anticipating",
-          "D": "anticipation"
+          "A": "Both",
+          "B": "They",
+          "C": "Fewer",
+          "D": "Theirs"
         },
         "correctAnswer": "B",
-        "explanation": "<p>Cấu trúc rút gọn phân từ bị động mang ý nghĩa 'được dự kiến': <i>'with full operational status (being) anticipated by...'</i>. Chọn <b>(B) anticipated</b>.</p>",
-        "blankNumber": 141,
-        "subCategory": "Verb Tense",
-        "grammarTag": "Reduced Relative Clause"
+        "explanation": "<p><b>Dịch nghĩa:</b> Chúng đủ chắc chắn để giữ được trọng lượng lên tới mười pound.</p><p><b>Phân tích ngữ pháp:</b> Vị trí đầu câu đứng trước động từ to-be <i>are</i> cần một đại từ nhân xưng đóng vai trò chủ ngữ số nhiều thay thế cho danh từ <i>these hangers</i> ở câu trước. Do đó, <b>(B) They</b> là đáp án đúng.<br/>- (A) <i>Both</i>: cả hai (chỉ dùng cho 2 đối tượng).<br/>- (C) <i>Fewer</i>: ít hơn.<br/>- (D) <i>Theirs</i>: đại từ sở hữu.</p>",
+        "type": "Pronoun",
+        "subCategory": "Pronoun",
+        "grammarTag": "Subject Pronoun"
       },
       {
-        "id": "ets22_t2_p6_q142",
+        "id": "ets22_t2_p6_142",
         "number": 142,
         "text": "",
         "options": {
-          "A": "substantial",
-          "B": "substantially",
-          "C": "substance",
-          "D": "substantiate"
+          "A": "Our products make great gifts.",
+          "B": "While sturdy, wooden hangers are also heavy.",
+          "C": "Quality hangers are a great investment.",
+          "D": "The balance is due when the shipment is received."
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Trước cụm danh từ <i>'economic benefits'</i> cần một tính từ: <b>(A) substantial</b> (đáng kể, to lớn).</p>",
-        "blankNumber": 142,
-        "subCategory": "Word Form",
-        "grammarTag": "Adjective Modifier"
+        "correctAnswer": "D",
+        "explanation": "<p><b>Dịch nghĩa:</b> Số tiền còn lại phải thanh toán khi nhận được hàng.</p><p><b>Phân tích tính liên kết:</b> Câu trước nói về điều khoản thanh toán: <i>'Note that all orders require a 20 percent deposit'</i> (Lưu ý rằng mọi đơn hàng đều yêu cầu đặt cọc 20%). Câu tiếp nối hợp lý nhất về mặt tài chính thương mại là nêu rõ thời điểm thanh toán số tiền còn lại (the balance): <b>(D) The balance is due when the shipment is received</b>.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Structure",
+        "grammarTag": "Coherence & Sentence Insertion"
       }
     ]
   },
   {
-    "id": "ets22_t2_p6_p4",
-    "title": "Part 6 Passage 4",
-    "type": "Letter",
-    "content": "<p>Dear Ms. O'Connor,</p><p>Thank you for your recent inquiry concerning the corporate catering packages offered by Grand View Catering. We take pride in delivering unforgettable culinary experiences for business luncheons, formal galas, and executive retreats across the metropolitan area.</p><p>Enclosed with this letter is our latest seasonal menu catalog, (143) _____ details pricing tiers, specialty appetizer selections, and dietary accommodation options. You will find that our packages are completely customizable to match your organization's exact requirements and budget. (144) _____.</p><p>If you choose to confirm your booking before November 15, we will be pleased to (145) _____ a complimentary dessert buffet valued at $350. Please feel free to call me directly at 555-0149 if you would like to arrange a complimentary menu tasting (146) _____ our head chef.</p><p>Warm regards,<br/>Elena Rostova<br/>Client Relations Coordinator, Grand View Catering</p>",
+    "id": "ets22_t2_p6_s04",
+    "title": "Questions 143-146 refer to the following e-mail.",
+    "type": "Text",
+    "content": "<p><b>From:</b> mcrane@doodlemail.com<br/><b>To:</b> jkumar@baxterartsupplies.com<br/><b>Date:</b> October 14<br/><b>Subject:</b> Application<br/><b>Attachment:</b> Resume</p><p>Dear Ms. Kumar,<br/>I am writing in response to the advertisement posted in the window of Baxter Art Supplies. As a frequent visitor to your (143) ___, I have found it an invaluable source of inspiration over the years. I would be (144) ___ to display my artwork. I would also enjoy running workshops to help inspire your customers.<br/><br/>I believe I would be well suited for this role because I am both enthusiastic and friendly. (145) ___, I have led successful workshops at various locations in the area. I have attached a copy of my resume, which includes more details about these workshops. (146) ___. I look forward to hearing from you after you have reviewed my application and work.<br/><br/>Kind regards,<br/>Melania Crane</p>",
     "questions": [
       {
-        "id": "ets22_t2_p6_q143",
+        "id": "ets22_t2_p6_143",
         "number": 143,
         "text": "",
         "options": {
-          "A": "which",
-          "B": "what",
-          "C": "who",
-          "D": "where"
+          "A": "school",
+          "B": "house",
+          "C": "store",
+          "D": "museum"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Đại từ quan hệ thay thế cho danh từ chỉ vật <i>'our latest seasonal menu catalog'</i> đứng sau dấu phẩy là <b>(A) which</b>.</p>",
-        "blankNumber": 143,
-        "subCategory": "Relative Clause",
-        "grammarTag": "Non-defining Relative Pronoun"
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Là một khách hàng thường xuyên ghé thăm cửa hàng của bạn, tôi thấy nơi đây là một nguồn cảm hứng vô giá trong suốt những năm qua.</p><p><b>Phân tích ngữ cảnh:</b> Người gửi nộp hồ sơ xin việc theo quảng cáo dán tại cửa sổ của <i>Baxter Art Supplies</i> (cửa hàng vật phẩm nghệ thuật). Vì vậy, <b>(C) store</b> (cửa hàng) là từ chỉ nơi chốn chính xác nhất.<br/>- (A) <i>school</i>: trường học.<br/>- (B) <i>house</i>: nhà ở.<br/>- (D) <i>museum</i>: viện bảo tàng.</p>",
+        "type": "Vocabulary",
+        "subCategory": "Business Vocabulary",
+        "grammarTag": "Contextual Vocabulary"
       },
       {
-        "id": "ets22_t2_p6_q144",
+        "id": "ets22_t2_p6_144",
         "number": 144,
         "text": "",
         "options": {
-          "A": "We can easily prepare vegan, organic, and gluten-free alternatives upon request.",
-          "B": "Our delivery vehicles are currently undergoing routine oil changes.",
-          "C": "The minimum order size is five hundred individual servings.",
-          "D": "Full payment must be deposited six months prior to the event."
+          "A": "thrilling",
+          "B": "thrill",
+          "C": "thrilled",
+          "D": "thrills"
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Đoạn văn vừa nhắc đến việc các gói dịch vụ có thể tùy chỉnh theo yêu cầu của khách hàng (<i>'customizable to match your organization's exact requirements'</i>). Câu <b>(A) We can easily prepare vegan, organic, and gluten-free alternatives upon request</b> khớp hoàn hảo.</p>",
-        "blankNumber": 144,
-        "subCategory": "Contextual Completion",
-        "grammarTag": "Sentence Insertion"
+        "correctAnswer": "C",
+        "explanation": "<p><b>Dịch nghĩa:</b> Tôi sẽ vô cùng hào hứng khi được trưng bày các tác phẩm nghệ thuật của mình.</p><p><b>Phân tích ngữ pháp:</b> Cấu trúc tính từ miêu tả cảm xúc của con người: <i>S (người: I) + would be + Adj_ed (thrilled) + to-V</i>. Tính từ <b>thrilled</b> (rất vui mừng, hào hứng) diễn tả cảm xúc của người viết khi có cơ hội trưng bày tranh. Do đó, <b>(C) thrilled</b> là đáp án đúng.<br/>- (A) <i>thrilling</i>: tính từ đuôi -ing (chỉ tính chất gây hồi hộp của sự vật/sự việc).</p>",
+        "type": "Word Form",
+        "subCategory": "Word Form",
+        "grammarTag": "Participial Adjective (ed vs ing)"
       },
       {
-        "id": "ets22_t2_p6_q145",
+        "id": "ets22_t2_p6_145",
         "number": 145,
         "text": "",
         "options": {
-          "A": "include",
-          "B": "includes",
-          "C": "including",
-          "D": "inclusion"
+          "A": "In addition",
+          "B": "However",
+          "C": "In general",
+          "D": "Similarly"
         },
         "correctAnswer": "A",
-        "explanation": "<p>Cấu trúc: <i>'be pleased to + V nguyên mẫu'</i>. Chọn <b>(A) include</b> (bao gồm).</p>",
-        "blankNumber": 145,
-        "subCategory": "Verb Tense",
-        "grammarTag": "To-Infinitive Form"
+        "explanation": "<p><b>Dịch nghĩa:</b> Ngoài ra, tôi đã từng dẫn dắt các buổi hội thảo thành công tại nhiều địa điểm khác nhau trong khu vực.</p><p><b>Phân tích ngữ cảnh:</b> Đoạn văn nêu các thế mạnh của ứng viên: Câu trước nêu tính cách (nhiệt tình và thân thiện), câu sau bổ sung thêm kinh nghiệm thực tế (đã tổ chức nhiều workshop). Cụm từ nối mang ý bổ sung thông tin là <b>(A) In addition</b> (Ngoài ra, hơn nữa).<br/>- (B) <i>However</i>: tuy nhiên (chỉ tương phản).<br/>- (C) <i>In general</i>: nhìn chung.<br/>- (D) <i>Similarly</i>: tương tự.</p>",
+        "type": "Conjunction",
+        "subCategory": "Preposition & Conjunction",
+        "grammarTag": "Transition Adverb (Additive)"
       },
       {
-        "id": "ets22_t2_p6_q146",
+        "id": "ets22_t2_p6_146",
         "number": 146,
         "text": "",
         "options": {
-          "A": "with",
-          "B": "about",
-          "C": "during",
-          "D": "from"
+          "A": "I enjoyed the painting workshop last week.",
+          "B": "Samples of my art can be found at www.mcrane.com.",
+          "C": "I just started working with watercolors.",
+          "D": "For a price list, please contact me at 347-555-0101."
         },
-        "correctAnswer": "A",
-        "explanation": "<p>Cụm từ <i>'arrange a tasting with someone'</i> (sắp xếp buổi nếm thử món ăn cùng với ai). Giới từ phù hợp là <b>(A) with</b>.</p>",
-        "blankNumber": 146,
-        "subCategory": "Preposition & Conjunction",
-        "grammarTag": "Preposition of Association"
+        "correctAnswer": "B",
+        "explanation": "<p><b>Dịch nghĩa:</b> Các mẫu tác phẩm nghệ thuật của tôi có thể được tìm thấy tại www.mcrane.com.</p><p><b>Phân tích tính liên kết:</b> Câu ngay sau đó viết: <i>'I look forward to hearing from you after you have reviewed my application and work'</i> (Tôi rất mong nhận được phản hồi sau khi bạn xem xét đơn ứng tuyển và các tác phẩm của tôi). Phương án <b>(B) Samples of my art can be found at www.mcrane.com</b> cung cấp liên kết xem tác phẩm để người tuyển dụng có thể đánh giá 'work' của cô ấy.</p>",
+        "type": "Sentence Insertion",
+        "subCategory": "Sentence Structure",
+        "grammarTag": "Coherence & Sentence Insertion"
       }
     ]
   }

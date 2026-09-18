@@ -134,9 +134,12 @@ function Part5SpeedTrainer() {
         setError(null);
 
         if (selectedSubSkill !== 'all') {
-          // Official ETS tests (currently ETS 2022 Test 1)
+          // Official ETS tests (ETS 2022 Test 1, Test 2, Test 3, & Test 4)
           const testPaths = [
             '/data/ets2022/test1/part5.json',
+            '/data/ets2022/test2/part5.json',
+            '/data/ets2022/test3/part5.json',
+            '/data/ets2022/test4/part5.json',
           ];
           const responses = await Promise.all(testPaths.map(p => fetch(p)));
           const allData: any[] = [];
@@ -753,6 +756,27 @@ function Part5SpeedTrainer() {
               >
                 Test 1 (Chuẩn ETS)
               </button>
+              <button
+                type="button"
+                className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test2' ? styles.testOptionActive : ''}`}
+                onClick={() => handleSelectTest('ets2022_test2')}
+              >
+                Test 2 (Chuẩn ETS)
+              </button>
+              <button
+                type="button"
+                className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test3' ? styles.testOptionActive : ''}`}
+                onClick={() => handleSelectTest('ets2022_test3')}
+              >
+                Test 3 (Chuẩn ETS)
+              </button>
+              <button
+                type="button"
+                className={`${styles.testOptionBtn} ${selectedTest === 'ets2022_test4' ? styles.testOptionActive : ''}`}
+                onClick={() => handleSelectTest('ets2022_test4')}
+              >
+                Test 4 (Chuẩn ETS)
+              </button>
             </div>
           )}
         </div>
@@ -815,7 +839,7 @@ function Part5SpeedTrainer() {
         <div className={styles.topHeaderRow}>
           <div className={styles.progressSection}>
             <div className={styles.statsRow}>
-              <span className={styles.questionCount}>Câu {currentIndex + 1} / {questions.length}</span>
+              <span className={styles.questionCount}>Câu #{currentQ.number} ({currentIndex + 1} / {questions.length})</span>
               {streak > 0 && (
                 <div className={`${styles.streakBadge} ${styles.streakActive}`}>
                   <span className={styles.streakFire}><ZapIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', color: '#ff9800' }} /></span> {streak} Streak!
