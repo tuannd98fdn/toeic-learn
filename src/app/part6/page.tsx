@@ -127,6 +127,17 @@ function Part6Trainer() {
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(Object.keys(answers).length > 0 && !isSubmitted);
 
+  const sessionKey = `toeic_p6sess_${testId}_${selectedSubSkill}`;
+  type SavedSession = {
+    currentPassageIndex: number;
+    answers: Record<number, string>;
+    isSubmitted: boolean;
+    totalScore: number;
+    totalQuestions: number;
+    isFinished: boolean;
+    savedAt: number;
+  };
+
   // Load Time Attack preference
   useEffect(() => {
     const savedTimeAttack = localStorage.getItem('toeic_part6_time_attack');
@@ -233,17 +244,39 @@ function Part6Trainer() {
       );
     }
 
-    setPassages(filtered);
-    setCurrentPassageIndex(0);
-    setAnswers({});
-    setIsSubmitted(false);
-    setIsFinished(false);
-    setTotalScore(0);
-    setTotalQuestions(0);
-    setShowConfetti(false);
-    setSessionPacingHistory([]);
-    passageStartTimeRef.current = Date.now();
-    setElapsedSeconds(0);
+    // Try restoring previous session for this filter combination
+    const saved = storage.get<SavedSession | null>(sessionKey, null);
+    const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
+    const isValidSession =
+      saved &&
+      typeof saved.currentPassageIndex === 'number' &&
+      Date.now() - saved.savedAt < SESSION_TTL_MS;
+
+    if (isValidSession && saved) {
+      setPassages(filtered);
+      setCurrentPassageIndex(Math.min(saved.currentPassageIndex, filtered.length - 1));
+      setAnswers(saved.answers ?? {});
+      setIsSubmitted(saved.isSubmitted ?? false);
+      setIsFinished(saved.isFinished ?? false);
+      setTotalScore(saved.totalScore ?? 0);
+      setTotalQuestions(saved.totalQuestions ?? 0);
+      setShowConfetti(false);
+      setSessionPacingHistory([]);
+      passageStartTimeRef.current = Date.now();
+      setElapsedSeconds(0);
+    } else {
+      setPassages(filtered);
+      setCurrentPassageIndex(0);
+      setAnswers({});
+      setIsSubmitted(false);
+      setIsFinished(false);
+      setTotalScore(0);
+      setTotalQuestions(0);
+      setShowConfetti(false);
+      setSessionPacingHistory([]);
+      passageStartTimeRef.current = Date.now();
+      setElapsedSeconds(0);
+    }
 
     // Focus on first matching blank in the first passage
     if (filtered.length > 0 && selectedSubSkill !== 'all') {
@@ -253,6 +286,23 @@ function Part6Trainer() {
       setActiveBlank(1);
     }
   }, [allPassages, selectedSubSkill]);
+
+  useEffect(() => {
+    if (loading || allPassages.length === 0) return;
+    if (isFinished) {
+      storage.remove(sessionKey);
+      return;
+    }
+    storage.set<SavedSession>(sessionKey, {
+      currentPassageIndex,
+      answers,
+      isSubmitted,
+      totalScore,
+      totalQuestions,
+      isFinished,
+      savedAt: Date.now(),
+    });
+  }, [currentPassageIndex, answers, isSubmitted, totalScore, totalQuestions, isFinished, loading, allPassages.length, sessionKey]);
 
   // Pacing Timer Interval
   useEffect(() => {
@@ -611,7 +661,10 @@ function Part6Trainer() {
 
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 28 }}>
             <button
-              onClick={() => window.location.reload()}
+              onClick={() => {
+                storage.remove(sessionKey);
+                window.location.reload();
+              }}
               className="btn-secondary"
               style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
             >

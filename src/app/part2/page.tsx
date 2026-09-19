@@ -48,6 +48,16 @@ function Part2Trainer() {
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentIndex > 0 && !isFinished);
 
+  const sessionKey = `toeic_p2sess_${testId}`;
+  type SavedSession = {
+    currentIndex: number;
+    selectedAnswer: string | null;
+    isAnswered: boolean;
+    score: number;
+    isFinished: boolean;
+    savedAt: number;
+  };
+
   useEffect(() => {
     if (isAnswered && explanationRef.current) {
       if (typeof window !== 'undefined' && window.innerWidth < 992) {
@@ -69,6 +79,22 @@ function Part2Trainer() {
         const data = await res.json();
         const validated = Part2DataSchema.parse(data);
         setQuestions(validated);
+
+        const saved = storage.get<SavedSession | null>(sessionKey, null);
+        const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
+        if (saved && typeof saved.currentIndex === 'number' && Date.now() - saved.savedAt < SESSION_TTL_MS) {
+          setCurrentIndex(Math.min(saved.currentIndex, validated.length - 1));
+          setSelectedAnswer(saved.selectedAnswer ?? null);
+          setIsAnswered(saved.isAnswered ?? false);
+          setScore(saved.score ?? 0);
+          setIsFinished(saved.isFinished ?? false);
+        } else {
+          setCurrentIndex(0);
+          setSelectedAnswer(null);
+          setIsAnswered(false);
+          setScore(0);
+          setIsFinished(false);
+        }
       } catch (err: any) {
         console.error('Error loading Part 2:', err);
         setError(err.message || 'Lỗi tải dữ liệu');
@@ -79,6 +105,22 @@ function Part2Trainer() {
 
     fetchPart2();
   }, [testId]);
+
+  useEffect(() => {
+    if (loading || questions.length === 0) return;
+    if (isFinished) {
+      storage.remove(sessionKey);
+      return;
+    }
+    storage.set<SavedSession>(sessionKey, {
+      currentIndex,
+      selectedAnswer,
+      isAnswered,
+      score,
+      isFinished,
+      savedAt: Date.now(),
+    });
+  }, [currentIndex, selectedAnswer, isAnswered, score, isFinished, loading, questions.length, sessionKey]);
 
   const currentQ = questions[currentIndex] || null;
 
@@ -118,6 +160,7 @@ function Part2Trainer() {
   };
 
   const handleRestart = () => {
+    storage.remove(sessionKey);
     setCurrentIndex(0);
     setSelectedAnswer(null);
     setIsAnswered(false);

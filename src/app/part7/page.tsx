@@ -110,6 +110,17 @@ function Part7Trainer() {
     { question: Part7Question; isCorrect: boolean }[]
   >([]);
 
+  // Session persistence — save key per filter combination (24h TTL)
+  const sessionKey = `toeic_p7sess_${testId}_${initialQType}_${initialPassageType}`;
+  type SavedSession = {
+    currentPassageIndex: number;
+    answers: Record<string, string>;
+    isSubmitted: boolean;
+    totalScore: number;
+    totalQuestions: number;
+    savedAt: number;
+  };
+
   // Time Attack State
   const [isTimeAttackEnabled, setIsTimeAttackEnabled] = useState(false);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
@@ -238,17 +249,37 @@ function Part7Trainer() {
         }
 
         setAllPassageSets(loadedSets);
-        setCurrentPassageIndex(0);
-        setActiveQuestionIndex(0);
-        setAnswers({});
-        setIsSubmitted(false);
-        setIsFinished(false);
-        setTotalScore(0);
-        setTotalQuestions(0);
-        setSessionAnsweredQuestions([]);
-        setSessionPacingHistory([]);
-        setPaceInfo(null);
-        passageStartTimeRef.current = Date.now();
+
+        // Try restoring previous session for this filter combination
+        const saved = storage.get<SavedSession | null>(
+          `toeic_p7sess_${testId}_${initialQType}_${initialPassageType}`,
+          null
+        );
+        const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
+        const isValidSession =
+          saved &&
+          typeof saved.currentPassageIndex === 'number' &&
+          Date.now() - saved.savedAt < SESSION_TTL_MS;
+
+        if (isValidSession && saved) {
+          setCurrentPassageIndex(Math.min(saved.currentPassageIndex, loadedSets.length - 1));
+          setAnswers(saved.answers ?? {});
+          setIsSubmitted(saved.isSubmitted ?? false);
+          setTotalScore(saved.totalScore ?? 0);
+          setTotalQuestions(saved.totalQuestions ?? 0);
+        } else {
+          setCurrentPassageIndex(0);
+          setActiveQuestionIndex(0);
+          setAnswers({});
+          setIsSubmitted(false);
+          setIsFinished(false);
+          setTotalScore(0);
+          setTotalQuestions(0);
+          setSessionAnsweredQuestions([]);
+          setSessionPacingHistory([]);
+          setPaceInfo(null);
+          passageStartTimeRef.current = Date.now();
+        }
       } catch (err: any) {
         console.error('Error loading Part 7 data:', err);
         setError(err.message || 'Có lỗi xảy ra khi tải dữ liệu');
@@ -259,6 +290,23 @@ function Part7Trainer() {
 
     fetchPassages();
   }, [testId]);
+
+  // Auto-save session on state changes
+  useEffect(() => {
+    if (loading || allPassageSets.length === 0) return;
+    if (isFinished) {
+      storage.remove(sessionKey);
+      return;
+    }
+    storage.set<SavedSession>(sessionKey, {
+      currentPassageIndex,
+      answers,
+      isSubmitted,
+      totalScore,
+      totalQuestions,
+      savedAt: Date.now(),
+    });
+  }, [currentPassageIndex, answers, isSubmitted, totalScore, totalQuestions, isFinished, loading, allPassageSets.length, sessionKey]);
 
   // Filter passages based on selected filters
   const filteredPassageSets = useMemo(() => {
@@ -811,6 +859,7 @@ function Part7Trainer() {
                       type="button"
                       className={styles.breakdownActionBtn}
                       onClick={() => {
+                        storage.remove(sessionKey);
                         setSelectedQType(item.type);
                         updateUrlParams(testId, item.type, selectedPassageType);
                         setIsFinished(false);
@@ -837,6 +886,7 @@ function Part7Trainer() {
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button
               onClick={() => {
+                storage.remove(sessionKey);
                 setIsFinished(false);
                 setCurrentPassageIndex(0);
                 setActiveQuestionIndex(0);

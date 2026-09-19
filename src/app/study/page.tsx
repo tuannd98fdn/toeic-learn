@@ -335,18 +335,20 @@ function StudyPageContent() {
 
     return (
       <>
-        {/* Streamlined Session Status Strip */}
+        {/* Full-width progress bar */}
+        <div className={styles.sessionProgressTrack}>
+          <div
+            className={styles.sessionProgressFill}
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+
+        {/* Session Status Strip */}
         <div className={styles.sessionStatusBar}>
           <div className={styles.statusBarLeft}>
             <span className={`${styles.progressCounter} ${styles.progressText}`}>
               Từ <strong>{currentIndex + 1}</strong> / {words.length}
             </span>
-            <div className={styles.miniProgressBar}>
-              <div 
-                className={styles.miniProgressBarFill} 
-                style={{ width: `${progressPercent}%` }} 
-              />
-            </div>
           </div>
 
           <div className={styles.statusBarCenter}>
@@ -471,54 +473,47 @@ function StudyPageContent() {
                 </div>
               </div>
 
-              {/* Band Selector & Topic Controls (Used for Flashcard SRS) */}
+              {/* Band Selector & Topic Controls — ONE compact row */}
               {studyMode === 'flashcard' && (
-                <>
-                  <div className={styles.bandRow}>
-                    <div className={styles.bandSelector}>
-                      {BANDS.map(b => (
-                        <button
-                          key={b.value}
-                          className={`${styles.bandPill} ${selectedBand === b.value ? styles.activeBandPill : ''}`}
-                          onClick={() => handleBandChange(b.value)}
-                        >
-                          {b.label}
-                        </button>
-                      ))}
-                    </div>
+                <div className={styles.bandRow}>
+                  <div className={styles.bandSelector}>
+                    {BANDS.map(b => (
+                      <button
+                        key={b.value}
+                        className={`${styles.bandPill} ${selectedBand === b.value ? styles.activeBandPill : ''}`}
+                        onClick={() => handleBandChange(b.value)}
+                      >
+                        {b.label}
+                      </button>
+                    ))}
                   </div>
 
-                  <div className={styles.topicControlRow}>
-                    <div className={styles.topicSelectWrapper}>
-                      <label htmlFor="topic-filter-select" className={styles.topicSelectLabel}>
-                        Chủ đề ETS:
-                      </label>
-                      <select
-                        id="topic-filter-select"
-                        className={styles.topicSelectDropdown}
-                        value={selectedTopic}
-                        onChange={(e) => handleTopicChange(e.target.value)}
-                      >
-                        <option value="All">Tất cả 12 Chủ Đề ETS (453 từ)</option>
-                        {TOEIC_TOPICS.map((topic) => (
-                          <option key={topic.id} value={topic.nameEn}>
-                            {topic.nameVi} ({topic.nameEn})
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
+                  {/* Inline topic selector + mastery toggle */}
+                  <div className={styles.inlineTopicRow}>
+                    <select
+                      id="topic-filter-select"
+                      className={styles.topicSelectDropdown}
+                      value={selectedTopic}
+                      onChange={(e) => handleTopicChange(e.target.value)}
+                      title="Chọn chủ đề ETS"
+                    >
+                      <option value="All">Tất cả 12 Chủ Đề ETS</option>
+                      {TOEIC_TOPICS.map((topic) => (
+                        <option key={topic.id} value={topic.nameEn}>
+                          {topic.nameVi}
+                        </option>
+                      ))}
+                    </select>
                     <button
                       type="button"
                       className={`${styles.matrixToggleBtn} ${showTopicMatrix ? styles.matrixToggleBtnActive : ''}`}
                       onClick={() => setShowTopicMatrix(prev => !prev)}
-                      title="Bật/tắt Bản đồ Đánh giá Năng lực 12 Chủ Đề"
+                      title={showTopicMatrix ? 'Ẩn bản đồ năng lực' : 'Xem bản đồ 12 chủ đề'}
                     >
-                      <TargetIcon size={14} />
-                      <span>{showTopicMatrix ? 'Ẩn Đánh Giá' : 'Đánh Giá Năng Lực 12 Chủ Đề'}</span>
+                      <TargetIcon size={13} />
                     </button>
                   </div>
-                </>
+                </div>
               )}
             </div>
           </header>

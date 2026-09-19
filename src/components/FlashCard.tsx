@@ -131,7 +131,8 @@ export default function FlashCard({ word, onRate, autoPlay = true }: FlashCardPr
                 padding: '8px 12px',
                 margin: '8px 0',
                 textAlign: 'left',
-                fontSize: '0.85rem'
+                fontSize: '0.85rem',
+                width: '100%',
               }}>
                 <div style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: '4px' }}>
                   Cặp đối chiếu đề thi ETS:
@@ -160,6 +161,38 @@ export default function FlashCard({ word, onRate, autoPlay = true }: FlashCardPr
               <span>Phím <strong>A</strong> nghe lại</span>
               <span className={styles.hintDot}>•</span>
               <span><strong>Space</strong> lật lại</span>
+            </div>
+          </div>
+
+          {/* Invisible sizer: drives card height to match back-face content */}
+          <div className={styles.sizer} aria-hidden="true">
+            <span className={styles.partOfSpeech}>{word.partOfSpeech}</span>
+            <div className={styles.meaningContainer}>
+              <h2 className={styles.meaning}>{word.vietnamese}</h2>
+            </div>
+            {word.examples.length > 0 && (
+              <div className={styles.examples}>
+                {word.examples.map((ex, idx) => (
+                  <p key={idx} className={styles.example}>&quot;{ex}&quot;</p>
+                ))}
+              </div>
+            )}
+            {word.paraphrasePair && (
+              <div style={{ padding: '8px 12px', fontSize: '0.85rem', width: '100%' }}>
+                <div style={{ fontWeight: 700, marginBottom: '4px' }}>Cặp đối chiếu:</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                  <div>{word.paraphrasePair.passageText}</div>
+                  <div>{word.paraphrasePair.optionText}</div>
+                </div>
+              </div>
+            )}
+            {word.mnemonicTip && (
+              <div className={styles.mnemonic}>
+                <p>{word.mnemonicTip}</p>
+              </div>
+            )}
+            <div className={styles.backHint}>
+              <span>Phím <strong>A</strong> nghe lại</span>
             </div>
           </div>
         </div>

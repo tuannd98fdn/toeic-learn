@@ -50,6 +50,16 @@ function Part3Trainer() {
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentSetIndex > 0 && !isFinished);
 
+  const sessionKey = `toeic_p3sess_${testId}`;
+  type SavedSession = {
+    currentSetIndex: number;
+    selectedAnswers: Record<string, string>;
+    isSubmitted: boolean;
+    totalScore: number;
+    isFinished: boolean;
+    savedAt: number;
+  };
+
   useEffect(() => {
     const fetchPart3 = async () => {
       try {
@@ -63,6 +73,22 @@ function Part3Trainer() {
         const data = await res.json();
         const validated = Part3DataSchema.parse(data);
         setSets(validated);
+
+        const saved = storage.get<SavedSession | null>(sessionKey, null);
+        const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
+        if (saved && typeof saved.currentSetIndex === 'number' && Date.now() - saved.savedAt < SESSION_TTL_MS) {
+          setCurrentSetIndex(Math.min(saved.currentSetIndex, validated.length - 1));
+          setSelectedAnswers(saved.selectedAnswers ?? {});
+          setIsSubmitted(saved.isSubmitted ?? false);
+          setTotalScore(saved.totalScore ?? 0);
+          setIsFinished(saved.isFinished ?? false);
+        } else {
+          setCurrentSetIndex(0);
+          setSelectedAnswers({});
+          setIsSubmitted(false);
+          setTotalScore(0);
+          setIsFinished(false);
+        }
       } catch (err: any) {
         console.error('Error loading Part 3:', err);
         setError(err.message || 'Lỗi tải dữ liệu');
@@ -73,6 +99,22 @@ function Part3Trainer() {
 
     fetchPart3();
   }, [testId]);
+
+  useEffect(() => {
+    if (loading || sets.length === 0) return;
+    if (isFinished) {
+      storage.remove(sessionKey);
+      return;
+    }
+    storage.set<SavedSession>(sessionKey, {
+      currentSetIndex,
+      selectedAnswers,
+      isSubmitted,
+      totalScore,
+      isFinished,
+      savedAt: Date.now(),
+    });
+  }, [currentSetIndex, selectedAnswers, isSubmitted, totalScore, isFinished, loading, sets.length, sessionKey]);
 
   const currentSet = sets[currentSetIndex] || null;
   const allQuestionsCount = sets.reduce((acc, s) => acc + s.questions.length, 0);
@@ -131,6 +173,7 @@ function Part3Trainer() {
   };
 
   const handleRestart = () => {
+    storage.remove(sessionKey);
     setCurrentSetIndex(0);
     setSelectedAnswers({});
     setIsSubmitted(false);

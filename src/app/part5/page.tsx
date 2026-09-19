@@ -132,6 +132,18 @@ function Part5SpeedTrainer() {
   const { addMistake } = useMistakeNotebook();
   useLeaveWarning(currentIndex > 0 && !isFinished);
 
+  const sessionKey = `toeic_p5sess_${selectedTest}_${selectedSubSkill}`;
+  type SavedSession = {
+    currentIndex: number;
+    score: number;
+    streak: number;
+    wrongAnswers: { question: Part5Question; userAnswer?: string }[];
+    selectedAnswer: string | null;
+    showAnswer: boolean;
+    isFinished: boolean;
+    savedAt: number;
+  };
+
   // Smooth scroll to explanation on mobile/narrow screens when answer is revealed
   useEffect(() => {
     if (showAnswer && typeof window !== 'undefined' && window.innerWidth < 992 && explanationRef.current) {
@@ -208,18 +220,34 @@ function Part5SpeedTrainer() {
           setQuestions(validated.map(q => ({ ...q, testId: selectedTest })));
         }
 
-        // Reset session state
-        setCurrentIndex(0);
-        setScore(0);
-        setStreak(0);
-        setTimeLeft(TIME_LIMIT);
-        setIsFinished(false);
-        setShowAnswer(false);
-        setShowExplanation(false);
-        setSelectedAnswer(null);
-        setWrongAnswers([]);
-        setShowConfetti(false);
-        setTutorContext(null);
+        const saved = storage.get<SavedSession | null>(sessionKey, null);
+        const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
+        if (saved && typeof saved.currentIndex === 'number' && Date.now() - saved.savedAt < SESSION_TTL_MS) {
+          setCurrentIndex(saved.currentIndex);
+          setScore(saved.score ?? 0);
+          setStreak(saved.streak ?? 0);
+          setTimeLeft(TIME_LIMIT);
+          setIsFinished(saved.isFinished ?? false);
+          setShowAnswer(saved.showAnswer ?? false);
+          setShowExplanation(false);
+          setSelectedAnswer(saved.selectedAnswer ?? null);
+          setWrongAnswers(saved.wrongAnswers ?? []);
+          setShowConfetti(false);
+          setTutorContext(null);
+        } else {
+          // Reset session state
+          setCurrentIndex(0);
+          setScore(0);
+          setStreak(0);
+          setTimeLeft(TIME_LIMIT);
+          setIsFinished(false);
+          setShowAnswer(false);
+          setShowExplanation(false);
+          setSelectedAnswer(null);
+          setWrongAnswers([]);
+          setShowConfetti(false);
+          setTutorContext(null);
+        }
       } catch (err: any) {
         console.error("Error loading Part 5 data:", err);
         setError(err.message || "Something went wrong");
@@ -230,6 +258,24 @@ function Part5SpeedTrainer() {
     
     fetchQuestions();
   }, [selectedTest, selectedSubSkill]);
+
+  useEffect(() => {
+    if (loading || questions.length === 0) return;
+    if (isFinished) {
+      storage.remove(sessionKey);
+      return;
+    }
+    storage.set<SavedSession>(sessionKey, {
+      currentIndex,
+      score,
+      streak,
+      wrongAnswers,
+      selectedAnswer,
+      showAnswer,
+      isFinished,
+      savedAt: Date.now(),
+    });
+  }, [currentIndex, score, streak, wrongAnswers, selectedAnswer, showAnswer, isFinished, loading, questions.length, sessionKey]);
 
   const handleSelectSubSkill = (key: string) => {
     setSelectedSubSkill(key);
@@ -278,6 +324,7 @@ function Part5SpeedTrainer() {
   };
 
   const handleRestart = () => {
+    storage.remove(sessionKey);
     setCurrentIndex(0);
     setScore(0);
     setStreak(0);
