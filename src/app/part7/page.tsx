@@ -26,6 +26,7 @@ import { Part7PassageSet, Part7Question, Part7DataSchema } from '@/schema/toeic'
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
+import { completeActiveTaskByType } from '@/utils/studyPlanEngine';
 import {
   extractEvidenceSnippets,
   locateEvidenceSnippet,
@@ -447,6 +448,10 @@ function Part7Trainer() {
       if (testId !== 'all') {
         storage.set(`progress_${testId}_part7`, true);
       }
+      completeActiveTaskByType('practice', {
+        subCategory: selectedQType !== 'all' ? selectedQType : undefined,
+        part: 'p7',
+      });
       if (finalTotal / finalQuestions >= 0.7) {
         setShowConfetti(true);
       }

@@ -23,6 +23,7 @@ import {
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
+import { completeActiveTaskByType } from '@/utils/studyPlanEngine';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import PracticeFooter from '@/components/PracticeFooter';
 import InteractiveTranscript from '@/components/InteractiveTranscript';
@@ -121,6 +122,7 @@ function Part1Trainer() {
     } else {
       setIsFinished(true);
       storage.set(`progress_${testId}_part1`, true);
+      completeActiveTaskByType('practice', { part: 'p1' });
       if ((score / questions.length) >= 0.7) {
         setShowConfetti(true);
       }

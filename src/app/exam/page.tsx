@@ -25,7 +25,7 @@ import {
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { storage } from '@/utils/storage';
-import { syncAdaptivePlan } from '@/utils/studyPlanEngine';
+import { syncAdaptivePlan, completeActiveTaskByType } from '@/utils/studyPlanEngine';
 import KnowledgeGapBreakdown from '@/components/KnowledgeGapBreakdown';
 import {
   calculateScaledScore,
@@ -626,6 +626,7 @@ function ExamSimulation() {
 
     // Synchronize and rebalance study plan based on full exam performance
     syncAdaptivePlan();
+    completeActiveTaskByType('exam');
 
     // Calculate Comprehensive Reading Pacing Analytics (Part 5, Part 6, Part 7)
     const p5Seconds = part5SecondsRef.current;

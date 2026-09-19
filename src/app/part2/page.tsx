@@ -9,6 +9,7 @@ import Confetti from '@/components/Confetti';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
+import { completeActiveTaskByType } from '@/utils/studyPlanEngine';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import { HeadphonesIcon, AlertCircleIcon, AwardIcon, BookIcon, RotateCcwIcon, HomeIcon, ExamIcon, FileTextIcon, LightbulbIcon } from '@/components/icons/AppIcons';
 import PracticeFooter from '@/components/PracticeFooter';
@@ -108,6 +109,7 @@ function Part2Trainer() {
     } else {
       setIsFinished(true);
       storage.set(`progress_${testId}_part2`, true);
+      completeActiveTaskByType('practice', { part: 'p2' });
       if ((score / questions.length) >= 0.7) {
         setShowConfetti(true);
       }

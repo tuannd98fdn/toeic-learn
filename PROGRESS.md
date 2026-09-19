@@ -1410,6 +1410,37 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
     - Dark Mode Dropdown: `scratch/dashboard_enhanced_dark_open.png`.
     - Dashboard đóng: `scratch/dashboard_enhanced_closed.png`.
 
+### ✅ Vấn Đề 54: Nâng Cấp Toàn Diện Trang Lộ Trình Học (/study-plan) & Khép Kín Chu Trình Adaptive Study Engine [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Đánh giá trang `/study-plan` theo nguyên tắc `AGENTS.md` phát hiện các vấn đề:
+    1. Thiếu biến CSS `--bg-secondary` trong `globals.css` khiến các thẻ tag, metric badge, task completed bị trong suốt và nhợt nhạt.
+    2. Giao diện vỡ trên Mobile: `.planMetricsGrid` cố định 4 cột khiến chiều rộng cột bị ép còn ~75px, chữ gãy vụn từng từ.
+    3. Hiện tượng mỏi cuộn (Scroll Fatigue): Lộ trình 30-90 ngày hiển thị phẳng kéo dài 5,000-8,000px không phân đoạn.
+    4. Mất ngữ cảnh ngày đang học khi click "Xem chi tiết" ngày khác.
+    5. Thiếu phản hồi thành tích (Celebration) khi hoàn thành 100% mục tiêu ngày học.
+    6. Khi tùy chỉnh số phút/ngày hoặc mục tiêu điểm, hệ thống cũ gọi `generateStudyPlan` xóa sạch toàn bộ lịch sử ngày/nhiệm vụ đã hoàn thành.
+    7. Thiếu cơ chế đánh dấu hoàn thành tự động cross-page khi luyện tập ở các trang Part 1–7 và Exam.
+    8. Nhiều đoạn mã sử dụng style nội dòng (inline styles).
+* **Giải pháp & Triển khai**:
+  1. **Định nghĩa biến CSS hệ thống**: Bổ sung `--bg-secondary: var(--surface-sunken)` (Light) và `var(--surface-hover)` (Dark) trong `globals.css`.
+  2. **Tối ưu Mobile Responsive**: Điều chỉnh `planMetricsGrid` thành 2 cột trên Mobile, 4 cột trên Desktop; bổ sung khoảng đệm an toàn chân trang (`padding-bottom: calc(5.5rem + env(safe-area-inset-bottom))`) tránh che khuất bởi thanh điều hướng.
+  3. **Gom cụm Tuần (Weekly Clusters 7 ngày)**: Gom 30-90 ngày thành các thẻ cụm tuần với thanh tiến độ tuần và khả năng đóng/mở (Collapse/Expand) linh hoạt.
+  4. **Tách biệt ngày Active và ngày Inspect**: Cho phép người học xem trước chi tiết bất kỳ ngày nào mà không làm mất ngày học thực tế hiện tại.
+  5. **Thẻ Chúc Mừng Hoàn Thành Ngày (Daily Goal Celebration Card)**: Tự động chúc mừng khi đạt 100% nhiệm vụ ngày với huy hiệu `+50 XP`, hiệu ứng âm thanh Web Audio Chime tinh tế và nút xem trước ngày mai.
+  6. **Cập nhật Lộ trình Không Phá Huỷ (Non-destructive Plan Update)**: Thêm hàm `updatePlanSettings()` trong `studyPlanEngine.ts` bảo tồn nguyên vẹn các ngày và task đã hoàn thành; bổ sung Bộ chọn Part yếu nhất (Weakest Parts Multi-Select) Part 1–7.
+  7. **Khép kín Chu trình Tự Động Hoàn Thành Cross-Page**: Kết nối hàm `completeActiveTaskByType()` vào toàn bộ các trang `/part1`, `/part2`, `/part3`, `/part4`, `/part6`, `/part7`, và `/exam`.
+  8. **Xóa bỏ 100% Inline Styles & Tuân thủ NO UI EMOJIS**: Thay thế bằng CSS Modules, sử dụng 100% biểu tượng SVG từ `AppIcons` (bổ sung `CalendarIcon`).
+* **Quy chuẩn & Xác minh**:
+  - Tuân thủ nghiêm ngặt **NO UI EMOJIS (STRICT)**: 0 emoji trong mã nguồn và rendered DOM.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% (35/35 routes static & dynamic).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_study_plan_enhancements_e2e.mjs`): PASS 100% (Tạo lộ trình, Target validation warning, Weekly Clusters, Collapse/Expand, Inspect Day, Non-destructive edit, Daily Celebration Card, Mobile layout, Dark Mode, 0 DOM emojis).
+  - Ảnh nghiệm thu giao diện:
+    - Form tạo lộ trình Desktop: `scratch/enhanced_form_desktop.png`.
+    - Lộ trình hoàn chỉnh Light Mode: `scratch/enhanced_plan_light.png`.
+    - Lộ trình hoàn chỉnh Dark Mode: `scratch/enhanced_plan_dark.png`.
+    - Lộ trình trên Mobile iPhone (375x812): `scratch/enhanced_plan_mobile.png`.
+
 ---
 
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
@@ -1434,6 +1465,7 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm định dữ liệu chuẩn ETS**: `node scripts/ingest_real_ets.mjs public/data/ets2022/test6`.
 * **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_study_plan_enhancements_e2e.mjs` (Kiểm thử toàn diện nâng cấp trang Lộ trình học /study-plan, Weekly Clusters, Non-destructive update, Celebration, Mobile responsive, 0 emojis).
   * `node scratch/test_ui_ux_enhancements_e2e.mjs` (Kiểm thử gói nâng cấp UI/UX Dashboard: Custom Test Selector, CompactInsightBar, De-duplicate RC buttons, 0 emojis).
   * `node scratch/test_ets2022_test6_full_e2e.mjs` (Kiểm thử toàn diện 7 Parts và Full Exam đề thi thật ETS 2022 Test 6).
   * `node scratch/test_ets2022_test5_full_e2e.mjs` (Kiểm thử toàn diện 7 Parts và Full Exam đề thi thật ETS 2022 Test 5).
@@ -1443,6 +1475,7 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
   * `node scratch/test_ets2022_test2_listening_full_e2e.mjs` (Kiểm thử toàn diện Listening đề thật ETS 2022 Test 2).
   * `node scratch/verify_graphics_e2e.mjs` (Kiểm thử hiển thị biểu đồ scan gốc Q63 và Q96 trong đề thi thật).
   * `node scratch/test_streamlined_daily_flow_e2e.mjs` (Kiểm thử Toàn Diện Daily Learning Flow 3 bước, Navbar tinh gọn, Vocab Hub 3 tabs, 0 emoji).
+
 
 
 

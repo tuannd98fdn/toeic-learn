@@ -251,6 +251,91 @@ export function rebalanceStudyPlan(plan: StudyPlan, gaps: LearnerGaps): StudyPla
 }
 
 /**
+ * Updates plan settings (target score, daily study minutes, duration, weak parts)
+ * while non-destructively preserving completed days and tasks.
+ */
+export function updatePlanSettings(params: {
+  targetScore?: number;
+  dailyMinutes?: number;
+  daysTotal?: number;
+  weakestParts?: string[];
+}): StudyPlan | null {
+  const plan = getStudyPlan();
+  if (!plan) return null;
+
+  if (params.targetScore) plan.targetScore = params.targetScore;
+  if (params.dailyMinutes) plan.dailyMinutes = params.dailyMinutes;
+  if (params.weakestParts && params.weakestParts.length > 0) plan.weakestParts = params.weakestParts;
+
+  // If daysTotal changed, adjust plan.days without touching completed days
+  if (params.daysTotal && params.daysTotal !== plan.daysTotal) {
+    const newTotal = params.daysTotal;
+    plan.daysTotal = newTotal;
+    if (plan.days.length < newTotal) {
+      const existingCount = plan.days.length;
+      const today = new Date();
+      for (let i = existingCount + 1; i <= newTotal; i++) {
+        const taskDate = new Date(today);
+        taskDate.setDate(today.getDate() + (i - 1));
+        const dateStr = taskDate.toLocaleDateString('vi-VN', {
+          weekday: 'short',
+          month: 'numeric',
+          day: 'numeric',
+        });
+        const phaseName = 'Giai đoạn 3: Tổng ôn thực chiến & Thi thử';
+        plan.days.push({
+          dayNumber: i,
+          dateStr,
+          phaseName,
+          tasks: [
+            {
+              id: `task_${i}_vocab`,
+              title: 'Học 15 Từ vựng Spaced Repetition',
+              description: 'Ôn tập thẻ ghi nhớ bằng hệ thống Leitner để từ vào trí nhớ dài hạn',
+              link: '/study',
+              type: 'vocab',
+              estimatedMinutes: Math.min(15, Math.round(plan.dailyMinutes * 0.35)),
+              completed: false,
+            },
+            {
+              id: `task_${i}_practice`,
+              title: 'Luyện tập hỗn hợp đề nâng cao',
+              description: 'Rà soát các bẫy hay gặp và củng cố độ chính xác',
+              link: '/part5',
+              type: 'practice',
+              estimatedMinutes: Math.round(plan.dailyMinutes * 0.45),
+              completed: false,
+            },
+            {
+              id: `task_${i}_review`,
+              title: 'Ôn tập Sổ tay lỗi sai',
+              description: 'Làm lại các câu đã từng sai để không bao giờ mắc lại lỗi cũ',
+              link: '/notebook',
+              type: 'review',
+              estimatedMinutes: Math.min(10, Math.round(plan.dailyMinutes * 0.2)),
+              completed: false,
+            },
+          ],
+          completed: false,
+        });
+      }
+    } else if (plan.days.length > newTotal) {
+      // Only truncate uncompleted tail days beyond newTotal
+      plan.days = plan.days.filter((d) => d.dayNumber <= newTotal || d.completed);
+    }
+  }
+
+  // Rebalance remaining days based on new settings and current gaps
+  const gaps = analyzeLearnerGaps();
+  if (params.weakestParts && params.weakestParts.length > 0) {
+    gaps.weakestParts = params.weakestParts;
+  }
+  const rebalanced = rebalanceStudyPlan(plan, gaps);
+  saveStudyPlan(rebalanced);
+  return rebalanced;
+}
+
+/**
  * Synchronizes the study plan with latest diagnostic and mistake data.
  */
 export function syncAdaptivePlan(): { plan: StudyPlan | null; gaps: LearnerGaps } {

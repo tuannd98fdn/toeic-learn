@@ -8,6 +8,7 @@ import { NormalizedPart6Passage, Part6DataSchema } from '@/schema/toeic';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { useLeaveWarning } from '@/hooks/useLeaveWarning';
 import { storage } from '@/utils/storage';
+import { completeActiveTaskByType } from '@/utils/studyPlanEngine';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import { 
   AwardIcon, 
@@ -357,6 +358,10 @@ function Part6Trainer() {
       setTotalQuestions(finalQuestions);
       setIsFinished(true);
       storage.set(`progress_${testId}_part6`, true);
+      completeActiveTaskByType('practice', {
+        subCategory: selectedSubSkill !== 'all' ? selectedSubSkill : undefined,
+        part: 'p6',
+      });
       if ((finalTotal / finalQuestions) >= 0.7) {
         setShowConfetti(true);
       }

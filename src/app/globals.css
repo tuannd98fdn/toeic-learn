@@ -75,6 +75,7 @@
   --card: var(--surface);
   --muted: var(--surface-hover);
   --muted-foreground: var(--text-secondary);
+  --bg-secondary: var(--surface-sunken);
   
   /* Transition Timing */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -142,6 +143,7 @@
     --card: var(--surface);
     --muted: var(--surface-hover);
     --muted-foreground: var(--text-secondary);
+    --bg-secondary: var(--surface-hover);
   }
 }
 
