@@ -862,7 +862,7 @@
 
 .fastTipCalloutContent b,
 .fastTipCalloutContent strong {
-  color: #fbbf24;
+  color: #d97706; /* amber-600 for light mode */
   font-weight: 700;
 }
 
@@ -901,7 +901,8 @@
 
 .analysisBoxContent i,
 .analysisBoxContent em {
-  color: #93c5fd;
+  color: #2563eb; /* blue-600 for light mode */
+  font-weight: 600;
   font-style: italic;
 }
 
@@ -1860,7 +1861,7 @@
   border-color: rgba(59, 130, 246, 0.35);
 }
 .syntaxTokenSubject .syntaxTokenLabel {
-  color: #60a5fa;
+  color: #2563eb; /* blue-600 */
 }
 
 .syntaxTokenVerb {
@@ -1868,7 +1869,7 @@
   border-color: rgba(249, 115, 22, 0.35);
 }
 .syntaxTokenVerb .syntaxTokenLabel {
-  color: #fb923c;
+  color: #ea580c; /* orange-600 */
 }
 
 .syntaxTokenObject {
@@ -1876,7 +1877,7 @@
   border-color: rgba(168, 85, 247, 0.35);
 }
 .syntaxTokenObject .syntaxTokenLabel {
-  color: #c084fc;
+  color: #9333ea; /* purple-600 */
 }
 
 .syntaxTokenBlank {
@@ -1884,10 +1885,37 @@
   border-color: rgba(234, 179, 8, 0.45);
 }
 .syntaxTokenBlank .syntaxTokenLabel {
-  color: #facc15;
+  color: #ca8a04; /* yellow-600 */
 }
 .syntaxTokenBlank .syntaxTokenContent {
-  color: #fef08a;
+  color: #a16207; /* yellow-700 */
   font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .fastTipCalloutContent b,
+  .fastTipCalloutContent strong {
+    color: #fbbf24;
+  }
+  .analysisBoxContent i,
+  .analysisBoxContent em {
+    color: #93c5fd;
+    font-weight: normal;
+  }
+  .syntaxTokenSubject .syntaxTokenLabel {
+    color: #60a5fa;
+  }
+  .syntaxTokenVerb .syntaxTokenLabel {
+    color: #fb923c;
+  }
+  .syntaxTokenObject .syntaxTokenLabel {
+    color: #c084fc;
+  }
+  .syntaxTokenBlank .syntaxTokenLabel {
+    color: #facc15;
+  }
+  .syntaxTokenBlank .syntaxTokenContent {
+    color: #fef08a;
+  }
 }
 
