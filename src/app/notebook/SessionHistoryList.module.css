@@ -106,9 +106,14 @@
   border: 1px solid var(--error, #ef4444);
   color: var(--error, #ef4444);
   padding: 0.35rem 0.75rem;
-  border-radius: 6px;
+  border-radius: var(--radius-md, 10px);
   font-size: 0.8rem;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background: rgba(239, 68, 68, 0.1);
 }
 
 .chatLog {
@@ -236,14 +241,21 @@
 }
 
 .primaryBtn {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
   color: white;
   border: none;
-  padding: 0.6rem 1.25rem;
-  border-radius: 8px;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-lg, 14px);
   font-weight: 600;
   cursor: pointer;
   margin-top: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
+}
+
+.primaryBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(var(--primary-rgb), 0.35);
 }
 
 .primaryBtn:disabled {

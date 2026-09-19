@@ -37,14 +37,14 @@ async function main() {
   console.log(`[2] Section badge "Tự học ngoài giờ" found: ${sectionBadge > 0 ? 'PASS' : 'FAIL'}`);
   if (sectionBadge === 0) throw new Error('Section badge not found!');
 
-  // 3. Verify Reading Station and Exam Arena button distinction
-  const readingCta = await page.locator('text=LUYỆN FULL RC (75P)').count();
-  console.log(`[3a] Reading station CTA "LUYỆN FULL RC (75P)" found: ${readingCta > 0 ? 'PASS' : 'FAIL'}`);
-  if (readingCta === 0) throw new Error('Reading station CTA "LUYỆN FULL RC (75P)" not found!');
+  // 3. Verify Reading Station and Exam Arena button de-duplication
+  const duplicateReadingCta = await page.locator('text=LUYỆN FULL RC (75P)').count();
+  console.log(`[3a] Reading station duplicate CTA "LUYỆN FULL RC (75P)" count: ${duplicateReadingCta} (expected: 0)`);
+  if (duplicateReadingCta !== 0) throw new Error('Duplicate "LUYỆN FULL RC (75P)" should be removed!');
 
   const mockCta = await page.locator('text=THI THỬ RC (75P)').count();
   console.log(`[3b] Arena Mock CTA "THI THỬ RC (75P)" found: ${mockCta > 0 ? 'PASS' : 'FAIL'}`);
-  if (mockCta === 0) throw new Error('Arena Mock CTA "THI THỬ RC (75P)" not found!');
+  if (mockCta !== 1) throw new Error('Arena Mock CTA "THI THỬ RC (75P)" should be exactly 1!');
 
   // 4. Verify Custom Test Selector Dropdown
   const testSelectorBtn = page.locator('button[aria-label="Chọn bộ đề thi ETS"]');

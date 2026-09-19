@@ -9,20 +9,13 @@ import { useStreak } from '@/hooks/useStreak';
 import { storage } from '@/utils/storage';
 import { StudyPlan, getStudyPlan, toggleTaskCompleted, getNextStudyTask, syncAdaptivePlan } from '@/utils/studyPlanEngine';
 import {
-  CardsIcon,
-  QuizIcon,
-  BookIcon,
-  NotebookIcon,
   ExamIcon,
   HeadphonesIcon,
   ReadingIcon,
-  ZapIcon,
   ArrowRightIcon,
   CompassIcon,
   TargetIcon,
-  LightbulbIcon,
   AwardIcon,
-  SparklesIcon,
   CheckIcon,
   ChevronDownIcon,
 } from '@/components/icons/AppIcons';
@@ -591,14 +584,6 @@ export default function Home() {
                   Part {part} {partProgress[`part${part}`] && <CheckIcon size={12} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '3px' }} />}
                 </Link>
               ))}
-              <Link
-                href={`/exam?test=${selectedTest}&section=rc`}
-                className="btn-accent btn-sm"
-                style={{ fontWeight: 700 }}
-                title="Luyện tập toàn bộ 100 câu đọc Part 5, 6, 7 trong 75 phút"
-              >
-                LUYỆN FULL RC (75P)
-              </Link>
             </div>
           </div>
 
@@ -640,46 +625,6 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
-
-        {/* Supplementary Tools Row */}
-        <div className={styles.onDemandToolsRow} style={{ marginTop: '16px' }}>
-          <Link href="/study" className={styles.onDemandToolCard}>
-            <div className={styles.onDemandToolIcon}>
-              <CardsIcon size={20} />
-            </div>
-            <div className={styles.onDemandToolText}>
-              <span className={styles.onDemandToolTitle}>Từ vựng &amp; Flashcards</span>
-              <span className={styles.onDemandToolDesc}>SRS Leitner, Quiz 10 câu &amp; Tra từ</span>
-            </div>
-          </Link>
-          <Link href="/notebook" className={styles.onDemandToolCard}>
-            <div className={styles.onDemandToolIcon}>
-              <NotebookIcon size={20} />
-            </div>
-            <div className={styles.onDemandToolText}>
-              <span className={styles.onDemandToolTitle}>Sổ tay lỗi sai</span>
-              <span className={styles.onDemandToolDesc}>Bóc tách nguyên nhân &amp; chữa điểm nghẽn</span>
-            </div>
-          </Link>
-          <Link href="/tips" className={styles.onDemandToolCard}>
-            <div className={styles.onDemandToolIcon}>
-              <LightbulbIcon size={20} />
-            </div>
-            <div className={styles.onDemandToolText}>
-              <span className={styles.onDemandToolTitle}>Mẹo &amp; Bẫy thi ETS</span>
-              <span className={styles.onDemandToolDesc}>30 chiến thuật phòng thi 7 Parts</span>
-            </div>
-          </Link>
-          <Link href="/masterclass" className={styles.onDemandToolCard}>
-            <div className={styles.onDemandToolIcon}>
-              <SparklesIcon size={20} />
-            </div>
-            <div className={styles.onDemandToolText}>
-              <span className={styles.onDemandToolTitle}>Trạm Masterclass 30&apos;</span>
-              <span className={styles.onDemandToolDesc}>Bẻ khóa âm bản xứ &amp; bẫy 800+</span>
-            </div>
-          </Link>
         </div>
       </section>
     </div>

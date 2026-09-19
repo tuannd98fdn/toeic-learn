@@ -1889,30 +1889,53 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
      - Khi nộp bài thi thành công (`handleSubmitExam`), hệ thống tự động xóa sạch `draftKey` và `activeSessionKey`.
      - Khi bấm "Làm lại từ đầu" (`handleResetDraft`), hệ thống xác nhận qua dialog an toàn, xóa sạch draft và reset toàn bộ state về mới 100%.
   6. **Quy Chuẩn UI/UX & Không Emoji (STRICT NO UI EMOJIS)**:
-     - Bổ sung 3 icon SVG chuyên dụng vào `AppIcons.tsx`: `SaveIcon`, `WifiIcon`, `WifiOffIcon`.
+     - Bổ sung các icon SVG chuyên dụng vào `AppIcons.tsx`: `SaveIcon`, `WifiIcon`, `WifiOffIcon`, `PauseIcon`, `PlayIcon`.
      - Tuyệt đối 0 emoji trên toàn bộ UI components, badges, banners và modals.
      - Thiết kế theo phong cách glassmorphism hiện đại, tương thích hoàn hảo cả Light Mode và Dark Mode.
+  7. **Đồng Bộ Tạm Dừng / Tiếp Tục Toàn Diện (Pause Modal & Audio Sync & Zero Time-Leak)**:
+     - **Dừng âm thanh tức thì**: Khi người học bấm "Tạm dừng", toàn bộ trình phát audio (`ListeningAudioPlayer`) được ngắt tức thời, ngăn chặn việc mất thời gian nghe.
+     - **Modal Tạm Dừng Chuyên Dụng (`PauseModal`)**: Hiển thị màn hình mờ che đề thi để đảm bảo tính công bằng, hiển thị thời gian đóng băng và tiến độ câu đã làm, cùng nút bấm lớn "Tiếp tục làm bài" (`PlayIcon`).
+     - **Bảo toàn thời gian khi tạm dừng (Zero Time-Leak)**: Lưu trường `isPaused` vào `ExamDraft`. Khi reload hoặc quay lại phòng thi trong lúc đang tạm dừng, hệ thống nhận diện `draft.isPaused === true` và **không trừ bất kỳ giây nào** (`elapsedSecs = 0`), khôi phục chính xác thời gian đóng băng và mở sẵn Pause Modal.
 * **Quy chuẩn & Xác minh**:
   - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
   - Build tĩnh Next.js: `npm run build` thành công 100% (35/35 routes).
-  - Kiểm thử tự động Playwright E2E (`scratch/test_exam_autosave_e2e.mjs`): PASS 100% (6/6 kịch bản kiểm thử):
-    1. Auto-save realtime: Chọn câu 101, 102, cắm cờ câu 102 -> State lưu trữ chính xác trong `localStorage`.
-    2. Reload recovery: Tải lại trang -> Recovery Banner xuất hiện, phục hồi chính xác 2 câu làm dở, cờ, vị trí câu #103 và thời gian đếm ngược.
-    3. Offline network failure resilience: Cắt đường truyền dữ liệu `/data/**`, ngắt mạng, chọn câu 102 (D), câu 103 (A), tải lại trang -> Nạp từ offline cache thành công, giữ trọn vẹn 3/3 câu.
-    4. Submit cleanup: Nộp bài thi -> Draft bị xóa sạch hoàn toàn khỏi `localStorage`.
-    5. Reset draft: Nút "Làm lại từ đầu" xóa draft và đưa bài thi về 0/41 câu.
-    6. Regex DOM Audit: Quét toàn bộ rendered DOM đạt 0 emoji icons.
+  - Kiểm thử tự động Playwright E2E (`scratch/test_exam_autosave_e2e.mjs`): PASS 100% (6/6 kịch bản kiểm thử).
+  - Kiểm thử tự động Playwright Pause / Resume (`scratch/test_pause_resume_e2e.mjs`): PASS 100% (Dừng audio, Đóng băng thời gian, Mở Pause Modal, Reload trang không mất giây nào, Tiếp tục làm bài, 0 emojis).
   - Kiểm thử Full Test 120 phút (`scratch/test_full_120m_autosave.mjs`): PASS 100%:
     - Kiểm thử trên toàn bộ đề 200 câu (`section: all`), làm bài Part 1 (Câu 1, 2) và Part 5 (Câu 101), cắm cờ, reload -> Banner khôi phục 3/200 câu, còn 01:59:58, vị trí câu 101 được giữ nguyên vẹn.
   - Ảnh nghiệm thu giao diện:
     - `scratch/exam_autosave_verified.png`
     - `scratch/full_exam_120m_autosave_verified.png`
+    - `scratch/exam_pause_modal_verified.png`
+
+---
+
+### Milestone 65: Tinh Gọn Giao Diện & Triệt Tiêu Trùng Lặp Nội Dung (Clean UX & De-duplication) [HOÀN TẤT 100%]
+* **Vấn đề đã giải quyết**:
+  - Phát hiện và xử lý triệt để hiện tượng nhồi nhét, trùng lặp thông tin và dư thừa nút bấm trên Dashboard (`/`) và các trang vệ tinh:
+    1. **Nút RC 75P trùng lặp**: Trạm Đọc trước đây có nút `LUYỆN FULL RC (75P)`, nằm ngay cạnh `THI THỬ RC (75P)` trong Đấu Trường Thi Thử có cùng URL `/exam?section=rc`.
+    2. **Hàng 4 thẻ công cụ phụ ở đáy trang (`onDemandToolsRow`)**: Sao chép lại 100% các công cụ đã có sẵn trên Sidebar (`/study`, `/notebook`, `/tips`).
+    3. **Phân mảnh luồng học Từ vựng**: Nút làm Quiz ở cuối phiên Flashcard `/study` trước đây nhảy trang sang route ngoài `/quiz` thay vì kích hoạt tab Quiz trực tiếp.
+* **Chi tiết triển khai**:
+  1. **Trang Chủ (`src/app/page.tsx`)**:
+     - Loại bỏ nút `LUYỆN FULL RC (75P)` tại Trạm Đọc. Trạm Đọc trở nên tinh gọn, đối xứng hoàn hảo với Trạm Nghe (Part 5, 6, 7).
+     - Toàn bộ bài thi thử tính giờ tập trung duy nhất tại **Đấu Trường Thi Thử Chuẩn ETS** (`MINI-TEST 20P`, `THI THỬ RC 75P`, `FULL TEST 120P`).
+     - Xóa bỏ hoàn toàn hàng thẻ công cụ phụ ở đáy trang chủ (`onDemandToolsRow`) và dọn dẹp các import icon dư thừa (`CardsIcon`, `NotebookIcon`, `LightbulbIcon`, `SparklesIcon`).
+  2. **Thanh Điều Hướng (`Navbar.tsx`)**:
+     - Đưa mục **"Masterclass 30'"** (`/masterclass`, `SparklesIcon`, badge `800+`) vào nhóm *Công Cụ & Ôn Tập* trên Sidebar để người học truy cập mọi lúc từ bất kỳ trang nào.
+  3. **Trung Tâm Từ Vựng (`src/app/study/page.tsx`)**:
+     - Nút "Làm Quiz ngay" tại màn hình hoàn thành Flashcard đổi sang `handleTabChange('quiz')` chuyển tab mượt mà ngay trong trang, ngăn chặn phân mảnh route.
+* **Quy chuẩn & Xác minh**:
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Kiểm thử Playwright E2E (`scratch/test_deduplication_clean_ux_e2e.mjs`): PASS 100% (Xác nhận 0 nút trùng lặp, 0 hàng thẻ phụ thừa, Masterclass hoạt động trên Sidebar, chuyển tab Quiz mượt mà, 0 emojis).
+  - Kiểm thử Playwright UI/UX (`scratch/test_ui_ux_enhancements_e2e.mjs`): PASS 100%.
+  - Ảnh nghiệm thu giao diện: `scratch/dashboard_deduplicated_clean.png`.
 
 ---
 
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 65: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
+### Vấn Đề 66: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
 * **Bối cảnh & Kế hoạch**:
   - Đã hoàn tất 100% chuẩn xác thực cho ETS 2022 Test 1, Test 2, Test 3, Test 4, Test 5, và Test 6 (1,200 câu hỏi chuẩn hóa).
   - Tiếp tục mở rộng bộ đề ETS 2022 với **Test 7**:

@@ -156,6 +156,7 @@ export default function Navbar() {
         { path: '/study', label: 'Từ vựng & Flashcards', icon: <CardsIcon size={20} /> },
         { path: '/notebook', label: 'Sổ tay lỗi sai', icon: <NotebookIcon size={20} /> },
         { path: '/tips', label: 'Mẹo & Bẫy thi', icon: <LightbulbIcon size={20} /> },
+        { path: '/masterclass', label: 'Masterclass 30\'', icon: <SparklesIcon size={20} />, badge: '800+' },
         { path: '/stats', label: 'Thống kê & Radar', icon: <StatsIcon size={20} /> },
       ],
     },

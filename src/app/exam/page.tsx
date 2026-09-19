@@ -25,6 +25,8 @@ import {
   ShieldCheckIcon,
   RotateCcwIcon,
   WifiOffIcon,
+  PlayIcon,
+  PauseIcon,
 } from '@/components/icons/AppIcons';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
@@ -55,7 +57,9 @@ export interface ExamDraft {
   part6Seconds: number;
   part7Seconds: number;
   totalQuestions: number;
+  isPaused?: boolean;
 }
+
 
 
 interface UnifiedQuestion {
@@ -172,6 +176,7 @@ function ExamSimulation() {
   const currentIndexRef = useRef(currentIndex);
   const isSubmittedRef = useRef(isSubmitted);
   const isReviewModeRef = useRef(isReviewMode);
+  const isPausedRef = useRef(isPaused);
 
   useEffect(() => { userAnswersRef.current = userAnswers; }, [userAnswers]);
   useEffect(() => { flaggedQuestionsRef.current = flaggedQuestions; }, [flaggedQuestions]);
@@ -179,19 +184,21 @@ function ExamSimulation() {
   useEffect(() => { currentIndexRef.current = currentIndex; }, [currentIndex]);
   useEffect(() => { isSubmittedRef.current = isSubmitted; }, [isSubmitted]);
   useEffect(() => { isReviewModeRef.current = isReviewMode; }, [isReviewMode]);
+  useEffect(() => { isPausedRef.current = isPaused; }, [isPaused]);
 
   const saveDraft = (
     customAnswers = userAnswersRef.current,
     customFlags = flaggedQuestionsRef.current,
     customIndex = currentIndexRef.current,
     customTime = timeLeftRef.current,
+    customPaused = isPausedRef.current,
   ) => {
     if (isSubmittedRef.current || isReviewModeRef.current || questions.length === 0) return;
     const answeredCount = Object.keys(customAnswers).length;
     const flaggedCount = customFlags.size;
 
     // Do not save blank drafts before user starts
-    if (answeredCount === 0 && flaggedCount === 0 && customTime >= totalExamTime) {
+    if (answeredCount === 0 && flaggedCount === 0 && customTime >= totalExamTime && !customPaused) {
       return;
     }
 
@@ -207,6 +214,7 @@ function ExamSimulation() {
       part6Seconds: part6SecondsRef.current,
       part7Seconds: part7SecondsRef.current,
       totalQuestions: questions.length,
+      isPaused: customPaused,
     };
 
     storage.set(draftKey, draft);
@@ -220,6 +228,27 @@ function ExamSimulation() {
     setAutoSavedAt(Date.now());
   };
 
+  const handleTogglePause = () => {
+    setIsPaused((prev) => {
+      const nextPaused = !prev;
+      if (nextPaused && typeof document !== 'undefined') {
+        document.querySelectorAll('audio').forEach((a) => {
+          try {
+            a.pause();
+          } catch (_) {}
+        });
+      }
+      saveDraft(
+        userAnswersRef.current,
+        flaggedQuestionsRef.current,
+        currentIndexRef.current,
+        timeLeftRef.current,
+        nextPaused
+      );
+      return nextPaused;
+    });
+  };
+
   const handleResetExam = () => {
     if (window.confirm('Bạn có chắc chắn muốn xóa bài làm hiện tại để bắt đầu lại từ đầu? Mọi câu trả lời đã lưu tạm sẽ bị xóa.')) {
       storage.remove(draftKey);
@@ -228,6 +257,7 @@ function ExamSimulation() {
       setFlaggedQuestions(new Set());
       setCurrentIndex(0);
       setTimeLeft(totalExamTime);
+      setIsPaused(false);
       part5SecondsRef.current = 0;
       part6SecondsRef.current = 0;
       part7SecondsRef.current = 0;
@@ -236,6 +266,7 @@ function ExamSimulation() {
       setAutoSavedAt(null);
     }
   };
+
 
   const navigateToQuestion = (newIndex: number) => {
     const targetIndex = Math.max(0, Math.min(questions.length - 1, newIndex));
@@ -587,7 +618,9 @@ function ExamSimulation() {
     }
 
     // Calculate elapsed seconds since last save
-    const elapsedSecs = Math.max(0, Math.floor((Date.now() - draft.lastSaved) / 1000));
+    // If the exam was explicitly paused, do NOT deduct elapsed time!
+    const isDraftPaused = Boolean(draft.isPaused);
+    const elapsedSecs = isDraftPaused ? 0 : Math.max(0, Math.floor((Date.now() - draft.lastSaved) / 1000));
     const adjustedTime = Math.max(0, draft.timeLeft - elapsedSecs);
 
     if (adjustedTime > 0) {
@@ -598,6 +631,9 @@ function ExamSimulation() {
         setCurrentIndex(draft.currentIndex);
       }
       setTimeLeft(adjustedTime);
+      if (isDraftPaused) {
+        setIsPaused(true);
+      }
       part5SecondsRef.current = draft.part5Seconds || 0;
       part6SecondsRef.current = draft.part6Seconds || 0;
       part7SecondsRef.current = draft.part7Seconds || 0;
@@ -648,6 +684,18 @@ function ExamSimulation() {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [loading, isSubmitted, isPaused, questions]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Stop all audio when exam is paused
+  useEffect(() => {
+    if (isPaused && typeof document !== 'undefined') {
+      document.querySelectorAll('audio').forEach((a) => {
+        try {
+          a.pause();
+        } catch (_) {}
+      });
+    }
+  }, [isPaused]);
+
 
   // Monitor online / offline network connectivity
   useEffect(() => {
@@ -1347,12 +1395,23 @@ function ExamSimulation() {
             </span>
             <button
               type="button"
-              className={styles.pauseBtn}
-              onClick={() => setIsPaused((p) => !p)}
-              title={isPaused ? 'Tiếp tục' : 'Tạm dừng'}
+              className={`${styles.pauseBtn} ${isPaused ? styles.pauseBtnActive : ''}`}
+              onClick={handleTogglePause}
+              title={isPaused ? 'Tiếp tục làm bài' : 'Tạm dừng bài thi'}
             >
-              {isPaused ? 'Tiếp tục' : 'Tạm dừng'}
+              {isPaused ? (
+                <>
+                  <PlayIcon size={14} style={{ display: 'inline', verticalAlign: 'middle' }} />
+                  <span>Tiếp tục</span>
+                </>
+              ) : (
+                <>
+                  <PauseIcon size={14} style={{ display: 'inline', verticalAlign: 'middle' }} />
+                  <span>Tạm dừng</span>
+                </>
+              )}
             </button>
+
           </div>
         ) : (
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
@@ -1775,6 +1834,58 @@ function ExamSimulation() {
           onClose={() => setTutorContext(null)}
           questionContext={tutorContext}
         />
+      )}
+
+      {/* Pause Exam Modal Overlay */}
+      {isPaused && !isSubmitted && questions.length > 0 && (
+        <div className={styles.pauseOverlay} role="dialog" aria-modal="true" aria-label="Bài thi đang tạm dừng">
+          <div className={styles.pauseModalCard}>
+            <div className={styles.pauseIconBadge}>
+              <PauseIcon size={30} />
+            </div>
+            <h2 className={styles.pauseHeading}>Bài thi đang tạm dừng</h2>
+            <p className={styles.pauseDesc}>
+              Đồng hồ đếm ngược và âm thanh bài nghe đã được tạm ngưng. Toàn bộ câu trả lời và tiến độ bài làm của bạn đã được bảo lưu an toàn.
+            </p>
+
+            <div className={styles.pauseMetricsBox}>
+              <div className={styles.pauseMetricItem}>
+                <span className={styles.pauseMetricLabel}>Thời gian còn lại</span>
+                <span className={styles.pauseMetricValue}>{formatTimer(timeLeft)}</span>
+              </div>
+              <div className={styles.pauseMetricDivider} />
+              <div className={styles.pauseMetricItem}>
+                <span className={styles.pauseMetricLabel}>Tiến độ bài làm</span>
+                <span className={styles.pauseMetricValueSecondary}>
+                  {Object.keys(userAnswers).length} / {questions.length} câu
+                </span>
+              </div>
+
+            </div>
+
+            <div className={styles.pauseActionButtons}>
+              <button
+                type="button"
+                className={styles.resumeBigBtn}
+                onClick={handleTogglePause}
+              >
+                <PlayIcon size={18} />
+                <span>Tiếp tục làm bài</span>
+              </button>
+              <button
+                type="button"
+                className={styles.exitToHomeBtn}
+                onClick={() => {
+                  if (window.confirm('Bạn có chắc chắn muốn rời phòng thi? Bài làm dở dang đã được lưu tạm tự động.')) {
+                    window.location.href = '/';
+                  }
+                }}
+              >
+                Thoát về trang chủ
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Expired Draft Recovery Modal */}

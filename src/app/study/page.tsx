@@ -256,10 +256,15 @@ function StudyPageContent() {
                 <ZapIcon size={18} style={{ marginRight: '8px' }} />
                 Luyện phản xạ Collocations
               </button>
-              <Link href="/quiz" className="btn-primary">
+              <button
+                type="button"
+                onClick={() => handleTabChange('quiz')}
+                className="btn-primary"
+                style={{ cursor: 'pointer' }}
+              >
                 Làm Quiz ngay
                 <ArrowRightIcon size={18} style={{ marginLeft: '8px' }} />
-              </Link>
+              </button>
               <Link href="/" className="btn-secondary" style={{ border: 'none', background: 'transparent' }}>
                 <HomeIcon size={18} style={{ marginRight: '8px' }} />
                 Về trang chủ
