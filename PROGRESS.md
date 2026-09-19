@@ -1523,11 +1523,66 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
     - Giao diện Mobile Light Mode: `scratch/tips_enhanced_mobile_light.png`.
     - Giao diện Mobile Dark Mode: `scratch/tips_enhanced_mobile_dark.png`.
 
+### ✅ Vấn Đề 57: Nâng Cấp Toàn Diện Trang Thống Kê Học Tập (/stats) Chuẩn SaaS 10/10: 4 Chỉ Số Vàng, Bản Đồ 7 Parts, Sửa Lỗi Đảo Trục LineChart & Modal Chứng Nhận Thành Tích Tỷ Lệ Vàng [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Khảo sát trang `/stats` ("Thống Kê Tiến Độ") theo tiêu chuẩn `AGENTS.md` (Product Loop, Tech Lead YAGNI/KISS, Zero-Bloat) phát hiện các lỗi kỹ thuật và khoảng trống sư phạm:
+    1. **Lỗi Đảo Ngược Trục Thời Gian (Time-Series Inversion Bug)**: Biểu đồ `LineChart` hiển thị thứ tự thi từ phải sang trái (mới nhất sang cũ nhất) vì dữ liệu `toeic_exam_history` lưu bài mới ở đầu mảng, khiến đường tiến độ bị lộn ngược theo thời gian.
+    2. **Lỗi Cháy Nền Dark Mode Khi Chụp Chia Sẻ (Share Contrast Inversion)**: `ShareButton` chụp toàn trang 1600px với `backgroundColor: '#ffffff'`, trong khi Dark Mode render chữ trắng dẫn đến ảnh bị "chữ trắng trên nền trắng" hoàn toàn không đọc được.
+    3. **Lỗi Tràn Nhãn Biểu Đồ Radar Trên Mobile (SVG Label Clipping)**: Tên các chủ điểm ngữ pháp dài (ví dụ: *Contextual Completion*, *Relative Clauses*) bị tràn khỏi viewBox SVG trên màn hình 375px.
+    4. **Thiếu Khoảng Đệm Chân Trang An Toàn (Missing Safe-Area)**: Nội dung cuối trang bị thanh điều hướng di động che khuất trên thiết bị cảm ứng.
+    5. **Khoảng Trống Sư Phạm (Pedagogical Gaps)**:
+       - Thiếu Bản đồ Thành thạo 7 Part TOEIC (Part 1 - 7): Người học không nắm được tương quan năng lực giữa Listening (Part 1-4) và Reading (Part 5-7).
+       - Nhầm lẫn chỉ số: Chỉ số "Tổng từ đã học" bị gán nhãn là "Tổng tiến độ", thiếu 4 Chỉ số Vàng định chuẩn TOEIC.
+       - Tách rời Hệ Thống Trần Năng Lực (Knowledge Ceiling): Chưa kết nối mô hình `evaluateLearnerKnowledge`.
+       - Đứt gãy Chu trình Hành động: Các bảng và biểu đồ thiếu nút CTA 1-click dẫn thẳng vào luyện tập khắc phục lỗi.
+* **Giải pháp & Triển khai**:
+  1. **Sửa Triệt Để Lỗi Trục Thời Gian & Thống Nhất Thứ Tự Trực Quan**:
+     - Hàm chuẩn hóa ngày tháng `parseDate` sắp xếp dữ liệu cho `LineChart` theo chiều thời gian tăng dần (`Cũ nhất -> Mới nhất`), trong khi bảng Lịch sử thi vẫn giữ thứ tự đảo ngược (`Mới nhất ở trên`).
+     - Tích hợp nhãn số điểm kèm chênh lệch so với lần thi trước ngay trên điểm mốc.
+  2. **Bộ 4 Chỉ Số Vàng (Golden Metrics Bar)**:
+     - *Điểm Dự Đoán ETS*: Tính toán từ lần thi gần nhất kèm khoảng dao động tin cậy và phân loại CEFR chuẩn.
+     - *Khắc Phục Lỗi Sai*: Tỷ lệ và số lượng câu hỏi trong Sổ tay đã được chuyển sang Hộp 4-5.
+     - *Từ Vựng Cốt Lõi Nắm Vững*: Tỷ lệ từ vựng Leitner đạt Hộp 5 trên tổng kho từ vựng.
+     - *Đề Thi ETS Đã Hoàn Thành*: Tổng số bài thi đã hoàn thành kèm nhãn đánh giá độ chăm chỉ.
+  3. **Banner Chẩn Đoán Chiến Thuật & Trần Năng Lực (Strategic Diagnosis)**:
+     - Tích hợp `evaluateLearnerKnowledge` đối chiếu trực tiếp giữa Điểm thi thực tế vs Điểm trần tiềm năng (Knowledge Ceiling).
+     - Đưa ra khuyến nghị trọng tâm: Nếu trần năng lực cao hơn điểm thi -> Cần luyện tốc độ và giải tỏa tâm lý; Nếu điểm thi chạm trần -> Cần nạp thêm từ vựng/ngữ pháp nâng cao.
+  4. **Bản Đồ Năng Lực 7 Parts (7-Part TOEIC Mastery Matrix)**:
+     - Bóc tách toàn diện điểm số và độ chính xác của 7 Part: Part 1 - 4 (Listening) và Part 5 - 7 (Reading).
+     - Thanh tiến độ màu động theo ngưỡng năng lực: *Xanh lá (>= 75% - Tốt)*, *Cam (50-74% - Cần ôn)*, *Đỏ (< 50% - Yếu)*.
+     - Nút hành động 1-click `Luyện Part X ->` chuyển trực tiếp vào màn hình luyện tập tương ứng (`/part1` đến `/part7`).
+  5. **Modal Chứng Nhận Thành Tích Tỷ Lệ Vàng (Achievement Certificate Modal & Share)**:
+     - Thay thế cơ chế chụp toàn màn hình lỗi bằng Modal Thẻ Chứng Nhận Tỷ Lệ Vàng kích thước 540x380px (`#achievement-certificate-card`).
+     - Nền Dark-Glass Gradient sang trọng (`linear-gradient(135deg, #090d16, #171d33)`) không phụ thuộc theme, loại bỏ 100% bug tương phản chữ trắng nền trắng.
+     - Tích hợp Web Share API native cho điện thoại di động và fallback tải file PNG trực tiếp chất lượng cao `scale: 2`.
+  6. **Tối Ưu Giao Diện Radar & Hộp Leitner**:
+     - Radar Chart: Bổ sung nhãn rút gọn tiếng Việt (`shortVi`: *MĐ quan hệ*, *Giới/Liên từ*, *Điền câu*), giữ nguyên tên đầy đủ trong Tooltip và Thẻ phân tích; sửa link Part 6 chính xác; thay thế hardcoded colors bằng CSS variables.
+     - Hộp Leitner: Việt hóa 100% ngữ nghĩa (Hộp 1-5 kèm chu kỳ ôn tập), sửa lỗi CSS double-border, bổ sung nút CTA 1-click `Ôn tập ngay -> /study`.
+     - Lịch sử thi: Bổ sung cột "Hành động" với nút `Khắc phục` chuyển đến phân tích chi tiết.
+  7. **Mobile Ergonomics & Tuân Thủ Triệt Để NO UI EMOJIS**:
+     - Bổ sung `padding-bottom: calc(5.5rem + env(safe-area-inset-bottom))` vào trang.
+     - Sử dụng 100% icon SVG từ `AppIcons` (`TrophyIcon`, `TargetIcon`, `FlameIcon`, `SparklesIcon`, `CheckIcon`, `RotateIcon`, `BookIcon`, `ChartIcon`, `ShareIcon`, `ArrowRightIcon`, v.v.).
+     - Quét DOM phát hiện 0 emoji.
+* **Quy chuẩn & Xác minh**:
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% (35/35 routes static & dynamic).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_stats_page_e2e.mjs`): PASS 100% trên 5 bộ kiểm thử:
+    1. Desktop Light Mode: Đầy đủ 4 chỉ số vàng, Banner trần năng lực, Bản đồ 7 Parts với 7 nút CTA luyện tập, Biểu đồ tiến độ, Hộp Leitner, Bảng lịch sử.
+    2. Share Modal: Kích hoạt modal, hiển thị thẻ chứng nhận chuẩn tỷ lệ vàng, nút Tải ảnh PNG và Chia sẻ hoạt động mượt mà.
+    3. Desktop Dark Mode: Tương phản nền và chữ hoàn hảo, không có bug chữ trắng nền trắng.
+    4. Mobile 375x812: Bố cục cột đáp ứng chuẩn, nhãn radar không tràn viền, padding an toàn đáy màn hình.
+    5. Regex DOM Audit: 0 UI emojis trên toàn bộ cây DOM.
+  - Ảnh nghiệm thu giao diện:
+    - Thẻ Chứng nhận Thành tích: `scratch/stats_share_card.png`.
+    - Trang Thống kê Desktop Light: `scratch/stats_enhanced_desktop_light.png`.
+    - Trang Thống kê Desktop Dark: `scratch/stats_enhanced_desktop_dark.png`.
+    - Trang Thống kê Mobile: `scratch/stats_enhanced_mobile.png`.
+
 ---
 
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 57: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
+### Vấn Đề 58: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
 * **Bối cảnh & Kế hoạch**:
   - Đã hoàn tất 100% chuẩn xác thực cho ETS 2022 Test 1, Test 2, Test 3, Test 4, Test 5, và Test 6 (1,200 câu hỏi chuẩn hóa).
   - Tiếp tục mở rộng bộ đề ETS 2022 với **Test 7**:
@@ -1547,6 +1602,9 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm định dữ liệu chuẩn ETS**: `node scripts/ingest_real_ets.mjs public/data/ets2022/test6`.
 * **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_stats_page_e2e.mjs` (Kiểm thử toàn diện nâng cấp trang Thống kê /stats, 4 Chỉ số Vàng, Bản đồ 7 Parts, Share Modal Certificate, Mobile responsive, 0 emojis).
+  * `node scratch/test_tips_enhancements_e2e.mjs` (Kiểm thử toàn diện nâng cấp trang Mẹo thi /tips, Bookmarking & Mastery, Sổ tay tóm tắt Cheat Sheet, Mobile responsive, 0 emojis).
+  * `node scratch/test_notebook_enhancements_e2e.mjs` (Kiểm thử toàn diện nâng cấp Sổ tay /notebook, Quiz chuộc lỗi, Leitner badges, Mobile responsive, 0 emojis).
   * `node scratch/test_study_plan_enhancements_e2e.mjs` (Kiểm thử toàn diện nâng cấp trang Lộ trình học /study-plan, Weekly Clusters, Non-destructive update, Celebration, Mobile responsive, 0 emojis).
   * `node scratch/test_ui_ux_enhancements_e2e.mjs` (Kiểm thử gói nâng cấp UI/UX Dashboard: Custom Test Selector, CompactInsightBar, De-duplicate RC buttons, 0 emojis).
   * `node scratch/test_ets2022_test6_full_e2e.mjs` (Kiểm thử toàn diện 7 Parts và Full Exam đề thi thật ETS 2022 Test 6).
@@ -1557,10 +1615,6 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
   * `node scratch/test_ets2022_test2_listening_full_e2e.mjs` (Kiểm thử toàn diện Listening đề thật ETS 2022 Test 2).
   * `node scratch/verify_graphics_e2e.mjs` (Kiểm thử hiển thị biểu đồ scan gốc Q63 và Q96 trong đề thi thật).
   * `node scratch/test_streamlined_daily_flow_e2e.mjs` (Kiểm thử Toàn Diện Daily Learning Flow 3 bước, Navbar tinh gọn, Vocab Hub 3 tabs, 0 emoji).
-
-
-
-
 
 
 

@@ -20,6 +20,7 @@ import styles from './GrammarRadarChart.module.css';
 export interface SubSkillMeta {
   key: string;
   nameVi: string;
+  shortVi: string;
   description: string;
   advice: string;
 }
@@ -28,48 +29,56 @@ export const GRAMMAR_SUB_SKILLS: SubSkillMeta[] = [
   {
     key: 'Word Form',
     nameVi: 'Từ loại',
+    shortVi: 'Từ loại',
     description: 'Xác định Noun, Adj, Adv, Verb dựa trên vị trí và hậu tố',
     advice: 'Luyện kỹ thuật nhận diện đuôi từ (-tion, -ment, -ful, -ive, -ly) và công thức cụm danh từ (a/the + Adj + N).',
   },
   {
     key: 'Verb Tense',
     nameVi: 'Thì & Thể động từ',
+    shortVi: 'Thì & Thể',
     description: 'Thì hoàn thành, quá khứ đơn, câu bị động và dạng To-V / V-ing',
     advice: 'Xác định dấu hiệu thời gian (since, already, yesterday) và kiểm tra xem chủ ngữ tự làm hay bị tác động (bị động).',
   },
   {
     key: 'Preposition & Conjunction',
     nameVi: 'Giới từ & Liên từ',
+    shortVi: 'Giới/Liên từ',
     description: 'Phân biệt Although vs Despite, Because vs Due to, giới từ đi kèm',
     advice: 'Quy tắc vàng: Liên từ nối Mệnh đề (S + V), Giới từ đi với Cụm danh từ / V-ing.',
   },
   {
     key: 'Pronoun',
     nameVi: 'Đại từ & Sở hữu',
+    shortVi: 'Đại từ',
     description: 'Đại từ nhân xưng, tính từ sở hữu, đại từ phản thân',
     advice: 'Trước danh từ luôn là Tính từ sở hữu (their / her). Sau giới từ hoặc ngoại động từ là Đại từ tân ngữ hoặc phản thân.',
   },
   {
     key: 'Relative Clause',
     nameVi: 'Mệnh đề quan hệ',
+    shortVi: 'MĐ quan hệ',
     description: 'who, which, that, whose, mệnh đề quan hệ rút gọn',
     advice: 'Xem từ đứng trước là Người hay Vật; xem phía sau khuyết Chủ ngữ hay Tân ngữ để chọn đại từ quan hệ chuẩn xác.',
   },
   {
     key: 'Business Vocabulary',
     nameVi: 'Từ vựng thương mại',
+    shortVi: 'Từ vựng',
     description: 'Collocations và cụm từ cố định trong môi trường công sở ETS',
     advice: 'Học từ vựng theo cụm (Collocation) như "reach an agreement", "deliver a speech", "comply with regulations".',
   },
   {
     key: 'Sentence Structure',
     nameVi: 'Cấu trúc câu',
+    shortVi: 'Cấu trúc',
     description: 'Đảo ngữ, thể giả định, cấu trúc song hành, câu so sánh',
     advice: 'Tìm động từ chính của câu trước để tránh nhầm lẫn giữa mệnh đề phụ và mệnh đề chính.',
   },
   {
     key: 'Contextual Completion',
     nameVi: 'Điền câu ngữ cảnh',
+    shortVi: 'Điền câu',
     description: 'Chọn câu logic nối mạch văn bản Part 6',
     advice: 'Đọc câu liền trước và liền sau chỗ trống, chú ý các từ nối (However, Therefore, In addition) và đại từ chỉ định.',
   },
@@ -177,7 +186,8 @@ export default function GrammarRadarChart({ mistakes: propMistakes }: GrammarRad
   // Data for Recharts Radar
   const chartData = useMemo(() => {
     return GRAMMAR_SUB_SKILLS.map(skill => ({
-      subject: skill.nameVi,
+      subject: skill.shortVi,
+      fullName: skill.nameVi,
       key: skill.key,
       mistakes: statsBySkill[skill.key] || 0,
       fullMark: Math.max(...Object.values(statsBySkill), 5),
@@ -235,11 +245,11 @@ export default function GrammarRadarChart({ mistakes: propMistakes }: GrammarRad
           {/* Left: Radar Chart */}
           <div className={styles.chartWrap}>
             <ResponsiveContainer width="100%" height="100%">
-              <RadarChart cx="50%" cy="50%" outerRadius="75%" data={chartData}>
+              <RadarChart cx="50%" cy="50%" outerRadius="72%" data={chartData}>
                 <PolarGrid stroke="var(--border)" strokeOpacity={0.6} />
                 <PolarAngleAxis
                   dataKey="subject"
-                  tick={{ fill: 'var(--foreground)', fontSize: 11, fontWeight: 600 }}
+                  tick={{ fill: 'var(--foreground)', fontSize: 11, fontWeight: 700 }}
                 />
                 <PolarRadiusAxis
                   angle={30}
@@ -253,7 +263,7 @@ export default function GrammarRadarChart({ mistakes: propMistakes }: GrammarRad
                   dataKey="mistakes"
                   stroke="var(--primary)"
                   fill="var(--primary)"
-                  fillOpacity={0.4}
+                  fillOpacity={0.35}
                 />
                 <Tooltip
                   contentStyle={{
@@ -264,7 +274,10 @@ export default function GrammarRadarChart({ mistakes: propMistakes }: GrammarRad
                     boxShadow: 'var(--shadow-md)',
                     fontSize: '12px',
                   }}
-                  formatter={(value: any) => [`${value} câu sai`, 'Tần suất']}
+                  formatter={(value: any, _name: any, entry: any) => [
+                    `${value} câu sai`,
+                    entry?.payload?.fullName || 'Chủ điểm'
+                  ]}
                 />
               </RadarChart>
             </ResponsiveContainer>
@@ -314,9 +327,9 @@ export default function GrammarRadarChart({ mistakes: propMistakes }: GrammarRad
                       <ArrowRightIcon size={13} />
                     </Link>
                     <Link
-                      href={`/part5?subCategory=${encodeURIComponent(item.key)}`}
+                      href={item.key === 'Contextual Completion' ? '/part6' : `/part5?subCategory=${encodeURIComponent(item.key)}`}
                       className={styles.actionBtn}
-                      title={`Luyện tập chuyên đề ${item.nameVi} (${item.key})`}
+                      title={`Luyện tập chuyên đề ${item.nameVi}`}
                     >
                       <ZapIcon size={13} />
                       <span>Luyện tập</span>
