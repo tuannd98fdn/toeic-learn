@@ -8,6 +8,7 @@ export async function middleware(req: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
   const isAuth = !!token;
+  const isGuest = req.cookies.get('toeic_guest_mode')?.value === '1';
   const isAuthPage = req.nextUrl.pathname.startsWith('/login');
   const isLandingPage = req.nextUrl.pathname.startsWith('/landing');
 
@@ -16,12 +17,12 @@ export async function middleware(req: NextRequest) {
     if (isAuth) {
       return NextResponse.redirect(new URL('/', req.url));
     }
-    return null; // let them see the login page
+    return null; // let them see the login page (including guests wishing to sign in)
   }
 
-  // If on landing page, redirect to home if already authenticated
+  // If on landing page, redirect to home if already authenticated or already in guest mode
   if (isLandingPage) {
-    if (isAuth) {
+    if (isAuth || isGuest) {
       return NextResponse.redirect(new URL('/', req.url));
     }
     return null; // let them see the landing page
@@ -32,8 +33,8 @@ export async function middleware(req: NextRequest) {
     return null;
   }
 
-  // If NOT authenticated, enforce protection
-  if (!isAuth) {
+  // If NOT authenticated and NOT guest, enforce protection
+  if (!isAuth && !isGuest) {
     let from = req.nextUrl.pathname;
     if (req.nextUrl.search) {
       from += req.nextUrl.search;

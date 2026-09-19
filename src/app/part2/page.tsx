@@ -95,7 +95,8 @@ function Part2Trainer() {
         type: 'exam',
         testId: testId,
         part: 'part2',
-        questionId: currentQ.id
+        questionId: currentQ.id,
+        subCategory: currentQ.subCategory || 'Question-Response',
       });
     }
   };

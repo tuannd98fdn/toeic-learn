@@ -217,13 +217,13 @@ function Part7Trainer() {
 
           if (!res1.ok || !res2.ok || !res3.ok || !res4.ok || !res5.ok || !res6.ok) throw new Error('Không thể tải dữ liệu đề thi');
           const [d1, d2, d3, d4, d5, d6] = await Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json(), res6.json()]);
-          const v1 = Part7DataSchema.parse(d1);
-          const v2 = Part7DataSchema.parse(d2);
-          const v3 = Part7DataSchema.parse(d3);
-          const v4 = Part7DataSchema.parse(d4);
-          const v5 = Part7DataSchema.parse(d5);
-          const v6 = Part7DataSchema.parse(d6);
-          loadedSets = [...v1, ...v2, ...v3, ...v4, ...v5, ...v6];
+          const v1 = Part7DataSchema.parse(d1).map(s => ({ ...s, testId: 'ets2022_test1' }));
+          const v2 = Part7DataSchema.parse(d2).map(s => ({ ...s, testId: 'ets2022_test2' }));
+          const v3 = Part7DataSchema.parse(d3).map(s => ({ ...s, testId: 'ets2022_test3' }));
+          const v4 = Part7DataSchema.parse(d4).map(s => ({ ...s, testId: 'ets2022_test4' }));
+          const v5 = Part7DataSchema.parse(d5).map(s => ({ ...s, testId: 'ets2022_test5' }));
+          const v6 = Part7DataSchema.parse(d6).map(s => ({ ...s, testId: 'ets2022_test6' }));
+          loadedSets = [...v1, ...v2, ...v3, ...v4, ...v5, ...v6] as Part7PassageSet[];
         } else {
           const match = testId.match(/ets(\d+)_test(\d+)/);
           if (!match) throw new Error('Mã đề thi không hợp lệ');
@@ -234,7 +234,7 @@ function Part7Trainer() {
 
           const data = await res.json();
           const validated = Part7DataSchema.parse(data);
-          loadedSets = validated as Part7PassageSet[];
+          loadedSets = validated.map(s => ({ ...s, testId })) as Part7PassageSet[];
         }
 
         setAllPassageSets(loadedSets);
@@ -398,14 +398,15 @@ function Part7Trainer() {
     let score = 0;
     const answeredInThisSet: { question: Part7Question; isCorrect: boolean }[] = [];
 
+    const resolvedTestId = (passageSet as any)?.testId || (testId.match(/ets(\d+)_test(\d+)/) ? testId : 'ets2022_test1');
     passageSet.questions.forEach((q) => {
       const isCorrect = answers[q.id] === q.correctAnswer;
       if (isCorrect) {
         score++;
       } else {
-        addMistake(`exam_${testId}_part7_${q.id}`, {
+        addMistake(`exam_${resolvedTestId}_part7_${q.id}`, {
           type: 'exam',
-          testId: testId === 'all' ? 'ets2022_cross' : testId,
+          testId: resolvedTestId,
           part: 'part7',
           questionId: q.id,
           subCategory: q.questionType || q.subCategory || 'Detail',

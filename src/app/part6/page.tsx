@@ -175,12 +175,12 @@ function Part6Trainer() {
 
           if (!res1.ok || !res2.ok || !res3.ok || !res4.ok || !res5.ok || !res6.ok) throw new Error('Không thể tải dữ liệu liên đề');
           const [d1, d2, d3, d4, d5, d6] = await Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json(), res6.json()]);
-          const v1 = Part6DataSchema.parse(d1).map(p => ({ ...p, source: 'ETS 2022 Test 1' }));
-          const v2 = Part6DataSchema.parse(d2).map(p => ({ ...p, source: 'ETS 2022 Test 2' }));
-          const v3 = Part6DataSchema.parse(d3).map(p => ({ ...p, source: 'ETS 2022 Test 3' }));
-          const v4 = Part6DataSchema.parse(d4).map(p => ({ ...p, source: 'ETS 2022 Test 4' }));
-          const v5 = Part6DataSchema.parse(d5).map(p => ({ ...p, source: 'ETS 2022 Test 5' }));
-          const v6 = Part6DataSchema.parse(d6).map(p => ({ ...p, source: 'ETS 2022 Test 6' }));
+          const v1 = Part6DataSchema.parse(d1).map(p => ({ ...p, source: 'ETS 2022 Test 1', testId: 'ets2022_test1' }));
+          const v2 = Part6DataSchema.parse(d2).map(p => ({ ...p, source: 'ETS 2022 Test 2', testId: 'ets2022_test2' }));
+          const v3 = Part6DataSchema.parse(d3).map(p => ({ ...p, source: 'ETS 2022 Test 3', testId: 'ets2022_test3' }));
+          const v4 = Part6DataSchema.parse(d4).map(p => ({ ...p, source: 'ETS 2022 Test 4', testId: 'ets2022_test4' }));
+          const v5 = Part6DataSchema.parse(d5).map(p => ({ ...p, source: 'ETS 2022 Test 5', testId: 'ets2022_test5' }));
+          const v6 = Part6DataSchema.parse(d6).map(p => ({ ...p, source: 'ETS 2022 Test 6', testId: 'ets2022_test6' }));
           rawLoadedPassages = [...v1, ...v2, ...v3, ...v4, ...v5, ...v6];
         } else {
           const match = testId.match(/ets(\d+)_test(\d+)/);
@@ -195,6 +195,7 @@ function Part6Trainer() {
           rawLoadedPassages = validated.map(p => ({
             ...p,
             source: `ETS ${match[1]} Test ${match[2]}`,
+            testId: testId,
           }));
         }
 
@@ -294,13 +295,14 @@ function Part6Trainer() {
   const handleSubmit = () => {
     setIsSubmitted(true);
     let score = 0;
+    const resolvedTestId = (passage as any)?.testId || (testId.match(/ets(\d+)_test(\d+)/) ? testId : 'ets2022_test1');
     passage?.questions.forEach((q) => {
       if (answers[q.blankNumber] === q.correctAnswer) {
         score++;
       } else {
-        addMistake(`exam_${testId}_part6_${q.id}`, {
+        addMistake(`exam_${resolvedTestId}_part6_${q.id}`, {
           type: 'exam',
-          testId: testId,
+          testId: resolvedTestId,
           part: 'part6',
           questionId: q.id,
           subCategory: q.subCategory || q.type,

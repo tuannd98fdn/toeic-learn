@@ -101,7 +101,8 @@ function Part4Trainer() {
           type: 'exam',
           testId: testId,
           part: 'part4',
-          questionId: q.id
+          questionId: q.id,
+          subCategory: q.subCategory || 'Short Talks',
         });
       }
     });

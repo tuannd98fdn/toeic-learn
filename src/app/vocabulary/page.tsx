@@ -1,13 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { VocabularyWord, TargetBand } from '@/data/vocabulary';
 import { useVocabulary } from '@/hooks/useVocabulary';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useAudio } from '@/hooks/useAudio';
 import EmptyState from '@/components/illustrations/EmptyState';
-import { VolumeIcon } from '@/components/icons/AppIcons';
+import { VolumeIcon, SearchIcon, CloseIcon } from '@/components/icons/AppIcons';
 import SmartVocabQuickAdd from '@/components/SmartVocabQuickAdd';
+import { matchBilingualWord, highlightMatch, SearchMode } from '@/utils/bilingualSearch';
 import styles from './page.module.css';
 
 const LEVELS = ["All", 1, 2, 3, 4, 5];
@@ -23,11 +24,24 @@ const TARGET_BANDS = [
   { value: '800+', label: 'Band 800+' }
 ];
 
+const QUICK_SEARCH_CHIPS = [
+  { label: 'Hợp đồng', query: 'hợp đồng' },
+  { label: 'Báo cáo', query: 'báo cáo' },
+  { label: 'Lịch trình', query: 'lịch trình' },
+  { label: 'Thanh toán', query: 'thanh toán' },
+  { label: 'Nhân sự', query: 'nhân sự' },
+  { label: 'Đàm phán', query: 'đàm phán' },
+  { label: 'Giao hàng', query: 'giao hàng' },
+  { label: 'Thông báo', query: 'thông báo' },
+];
+
 export default function VocabularyPage() {
   const { mounted: vocabMounted, allWords, userWords, addWord, removeWord } = useVocabulary();
   const { progress, mounted: leitnerMounted } = useLeitner();
   const { speak } = useAudio();
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchMode, setSearchMode] = useState<SearchMode>('all');
+  const [activeQuickChip, setActiveQuickChip] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState<string | number>('All');
   const [selectedSource, setSelectedSource] = useState<'All' | 'system' | 'user'>('All');
@@ -58,18 +72,33 @@ export default function VocabularyPage() {
     selectedLevel !== 'All',
   ].filter(Boolean).length;
 
-  // Filter words
-  const filteredWords = allWords.filter(word => {
-    const matchesSearch = 
-      word.word.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      word.vietnamese.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || word.category === selectedCategory;
-    const wordBox = progress[word.id]?.box || 0;
-    const matchesLevel = selectedLevel === 'All' || wordBox === selectedLevel;
-    const matchesSource = selectedSource === 'All' || word.source === selectedSource;
-    const matchesBand = selectedBand === 'All' || (word.targetBand || '650+') === selectedBand;
-    return matchesSearch && matchesCategory && matchesLevel && matchesSource && matchesBand;
-  });
+  // Filter and rank words using bilingual search engine
+  const filteredWords = useMemo(() => {
+    const trimmed = searchTerm.trim();
+    return allWords
+      .map(word => {
+        const matchRes = matchBilingualWord(word, trimmed, searchMode);
+        return { word, matchRes };
+      })
+      .filter(({ word, matchRes }) => {
+        if (!matchRes.matched) return false;
+        const matchesCategory = selectedCategory === 'All' || word.category === selectedCategory;
+        const wordBox = progress[word.id]?.box || 0;
+        const matchesLevel = selectedLevel === 'All' || wordBox === selectedLevel;
+        const matchesSource = selectedSource === 'All' || word.source === selectedSource;
+        const matchesBand = selectedBand === 'All' || (word.targetBand || '650+') === selectedBand;
+        return matchesCategory && matchesLevel && matchesSource && matchesBand;
+      })
+      .sort((a, b) => {
+        if (trimmed) {
+          if (b.matchRes.score !== a.matchRes.score) {
+            return b.matchRes.score - a.matchRes.score;
+          }
+        }
+        return a.word.word.localeCompare(b.word.word);
+      })
+      .map(item => item.word);
+  }, [allWords, searchTerm, searchMode, selectedCategory, progress, selectedLevel, selectedSource, selectedBand]);
 
   const handleCardClick = (id: string) => {
     setExpandedId(prev => prev === id ? null : id);
@@ -80,14 +109,13 @@ export default function VocabularyPage() {
     return `var(--box-${box})`;
   };
 
-
-
   const clearAllFilters = () => {
     setSelectedBand('All');
     setSelectedSource('All');
     setSelectedCategory('All');
     setSelectedLevel('All');
     setSearchTerm('');
+    setActiveQuickChip(null);
   };
 
   return (
@@ -107,14 +135,36 @@ export default function VocabularyPage() {
         {/* Search + Filter Bar */}
         <div className={styles.searchRow}>
           <div className={styles.searchBar}>
-            <svg className={styles.searchSvg} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <SearchIcon className={styles.searchSvg} size={18} />
             <input
               type="text"
-              placeholder="Tìm kiếm tiếng Anh hoặc tiếng Việt..."
+              placeholder="Tra cứu song ngữ Anh - Việt (VD: contract, hợp đồng, bao cao...)"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                if (!e.target.value) setActiveQuickChip(null);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') {
+                  setSearchTerm('');
+                  setActiveQuickChip(null);
+                }
+              }}
               className={styles.searchInput}
             />
+            {searchTerm && (
+              <button
+                type="button"
+                className={styles.clearSearchBtn}
+                onClick={() => {
+                  setSearchTerm('');
+                  setActiveQuickChip(null);
+                }}
+                aria-label="Xóa tìm kiếm"
+              >
+                <CloseIcon size={16} />
+              </button>
+            )}
           </div>
           <button 
             className={`${styles.filterToggle} ${showFilters ? styles.filterActive : ''}`}
@@ -124,6 +174,63 @@ export default function VocabularyPage() {
             Bộ lọc
             {activeFilterCount > 0 && <span className={styles.filterCount}>{activeFilterCount}</span>}
           </button>
+        </div>
+
+        {/* Bilingual Search Mode & Quick Topic Suggestions */}
+        <div className={styles.bilingualControls}>
+          <div className={styles.searchModeGroup}>
+            <span className={styles.bilingualLabel}>Tìm theo:</span>
+            <div className={styles.modeTabs}>
+              <button
+                type="button"
+                className={`${styles.modeTab} ${searchMode === 'all' ? styles.activeModeTab : ''}`}
+                onClick={() => setSearchMode('all')}
+              >
+                Song ngữ (Tất cả)
+              </button>
+              <button
+                type="button"
+                className={`${styles.modeTab} ${searchMode === 'en' ? styles.activeModeTab : ''}`}
+                onClick={() => setSearchMode('en')}
+              >
+                Tiếng Anh (EN)
+              </button>
+              <button
+                type="button"
+                className={`${styles.modeTab} ${searchMode === 'vi' ? styles.activeModeTab : ''}`}
+                onClick={() => setSearchMode('vi')}
+              >
+                Tiếng Việt (VI)
+              </button>
+            </div>
+          </div>
+
+          <div className={styles.quickSearchRow}>
+            <span className={styles.quickSearchLabel}>Gợi ý nhanh:</span>
+            <div className={styles.quickSearchChips}>
+              {QUICK_SEARCH_CHIPS.map(chip => {
+                const isActive = activeQuickChip === chip.label || searchTerm.trim().toLowerCase() === chip.query.toLowerCase();
+                return (
+                  <button
+                    key={chip.label}
+                    type="button"
+                    className={`${styles.quickChip} ${isActive ? styles.activeQuickChip : ''}`}
+                    onClick={() => {
+                      if (isActive) {
+                        setSearchTerm('');
+                        setActiveQuickChip(null);
+                      } else {
+                        setSearchTerm(chip.query);
+                        setActiveQuickChip(chip.label);
+                      }
+                    }}
+                  >
+                    {chip.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Collapsible Filter Panel */}
@@ -211,10 +318,29 @@ export default function VocabularyPage() {
         />
       )}
 
-      {/* ═══════════════ WORD COUNT ═══════════════ */}
-      <div className={styles.wordCount}>
-        {filteredWords.length} từ
-        {activeFilterCount > 0 && <span className={styles.wordCountFilter}> (đã lọc)</span>}
+      {/* ═══════════════ WORD COUNT & SEARCH FEEDBACK ═══════════════ */}
+      <div className={styles.wordCountRow}>
+        <div className={styles.wordCount}>
+          {filteredWords.length} từ
+          {activeFilterCount > 0 && <span className={styles.wordCountFilter}> (đã lọc)</span>}
+          {searchTerm.trim() && (
+            <span className={styles.searchFeedback}>
+              {' '}• Khớp với &ldquo;<strong>{searchTerm}</strong>&rdquo; ({searchMode === 'all' ? 'Song ngữ' : searchMode === 'en' ? 'Tiếng Anh' : 'Tiếng Việt'})
+            </span>
+          )}
+        </div>
+        {searchTerm && (
+          <button
+            type="button"
+            className={styles.resetSearchInlineBtn}
+            onClick={() => {
+              setSearchTerm('');
+              setActiveQuickChip(null);
+            }}
+          >
+            Xóa tìm kiếm
+          </button>
+        )}
       </div>
 
       {/* ═══════════════ WORD GRID ═══════════════ */}
@@ -235,7 +361,9 @@ export default function VocabularyPage() {
               <div className={styles.cardBody}>
                 <div className={styles.cardHeader}>
                   <div className={styles.wordInfo}>
-                    <h3 className={styles.word}>{word.word}</h3>
+                    <h3 className={styles.word}>
+                      {highlightMatch(word.word, searchTerm, styles.highlight)}
+                    </h3>
                     <span className={styles.bandBadge}>{word.targetBand || '650+'}</span>
                     {word.source === 'user' && <span className={styles.userBadge}>Tôi</span>}
                   </div>
@@ -249,7 +377,9 @@ export default function VocabularyPage() {
                 </div>
                 
                 <span className={styles.ipa}>{word.ipa}</span>
-                <div className={styles.vietnamese}>{word.vietnamese}</div>
+                <div className={styles.vietnamese}>
+                  {highlightMatch(word.vietnamese, searchTerm, styles.highlight)}
+                </div>
 
                 {isExpanded && (
                   <div className={`${styles.expandedContent} animate-slide-up`}>
@@ -269,7 +399,7 @@ export default function VocabularyPage() {
                         <div className={styles.expandLabel}>Mẹo nhớ</div>
                         <div className={styles.mnemonic}>
                           {word.emoji ? <span className={styles.emoji}>{word.emoji}</span> : null}
-                          <span>{word.mnemonicTip}</span>
+                          <span>{highlightMatch(word.mnemonicTip, searchTerm, styles.highlight)}</span>
                         </div>
                       </div>
                     )}
@@ -293,11 +423,32 @@ export default function VocabularyPage() {
       </main>
 
       {filteredWords.length === 0 && (
-        <EmptyState 
-          title="Không tìm thấy từ vựng nào"
-          description="Thử thay đổi bộ lọc hoặc thêm từ mới vào thư viện."
-          mascotMood="thinking"
-        />
+        <div className={styles.emptyStateWrapper}>
+          <EmptyState 
+            title="Không tìm thấy từ vựng nào"
+            description={
+              searchTerm.trim()
+                ? `Không tìm thấy từ vựng nào khớp với "${searchTerm}". Thử tìm không dấu (VD: "hop dong", "bao cao") hoặc đổi sang chế độ "Song ngữ".`
+                : "Thử thay đổi bộ lọc hoặc thêm từ mới vào thư viện."
+            }
+            mascotMood="thinking"
+          />
+          {searchTerm.trim() && (
+            <div className={styles.emptyActionRow}>
+              <button 
+                type="button" 
+                className="btn-secondary btn-sm"
+                onClick={() => {
+                  setSearchTerm('');
+                  setActiveQuickChip(null);
+                  setSearchMode('all');
+                }}
+              >
+                Xóa tìm kiếm & Xem tất cả
+              </button>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

@@ -113,6 +113,7 @@ function MiniTestSimulation() {
             correctAnswer: q.correctAnswer,
             transcript: q.transcript,
             explanation: q.explanation,
+            subCategory: q.subCategory || 'Question-Response',
           });
         });
 

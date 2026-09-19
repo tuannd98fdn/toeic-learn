@@ -34,11 +34,15 @@ export const fetchMistakeQuestions = async (
   mistakeIds.forEach(id => {
     const m = mistakes[id];
     if (m && m.type === 'exam' && m.testId && m.part && m.questionId) {
+      let resolvedTestId = m.testId;
+      if (resolvedTestId === 'all' || resolvedTestId === 'ets2022_cross' || !resolvedTestId.match(/ets(\d+)_test(\d+)/)) {
+        resolvedTestId = 'ets2022_test1';
+      }
       const partNum = m.part.replace(/^p(art)?/, '');
       const partKey = `part${partNum}`;
-      if (!fetchGroup[m.testId]) fetchGroup[m.testId] = {};
-      if (!fetchGroup[m.testId][partKey]) fetchGroup[m.testId][partKey] = [];
-      fetchGroup[m.testId][partKey].push({ id, qid: m.questionId, origPart: m.part });
+      if (!fetchGroup[resolvedTestId]) fetchGroup[resolvedTestId] = {};
+      if (!fetchGroup[resolvedTestId][partKey]) fetchGroup[resolvedTestId][partKey] = [];
+      fetchGroup[resolvedTestId][partKey].push({ id, qid: m.questionId, origPart: m.part });
     }
   });
 

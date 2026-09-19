@@ -108,7 +108,8 @@ function Part1Trainer() {
         type: 'exam',
         testId: testId,
         part: 'part1',
-        questionId: currentQ.id
+        questionId: currentQ.id,
+        subCategory: currentQ.subCategory || 'Photographs',
       });
     }
   };

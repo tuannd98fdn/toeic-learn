@@ -512,6 +512,19 @@ export default function TipsPage() {
                           <span>Cảnh báo bẫy ETS</span>
                         </div>
                         <p className={styles.trapText}>{tip.trapWarning}</p>
+                        {tip.practiceLink && (
+                          <div className={styles.trapActionRow}>
+                            <Link
+                              href={tip.practiceLink}
+                              className={styles.trapPracticeBtn}
+                              title={`Luyện ngay bẫy này: ${tip.title}`}
+                            >
+                              <ZapIcon size={13} />
+                              <span>Luyện ngay bẫy này</span>
+                              <ArrowRightIcon size={12} />
+                            </Link>
+                          </div>
+                        )}
                       </div>
                     )}
 
@@ -597,9 +610,15 @@ export default function TipsPage() {
                     </div>
 
                     {tip.practiceLink && (
-                      <Link href={tip.practiceLink} className={styles.practiceBtn}>
-                        <ZapIcon size={15} />
-                        <span>{tip.practiceTitle || 'Áp dụng vào bài luyện ngay'}</span>
+                      <Link
+                        href={tip.practiceLink}
+                        className={`${styles.practiceBtn} ${tip.type === 'trap' ? styles.practiceBtnTrap : ''}`}
+                        title={tip.practiceTitle || (tip.type === 'trap' ? 'Luyện ngay bẫy này' : 'Áp dụng vào bài luyện ngay')}
+                      >
+                        {tip.type === 'trap' ? <AlertCircleIcon size={15} /> : <ZapIcon size={15} />}
+                        <span>
+                          {tip.type === 'trap' ? 'Luyện ngay bẫy này' : (tip.practiceTitle || 'Áp dụng vào bài luyện ngay')}
+                        </span>
                         <ArrowRightIcon size={14} />
                       </Link>
                     )}

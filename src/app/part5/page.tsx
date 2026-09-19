@@ -169,25 +169,26 @@ function Part5SpeedTrainer() {
         setError(null);
 
         if (selectedSubSkill !== 'all') {
-          // Official ETS tests (ETS 2022 Test 1, Test 2, Test 3, & Test 4)
-          const testPaths = [
-            '/data/ets2022/test1/part5.json',
-            '/data/ets2022/test2/part5.json',
-            '/data/ets2022/test3/part5.json',
-            '/data/ets2022/test4/part5.json',
-            '/data/ets2022/test5/part5.json',
-            '/data/ets2022/test6/part5.json',
+          // Official ETS tests (ETS 2022 Test 1 to Test 6)
+          const testConfigs = [
+            { id: 'ets2022_test1', path: '/data/ets2022/test1/part5.json' },
+            { id: 'ets2022_test2', path: '/data/ets2022/test2/part5.json' },
+            { id: 'ets2022_test3', path: '/data/ets2022/test3/part5.json' },
+            { id: 'ets2022_test4', path: '/data/ets2022/test4/part5.json' },
+            { id: 'ets2022_test5', path: '/data/ets2022/test5/part5.json' },
+            { id: 'ets2022_test6', path: '/data/ets2022/test6/part5.json' },
           ];
-          const responses = await Promise.all(testPaths.map(p => fetch(p)));
+          const responses = await Promise.all(testConfigs.map(c => fetch(c.path)));
           const allData: any[] = [];
-          for (const res of responses) {
+          for (let i = 0; i < responses.length; i++) {
+            const res = responses[i];
             if (res.ok) {
               const data = await res.json();
-              allData.push(...data);
+              const parsed = Part5DataSchema.parse(data);
+              allData.push(...parsed.map(q => ({ ...q, testId: testConfigs[i].id })));
             }
           }
-          const validated = Part5DataSchema.parse(allData);
-          const filtered = validated.filter(q => {
+          const filtered = allData.filter(q => {
             const cat = q.subCategory || q.type || '';
             return cat.toLowerCase() === selectedSubSkill.toLowerCase() ||
                    cat.toLowerCase().includes(selectedSubSkill.toLowerCase());
@@ -204,7 +205,7 @@ function Part5SpeedTrainer() {
           
           const data = await res.json();
           const validated = Part5DataSchema.parse(data);
-          setQuestions(validated);
+          setQuestions(validated.map(q => ({ ...q, testId: selectedTest })));
         }
 
         // Reset session state
@@ -318,7 +319,7 @@ function Part5SpeedTrainer() {
   }, [currentIndex, isFinished, showAnswer, questions, loading, tutorContext, practiceMode]);
 
   const recordMistake = (currentQ: Part5Question) => {
-    const qTestId = 'ets2022_test1';
+    const qTestId = (currentQ as any).testId || (selectedTest.match(/ets(\d+)_test(\d+)/) ? selectedTest : 'ets2022_test1');
     addMistake(`exam_${qTestId}_part5_${currentQ.id}`, {
       type: 'exam',
       testId: qTestId,

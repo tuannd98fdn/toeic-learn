@@ -22,6 +22,7 @@ import {
   TargetIcon,
   AlertCircleIcon,
   BotIcon,
+  FilterIcon,
 } from '@/components/icons/AppIcons';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
 import { syncAdaptivePlan } from '@/utils/studyPlanEngine';
@@ -78,8 +79,10 @@ export default function DiagnosticPage() {
 
   // Result state
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isRevisit, setIsRevisit] = useState(false);
   const [result, setResult] = useState<DiagnosticResult | null>(null);
   const [showReview, setShowReview] = useState(false);
+  const [reviewFilter, setReviewFilter] = useState<'all' | 'wrong' | 'lc' | 'rc' | 'p1' | 'p2' | 'p3' | 'p4' | 'p5' | 'p6' | 'p7'>('all');
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
@@ -281,8 +284,17 @@ export default function DiagnosticPage() {
 
         // Check if there was a previous diagnostic test result stored
         const savedResult = storage.get<DiagnosticResult | null>('toeic_diagnostic_result', null);
+        const savedAnswers = storage.get<Record<number, string>>('toeic_diagnostic_answers', {});
         if (savedResult) {
           setResult(savedResult);
+          if (Object.keys(savedAnswers).length > 0) {
+            setUserAnswers(savedAnswers);
+          }
+          const isRetakeRequested = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('retake') === 'true';
+          if (!isRetakeRequested) {
+            setIsSubmitted(true);
+            setIsRevisit(true);
+          }
         }
       } catch (err: any) {
         console.error('Error loading diagnostic test:', err);
@@ -409,10 +421,12 @@ export default function DiagnosticPage() {
     };
 
     storage.set('toeic_diagnostic_result', newResult);
+    storage.set('toeic_diagnostic_answers', userAnswers);
     // Automatically synchronize study plan with fresh diagnostic diagnosis & weaknesses
     syncAdaptivePlan();
     setResult(newResult);
     setIsSubmitted(true);
+    setIsRevisit(false);
     setShowConfetti(true);
   };
 
@@ -423,6 +437,24 @@ export default function DiagnosticPage() {
     setIsSubmitted(false);
     setShowReview(false);
     setShowConfetti(false);
+    setIsRevisit(false);
+    setReviewFilter('all');
+  };
+
+  const formatDiagnosticDate = (isoStr?: string) => {
+    if (!isoStr) return '';
+    try {
+      const d = new Date(isoStr);
+      if (isNaN(d.getTime())) return '';
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      const hours = String(d.getHours()).padStart(2, '0');
+      const mins = String(d.getMinutes()).padStart(2, '0');
+      return `${hours}:${mins} ngày ${day}/${month}/${year}`;
+    } catch {
+      return '';
+    }
   };
 
   if (loading) {
@@ -455,6 +487,30 @@ export default function DiagnosticPage() {
         <Confetti show={showConfetti} onComplete={() => setShowConfetti(false)} />
 
         <div className={styles.resultsContainer}>
+          {isRevisit && result && (
+            <div className={styles.revisitBanner}>
+              <div className={styles.revisitIconWrapper}>
+                <CheckCircleIcon size={22} />
+              </div>
+              <div className={styles.revisitText}>
+                <div className={styles.revisitTitle}>Kết Quả Đánh Giá Năng Lực Gần Nhất</div>
+                <div className={styles.revisitDesc}>
+                  Đã hoàn thành lúc {formatDiagnosticDate(result.date)}. Lộ trình thích ứng đã được đồng bộ hóa theo kết quả này. Bạn có thể xem lại chi tiết hoặc làm lại bài test mới để hiệu chuẩn lại điểm số.
+                </div>
+              </div>
+              <div className={styles.revisitBannerActions}>
+                <button
+                  type="button"
+                  onClick={handleRetake}
+                  className={styles.revisitRetakeBtn}
+                >
+                  <RotateCcwIcon size={14} />
+                  <span>Làm bài test mới</span>
+                </button>
+              </div>
+            </div>
+          )}
+
           <div className={styles.reportCard}>
             <span className={styles.badge}>KẾT QUẢ CHẨN ĐOÁN NĂNG LỰC</span>
             
@@ -578,80 +634,155 @@ export default function DiagnosticPage() {
           {/* Review Questions Section */}
           {showReview && (
             <div className={styles.reviewSection}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800 }}>
-                Chi tiết 28 câu hỏi ({answeredCount}/28 đã trả lời)
-              </h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800 }}>
+                  Chi tiết câu hỏi bài làm ({answeredCount}/28 đã trả lời)
+                </h3>
+              </div>
 
-              {questions.map((q, idx) => {
-                const userAns = userAnswers[q.number];
-                const isCorrect = userAns && userAns.toUpperCase() === q.correctAnswer.toUpperCase();
-
-                return (
-                  <div
-                    key={q.id}
-                    className={`${styles.reviewCard} ${isCorrect ? styles.reviewCorrect : styles.reviewIncorrect}`}
+              {/* Review Filter Bar */}
+              <div className={styles.reviewFilterBar}>
+                <span className={styles.filterTitle}>
+                  <FilterIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+                  Lọc:
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setReviewFilter('all')}
+                  className={`${styles.filterPill} ${reviewFilter === 'all' ? styles.filterPillActive : ''}`}
+                >
+                  Tất cả ({questions.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReviewFilter('wrong')}
+                  className={`${styles.filterPill} ${reviewFilter === 'wrong' ? styles.filterPillActive : ''}`}
+                  style={{ color: reviewFilter === 'wrong' ? undefined : '#ef4444' }}
+                >
+                  Chỉ câu sai ({questions.filter(q => {
+                    const ans = userAnswers[q.number];
+                    return !ans || ans.toUpperCase() !== q.correctAnswer.toUpperCase();
+                  }).length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReviewFilter('lc')}
+                  className={`${styles.filterPill} ${reviewFilter === 'lc' ? styles.filterPillActive : ''}`}
+                >
+                  Listening (16)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReviewFilter('rc')}
+                  className={`${styles.filterPill} ${reviewFilter === 'rc' ? styles.filterPillActive : ''}`}
+                >
+                  Reading (12)
+                </button>
+                {(['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7'] as const).map(p => (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => setReviewFilter(p)}
+                    className={`${styles.filterPill} ${reviewFilter === p ? styles.filterPillActive : ''}`}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontWeight: 800, fontSize: '0.95rem' }}>
-                        Câu {idx + 1} (ETS #{q.number}) - {q.partTitle}
-                      </span>
-                      <span style={{ fontWeight: 700, fontSize: '0.85rem', color: isCorrect ? '#15803d' : '#b91c1c' }}>
-                        {isCorrect ? 'Đúng' : `Sai (Đã chọn: ${userAns || 'Chưa chọn'})`}
-                      </span>
+                    Part {p.replace('p', '')}
+                  </button>
+                ))}
+              </div>
+
+              {/* Filtered Questions List */}
+              {(() => {
+                const filtered = questions
+                  .map((q, originalIdx) => ({ q, originalIdx }))
+                  .filter(({ q }) => {
+                    const userAns = userAnswers[q.number];
+                    const isCorrect = userAns && userAns.toUpperCase() === q.correctAnswer.toUpperCase();
+                    if (reviewFilter === 'wrong') return !isCorrect;
+                    if (reviewFilter === 'lc') return ['p1', 'p2', 'p3', 'p4'].includes(q.part);
+                    if (reviewFilter === 'rc') return ['p5', 'p6', 'p7'].includes(q.part);
+                    if (reviewFilter.startsWith('p')) return q.part === reviewFilter;
+                    return true;
+                  });
+
+                if (filtered.length === 0) {
+                  return (
+                    <div className={styles.emptyReviewState}>
+                      Không có câu hỏi nào thuộc bộ lọc này.
                     </div>
+                  );
+                }
 
-                    <div style={{ fontSize: '0.95rem', fontWeight: 500, margin: '0.25rem 0' }}>
-                      {q.text}
-                    </div>
+                return filtered.map(({ q, originalIdx }) => {
+                  const userAns = userAnswers[q.number];
+                  const isCorrect = userAns && userAns.toUpperCase() === q.correctAnswer.toUpperCase();
 
-                    <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                      Đáp án đúng: <strong style={{ color: '#15803d' }}>{q.correctAnswer}</strong>
-                      {q.options[q.correctAnswer] && ` - ${q.options[q.correctAnswer]}`}
-                    </div>
-
-                    {q.explanation && (
-                      <div className={styles.explanationText}>
-                        <strong>Giải thích:</strong> {q.explanation}
-                      </div>
-                    )}
-
-                    <button
-                      type="button"
-                      onClick={() => setTutorContext({
-                        partTitle: q.partTitle,
-                        number: q.number,
-                        text: q.text,
-                        options: q.options,
-                        correctAnswer: q.correctAnswer,
-                        userAnswer: userAns,
-                        transcript: q.transcript,
-                        passageText: q.passageText,
-                        explanation: q.explanation,
-                        audioUrl: q.audioUrl,
-                      })}
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.4rem',
-                        background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
-                        color: '#ffffff',
-                        border: 'none',
-                        borderRadius: '16px',
-                        padding: '0.4rem 0.9rem',
-                        fontSize: '0.82rem',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        width: 'fit-content',
-                        marginTop: '0.5rem',
-                        boxShadow: '0 2px 6px rgba(37, 99, 235, 0.25)',
-                      }}
+                  return (
+                    <div
+                      key={q.id}
+                      className={`${styles.reviewCard} ${isCorrect ? styles.reviewCorrect : styles.reviewIncorrect}`}
                     >
-                      <BotIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
-                      Hỏi Gia Sư AI 990 về câu này
-                    </button>
-                  </div>
-                );
-              })}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span style={{ fontWeight: 800, fontSize: '0.95rem' }}>
+                          Câu {originalIdx + 1} (ETS #{q.number}) - {q.partTitle}
+                        </span>
+                        <span style={{ fontWeight: 700, fontSize: '0.85rem', color: isCorrect ? '#15803d' : '#b91c1c' }}>
+                          {isCorrect ? 'Đúng' : `Sai (Đã chọn: ${userAns || 'Chưa chọn'})`}
+                        </span>
+                      </div>
+
+                      <div style={{ fontSize: '0.95rem', fontWeight: 500, margin: '0.25rem 0' }}>
+                        {q.text}
+                      </div>
+
+                      <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                        Đáp án đúng: <strong style={{ color: '#15803d' }}>{q.correctAnswer}</strong>
+                        {q.options[q.correctAnswer] && ` - ${q.options[q.correctAnswer]}`}
+                      </div>
+
+                      {q.explanation && (
+                        <div className={styles.explanationText}>
+                          <strong>Giải thích:</strong> {q.explanation}
+                        </div>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() => setTutorContext({
+                          partTitle: q.partTitle,
+                          number: q.number,
+                          text: q.text,
+                          options: q.options,
+                          correctAnswer: q.correctAnswer,
+                          userAnswer: userAns,
+                          transcript: q.transcript,
+                          passageText: q.passageText,
+                          explanation: q.explanation,
+                          audioUrl: q.audioUrl,
+                        })}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.4rem',
+                          background: 'linear-gradient(135deg, #2563eb, #7c3aed)',
+                          color: '#ffffff',
+                          border: 'none',
+                          borderRadius: '16px',
+                          padding: '0.4rem 0.9rem',
+                          fontSize: '0.82rem',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          width: 'fit-content',
+                          marginTop: '0.5rem',
+                          boxShadow: '0 2px 6px rgba(37, 99, 235, 0.25)',
+                        }}
+                      >
+                        <BotIcon size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
+                        Hỏi Gia Sư AI 990 về câu này
+                      </button>
+                    </div>
+                  );
+                });
+              })()}
             </div>
           )}
         </div>

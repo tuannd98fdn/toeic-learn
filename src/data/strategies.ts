@@ -305,8 +305,8 @@ export const TOEIC_TIPS: ToeicTip[] = [
       }
     ],
     tags: ['Part 3', 'Part 4', 'Đổi ý phút chót', 'Từ chuyển hướng'],
-    practiceLink: '/part4',
-    practiceTitle: 'Luyện Part 4: Bài nói ngắn'
+    practiceLink: '/part3',
+    practiceTitle: 'Luyện Part 3: Bẫy đổi ý phút chót'
   },
   {
     id: 'tip_p4_graphic',
@@ -513,8 +513,8 @@ export const TOEIC_TIPS: ToeicTip[] = [
       }
     ],
     tags: ['Part 6', 'Điền cả câu', 'Mạch văn bản'],
-    practiceLink: '/part6',
-    practiceTitle: 'Luyện Part 6: Điền từ đoạn văn'
+    practiceLink: '/part6?subCategory=Sentence%20Insertion',
+    practiceTitle: 'Luyện Part 6: Dạng điền cả câu'
   },
   {
     id: 'tip_p6_date_stamp',
@@ -535,8 +535,8 @@ export const TOEIC_TIPS: ToeicTip[] = [
       }
     ],
     tags: ['Part 6', 'Thì động từ', 'Mốc thời gian'],
-    practiceLink: '/part6',
-    practiceTitle: 'Luyện Part 6: Điền từ đoạn văn'
+    practiceLink: '/part6?subCategory=Grammar',
+    practiceTitle: 'Luyện Part 6: Bẫy mốc thời gian & Thì'
   },
   {
     id: 'tip_p6_transitions',
@@ -556,8 +556,8 @@ export const TOEIC_TIPS: ToeicTip[] = [
       }
     ],
     tags: ['Part 6', 'Từ nối', 'Liên từ chuyển ý'],
-    practiceLink: '/part6',
-    practiceTitle: 'Luyện Part 6: Đoạn văn'
+    practiceLink: '/part6?subCategory=Preposition%20%26%20Conjunction',
+    practiceTitle: 'Luyện Part 6: Từ nối chuyển đoạn'
   },
 
   // ==================== PART 7: READING COMPREHENSION ====================
@@ -599,8 +599,8 @@ export const TOEIC_TIPS: ToeicTip[] = [
       }
     ],
     tags: ['Part 7', 'Paraphrasing', 'Từ đồng nghĩa'],
-    practiceLink: '/part7',
-    practiceTitle: 'Luyện Part 7: Đọc hiểu'
+    practiceLink: '/part7?questionType=Vocabulary',
+    practiceTitle: 'Luyện Part 7: Từ đồng nghĩa & Ngữ cảnh'
   },
   {
     id: 'tip_p7_cross_passage',
@@ -619,8 +619,8 @@ export const TOEIC_TIPS: ToeicTip[] = [
       }
     ],
     tags: ['Part 7', 'Đọc đôi', 'Đọc ba', 'Cross-passage', 'Band 800+'],
-    practiceLink: '/part7',
-    practiceTitle: 'Luyện Part 7: Đọc hiểu nâng cao'
+    practiceLink: '/part7?passageType=Double%20Passage',
+    practiceTitle: 'Luyện Part 7: Đọc liên kết đa đoạn'
   },
   {
     id: 'tip_p7_true_wrong_q',
@@ -641,8 +641,8 @@ export const TOEIC_TIPS: ToeicTip[] = [
       }
     ],
     tags: ['Part 7', 'Bẫy đọc hiểu', 'Câu hỏi lừa'],
-    practiceLink: '/part7',
-    practiceTitle: 'Luyện Part 7: Đọc hiểu'
+    practiceLink: '/part7?questionType=NOT%20%2F%20TRUE',
+    practiceTitle: 'Luyện Part 7: Bẫy thông tin gây nhiễu'
   },
   {
     id: 'tip_p7_not_least',
@@ -661,8 +661,8 @@ export const TOEIC_TIPS: ToeicTip[] = [
       }
     ],
     tags: ['Part 7', 'NOT questions', 'Kỹ thuật loại trừ'],
-    practiceLink: '/part7',
-    practiceTitle: 'Luyện Part 7: Kỹ năng đọc quét'
+    practiceLink: '/part7?questionType=NOT%20%2F%20TRUE',
+    practiceTitle: 'Luyện Part 7: Dạng phủ định NOT / LEAST'
   },
 
   // ==================== GENERAL / EXAM TACTICS ====================

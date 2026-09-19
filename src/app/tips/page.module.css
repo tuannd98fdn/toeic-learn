@@ -681,6 +681,45 @@
   margin: 0;
 }
 
+.trapActionRow {
+  margin-top: 0.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.trapPracticeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.trapPracticeBtn:hover {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+:global([data-theme="dark"]) .trapPracticeBtn {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+:global([data-theme="dark"]) .trapPracticeBtn:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+
 /* Golden Formula Box */
 .formulaBox {
   background: rgba(245, 158, 11, 0.08);
@@ -855,6 +894,19 @@
 
 .practiceBtn:hover {
   opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.practiceBtnTrap {
+  background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+  color: #ffffff;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25);
+}
+
+.practiceBtnTrap:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #c2410c 100%);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
   transform: translateY(-1px);
 }
 

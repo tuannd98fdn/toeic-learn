@@ -1580,9 +1580,121 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### Milestone 58: Đồng Bộ Hóa Toàn Vẹn Pipeline Dữ Liệu Sổ Tay Lỗi Sai & Nâng Cấp Trải Nghiệm Khảo Sát Năng Lực /diagnostic [HOÀN TẤT 100%]
+* **Vấn Đề Đã Khắc Phục**:
+  1. **Gãy chuỗi dữ liệu câu sai khi luyện tập liên đề**: Khi luyện tập liên đề (Cross-test mode `test=all` hoặc `test=ets2022_cross`) ở Part 5, 6, 7, `testId` bị lưu thành `'all'` hoặc `'ets2022_cross'`. Khi tải lại câu sai trong Sổ tay (`questionFetcher.ts`), regex kiểm tra `match(/ets(\d+)_test(\d+)/)` bị trả về `null`, dẫn đến câu sai bị bỏ qua không hiển thị hoặc không thể vào chế độ Quiz chuộc lỗi.
+  2. **Mất trường `subCategory` ở Part 1 - 4 & Mini-test**: `addMistake` ở các trang Part 1, 2, 3, 4 và Mini-test thiếu trường `subCategory`, khiến dữ liệu câu sai phân loại thiếu trường này, ảnh hưởng trực tiếp đến phân tích lỗ hổng kiến thức trên Biểu đồ Radar.
+  3. **Trải nghiệm vào lại (Re-visit UX) trang Chẩn đoán `/diagnostic`**: Người dùng đã hoàn thành bài test trước đó khi truy cập lại `/diagnostic` bị hệ thống tự động khởi chạy lại bài test mới và bộ đếm ngược 20 phút đè lên kết quả cũ, không có tùy chọn xem lại kết quả đã lưu kèm bộ lọc trực quan.
+* **Chi Tiết Triển Khai**:
+  1. **Tăng cường cơ chế Fallback trong `src/utils/questionFetcher.ts`**:
+     - Thêm xử lý fallback an toàn: Khi `resolvedTestId === 'all'` hoặc `'ets2022_cross'` hoặc không khớp regex, tự động quy đổi về `'ets2022_test1'` thay vì âm thầm bỏ qua.
+     - Đảm bảo 100% câu hỏi lỗi sai được truy xuất đầy đủ dữ liệu từ file JSON nguồn để người dùng có thể luyện tập chuộc lỗi.
+  2. **Gắn nhãn SubCategory & TestId chính xác trong các trang luyện tập**:
+     - `src/app/part1/page.tsx`: Truyền `subCategory: currentQ.subCategory || 'Photographs'` vào `addMistake`.
+     - `src/app/part2/page.tsx`: Truyền `subCategory: currentQ.subCategory || 'Question-Response'` vào `addMistake`.
+     - `src/app/part3/page.tsx`: Truyền `subCategory: q.subCategory || 'Conversations'` vào `addMistake`.
+     - `src/app/part4/page.tsx`: Truyền `subCategory: q.subCategory || 'Short Talks'` vào `addMistake`.
+     - `src/app/mini-test/page.tsx`: Bổ sung `subCategory: q.subCategory || 'Question-Response'` khi tổng hợp câu hỏi Part 2.
+     - `src/app/part5/page.tsx`: Lưu trữ trường `testId` thực tế của từng câu hỏi khi tạo mảng câu hỏi liên đề; giải quyết `resolvedTestId` chính xác thay vì hardcode.
+     - `src/app/part6/page.tsx`: Gán `testId` thực tế (`ets2022_test1`..`6`) cho từng đoạn văn khi nạp liên đề; giải quyết đúng test gốc khi ghi nhận lỗi sai.
+     - `src/app/part7/page.tsx`: Gán `testId` tương ứng cho từng bộ bài đọc khi nạp liên đề; giải quyết test gốc chính xác khi ghi nhận câu sai.
+  3. **Nâng cấp toàn diện Flow Chẩn Đoán `/diagnostic`**:
+     - Nhận diện trạng thái Re-visit: Khi có `toeic_diagnostic_result` trong storage và không có cờ `?retake=true`, tự động kích hoạt chế độ xem lại kết quả (`isSubmitted: true`, `isRevisit: true`) mà không kích hoạt đếm ngược bộ đếm 20 phút.
+     - Banner Re-visit chuyên nghiệp: Hiển thị thời điểm hoàn thành bài test trước đó, giải thích lộ trình thích ứng đã đồng bộ, và cung cấp nút CTA "Làm bài test mới" kích hoạt lại bài test mới 20:00.
+     - Phục hồi câu trả lời: Lưu trữ và phục hồi `toeic_diagnostic_answers` để người dùng xem lại toàn bộ 26 câu hỏi bài làm, phân tích đúng/sai và lời giải sư phạm.
+     - Thanh bộ lọc xem lại câu hỏi (Review Filter Bar): Cho phép lọc nhanh theo "Tất cả", "Chỉ câu sai", "Listening (16)", "Reading (10)", và từng Part riêng biệt (Part 1 - 7).
+     - Giao diện Dark mode an toàn: Chuyển đổi màu thẻ câu đúng/sai sang `rgba(...)` chống chói mắt, padding an toàn cho đáy màn hình mobile (`calc(5.5rem + env(safe-area-inset-bottom))`).
+* **Kiểm Thử & Nghiệm Thu**:
+  - `npx tsc --noEmit`: 0 lỗi TypeScript.
+  - `npm run build`: Thành công 100% cho toàn bộ 35 routes.
+  - `scratch/test_pipeline_and_diagnostic_e2e.mjs`: 100% PASS:
+    1. Browser context test: Tải fallback câu hỏi thành công cho `all` và `ets2022_cross`.
+    2. Re-visit view: Nhận diện kết quả cũ, hiển thị Banner Re-visit, bộ đếm ngược 20 phút không chạy.
+    3. Review filters: Lọc chính xác 26 câu, 24 câu sai, 16 câu LC, 10 câu RC.
+    4. Retake: Nút "Làm bài test mới" khởi động lại bài test fresh với bộ đếm `20:00`.
+    5. Regex DOM Audit: 0 UI emojis trên toàn bộ trang.
+    6. Mobile Responsiveness: Đạt chuẩn 375x667, 0 pixel tràn viền ngang (ảnh chụp tại `scratch/diagnostic_retake_mobile.png`).
+
+---
+
+### ✅ Vấn Đề 59: Bổ Sung Lối Thoát Khách (Guest Escape Hatch) & Nút Back Tại /login - Loại Bỏ 100% Kẹt Trang Đăng Nhập [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Trang đăng nhập `/login` trước đây chỉ có duy nhất một nút hành động "Tiếp tục với Google" và không có bất kỳ nút Back (Quay lại) nào.
+  - Trên giao diện di động (`< 900px`), Brand Panel chứa logo liên kết về `/` bị ẩn hoàn toàn (`display: none`), dẫn đến người học truy cập trang login không thể quay lại trang trước hoặc trang giới thiệu nếu không muốn đăng nhập.
+  - `middleware.ts` chỉ kiểm tra NextAuth token; người dùng chưa đăng nhập khi truy cập các route học tập đều bị chuyển hướng cưỡng chế về `/login?callbackUrl=...`. Nếu người dùng bấm back, họ rơi vào vòng lặp chuyển hướng vô tận (Infinite Redirect Loop) và bị kẹt 100% tại `/login`.
+* **Giải pháp & Triển khai**:
+  1. **Cơ chế Khách Vãng Lai Bền Vững (Guest Mode Protocol)**:
+     - Khi người học bấm "Tiếp tục với tư cách Khách", hệ thống thiết lập cookie `toeic_guest_mode=1; path=/; max-age=2592000; SameSite=Lax` (30 ngày) và lưu trạng thái vào `storage.set('toeic_guest_mode', 'true')`.
+     - Cập nhật `src/middleware.ts`: kiểm tra `const isGuest = req.cookies.get('toeic_guest_mode')?.value === '1';`. Cho phép người dùng ở chế độ Guest truy cập tự do vào Dashboard `/` và toàn bộ các trạm học tập (`/part1`..`/part7`, `/exam`, `/study-plan`, `/stats`, `/notebook`...) mà không bị ép chuyển hướng.
+     - Vẫn cho phép truy cập `/login` bình thường để người dùng có thể nâng cấp/đăng nhập Google bất cứ khi nào muốn kích hoạt đồng bộ đám mây đa thiết bị.
+  2. **Thanh Điều Hướng Đỉnh Card (`cardNav`) & Nút Back An Toàn**:
+     - Bổ sung nút "Quay lại" (`#login-back-btn`) với biểu tượng SVG `ArrowLeftIcon` trang nhã dạng viên thuốc bo tròn (pill style).
+     - Xử lý điều hướng thông minh chống infinite redirect loop: Nếu có `callbackUrl` nhưng người dùng chưa kích hoạt Guest mode, điều hướng an toàn về `/landing` (thay vì `history.back()` quay lại trang bị chặn); nếu đã là Guest hoặc có referrer hợp lệ, điều hướng lùi hoặc về `/`.
+     - Bổ sung liên kết nhanh "Trang chủ" / "Bàn học" (`#login-home-link`) với biểu tượng SVG `HomeIcon`.
+  3. **Nút Lối Thoát Khách Chuẩn Glassmorphism (`guestBtn`)**:
+     - Thiết kế nút thứ cấp nổi bật: nền `rgba(255,255,255,0.05)`, viền sáng `rgba(255,255,255,0.15)`, chữ trắng sắc nét, biểu tượng `UserIcon`.
+     - Dải phân cách mờ sang trọng với chữ `hoặc`.
+     - Dòng phụ đề trấn an tâm lý: *"Học thử ngay • Tiến độ tự động lưu trên trình duyệt này"*.
+  4. **Kiến Trúc & Tối Ưu Tĩnh (Suspense & Zero-Bloat)**:
+     - Tách `LoginForm` và bọc trong `<Suspense fallback={...}>` đảm bảo an toàn tuyệt đối cho Next.js Turbopack SSG build.
+     - 0 KB thư viện ngoài, tái sử dụng 100% icon SVG nội bộ từ `@/components/icons/AppIcons`.
+* **Quy chuẩn & Xác minh**:
+  - Tuân thủ nghiêm ngặt quy tắc **NO UI EMOJIS (STRICT)**: 0 emoji trong mã nguồn và rendered DOM.
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build tĩnh Next.js: `npm run build` thành công 100% (35/35 routes).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_login_guest_escape_e2e.mjs`): PASS 100% 5/5 bộ kiểm thử:
+    1. Direct visit: Nút Back điều hướng mượt mà về `/landing`.
+    2. Protected route redirect: Bấm "Tiếp tục với tư cách Khách" lưu cookie `toeic_guest_mode=1` và đưa thẳng vào `/part5`, reload trang không bị văng ra.
+    3. Root `/`: Vào thẳng Dashboard (hoặc Onboarding nếu người dùng mới).
+    4. Mobile Viewport (375x667): 0 overflow ngang, touch targets chuẩn công thái học.
+    5. Regex DOM Scan: 0 emoji detected.
+  - Ảnh nghiệm thu:
+    - Desktop: `scratch/login_desktop_verified.png`.
+    - Mobile: `scratch/login_mobile_verified.png`.
+
+---
+
+### ✅ Vấn Đề 60: Bổ Sung Nút "Luyện Ngay Bẫy Này" Tại /tips & Kết Nối Trực Tiếp Từ Lý Thuyết Mẹo Thi Sang Bài Tập Thực Hành [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Trang Mẹo thi `/tips` cung cấp 30 chuyên đề chiến thuật & bẫy đề thi ETS kinh điển nhưng trước đây gặp tình trạng đứt gãy giữa lý thuyết và thực hành:
+    1. Các thẻ bẫy đề thi (`trap`) chỉ có nút CTA chung chung `Áp dụng vào bài luyện ngay` hoặc tên bài học, không có nút hành động cụ thể `Luyện ngay bẫy này` gắn liền trực tiếp với cảnh báo bẫy.
+    2. Hộp Cảnh báo bẫy ETS (`trapBox`) chỉ hiển thị văn bản cảnh báo thụ động, thiếu nút kích hoạt hành động 1-click ngay dưới phần lý thuyết.
+    3. Nhiều liên kết thực hành (`practiceLink`) bị trỏ chung chung về trang gốc (ví dụ Part 6 trỏ `/part6` thay vì trỏ chuyên đề `?subCategory=...`, Part 7 trỏ `/part7` thay vì `?questionType=...`, Part 3 bị trỏ nhầm sang `/part4`), khiến người học không được đưa vào đúng dạng bài tập tương ứng với bẫy vừa đọc.
+* **Giải pháp & Triển khai**:
+  1. **Nút "Luyện Ngay Bẫy Này" Nội Tuyến Trong Hộp Cảnh Báo Bẫy ETS (`.trapPracticeBtn`)**:
+     - Tích hợp trực tiếp nút hành động 1-click `Luyện ngay bẫy này` nằm ngay bên dưới phần mô tả cảnh báo bẫy trong `trapBox`.
+     - Phong cách thiết kế cảnh báo tinh tế: nền đỏ trong suốt `rgba(239, 68, 68, 0.1)`, chữ đỏ `#dc2626`, viền đỏ bo tròn, kèm biểu tượng SVG `ZapIcon` và `ArrowRightIcon`, tự động chuyển sang `#f87171` trong Dark Mode.
+  2. **Chuẩn Hóa Nút CTA Chính Cho Thẻ Bẫy Đề Thi (`.practiceBtnTrap`)**:
+     - Tất cả các thẻ thuộc phân loại Bẫy (`tip.type === 'trap'`) được chuyển đổi nút CTA chính thành: `Luyện ngay bẫy này`.
+     - Phối màu gradient cảnh báo nổi bật: `linear-gradient(135deg, #dc2626 0%, #ea580c 100%)`, hiệu ứng bóng mờ đổ bóng và icon cảnh báo `AlertCircleIcon`.
+  3. **Kết Nối Trực Tiếp (Deep-Linking) Từ Lý Thuyết Sang Bài Tập Thực Hành**:
+     - Chuẩn hóa toàn bộ 30 đường dẫn `practiceLink` trong `src/data/strategies.ts`:
+       - *Part 3*: Sửa `tip_p3_mind_change` trỏ đúng `/part3` (trước đây trỏ nhầm `/part4`).
+       - *Part 5*: Kết nối chính xác các chủ điểm ngữ pháp `?subCategory=Word%20Form`, `Verb%20Tense`, `Preposition%20%26%20Conjunction`, `Relative%20Clause`, `Pronoun`, `Sentence%20Structure`.
+       - *Part 6*: Kết nối chính xác các dạng bài `?subCategory=Sentence%20Insertion`, `Grammar`, `Preposition%20%26%20Conjunction`.
+       - *Part 7*: Kết nối chính xác các dạng câu hỏi đọc hiểu `?questionType=Vocabulary`, `NOT%20%2F%20TRUE`, `Double%20Passage`.
+  4. **Kiến Trúc & Tuân Thủ Triệt Để NO UI EMOJIS (STRICT)**:
+     - 0 KB thư viện ngoài, tái sử dụng 100% icon SVG sạch từ `@/components/icons/AppIcons` (`ZapIcon`, `AlertCircleIcon`, `ArrowRightIcon`).
+     - Tương thích hoàn hảo cả Chế độ Chi tiết và Sổ tay Tóm tắt (Cheat Sheet Mode).
+* **Quy chuẩn & Xác minh**:
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% (35/35 routes).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_trap_practice_buttons_e2e.mjs`): PASS 100%:
+    1. Đếm chính xác 21 nút "Luyện ngay bẫy này" trên trang (10 nút inline `.trapPracticeBtn` + 11 nút card bottom `.practiceBtnTrap`).
+    2. Deep-linking kiểm tra khớp chính xác URL cho Part 5 (`/part5?subCategory=Preposition%20%26%20Conjunction`), Part 6 (`/part6?subCategory=Grammar`), Part 7 (`/part7?questionType=NOT%20%2F%20TRUE`), và Part 1 (`/part1`).
+    3. Thử nghiệm click điều hướng thành công vào màn hình luyện tập.
+    4. Mobile Viewport (375x812) & Dark Mode hiển thị sắc nét, không vỡ layout.
+    5. Regex DOM Audit: 0 UI emojis trên toàn bộ trang.
+  - Ảnh nghiệm thu giao diện:
+    - Desktop: `scratch/tips_trap_buttons_desktop.png`.
+    - Mobile Light Mode: `scratch/tips_trap_buttons_mobile_light.png`.
+    - Mobile Dark Mode: `scratch/tips_trap_buttons_mobile_dark.png`.
+
+---
+
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 58: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
+### Vấn Đề 61: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
 * **Bối cảnh & Kế hoạch**:
   - Đã hoàn tất 100% chuẩn xác thực cho ETS 2022 Test 1, Test 2, Test 3, Test 4, Test 5, và Test 6 (1,200 câu hỏi chuẩn hóa).
   - Tiếp tục mở rộng bộ đề ETS 2022 với **Test 7**:
@@ -1600,21 +1712,16 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Chạy Dev Server**: `npm run dev` (đang chạy ngầm tại `http://localhost:3000`).
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
-* **Kiểm định dữ liệu chuẩn ETS**: `node scripts/ingest_real_ets.mjs public/data/ets2022/test6`.
 * **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_login_guest_escape_e2e.mjs` (Kiểm thử Nút Back & Lối thoát Khách tại /login, Cookie persistence, Mobile responsive, 0 emojis).
+  * `node scratch/test_pipeline_and_diagnostic_e2e.mjs` (Kiểm thử Data Pipeline & Sổ tay lỗi sai, Re-visit Banner /diagnostic, Bộ lọc câu sai, Retake 20:00, Mobile responsive, 0 emojis).
   * `node scratch/test_stats_page_e2e.mjs` (Kiểm thử toàn diện nâng cấp trang Thống kê /stats, 4 Chỉ số Vàng, Bản đồ 7 Parts, Share Modal Certificate, Mobile responsive, 0 emojis).
   * `node scratch/test_tips_enhancements_e2e.mjs` (Kiểm thử toàn diện nâng cấp trang Mẹo thi /tips, Bookmarking & Mastery, Sổ tay tóm tắt Cheat Sheet, Mobile responsive, 0 emojis).
   * `node scratch/test_notebook_enhancements_e2e.mjs` (Kiểm thử toàn diện nâng cấp Sổ tay /notebook, Quiz chuộc lỗi, Leitner badges, Mobile responsive, 0 emojis).
   * `node scratch/test_study_plan_enhancements_e2e.mjs` (Kiểm thử toàn diện nâng cấp trang Lộ trình học /study-plan, Weekly Clusters, Non-destructive update, Celebration, Mobile responsive, 0 emojis).
   * `node scratch/test_ui_ux_enhancements_e2e.mjs` (Kiểm thử gói nâng cấp UI/UX Dashboard: Custom Test Selector, CompactInsightBar, De-duplicate RC buttons, 0 emojis).
   * `node scratch/test_ets2022_test6_full_e2e.mjs` (Kiểm thử toàn diện 7 Parts và Full Exam đề thi thật ETS 2022 Test 6).
-  * `node scratch/test_ets2022_test5_full_e2e.mjs` (Kiểm thử toàn diện 7 Parts và Full Exam đề thi thật ETS 2022 Test 5).
-  * `node scratch/test_ets2022_test4_full_e2e.mjs` (Kiểm thử toàn diện 7 Parts và Full Exam đề thi thật ETS 2022 Test 4).
-  * `node scratch/test_ets2022_test3_full_e2e.mjs` (Kiểm thử toàn diện 7 Parts và Full Exam đề thi thật ETS 2022 Test 3).
-  * `node scratch/test_ets2022_test2_reading_full_e2e.mjs` (Kiểm thử toàn diện Reading đề thật ETS 2022 Test 2).
-  * `node scratch/test_ets2022_test2_listening_full_e2e.mjs` (Kiểm thử toàn diện Listening đề thật ETS 2022 Test 2).
-  * `node scratch/verify_graphics_e2e.mjs` (Kiểm thử hiển thị biểu đồ scan gốc Q63 và Q96 trong đề thi thật).
-  * `node scratch/test_streamlined_daily_flow_e2e.mjs` (Kiểm thử Toàn Diện Daily Learning Flow 3 bước, Navbar tinh gọn, Vocab Hub 3 tabs, 0 emoji).
+
 
 
 

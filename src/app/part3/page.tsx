@@ -102,7 +102,8 @@ function Part3Trainer() {
           type: 'exam',
           testId: testId,
           part: 'part3',
-          questionId: q.id
+          questionId: q.id,
+          subCategory: q.subCategory || 'Conversations',
         });
       }
     });

@@ -31,6 +31,14 @@ import { useLeitner } from '@/hooks/useLeitner';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import { getPredictiveScore, PredictiveScoreData } from '@/utils/scorePredictor';
 import { storage } from '@/utils/storage';
+import BackupRestoreModal from '@/components/BackupRestoreModal';
+import {
+  downloadBackupFile,
+  validateBackupFile,
+  restoreBackupData,
+  ValidationResult,
+  RestoreMode,
+} from '@/utils/dataBackup';
 import styles from './page.module.css';
 
 const TARGET_SCORE_OPTIONS = ['450+', '550+', '650+', '750+', '850+', '990'];
@@ -61,8 +69,14 @@ export default function ProfilePage() {
   // Predictive score data
   const [predictiveScore, setPredictiveScore] = useState<PredictiveScoreData | null>(null);
 
-  // Hidden file input for JSON import
+  // Backup & restore state
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isBackupModalOpen, setIsBackupModalOpen] = useState<boolean>(false);
+  const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
+  const [selectedFileName, setSelectedFileName] = useState<string>('');
+  const [selectedFileSize, setSelectedFileSize] = useState<string>('');
+  const [exportFeedback, setExportFeedback] = useState<boolean>(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   // Load stored state on mount
   useEffect(() => {
@@ -134,80 +148,38 @@ export default function ProfilePage() {
     storage.set('toeic_daily_minutes', minutes);
   };
 
-  // Export local data to JSON
-  const handleExportData = () => {
-    if (typeof window === 'undefined') return;
-
-    const backupData: Record<string, any> = {
-      exportDate: new Date().toISOString(),
-      version: '1.0',
-      targetScore: storage.get('toeic_target_score', '750+'),
-      examDate: storage.get('toeic_exam_date', null),
-      streak: storage.get('toeic_study_streak', null),
-      vocabAutoplay: storage.get('toeic_vocab_autoplay', false),
-      soundEffects: storage.get('toeic_sound_effects', true),
-      dailyMinutes: storage.get('toeic_daily_minutes', 30),
-      mistakes: storage.get('mistake_notebook', {}),
-      userVocabulary: storage.get('user_vocabulary', []),
-      examHistory: storage.get('toeic_exam_history', []),
-      adaptivePlan: storage.get('toeic_adaptive_study_plan', null),
-    };
-
-    // Collect all progress keys
-    const progressKeys: Record<string, any> = {};
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key && key.startsWith('progress_')) {
-        progressKeys[key] = storage.get(key, true);
-      }
-    }
-    backupData.progress = progressKeys;
-
-    const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    const dateStr = new Date().toISOString().split('T')[0];
-    a.href = url;
-    a.download = `toeic_master_backup_${dateStr}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
-  // Import JSON backup
-  const handleImportFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  // Process selected backup file (via click or drag & drop)
+  const processSelectedFile = (file: File) => {
     if (!file) return;
+    const sizeStr = (file.size / 1024).toFixed(1) + ' KB';
+    setSelectedFileName(file.name);
+    setSelectedFileSize(sizeStr);
 
     const reader = new FileReader();
     reader.onload = (event) => {
-      try {
-        const json = JSON.parse(event.target?.result as string);
-        if (json && typeof json === 'object') {
-          if (json.targetScore) {
-            const cleanScore = String(json.targetScore).replace(/^["']|["']$/g, '').trim();
-            storage.set('toeic_target_score', cleanScore);
-            localStorage.setItem('toeic_target_score', cleanScore);
-          }
-          if (json.examDate) storage.set('toeic_exam_date', json.examDate);
-          if (json.streak) storage.set('toeic_study_streak', json.streak);
-          if (json.mistakes) storage.set('mistake_notebook', json.mistakes);
-          if (json.userVocabulary) storage.set('user_vocabulary', json.userVocabulary);
-          if (json.examHistory) storage.set('toeic_exam_history', json.examHistory);
-          if (json.adaptivePlan) storage.set('toeic_adaptive_study_plan', json.adaptivePlan);
-          if (json.progress) {
-            Object.entries(json.progress).forEach(([k, v]) => storage.set(k, v));
-          }
-
-          alert('Khôi phục dữ liệu thành công! Trang sẽ tải lại để cập nhật.');
-          window.location.reload();
-        }
-      } catch (err) {
-        alert('Tệp dữ liệu không hợp lệ. Vui lòng chọn tệp JSON sao lưu đúng chuẩn.');
-      }
+      const text = event.target?.result as string;
+      const res = validateBackupFile(text);
+      setValidationResult(res);
+      setIsBackupModalOpen(true);
+    };
+    reader.onerror = () => {
+      setValidationResult({ isValid: false, error: 'Không thể đọc tệp sao lưu.' });
+      setIsBackupModalOpen(true);
     };
     reader.readAsText(file);
+  };
+
+  // Export local data to JSON
+  const handleExportData = () => {
+    downloadBackupFile();
+    setExportFeedback(true);
+    setTimeout(() => setExportFeedback(false), 3500);
+  };
+
+  // Restore confirmation callback from modal
+  const handleConfirmRestore = (mode: RestoreMode) => {
+    if (!validationResult?.payload) return;
+    restoreBackupData(validationResult.payload, mode);
   };
 
   // Clear local storage cache
@@ -567,14 +539,14 @@ export default function ProfilePage() {
             </div>
           </section>
 
-          {/* Card: Cloud Sync & Data Management */}
+          {/* Card: Cloud Sync */}
           <section className={styles.card}>
             <div className={styles.cardHeader}>
               <div className={styles.cardHeaderLeft}>
                 <div className={styles.iconBox}>
                   <ZapIcon size={20} />
                 </div>
-                <h2 className={styles.cardTitle}>Đồng bộ & Dữ liệu</h2>
+                <h2 className={styles.cardTitle}>Đồng bộ đám mây</h2>
               </div>
             </div>
 
@@ -602,12 +574,98 @@ export default function ProfilePage() {
                 </button>
               )}
             </div>
+          </section>
 
-            {/* Backup & Restore Row */}
+          {/* Card: Data Backup & Device Migration (JSON) */}
+          <section className={`${styles.card} ${styles.backupCard}`}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardHeaderLeft}>
+                <div className={styles.iconBox}>
+                  <DownloadIcon size={20} />
+                </div>
+                <h2 className={styles.cardTitle}>Sao lưu & Chuyển đổi thiết bị</h2>
+              </div>
+            </div>
+
+            <p className={styles.backupDesc}>
+              Người học tự do lưu trữ và chuyển đổi thiết bị không sợ mất dữ liệu. Tệp JSON sao lưu chứa toàn bộ chuỗi học, từ vựng, sổ tay lỗi sai và kết quả thi thử.
+            </p>
+
+            {/* Current local storage data count chips */}
+            <div className={styles.localStatsChips}>
+              <div className={styles.localChip}>
+                <span>Lỗi sai:</span>
+                <span className={styles.localChipVal}>{totalMistakesCount}</span>
+              </div>
+              <span className={styles.localChipDivider}>•</span>
+              <div className={styles.localChip}>
+                <span>Từ Hộp 5:</span>
+                <span className={styles.localChipVal}>{leitnerStats.mastered}</span>
+              </div>
+              <span className={styles.localChipDivider}>•</span>
+              <div className={styles.localChip}>
+                <span>Chuỗi:</span>
+                <span className={styles.localChipVal}>{streakData.currentStreak || 0} ngày</span>
+              </div>
+              <span className={styles.localChipDivider}>•</span>
+              <div className={styles.localChip}>
+                <span>Bài thi:</span>
+                <span className={styles.localChipVal}>{storage.get<any[]>('toeic_exam_history', []).length}</span>
+              </div>
+            </div>
+
+            {/* Drag & drop zone / File select */}
+            <div
+              className={`${styles.dropzone} ${isDragging ? styles.dropzoneActive : ''}`}
+              onDragOver={(e) => {
+                e.preventDefault();
+                setIsDragging(true);
+              }}
+              onDragLeave={() => setIsDragging(false)}
+              onDrop={(e) => {
+                e.preventDefault();
+                setIsDragging(false);
+                const file = e.dataTransfer.files?.[0];
+                if (file) processSelectedFile(file);
+              }}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <UploadIcon size={22} style={{ color: 'var(--primary)', opacity: 0.85 }} />
+              <div className={styles.dropzoneText}>
+                <strong>Nhấp chọn tệp JSON</strong> hoặc kéo thả vào đây để khôi phục
+              </div>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".json"
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    processSelectedFile(file);
+                    e.target.value = '';
+                  }
+                }}
+              />
+            </div>
+
+            {/* Export feedback toast */}
+            {exportFeedback && (
+              <div className={styles.exportFeedback}>
+                <CheckCircleIcon size={16} />
+                Đã tải xuống tệp sao lưu JSON thành công!
+              </div>
+            )}
+
+            {/* Action buttons */}
             <div className={styles.backupBtnRow}>
-              <button type="button" className={styles.backupBtn} onClick={handleExportData}>
+              <button
+                type="button"
+                className={`${styles.backupBtn} ${styles.backupBtnPrimary}`}
+                onClick={handleExportData}
+              >
                 <DownloadIcon size={16} />
-                Xuất file sao lưu
+                Xuất file sao lưu (JSON)
               </button>
 
               <button
@@ -616,15 +674,8 @@ export default function ProfilePage() {
                 onClick={() => fileInputRef.current?.click()}
               >
                 <UploadIcon size={16} />
-                Khôi phục dữ liệu
+                Khôi phục từ JSON
               </button>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".json"
-                style={{ display: 'none' }}
-                onChange={handleImportFile}
-              />
             </div>
           </section>
 
@@ -663,6 +714,16 @@ export default function ProfilePage() {
           </section>
         </div>
       </div>
+
+      {/* Backup & Restore Preview Modal */}
+      <BackupRestoreModal
+        isOpen={isBackupModalOpen}
+        onClose={() => setIsBackupModalOpen(false)}
+        validationResult={validationResult}
+        fileName={selectedFileName}
+        fileSize={selectedFileSize}
+        onConfirmRestore={handleConfirmRestore}
+      />
     </div>
   );
 }
