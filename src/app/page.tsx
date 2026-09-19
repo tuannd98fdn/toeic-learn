@@ -610,16 +610,17 @@ export default function Home() {
               </div>
               <div className={styles.stationText}>
                 <h3>Đấu Trường Thi Thử Chuẩn ETS</h3>
-                <p>Mô phỏng áp lực phòng thi: Mini Test 15P (20 câu) hoặc Full Test 120P (200 câu) có bóc tách lỗ hổng</p>
+                <p>Mô phỏng áp lực phòng thi: Mini Test 20P (25 câu 7 Parts) hoặc Full Test 120P (200 câu) có bóc tách lỗ hổng</p>
               </div>
             </div>
             <div className={styles.stationActions} style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               <Link
                 href={`/mini-test?test=${selectedTest}`}
                 className="btn-secondary btn-sm"
-                title="20 câu hỏi nhanh (Part 2 & Part 5) trong 15 phút"
+                style={{ fontWeight: 700 }}
+                title="25 câu hỏi chuẩn hóa đầy đủ 7 Parts trong 20 phút"
               >
-                MINI-TEST (15P)
+                MINI-TEST (20P - 7 PARTS)
               </Link>
               <Link
                 href={`/exam?test=${selectedTest}&section=rc`}

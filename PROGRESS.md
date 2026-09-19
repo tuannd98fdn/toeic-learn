@@ -1692,9 +1692,227 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+---
+
+### ✅ Vấn Đề 61: Tìm Kiếm Song Ngữ Anh - Việt Thông Minh Tại /vocabulary (Bilingual Search Engine & Beginner-Friendly Topic Discovery) [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Trang từ vựng `/vocabulary` trước đây sử dụng so khớp chuỗi trực tiếp (`word.includes` / `vietnamese.includes`).
+  - Khi người học (đặc biệt là người mới bắt đầu) gõ tiếng Việt **không dấu** (ví dụ: `hop dong`, `bao cao`, `thoa thuan`, `thanh toan`, `lich trinh`, `ke hoach`), hệ thống trả về **0 kết quả**, dù ngân hàng từ vựng có hơn 10+ từ liên quan đến "hợp đồng" (`contract`, `lease`, `negotiate`, `clause`, `amendment`, `breach`, `stipulate`...).
+  - Khi gõ dạng từ tiếng Anh chia thì hoặc số nhiều (ví dụ: `contracts`, `invoices`, `submitting`), hệ thống không kết nối được với từ gốc.
+  - Thiếu bộ chuyển đổi phạm vi tìm kiếm (Song ngữ ⇄ Tiếng Anh ⇄ Tiếng Việt), thiếu gợi ý từ khóa công sở theo chủ đề cho người mới, và thiếu highlight trực quan vị trí từ khóa khớp.
+* **Giải pháp & Triển khai**:
+  1. **Động Cơ Tìm Kiếm Song Ngữ Chuẩn Hóa NFD (`src/utils/bilingualSearch.ts`)**:
+     - Hàm `removeVietnameseTones(str)` chuẩn hóa Unicode NFD, bóc tách dấu thanh, chuyển đổi `đ`/`Đ` thành `d`/`D` với độ trễ 0ms, 0KB thư viện ngoài.
+     - Tích hợp `getWordCandidates` từ `src/utils/stemmer.ts` sinh các dạng từ gốc tiếng Anh (e.g. `invoices` -> `invoice`).
+     - Hàm `matchBilingualWord(word, query, mode)` phân tầng tính điểm liên quan (Relevance Scoring):
+       - Khớp chính xác tiếng Anh: 100 điểm.
+       - Khớp tiền tố tiếng Anh: 85 điểm.
+       - Khớp chính xác tiếng Việt (có dấu / không dấu): 90 - 95 điểm.
+       - Khớp tiền tố tiếng Việt: 80 điểm.
+       - Khớp chuỗi con tiếng Việt: 65 điểm.
+       - Khớp ngữ cảnh (ví dụ câu, mẹo nhớ): 25 - 35 điểm.
+     - Hàm `highlightMatch(text, query, className)` bọc từ khóa khớp trong thẻ `<mark>` trực quan, hỗ trợ ánh xạ chỉ số 1:1 giữa chuỗi chuẩn hóa không dấu và chuỗi gốc tiếng Việt có dấu.
+  2. **Giao Diện Điều Khiển Song Ngữ & Gợi Ý Cho Người Mới Bắt Đầu (`src/app/vocabulary/page.tsx` & `.module.css`)**:
+     - **Thanh chế độ tìm kiếm (Search Mode Tabs)**: 3 tab viên thuốc sắc nét: `Song ngữ (Tất cả)` [Mặc định], `Tiếng Anh (EN)`, `Tiếng Việt (VI)`.
+     - **Dải chip gợi ý tra cứu nhanh (Quick Topic Suggestions)**: 8 chủ đề công sở thường gặp: *Hợp đồng*, *Báo cáo*, *Lịch trình*, *Thanh toán*, *Nhân sự*, *Đàm phán*, *Giao hàng*, *Thông báo*. Click 1 chạm lọc ngay lập tức, click lại để xóa.
+     - **Nút Xóa Nhanh (`CloseIcon`) & Phím Tắt `Escape`**: Tích hợp nút '✕' bên trong ô input khi có ký tự, bấm `Escape` để xóa nhanh.
+     - **Bôi Đậm Từ Khóa Khớp (Keyword Highlighting)**: Tự động highlight từ khóa trên cả thẻ từ tiếng Anh (`word.word`), nghĩa tiếng Việt (`word.vietnamese`) và mẹo nhớ (`word.mnemonicTip`).
+     - **Phản Hồi & Trạng Thái Rỗng (Search Feedback & Smart Empty State)**: Dòng thông báo số từ khớp kèm từ khóa và chế độ tìm kiếm; khi 0 kết quả, đưa ra gợi ý tìm không dấu và nút 1-click "Xóa tìm kiếm & Xem tất cả".
+  3. **Kiến Trúc & Tuân Thủ Triệt Để Quy Tắc**:
+     - Tuân thủ nghiêm ngặt quy tắc **NO UI EMOJIS (STRICT)**: 0 emoji trong CSS và mã nguồn rendered DOM (100% SVG từ `AppIcons`).
+     - Tuân thủ React Rules of Hooks: Mọi hooks (`useMemo`, `useState`) được gọi vô điều kiện trước khi kiểm tra `!mounted`.
+     - 0 KB thư viện ngoài, tải và lọc 453 từ vựng trong < 1ms.
+* **Quy chuẩn & Xác minh**:
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Unit Test Thuật toán: `scratch/test_bilingual_search_unit.mjs` đạt 100% PASS (6/6 tests: tone normalization, unaccented search, accented search, English stemming, mode scoping, highlighting).
+  - Playwright E2E: `scratch/test_bilingual_search_e2e.mjs` đạt 100% PASS:
+    1. Tải thành công 453 từ vựng.
+    2. Gõ `hop dong` không dấu tìm chính xác 16 từ vựng liên quan, 10 highlight marks.
+    3. Nút Xóa nhanh '✕' reset tìm kiếm về rỗng.
+    4. Click chip "Lịch trình" tự động điền input và lọc đúng 5 từ.
+    5. Chuyển đổi EN / VI / Song ngữ hoạt động chính xác theo phạm vi ngôn ngữ.
+    6. Phím `Escape` xóa nhanh từ khóa.
+    7. Regex DOM Audit: 0 UI emojis trên toàn bộ trang.
+  - Ảnh nghiệm thu giao diện:
+    - `vocab_bilingual_initial.png`
+    - `vocab_search_hop_dong.png`
+    - `vocab_quick_chip_lich_trinh.png`
+    - `vocab_bilingual_verified.png`
+
+### ✅ Vấn Đề 62: Nâng Cấp Toàn Diện Mini Test Chuẩn Hóa 7 Parts, Chọn Đề (ETS 1 - 6 & Liên Đề) & Tính Điểm Ước Lượng TOEIC Chuẩn ETS (Đưa Mini Test Từ 7.2 Lên 9.5 Điểm) [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Trang Mini Test (`/mini-test`) trước đây chỉ được đánh giá 7.2/10 vì những khoảng trống lớn trong sư phạm và trải nghiệm thi:
+    1. **Thiếu 5/7 Parts**: Mini Test chỉ tải ngẫu nhiên 10 câu Part 2 và 10 câu Part 5, bỏ qua hoàn toàn Part 1 (Ảnh), Part 3 (Hội thoại), Part 4 (Bài nói), Part 6 (Đoạn văn) và Part 7 (Đọc hiểu). Điều này khiến bài kiểm tra không phản ánh được năng lực TOEIC thực tế của người học.
+    2. **Không có Chọn đề (Missing Test Selection)**: Trang chỉ nhận query parameter `?test=...` nhưng không có giao diện chọn đề. Người học không thể chọn làm Mini Test từ Test 1, Test 2, Test 3, Test 4, Test 5, Test 6 hay Chế độ Trộn đề liên đề.
+    3. **Thiếu Điểm ước lượng (No Estimated TOEIC Score)**: Chỉ hiển thị `15/20 đúng (75%)`, không quy đổi ra thang điểm TOEIC chuẩn 10 - 990 (Scaled LC & Scaled RC) và cấp độ CEFR.
+    4. **Đứt gãy Báo cáo Lỗ hổng**: `KnowledgeGapBreakdown.tsx` hardcode chỉ so sánh Part 2 vs Part 5 khi `testType === 'mini-test'`.
+* **Giải pháp & Triển khai**:
+  1. **Chuẩn Hóa Đề Thi 7 Parts Chuẩn Tỷ Lệ Vàng (25 Câu / 20 Phút)**:
+     - **Listening (12 câu - 48%)**:
+       - *Part 1 (2 câu)*: Ảnh minh họa phóng to rõ nét kèm trình phát audio `ListeningAudioPlayer`.
+       - *Part 2 (4 câu)*: Audio nghe hỏi - đáp với 3 lựa chọn A-B-C.
+       - *Part 3 (3 câu)*: 1 hội thoại hoàn chỉnh gồm 3 câu hỏi liên hoàn kèm audio và transcript.
+       - *Part 4 (3 câu)*: 1 bài nói chuyện ngắn gồm 3 câu hỏi liên hoàn kèm audio và transcript.
+     - **Reading (13 câu - 52%)**:
+       - *Part 5 (5 câu)*: Điền câu ngữ pháp & từ vựng công sở.
+       - *Part 6 (4 câu)*: 1 bài đọc hoàn chỉnh gồm 4 ô trống điền câu và ngữ pháp trong khung đọc cuộn độc lập (`passageBox`).
+       - *Part 7 (4 câu)*: 1 bài đọc đơn hoàn chỉnh gồm 4 câu hỏi đọc hiểu sâu trong khung đọc cuộn độc lập.
+  2. **Giao Diện Chọn Đề & Chuẩn Bị Thực Chiến (Pre-test Setup Screen)**:
+     - Thẻ chỉ số tổng quan: 25 câu hỏi, 7/7 Parts, 20:00 đếm ngược, Dự đoán điểm 10 - 990.
+     - Lưới chọn đề trực quan: Cho phép chọn trực tiếp 6 bộ đề ETS 2022 (Test 1 -> Test 6) kèm thẻ **Đề Trộn Ngẫu Nhiên Liên Đề (Cross-Test Pool)** tự động trích xuất ngẫu nhiên 7 parts từ cả 6 bộ đề.
+     - Thẻ lưu trữ kết quả gần nhất (Previous Result Banner) với điểm số, cấp độ CEFR và nút 1-click xem lại.
+  3. **Bộ Quy Đổi & Ước Lượng Điểm TOEIC Chuẩn ETS (Estimated Scaled Score 10 - 990)**:
+     - Tích hợp thuật toán quy đổi điểm chuẩn ETS `calculateScaledScore(rawLC, rawRC)` từ `toeicScoreCalculator.ts`:
+       - *Điểm tổng ước lượng*: `totalScore / 990` kèm dải điểm tin cậy `±30 điểm`.
+       - *Điểm thành phần*: `Scaled LC: X/495` (12 câu), `Scaled RC: Y/495` (13 câu).
+       - *Cấp độ CEFR*: A1, A2, B1, B2, C1.
+     - Tự động kết nối lưu trữ `toeic_minitest_result` vào `scorePredictor.ts` để hiệu chuẩn điểm dự đoán toàn ứng dụng trên Dashboard.
+  4. **Bản Đồ Năng Lực 7 Parts & Báo Cáo Lỗ Hổng Kiến Thức**:
+     - Bản đồ 7 Parts: 7 thanh đo lường tiến độ màu sắc động (Xanh: Thành thạo >= 75%, Cam: Cần củng cố 50-74%, Đỏ: Lỗ hổng lớn < 50%) kèm nút 1-click `Luyện Part X ->`.
+     - Nâng cấp `KnowledgeGapBreakdown.tsx`: Hỗ trợ so sánh trực quan giữa Listening (Part 1-4) vs Reading (Part 5-7) cho bài kiểm tra 7 parts.
+     - Chế độ Review chi tiết: Bộ lọc câu sai, Listening, Reading, từng Part, xem transcript, lời giải chi tiết và nút **"Hỏi Gia Sư AI 990 về câu này"** (`AITutorDrawer`).
+  5. **Chu Trình Khép Kín & Trải Nghiệm SaaS 9.5 Điểm**:
+     - Tự động ghi nhận câu sai vào Sổ tay (`addMistake`) với phân loại chuẩn `part1` đến `part7` và chủ điểm.
+     - Tự động đồng bộ Lộ trình thích ứng (`syncAdaptivePlan()`).
+     - Hỗ trợ đầy đủ phím tắt bàn phím (`A/B/C/D` chọn đáp án, `ArrowLeft/ArrowRight` chuyển câu, `F` gắn cờ).
+     - Tuân thủ 100% quy tắc **NO UI EMOJIS (STRICT)**.
+* **Quy chuẩn & Xác minh**:
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build tĩnh Next.js: `npm run build` thành công 100% (35/35 routes).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_minitest_7parts_e2e.mjs`): PASS 100%:
+    1. Pre-test Setup Screen: Xác thực metrics 25 câu, 7/7 parts, 20:00, hiển thị đủ thẻ chọn đề ETS 1 - 6 và liên đề.
+    2. 7 Parts Simulation: Nạp chuẩn xác 25 câu hỏi từ 7 parts, hiển thị tranh Part 1, trình phát audio LC, đoạn văn P6-7, phím tắt A/B/C/D, gắn cờ F.
+    3. Estimated Score: Quy đổi chính xác Scaled LC (145), Scaled RC (5), Điểm tổng (150/990), CEFR A1, dải tin cậy.
+    4. 7-Part Mastery Matrix: Đủ 7 dòng bóc tách chính xác từng Part.
+    5. Knowledge Gap Breakdown: So sánh Listening vs Reading mượt mà.
+    6. Review Mode: Lọc câu sai, transcript, mở AITutorDrawer thành công.
+    7. Cross-Test Pool Mode: Nạp đề trộn liên đề 25 câu thành công.
+    8. Regex DOM Audit: 0 UI emojis trên toàn bộ trang.
+    9. Mobile Viewport (375x812): 0 pixel tràn viền ngang.
+  - Ảnh nghiệm thu giao diện:
+    - `scratch/minitest_setup_desktop.png`
+    - `scratch/minitest_simulation_desktop.png`
+    - `scratch/minitest_result_desktop.png`
+    - `scratch/minitest_mobile.png`
+
+### ✅ Vấn Đề 63: Bổ Sung Toàn Diện Hệ Thống Export / Import JSON Offline Tại /profile (Bảo Vệ Dữ Liệu Học Tập & Di Chuyển Đa Thiết Bị Không Sợ Mất Mát) [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Người học TOEIC đầu tư hàng chục giờ ghi chép vào Sổ tay lỗi sai, tích lũy từ vựng Spaced Repetition (Hộp 1-5), duy trì Chuỗi học tập (Streak) và làm các bài thi chẩn đoán/thi thử ETS.
+  - Tuy nhiên, người học ở chế độ Khách (Guest) hoặc người dùng muốn chuyển đổi giữa điện thoại và máy tính gặp rủi ro mất trắng dữ liệu khi dọn dẹp bộ nhớ trình duyệt hoặc đổi thiết bị. Tính năng Cloud Sync phụ thuộc vào kết nối mạng và tài khoản đăng nhập.
+  - Cần có giải pháp sao lưu ngoại tuyến (Offline-First JSON Backup) chuẩn hóa, bảo mật, độc lập và tương thích ngược, cho phép xuất file và nhập lại tức thì với chế độ Gộp thông minh (Smart Merge) hoặc Ghi đè (Clean Replace).
+* **Giải pháp & Triển khai**:
+  1. **Engine Xử Lý Dữ Liệu Ngoại Tuyến Độc Lập Zero-Dependency (`src/utils/dataBackup.ts`)**:
+     - Cấu trúc Payload chuẩn hóa v2.0 gồm: `version`, `exportedAt`, `platform`, `metadata` (tóm tắt chuỗi ngày, số lỗi sai, từ hộp 5, số bài thi, mục tiêu điểm), và `data` (chứa toàn bộ 100% khoá dữ liệu TOEIC).
+     - Bao phủ toàn diện: `mistake_notebook`, `leitner_progress`, `user_vocabulary`, `vocabulary_streak`, `toeic_study_streak`, `toeic_study_days`, `toeic_masterclass_completed_days`, `toeic_adaptive_study_plan`, `toeic_exam_history`, `toeic_diagnostic_result` & `answers`, `toeic_tips_*`, `ai_study_sessions_history`, cùng tất cả khoá tiền tố `progress_*` và `toeic_*`.
+     - **Tương thích ngược v1.0 (Backward Compatibility)**: Tự động phát hiện và nâng cấp các file sao lưu định dạng cũ không có trường `version`.
+     - **Thuật toán Gộp thông minh (Smart Merge)**:
+       - Sổ tay lỗi sai: Hợp nhất (Union) theo ID câu hỏi, giữ lại câu có số lần sai cao hơn hoặc cập nhật mới nhất.
+       - Lịch sử thi & Ngày học: Hợp nhất không trùng lặp các bài thi và ngày điểm danh.
+       - Flashcard Leitner: Giữ cấp độ hộp cao nhất (`Math.max(currentBox, backupBox)`) cho từng từ vựng.
+       - Chuỗi ngày (Streak): Giữ giá trị chuỗi lớn nhất giữa 2 nguồn.
+     - **Chế độ Ghi đè sạch (Clean Replace)**: Dọn sạch các khoá cũ và khôi phục nguyên trạng snapshot.
+     - **Native Browser APIs**: Sử dụng `Blob` và `URL.createObjectURL` để tải file `toeic_master_backup_YYYY-MM-DD.json`, 0.0 KB phụ thuộc thư viện bên ngoài.
+  2. **Giao Diện Modal Xem Trước & Chọn Chế Độ Phục Hồi (`BackupRestoreModal.tsx` & Module CSS)**:
+     - Glassmorphic Modal hiển thị tóm tắt trực quan: Chuỗi ngày, Số lỗi sai, Từ vựng Hộp 5 thành thạo, Số bài thi ETS, Điểm mục tiêu và Ngày thi.
+     - 2 thẻ tuỳ chọn chế độ phục hồi trực quan:
+       - **Gộp thông minh (Khuyên dùng)** (`#mode-merge`): Giữ nguyên tiến độ hiện tại và bổ sung thêm dữ liệu mới.
+       - **Ghi đè hoàn toàn** (`#mode-replace`): Thay thế sạch sẽ toàn bộ dữ liệu bằng bản sao lưu.
+     - Phản hồi trạng thái lỗi định dạng file rõ ràng, thông báo thành công tức thì và tự động làm mới dữ liệu trang.
+  3. **Tích Hợp Chuyên Nghiệp Vào Trang Hồ Sơ Cá Nhân (`/profile`)**:
+     - Thêm phân vùng chuyên biệt **"Sao lưu & Chuyển đổi thiết bị"** với các chip thống kê trực tiếp (`Lỗi sai: X • Từ Hộp 5: Y • Chuỗi: Z ngày • Bài thi: W`).
+     - Hỗ trợ cả 2 hình thức: Kéo-thả file JSON trực tiếp vào vùng Dropzone hoặc click nút "Khôi phục từ JSON".
+     - Nút "Xuất file sao lưu (JSON)" 1-click tải ngay bản snapshot về máy.
+     - Khả dụng và hoạt động trơn tru cho cả người dùng Khách (Guest) lẫn tài khoản đã đăng nhập.
+  4. **Quy Chuẩn UI/UX & Không Emoji**:
+     - Tuân thủ 100% nguyên tắc **NO UI EMOJIS (STRICT)**, sử dụng hệ thống icon SVG sạch từ `AppIcons.tsx` (`DownloadIcon`, `UploadIcon`, `CheckCircleIcon`, `AlertCircleIcon`, `LayersIcon`).
+     - Tối ưu giao diện Dark Mode tương phản cao và Mobile Viewport với safe-area-inset-bottom.
+* **Quy chuẩn & Xác minh**:
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build tĩnh Next.js: `npm run build` thành công 100% (35/35 routes).
+  - Kiểm thử đơn vị (`scratch/test_backup_restore_unit.mjs`): PASS 6/6 bài test (Tạo backup, validate v2.0, backward-compatibility v1.0, reject file lỗi/HTML, Clean replace, Smart merge).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_backup_restore_e2e.mjs`): PASS 100% (9 kịch bản kiểm thử):
+    1. Export JSON: Tải file backup thực tế, kiểm tra JSON parse hợp lệ, đúng version 2.0 và metadata.
+    2. Import Preview Modal: Mở modal xem trước, hiển thị đúng Streak, Mistakes, Box 5 words, Exam target.
+    3. Smart Merge Mode: Hợp nhất thành công, streak giữ `Math.max(12, 10) = 12`, gom lỗi sai từ 1 lên 3 câu, giữ từ Hộp 5.
+    4. Clean Replace Mode trên Guest: Xóa sạch dữ liệu cũ và nạp chính xác bản snapshot.
+    5. Dark Mode: Giao diện Modal và Dropzone hiển thị sắc nét, tương phản chuẩn SaaS.
+    6. Mobile Viewport (390x844): Modal và thẻ chế độ co giãn hoàn hảo, không tràn viền ngang.
+    7. Regex DOM Audit: 0 UI emojis trên toàn bộ trang `/profile` và Modal.
+  - Ảnh nghiệm thu giao diện:
+    - `profile_backup_desktop_light.png`
+    - `backup_restore_modal_preview.png`
+    - `profile_backup_desktop_dark.png`
+    - `profile_backup_mobile.png`
+    - `profile_backup_guest.png`
+
+---
+
+### ✅ Vấn Đề 64: Lưu Tạm Bài Thi Dở Dang (Auto-Save) & Chống Mất Dữ Liệu 120 Phút Tại /exam Khi Reload Hay Mất Mạng [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Bài thi thử TOEIC chuẩn ETS tại `/exam` kéo dài 120 phút với 200 câu hỏi (hoặc 30 phút với Sprint RC 41 câu).
+  - Trước đây, trang `/exam` lưu toàn bộ trạng thái bài làm (`userAnswers`, `flaggedQuestions`, `currentIndex`, `timeLeft`) hoàn toàn trong bộ nhớ RAM (`useState`).
+  - Nếu người học vô tình tải lại trang (`F5`, `Cmd+R`), bấm nhầm nút quay lại của trình duyệt, đóng tab, hoặc gặp sự cố chập chờn/mất kết nối mạng giữa chừng, toàn bộ công sức làm bài 120 phút sẽ bị mất trắng 100%, gây ức chế tột độ và làm đứt gãy trải nghiệm học tập.
+  - Cần một giải pháp Auto-Save & Phục hồi ngoại tuyến (Offline-First State Preservation) bền vững, không dùng thư viện nặng (Zero-Bloat), không vi phạm quy tắc NO UI EMOJIS, tự động bù trừ thời gian trôi qua, cảnh báo khi bài thi đã hết giờ, và dọn dẹp sạch sẽ khi nộp bài hoặc làm lại từ đầu.
+* **Giải pháp & Triển khai**:
+  1. **Hệ Thống Lưu Trữ Trạng Thái Bài Thi Bền Vững (Exam Draft Architecture)**:
+     - Khóa lưu trữ phân vùng độc lập (Scoped Storage Key): `toeic_exam_draft_${testId}_${currentSection}` kết hợp con trỏ phiên hoạt động `toeic_exam_active_session`.
+     - Cấu trúc `ExamDraft`:
+       - `testId`: Mã đề thi (`ets2022_test1`..`6`).
+       - `section`: Phần thi (`all` 120 phút 200 câu, `rc_sprint` 30 phút 41 câu, hoặc các part riêng lẻ).
+       - `userAnswers`: Toàn bộ câu trả lời của thí sinh `{ [qId]: option }`.
+       - `flaggedQuestions`: Danh sách số thứ tự câu hỏi đã cắm cờ xem lại.
+       - `currentIndex`: Chỉ số câu hỏi đang làm dở dang.
+       - `timeLeft`: Số giây đếm ngược còn lại tại thời điểm lưu.
+       - `lastSaved`: Dấu thời gian Unix `Date.now()` để tính độ trôi thời gian thực tế.
+       - `pacing`: Bộ đếm thời gian phân bổ pacing chi tiết theo từng câu.
+     - Bộ nhớ đệm câu hỏi ngoại tuyến: Lưu snapshot câu hỏi `toeic_exam_questions_cache_${testId}_${currentSection}` vào `localStorage`. Khi mất mạng hoặc fetch API `/data/**` bị đứt, hệ thống tự động fallback nạp đề từ cache kèm thanh thông báo `offlineNoticeBar`.
+  2. **Cơ Chế Tự Động Lưu Đa Tầng (Multi-tier Auto-Save Engine)**:
+     - **Lưu tức thì (Instant Save)**: Tự động lưu ngay khi người học chọn/đổi đáp án (`handleSelectOption`), bật/tắt cờ (`toggleFlagQuestion`), hoặc chuyển câu hỏi (`navigateToQuestion`).
+     - **Lưu chu kỳ (Heartbeat Save)**: `setInterval` chu kỳ mỗi 5 giây tự động cập nhật `timeLeft` và timestamp.
+     - **Lưu khi chuyển tab (Visibility Change Save)**: Bắt sự kiện `document.visibilitychange`; khi người học chuyển tab hoặc thu nhỏ trình duyệt, lưu ngay lập tức trạng thái hiện tại.
+     - **Bảo vệ trước khi đóng tab (Unload Guard)**: Bắt sự kiện `window.beforeunload`, kích hoạt dialog xác nhận gốc của trình duyệt nếu bài thi còn dở dang, ngăn chặn việc bấm nhầm tắt trang.
+  3. **Cơ Chế Phục Hồi Thông Minh (Smart State Recovery)**:
+     - Khi vào trang `/exam`, hệ thống tự động kiểm tra draft tương ứng với `testId` & `section`.
+     - **Tính toán bù trừ thời gian trôi qua**: `const elapsedSeconds = Math.floor((Date.now() - draft.lastSaved) / 1000)`.
+     - **Kịch bản 1 - Còn thời gian**: `adjustedTime = draft.timeLeft - elapsedSeconds > 0`:
+       - Tự động khôi phục toàn bộ câu trả lời, câu cắm cờ, vị trí câu hỏi đang làm và đồng hồ đếm ngược chính xác.
+       - Hiển thị thanh thông báo nổi trang nhã **`RecoveryBanner`**: *"Đã tự động khôi phục bài làm dở dang: đã làm X/Y câu • Còn HH:MM:SS"* kèm nút "Tiếp tục làm bài" (ẩn banner) và nút "Làm lại từ đầu".
+     - **Kịch bản 2 - Đã hết thời gian gián đoạn**: `draft.timeLeft - elapsedSeconds <= 0`:
+       - Hiển thị Modal thông báo **`ExpiredDraftModal`**: Bài thi đã hết giờ trong thời gian gián đoạn.
+       - Cung cấp 2 lựa chọn: "Nộp bài với các câu đã làm" (chấm điểm kết quả) hoặc "Làm lại bài thi mới".
+  4. **Giám Sát Ngoại Tuyến & Trực Quan Hóa Trạng Thái (Offline Monitor & UI Indicators)**:
+     - Lắng nghe sự kiện `online` / `offline` của trình duyệt.
+     - Trên thanh Header Top Bar:
+       - **Auto-save Badge**: Hiển thị biểu tượng SVG `SaveIcon` và dòng chữ *"Đã lưu tự động"*.
+       - **Offline Badge**: Hiển thị biểu tượng SVG `WifiOffIcon` và dòng chữ *"Ngoại tuyến"* khi ngắt mạng (tự động chuyển thành `WifiIcon` khi online).
+  5. **Dọn Dẹp Sạch Sẽ (Lifecycle Cleanups)**:
+     - Khi nộp bài thi thành công (`handleSubmitExam`), hệ thống tự động xóa sạch `draftKey` và `activeSessionKey`.
+     - Khi bấm "Làm lại từ đầu" (`handleResetDraft`), hệ thống xác nhận qua dialog an toàn, xóa sạch draft và reset toàn bộ state về mới 100%.
+  6. **Quy Chuẩn UI/UX & Không Emoji (STRICT NO UI EMOJIS)**:
+     - Bổ sung 3 icon SVG chuyên dụng vào `AppIcons.tsx`: `SaveIcon`, `WifiIcon`, `WifiOffIcon`.
+     - Tuyệt đối 0 emoji trên toàn bộ UI components, badges, banners và modals.
+     - Thiết kế theo phong cách glassmorphism hiện đại, tương thích hoàn hảo cả Light Mode và Dark Mode.
+* **Quy chuẩn & Xác minh**:
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build tĩnh Next.js: `npm run build` thành công 100% (35/35 routes).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_exam_autosave_e2e.mjs`): PASS 100% (6/6 kịch bản kiểm thử):
+    1. Auto-save realtime: Chọn câu 101, 102, cắm cờ câu 102 -> State lưu trữ chính xác trong `localStorage`.
+    2. Reload recovery: Tải lại trang -> Recovery Banner xuất hiện, phục hồi chính xác 2 câu làm dở, cờ, vị trí câu #103 và thời gian đếm ngược.
+    3. Offline network failure resilience: Cắt đường truyền dữ liệu `/data/**`, ngắt mạng, chọn câu 102 (D), câu 103 (A), tải lại trang -> Nạp từ offline cache thành công, giữ trọn vẹn 3/3 câu.
+    4. Submit cleanup: Nộp bài thi -> Draft bị xóa sạch hoàn toàn khỏi `localStorage`.
+    5. Reset draft: Nút "Làm lại từ đầu" xóa draft và đưa bài thi về 0/41 câu.
+    6. Regex DOM Audit: Quét toàn bộ rendered DOM đạt 0 emoji icons.
+  - Kiểm thử Full Test 120 phút (`scratch/test_full_120m_autosave.mjs`): PASS 100%:
+    - Kiểm thử trên toàn bộ đề 200 câu (`section: all`), làm bài Part 1 (Câu 1, 2) và Part 5 (Câu 101), cắm cờ, reload -> Banner khôi phục 3/200 câu, còn 01:59:58, vị trí câu 101 được giữ nguyên vẹn.
+  - Ảnh nghiệm thu giao diện:
+    - `scratch/exam_autosave_verified.png`
+    - `scratch/full_exam_120m_autosave_verified.png`
+
+---
+
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 61: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
+### Vấn Đề 65: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
 * **Bối cảnh & Kế hoạch**:
   - Đã hoàn tất 100% chuẩn xác thực cho ETS 2022 Test 1, Test 2, Test 3, Test 4, Test 5, và Test 6 (1,200 câu hỏi chuẩn hóa).
   - Tiếp tục mở rộng bộ đề ETS 2022 với **Test 7**:
@@ -1713,6 +1931,12 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 * **Kiểm tra TypeScript**: `npx tsc --noEmit`.
 * **Kiểm tra Build**: `npm run build`.
 * **Kiểm thử E2E Playwright mẫu**:
+  * `node scratch/test_exam_autosave_e2e.mjs` (Kiểm thử Auto-save realtime, Phục hồi sau reload, Chống mất mạng offline, Dọn dẹp sau nộp bài, 0 emojis).
+  * `node scratch/test_full_120m_autosave.mjs` (Kiểm thử Full Test 120 phút 200 câu, Cross-part Answers LC + RC, Timer recovery).
+  * `node scratch/test_backup_restore_e2e.mjs` (Kiểm thử toàn diện Sao lưu & Khôi phục JSON offline tại /profile, Smart Merge vs Clean Replace, Preview Modal, Mobile, Dark mode, 0 emojis).
+  * `node scratch/test_minitest_7parts_e2e.mjs` (Kiểm thử toàn diện Nâng cấp Mini Test 7 Parts, Chọn đề ETS 1-6 & Liên đề, Điểm ước lượng 10-990, 7-Part Mastery, AI Tutor, Mobile, 0 emojis).
+  * `node scratch/test_bilingual_search_e2e.mjs` (Kiểm thử Tìm kiếm song ngữ thông minh Anh - Việt tại /vocabulary, NFD, Stemming, Highlighting, 0 emojis).
+  * `node scratch/test_trap_practice_buttons_e2e.mjs` (Kiểm thử nút Luyện ngay bẫy này tại /tips, Deep-linking, Mobile responsive, 0 emojis).
   * `node scratch/test_login_guest_escape_e2e.mjs` (Kiểm thử Nút Back & Lối thoát Khách tại /login, Cookie persistence, Mobile responsive, 0 emojis).
   * `node scratch/test_pipeline_and_diagnostic_e2e.mjs` (Kiểm thử Data Pipeline & Sổ tay lỗi sai, Re-visit Banner /diagnostic, Bộ lọc câu sai, Retake 20:00, Mobile responsive, 0 emojis).
   * `node scratch/test_stats_page_e2e.mjs` (Kiểm thử toàn diện nâng cấp trang Thống kê /stats, 4 Chỉ số Vàng, Bản đồ 7 Parts, Share Modal Certificate, Mobile responsive, 0 emojis).

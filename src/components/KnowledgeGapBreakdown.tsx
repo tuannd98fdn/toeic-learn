@@ -226,9 +226,49 @@ export default function KnowledgeGapBreakdown({
       .slice(0, 3);
   }, [grammarStats, readingStats]);
 
-  // 4. Calculate Section Overview (Specific for Mini-test: Part 2 vs Part 5)
+  // 4. Calculate Section Overview (Specific for Mini-test: LC vs RC or Part 2 vs Part 5)
   const sectionStats = useMemo(() => {
     if (testType !== 'mini-test') return null;
+
+    const isMultiPart = questions.some((q) =>
+      ['p1', 'p3', 'p4', 'p6', 'p7', 'part1', 'part3', 'part4', 'part6', 'part7'].includes(q.part)
+    );
+
+    if (isMultiPart) {
+      const lcQs = questions.filter((q) =>
+        ['p1', 'p2', 'p3', 'p4', 'part1', 'part2', 'part3', 'part4'].includes(q.part)
+      );
+      const rcQs = questions.filter((q) =>
+        ['p5', 'p6', 'p7', 'part5', 'part6', 'part7'].includes(q.part)
+      );
+
+      const lcCorrect = lcQs.filter((q) => q.isCorrect).length;
+      const rcCorrect = rcQs.filter((q) => q.isCorrect).length;
+
+      return {
+        isMultiPart: true,
+        first: {
+          title: 'Listening (Part 1 - 4)',
+          total: lcQs.length,
+          correct: lcCorrect,
+          accuracy: lcQs.length > 0 ? Math.round((lcCorrect / lcQs.length) * 100) : 0,
+          advice:
+            lcQs.length > 0 && lcCorrect / lcQs.length >= 0.75
+              ? 'Phản xạ nghe và nắm bắt từ khóa rất tốt. Duy trì luyện tập nghe chép chính tả và nghe bắt âm.'
+              : 'Cần cải thiện phản xạ nghe hiểu, đặc biệt là bẫy đồng âm Part 2 và kỹ năng định vị từ khóa Part 3-4.',
+        },
+        second: {
+          title: 'Reading (Part 5 - 7)',
+          total: rcQs.length,
+          correct: rcCorrect,
+          accuracy: rcQs.length > 0 ? Math.round((rcCorrect / rcQs.length) * 100) : 0,
+          advice:
+            rcQs.length > 0 && rcCorrect / rcQs.length >= 0.75
+              ? 'Nắm chắc ngữ pháp và đọc hiểu tốt. Tiếp tục tối ưu nhịp độ đọc Part 7 dưới 50s/câu.'
+              : 'Xem chi tiết các chủ điểm ngữ pháp và dạng đọc hiểu yếu bên dưới để luyện tập khắc phục ngay.',
+        },
+      };
+    }
 
     const p2Qs = questions.filter((q) => q.part === 'p2' || q.part === 'part2');
     const p5Qs = questions.filter((q) => q.part === 'p5' || q.part === 'part5');
@@ -237,15 +277,26 @@ export default function KnowledgeGapBreakdown({
     const p5Correct = p5Qs.filter((q) => q.isCorrect).length;
 
     return {
-      p2: {
+      isMultiPart: false,
+      first: {
+        title: 'Part 2: Phản xạ Hỏi - Đáp',
         total: p2Qs.length,
         correct: p2Correct,
         accuracy: p2Qs.length > 0 ? Math.round((p2Correct / p2Qs.length) * 100) : 0,
+        advice:
+          p2Qs.length > 0 && p2Correct / p2Qs.length >= 0.75
+            ? 'Phản xạ nghe câu hỏi tốt. Tiếp tục duy trì độ tập trung bắt từ hỏi đầu câu.'
+            : 'Luyện kỹ năng bắt từ để hỏi (Who, Where, When, Why) và tránh bẫy lặp từ/đồng âm.',
       },
-      p5: {
+      second: {
+        title: 'Part 5: Ngữ pháp & Từ vựng',
         total: p5Qs.length,
         correct: p5Correct,
         accuracy: p5Qs.length > 0 ? Math.round((p5Correct / p5Qs.length) * 100) : 0,
+        advice:
+          p5Qs.length > 0 && p5Correct / p5Qs.length >= 0.75
+            ? 'Nắm chắc ngữ pháp nền tảng. Chú ý tối ưu thời gian dưới 20-30s cho mỗi câu.'
+            : 'Xem chi tiết các chủ điểm sai bên dưới và luyện tập chuyên sâu để bịt lỗ hổng.',
       },
     };
   }, [questions, testType]);
@@ -276,18 +327,18 @@ export default function KnowledgeGapBreakdown({
             <div className={styles.sectionCardHeader}>
               <span className={styles.sectionCardTitle}>
                 <HeadphonesIcon size={18} style={{ color: '#2563eb' }} />
-                Part 2: Phản xạ Hỏi - Đáp
+                {sectionStats.first.title}
               </span>
               <span
                 className={
-                  sectionStats.p2.accuracy >= 75
+                  sectionStats.first.accuracy >= 75
                     ? styles.badgeGood
-                    : sectionStats.p2.accuracy >= 50
+                    : sectionStats.first.accuracy >= 50
                     ? styles.badgeWarning
                     : styles.badgeCritical
                 }
               >
-                {sectionStats.p2.correct}/{sectionStats.p2.total} đúng ({sectionStats.p2.accuracy}%)
+                {sectionStats.first.correct}/{sectionStats.first.total} đúng ({sectionStats.first.accuracy}%)
               </span>
             </div>
             <div className={styles.progressContainer}>
@@ -295,16 +346,14 @@ export default function KnowledgeGapBreakdown({
                 <div
                   className={styles.progressBarFill}
                   style={{
-                    width: `${sectionStats.p2.accuracy}%`,
-                    backgroundColor: getProgressColor(sectionStats.p2.accuracy),
+                    width: `${sectionStats.first.accuracy}%`,
+                    backgroundColor: getProgressColor(sectionStats.first.accuracy),
                   }}
                 />
               </div>
             </div>
             <p className={styles.sectionAdviceText}>
-              {sectionStats.p2.accuracy >= 75
-                ? 'Phản xạ nghe câu hỏi tốt. Tiếp tục duy trì độ tập trung bắt từ hỏi đầu câu.'
-                : 'Luyện kỹ năng bắt từ để hỏi (Who, Where, When, Why) và tránh bẫy lặp từ/đồng âm.'}
+              {sectionStats.first.advice}
             </p>
           </div>
 
@@ -312,18 +361,18 @@ export default function KnowledgeGapBreakdown({
             <div className={styles.sectionCardHeader}>
               <span className={styles.sectionCardTitle}>
                 <ReadingIcon size={18} style={{ color: '#059669' }} />
-                Part 5: Ngữ pháp & Từ vựng
+                {sectionStats.second.title}
               </span>
               <span
                 className={
-                  sectionStats.p5.accuracy >= 75
+                  sectionStats.second.accuracy >= 75
                     ? styles.badgeGood
-                    : sectionStats.p5.accuracy >= 50
+                    : sectionStats.second.accuracy >= 50
                     ? styles.badgeWarning
                     : styles.badgeCritical
                 }
               >
-                {sectionStats.p5.correct}/{sectionStats.p5.total} đúng ({sectionStats.p5.accuracy}%)
+                {sectionStats.second.correct}/{sectionStats.second.total} đúng ({sectionStats.second.accuracy}%)
               </span>
             </div>
             <div className={styles.progressContainer}>
@@ -331,16 +380,14 @@ export default function KnowledgeGapBreakdown({
                 <div
                   className={styles.progressBarFill}
                   style={{
-                    width: `${sectionStats.p5.accuracy}%`,
-                    backgroundColor: getProgressColor(sectionStats.p5.accuracy),
+                    width: `${sectionStats.second.accuracy}%`,
+                    backgroundColor: getProgressColor(sectionStats.second.accuracy),
                   }}
                 />
               </div>
             </div>
             <p className={styles.sectionAdviceText}>
-              {sectionStats.p5.accuracy >= 75
-                ? 'Nắm chắc ngữ pháp nền tảng. Chú ý tối ưu thời gian dưới 20-30s cho mỗi câu.'
-                : 'Xem chi tiết các chủ điểm sai bên dưới và luyện tập chuyên sâu để bịt lỗ hổng.'}
+              {sectionStats.second.advice}
             </p>
           </div>
         </div>

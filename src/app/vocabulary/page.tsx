@@ -50,19 +50,7 @@ export default function VocabularyPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [isAddingWord, setIsAddingWord] = useState(false);
 
-  const mounted = vocabMounted && leitnerMounted;
-  if (!mounted) return (
-    <div className={styles.container}>
-      <div className={`${styles.skeletonHeader} skeleton`} />
-      <div className={styles.skeletonGrid}>
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className={`${styles.skeletonCard} skeleton`} />
-        ))}
-      </div>
-    </div>
-  );
-
-  const CATEGORIES = ["All", ...Array.from(new Set(allWords.map(w => w.category)))];
+  const CATEGORIES = useMemo(() => ["All", ...Array.from(new Set(allWords.map(w => w.category)))], [allWords]);
 
   // Count active filters
   const activeFilterCount = [
@@ -99,6 +87,18 @@ export default function VocabularyPage() {
       })
       .map(item => item.word);
   }, [allWords, searchTerm, searchMode, selectedCategory, progress, selectedLevel, selectedSource, selectedBand]);
+
+  const mounted = vocabMounted && leitnerMounted;
+  if (!mounted) return (
+    <div className={styles.container}>
+      <div className={`${styles.skeletonHeader} skeleton`} />
+      <div className={styles.skeletonGrid}>
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className={`${styles.skeletonCard} skeleton`} />
+        ))}
+      </div>
+    </div>
+  );
 
   const handleCardClick = (id: string) => {
     setExpandedId(prev => prev === id ? null : id);

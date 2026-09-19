@@ -21,6 +21,10 @@ import {
   CloseIcon,
   ZapIcon,
   NotebookIcon,
+  CheckCircleIcon,
+  ShieldCheckIcon,
+  RotateCcwIcon,
+  WifiOffIcon,
 } from '@/components/icons/AppIcons';
 import ListeningAudioPlayer from '@/components/ListeningAudioPlayer';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
@@ -38,6 +42,21 @@ import {
 } from '@/utils/toeicScoreCalculator';
 import styles from './page.module.css';
 import AITutorDrawer, { QuestionContext } from '@/components/AITutorDrawer';
+
+export interface ExamDraft {
+  testId: string;
+  section: 'all' | 'rc' | 'rc_sprint';
+  userAnswers: Record<number, string>;
+  flaggedQuestions: number[];
+  currentIndex: number;
+  timeLeft: number;
+  lastSaved: number;
+  part5Seconds: number;
+  part6Seconds: number;
+  part7Seconds: number;
+  totalQuestions: number;
+}
+
 
 interface UnifiedQuestion {
   id: string;
@@ -125,14 +144,104 @@ function ExamSimulation() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [tutorContext, setTutorContext] = useState<QuestionContext | null>(null);
 
+  // Auto-Save & Offline states
+  const [autoSavedAt, setAutoSavedAt] = useState<number | null>(null);
+  const [isOnline, setIsOnline] = useState(true);
+  const [isOfflineMode, setIsOfflineMode] = useState(false);
+  const [recoveryNotice, setRecoveryNotice] = useState<{
+    answeredCount: number;
+    totalCount: number;
+    timeLeft: number;
+    restoredAt: number;
+  } | null>(null);
+  const [expiredDraftData, setExpiredDraftData] = useState<ExamDraft | null>(null);
+
+  const draftKey = `toeic_exam_draft_${testId}_${currentSection}`;
+  const questionsCacheKey = `toeic_exam_questions_cache_${testId}_${currentSection}`;
+  const activeSessionKey = 'toeic_exam_active_session';
+
   // Pacing Trackers
   const part5SecondsRef = useRef<number>(0);
   const part6SecondsRef = useRef<number>(0);
   const part7SecondsRef = useRef<number>(0);
-  const currentIndexRef = useRef<number>(currentIndex);
-  useEffect(() => {
-    currentIndexRef.current = currentIndex;
-  }, [currentIndex]);
+
+  // Synchronized refs for fresh access in intervals & listeners
+  const userAnswersRef = useRef(userAnswers);
+  const flaggedQuestionsRef = useRef(flaggedQuestions);
+  const timeLeftRef = useRef(timeLeft);
+  const currentIndexRef = useRef(currentIndex);
+  const isSubmittedRef = useRef(isSubmitted);
+  const isReviewModeRef = useRef(isReviewMode);
+
+  useEffect(() => { userAnswersRef.current = userAnswers; }, [userAnswers]);
+  useEffect(() => { flaggedQuestionsRef.current = flaggedQuestions; }, [flaggedQuestions]);
+  useEffect(() => { timeLeftRef.current = timeLeft; }, [timeLeft]);
+  useEffect(() => { currentIndexRef.current = currentIndex; }, [currentIndex]);
+  useEffect(() => { isSubmittedRef.current = isSubmitted; }, [isSubmitted]);
+  useEffect(() => { isReviewModeRef.current = isReviewMode; }, [isReviewMode]);
+
+  const saveDraft = (
+    customAnswers = userAnswersRef.current,
+    customFlags = flaggedQuestionsRef.current,
+    customIndex = currentIndexRef.current,
+    customTime = timeLeftRef.current,
+  ) => {
+    if (isSubmittedRef.current || isReviewModeRef.current || questions.length === 0) return;
+    const answeredCount = Object.keys(customAnswers).length;
+    const flaggedCount = customFlags.size;
+
+    // Do not save blank drafts before user starts
+    if (answeredCount === 0 && flaggedCount === 0 && customTime >= totalExamTime) {
+      return;
+    }
+
+    const draft: ExamDraft = {
+      testId,
+      section: currentSection,
+      userAnswers: customAnswers,
+      flaggedQuestions: Array.from(customFlags),
+      currentIndex: customIndex,
+      timeLeft: customTime,
+      lastSaved: Date.now(),
+      part5Seconds: part5SecondsRef.current,
+      part6Seconds: part6SecondsRef.current,
+      part7Seconds: part7SecondsRef.current,
+      totalQuestions: questions.length,
+    };
+
+    storage.set(draftKey, draft);
+    storage.set(activeSessionKey, {
+      testId,
+      section: currentSection,
+      lastSaved: Date.now(),
+      answeredCount,
+      totalQuestions: questions.length,
+    });
+    setAutoSavedAt(Date.now());
+  };
+
+  const handleResetExam = () => {
+    if (window.confirm('Bạn có chắc chắn muốn xóa bài làm hiện tại để bắt đầu lại từ đầu? Mọi câu trả lời đã lưu tạm sẽ bị xóa.')) {
+      storage.remove(draftKey);
+      storage.remove(activeSessionKey);
+      setUserAnswers({});
+      setFlaggedQuestions(new Set());
+      setCurrentIndex(0);
+      setTimeLeft(totalExamTime);
+      part5SecondsRef.current = 0;
+      part6SecondsRef.current = 0;
+      part7SecondsRef.current = 0;
+      setRecoveryNotice(null);
+      setExpiredDraftData(null);
+      setAutoSavedAt(null);
+    }
+  };
+
+  const navigateToQuestion = (newIndex: number) => {
+    const targetIndex = Math.max(0, Math.min(questions.length - 1, newIndex));
+    setCurrentIndex(targetIndex);
+    saveDraft(userAnswersRef.current, flaggedQuestionsRef.current, targetIndex, timeLeftRef.current);
+  };
 
   const [part7ExamPacing, setPart7ExamPacing] = useState<{
     secondsSpent: number;
@@ -147,6 +256,7 @@ function ExamSimulation() {
 
   // Focus Mode
   const [isFocusMode, setIsFocusMode] = useState(false);
+
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -431,19 +541,81 @@ function ExamSimulation() {
 
         unified.sort((a, b) => a.number - b.number);
         setQuestions(unified);
-        setTimeLeft(totalExamTime);
+        // Cache to storage for offline reload resilience
+        storage.set(questionsCacheKey, unified);
+        setIsOfflineMode(false);
+        setError(null);
       } catch (err: any) {
-        console.error('Error loading exam data:', err);
-        setError(err.message || 'Không thể nạp bài thi');
+        console.warn('Network fetch error or offline, attempting to load from cache:', err);
+        const cachedQuestions = storage.get<UnifiedQuestion[] | null>(questionsCacheKey, null);
+        if (cachedQuestions && cachedQuestions.length > 0) {
+          setQuestions(cachedQuestions);
+          setIsOfflineMode(true);
+          setError(null);
+        } else {
+          console.error('Error loading exam data:', err);
+          setError(err.message || 'Không thể nạp bài thi');
+        }
       } finally {
         setLoading(false);
       }
     };
 
     loadAllParts();
-  }, [testId, currentSection, totalExamTime]);
+  }, [testId, currentSection, totalExamTime, questionsCacheKey]);
 
-  // Timer interval with Pacing tracking across Part 5, 6, 7
+  // Draft Recovery on Component Mount / Questions Loaded
+  const hasCheckedDraftRef = useRef(false);
+
+  useEffect(() => {
+    hasCheckedDraftRef.current = false;
+  }, [testId, currentSection]);
+
+  useEffect(() => {
+    if (questions.length === 0 || loading || hasCheckedDraftRef.current || isSubmitted) return;
+    hasCheckedDraftRef.current = true;
+
+    const draft = storage.get<ExamDraft | null>(draftKey, null);
+    if (!draft || draft.testId !== testId || draft.section !== currentSection) {
+      return;
+    }
+
+    const answeredCount = Object.keys(draft.userAnswers || {}).length;
+    const flaggedCount = (draft.flaggedQuestions || []).length;
+    if (answeredCount === 0 && flaggedCount === 0) {
+      return;
+    }
+
+    // Calculate elapsed seconds since last save
+    const elapsedSecs = Math.max(0, Math.floor((Date.now() - draft.lastSaved) / 1000));
+    const adjustedTime = Math.max(0, draft.timeLeft - elapsedSecs);
+
+    if (adjustedTime > 0) {
+      // Normal restoration: answers, flags, question index, pacing, remaining time
+      setUserAnswers(draft.userAnswers || {});
+      setFlaggedQuestions(new Set(draft.flaggedQuestions || []));
+      if (typeof draft.currentIndex === 'number' && draft.currentIndex >= 0 && draft.currentIndex < questions.length) {
+        setCurrentIndex(draft.currentIndex);
+      }
+      setTimeLeft(adjustedTime);
+      part5SecondsRef.current = draft.part5Seconds || 0;
+      part6SecondsRef.current = draft.part6Seconds || 0;
+      part7SecondsRef.current = draft.part7Seconds || 0;
+      setAutoSavedAt(draft.lastSaved);
+
+      setRecoveryNotice({
+        answeredCount,
+        totalCount: questions.length,
+        timeLeft: adjustedTime,
+        restoredAt: Date.now(),
+      });
+    } else {
+      // Draft has expired (120 minutes passed while user was away)
+      setExpiredDraftData(draft);
+    }
+  }, [questions, loading, isSubmitted, draftKey, testId, currentSection]);
+
+  // Timer interval with Pacing tracking & Auto-save every 5 seconds
   useEffect(() => {
     if (loading || isSubmitted || isPaused) return;
 
@@ -463,14 +635,61 @@ function ExamSimulation() {
           handleSubmitExam();
           return 0;
         }
-        return prev - 1;
+        const nextTime = prev - 1;
+        // Auto-save timer and pacing progress every 5 seconds
+        if (nextTime % 5 === 0) {
+          saveDraft(userAnswersRef.current, flaggedQuestionsRef.current, currentIndexRef.current, nextTime);
+        }
+        return nextTime;
       });
     }, 1000);
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [loading, isSubmitted, isPaused]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [loading, isSubmitted, isPaused, questions]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Monitor online / offline network connectivity
+  useEffect(() => {
+    setIsOnline(typeof navigator !== 'undefined' ? navigator.onLine : true);
+
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  // Flush draft on visibilitychange (tab switch) & prompt on beforeunload (accidental reload/close)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden' && !isSubmittedRef.current && !isReviewModeRef.current) {
+        saveDraft();
+      }
+    };
+
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!isSubmittedRef.current && !isReviewModeRef.current && Object.keys(userAnswersRef.current).length > 0) {
+        saveDraft();
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [draftKey]);
 
   const formatTimer = (secs: number) => {
     const hours = Math.floor(secs / 3600);
@@ -483,10 +702,12 @@ function ExamSimulation() {
   const handleSelectOption = (letter: string) => {
     if (isSubmitted && !isReviewMode) return;
     const currentQ = questions[currentIndex];
-    setUserAnswers((prev) => ({
-      ...prev,
+    const newAnswers = {
+      ...userAnswers,
       [currentQ.number]: letter,
-    }));
+    };
+    setUserAnswers(newAnswers);
+    saveDraft(newAnswers, flaggedQuestions, currentIndex, timeLeftRef.current);
   };
 
   const toggleFlag = (num: number) => {
@@ -494,6 +715,7 @@ function ExamSimulation() {
       const next = new Set(prev);
       if (next.has(num)) next.delete(num);
       else next.add(num);
+      saveDraft(userAnswersRef.current, next, currentIndexRef.current, timeLeftRef.current);
       return next;
     });
   };
@@ -501,14 +723,16 @@ function ExamSimulation() {
   const handleSwitchSection = (newSec: 'all' | 'rc' | 'rc_sprint') => {
     if (newSec === currentSection) return;
     if (Object.keys(userAnswers).length > 0) {
-      if (!window.confirm('Chuyển chế độ thi sẽ khởi động lại bài làm của chế độ mới. Bạn có chắc chắn muốn chuyển?')) {
+      if (!window.confirm('Chuyển chế độ thi sẽ chuyển sang bài làm của chế độ mới. Bài làm hiện tại của bạn vẫn được lưu tạm. Bạn có muốn chuyển?')) {
         return;
       }
+      saveDraft();
     }
     const params = new URLSearchParams(searchParams.toString());
     params.set('section', newSec);
     window.location.href = `/exam?${params.toString()}`;
   };
+
 
   const handleSubmitExam = () => {
     if (isSubmitted) return;
@@ -623,6 +847,12 @@ function ExamSimulation() {
     // Save to localStorage history
     const prevHistory = storage.get<ExamScoreSummary[]>('toeic_exam_history', []);
     storage.set('toeic_exam_history', [summary, ...prevHistory]);
+
+    // Clear auto-saved draft for this completed test
+    storage.remove(draftKey);
+    storage.remove(activeSessionKey);
+    setRecoveryNotice(null);
+    setExpiredDraftData(null);
 
     // Synchronize and rebalance study plan based on full exam performance
     syncAdaptivePlan();
@@ -1155,6 +1385,26 @@ function ExamSimulation() {
           >
             {isFocusMode ? <MinimizeIcon size={16} /> : <MaximizeIcon size={16} />}
           </button>
+
+          {/* Auto-save Status Indicator */}
+          {!isSubmitted && (
+            <div
+              className={styles.autoSaveBadge}
+              title={autoSavedAt ? `Đã tự động lưu bài làm lúc ${new Date(autoSavedAt).toLocaleTimeString('vi-VN')}` : 'Tự động lưu bài làm thời gian thực'}
+            >
+              <ShieldCheckIcon size={14} style={{ color: 'var(--success)' }} />
+              <span className={styles.autoSaveText}>Đã lưu tự động</span>
+            </div>
+          )}
+
+          {/* Offline Status Badge */}
+          {!isOnline && (
+            <div className={styles.offlineBadge} title="Mất kết nối mạng Internet. Bài làm vẫn được lưu an toàn 100% trên thiết bị">
+              <WifiOffIcon size={14} />
+              <span>Ngoại tuyến</span>
+            </div>
+          )}
+
           <span className={styles.progressBadge}>
             Đã làm: <strong>{Object.keys(userAnswers).length}</strong> / {questions.length}
           </span>
@@ -1211,8 +1461,46 @@ function ExamSimulation() {
         </div>
       )}
 
+      {/* Recovery Notification Banner */}
+      {recoveryNotice && !isSubmitted && (
+        <div className={styles.recoveryBanner}>
+          <div className={styles.recoveryInfo}>
+            <CheckCircleIcon size={18} style={{ color: 'var(--success)', flexShrink: 0 }} />
+            <span>
+              Đã tự động khôi phục bài làm dở dang: đã làm <strong>{recoveryNotice.answeredCount}/{recoveryNotice.totalCount}</strong> câu • Còn <strong>{formatTimer(recoveryNotice.timeLeft)}</strong>
+            </span>
+          </div>
+          <div className={styles.recoveryActions}>
+            <button
+              type="button"
+              className={styles.recoveryDismissBtn}
+              onClick={() => setRecoveryNotice(null)}
+            >
+              Tiếp tục làm bài
+            </button>
+            <button
+              type="button"
+              className={styles.recoveryResetBtn}
+              onClick={handleResetExam}
+            >
+              <RotateCcwIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+              Làm lại từ đầu
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Offline Notice Bar (if loaded from cache) */}
+      {isOfflineMode && !isSubmitted && (
+        <div className={styles.offlineNoticeBar}>
+          <WifiOffIcon size={16} style={{ flexShrink: 0 }} />
+          <span>Bạn đang làm bài ở chế độ ngoại tuyến (dữ liệu đề thi nạp từ bộ nhớ đệm). Toàn bộ câu trả lời được bảo vệ an toàn 100%.</span>
+        </div>
+      )}
+
       {/* Main Exam Layout */}
       <main className={styles.examLayout}>
+
         {/* Question Area */}
         <section className={styles.questionArea}>
           <div className={styles.questionMeta}>
@@ -1355,7 +1643,7 @@ function ExamSimulation() {
             <button
               type="button"
               className={styles.navBtn}
-              onClick={() => setCurrentIndex((idx) => Math.max(0, idx - 1))}
+              onClick={() => navigateToQuestion(currentIndex - 1)}
               disabled={currentIndex === 0}
             >
               ← Câu trước
@@ -1368,7 +1656,7 @@ function ExamSimulation() {
             <button
               type="button"
               className={`${styles.navBtn} ${styles.navBtnPrimary}`}
-              onClick={() => setCurrentIndex((idx) => Math.min(questions.length - 1, idx + 1))}
+              onClick={() => navigateToQuestion(currentIndex + 1)}
               disabled={currentIndex === questions.length - 1}
             >
               Câu sau →
@@ -1470,7 +1758,7 @@ function ExamSimulation() {
                   className={classes}
                   onClick={() => {
                     const foundIndex = questions.findIndex((item) => item.number === q.number);
-                    if (foundIndex !== -1) setCurrentIndex(foundIndex);
+                    if (foundIndex !== -1) navigateToQuestion(foundIndex);
                   }}
                 >
                   {q.number}
@@ -1487,6 +1775,61 @@ function ExamSimulation() {
           onClose={() => setTutorContext(null)}
           questionContext={tutorContext}
         />
+      )}
+
+      {/* Expired Draft Recovery Modal */}
+      {expiredDraftData && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <div className={styles.modalHeader}>
+              <AlertCircleIcon size={24} style={{ color: 'var(--warning)', flexShrink: 0 }} />
+              <h3>Khôi Phục Bài Thi Dở Dang</h3>
+            </div>
+            <p className={styles.modalText}>
+              Hệ thống phát hiện bài thi trước đó của bạn ({Object.keys(expiredDraftData.userAnswers || {}).length}/{expiredDraftData.totalQuestions} câu đã làm), nhưng thời gian thi 120 phút đã kết thúc trong lúc bạn rời phòng thi.
+            </p>
+            <div className={styles.modalActions}>
+              <button
+                type="button"
+                className={styles.recoveryDismissBtn}
+                style={{ padding: '0.65rem 1rem', borderRadius: '8px', fontWeight: 600 }}
+                onClick={() => {
+                  setUserAnswers(expiredDraftData.userAnswers || {});
+                  setFlaggedQuestions(new Set(expiredDraftData.flaggedQuestions || []));
+                  setCurrentIndex(expiredDraftData.currentIndex || 0);
+                  setTimeLeft(30 * 60); // Gia hạn 30 phút
+                  part5SecondsRef.current = expiredDraftData.part5Seconds || 0;
+                  part6SecondsRef.current = expiredDraftData.part6Seconds || 0;
+                  part7SecondsRef.current = expiredDraftData.part7Seconds || 0;
+                  setExpiredDraftData(null);
+                }}
+              >
+                Gia hạn thêm 30 phút & Tiếp tục
+              </button>
+              <button
+                type="button"
+                className={styles.secondaryBtn}
+                style={{ padding: '0.6rem 1rem', borderRadius: '8px' }}
+                onClick={() => {
+                  setUserAnswers(expiredDraftData.userAnswers || {});
+                  setFlaggedQuestions(new Set(expiredDraftData.flaggedQuestions || []));
+                  setExpiredDraftData(null);
+                  setTimeout(() => handleSubmitExam(), 50);
+                }}
+              >
+                Nộp bài tính điểm ngay
+              </button>
+              <button
+                type="button"
+                className={styles.resetBtn}
+                onClick={handleResetExam}
+              >
+                <RotateCcwIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+                Làm lại từ đầu
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

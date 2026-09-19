@@ -183,6 +183,8 @@ export default function BackupRestoreModal({
                 <div className={styles.modeCards}>
                   {/* Mode 1: Smart Merge */}
                   <div
+                    id="mode-merge"
+                    data-testid="mode-merge"
                     className={`${styles.modeCard} ${selectedMode === 'merge' ? styles.modeCardActive : ''}`}
                     onClick={() => setSelectedMode('merge')}
                   >
@@ -202,6 +204,8 @@ export default function BackupRestoreModal({
 
                   {/* Mode 2: Clean Replace */}
                   <div
+                    id="mode-replace"
+                    data-testid="mode-replace"
                     className={`${styles.modeCard} ${selectedMode === 'replace' ? styles.modeCardActive : ''}`}
                     onClick={() => setSelectedMode('replace')}
                   >

@@ -83,7 +83,31 @@ export function getPredictiveScore(): PredictiveScoreData {
     };
   }
 
-  // 4. Fallback if no test taken yet
+  // 4. Check mini test result (7-part standardized Mini Test)
+  const miniResult = storage.get<any>('toeic_minitest_result', null);
+  if (miniResult && (miniResult.totalScore || miniResult.estimatedScore)) {
+    const total = Number(miniResult.totalScore ?? miniResult.estimatedScore);
+    const listeningScore = Number(miniResult.scaledLC ?? miniResult.listeningScore) || Math.round(total * 0.5);
+    const readingScore = Number(miniResult.scaledRC ?? miniResult.readingScore) || (total - listeningScore);
+    const predictedMin = Math.max(10, Math.floor((total - 35) / 10) * 10);
+    const predictedMax = Math.min(990, Math.ceil((total + 35) / 10) * 10);
+    const predictedMid = Math.round((predictedMin + predictedMax) / 2);
+
+    return {
+      predictedMin,
+      predictedMax,
+      predictedMid,
+      listeningScore,
+      readingScore,
+      targetScoreNum,
+      distanceToTarget: targetScoreNum - predictedMid,
+      confidenceLevel: 'medium',
+      sourceLabel: 'Hiệu chuẩn qua Mini Test 7 Parts',
+      hasCalibratedData: true,
+    };
+  }
+
+  // 5. Fallback if no test taken yet
   const initialBase = Math.max(350, targetScoreNum - 250);
   const predictedMin = initialBase;
   const predictedMax = initialBase + 100;
