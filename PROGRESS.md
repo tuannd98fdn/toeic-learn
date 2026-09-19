@@ -1441,11 +1441,55 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
     - Lộ trình hoàn chỉnh Dark Mode: `scratch/enhanced_plan_dark.png`.
     - Lộ trình trên Mobile iPhone (375x812): `scratch/enhanced_plan_mobile.png`.
 
+### ✅ Vấn Đề 55: Nâng Cấp Toàn Diện Sổ Tay Lỗi Sai (/notebook), Khắc Phục Lỗi Quiz Chuộc Lỗi & Tối Ưu Mobile UX [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Đánh giá trang `/notebook` và luồng "Ôn tập chuộc lỗi" (`/notebook/quiz`) phát hiện các lỗ hổng nghiêm trọng:
+    1. **Bug nghiêm trọng trong Quiz Ôn Tập**: Khi người dùng có cả câu hỏi bài thi sai và từ vựng lưu trong sổ tay, trang `/notebook/quiz/page.tsx` gọi `getMistakes()` lấy danh sách toàn bộ ID mà không lọc `m.type === 'vocabulary'`. Dẫn tới Quiz ngẫu nhiên bốc trúng ID câu hỏi thi (ví dụ `t1_q101`), không tìm thấy từ vựng trong từ điển (`allWords.find(...)` trả về undefined), và người dùng lập tức bị kẹt ở màn hình *"Không có từ nào!"*.
+    2. **Thẻ từ vựng đơn điệu, thiếu công cụ sư phạm**: Không có phát âm (Audio/Pronunciation), không có hiển thị hộp Spaced Repetition (Hộp 1-5 Leitner), không có nhãn cảnh báo từ tới hạn ôn tập, không có nút "Đã thuộc" để gỡ nhanh từ khỏi sổ tay, và các mẹo ghi nhớ (Mnemonic)/ví dụ song ngữ bị ẩn.
+    3. **Không có công cụ tìm kiếm & lọc từ vựng**: Khi danh sách từ vựng tích lũy lớn, người học không thể tìm kiếm theo từ khóa hoặc lọc riêng các từ đến hạn ôn tập.
+    4. **Vỡ layout thanh Tabs trên Mobile**: `tabsContainer` không có thanh cuộn ngang, khiến các tab bị ép hẹp và chữ bẻ dòng thành 3 dòng dọc (`Từ\nvựng\n(6)`).
+    5. **Mất an toàn thanh điều hướng dưới đáy**: Đáy trang thiếu padding an toàn (`padding-bottom: calc(5.5rem + env(safe-area-inset-bottom))`) khiến nội dung bị che khuất bởi bottom navbar trên điện thoại.
+    6. **Container trên Desktop quá chật hẹp**: Giới hạn tối đa 800px khiến các thẻ lỗi sai bị co rúm, không gian thừa thãi hai bên.
+    7. **138+ dòng inline styles trong `ExamMistakeList.tsx`**: Trực tiếp vi phạm quy chuẩn thiết kế sạch và kiến trúc CSS modules.
+    8. **Quiz Header đơn sơ**: Nút quay lại là text thô `← Thoát`, thiếu bộ đếm câu hỏi trực quan, thiếu thanh tiến độ và thống kê điểm realtime.
+* **Giải pháp & Triển khai**:
+  1. **Khắc phục triệt để Bug Quiz Ôn Tập (`/notebook/quiz/page.tsx`)**:
+     - Lọc chuẩn xác `mistakes.filter(m => m.type === 'vocabulary')`.
+     - Ưu tiên các từ vựng đến hạn ôn (`isDueForReview(m.nextReviewDate)`).
+     - Cập nhật thăng cấp Hộp Leitner (Box 1-5) và lùi lại Box 1 khi trả lời sai bằng `updateMistakeLeitner()`.
+     - Tích hợp tự động hoàn thành nhiệm vụ lộ trình `completeActiveTaskByType('vocab')` khi kết thúc bài quiz.
+  2. **Nâng cấp Hệ Thống Thẻ Từ Vựng Cốt Lõi (`/notebook/page.tsx`)**:
+     - Tích hợp phát âm Audio bằng hook `useAudio` với biểu tượng `VolumeIcon`.
+     - Hiển thị huy hiệu Hộp Spaced Repetition Leitner từ `Hộp 1 • Ôn mỗi ngày` đến `Hộp 5 • Nắm vững` cùng trạng thái `Tới hạn ôn`.
+     - Nút hành động nhanh "Đã thuộc" (`removeMistake`) xóa từ ngay khỏi sổ tay.
+     - Nút chuyển đổi mở rộng/thu gọn Mẹo ghi nhớ (Mnemonic Tip) & Ví dụ câu song ngữ kèm dịch nghĩa.
+     - Thanh tìm kiếm từ khóa thời gian thực (Search Bar từ vựng / nghĩa) kết hợp Bộ lọc trạng thái (Tất cả / Đến hạn ôn).
+  3. **Tái Cấu Trúc CSS Modules & Tối Ưu Mobile Ergonomics (`page.module.css`)**:
+     - Thiết lập `tabsContainer` hỗ trợ vuốt cuộn ngang mượt mà (`overflow-x: auto`, `white-space: nowrap`, `scrollbar-width: none`), ngăn chặn 100% tình trạng vỡ chữ trên điện thoại.
+     - Nới rộng desktop container từ 800px lên 1080px tiêu chuẩn.
+     - Bổ sung khoảng đệm an toàn `padding-bottom: calc(5.5rem + env(safe-area-inset-bottom))`.
+  4. **Triệt Tiêu Hoàn Toàn 138+ Inline Styles (`ExamMistakeList.tsx`)**:
+     - Chuyển đổi 100% style nội dòng trên bộ lọc đề thi/Part, thẻ câu hỏi, bảng ma trận phân loại nguyên nhân sai (Từ vựng, Bẫy đề, Ngữ pháp, Thiếu thời gian) và nút giải thích chi tiết sang các lớp CSS ngữ nghĩa trong `page.module.css`.
+  5. **Nâng Cấp Giao Diện Header Quiz Ôn Tập (`/notebook/quiz/page.tsx`)**:
+     - Nút "Thoát" trang nhã với biểu tượng SVG `ArrowLeftIcon`.
+     - Huy hiệu đếm câu hỏi `Câu X / Y`, huy hiệu điểm trực tiếp, và thanh tiến độ hoạt họa mượt mà.
+* **Quy chuẩn & Xác minh**:
+  - Tuân thủ nghiêm ngặt **NO UI EMOJIS (STRICT)**: 0 emoji trong mã nguồn và rendered DOM. Sử dụng 100% icon SVG từ `AppIcons` (`BookIcon`, `VolumeIcon`, `CheckIcon`, `FilterIcon`, `RotateIcon`, `ArrowLeftIcon`, v.v.).
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% (35/35 routes static & dynamic).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_notebook_enhancements_e2e.mjs`): PASS 100% (Vocab subtitle, tabs, 6 cards rendered, search 'conference', due filter, mnemonic toggle, quiz load with questions & options, exam tab matrix + cards, mobile tab nowrap, 0 DOM emojis).
+  - Ảnh nghiệm thu giao diện:
+    - Sổ tay từ vựng Desktop: `scratch/notebook_enhanced_vocab_desktop.png`.
+    - Quiz chuộc lỗi khi đã sửa bug: `scratch/notebook_enhanced_quiz_loaded.png`.
+    - Sổ tay từ vựng Mobile: `scratch/notebook_enhanced_vocab_mobile.png`.
+    - Sổ tay câu hỏi thi sai Desktop: `scratch/notebook_enhanced_exam_desktop.png`.
+    - Sổ tay câu hỏi thi sai Mobile: `scratch/notebook_enhanced_exam_mobile.png`.
+
 ---
 
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 53: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
+### Vấn Đề 56: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
 * **Bối cảnh & Kế hoạch**:
   - Đã hoàn tất 100% chuẩn xác thực cho ETS 2022 Test 1, Test 2, Test 3, Test 4, Test 5, và Test 6 (1,200 câu hỏi chuẩn hóa).
   - Tiếp tục mở rộng bộ đề ETS 2022 với **Test 7**:

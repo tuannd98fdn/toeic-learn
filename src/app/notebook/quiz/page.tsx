@@ -7,11 +7,14 @@ import Confetti from '@/components/Confetti';
 import { VocabularyWord } from '@/data/vocabulary';
 import { useVocabulary } from '@/hooks/useVocabulary';
 import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
+import { isDueForReview } from '@/utils/spacedRepetition';
+import { completeActiveTaskByType } from '@/utils/studyPlanEngine';
+import { ArrowLeftIcon } from '@/components/icons/AppIcons';
 import styles from '@/app/quiz/page.module.css';
 
 export default function NotebookQuizPage() {
   const { mounted: vocabMounted, allWords, getRandomWords } = useVocabulary();
-  const { mounted: notebookMounted, getMistakes, removeMistake } = useMistakeNotebook();
+  const { mounted: notebookMounted, getMistakes, mistakes, removeMistake, updateMistakeProgress } = useMistakeNotebook();
   const [questions, setQuestions] = useState<{word: VocabularyWord, options: string[]}[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -23,18 +26,39 @@ export default function NotebookQuizPage() {
   useEffect(() => {
     if (!vocabMounted || !notebookMounted) return;
     
-    const mistakeIds = getMistakes();
-    if (mistakeIds.length === 0) {
+    const allMistakeIds = getMistakes();
+    // Filter strictly for vocabulary mistakes (exclude exam mistakes like ets2022_test1_part5_101)
+    const vocabMistakeIds = allMistakeIds.filter(
+      id => !mistakes[id]?.type || mistakes[id]?.type === 'vocabulary'
+    );
+
+    if (vocabMistakeIds.length === 0) {
       setIsFinished(true); // Nothing to do
       return;
     }
 
-    // Limit quiz to max 15 mistakes at a time
-    const quizIds = mistakeIds.sort(() => 0.5 - Math.random()).slice(0, 15);
-    const quizWords = quizIds
+    // Prioritize words that are due today according to Spaced Repetition
+    const dueVocabIds = vocabMistakeIds.filter(
+      id => mistakes[id]?.nextReviewDate && isDueForReview(mistakes[id].nextReviewDate)
+    );
+    const nonDueVocabIds = vocabMistakeIds.filter(
+      id => !mistakes[id]?.nextReviewDate || !isDueForReview(mistakes[id].nextReviewDate)
+    );
+
+    // Take due words first, then fill up to 15 with other vocab mistakes
+    const shuffledDue = [...dueVocabIds].sort(() => 0.5 - Math.random());
+    const shuffledNonDue = [...nonDueVocabIds].sort(() => 0.5 - Math.random());
+    const quizIds = [...shuffledDue, ...shuffledNonDue].slice(0, 15);
+
+    const quizWords = (quizIds
       .map(id => allWords.find(w => w.id === id))
-      .filter((w) => w !== undefined) as VocabularyWord[];
+      .filter(w => w !== undefined)) as VocabularyWord[];
     
+    if (quizWords.length === 0) {
+      setIsFinished(true);
+      return;
+    }
+
     const generatedQuestions = quizWords.map(word => {
       // Get 3 random wrong answers
       const wrongWords = getRandomWords(3, [word.id]);
@@ -50,10 +74,20 @@ export default function NotebookQuizPage() {
   }, [vocabMounted, notebookMounted, sessionKey]);
 
   const handleAnswer = (isCorrect: boolean) => {
-    if (isCorrect) {
-      setScore(prev => prev + 1);
-      removeMistake(questions[currentIndex].word.id);
-      setClearedWords(prev => prev + 1);
+    const currentWord = questions[currentIndex]?.word;
+    if (currentWord) {
+      if (isCorrect) {
+        setScore(prev => prev + 1);
+        updateMistakeProgress(currentWord.id, true);
+        const m = mistakes[currentWord.id];
+        // If word reached Box 4 or 5, consider it cleared from active mistake review
+        if (!m || (m.box && m.box >= 4)) {
+          removeMistake(currentWord.id);
+          setClearedWords(prev => prev + 1);
+        }
+      } else {
+        updateMistakeProgress(currentWord.id, false);
+      }
     }
 
     if (currentIndex < questions.length - 1) {
@@ -64,6 +98,9 @@ export default function NotebookQuizPage() {
       if (percentage >= 70) {
         setShowConfetti(true);
       }
+      // Auto-complete study plan task if applicable
+      completeActiveTaskByType('review');
+      completeActiveTaskByType('vocab');
     }
   };
 
@@ -138,17 +175,24 @@ export default function NotebookQuizPage() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div className={styles.progressInfo}>
-          <span>Câu {currentIndex + 1} / {questions.length}</span>
-          <span>Score: {score}</span>
+        <div className={styles.quizTopBar}>
+          <Link href="/notebook" className={styles.exitBtn}>
+            <ArrowLeftIcon size={16} />
+            <span>Thoát</span>
+          </Link>
+          <div className={styles.liveStats}>
+            <span className={styles.questionBadge}>
+              Câu {currentIndex + 1} / {questions.length}
+            </span>
+            <span className={styles.questionBadge}>
+              Điểm: {score}
+            </span>
+          </div>
         </div>
         <div className={styles.progressBarBg}>
           <div 
             className={styles.progressBarFill} 
-            style={{ 
-              width: `${progressPercent}%`,
-              backgroundColor: 'var(--primary)'
-            }}
+            style={{ width: `${progressPercent}%` }}
           />
         </div>
       </header>

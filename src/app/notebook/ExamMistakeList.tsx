@@ -256,7 +256,7 @@ export default function ExamMistakeList({
       </section>
 
       {/* Top CTA Banner to start Practice */}
-      <section className={styles.actionSection} style={{ marginBottom: '1.5rem' }}>
+      <section className={styles.actionSection}>
         <div className={`${styles.ctaCard} card-minimal`}>
           <h2>Sẵn sàng khắc phục câu sai?</h2>
           <p>
@@ -268,11 +268,10 @@ export default function ExamMistakeList({
               <>, đã khắc phục thành công <strong>{rootCauseStats.masteredTotal}</strong> câu</>
             )}.
           </p>
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+          <div className={styles.ctaButtonsRow}>
             <Link 
               href={`/notebook/exam-quiz?part=${filterPart}`} 
               className={`${styles.primaryBtn} btn-accent`}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
             >
               <span>Bắt đầu luyện tập câu sai {filterPart !== 'all' ? `(${partLabels[filterPart] || filterPart})` : ''}</span>
               <ArrowRightIcon size={16} />
@@ -281,7 +280,6 @@ export default function ExamMistakeList({
               <Link 
                 href="/notebook/exam-quiz?filter=due" 
                 className={styles.secondaryBtn}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
               >
                 <ZapIcon size={14} />
                 <span>Chỉ ôn câu tới hạn ({dueQuestions.length})</span>
@@ -298,7 +296,6 @@ export default function ExamMistakeList({
                     : `/part5?subCategory=${encodeURIComponent(filterSubCategory)}`
                 } 
                 className={styles.secondaryBtn}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                 title={`Luyện tập chuyên đề ${filterSubCategory}`}
               >
                 <ZapIcon size={14} />
@@ -318,13 +315,13 @@ export default function ExamMistakeList({
         </div>
       </section>
 
-      <div style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <label style={{ fontSize: '0.88rem', fontWeight: 600 }}>Lọc Part:</label>
+      <div className={styles.filterBar}>
+        <div className={styles.filterGroup}>
+          <label className={styles.filterLabel}>Lọc Part:</label>
           <select 
             value={filterPart}
             onChange={(e) => setFilterPart(e.target.value)}
-            style={{ padding: '0.45rem 0.75rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-primary)', color: 'var(--foreground)', fontSize: '0.85rem' }}
+            className={styles.filterSelect}
           >
             <option value="all">Tất cả Part ({loadedQuestions.length})</option>
             <option value="part1">Part 1 (Ảnh)</option>
@@ -338,12 +335,12 @@ export default function ExamMistakeList({
         </div>
 
         {availableSubCategories.length > 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <label style={{ fontSize: '0.88rem', fontWeight: 600 }}>Chủ điểm ngữ pháp:</label>
+          <div className={styles.filterGroup}>
+            <label className={styles.filterLabel}>Chủ điểm:</label>
             <select 
               value={filterSubCategory}
               onChange={(e) => setFilterSubCategory(e.target.value)}
-              style={{ padding: '0.45rem 0.75rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-primary)', color: 'var(--foreground)', fontSize: '0.85rem' }}
+              className={styles.filterSelect}
             >
               <option value="all">Tất cả chủ điểm</option>
               {availableSubCategories.map(cat => (
@@ -353,12 +350,12 @@ export default function ExamMistakeList({
           </div>
         )}
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <label style={{ fontSize: '0.88rem', fontWeight: 600 }}>Nguyên nhân sai:</label>
+        <div className={styles.filterGroup}>
+          <label className={styles.filterLabel}>Nguyên nhân:</label>
           <select 
             value={filterRootCause}
             onChange={(e) => setFilterRootCause(e.target.value)}
-            style={{ padding: '0.45rem 0.75rem', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg-primary)', color: 'var(--foreground)', fontSize: '0.85rem' }}
+            className={styles.filterSelect}
           >
             <option value="all">Tất cả nguyên nhân</option>
             {ROOT_CAUSES.map(rc => (
@@ -368,7 +365,7 @@ export default function ExamMistakeList({
           </select>
         </div>
 
-        <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+        <span className={styles.filterCount}>
           Hiển thị {filteredQuestions.length} câu
         </span>
       </div>
@@ -385,31 +382,30 @@ export default function ExamMistakeList({
           return (
             <div 
               key={mistakeId} 
-              className={`${styles.wordCard} card-minimal`}
-              style={isMastered ? { opacity: 0.85, border: '1px solid rgba(16, 185, 129, 0.4)' } : undefined}
+              className={`${styles.examCard} card-minimal ${isMastered ? styles.examCardMastered : ''}`}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '0.6rem' }}>
+              <div className={styles.examCardHeader}>
                 <div>
-                  <div style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--foreground)' }}>
+                  <div className={styles.examCardTitle}>
                     {partLabels[part] || part} • Câu {qData.number}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '4px', flexWrap: 'wrap' }}>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                  <div className={styles.tagsRow}>
+                    <span className={styles.testNameTag}>
                       {testName}
                     </span>
                     {subCategory && (
-                      <span style={{ fontSize: '0.72rem', padding: '1px 7px', borderRadius: '4px', background: 'rgba(99, 102, 241, 0.12)', color: 'var(--primary)', fontWeight: 600 }}>
+                      <span className={styles.subCategoryBadge}>
                         {subCategory}
                       </span>
                     )}
                     {grammarTag && (
-                      <span style={{ fontSize: '0.72rem', padding: '1px 7px', borderRadius: '4px', background: 'rgba(16, 185, 129, 0.12)', color: '#10b981', fontWeight: 500 }}>
+                      <span className={styles.grammarBadge}>
                         {grammarTag}
                       </span>
                     )}
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', flexShrink: 0 }}>
+                <div className={styles.badgesGroup}>
                   {isMastered ? (
                     <span className={styles.masteredBadge}>
                       <ShieldCheckIcon size={13} />
@@ -418,7 +414,7 @@ export default function ExamMistakeList({
                   ) : (
                     <>
                       {due && (
-                        <span style={{ fontSize: '0.7rem', background: 'var(--danger)', color: 'white', padding: '2px 8px', borderRadius: '6px', fontWeight: 700 }}>
+                        <span className={styles.dueBadge}>
                           Tới hạn ôn
                         </span>
                       )}
@@ -431,37 +427,28 @@ export default function ExamMistakeList({
               {qData.text ? (
                 <p className={styles.wordMeaning}>{qData.text}</p>
               ) : (
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--text-secondary)', fontSize: '0.85rem', background: 'var(--bg-secondary)', padding: '6px 10px', borderRadius: '8px', margin: '0.4rem 0' }}>
+                <div className={styles.audioQuestionTag}>
                   <HeadphonesIcon size={15} />
                   <span>Câu hỏi dạng nghe / hình ảnh</span>
                 </div>
               )}
               
-              <div style={{ marginTop: '0.6rem', fontSize: '0.85rem' }}>
+              <div className={styles.answerRow}>
                 <strong>Đáp án: </strong> 
-                <span style={{ color: 'var(--success)', fontWeight: 700 }}>{qData.correctAnswer}</span>
+                <span className={styles.answerCorrect}>{qData.correctAnswer}</span>
               </div>
 
-              <div style={{ marginTop: '1rem' }}>
-                <div style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Nguyên nhân sai:</div>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <div className={styles.rootCauseSection}>
+                <div className={styles.rootCauseLabel}>Nguyên nhân sai:</div>
+                <div className={styles.rootCausePills}>
                   {ROOT_CAUSES.map(rc => {
                     const isSelected = m?.rootCause === rc;
                     return (
                       <button
                         key={rc}
+                        type="button"
                         onClick={() => updateMistakeRootCause?.(mistakeId, rc)}
-                        style={{
-                          background: isSelected ? 'var(--primary)' : 'var(--bg-secondary)',
-                          color: isSelected ? 'white' : 'var(--text-secondary)',
-                          border: `1px solid ${isSelected ? 'var(--primary)' : 'var(--border)'}`,
-                          padding: '0.35rem 0.7rem',
-                          borderRadius: '16px',
-                          fontSize: '0.75rem',
-                          fontWeight: 600,
-                          cursor: 'pointer',
-                          transition: 'all 0.2s ease'
-                        }}
+                        className={`${styles.rootCausePill} ${isSelected ? styles.rootCausePillActive : ''}`}
                       >
                         {rc}
                       </button>
@@ -470,20 +457,10 @@ export default function ExamMistakeList({
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+              <div className={styles.examCardActions}>
                 <Link
                   href={`/notebook/exam-quiz?id=${mistakeId}`}
-                  className="btn-primary btn-sm"
-                  style={{
-                    borderRadius: '8px',
-                    padding: '0.45rem 0.85rem',
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    textDecoration: 'none'
-                  }}
+                  className={styles.actionBtnPrimary}
                 >
                   <RotateCcwIcon size={14} />
                   <span>Luyện câu này</span>
@@ -493,17 +470,7 @@ export default function ExamMistakeList({
                   <button
                     type="button"
                     onClick={() => unmasterMistake?.(mistakeId)}
-                    className="btn-secondary btn-sm"
-                    style={{
-                      borderRadius: '8px',
-                      padding: '0.45rem 0.85rem',
-                      fontSize: '0.8rem',
-                      fontWeight: 700,
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      cursor: 'pointer'
-                    }}
+                    className={styles.actionBtnSecondary}
                   >
                     <RotateCcwIcon size={14} />
                     <span>Mở lại câu này</span>
@@ -512,19 +479,7 @@ export default function ExamMistakeList({
                   <button
                     type="button"
                     onClick={() => masterMistake?.(mistakeId)}
-                    className="btn-secondary btn-sm"
-                    style={{
-                      borderRadius: '8px',
-                      padding: '0.45rem 0.85rem',
-                      fontSize: '0.8rem',
-                      fontWeight: 700,
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      cursor: 'pointer',
-                      color: '#10b981',
-                      borderColor: 'rgba(16, 185, 129, 0.4)'
-                    }}
+                    className={styles.actionBtnMastered}
                   >
                     <ShieldCheckIcon size={14} />
                     <span>Đã nắm vững</span>
@@ -547,17 +502,7 @@ export default function ExamMistakeList({
                     subCategory: subCategory,
                     grammarTag: grammarTag,
                   })}
-                  className="btn-secondary btn-sm"
-                  style={{
-                    borderRadius: '8px',
-                    padding: '0.45rem 0.85rem',
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    cursor: 'pointer'
-                  }}
+                  className={styles.actionBtnTutor}
                 >
                   <BotIcon size={14} />
                   <span>Hỏi Gia sư</span>
