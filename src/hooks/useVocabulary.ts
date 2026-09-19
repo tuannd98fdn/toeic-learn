@@ -68,12 +68,25 @@ export function useVocabulary() {
   }, []);
 
   const getWordsByCategory = useCallback((category: string) => {
-    if (category === "All") return allWords;
-    return allWords.filter(w => w.category === category);
+    if (category === "All" || !category) return allWords;
+    return allWords.filter(w => w.category === category || w.topicId === category);
   }, [allWords]);
 
-  const getRandomWords = useCallback((n: number, excludeIds: string[] = []) => {
-    const available = allWords.filter(w => !excludeIds.includes(w.id));
+  const getRandomWords = useCallback((n: number, excludeIds: string[] = [], category?: string, targetBand?: string) => {
+    let available = allWords.filter(w => !excludeIds.includes(w.id));
+    if (category && category !== 'All') {
+      available = available.filter(w => w.category === category || w.topicId === category);
+    }
+    if (targetBand && targetBand !== 'All') {
+      available = available.filter(w => w.targetBand === targetBand);
+    }
+    // Fallback if not enough words in filtered pool
+    if (available.length < n && category) {
+      const rest = allWords.filter(w => !excludeIds.includes(w.id) && !available.some(a => a.id === w.id));
+      const needed = n - available.length;
+      const shuffledRest = [...rest].sort(() => 0.5 - Math.random());
+      available = [...available, ...shuffledRest.slice(0, needed)];
+    }
     const shuffled = [...available].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, n);
   }, [allWords]);

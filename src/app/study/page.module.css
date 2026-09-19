@@ -919,3 +919,89 @@
   margin: 0 0 14px 0;
   line-height: 1.5;
 }
+
+/* ============================================
+   Topic Control Row & Mastery Matrix Toggle
+   ============================================ */
+.topicControlRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+.topicSelectWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.topicSelectLabel {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.topicSelectDropdown {
+  flex: 1;
+  padding: 5px 10px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--border);
+  background: var(--surface-secondary, var(--card));
+  color: var(--foreground);
+  font-size: 0.78rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.topicSelectDropdown:focus {
+  border-color: var(--primary);
+}
+
+.matrixToggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.matrixToggleBtn:hover {
+  background: var(--surface-hover);
+  color: var(--foreground);
+  border-color: var(--border-focus);
+}
+
+.matrixToggleBtnActive {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.matrixWrapper {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 12px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

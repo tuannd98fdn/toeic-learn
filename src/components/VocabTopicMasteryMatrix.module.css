@@ -1,0 +1,395 @@
+.loadingContainer {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.matrixCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 16px);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  transition: all 0.2s ease;
+}
+
+.compactCard {
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Header */
+.matrixHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.headerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 680px;
+}
+
+.headerBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  color: var(--primary);
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+
+.headerTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--foreground);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.headerSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.headerActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  background: var(--primary);
+  color: #ffffff;
+  border-radius: var(--radius-md, 8px);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.headerActionBtn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* KPI Strip */
+.kpiStrip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 1rem 1.25rem;
+}
+
+.kpiItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.kpiLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.kpiValWrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.kpiValue {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.kpiUnit {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.kpiBandBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.kpiDivider {
+  display: none;
+}
+
+/* Weakness Alert Banner */
+.weaknessAlert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  border-radius: var(--radius-lg, 12px);
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  flex-wrap: wrap;
+}
+
+.alertIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger);
+  flex-shrink: 0;
+}
+
+.alertContent {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.alertTitle {
+  font-size: 0.9rem;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.alertTitle strong {
+  font-weight: 700;
+}
+
+.alertDesc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.alertActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-md, 8px);
+  background: var(--danger);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.alertActionBtn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+/* Topics Grid */
+.topicsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.topicCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 12px);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.topicCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--primary);
+}
+
+.topicCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.topicIconAndTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.topicIconBubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.topicNameVi {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--foreground);
+  line-height: 1.25;
+}
+
+.topicNameEn {
+  font-size: 0.725rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+
+.topicScoreBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.topicScoreNum {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.topicStatusPill {
+  font-size: 0.675rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.statusStrong {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--success);
+}
+
+.statusModerate {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--warning-hover);
+}
+
+.statusWeak {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger);
+}
+
+/* Progress Bar */
+.progressBarBg {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+/* Card Bottom */
+.topicCardBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+}
+
+.topicWordCount {
+  color: var(--text-secondary);
+}
+
+.topicWordCount strong {
+  color: var(--foreground);
+}
+
+.topicLinkBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--primary);
+  font-size: 0.775rem;
+  font-weight: 700;
+  background: none;
+  border: none;
+  padding: 0.25rem 0.4rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.topicLinkBtn:hover {
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--primary-hover);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .kpiStrip {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .weaknessAlert {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .alertActionBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .topicsGrid {
+    grid-template-columns: 1fr;
+  }
+}

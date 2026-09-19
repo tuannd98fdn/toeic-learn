@@ -1,5 +1,7 @@
 import { storage } from './storage';
 import { getPredictiveScore } from './scorePredictor';
+import { VOCABULARY_DATA } from '@/data/vocabulary';
+import { evaluateVocabMastery, VocabEvaluationResult } from './vocabEvaluator';
 
 export interface KnowledgePillarStats {
   score: number; // 0 - 100%
@@ -29,6 +31,7 @@ export interface KnowledgeEvaluationResult {
     listening: KnowledgePillarStats;
     reading: KnowledgePillarStats;
   };
+  vocabTopics?: VocabEvaluationResult;
 }
 
 /**
@@ -40,19 +43,14 @@ export function evaluateLearnerKnowledge(): KnowledgeEvaluationResult {
   const examScore = predictiveData.predictedMid;
   const targetScoreNum = predictiveData.targetScoreNum || 750;
 
-  // 1. Evaluate Pillar: Vocabulary (from Leitner SRS)
+  // 1. Evaluate Pillar: Vocabulary (from Leitner SRS & 12 Topics)
   const leitnerProgress = storage.get<Record<string, { box: number }>>('leitner_progress', {});
-  const leitnerEntries = Object.values(leitnerProgress);
+  const userWords = storage.get<any[]>('user_vocabulary', []);
+  const allVocabWords = [...VOCABULARY_DATA, ...userWords];
+  const vocabEvaluation = evaluateVocabMastery(allVocabWords, leitnerProgress);
   
-  let masteredVocab = 0; // Box 4 & 5
-  let learningVocab = 0; // Box 1, 2, 3
-  
-  leitnerEntries.forEach((entry) => {
-    if (entry && typeof entry.box === 'number') {
-      if (entry.box >= 4) masteredVocab++;
-      else if (entry.box >= 1) learningVocab++;
-    }
-  });
+  const masteredVocab = vocabEvaluation.totalMastered;
+  const learningVocab = vocabEvaluation.totalLearning;
 
   // Target vocabulary requirement based on target score band
   let targetVocabRequirement = 250;
@@ -157,13 +155,23 @@ export function evaluateLearnerKnowledge(): KnowledgeEvaluationResult {
   } else if (executionGap <= -35 || (vocabScorePct < 40 && examScore >= 500)) {
     gapType = 'KNOWLEDGE_DEFICIT';
     diagnosisTitle = 'Hổng Nền Tảng Tri Thức Cốt Lõi';
-    diagnosisAdvice = `Điểm thi thực chiến (${examScore}) đang chạm sát trần tri thức (${knowledgeCeilingScore}). Bạn sẽ sớm gặp ngưỡng chững điểm nếu không nạp thêm vốn từ vựng band ${targetScoreNum}+ và lấp lỗ hổng ngữ pháp.`;
-    primaryRecommendation = {
-      title: 'Học Từ Vựng Spaced Repetition (SRS)',
-      description: 'Nạp thêm từ vựng cốt lõi vào Hộp 4 - 5 để nâng trần điểm số.',
-      actionLabel: 'HỌC TỪ VỰNG NGAY',
-      actionLink: '/study',
-    };
+    if (vocabEvaluation.weakestTopic && vocabEvaluation.weakestTopic.masteryScore < 50) {
+      diagnosisAdvice = `Vốn từ vựng của bạn đang bị nghẽn tại chủ đề ${vocabEvaluation.weakestTopic.nameVi} (${vocabEvaluation.weakestTopic.masteredWords}/${vocabEvaluation.weakestTopic.totalWords} từ đã thuộc). Hãy củng cố chủ đề này để nâng trần điểm số.`;
+      primaryRecommendation = {
+        title: `Học Từ Vựng: ${vocabEvaluation.weakestTopic.nameVi}`,
+        description: `Củng cố ${vocabEvaluation.weakestTopic.unstudiedWords + vocabEvaluation.weakestTopic.learningWords} từ chưa vững trong chủ đề ${vocabEvaluation.weakestTopic.nameVi}.`,
+        actionLabel: 'HỌC CHỦ ĐỀ NÀY',
+        actionLink: `/study?category=${encodeURIComponent(vocabEvaluation.weakestTopic.nameEn)}`,
+      };
+    } else {
+      diagnosisAdvice = `Điểm thi thực chiến (${examScore}) đang chạm sát trần tri thức (${knowledgeCeilingScore}). Bạn sẽ sớm gặp ngưỡng chững điểm nếu không nạp thêm vốn từ vựng band ${targetScoreNum}+ và lấp lỗ hổng ngữ pháp.`;
+      primaryRecommendation = {
+        title: 'Học Từ Vựng Spaced Repetition (SRS)',
+        description: 'Nạp thêm từ vựng cốt lõi vào Hộp 4 - 5 để nâng trần điểm số.',
+        actionLabel: 'HỌC TỪ VỰNG NGAY',
+        actionLink: '/study',
+      };
+    }
   }
 
   // Pillar helper
@@ -212,5 +220,6 @@ export function evaluateLearnerKnowledge(): KnowledgeEvaluationResult {
         status: getPillarStatus(readingScorePct),
       },
     },
+    vocabTopics: vocabEvaluation,
   };
 }

@@ -7,14 +7,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˌædvərˈtaɪzmənt/",
     "vietnamese": "quảng cáo",
     "partOfSpeech": "noun",
-    "category": "Corporate & Management",
+    "category": "Marketing & Sales",
     "targetBand": "450+",
     "examples": [
       "The advertisement appeared in the local newspaper.",
       "They spent a lot of money on online advertisements."
     ],
     "mnemonicTip": "Thường viết tắt là 'ad' trong tiếp thị",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v5",
@@ -29,7 +30,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "He is scheduled to speak at a medical conference next week."
     ],
     "mnemonicTip": "Gốc từ confer = bàn bạc, thảo luận tập thể",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v8",
@@ -37,73 +39,78 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈdaʊntaʊn/",
     "vietnamese": "trung tâm thành phố",
     "partOfSpeech": "noun/adv",
-    "category": "General Business",
+    "category": "Travel & Hospitality",
     "targetBand": "450+",
     "examples": [
       "The new branch office is located downtown near the subway.",
       "We took a taxi downtown to meet the client for lunch."
     ],
     "mnemonicTip": "Down + town: khu phố sầm uất trung tâm",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v9",
-    "word": "farewell",
-    "ipa": "/ˌferˈwel/",
-    "vietnamese": "lời tạm biệt, buổi chia tay",
+    "word": "reimbursement",
+    "ipa": "/ˌriːɪmˈbɜːrsmənt/",
+    "vietnamese": "khoản hoàn tiền công tác phí, sự bồi hoàn",
     "partOfSpeech": "noun",
-    "category": "Personnel & HR",
+    "category": "Finance & Accounting",
+    "topicId": "finance",
     "targetBand": "450+",
     "examples": [
-      "The department organized a farewell party for the retiring manager.",
-      "He bid a warm farewell to all his coworkers on Friday."
+      "Please submit your travel receipts for reimbursement.",
+      "Reimbursement requests are processed within five business days."
     ],
-    "mnemonicTip": "Fare (đi đường) + well (tốt đẹp): chúc đi đường bình an",
+    "mnemonicTip": "Gốc từ: re (lại) + imburse (bỏ tiền vào ví) = hoàn lại tiền đã tự ứng trước.",
     "emoji": ""
   },
   {
     "id": "v13",
-    "word": "soap",
-    "ipa": "/soʊp/",
-    "vietnamese": "xà phòng, đồ dùng vệ sinh",
-    "partOfSpeech": "noun",
-    "category": "General Business",
+    "word": "complimentary",
+    "ipa": "/ˌkɑːmplɪˈmɛntri/",
+    "vietnamese": "miễn phí (dịch vụ khách sạn, quà tặng kèm hội nghị)",
+    "partOfSpeech": "adjective",
+    "category": "Travel & Hospitality",
+    "topicId": "travel",
     "targetBand": "450+",
     "examples": [
-      "The hotel provides complimentary soap and shampoo in each room.",
-      "Housekeeping restocked the liquid soap dispensers this morning."
+      "Guests receive a complimentary breakfast each morning.",
+      "Complimentary shuttle service is available to the airport."
     ],
-    "mnemonicTip": "Vật dụng vệ sinh tiêu chuẩn trong khách sạn",
+    "mnemonicTip": "Từ khóa vàng khách sạn/hội thảo Part 3 & 7: complimentary = free = at no charge.",
     "emoji": ""
   },
   {
     "id": "v14",
-    "word": "lotion",
-    "ipa": "/ˈloʊʃn/",
-    "vietnamese": "kem dưỡng da, dung dịch chăm sóc",
+    "word": "subscription",
+    "ipa": "/səbˈskrɪpʃən/",
+    "vietnamese": "sự đăng ký thuê bao (báo chí, tạp chí, dịch vụ định kỳ)",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Marketing & Sales",
+    "topicId": "marketing",
     "targetBand": "450+",
     "examples": [
-      "Apply protective lotion before working outdoors in the sun.",
-      "The gift shop sells scented hand lotions and body care items."
+      "You can renew your annual subscription online at a discount.",
+      "The magazine subscription includes access to digital archives."
     ],
-    "mnemonicTip": "Từ vựng đồ dùng cá nhân thường gặp trong Part 1 & 4",
+    "mnemonicTip": "Sub (dưới) + script (viết) = ký tên đăng ký nhận báo định kỳ.",
     "emoji": ""
   },
   {
     "id": "v16",
-    "word": "frozen food",
-    "ipa": "/ˈfroʊzn fuːd/",
-    "vietnamese": "thực phẩm đông lạnh",
+    "word": "representative",
+    "ipa": "/ˌrɛprɪˈzɛntətɪv/",
+    "vietnamese": "người đại diện (bán hàng, chăm sóc khách hàng)",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Customer Relations",
+    "topicId": "customer_service",
     "targetBand": "450+",
     "examples": [
-      "The grocery store expanded its frozen food section last month.",
-      "Frozen food items should be stored in commercial freezers immediately upon arrival."
+      "A sales representative will contact you shortly.",
+      "Our customer service representative resolved the billing inquiry."
     ],
-    "mnemonicTip": "Freeze (đông đá) -> frozen food (đồ đông lạnh)",
+    "mnemonicTip": "Thường gặp dạng viết tắt: sales rep / customer rep = người đại diện.",
     "emoji": ""
   },
   {
@@ -112,14 +119,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/kənˈviːniəns/",
     "vietnamese": "sự thuận tiện, tiện lợi",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "450+",
     "examples": [
       "Please contact our customer service line at your earliest convenience.",
       "The online portal was developed for the convenience of all registered users."
     ],
     "mnemonicTip": "Cụm thường gặp: 'at your earliest convenience' (ngay khi tiện nhất)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v23",
@@ -127,14 +135,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/aɪˈdiːəl/",
     "vietnamese": "lý tưởng, hoàn hảo",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "450+",
     "examples": [
       "This central location is ideal for our new regional distribution center.",
       "She has the ideal skills and experience for the administrative assistant role."
     ],
     "mnemonicTip": "Ideal location / ideal candidate: vị trí / ứng viên lý tưởng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v26",
@@ -149,7 +158,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Special protective packaging prevents delicate electronics from breaking."
     ],
     "mnemonicTip": "Gốc protect (bảo vệ) + ive -> protective gear (đồ bảo hộ)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v30",
@@ -164,36 +174,39 @@ export const VOCAB_450: VocabularyWord[] = [
       "Management is actively seeking ways to reduce energy costs."
     ],
     "mnemonicTip": "Cụm phổ biến trong tuyển dụng: seeking candidates / seeking advice",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v31",
-    "word": "shine",
-    "ipa": "/ʃaɪn/",
-    "vietnamese": "tỏa sáng, nổi bật",
-    "partOfSpeech": "verb",
-    "category": "General Business",
+    "word": "extension",
+    "ipa": "/ɪkˈstɛnʃən/",
+    "vietnamese": "số máy nhánh nội bộ; sự gia hạn thời gian",
+    "partOfSpeech": "noun",
+    "category": "Office & Administration",
+    "topicId": "office",
     "targetBand": "450+",
     "examples": [
-      "Her presentation skills truly shine during client meetings.",
-      "The newly polished reception floor was clean and bright."
+      "You can reach Ms. Gomez at extension 402.",
+      "The contractor requested a two-week extension on the deadline."
     ],
-    "mnemonicTip": "Nghĩa bóng trong công việc: thể hiện năng lực xuất sắc",
+    "mnemonicTip": "Part 2 & 3: \"Call extension 305\" = gọi số máy lẻ trong văn phòng công ty.",
     "emoji": ""
   },
   {
     "id": "v34",
-    "word": "plenty",
-    "ipa": "/ˈplenti/",
-    "vietnamese": "nhiều, dồi dào",
-    "partOfSpeech": "pronoun/adv",
-    "category": "General Business",
+    "word": "amenity",
+    "ipa": "/əˈmɛnəti/",
+    "vietnamese": "tiện nghi, dịch vụ tiện ích (khách sạn, khu căn hộ văn phòng)",
+    "partOfSpeech": "noun",
+    "category": "Travel & Hospitality",
+    "topicId": "travel",
     "targetBand": "450+",
     "examples": [
-      "There is plenty of time to submit your reimbursement request before Friday.",
-      "We ordered plenty of conference badges for all expected visitors."
+      "The resort offers numerous amenities including a heated pool and fitness center.",
+      "Complimentary Wi-Fi is one of the hotel standard room amenities."
     ],
-    "mnemonicTip": "Đi kèm of: plenty of time / plenty of resources",
+    "mnemonicTip": "Từ vựng cốt lõi Part 3 & 7: hotel amenities = các tiện ích phục vụ khách lưu trú.",
     "emoji": ""
   },
   {
@@ -209,7 +222,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The first item on the agenda is the quarterly sales performance."
     ],
     "mnemonicTip": "Danh sách các việc cần giải quyết trong buổi họp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v36",
@@ -217,14 +231,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/əˈpɔɪntmənt/",
     "vietnamese": "cuộc hẹn, sự bổ nhiệm",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "I have an appointment with Dr. Henderson at three o'clock.",
       "Please call the dentist office if you need to reschedule your appointment."
     ],
     "mnemonicTip": "Make an appointment: đặt lịch hẹn gặp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v37",
@@ -239,7 +254,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Each applicant must submit an updated resume and three references."
     ],
     "mnemonicTip": "Từ động từ apply (nộp đơn) + đuôi chỉ người -ant",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v38",
@@ -254,7 +270,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "More than two hundred delegates will attend the regional trade fair."
     ],
     "mnemonicTip": "Attend a meeting / attend a workshop (không dùng giới từ to)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v39",
@@ -262,14 +279,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/əˈveɪləbl/",
     "vietnamese": "có sẵn, rảnh rỗi (người), còn trống (phòng)",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "The technician will be available after lunch to check your computer.",
       "Tickets for the evening seminar are still available online."
     ],
     "mnemonicTip": "Từ xuất hiện với tần suất cực cao trong Part 2, 3 và 7",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v40",
@@ -284,7 +302,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The airline charges an additional fee for overweight baggage."
     ],
     "mnemonicTip": "Danh từ không đếm được, tương đương luggage",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v41",
@@ -299,7 +318,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Could you please bring us the bill when you have a moment?"
     ],
     "mnemonicTip": "Pay the bill = trả tiền hóa đơn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v42",
@@ -314,7 +334,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "You can download an electronic boarding pass to your smartphone."
     ],
     "mnemonicTip": "Board = lên tàu/máy bay, pass = vé thông hành",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v43",
@@ -329,7 +350,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Inquiries should be directed to your local branch office."
     ],
     "mnemonicTip": "Branch office = văn phòng chi nhánh",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v44",
@@ -344,7 +366,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "We must stay on budget to ensure project profitability."
     ],
     "mnemonicTip": "On budget (đúng ngân sách) / over budget (vượt ngân sách)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v45",
@@ -352,14 +375,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˌkæfəˈtɪriə/",
     "vietnamese": "quán ăn tự phục vụ tại công ty/trường học",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Employees can purchase hot meals in the office cafeteria on the second floor.",
       "The cafeteria will remain closed on national holidays."
     ],
     "mnemonicTip": "Địa điểm ăn trưa nội bộ thường xuyên xuất hiện ở Part 1 & 3",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v46",
@@ -367,14 +391,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈkænsl/",
     "vietnamese": "hủy bỏ",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Travel & Hospitality",
     "targetBand": "450+",
     "examples": [
       "Due to heavy snowfall, the airline had to cancel all afternoon flights.",
       "Please let us know twenty-four hours in advance if you need to cancel."
     ],
     "mnemonicTip": "Cancel a reservation / order / flight",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v47",
@@ -389,7 +414,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The ideal candidate must have at least three years of graphic design experience."
     ],
     "mnemonicTip": "Successful candidate = ứng viên trúng tuyển",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v48",
@@ -404,7 +430,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The cashier handed the customer a receipt and the change."
     ],
     "mnemonicTip": "Gốc cash (tiền mặt) + ier = người thu tiền",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v49",
@@ -412,14 +439,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈklaɪənt/",
     "vietnamese": "khách hàng, đối tác dịch vụ",
     "partOfSpeech": "noun",
-    "category": "Marketing & Sales",
+    "category": "Customer Relations",
     "targetBand": "450+",
     "examples": [
       "Mr. Davis has an important meeting with an international client at noon.",
       "Our firm is committed to providing outstanding support to all corporate clients."
     ],
     "mnemonicTip": "Khách hàng sử dụng dịch vụ chuyên môn (luật, kế toán, tư vấn)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "customer_service"
   },
   {
     "id": "v50",
@@ -434,7 +462,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "A farewell card was signed by all her colleagues in the design department."
     ],
     "mnemonicTip": "Đồng nghĩa với coworker",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v51",
@@ -449,7 +478,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "His daily commute takes approximately forty-five minutes each way."
     ],
     "mnemonicTip": "Daily commute = việc đi làm về mỗi ngày",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v52",
@@ -457,14 +487,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/kəmˈpleɪnt/",
     "vietnamese": "lời phàn nàn, khiếu nại",
     "partOfSpeech": "noun",
-    "category": "Marketing & Sales",
+    "category": "Customer Relations",
     "targetBand": "450+",
     "examples": [
       "The customer service manager promptly resolved the customer's complaint.",
       "We received several complaints regarding delayed shipping last week."
     ],
     "mnemonicTip": "Động từ là complain -> danh từ là complaint",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "customer_service"
   },
   {
     "id": "v53",
@@ -472,14 +503,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/kənˈfɜːrm/",
     "vietnamese": "xác nhận",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Please email us to confirm your attendance at the banquet.",
       "The travel agency sent a message to confirm the hotel reservation."
     ],
     "mnemonicTip": "Confirm a booking / confirm an appointment",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v54",
@@ -494,7 +526,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The supplier agreed to renew the maintenance contract at no extra cost."
     ],
     "mnemonicTip": "Sign a contract = ký kết hợp đồng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v55",
@@ -509,7 +542,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The store offers free gift-wrapping for any valued customer."
     ],
     "mnemonicTip": "Customer service = dịch vụ chăm sóc khách hàng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v56",
@@ -524,7 +558,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The team worked overtime to meet the tight project deadline."
     ],
     "mnemonicTip": "Meet the deadline (kịp hạn) / miss the deadline (trễ hạn)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v57",
@@ -532,14 +567,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/dɪˈleɪ/",
     "vietnamese": "sự trì hoãn, làm chậm trễ",
     "partOfSpeech": "verb/noun",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "450+",
     "examples": [
       "Bad weather may delay the arrival of the overseas shipment.",
       "We apologize for the unexpected delay in processing your refund."
     ],
     "mnemonicTip": "Thường gặp trong thông báo sân bay Part 4: flight delay",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v58",
@@ -547,14 +583,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/dɪˈlɪvər/",
     "vietnamese": "giao hàng, chuyển phát",
     "partOfSpeech": "verb",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "450+",
     "examples": [
       "The package will be delivered directly to your doorstep tomorrow.",
       "Our express courier service delivers mail nationwide within twenty-four hours."
     ],
     "mnemonicTip": "Delivery service = dịch vụ chuyển phát",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v59",
@@ -569,7 +606,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The marketing department is preparing a brand-new digital promotion."
     ],
     "mnemonicTip": "Department store = cửa hàng bách hóa nhiều gian hàng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v60",
@@ -584,7 +622,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The furniture outlet is discounting display models by up to thirty percent."
     ],
     "mnemonicTip": "Dis (bớt) + count (tính tiền) = giảm giá",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v61",
@@ -599,7 +638,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The exhibition features an impressive display of vintage photographs."
     ],
     "mnemonicTip": "On display = đang được trưng bày",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v62",
@@ -614,7 +654,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The manager commended the employee for exemplary attendance."
     ],
     "mnemonicTip": "Employ (thuê) + ee (người được thuê) = nhân viên",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v63",
@@ -622,14 +663,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ɪˈkwɪpmənt/",
     "vietnamese": "thiết bị, trang thiết bị máy móc",
     "partOfSpeech": "noun",
-    "category": "Office & Technology",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "The laboratory received upgraded scientific testing equipment yesterday.",
       "Heavy construction equipment must be operated solely by certified technicians."
     ],
     "mnemonicTip": "Danh từ không đếm được: office equipment",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v64",
@@ -644,7 +686,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "We estimate that the renovation will take approximately three weeks."
     ],
     "mnemonicTip": "Cost estimate = bản ước tính chi phí",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v65",
@@ -652,14 +695,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/fəˈsɪləti/",
     "vietnamese": "cơ sở vật chất, nhà xưởng, tòa nhà",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Real Estate & Facilities",
     "targetBand": "450+",
     "examples": [
       "Our manufacturing facility adheres strictly to international safety standards.",
       "The fitness facility is open twenty-four hours a day for hotel guests."
     ],
     "mnemonicTip": "Storage facility = kho chứa đồ; Production facility = nhà xưởng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v66",
@@ -667,14 +711,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈfiːdbæk/",
     "vietnamese": "ý kiến phản hồi, đánh giá",
     "partOfSpeech": "noun",
-    "category": "Marketing & Sales",
+    "category": "Customer Relations",
     "targetBand": "450+",
     "examples": [
       "We appreciate receiving customer feedback regarding our updated mobile application.",
       "Constructive feedback from supervisors helps employees sharpen their skills."
     ],
     "mnemonicTip": "Provide feedback = đưa ra ý kiến phản hồi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "customer_service"
   },
   {
     "id": "v67",
@@ -689,7 +734,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Passengers on flight forty-two should board through gate nine."
     ],
     "mnemonicTip": "Book a flight = đặt vé máy bay",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v68",
@@ -704,7 +750,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Senior executives convened at headquarters for the strategic annual review."
     ],
     "mnemonicTip": "Viết tắt là HQ, luôn có số nhiều -s nhưng dùng cho 1 trụ sở",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v69",
@@ -719,7 +766,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Human resources will hire an external consultant to conduct the training."
     ],
     "mnemonicTip": "New hire = nhân viên mới được tuyển",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v70",
@@ -727,14 +775,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ɪnˈstrʌkʃn/",
     "vietnamese": "hướng dẫn chỉ dẫn chi tiết",
     "partOfSpeech": "noun",
-    "category": "Office & Technology",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Carefully follow the assembly instructions printed on the carton.",
       "The supervisor provided detailed instructions on handling confidential records."
     ],
     "mnemonicTip": "Instruction manual = sách hướng dẫn sử dụng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v71",
@@ -749,7 +798,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The hiring manager will interview five shortlisted candidates on Wednesday."
     ],
     "mnemonicTip": "Job interview = buổi phỏng vấn xin việc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v72",
@@ -757,14 +807,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈɪnvəntɔːri/",
     "vietnamese": "hàng tồn kho, sự kiểm kê hàng",
     "partOfSpeech": "noun",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "450+",
     "examples": [
       "The warehouse conducts a complete inventory check at the end of each month.",
       "Current inventory levels are sufficient to meet surging holiday demand."
     ],
     "mnemonicTip": "Take inventory = kiểm kê hàng tồn kho",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v73",
@@ -779,7 +830,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Please remit full payment within thirty days of the invoice date."
     ],
     "mnemonicTip": "Send an invoice = gửi hóa đơn yêu cầu thanh toán",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v74",
@@ -794,7 +846,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Our overseas itinerary includes factory visits in Tokyo and Seoul."
     ],
     "mnemonicTip": "Bản kế hoạch chi tiết giờ bay, khách sạn, điểm hẹn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v75",
@@ -802,14 +855,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈlɑːbi/",
     "vietnamese": "sảnh lớn (khách sạn, tòa nhà văn phòng)",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Real Estate & Facilities",
     "targetBand": "450+",
     "examples": [
       "Visitors must check in at the reception desk in the main ground-floor lobby.",
       "The client was seated comfortably in the lobby waiting for the conference."
     ],
     "mnemonicTip": "Hotel lobby = sảnh khách sạn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v76",
@@ -824,7 +878,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The porter assisted the elderly couple with their heavy luggage."
     ],
     "mnemonicTip": "Danh từ không đếm được, thường xuyên xuất hiện ở Part 1",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v77",
@@ -839,7 +894,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The building elevators will be temporarily shut down for scheduled maintenance."
     ],
     "mnemonicTip": "Động từ maintain -> danh từ maintenance",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v78",
@@ -854,7 +910,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "She was recently promoted to general manager of the Northern territory."
     ],
     "mnemonicTip": "Manage (quản lý) + er (người) = người quản lý",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v79",
@@ -862,14 +919,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈmænjuəl/",
     "vietnamese": "sách hướng dẫn kỹ thuật; thủ công",
     "partOfSpeech": "noun/adj",
-    "category": "Office & Technology",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Refer to the owner's manual for step-by-step installation instructions.",
       "The factory replaced manual data entry with an automated scanner system."
     ],
     "mnemonicTip": "User manual = cẩm nang người dùng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v80",
@@ -877,14 +935,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈmemoʊ/",
     "vietnamese": "bản ghi nhớ nội bộ",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "The CEO circulated a company-wide memo announcing the holiday schedule.",
       "Please read the attached memo regarding updated parking regulations."
     ],
     "mnemonicTip": "Dạng bài đọc cực phổ biến trong Part 6 & 7",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v81",
@@ -892,14 +951,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈmesɪdʒ/",
     "vietnamese": "tin nhắn, thông điệp",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Ms. Vance was unavailable, so the receptionist took a brief message.",
       "Please leave a voicemail message after the tone if nobody answers."
     ],
     "mnemonicTip": "Take a message = ghi lại lời nhắn điện thoại",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v82",
@@ -907,14 +967,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈnoʊtɪs/",
     "vietnamese": "thông báo; nhận thấy",
     "partOfSpeech": "noun/verb",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "A notice was posted on the bulletin board regarding upcoming fire drills.",
       "Tenants must give thirty days' written notice prior to vacating."
     ],
     "mnemonicTip": "Short notice = báo trước gấp, ít thời gian",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v83",
@@ -922,14 +983,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈnoʊtɪfaɪ/",
     "vietnamese": "thông báo chính thức, thông tri",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "The airline will notify passengers via SMS if flight schedules change.",
       "Please notify the HR department immediately of any address changes."
     ],
     "mnemonicTip": "Notify somebody of something = báo cho ai biết về điều gì",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v84",
@@ -937,14 +999,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈɔːrdər/",
     "vietnamese": "đơn đặt hàng; gọi món; thứ tự",
     "partOfSpeech": "noun/verb",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "450+",
     "examples": [
       "Your wholesale merchandise order will be dispatched from our depot today.",
       "The office manager ordered three boxes of printer paper and ballpoint pens."
     ],
     "mnemonicTip": "Place an order = đặt một đơn hàng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v85",
@@ -959,7 +1022,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The express shuttle carries up to twenty-four passengers comfortably."
     ],
     "mnemonicTip": "Thường gặp trong hội thoại sân bay, ga tàu Part 1-4",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v86",
@@ -974,7 +1038,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Customs agents inspected passports at the international arrivals border."
     ],
     "mnemonicTip": "Pass (qua) + port (cửa khẩu/cảng) = hộ chiếu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v87",
@@ -982,14 +1047,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/poʊˈspoʊn/",
     "vietnamese": "hoãn lại, dời lịch sang thời điểm khác",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "The outdoor promotional event was postponed until Saturday due to rain.",
       "We may need to postpone the product launch if beta testing fails."
     ],
     "mnemonicTip": "Đồng nghĩa với put off / delay",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v88",
@@ -997,14 +1063,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/prɪˈper/",
     "vietnamese": "chuẩn bị",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "The finance team worked late to prepare financial summaries for the audit.",
       "Catering staff will prepare hot refreshments for the evening reception."
     ],
     "mnemonicTip": "Prepare for something = chuẩn bị sẵn sàng cho điều gì",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v89",
@@ -1012,14 +1079,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/prɑːmpt/",
     "vietnamese": "nhanh chóng, kịp thời; đúng giờ",
     "partOfSpeech": "adj/verb",
-    "category": "General Business",
+    "category": "Customer Relations",
     "targetBand": "450+",
     "examples": [
       "Thank you for your prompt reply to our inquiry regarding pricing.",
       "The courier service promises prompt delivery of all rush shipments."
     ],
     "mnemonicTip": "Prompt response = câu trả lời nhanh chóng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "customer_service"
   },
   {
     "id": "v90",
@@ -1034,7 +1102,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The university purchased new ergonomic desks for the campus computer lab."
     ],
     "mnemonicTip": "Từ trang trọng thay thế cho 'buy' trong bài thi TOEIC",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v91",
@@ -1049,7 +1118,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The cashier handed the shopper a printed paper receipt."
     ],
     "mnemonicTip": "Lưu ý chữ 'p' câm, phát âm là /rɪˈsiːt/",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v92",
@@ -1064,7 +1134,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Please inform the front receptionist when you arrive for your interview."
     ],
     "mnemonicTip": "Người tiếp đón khách ở bàn tiếp tân (reception desk)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v93",
@@ -1079,7 +1150,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The store refunded the total cost of the defective microwave oven."
     ],
     "mnemonicTip": "Re (lại) + fund (tiền quỹ) = hoàn lại tiền",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v94",
@@ -1087,14 +1159,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/rɪˈmaɪnd/",
     "vietnamese": "nhắc nhở",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "This email is to remind you of the project deadline tomorrow at 5 PM.",
       "The supervisor reminded factory workers to wear ear protection."
     ],
     "mnemonicTip": "Remind someone to do something = nhắc ai làm việc gì",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v95",
@@ -1102,14 +1175,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˌrenəˈveɪʃn/",
     "vietnamese": "sự sửa chữa, tân trang cải tạo",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Real Estate & Facilities",
     "targetBand": "450+",
     "examples": [
       "The central library will be closed throughout October for interior renovation.",
       "The hotel underwent an extensive million-dollar renovation last winter."
     ],
     "mnemonicTip": "Under renovation = đang trong giai đoạn tu sửa",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v96",
@@ -1124,7 +1198,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The cost of roof repairs was covered under the landlord's insurance policy."
     ],
     "mnemonicTip": "Repair service = dịch vụ sửa chữa",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v97",
@@ -1139,7 +1214,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The hotel confirmed our room reservation via email confirmation code."
     ],
     "mnemonicTip": "Make a reservation = đặt chỗ trước",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v98",
@@ -1154,7 +1230,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Her resume highlights over six years of corporate marketing expertise."
     ],
     "mnemonicTip": "Submit a resume = nộp hồ sơ xin việc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v99",
@@ -1162,14 +1239,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈskedʒuːl/",
     "vietnamese": "lịch trình, thời gian biểu; lên lịch",
     "partOfSpeech": "noun/verb",
-    "category": "Corporate & Management",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "The construction project is running exactly on schedule.",
       "The keynote lecture is scheduled to commence at ten o'clock sharp."
     ],
     "mnemonicTip": "On schedule (đúng tiến độ) / ahead of schedule (vượt tiến độ)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v100",
@@ -1177,14 +1255,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈsteɪʃəneri/",
     "vietnamese": "văn phòng phẩm (giấy, bút, kẹp)",
     "partOfSpeech": "noun",
-    "category": "Office & Technology",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Order additional office stationery including printer toner and note pads.",
       "The supply closet is stocked with high-grade letterhead stationery."
     ],
     "mnemonicTip": "Chú ý đuôi 'ery' (văn phòng phẩm), phân biệt 'ary' (đứng yên)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v101",
@@ -1199,7 +1278,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The warehouse supervisor oversees inventory receiving and sorting."
     ],
     "mnemonicTip": "Super (trên) + vis (nhìn) + or (người) = người trông nom, giám sát",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v102",
@@ -1207,14 +1287,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/tekˈnɪʃn/",
     "vietnamese": "kỹ thuật viên, thợ máy",
     "partOfSpeech": "noun",
-    "category": "Office & Technology",
+    "category": "Manufacturing & Quality",
     "targetBand": "450+",
     "examples": [
       "A certified technician inspected the air-conditioning unit on the roof.",
       "IT technicians resolved the server connectivity disruption within minutes."
     ],
     "mnemonicTip": "Người chuyên môn xử lý máy móc, thiết bị kỹ thuật",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v103",
@@ -1229,7 +1310,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Passengers should report to the departures terminal two hours prior to takeoff."
     ],
     "mnemonicTip": "Airport terminal = nhà ga cảng hàng không",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v104",
@@ -1244,7 +1326,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Please retain your rail ticket until you pass through the station turnstile."
     ],
     "mnemonicTip": "One-way ticket (vé một chiều) / round-trip ticket (vé khứ hồi)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v105",
@@ -1252,14 +1335,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈɜːrdʒənt/",
     "vietnamese": "khẩn cấp, cấp bách",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "The regional director sent an urgent notification requesting sales statistics.",
       "This matter is extremely urgent and demands our immediate attention."
     ],
     "mnemonicTip": "Urgent message / urgent request",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v106",
@@ -1274,7 +1358,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The seaside motel displayed a neon sign indicating 'No Vacancy'."
     ],
     "mnemonicTip": "Vacant (trống rỗng) -> vacancy (vị trí/phòng trống)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v107",
@@ -1282,14 +1367,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈwɔːrənti/",
     "vietnamese": "chế độ bảo hành",
     "partOfSpeech": "noun",
-    "category": "Marketing & Sales",
+    "category": "Customer Relations",
     "targetBand": "450+",
     "examples": [
       "The newly purchased laser printer comes with a two-year manufacturer warranty.",
       "Repairs are free of charge provided the equipment remains under warranty."
     ],
     "mnemonicTip": "Under warranty = đang trong thời hạn bảo hành",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "customer_service"
   },
   {
     "id": "v108",
@@ -1304,7 +1390,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Participants at the training workshop engaged in collaborative team exercises."
     ],
     "mnemonicTip": "Hội thảo có hoạt động thực hành, phân biệt với lecture",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v109",
@@ -1319,21 +1406,23 @@ export const VOCAB_450: VocabularyWord[] = [
       "The CEO held a press conference to announce the launch of the new tablet."
     ],
     "mnemonicTip": "Announcement = bản thông báo chính thức",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v110",
-    "word": "appliance",
-    "ipa": "/əˈplaɪəns/",
-    "vietnamese": "thiết bị gia dụng",
+    "word": "tenant",
+    "ipa": "/ˈtɛnənt/",
+    "vietnamese": "người thuê nhà, khách thuê mặt bằng văn phòng",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Real Estate & Facilities",
+    "topicId": "real_estate",
     "targetBand": "450+",
     "examples": [
-      "The showroom displays energy-efficient household appliances like refrigerators.",
-      "Modern kitchen appliances reduce power consumption significantly."
+      "The landlord notified the tenants about building maintenance.",
+      "Commercial tenants must sign a three-year lease agreement."
     ],
-    "mnemonicTip": "Household appliances = thiết bị đồ dùng gia đình",
+    "mnemonicTip": "Xuất hiện liên tục trong Part 6 & 7: tenant (người thuê) đối nghịch với landlord (chủ cho thuê).",
     "emoji": ""
   },
   {
@@ -1349,7 +1438,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "She was hired as an executive assistant to the vice president."
     ],
     "mnemonicTip": "Gốc assist (giúp đỡ) + ant = trợ lý",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v112",
@@ -1364,7 +1454,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Catering staff are preparing a four-course dinner for the awards banquet."
     ],
     "mnemonicTip": "Awards banquet = tiệc trao giải thưởng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v113",
@@ -1372,14 +1463,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈkɑːrtrɪdʒ/",
     "vietnamese": "hộp mực in máy in",
     "partOfSpeech": "noun",
-    "category": "Office & Technology",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Please replace the black toner cartridge when the warning indicator blinks.",
       "Recycled printer cartridges are cheaper and environmentally responsible."
     ],
     "mnemonicTip": "Toner cartridge = hộp mực máy photocopy / máy in",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v114",
@@ -1394,7 +1486,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The filing clerk organized financial paperwork into alphabetical folders."
     ],
     "mnemonicTip": "Desk clerk = nhân viên tiếp tân",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v115",
@@ -1409,7 +1502,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The flyer includes a twenty-dollar coupon valid toward any footwear purchase."
     ],
     "mnemonicTip": "Redeem a coupon = dùng phiếu giảm giá",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v116",
@@ -1417,14 +1511,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/dɪˈvaɪs/",
     "vietnamese": "thiết bị, công cụ điện tử",
     "partOfSpeech": "noun",
-    "category": "Office & Technology",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Employees can sync their mobile devices with the office calendar system.",
       "The security device sounds an alarm if the exit doors are opened forcibly."
     ],
     "mnemonicTip": "Electronic device = thiết bị điện tử",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v117",
@@ -1432,14 +1527,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˌɪnɪkˈspensɪv/",
     "vietnamese": "không đắt, giá cả phải chăng",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Marketing & Sales",
     "targetBand": "450+",
     "examples": [
       "Public transportation is an inexpensive way to travel around the metropolitan area.",
       "They found an inexpensive catering company for the office luncheon."
     ],
     "mnemonicTip": "In (không) + expensive (đắt) = rẻ, tiết kiệm",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v118",
@@ -1454,7 +1550,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The new commuter rail line will operate seven days a week."
     ],
     "mnemonicTip": "Operating manual = hướng dẫn vận hành",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v119",
@@ -1462,14 +1559,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈpeɪʃnt/",
     "vietnamese": "kiên nhẫn, nhẫn nại; bệnh nhân",
     "partOfSpeech": "adj/noun",
-    "category": "General Business",
+    "category": "Customer Relations",
     "targetBand": "450+",
     "examples": [
       "Please be patient while the customer representative retrieves your account details.",
       "The doctor examined three patients before conducting afternoon rounds."
     ],
     "mnemonicTip": "Cụm Part 2: Thank you for your patience",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "customer_service"
   },
   {
     "id": "v120",
@@ -1484,7 +1582,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Our learning platform enables students to practice mock tests anytime."
     ],
     "mnemonicTip": "Train platform = sân ga đợi tàu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v121",
@@ -1492,14 +1591,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈredʒɪstər/",
     "vietnamese": "đăng ký ghi danh; máy tính tiền",
     "partOfSpeech": "verb/noun",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Attendees must register online at least one week prior to the workshop.",
       "The cash register at counter two was out of receipt tape."
     ],
     "mnemonicTip": "Register for a seminar = đăng ký tham gia hội thảo",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v122",
@@ -1514,21 +1614,23 @@ export const VOCAB_450: VocabularyWord[] = [
       "A battery that no longer holds a charge should be replaced promptly."
     ],
     "mnemonicTip": "Replace A with B = thay thế A bằng B",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v123",
-    "word": "restroom",
-    "ipa": "/ˈrestruːm/",
-    "vietnamese": "nhà vệ sinh công cộng",
+    "word": "landlord",
+    "ipa": "/ˈlændlɔːrd/",
+    "vietnamese": "chủ nhà, chủ cho thuê mặt bằng / tòa nhà",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Real Estate & Facilities",
+    "topicId": "real_estate",
     "targetBand": "450+",
     "examples": [
-      "Public restrooms are located on the ground floor next to the water fountain.",
-      "The customer asked where the nearest restroom was located."
+      "The landlord agreed to replace the heating unit before winter.",
+      "Tenants should report any plumbing leaks directly to the landlord."
     ],
-    "mnemonicTip": "Từ vựng trang sự nơi làm việc Part 1, 2",
+    "mnemonicTip": "Land (đất) + lord (chủ) = người sở hữu bất động sản cho thuê.",
     "emoji": ""
   },
   {
@@ -1544,7 +1646,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Canned vegetables can be found in aisle number five."
     ],
     "mnemonicTip": "Aisle seat = ghế cạnh lối đi (âm 's' câm)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v125",
@@ -1559,7 +1662,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The flight attendant will serve food and cold beverages shortly."
     ],
     "mnemonicTip": "Food and beverage (F&B) = ngành ẩm thực và đồ uống",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v126",
@@ -1567,14 +1671,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈkʊriər/",
     "vietnamese": "người chuyển phát thư từ, bưu tá chuyển phát nhanh",
     "partOfSpeech": "noun",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "450+",
     "examples": [
       "The signed contract was delivered via an overnight courier service.",
       "The courier requested a signature before releasing the parcel."
     ],
     "mnemonicTip": "Courier service = dịch vụ chuyển phát nhanh",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v127",
@@ -1582,14 +1687,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈdæmɪdʒ/",
     "vietnamese": "sự hư hại, thiệt hại; làm hỏng",
     "partOfSpeech": "noun/verb",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "450+",
     "examples": [
       "Inspect the shipping box for any visible water damage.",
       "The freight company agreed to reimburse us for goods damaged during transit."
     ],
     "mnemonicTip": "Goods damaged in transit = hàng hóa bị hỏng trong quá trình vận chuyển",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v128",
@@ -1597,14 +1703,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/dəˈrekʃn/",
     "vietnamese": "phương hướng, chỉ dẫn đường đi",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Travel & Hospitality",
     "targetBand": "450+",
     "examples": [
       "Could you please give me driving directions to the convention center?",
       "Follow the arrow signs for directions to the baggage claim area."
     ],
     "mnemonicTip": "Ask for directions = hỏi đường đi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v129",
@@ -1612,14 +1719,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈentrəns/",
     "vietnamese": "lối vào, cổng vào",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Real Estate & Facilities",
     "targetBand": "450+",
     "examples": [
       "Please enter the corporate auditorium through the north entrance.",
       "Security passes are checked at every building entrance."
     ],
     "mnemonicTip": "Gốc enter (đi vào) + ance = lối vào",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v130",
@@ -1634,7 +1742,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Please press the call button if you need assistance from a flight attendant."
     ],
     "mnemonicTip": "Người phục vụ trên chuyến bay",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v131",
@@ -1642,14 +1751,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ɡəˈrɑːʒ/",
     "vietnamese": "nhà để xe, xưởng sửa xe",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Real Estate & Facilities",
     "targetBand": "450+",
     "examples": [
       "Visitor parking is available in the multi-level parking garage across the street.",
       "He took his company car to a certified garage for an oil change."
     ],
     "mnemonicTip": "Parking garage = nhà đỗ xe nhiều tầng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v132",
@@ -1657,14 +1767,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/aɪˌdentɪfɪˈkeɪʃn/",
     "vietnamese": "giấy tờ tùy thân, căn cước",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "450+",
     "examples": [
       "Visitors must show government-issued photo identification to enter the building.",
       "The security guard verified employee identification badges at the gate."
     ],
     "mnemonicTip": "Viết tắt là ID card / photo ID",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v133",
@@ -1679,7 +1790,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Please place dirty towels in the designated laundry hamper."
     ],
     "mnemonicTip": "Laundry service = dịch vụ giặt là",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v134",
@@ -1694,7 +1806,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The factory staff worked overtime to fulfill the urgent order."
     ],
     "mnemonicTip": "Over (quá) + time (thời gian) = làm ngoài giờ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v135",
@@ -1702,14 +1815,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/ˈpækɪdʒ/",
     "vietnamese": "kiện hàng, bưu kiện",
     "partOfSpeech": "noun",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "450+",
     "examples": [
       "A delivery driver left the cardboard package at the front reception desk.",
       "You can track the delivery status of your package with this tracking number."
     ],
     "mnemonicTip": "Bưu phẩm, kiện hàng trong vận chuyển",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v136",
@@ -1724,7 +1838,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Take the campus shuttle bus to reach the northern research laboratory."
     ],
     "mnemonicTip": "Airport shuttle bus = xe trung chuyển sân bay",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v137",
@@ -1732,14 +1847,15 @@ export const VOCAB_450: VocabularyWord[] = [
     "ipa": "/səˈplaɪər/",
     "vietnamese": "nhà cung cấp nguyên vật liệu/hàng hóa",
     "partOfSpeech": "noun",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "450+",
     "examples": [
       "We negotiated lower wholesale pricing with our primary paper supplier.",
       "The purchasing department evaluates prospective parts suppliers every quarter."
     ],
     "mnemonicTip": "Gốc supply (cung cấp) + er = nhà cung cấp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v138",
@@ -1754,7 +1870,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "Commuters formed an orderly line at the subway station turnstiles."
     ],
     "mnemonicTip": "Cổng xoay soát vé tàu điện ngầm thường gặp Part 1",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v139",
@@ -1769,7 +1886,8 @@ export const VOCAB_450: VocabularyWord[] = [
       "The city utility company announced scheduled maintenance on the water mains."
     ],
     "mnemonicTip": "Utility bills = tiền điện nước sinh hoạt",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v140",
@@ -1784,51 +1902,55 @@ export const VOCAB_450: VocabularyWord[] = [
       "The company contracts with several software vendors for IT solutions."
     ],
     "mnemonicTip": "Approved vendor = nhà cung cấp được phê duyệt",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v141",
-    "word": "wheelbarrow",
-    "ipa": "/ˈwiːlbæroʊ/",
-    "vietnamese": "xe rùa, xe cút kít chở vật liệu",
+    "word": "certificate",
+    "ipa": "/sərˈtɪfɪkət/",
+    "vietnamese": "chứng chỉ, giấy chứng nhận chuyên môn / hoàn thành khóa học",
     "partOfSpeech": "noun",
-    "category": "Manufacturing & Quality",
+    "category": "Personnel & HR",
+    "topicId": "personnel",
     "targetBand": "450+",
     "examples": [
-      "A construction worker wheeled a wheelbarrow full of bricks across the site.",
-      "The wheelbarrow was parked beside the storage shed."
+      "Participants receive a certificate of completion at the end of the seminar.",
+      "Please bring your original degree and training certificates to the interview."
     ],
-    "mnemonicTip": "Từ vựng hình ảnh cực kỳ phổ biến trong TOEIC Part 1",
+    "mnemonicTip": "Certify (chứng nhận) -> certificate (giấy chứng chỉ / bằng cấp).",
     "emoji": ""
   },
   {
     "id": "v142",
-    "word": "cart",
-    "ipa": "/kɑːrt/",
-    "vietnamese": "xe đẩy hàng (trong siêu thị hoặc sân bay)",
-    "partOfSpeech": "noun",
-    "category": "General Business",
+    "word": "incur",
+    "ipa": "/ɪnˈkɜːr/",
+    "vietnamese": "phát sinh, gánh chịu (chi phí, tiền phạt, thiệt hại)",
+    "partOfSpeech": "verb",
+    "category": "Finance & Accounting",
+    "topicId": "finance",
     "targetBand": "450+",
     "examples": [
-      "The shopper loaded grocery items into a metal shopping cart.",
-      "Luggage carts are available for rental near the baggage carousel."
+      "You will not incur any additional charges for canceling early.",
+      "The company incurred unexpected expenses during the factory renovation."
     ],
-    "mnemonicTip": "Shopping cart / luggage cart: xe đẩy hàng",
+    "mnemonicTip": "Cụm từ Part 5 & 6 kinh điển: incur expenses / incur penalties / incur fees.",
     "emoji": ""
   },
   {
     "id": "v143",
-    "word": "hallway",
-    "ipa": "/ˈhɔːlweɪ/",
-    "vietnamese": "hành lang tòa nhà",
+    "word": "survey",
+    "ipa": "/ˈsɜːrveɪ/",
+    "vietnamese": "bản khảo sát ý kiến (khách hàng, nhân viên); khảo sát thị trường",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Customer Relations",
+    "topicId": "customer_service",
     "targetBand": "450+",
     "examples": [
-      "The conference rooms are situated at the far end of the hallway.",
-      "Please keep the hallway clear of boxes and cleaning supplies."
+      "Customers who complete the satisfaction survey receive a discount coupon.",
+      "The marketing department conducted a survey on consumer preferences."
     ],
-    "mnemonicTip": "Đồng nghĩa với corridor",
+    "mnemonicTip": "Part 7 cực kỳ hay gặp: customer satisfaction survey = khảo sát mức độ hài lòng.",
     "emoji": ""
   }
 ];

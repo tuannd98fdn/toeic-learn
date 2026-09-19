@@ -14,7 +14,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Management remained firm on its commitment to cost reduction."
     ],
     "mnemonicTip": "Accounting firm (công ty kiểm toán) / law firm (văn phòng luật)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v3",
@@ -29,7 +30,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Please take a complimentary travel brochure from the display rack."
     ],
     "mnemonicTip": "Tập tài liệu gấp giới thiệu dịch vụ/sản phẩm",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v6",
@@ -37,14 +39,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ɪˈsteɪt/",
     "vietnamese": "bất động sản, điền trang, khối tài sản",
     "partOfSpeech": "noun",
-    "category": "Real Estate & Location",
+    "category": "Real Estate & Facilities",
     "targetBand": "650+",
     "examples": [
       "Commercial real estate prices increased significantly in the metropolitan area.",
       "He invested his personal savings in suburban residential estate."
     ],
     "mnemonicTip": "Real estate = bất động sản; Real estate agent = môi giới nhà đất",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v10",
@@ -59,7 +62,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Executives discussed future regional expansion during the business luncheon."
     ],
     "mnemonicTip": "Lunch trang trọng nhân dịp gặp gỡ ngoại giao / kinh doanh",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "travel"
   },
   {
     "id": "v11",
@@ -74,51 +78,55 @@ export const VOCAB_650: VocabularyWord[] = [
       "She serves as an elected representative on the regional advisory council."
     ],
     "mnemonicTip": "City council = hội đồng thành phố; Advisory council = hội đồng cố vấn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v12",
-    "word": "like-minded",
-    "ipa": "/ˌlaɪk ˈmaɪndɪd/",
-    "vietnamese": "cùng chí hướng, cùng quan điểm tư tưởng",
-    "partOfSpeech": "adj",
-    "category": "Personnel & HR",
+    "word": "confidentiality",
+    "ipa": "/ˌkɑːnfɪˌdɛnʃiˈæləti/",
+    "vietnamese": "tính bảo mật thông tin, cam kết bảo mật nội bộ",
+    "partOfSpeech": "noun",
+    "category": "Contracts & Legal",
+    "topicId": "contracts",
     "targetBand": "650+",
     "examples": [
-      "The conference provided networking opportunities with like-minded professionals.",
-      "Entrepreneurs benefit from collaborating with like-minded colleagues."
+      "Employees must sign a confidentiality agreement before accessing client data.",
+      "The company strictly respects the confidentiality of applicant records."
     ],
-    "mnemonicTip": "Like (giống) + minded (suy nghĩ) = người đồng chí hướng",
+    "mnemonicTip": "Confidential (bí mật) + ity = tính bảo mật, thỏa thuận bảo mật NDA.",
     "emoji": ""
   },
   {
     "id": "v15",
-    "word": "nutritional",
-    "ipa": "/njuːˈtrɪʃənl/",
-    "vietnamese": "thuộc về dinh dưỡng, giá trị dinh dưỡng",
-    "partOfSpeech": "adj",
-    "category": "General Business",
+    "word": "correspondence",
+    "ipa": "/ˌkɔːrəˈspɑːndəns/",
+    "vietnamese": "thư từ trao đổi, văn thư giao dịch công việc",
+    "partOfSpeech": "noun",
+    "category": "Office & Administration",
+    "topicId": "office",
     "targetBand": "650+",
     "examples": [
-      "Consumers are increasingly attentive to the nutritional information on food labels.",
-      "The company cafeteria revised its menu to offer healthier nutritional options."
+      "Please direct all business correspondence to the corporate communications department.",
+      "She kept a careful log of all email correspondence with the overseas client."
     ],
-    "mnemonicTip": "Nutritional value = giá trị dinh dưỡng",
+    "mnemonicTip": "Correspond (trao đổi thư từ) -> correspondence (tập hợp thư từ/email công việc).",
     "emoji": ""
   },
   {
     "id": "v19",
-    "word": "texture",
-    "ipa": "/ˈtekstʃər/",
-    "vietnamese": "kết cấu, độ thô ráp mịn màng của chất liệu",
+    "word": "specification",
+    "ipa": "/ˌspɛsɪfɪˈkeɪʃən/",
+    "vietnamese": "thông số kỹ thuật, quy chuẩn chi tiết của sản phẩm/dự án",
     "partOfSpeech": "noun",
     "category": "Manufacturing & Quality",
+    "topicId": "manufacturing",
     "targetBand": "650+",
     "examples": [
-      "The interior designer selected upholstery fabrics with a rich, soft texture.",
-      "The quality control inspector checked the rough surface texture of the polymer."
+      "The new machinery was manufactured according to precise safety specifications.",
+      "Check the architectural specifications before ordering raw materials."
     ],
-    "mnemonicTip": "Texture của vải hoặc bề mặt vật liệu trong kiểm định sản phẩm",
+    "mnemonicTip": "Thường gặp dạng viết tắt: specs (thông số kỹ thuật sản phẩm).",
     "emoji": ""
   },
   {
@@ -134,7 +142,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Financial forecasting requires meticulous attention and mathematical precision."
     ],
     "mnemonicTip": "Precision instruments = các thiết bị đo lường chuẩn xác",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v24",
@@ -149,7 +158,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Financial traders must make crucial decisions in a fast-paced market."
     ],
     "mnemonicTip": "Fast-paced environment: môi trường làm việc tốc độ cao, thường gặp trong tin tuyển dụng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v25",
@@ -164,7 +174,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "There is no substitute for rigorous training when learning technical procedures."
     ],
     "mnemonicTip": "Substitute A for B = thay thế B bằng A",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v27",
@@ -172,14 +183,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈɪnkwəri/",
     "vietnamese": "thắc mắc, câu hỏi hỏi thăm thông tin; cuộc điều tra",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Customer Relations",
     "targetBand": "650+",
     "examples": [
       "Direct all media inquiries to our corporate public relations officer.",
       "We received an inquiry concerning wholesale bulk pricing yesterday."
     ],
     "mnemonicTip": "Make an inquiry = gửi câu hỏi thắc mắc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "customer_service"
   },
   {
     "id": "v28",
@@ -187,14 +199,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈɪndɪkeɪt/",
     "vietnamese": "chỉ ra, cho thấy, biểu thị",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "Preliminary market surveys indicate strong consumer interest in electric scooters.",
       "Please indicate your meal preference on the registration form."
     ],
     "mnemonicTip": "As indicated in the report = như được chỉ rõ trong báo cáo",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v32",
@@ -209,7 +222,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Creative startups tend to flourish in tech-friendly incubator hubs."
     ],
     "mnemonicTip": "Đồng nghĩa với thrive / prosper",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v144",
@@ -224,7 +238,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "We will do our best to accommodate your special dietary requests."
     ],
     "mnemonicTip": "Accommodate needs/requests = đáp ứng nhu cầu/yêu cầu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v145",
@@ -239,7 +254,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Hard work and dedication enabled her to accomplish her career objectives."
     ],
     "mnemonicTip": "Accomplish a task/goal = hoàn thành một nhiệm vụ/mục tiêu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v146",
@@ -254,7 +270,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "He acquired extensive logistical expertise during his decade overseas."
     ],
     "mnemonicTip": "Acquisition = thương vụ thâu tóm",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v147",
@@ -262,14 +279,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈædɪkwət/",
     "vietnamese": "đầy đủ, thỏa đáng, đáp ứng yêu cầu",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Manufacturing & Quality",
     "targetBand": "650+",
     "examples": [
       "Ensure that there is adequate lighting and ventilation in the workshop.",
       "The compensation package was deemed adequate by the union representatives."
     ],
     "mnemonicTip": "Adequate preparation = sự chuẩn bị đầy đủ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v148",
@@ -284,7 +302,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The contractor failed to adhere to the agreed construction schedule."
     ],
     "mnemonicTip": "Adhere to policies/guidelines/rules = tuân theo quy định",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v149",
@@ -299,7 +318,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Project managers must allocate resources judiciously to prevent bottlenecks."
     ],
     "mnemonicTip": "Allocate funds/budget = phân bổ ngân quỹ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v150",
@@ -307,14 +327,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˌɔːltəˈreɪʃn/",
     "vietnamese": "sự sửa đổi, điều chỉnh",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Real Estate & Facilities",
     "targetBand": "650+",
     "examples": [
       "Any alterations to the architectural blueprints must be approved by the chief engineer.",
       "The tailor provides complimentary alterations on formal business suits."
     ],
     "mnemonicTip": "Động từ alter = thay đổi, sửa đổi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v151",
@@ -329,7 +350,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The proposed amendment was adopted following intensive discussions."
     ],
     "mnemonicTip": "Amend a contract -> contract amendment",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v152",
@@ -344,7 +366,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "We did not anticipate such high shipping costs when pricing the catalog."
     ],
     "mnemonicTip": "Anticipate changes/growth/problems = lường trước sự thay đổi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v153",
@@ -359,7 +382,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The bank ordered an independent property appraisal prior to granting the mortgage."
     ],
     "mnemonicTip": "Performance appraisal = đánh giá hiệu quả công việc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v154",
@@ -374,7 +398,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The corporation's total liquid assets exceed fifty million dollars."
     ],
     "mnemonicTip": "Valuable asset = tài sản quý giá",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v155",
@@ -389,7 +414,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Tasks were assigned according to individual team member strengths."
     ],
     "mnemonicTip": "Assignment = nhiệm vụ được giao",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v156",
@@ -404,7 +430,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "He works as a specialist in the corporate quality assurance division."
     ],
     "mnemonicTip": "Quality assurance (QA) = bảo đảm chất lượng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v157",
@@ -419,7 +446,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Tax authorities audited the corporation's travel and entertainment expenses."
     ],
     "mnemonicTip": "Financial audit = kiểm toán tài chính",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v158",
@@ -434,7 +462,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Please sign the purchase requisition to authorize the equipment purchase."
     ],
     "mnemonicTip": "Authorized personnel only = chỉ người có thẩm quyền mới được vào",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v159",
@@ -449,7 +478,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "We benchmarked our customer service response times against the top three competitors."
     ],
     "mnemonicTip": "Benchmark = thước đo chuẩn mực",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v160",
@@ -457,14 +487,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˌbenɪˈfɪʃl/",
     "vietnamese": "có lợi, mang lại lợi ích",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "Regular technical training sessions are highly beneficial to career advancement.",
       "The merger was mutually beneficial to both technology firms."
     ],
     "mnemonicTip": "Mutually beneficial = đôi bên cùng có lợi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v161",
@@ -479,7 +510,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Attending overseas trade expos helps executives broaden their global business network."
     ],
     "mnemonicTip": "Broaden the client base = mở rộng tệp khách hàng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v162",
@@ -494,7 +526,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The marketing agency launched an interactive social media campaign."
     ],
     "mnemonicTip": "Ad campaign = chiến dịch quảng cáo",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v163",
@@ -509,7 +542,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The auditorium has a seating capacity of twelve hundred people."
     ],
     "mnemonicTip": "Operate at full capacity = hoạt động hết công suất",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v164",
@@ -524,7 +558,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Review the confidentiality clause carefully before signing the agreement."
     ],
     "mnemonicTip": "Confidentiality clause = điều khoản bảo mật",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v165",
@@ -539,7 +574,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Our design department collaborates closely with external marketing consultants."
     ],
     "mnemonicTip": "Collaborate with someone on something = hợp tác với ai làm gì",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v166",
@@ -554,7 +590,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Construction work on the subway extension will commence next spring."
     ],
     "mnemonicTip": "Từ vựng trang trọng của begin / start trong đề thi TOEIC",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v167",
@@ -569,7 +606,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Her unwavering commitment to customer excellence earned her employee of the year."
     ],
     "mnemonicTip": "Demonstrate commitment to = thể hiện sự cam kết đối với",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v168",
@@ -584,7 +622,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Passengers received airline vouchers as compensation for the cancelled flight."
     ],
     "mnemonicTip": "Workers' compensation = bảo hiểm bồi thường người lao động",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v169",
@@ -599,7 +638,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The company appointed a compliance officer to monitor regulatory updates."
     ],
     "mnemonicTip": "In compliance with = tuân thủ theo",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v170",
@@ -607,14 +647,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˌkɑːmprɪˈhensɪv/",
     "vietnamese": "toàn diện, bao quát đầy đủ",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "New employees participate in a comprehensive two-week orientation program.",
       "The audit produced a comprehensive assessment of internal financial controls."
     ],
     "mnemonicTip": "Comprehensive review / comprehensive coverage: đánh giá toàn diện",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v171",
@@ -629,7 +670,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "We cannot compromise on product quality or workplace safety standards."
     ],
     "mnemonicTip": "Reach a compromise = đạt được thỏa hiệp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v172",
@@ -644,7 +686,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The stadium concession stand sells refreshments and team souvenirs."
     ],
     "mnemonicTip": "Make a concession = đưa ra nhượng bộ khi đàm phán",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v173",
@@ -652,14 +695,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/kənˈdʌkt/",
     "vietnamese": "tiến hành, thực hiện (nghiên cứu, khảo sát)",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "The market research firm will conduct a customer survey across ten major cities.",
       "Independent inspectors conducted a thorough audit of the assembly facility."
     ],
     "mnemonicTip": "Conduct a survey / conduct an interview / conduct an investigation",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v174",
@@ -674,7 +718,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The confidential report was stored in an encrypted corporate database."
     ],
     "mnemonicTip": "Strictly confidential = hoàn toàn bảo mật",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v175",
@@ -689,7 +734,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The factory achieved three consecutive years without an on-site injury."
     ],
     "mnemonicTip": "Consecutive days/months/quarters = các ngày/tháng/quý liên tiếp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v176",
@@ -704,7 +750,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Building a consensus among team leaders took several rounds of dialogue."
     ],
     "mnemonicTip": "Reach a consensus = đạt được sự nhất trí chung",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v177",
@@ -719,7 +766,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The property owner consented to the proposed boundary wall repairs."
     ],
     "mnemonicTip": "Prior written consent = sự đồng ý trước bằng văn bản",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v178",
@@ -727,14 +775,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈkɑːnsəkwentli/",
     "vietnamese": "hậu quả là, do đó vì vậy",
     "partOfSpeech": "adv",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "Raw material costs surged; consequently, the company had to adjust retail prices.",
       "The supplier missed the deadline, and consequently production was delayed."
     ],
     "mnemonicTip": "Từ nối biểu thị kết quả trong Part 5 & 6",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v179",
@@ -742,14 +791,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/kənˈsɪdərəbl/",
     "vietnamese": "đáng kể, to lớn",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Finance & Accounting",
     "targetBand": "650+",
     "examples": [
       "The new software automation generated considerable time savings for accountants.",
       "The firm made a considerable investment in cybersecurity infrastructure."
     ],
     "mnemonicTip": "Considerable amount / considerable savings: một lượng đáng kể",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v180",
@@ -764,7 +814,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The merger helped the firm consolidate its leading market share."
     ],
     "mnemonicTip": "Consolidate debts / operations = gom lại, tinh giản",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v181",
@@ -779,7 +830,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Independent contractors submit project invoices twice a month."
     ],
     "mnemonicTip": "General contractor = tổng thầu xây dựng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v182",
@@ -794,7 +846,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Our logistics team coordinates closely with overseas sea freight carriers."
     ],
     "mnemonicTip": "Project coordinator = điều phối viên dự án",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v183",
@@ -802,14 +855,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈkruːʃl/",
     "vietnamese": "cốt yếu, mang tính quyết định",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "Accurate inventory tracking plays a crucial role in preventing supply shortages.",
       "Securing the municipal permit was crucial to the project's continuation."
     ],
     "mnemonicTip": "Play a crucial role in = đóng vai trò sống còn trong",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v184",
@@ -824,7 +878,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Certain business travel expenses are tax-deductible under state law."
     ],
     "mnemonicTip": "Tax-deductible = được khấu trừ thuế thu nhập",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v185",
@@ -839,7 +894,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Quality assurance identified a defective circuit board on the assembly conveyor."
     ],
     "mnemonicTip": "Defective item/product = sản phẩm lỗi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v186",
@@ -854,7 +910,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Over four hundred international delegates registered for the energy conference."
     ],
     "mnemonicTip": "Delegate authority/tasks = ủy quyền, giao việc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v187",
@@ -869,7 +926,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Market analysts gathered demographic data before launching the apparel brand."
     ],
     "mnemonicTip": "Target demographic = nhóm khách hàng mục tiêu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v188",
@@ -884,7 +942,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Please park only in designated visitor stalls marked with green paint."
     ],
     "mnemonicTip": "Designated parking / designated area = khu vực được chỉ định",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v189",
@@ -899,7 +958,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Without regular maintenance, the factory roof will continue to deteriorate."
     ],
     "mnemonicTip": "Deteriorate = degrade = suy giảm chất lượng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v190",
@@ -914,7 +974,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The company disclosed its fourth-quarter financial figures yesterday morning."
     ],
     "mnemonicTip": "Non-disclosure agreement (NDA) = thỏa thuận bảo mật",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v191",
@@ -922,14 +983,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/dɪˈspætʃ/",
     "vietnamese": "gửi đi, điều phối xuất phát",
     "partOfSpeech": "verb/noun",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "650+",
     "examples": [
       "The distribution warehouse dispatched three delivery vans at dawn.",
       "Emergency maintenance technicians were dispatched immediately to the broken pipeline."
     ],
     "mnemonicTip": "Dispatch an order = chuyển gửi đơn hàng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v192",
@@ -937,14 +999,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˌdɪstrɪˈbjuːʃn/",
     "vietnamese": "sự phân phối, phân phát hàng hóa",
     "partOfSpeech": "noun",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "650+",
     "examples": [
       "The new logistics hub will streamline product distribution across three states.",
       "Distribution costs decreased after renegotiating agreements with local carriers."
     ],
     "mnemonicTip": "Distribution center = trung tâm phân phối hàng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v193",
@@ -959,7 +1022,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Automakers are diversifying into electric battery manufacturing."
     ],
     "mnemonicTip": "Diversify the business / portfolio = đa dạng hóa",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v194",
@@ -967,14 +1031,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈduːplɪkət/",
     "vietnamese": "bản sao giống hệt; nhân bản",
     "partOfSpeech": "noun/verb",
-    "category": "Office & Technology",
+    "category": "Office & Administration",
     "targetBand": "650+",
     "examples": [
       "Always retain a duplicate copy of the signed warranty for your records.",
       "The digital tool quickly detected and removed duplicate customer entries."
     ],
     "mnemonicTip": "In duplicate = thành 2 bản sao giống nhau",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v195",
@@ -982,14 +1047,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/duˈreɪʃn/",
     "vietnamese": "khoảng thời gian kéo dài",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Office & Administration",
     "targetBand": "650+",
     "examples": [
       "The warranty remains valid for the full duration of the lease period.",
       "Audience members were asked to silence their mobile phones for the duration of the lecture."
     ],
     "mnemonicTip": "For the duration of = trong suốt khoảng thời gian",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v196",
@@ -1004,7 +1070,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The new refrigeration compressors boast superior energy efficiency."
     ],
     "mnemonicTip": "Energy efficiency = hiệu quả năng lượng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v197",
@@ -1019,7 +1086,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Only full-time students are eligible to apply for the summer research fellowship."
     ],
     "mnemonicTip": "Eligible for + danh từ / eligible to + động từ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v198",
@@ -1034,7 +1102,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Management aims to eliminate production waste through lean manufacturing methods."
     ],
     "mnemonicTip": "Eliminate waste/errors = loại bỏ lãng phí/sai sót",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v199",
@@ -1049,7 +1118,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The marketing presentation emphasized the product's durable construction."
     ],
     "mnemonicTip": "Emphasize the importance of = nhấn mạnh tầm quan trọng của",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v200",
@@ -1064,7 +1134,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The board of directors officially endorsed the proposed merger agreement."
     ],
     "mnemonicTip": "Celebrity endorsement = sự quảng cáo bởi người nổi tiếng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v201",
@@ -1079,7 +1150,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Participating in public speaking workshops enhanced her presentation skills."
     ],
     "mnemonicTip": "Enhance efficiency / enhance reputation = nâng cao hiệu quả / danh tiếng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v202",
@@ -1094,7 +1166,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The deadline for health benefits enrollment is next Friday."
     ],
     "mnemonicTip": "Enroll in a course -> open enrollment (mở đăng ký)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v203",
@@ -1109,7 +1182,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Commercial enterprises must comply with newly passed data privacy regulations."
     ],
     "mnemonicTip": "Enterprise software = phần mềm cho doanh nghiệp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v204",
@@ -1124,7 +1198,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "We are seeking enthusiastic individuals to join our international sales team."
     ],
     "mnemonicTip": "Enthusiastic about something = hào hứng với điều gì",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v205",
@@ -1139,7 +1214,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Employee evaluations are held bi-annually to review performance targets."
     ],
     "mnemonicTip": "Job evaluation = đánh giá công việc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v206",
@@ -1154,7 +1230,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Luggage weight must not exceed twenty-three kilograms per bag."
     ],
     "mnemonicTip": "Exceed expectations = vượt ngoài mong đợi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v207",
@@ -1162,14 +1239,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ɪkˈsepʃənl/",
     "vietnamese": "xuất sắc, phi thường, nổi bật",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Personnel & HR",
     "targetBand": "650+",
     "examples": [
       "The candidate demonstrated exceptional analytical and leadership abilities.",
       "The boutique hotel is renowned for its exceptional customer service."
     ],
     "mnemonicTip": "Exceptional service / performance = dịch vụ / thành tích xuất chúng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v208",
@@ -1184,7 +1262,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Gold club members receive exclusive access to VIP airport lounges."
     ],
     "mnemonicTip": "Exclusive rights = quyền độc quyền",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v209",
@@ -1199,7 +1278,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Both companies executed the contract terms following lengthy negotiations."
     ],
     "mnemonicTip": "Execute a plan/contract = thi hành kế hoạch / ký hợp đồng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v210",
@@ -1214,7 +1294,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Certain salaried managerial employees are exempt from overtime regulations."
     ],
     "mnemonicTip": "Tax-exempt = được miễn thuế",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v211",
@@ -1229,7 +1310,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The museum's architecture exhibition attracted thousands of weekend visitors."
     ],
     "mnemonicTip": "Trade exhibition = hội chợ triển lãm thương mại",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v212",
@@ -1244,7 +1326,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Facility expansion plans were approved by the municipal planning board."
     ],
     "mnemonicTip": "Expand (động từ) -> expansion (danh từ)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v213",
@@ -1252,14 +1335,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈekspədaɪt/",
     "vietnamese": "đẩy nhanh tiến độ, giải quyết gấp",
     "partOfSpeech": "verb",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "650+",
     "examples": [
       "Customers can pay an additional courier fee to expedite international shipment.",
       "Management intervened to expedite the regulatory approval process."
     ],
     "mnemonicTip": "Expedite delivery = giao hàng hỏa tốc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v214",
@@ -1274,7 +1358,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The CFO urged department heads to curtail non-essential operational expenditures."
     ],
     "mnemonicTip": "Capital expenditure (CapEx) = chi phí đầu tư tài sản cố định",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v215",
@@ -1289,7 +1374,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Her financial expertise proved invaluable during the debt restructuring."
     ],
     "mnemonicTip": "Area of expertise = lĩnh vực chuyên môn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v216",
@@ -1304,7 +1390,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "A skilled mediator was brought in to facilitate discussions between union leaders."
     ],
     "mnemonicTip": "Facilitate communication/trade = thúc đẩy giao thương/trao đổi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v217",
@@ -1319,7 +1406,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "We need to evaluate whether working remotely on a permanent basis is feasible."
     ],
     "mnemonicTip": "Feasibility study = nghiên cứu tính khả thi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v218",
@@ -1334,7 +1422,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Prudent fiscal management helped the corporation weather the economic downturn."
     ],
     "mnemonicTip": "Fiscal year (FY) = năm tài chính / năm ngân sách",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v219",
@@ -1349,7 +1438,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Stock market indices fluctuated in response to interest rate announcements."
     ],
     "mnemonicTip": "Fluctuate between A and B = dao động giữa A và B",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v220",
@@ -1364,7 +1454,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The marketing analyst forecasted a ten percent increase in retail orders."
     ],
     "mnemonicTip": "Sales forecast = dự báo doanh số bán hàng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v221",
@@ -1372,14 +1463,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˌfɔːrθˈkʌmɪŋ/",
     "vietnamese": "sắp xảy ra, sắp được xuất bản/công bố",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "Details regarding the company retreat will be shared in a forthcoming email.",
       "Her forthcoming book examines sustainable commercial agriculture."
     ],
     "mnemonicTip": "Forthcoming publication/event = sự kiện/ấn phẩm sắp tới",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v222",
@@ -1387,14 +1479,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/fʊlˈfɪl/",
     "vietnamese": "hoàn thành, đáp ứng thỏa mãn (đơn hàng, yêu cầu)",
     "partOfSpeech": "verb",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "650+",
     "examples": [
       "The automated warehouse can fulfill and dispatch online orders within hours.",
       "Applicants must fulfill all job criteria to be considered for an interview."
     ],
     "mnemonicTip": "Fulfill an order / fulfill requirements",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v223",
@@ -1402,14 +1495,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˌfʌndəˈmentl/",
     "vietnamese": "cơ bản, nền tảng cốt lõi",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "Clear communication is fundamental to successful project execution.",
       "The seminar covers fundamental concepts of international corporate taxation."
     ],
     "mnemonicTip": "Fundamental principle = nguyên tắc cơ bản cốt lõi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v224",
@@ -1417,14 +1511,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈɡaɪdlaɪn/",
     "vietnamese": "nguyên tắc hướng dẫn, đường lối chỉ đạo",
     "partOfSpeech": "noun",
-    "category": "Corporate & Management",
+    "category": "Office & Administration",
     "targetBand": "650+",
     "examples": [
       "Please adhere strictly to corporate cybersecurity guidelines when working remotely.",
       "The board published revised ethical guidelines for procurement officers."
     ],
     "mnemonicTip": "Follow the guidelines = tuân theo hướng dẫn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v225",
@@ -1432,14 +1527,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈhezɪteɪt/",
     "vietnamese": "do dự, ngập ngừng",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Customer Relations",
     "targetBand": "650+",
     "examples": [
       "Do not hesitate to contact our technical helpline if you experience any errors.",
       "She did not hesitate to recommend him for the managerial vacancy."
     ],
     "mnemonicTip": "Cụm Part 2-7: 'Please do not hesitate to contact us'",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "customer_service"
   },
   {
     "id": "v226",
@@ -1454,7 +1550,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The chart serves as a clear illustration of our year-over-year growth."
     ],
     "mnemonicTip": "By way of illustration = để làm ví dụ minh họa",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v227",
@@ -1469,7 +1566,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Our IT department successfully implemented the new inventory management software."
     ],
     "mnemonicTip": "Implement a policy / implement a strategy",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v228",
@@ -1484,7 +1582,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The unexpected delay has serious financial implications for the contractor."
     ],
     "mnemonicTip": "Implications of something = những hệ quả đi kèm",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v229",
@@ -1499,7 +1598,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Tax incentives were introduced to encourage commercial investment in renewable tech."
     ],
     "mnemonicTip": "Incentive program = chương trình khen thưởng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v230",
@@ -1514,7 +1614,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The software developer plans to incorporate artificial intelligence into its search engine."
     ],
     "mnemonicTip": "Incorporate A into B = lồng ghép A vào B",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v231",
@@ -1529,7 +1630,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "She showed tremendous initiative by resolving the customer dispute independently."
     ],
     "mnemonicTip": "Take the initiative = chủ động khởi xướng hành động",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v232",
@@ -1544,7 +1646,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Our creative team develops innovative marketing concepts for global clients."
     ],
     "mnemonicTip": "Innovative design / solution = thiết kế / giải pháp sáng tạo",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v233",
@@ -1559,7 +1662,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The boiler passed its annual safety inspection without any recorded citations."
     ],
     "mnemonicTip": "Undergo an inspection = trải qua cuộc thanh tra",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v234",
@@ -1574,7 +1678,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The initial installment of the contract fee was wired upon project kickoff."
     ],
     "mnemonicTip": "Pay in installments = trả góp theo từng kỳ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v235",
@@ -1589,7 +1694,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Make sure your health insurance policy covers international emergency medical care."
     ],
     "mnemonicTip": "Insurance policy = hợp đồng bảo hiểm",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v236",
@@ -1604,7 +1710,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The brochure is intended primarily for prospective international students."
     ],
     "mnemonicTip": "Intended for = được dành riêng cho đối tượng nào",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v237",
@@ -1612,14 +1719,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˌɪntərˈækʃn/",
     "vietnamese": "sự tương tác, tiếp xúc trao đổi",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Personnel & HR",
     "targetBand": "650+",
     "examples": [
       "Positive customer interaction is key to building lasting brand loyalty.",
       "The workshops encourage active peer-to-peer interaction among attendees."
     ],
     "mnemonicTip": "Social / professional interaction = sự tương tác nghề nghiệp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v238",
@@ -1627,14 +1735,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˌɪntərˈfɪr/",
     "vietnamese": "gây cản trở, can thiệp vào làm gián đoạn",
     "partOfSpeech": "verb",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "Heavy construction noise interfered with conference presentations next door.",
       "Personal matters should not interfere with the timely fulfillment of duties."
     ],
     "mnemonicTip": "Interfere with something = cản trở điều gì",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v239",
@@ -1642,14 +1751,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ɪnˌvestɪˈɡeɪʃn/",
     "vietnamese": "cuộc điều tra xác minh sự việc",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "Safety regulators opened a formal investigation into the warehouse accident.",
       "A preliminary investigation revealed that the disruption was caused by power failure."
     ],
     "mnemonicTip": "Conduct an investigation = tiến hành điều tra",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v240",
@@ -1664,7 +1774,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The firm attracted five million dollars in foreign venture capital investment."
     ],
     "mnemonicTip": "Return on investment (ROI) = tỷ suất sinh lời trên vốn đầu tư",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v241",
@@ -1679,7 +1790,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The itemized expense statement made accounting reconciliation effortless."
     ],
     "mnemonicTip": "Itemized bill/receipt = hóa đơn chi tiết từng khoản mục",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v242",
@@ -1687,14 +1799,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/liːs/",
     "vietnamese": "hợp đồng thuê dài hạn; cho thuê",
     "partOfSpeech": "noun/verb",
-    "category": "Real Estate & Location",
+    "category": "Real Estate & Facilities",
     "targetBand": "650+",
     "examples": [
       "The commercial tenant signed a three-year office lease for the eighth floor.",
       "The company decided to lease delivery trucks rather than purchase them outright."
     ],
     "mnemonicTip": "Sign a lease / renew a lease = ký / gia hạn hợp đồng thuê",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v243",
@@ -1709,7 +1822,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Parliament passed legislation safeguarding consumer digital financial rights."
     ],
     "mnemonicTip": "Pass legislation = thông qua đạo luật",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v244",
@@ -1724,7 +1838,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "They leveraged cutting-edge technology to reduce operational overhead."
     ],
     "mnemonicTip": "Leverage an advantage = tận dụng lợi thế cạnh tranh",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v245",
@@ -1739,7 +1854,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The corporate balance sheet lists both current assets and long-term liabilities."
     ],
     "mnemonicTip": "Limited liability company (LLC) = công ty trách nhiệm hữu hạn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v246",
@@ -1754,7 +1870,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Proceeds from the asset liquidation were distributed to verified creditors."
     ],
     "mnemonicTip": "Liquidation sale = đợt xả hàng thanh lý",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v247",
@@ -1769,7 +1886,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Exporting organic farm produce proved to be an exceptionally lucrative business."
     ],
     "mnemonicTip": "Lucrative market / contract = thị trường / hợp đồng béo bở",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v248",
@@ -1784,7 +1902,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The airline introduced mandatory safety training for all ground handling crew."
     ],
     "mnemonicTip": "Mandatory requirement = yêu cầu bắt buộc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v249",
@@ -1799,7 +1918,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Damaged merchandise should be returned to the central warehouse with an invoice."
     ],
     "mnemonicTip": "Danh từ không đếm được: goods / products",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v250",
@@ -1814,7 +1934,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Poor communication during the restructuring caused office morale to decline."
     ],
     "mnemonicTip": "Boost employee morale = nâng cao tinh thần nhân viên (chú ý trọng âm âm 2)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v251",
@@ -1829,7 +1950,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Both parties are scheduled to negotiate the final licensing terms next Tuesday."
     ],
     "mnemonicTip": "Negotiate a contract/price = đàm phán hợp đồng/giá",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v252",
@@ -1844,7 +1966,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Targeting a niche market allows smaller businesses to avoid giant competitors."
     ],
     "mnemonicTip": "Niche market = thị trường ngách",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v253",
@@ -1852,14 +1975,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈnoʊtəbl/",
     "vietnamese": "đáng chú ý, nổi bật",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "650+",
     "examples": [
       "The quarterly financial report highlighted several notable achievements.",
       "One notable exception to the general sales decline was online subscriptions."
     ],
     "mnemonicTip": "Notable feature / notable achievement = thành tựu đáng chú ý",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v254",
@@ -1874,7 +1998,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The supplier failed to meet its contractual obligations, resulting in penalties."
     ],
     "mnemonicTip": "Legal / contractual obligation = nghĩa vụ pháp lý / hợp đồng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v255",
@@ -1882,14 +2007,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈɑːkjəpənt/",
     "vietnamese": "người cư ngụ, người thuê phòng/tòa nhà",
     "partOfSpeech": "noun",
-    "category": "Real Estate & Location",
+    "category": "Real Estate & Facilities",
     "targetBand": "650+",
     "examples": [
       "All building occupants were evacuated safely during the scheduled fire drill.",
       "The previous occupant left the office suite in immaculate condition."
     ],
     "mnemonicTip": "Building occupants = những người ở trong tòa nhà",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v256",
@@ -1897,14 +2023,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈɑːptɪmaɪz/",
     "vietnamese": "tối ưu hóa",
     "partOfSpeech": "verb",
-    "category": "Office & Technology",
+    "category": "Office & Administration",
     "targetBand": "650+",
     "examples": [
       "The logistics software helps optimize delivery routes to reduce transit fuel costs.",
       "Web developers worked to optimize the e-commerce site for mobile devices."
     ],
     "mnemonicTip": "Optimize performance / efficiency = tối ưu hiệu năng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v257",
@@ -1919,7 +2046,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The orientation handbook outlines company policies, benefits, and paid leave."
     ],
     "mnemonicTip": "Orientation session = buổi tập huấn định hướng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v258",
@@ -1934,7 +2062,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "She received an award for her outstanding contributions to software development."
     ],
     "mnemonicTip": "Outstanding bill/balance = hóa đơn chưa thanh toán",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v259",
@@ -1949,7 +2078,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The construction manager oversees safety compliance across three job sites."
     ],
     "mnemonicTip": "Oversee operations / a project = giám sát hoạt động",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v260",
@@ -1964,7 +2094,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The company currently has over four hundred skilled technicians on its payroll."
     ],
     "mnemonicTip": "On the payroll = trong danh sách nhận lương của công ty",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v261",
@@ -1979,7 +2110,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Borrowers face a penalty for early withdrawal of long-term fixed deposits."
     ],
     "mnemonicTip": "Pay a penalty = nộp phạt",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v262",
@@ -1994,7 +2126,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Aggressive pricing strategies helped the new brand penetrate the market quickly."
     ],
     "mnemonicTip": "Penetrate the market = thâm nhập thị trường",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v263",
@@ -2009,7 +2142,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "He retired comfortably on a generous company pension after thirty years of service."
     ],
     "mnemonicTip": "Pension plan/scheme = chương trình lương hưu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v264",
@@ -2024,7 +2158,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The company relocated its permanent corporate headquarters to Chicago."
     ],
     "mnemonicTip": "Permanent position = vị trí làm việc chính thức lâu dài",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v265",
@@ -2032,14 +2167,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/pərˈsɪstənt/",
     "vietnamese": "kiên trì, dai dẳng bền bỉ",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Personnel & HR",
     "targetBand": "650+",
     "examples": [
       "Thanks to persistent efforts by the sales staff, the contract was successfully renewed.",
       "IT technicians resolved persistent software errors in the accounting module."
     ],
     "mnemonicTip": "Persistent effort = nỗ lực bền bỉ không bỏ cuộc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v266",
@@ -2054,7 +2190,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "From an investor's perspective, the quarterly dividends were very attractive."
     ],
     "mnemonicTip": "From someone's perspective = theo quan điểm của ai",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v267",
@@ -2069,7 +2206,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The architect presented an impressive design portfolio during the client interview."
     ],
     "mnemonicTip": "Investment portfolio = danh mục đầu tư",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v268",
@@ -2084,7 +2222,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "As a safety precaution, backup power generators were tested before the storm."
     ],
     "mnemonicTip": "Take precautions = áp dụng các biện pháp phòng ngừa",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v269",
@@ -2099,7 +2238,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The architect presented preliminary floor plans at the municipal planning meeting."
     ],
     "mnemonicTip": "Preliminary results / findings = kết quả sơ bộ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v270",
@@ -2107,14 +2247,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈpremɪsɪz/",
     "vietnamese": "khuôn viên, cơ sở địa ốc kinh doanh",
     "partOfSpeech": "noun",
-    "category": "Real Estate & Location",
+    "category": "Real Estate & Facilities",
     "targetBand": "650+",
     "examples": [
       "Smoking is strictly prohibited everywhere on hospital premises.",
       "Security cameras monitor all entry and exit points on the corporate premises."
     ],
     "mnemonicTip": "On the premises = trong khuôn viên công ty",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v271",
@@ -2129,7 +2270,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Project managers must set clear priorities when operating under tight deadlines."
     ],
     "mnemonicTip": "Top priority = ưu tiên số một",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v272",
@@ -2144,7 +2286,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Her performance during the probation period exceeded all manager expectations."
     ],
     "mnemonicTip": "Probation period = thời gian thử việc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v273",
@@ -2152,14 +2295,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/prəˈsiːdʒər/",
     "vietnamese": "quy trình, thủ tục hành chính/kỹ thuật",
     "partOfSpeech": "noun",
-    "category": "Corporate & Management",
+    "category": "Office & Administration",
     "targetBand": "650+",
     "examples": [
       "Follow standard operating procedures when rebooting the main server cluster.",
       "The bank updated its loan application procedure to make approvals faster."
     ],
     "mnemonicTip": "Standard operating procedure (SOP) = quy trình thao tác chuẩn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v274",
@@ -2167,14 +2311,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/prəˈkjʊr/",
     "vietnamese": "thu mua, mua sắm vật tư trang thiết bị",
     "partOfSpeech": "verb",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "650+",
     "examples": [
       "The purchasing officer managed to procure industrial steel at favorable rates.",
       "It took several weeks to procure the specialized replacement parts from Germany."
     ],
     "mnemonicTip": "Procurement department = phòng mua sắm trang thiết bị",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v275",
@@ -2189,7 +2334,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The factory introduced automated assembly conveyors to boost hourly productivity."
     ],
     "mnemonicTip": "Increase productivity = nâng cao năng suất",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v276",
@@ -2204,7 +2350,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "State regulations prohibit commercial fishing in designated marine sanctuaries."
     ],
     "mnemonicTip": "Prohibit someone from doing something = cấm ai làm việc gì",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v277",
@@ -2219,7 +2366,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Special promotional pricing is available exclusively during the grand opening week."
     ],
     "mnemonicTip": "Promotional campaign / discount = chiến dịch / ưu đãi khuyến mãi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v278",
@@ -2234,7 +2382,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The human resources team interviewed several prospective candidates on Tuesday."
     ],
     "mnemonicTip": "Prospective client / buyer = khách hàng / người mua tiềm năng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v279",
@@ -2242,14 +2391,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/ˈproʊtəkɑːl/",
     "vietnamese": "nghi thức ngoại giao, quy thức chuẩn an toàn",
     "partOfSpeech": "noun",
-    "category": "Corporate & Management",
+    "category": "Office & Administration",
     "targetBand": "650+",
     "examples": [
       "Strict laboratory safety protocols prevent accidental chemical contamination.",
       "Diplomatic protocol requires welcoming foreign trade delegates at the airport."
     ],
     "mnemonicTip": "Safety protocol = quy thức an toàn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v280",
@@ -2264,7 +2414,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The agreement includes provisions for annual inflation adjustments."
     ],
     "mnemonicTip": "Contract provision = điều khoản hợp đồng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v281",
@@ -2279,7 +2430,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The high-speed passenger train has an outstanding record of punctual arrivals."
     ],
     "mnemonicTip": "Punctual delivery = giao hàng đúng giờ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v282",
@@ -2294,7 +2446,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Her professional certifications and qualifications made her the standout candidate."
     ],
     "mnemonicTip": "Meet the qualifications = đáp ứng các tiêu chuẩn chuyên môn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v283",
@@ -2309,7 +2462,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Department heads submit budget reviews quarterly to the finance director."
     ],
     "mnemonicTip": "Quarterly report = báo cáo tài chính quý",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v284",
@@ -2324,7 +2478,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Submit valid original receipts to receive full reimbursement for travel expenses."
     ],
     "mnemonicTip": "Reimburse expenses = hoàn trả chi phí công tác",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v285",
@@ -2332,14 +2487,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/rɪˈlʌktənt/",
     "vietnamese": "miễn cưỡng, ngần ngại",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Personnel & HR",
     "targetBand": "650+",
     "examples": [
       "Investors were reluctant to commit additional capital given the market uncertainty.",
       "Management was reluctant to raise prices despite higher supply chain costs."
     ],
     "mnemonicTip": "Reluctant to do something = ngần ngại làm điều gì",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v286",
@@ -2354,7 +2510,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "The financial institution has been a reputable community partner for fifty years."
     ],
     "mnemonicTip": "Reputable company / vendor = doanh nghiệp có uy tín",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "marketing"
   },
   {
     "id": "v287",
@@ -2369,7 +2526,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "Online subscription services account for forty percent of total corporate revenue."
     ],
     "mnemonicTip": "Generate revenue = tạo ra doanh thu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v288",
@@ -2384,7 +2542,8 @@ export const VOCAB_650: VocabularyWord[] = [
       "He chose to specialize in corporate patent law after finishing law school."
     ],
     "mnemonicTip": "Specialize in = chuyên sâu về",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v289",
@@ -2392,14 +2551,15 @@ export const VOCAB_650: VocabularyWord[] = [
     "ipa": "/səbˈstænʃəli/",
     "vietnamese": "đáng kể, rất nhiều",
     "partOfSpeech": "adv",
-    "category": "General Business",
+    "category": "Finance & Accounting",
     "targetBand": "650+",
     "examples": [
       "Operating overhead decreased substantially after adopting solar power.",
       "Customer satisfaction ratings improved substantially over the past six months."
     ],
     "mnemonicTip": "Increase / decrease substantially = tăng / giảm đáng kể",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v290",
@@ -2414,6 +2574,7 @@ export const VOCAB_650: VocabularyWord[] = [
       "The supplier terminated the delivery agreement due to chronic non-payment."
     ],
     "mnemonicTip": "Terminate a contract / terminate employment = chấm dứt hợp đồng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   }
 ];

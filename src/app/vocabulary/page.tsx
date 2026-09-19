@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { VocabularyWord, TargetBand } from '@/data/vocabulary';
+import { VocabularyWord, TargetBand, getTopicByName } from '@/data/vocabulary';
 import { useVocabulary } from '@/hooks/useVocabulary';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useAudio } from '@/hooks/useAudio';
@@ -26,13 +26,13 @@ const TARGET_BANDS = [
 
 const QUICK_SEARCH_CHIPS = [
   { label: 'Hợp đồng', query: 'hợp đồng' },
-  { label: 'Báo cáo', query: 'báo cáo' },
-  { label: 'Lịch trình', query: 'lịch trình' },
-  { label: 'Thanh toán', query: 'thanh toán' },
+  { label: 'Doanh nghiệp', query: 'doanh nghiệp' },
   { label: 'Nhân sự', query: 'nhân sự' },
-  { label: 'Đàm phán', query: 'đàm phán' },
-  { label: 'Giao hàng', query: 'giao hàng' },
-  { label: 'Thông báo', query: 'thông báo' },
+  { label: 'Tài chính', query: 'tài chính' },
+  { label: 'Tiếp thị', query: 'tiếp thị' },
+  { label: 'Văn phòng', query: 'văn phòng' },
+  { label: 'Vận chuyển', query: 'vận chuyển' },
+  { label: 'Bất động sản', query: 'bất động sản' },
 ];
 
 export default function VocabularyPage() {
@@ -276,17 +276,21 @@ export default function VocabularyPage() {
             </div>
 
             <div className={styles.filterGroup}>
-              <span className={styles.filterLabel}>Chủ đề</span>
+              <span className={styles.filterLabel}>Chủ đề ETS</span>
               <div className={styles.chips}>
-                {CATEGORIES.map(cat => (
-                  <button
-                    key={cat}
-                    className={`${styles.chip} ${selectedCategory === cat ? styles.activeChip : ''}`}
-                    onClick={() => setSelectedCategory(cat)}
-                  >
-                    {cat}
-                  </button>
-                ))}
+                {CATEGORIES.map(cat => {
+                  const topicMeta = cat !== 'All' ? getTopicByName(cat) : null;
+                  const label = topicMeta ? topicMeta.nameVi : (cat === 'All' ? 'Tất cả chủ đề' : cat);
+                  return (
+                    <button
+                      key={cat}
+                      className={`${styles.chip} ${selectedCategory === cat ? styles.activeChip : ''}`}
+                      onClick={() => setSelectedCategory(cat)}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -383,7 +387,12 @@ export default function VocabularyPage() {
 
                 {isExpanded && (
                   <div className={`${styles.expandedContent} animate-slide-up`}>
-                    <div className={styles.categoryBadge}>{word.category}</div>
+                    <div className={styles.categoryBadge}>
+                      {(() => {
+                        const topicMeta = getTopicByName(word.category);
+                        return topicMeta ? `${topicMeta.nameVi} (${topicMeta.nameEn})` : word.category;
+                      })()}
+                    </div>
                     
                     <div className={styles.expandSection}>
                       <div className={styles.expandLabel}>Ví dụ</div>
@@ -398,7 +407,6 @@ export default function VocabularyPage() {
                       <div className={styles.expandSection}>
                         <div className={styles.expandLabel}>Mẹo nhớ</div>
                         <div className={styles.mnemonic}>
-                          {word.emoji ? <span className={styles.emoji}>{word.emoji}</span> : null}
                           <span>{highlightMatch(word.mnemonicTip, searchTerm, styles.highlight)}</span>
                         </div>
                       </div>

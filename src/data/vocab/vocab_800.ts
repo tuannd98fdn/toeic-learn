@@ -14,7 +14,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Rumors of an impending corporate merger caused regional stock prices to surge."
     ],
     "mnemonicTip": "Hai tập đoàn merge (hợp nhất) thành một thực thể lớn hơn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v7",
@@ -22,58 +23,62 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/lɔːft/",
     "vietnamese": "căn hộ gác lửng thông tầng, không gian mở tầng cao",
     "partOfSpeech": "noun",
-    "category": "Real Estate & Location",
+    "category": "Real Estate & Facilities",
     "targetBand": "800+",
     "examples": [
       "The historic textile warehouse was converted into luxurious residential loft apartments.",
       "The architectural firm operates out of a spacious brick-and-timber loft downtown."
     ],
     "mnemonicTip": "Loft apartment = căn hộ không gian mở trần cao",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v18",
-    "word": "mosaic",
-    "ipa": "/moʊˈzeɪɪk/",
-    "vietnamese": "tranh khảm nghệ thuật; bức tranh ghép đa dạng",
+    "word": "depreciation",
+    "ipa": "/dɪˌpriːʃiˈeɪʃən/",
+    "vietnamese": "sự khấu hao tài sản cố định, giảm giá trị theo thời gian",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Finance & Accounting",
+    "topicId": "finance",
     "targetBand": "800+",
     "examples": [
-      "The corporate lobby features an intricate marble mosaic depicting international trade routes.",
-      "The metropolitan population represents a vibrant cultural mosaic."
+      "The finance director factored in asset depreciation when calculating taxes.",
+      "Vehicle depreciation represents a major annual expense for the logistics fleet."
     ],
-    "mnemonicTip": "Mảnh ghép nghệ thuật tinh tế",
+    "mnemonicTip": "De (xuống) + price (giá) = giảm dần giá trị sổ sách theo năm tháng.",
     "emoji": ""
   },
   {
     "id": "v20",
-    "word": "spectrum",
-    "ipa": "/ˈspektrəm/",
-    "vietnamese": "quang phổ; dải phổ rộng, phạm vi toàn diện",
+    "word": "consolidation",
+    "ipa": "/kənˌsɑːlɪˈdeɪʃən/",
+    "vietnamese": "sự hợp nhất, sáp nhập tài chính / tổ chức",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Corporate & Management",
+    "topicId": "corporate",
     "targetBand": "800+",
     "examples": [
-      "Our consultancy advises clients across a broad spectrum of commercial industries.",
-      "The financial institution offers services covering the entire spectrum of asset management."
+      "The consolidation of regional warehouses reduced shipping overhead by 15 percent.",
+      "Debt consolidation allowed the startup to restructure its high-interest loans."
     ],
-    "mnemonicTip": "Across the broad spectrum = trên một phạm vi rất rộng",
+    "mnemonicTip": "Consolidate = gom các phần tử rời rạc lại thành một khối vững chắc.",
     "emoji": ""
   },
   {
     "id": "v21",
-    "word": "minerals",
-    "ipa": "/ˈmɪnərəlz/",
-    "vietnamese": "khoáng vật, tài nguyên khoáng sản",
+    "word": "moratorium",
+    "ipa": "/ˌmɔːrəˈtɔːriəm/",
+    "vietnamese": "lệnh tạm hoãn thi hành nghĩa vụ nợ hoặc đình chỉ hoạt động",
     "partOfSpeech": "noun",
-    "category": "Manufacturing & Quality",
+    "category": "Finance & Accounting",
+    "topicId": "finance",
     "targetBand": "800+",
     "examples": [
-      "The mining conglomerate obtained extraction rights for rare earth minerals.",
-      "Raw industrial minerals are transported by heavy rail to processing smelters."
+      "The government declared a temporary moratorium on commercial loan interest.",
+      "Management agreed to a moratorium on staff layoffs during the reorganization."
     ],
-    "mnemonicTip": "Mineral extraction = khai khoáng",
+    "mnemonicTip": "Moratorium = temporary delay or freeze on legal/financial obligations.",
     "emoji": ""
   },
   {
@@ -89,21 +94,23 @@ export const VOCAB_800: VocabularyWord[] = [
       "Quality assurance insisted that safety must never be sacrificed for production speed."
     ],
     "mnemonicTip": "Sacrifice short-term gain for long-term growth",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v33",
-    "word": "refract",
-    "ipa": "/rɪˈfrækt/",
-    "vietnamese": "khúc xạ (tia sáng, bước sóng)",
-    "partOfSpeech": "verb",
-    "category": "Manufacturing & Quality",
+    "word": "subsequent",
+    "ipa": "/ˈsʌbsɪkwənt/",
+    "vietnamese": "xảy ra sau đó, liên tiếp tiếp theo",
+    "partOfSpeech": "adjective",
+    "category": "Corporate & Management",
+    "topicId": "corporate",
     "targetBand": "800+",
     "examples": [
-      "Specialized optical lenses refract laser beams to measure microscopic surface flaws.",
-      "The treated architectural glass refracts harsh ultraviolet rays to keep interiors cool."
+      "Subsequent studies confirmed the economic viability of the expansion plan.",
+      "The initial product launch failed, but subsequent revisions proved profitable."
     ],
-    "mnemonicTip": "Refractive index = chỉ số khúc xạ trong thiết bị quang học",
+    "mnemonicTip": "Cụm từ Part 5 & 6 kinh điển: subsequent to (sau khi), subsequent events (sự kiện xảy ra sau).",
     "emoji": ""
   },
   {
@@ -119,7 +126,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Supply chain disruptions adversely impacted the automaker's quarterly production output."
     ],
     "mnemonicTip": "Adversely affect / impact = tác động tiêu cực đến",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v292",
@@ -134,7 +142,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Both commercial partners agreed to terminate their joint venture amicably."
     ],
     "mnemonicTip": "Amicable settlement = thỏa thuận giải quyết hòa bình",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v293",
@@ -149,7 +158,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "An independent arbitration panel ruled in favor of the overseas software supplier."
     ],
     "mnemonicTip": "Binding arbitration = trọng tài phân xử có tính ràng buộc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v294",
@@ -164,7 +174,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The corporate cybersecurity department discovered an unauthorized data breach."
     ],
     "mnemonicTip": "Breach of contract / security breach = vi phạm hợp đồng / lỗ hổng an ninh",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v295",
@@ -179,7 +190,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The procurement officer was terminated for illegal collusion with preferred bidders."
     ],
     "mnemonicTip": "In collusion with = thông đồng với ai",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v296",
@@ -194,7 +206,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The executive board expected results commensurate with the substantial marketing outlay."
     ],
     "mnemonicTip": "Commensurate with experience = mức lương tương xứng kinh nghiệm",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v297",
@@ -209,7 +222,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The retail conglomerate acquired several boutique fashion brands last year."
     ],
     "mnemonicTip": "Tập đoàn kinh tế khổng lồ sở hữu nhiều ngành",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v298",
@@ -224,21 +238,23 @@ export const VOCAB_800: VocabularyWord[] = [
       "A large diplomatic contingent attended the international economic summit."
     ],
     "mnemonicTip": "Contingent on / upon = phụ thuộc vào điều kiện gì",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v299",
-    "word": "culpability",
-    "ipa": "/ˌkʌlpəˈbɪləti/",
-    "vietnamese": "trách nhiệm có lỗi, sự đáng bị khiển trách pháp lý",
+    "word": "non-disclosure",
+    "ipa": "/ˌnɑːndɪsˈkloʊʒər/",
+    "vietnamese": "cam kết không tiết lộ thông tin mật, thỏa thuận bảo mật",
     "partOfSpeech": "noun",
     "category": "Contracts & Legal",
+    "topicId": "contracts",
     "targetBand": "800+",
     "examples": [
-      "The chemical company denied any legal culpability for the accidental river contamination.",
-      "Judicial investigators established corporate culpability for the collapsed retaining wall."
+      "Both firms signed a mutual non-disclosure agreement before merger talks began.",
+      "Breaching the non-disclosure clause can result in heavy financial penalties."
     ],
-    "mnemonicTip": "Gốc culpa (lỗi) -> culpability (trách nhiệm có lỗi)",
+    "mnemonicTip": "Non (không) + disclosure (tiết lộ) = thỏa thuận bảo mật NDA trong kinh doanh.",
     "emoji": ""
   },
   {
@@ -254,7 +270,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The manual filing system was deemed too cumbersome for modern accounting workflows."
     ],
     "mnemonicTip": "Cumbersome procedure/regulations = thủ tục rườm rà",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v301",
@@ -269,21 +286,23 @@ export const VOCAB_800: VocabularyWord[] = [
       "Factory operating shifts were curtailed due to an acute shortage of imported semiconductors."
     ],
     "mnemonicTip": "Curtail spending / curtail operations = cắt bớt chi tiêu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v302",
-    "word": "deleterious",
-    "ipa": "/ˌdeləˈtɪriəs/",
-    "vietnamese": "gây tổn hại nguy hại (đối với sức khỏe, lợi nhuận)",
-    "partOfSpeech": "adj",
-    "category": "General Business",
+    "word": "severance",
+    "ipa": "/ˈsɛvərəns/",
+    "vietnamese": "gói trợ cấp thôi việc, tiền đền bù chấm dứt hợp đồng lao động",
+    "partOfSpeech": "noun",
+    "category": "Personnel & HR",
+    "topicId": "personnel",
     "targetBand": "800+",
     "examples": [
-      "Excessive workplace stress has a deleterious effect on team productivity and retention.",
-      "The trade embargo had a deleterious impact on the export-oriented manufacturing sector."
+      "Downsized employees received three months of severance pay and healthcare benefits.",
+      "The executive severance package was approved by the board of directors."
     ],
-    "mnemonicTip": "Deleterious effect/impact = tác hại khôn lường",
+    "mnemonicTip": "Sever (cắt đứt) -> severance pay = khoản tiền bồi thường khi chia tay công ty.",
     "emoji": ""
   },
   {
@@ -292,14 +311,15 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/dɪˈpliːʃn/",
     "vietnamese": "sự cạn kiệt nguồn tài nguyên/quỹ tiền",
     "partOfSpeech": "noun",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "800+",
     "examples": [
       "Severe reservoir depletion forced city authorities to ration commercial water usage.",
       "The unexpected legal battle led to rapid depletion of the company's emergency reserves."
     ],
     "mnemonicTip": "Resource depletion = cạn kiệt tài nguyên",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v304",
@@ -314,7 +334,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The candidate is known for her diligent attention to technical compliance details."
     ],
     "mnemonicTip": "Due diligence = sự thẩm định cẩn trọng trong mua bán sáp nhập",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v305",
@@ -329,21 +350,23 @@ export const VOCAB_800: VocabularyWord[] = [
       "A prominent warranty disclaimer was printed at the bottom of the software contract."
     ],
     "mnemonicTip": "Legal disclaimer = điều khoản miễn trừ trách nhiệm",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v306",
-    "word": "disconcerting",
-    "ipa": "/ˌdɪskənˈsɜːrtɪŋ/",
-    "vietnamese": "đáng lo ngại, gây bối rối hoang mang",
-    "partOfSpeech": "adj",
-    "category": "General Business",
+    "word": "patronage",
+    "ipa": "/ˈpeɪtrənɪdʒ/",
+    "vietnamese": "sự lui tới ủng hộ của khách hàng quen, sự bảo trợ thương mại",
+    "partOfSpeech": "noun",
+    "category": "Customer Relations",
+    "topicId": "customer_service",
     "targetBand": "800+",
     "examples": [
-      "The sudden drop in subscription renewals was a disconcerting signal for the publisher.",
-      "It was disconcerting to discover discrepancies between the physical inventory and the ledger."
+      "We deeply appreciate your continued patronage over the past decade.",
+      "The bookstore offers loyalty rewards to encourage regular customer patronage."
     ],
-    "mnemonicTip": "Disconcerting news/trends = xu hướng đáng quan ngại",
+    "mnemonicTip": "Patron (khách quen) -> patronage = sự ủng hộ gắn bó của khách hàng thân thiết.",
     "emoji": ""
   },
   {
@@ -359,7 +382,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Please explain the discrepancy between your original quotation and the final invoice."
     ],
     "mnemonicTip": "Discrepancy in figures = sự chênh lệch số liệu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v308",
@@ -374,7 +398,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The managing director has a discretionary annual fund for strategic employee bonuses."
     ],
     "mnemonicTip": "Discretionary spending/funds = chi tiêu không thiết yếu / quỹ tự do",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v309",
@@ -389,7 +414,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The conglomerate manages disparate business units ranging from aerospace to hospitality."
     ],
     "mnemonicTip": "Disparate systems/sources = các hệ thống rời rạc, khác biệt",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v310",
@@ -404,7 +430,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Consumers praise this commercial blender model for its reliability and outstanding durability."
     ],
     "mnemonicTip": "Durable (bền) -> durability (độ bền)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v311",
@@ -412,14 +439,15 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/ɪnˈkʌmbrəns/",
     "vietnamese": "vật cản trở; gánh nặng thế chấp trên bất động sản",
     "partOfSpeech": "noun",
-    "category": "Real Estate & Location",
+    "category": "Real Estate & Facilities",
     "targetBand": "800+",
     "examples": [
       "The title search confirmed that the commercial property was free of any liens or encumbrances.",
       "Excessive bureaucracy proved to be an unwanted encumbrance on rapid business innovation."
     ],
     "mnemonicTip": "Free of encumbrance = không vướng tranh chấp/thế chấp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "real_estate"
   },
   {
     "id": "v312",
@@ -434,7 +462,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Senior executives were compensated with performance-based equity incentives."
     ],
     "mnemonicTip": "Private equity = vốn cổ phần tư nhân",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v313",
@@ -449,7 +478,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Contractual terms must be unambiguous to avoid equivocal interpretations in court."
     ],
     "mnemonicTip": "Equivocal response = câu trả lời lấp lửng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v314",
@@ -464,7 +494,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The hospital maintains exemplary sanitation standards across all clinical wards."
     ],
     "mnemonicTip": "Exemplary performance/conduct = thành tích/hành vi mẫu mực",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v315",
@@ -479,7 +510,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The consulting firm was criticized for charging exorbitant fees for routine audits."
     ],
     "mnemonicTip": "Exorbitant prices / costs = giá cả trên trời",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v316",
@@ -494,7 +526,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Renting temporary diesel generators was deemed an expedient stopgap measure."
     ],
     "mnemonicTip": "Politically expedient = thuận tiện về mặt đối ngoại",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v317",
@@ -509,36 +542,39 @@ export const VOCAB_800: VocabularyWord[] = [
       "It is perilous to extrapolate long-term sales patterns from a single holiday weekend."
     ],
     "mnemonicTip": "Extrapolate data/trends = ngoại suy từ số liệu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v318",
-    "word": "fallacious",
-    "ipa": "/fəˈleɪʃəs/",
-    "vietnamese": "ngụy biện, sai lầm dựa trên lập luận giả tạo",
-    "partOfSpeech": "adj",
-    "category": "Corporate & Management",
+    "word": "binding",
+    "ipa": "/ˈbaɪndɪŋ/",
+    "vietnamese": "có tính ràng buộc pháp lý không thể tự ý hủy bỏ",
+    "partOfSpeech": "adjective",
+    "category": "Contracts & Legal",
+    "topicId": "contracts",
     "targetBand": "800+",
     "examples": [
-      "The auditor refuted the CFO's fallacious arguments regarding asset valuation.",
-      "Their financial model was based on the fallacious assumption that demand would never drop."
+      "Once both parties sign the contract, its terms become legally binding.",
+      "The arbitrator issued a final and binding decision regarding the payment dispute."
     ],
-    "mnemonicTip": "Fallacious reasoning = lập luận ngụy biện sai lầm",
+    "mnemonicTip": "Bind (trói buộc) -> legally binding agreement = hợp đồng có hiệu lực pháp lý bắt buộc.",
     "emoji": ""
   },
   {
     "id": "v319",
-    "word": "fastidious",
-    "ipa": "/fæˈstɪdiəs/",
-    "vietnamese": "kỹ tính, tỉ mỉ, đòi hỏi chuẩn xác cao",
-    "partOfSpeech": "adj",
-    "category": "Manufacturing & Quality",
+    "word": "downsizing",
+    "ipa": "/ˈdaʊnˌsaɪzɪŋ/",
+    "vietnamese": "sự thu hẹp quy mô hoạt động, cắt giảm biên chế tinh gọn bộ máy",
+    "partOfSpeech": "noun",
+    "category": "Personnel & HR",
+    "topicId": "personnel",
     "targetBand": "800+",
     "examples": [
-      "The lead architect is fastidious regarding alignment and structural finishes.",
-      "Fastidious attention to sterile protocol is required in semiconductor fabrication labs."
+      "Corporate downsizing resulted in the consolidation of multiple regional branches.",
+      "Management implemented voluntary retirement incentives prior to forced downsizing."
     ],
-    "mnemonicTip": "Fastidious attention to detail = chú ý cực kỳ tỉ mỉ",
+    "mnemonicTip": "Down (xuống) + size (quy mô) = cắt giảm nhân sự tinh gọn doanh nghiệp.",
     "emoji": ""
   },
   {
@@ -554,7 +590,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Doubts were raised regarding the economic feasibility of expanding the monorail."
     ],
     "mnemonicTip": "Feasibility study = báo cáo nghiên cứu tính khả thi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v321",
@@ -569,7 +606,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The investment manager violated his fiduciary responsibility by prioritizing personal commissions."
     ],
     "mnemonicTip": "Fiduciary duty = nghĩa vụ trung thành ủy thác",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v322",
@@ -584,7 +622,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Unpredictable market fluctuations deterred risk-averse institutional investors."
     ],
     "mnemonicTip": "Price/currency fluctuation = biến động giá/tỷ giá",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v323",
@@ -599,21 +638,23 @@ export const VOCAB_800: VocabularyWord[] = [
       "Executing the corporate turnaround posed a formidable logistical challenge."
     ],
     "mnemonicTip": "Formidable competitor/challenge = đối thủ đáng gờm / thử thách to lớn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v324",
-    "word": "haphazard",
-    "ipa": "/hæpˈhæzərd/",
-    "vietnamese": "bừa bãi, thiếu kế hoạch hệ thống",
-    "partOfSpeech": "adj",
-    "category": "General Business",
+    "word": "clientele",
+    "ipa": "/ˌklaɪənˈtɛl/",
+    "vietnamese": "tập khách hàng quen, nhóm khách hàng mục tiêu cao cấp",
+    "partOfSpeech": "noun",
+    "category": "Customer Relations",
+    "topicId": "customer_service",
     "targetBand": "800+",
     "examples": [
-      "A haphazard approach to data archiving led to severe record-keeping oversights.",
-      "Boxes were stacked in a haphazard fashion throughout the warehouse aisles."
+      "The boutique hotel caters to an exclusive international clientele.",
+      "Marketing strategies were adjusted to attract a younger urban clientele."
     ],
-    "mnemonicTip": "Haphazard approach = cách tiếp cận cẩu thả thiếu quy củ",
+    "mnemonicTip": "Client (khách) -> clientele = toàn bộ nhóm khách hàng thân thiết.",
     "emoji": ""
   },
   {
@@ -622,14 +663,15 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/ɪmˈpekəbl/",
     "vietnamese": "hoàn hảo không tì vết, chuẩn mực tuyệt đối",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "800+",
     "examples": [
       "The hotel's concierge service earned international acclaim for its impeccable attention.",
       "Her professional record as lead structural engineer is completely impeccable."
     ],
     "mnemonicTip": "Impeccable service / credentials = dịch vụ / hồ sơ hoàn hảo",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v326",
@@ -644,7 +686,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Expanding renewable energy generation is an urgent commercial imperative."
     ],
     "mnemonicTip": "It is imperative that + clause",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v327",
@@ -659,7 +702,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Meteorologists warned shipping vessels of an impending severe tropical storm."
     ],
     "mnemonicTip": "Impending merger / changes = cuộc sáp nhập / thay đổi sắp tới",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v328",
@@ -667,28 +711,30 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/ˌɪnədˈvɜːrtənt/",
     "vietnamese": "vô tình, không cố ý, sơ suất",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "800+",
     "examples": [
       "The company issued a formal apology for the inadvertent disclosure of client email addresses.",
       "The missing spreadsheet row was deemed an inadvertent clerical error."
     ],
     "mnemonicTip": "Inadvertent error/disclosure = sai sót/tiết lộ vô ý",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v329",
-    "word": "incessant",
-    "ipa": "/ɪnˈsesnt/",
-    "vietnamese": "không ngớt, liên miên không dứt",
-    "partOfSpeech": "adj",
-    "category": "General Business",
+    "word": "infringement",
+    "ipa": "/ɪnˈfrɪndʒmənt/",
+    "vietnamese": "sự xâm phạm, vi phạm quyền sở hữu trí tuệ / bản quyền",
+    "partOfSpeech": "noun",
+    "category": "Contracts & Legal",
+    "topicId": "contracts",
     "targetBand": "800+",
     "examples": [
-      "Office staff complained about the incessant drilling noise from adjacent construction.",
-      "The website crashed under incessant requests during the flash sale."
+      "The tech startup filed a patent infringement lawsuit against its competitor.",
+      "Company policy strictly forbids unauthorized software and copyright infringement."
     ],
-    "mnemonicTip": "Incessant complaints/noise = phàn nàn/tiếng ồn liên miên",
+    "mnemonicTip": "Cụm từ Part 5: copyright infringement / patent infringement = vi phạm bản quyền.",
     "emoji": ""
   },
   {
@@ -697,14 +743,15 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/ɪnˌkɑːnsɪˈkwenʃl/",
     "vietnamese": "không quan trọng, vụn vặt không đáng kể",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "800+",
     "examples": [
       "The slight formatting error on page three was deemed inconsequential to the bid.",
       "Small currency fluctuations had an inconsequential impact on overall corporate earnings."
     ],
     "mnemonicTip": "Inconsequential detail = chi tiết vụn vặt",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v331",
@@ -719,7 +766,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The insurance policy indemnifies the shipping line for cargo damaged at sea."
     ],
     "mnemonicTip": "Indemnify someone against loss = bảo lãnh ai khỏi tổn thất",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v332",
@@ -734,7 +782,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Reliable high-speed internet connectivity has become indispensable for global finance."
     ],
     "mnemonicTip": "Indispensable to/for = không thể thiếu đối với",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v333",
@@ -749,7 +798,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Some degree of delivery friction is inevitable when migrating to a new logistics center."
     ],
     "mnemonicTip": "Inevitable outcome = kết cục tất yếu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v334",
@@ -764,7 +814,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The contract terms regarding delivery schedules were rigid and inflexible."
     ],
     "mnemonicTip": "Inflexible terms / attitude = điều khoản / thái độ cứng nhắc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v335",
@@ -779,7 +830,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "A federal judge granted an emergency injunction prohibiting further factory demolitions."
     ],
     "mnemonicTip": "Seek an injunction = yêu cầu tòa ra lệnh đình chỉ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v336",
@@ -794,7 +846,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Creditors petitioned the court to appoint an administrator for the insolvent firm."
     ],
     "mnemonicTip": "Insolvent company = công ty mất khả năng thanh toán nợ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v337",
@@ -809,7 +862,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Shareholders instigated a formal investigation into the alleged accounting irregularities."
     ],
     "mnemonicTip": "Instigate an inquiry / review = khởi xướng cuộc điều tra",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v338",
@@ -824,7 +878,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "A judicious balance between innovation and cost containment is essential for long-term growth."
     ],
     "mnemonicTip": "Judicious use of resources = sử dụng nguồn lực sáng suốt",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v339",
@@ -839,7 +894,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Cross-border e-commerce often operates across multiple regulatory jurisdictions."
     ],
     "mnemonicTip": "Under the jurisdiction of = thuộc thẩm quyền pháp lý của",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v340",
@@ -854,7 +910,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Both companies sought an out-of-court settlement to avoid expensive commercial litigation."
     ],
     "mnemonicTip": "Avoid litigation = tránh kiện tụng kéo dài",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v341",
@@ -869,7 +926,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The enterprise maintains adequate cash reserves to safeguard short-term liquidity."
     ],
     "mnemonicTip": "High liquidity = tính thanh khoản cao",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v342",
@@ -884,7 +942,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Her meticulous planning ensured that the multi-city product launch went without a hitch."
     ],
     "mnemonicTip": "Meticulous attention to detail = chú ý tỉ mỉ từng chi tiết",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v343",
@@ -899,7 +958,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Patents grant pharmaceutical developers a temporary monopoly to recoup research costs."
     ],
     "mnemonicTip": "Hold a monopoly on = nắm giữ vị thế độc quyền về",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v344",
@@ -914,7 +974,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Safety audits revealed gross negligence in the storage of combustible manufacturing chemicals."
     ],
     "mnemonicTip": "Gross negligence = sự cẩu thả nghiêm trọng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v345",
@@ -922,14 +983,15 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/ˈneɡlɪdʒəbl/",
     "vietnamese": "không đáng kể, quá nhỏ để lưu tâm",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "800+",
     "examples": [
       "The slight alteration in air freight fees had a negligible impact on overall product margins.",
       "Radiation readings near the decommissioned plant were virtually negligible."
     ],
     "mnemonicTip": "Negligible amount/impact = lượng/tác động không đáng kể",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v346",
@@ -944,7 +1006,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The judge declared the contested land development contract null and void."
     ],
     "mnemonicTip": "Rendered null and void = bị tuyên bố vô hiệu hóa hoàn toàn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v347",
@@ -952,28 +1015,30 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/ˌɑːbsəˈliːt/",
     "vietnamese": "lỗi thời, không còn được sử dụng",
     "partOfSpeech": "adj",
-    "category": "Office & Technology",
+    "category": "Office & Administration",
     "targetBand": "800+",
     "examples": [
       "Cloud-based collaboration platforms rendered internal desktop tape backups obsolete.",
       "The factory replaced obsolete textile looms with computer-controlled automated spinners."
     ],
     "mnemonicTip": "Become obsolete = trở nên lỗi thời",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "office"
   },
   {
     "id": "v348",
-    "word": "ostensible",
-    "ipa": "/ɑːˈstensəbl/",
-    "vietnamese": "bề ngoài, ra vẻ (nhưng thực chất khác)",
-    "partOfSpeech": "adj",
-    "category": "Corporate & Management",
+    "word": "counterproposal",
+    "ipa": "/ˈkaʊntərprəˌpoʊzl/",
+    "vietnamese": "đề xuất đáp lại, phương án phản hồi trong đàm phán hợp đồng",
+    "partOfSpeech": "noun",
+    "category": "Contracts & Legal",
+    "topicId": "contracts",
     "targetBand": "800+",
     "examples": [
-      "The ostensible reason for the executive resignation was health, though boardroom friction existed.",
-      "The seminar's ostensible purpose was training, but its true goal was recruiting software talent."
+      "The union rejected the wage offer and submitted a formal counterproposal.",
+      "After reviewing their counterproposal, management agreed to revise the terms."
     ],
-    "mnemonicTip": "Ostensible reason = lý do bề ngoài",
+    "mnemonicTip": "Counter (đối kháng/đáp lại) + proposal (đề xuất) = đề xuất phản hồi trong đàm phán.",
     "emoji": ""
   },
   {
@@ -989,7 +1054,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Management resolved to overhaul the company's outdated performance evaluation system."
     ],
     "mnemonicTip": "Major overhaul = cuộc đại tu / cải tổ toàn diện",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v350",
@@ -1004,36 +1070,39 @@ export const VOCAB_800: VocabularyWord[] = [
       "The innovative electric vehicle challenged traditional automotive manufacturing paradigms."
     ],
     "mnemonicTip": "Paradigm shift = sự thay đổi hệ hình tư duy mang tính bước ngoặt",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v351",
-    "word": "peremptory",
-    "ipa": "/pəˈremptəri/",
-    "vietnamese": "dứt khoát, mang tính cưỡng chế mệnh lệnh không thể chối cãi",
-    "partOfSpeech": "adj",
-    "category": "Contracts & Legal",
+    "word": "remittance",
+    "ipa": "/rɪˈmɪtəns/",
+    "vietnamese": "khoản tiền gửi chuyển khoản, sự thanh toán tiền qua ngân hàng",
+    "partOfSpeech": "noun",
+    "category": "Finance & Accounting",
+    "topicId": "finance",
     "targetBand": "800+",
     "examples": [
-      "The municipal court issued a peremptory order mandating the immediate suspension of construction.",
-      "The regional inspector spoke in a peremptory tone regarding safety compliance violations."
+      "Please include the invoice number with your electronic remittance.",
+      "The foreign supplier confirmed receipt of the full remittance."
     ],
-    "mnemonicTip": "Peremptory order = lệnh cưỡng chế bắt buộc thi hành ngay",
+    "mnemonicTip": "Remit (chuyển tiền) -> remittance advice = giấy báo chuyển tiền thanh toán.",
     "emoji": ""
   },
   {
     "id": "v352",
-    "word": "plaintiff",
-    "ipa": "/ˈpleɪntɪf/",
-    "vietnamese": "nguyên đơn, người khởi kiện trong vụ án dân sự",
+    "word": "disbursement",
+    "ipa": "/dɪsˈbɜːrsmənt/",
+    "vietnamese": "sự giải ngân tiền vốn, khoản chi trả thực tế từ quỹ dự án",
     "partOfSpeech": "noun",
-    "category": "Contracts & Legal",
+    "category": "Finance & Accounting",
+    "topicId": "finance",
     "targetBand": "800+",
     "examples": [
-      "The plaintiff alleged that the software startup infringed upon its proprietary algorithm.",
-      "The jury awarded substantial compensatory damages to the injured plaintiff."
+      "The bank approved the initial disbursement of construction loan funds.",
+      "All cash disbursements require authorized approval from the department head."
     ],
-    "mnemonicTip": "Phân biệt với defendant (bị đơn)",
+    "mnemonicTip": "Disburse (giải ngân) -> loan disbursement = giải ngân khoản vay.",
     "emoji": ""
   },
   {
@@ -1049,7 +1118,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Granting overtime pay for travel would set an unwanted commercial precedent for other divisions."
     ],
     "mnemonicTip": "Set a precedent = tạo ra tiền lệ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v354",
@@ -1064,7 +1134,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Workers were ordered off the scaffold after high winds rendered the structure precarious."
     ],
     "mnemonicTip": "Precarious financial position = tình thế tài chính ngàn cân treo sợi tóc",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v355",
@@ -1079,21 +1150,23 @@ export const VOCAB_800: VocabularyWord[] = [
       "The new turbofan engine consumes twenty percent less aviation fuel than its predecessor."
     ],
     "mnemonicTip": "Pre (trước) + decessor = người giữ vị trí trước đó",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v356",
-    "word": "preposterous",
-    "ipa": "/prɪˈpɑːstərəs/",
-    "vietnamese": "phi lý, lố bịch không thể tin nổi",
-    "partOfSpeech": "adj",
-    "category": "General Business",
+    "word": "turnover",
+    "ipa": "/ˈtɜːrnˌoʊvər/",
+    "vietnamese": "tỷ lệ luân chuyển nhân sự; doanh thu quay vòng",
+    "partOfSpeech": "noun",
+    "category": "Corporate & Management",
+    "topicId": "corporate",
     "targetBand": "800+",
     "examples": [
-      "The board dismissed the competing vendor's exorbitant quotation as completely preposterous.",
-      "Expecting two software developers to build an enterprise ERP in one week is preposterous."
+      "High employee turnover led human resources to review compensation packages.",
+      "The supermarket chain reported an annual inventory turnover of twelve times."
     ],
-    "mnemonicTip": "Preposterous idea / proposal = ý tưởng phi lý",
+    "mnemonicTip": "Cụm từ TOEIC kinh điển: employee turnover (tỷ lệ nghỉ việc), annual turnover (doanh số).",
     "emoji": ""
   },
   {
@@ -1109,7 +1182,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Satisfactory credit standing is a prerequisite condition for commercial equipment leasing."
     ],
     "mnemonicTip": "Prerequisite for/to = điều kiện tiên quyết cho",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v358",
@@ -1124,7 +1198,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Advocates argue that privatization improves operational efficiency and fiscal transparency."
     ],
     "mnemonicTip": "Privatize (tư nhân hóa) -> privatization",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v359",
@@ -1132,14 +1207,15 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/prəˈkjʊrmənt/",
     "vietnamese": "hoạt động thu mua mua sắm quy mô doanh nghiệp/chính phủ",
     "partOfSpeech": "noun",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "800+",
     "examples": [
       "The procurement division oversees bidding and supplier negotiations for industrial supplies.",
       "Strict procurement guidelines prevent unethical conflicts of interest among purchasing agents."
     ],
     "mnemonicTip": "Procurement process = quy trình thu mua đấu thầu",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v360",
@@ -1147,14 +1223,15 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/prəˈvɪʒənl/",
     "vietnamese": "tạm thời, có giá trị lâm thời",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "800+",
     "examples": [
       "The international trade committee released provisional economic growth estimates for next quarter.",
       "She received a provisional license pending the completion of advanced medical credentialing."
     ],
     "mnemonicTip": "Provisional approval = sự phê duyệt tạm thời",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v361",
@@ -1169,7 +1246,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The two research institutes signed a reciprocal agreement allowing student library access."
     ],
     "mnemonicTip": "Reciprocal agreement = thỏa thuận đôi bên cùng có lợi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v362",
@@ -1184,7 +1262,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Reconciliation between recorded inventory and physical shelf counts took three days."
     ],
     "mnemonicTip": "Bank reconciliation = đối chiếu số dư ngân hàng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v363",
@@ -1199,7 +1278,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The regulatory agency mandated that the bank redress customer overbilling immediately."
     ],
     "mnemonicTip": "Seek legal redress = tìm kiếm sự bồi thường pháp lý",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v364",
@@ -1214,7 +1294,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The critical flight computer is backed up by two redundant processing units."
     ],
     "mnemonicTip": "Make someone redundant = sa thải do cắt giảm vị trí",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v365",
@@ -1229,7 +1310,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The remuneration offered for this overseas assignment includes a housing allowance."
     ],
     "mnemonicTip": "Remuneration = compensation = tiền thù lao",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "personnel"
   },
   {
     "id": "v366",
@@ -1244,7 +1326,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Creditors approved the debt restructuring proposal to prevent Chapter 11 bankruptcy."
     ],
     "mnemonicTip": "Corporate restructuring = tái cấu trúc doanh nghiệp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v367",
@@ -1259,7 +1342,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Candidates must pass a rigorous assessment covering finance, ethics, and leadership."
     ],
     "mnemonicTip": "Rigorous testing / standards = thử nghiệm / tiêu chuẩn nghiêm ngặt",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v368",
@@ -1274,7 +1358,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Investors will scrutinize the newly appointed CEO's turnaround plan at the annual meeting."
     ],
     "mnemonicTip": "Scrutinize records / documents = soi xét hồ sơ kỹ càng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v369",
@@ -1289,7 +1374,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Maintaining corporate solvency during recessionary quarters is the CFO's highest duty."
     ],
     "mnemonicTip": "Trái nghĩa với insolvency (vỡ nợ)",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v370",
@@ -1304,7 +1390,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Commercial developers halted speculative office construction until leasing demand rebounded."
     ],
     "mnemonicTip": "Speculative investment = khoản đầu tư mạo hiểm đầu cơ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v371",
@@ -1319,7 +1406,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Fostering transparent communication with all stakeholders builds lasting market trust."
     ],
     "mnemonicTip": "Key stakeholders = các bên liên quan chủ chốt",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v372",
@@ -1334,7 +1422,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Employees are entitled to thirty days of statutory paid maternity leave under federal law."
     ],
     "mnemonicTip": "Statutory requirement = yêu cầu theo luật định",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v373",
@@ -1349,7 +1438,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "State building codes stipulate that commercial structures must feature wheelchair ramps."
     ],
     "mnemonicTip": "Stipulate that + clause / contract stipulates",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v374",
@@ -1364,21 +1454,23 @@ export const VOCAB_800: VocabularyWord[] = [
       "The research institute operates under stringent budget constraints this fiscal year."
     ],
     "mnemonicTip": "Stringent standards/regulations = tiêu chuẩn/quy định khắt khe",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v375",
-    "word": "subpoena",
-    "ipa": "/səˈpiːnə/",
-    "vietnamese": "trát đòi hầu tòa cung cấp chứng cứ",
-    "partOfSpeech": "noun/verb",
+    "word": "nullify",
+    "ipa": "/ˈnʌlɪfaɪ/",
+    "vietnamese": "vô hiệu hóa, hủy bỏ hiệu lực pháp lý của thỏa thuận",
+    "partOfSpeech": "verb",
     "category": "Contracts & Legal",
+    "topicId": "contracts",
     "targetBand": "800+",
     "examples": [
-      "The corporate legal team received a federal subpoena requesting all internal memo archives.",
-      "The grand jury subpoenaed former executives to testify in the securities fraud inquiry."
+      "Any unauthorized alterations to the agreement will nullify the warranty.",
+      "The court ruling effectively nullified the commercial merger."
     ],
-    "mnemonicTip": "Issue a subpoena = tống đạt trát hầu tòa",
+    "mnemonicTip": "Null (số không, vô giá trị) + ify = làm cho vô hiệu lực pháp lý.",
     "emoji": ""
   },
   {
@@ -1394,7 +1486,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The parent conglomerate sold its loss-making logistics subsidiary to an equity firm."
     ],
     "mnemonicTip": "Wholly owned subsidiary = công ty con sở hữu 100% vốn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v377",
@@ -1409,21 +1502,23 @@ export const VOCAB_800: VocabularyWord[] = [
       "A rapid succession of quarterly earnings downgrades sent the company's share price tumbling."
     ],
     "mnemonicTip": "Succession plan = kế hoạch kế nhiệm lãnh đạo",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v378",
-    "word": "superfluous",
-    "ipa": "/suːˈpɜːrfluəs/",
-    "vietnamese": "thừa thãi, không cần thiết",
-    "partOfSpeech": "adj",
-    "category": "General Business",
+    "word": "relinquish",
+    "ipa": "/rɪˈlɪŋkwɪʃ/",
+    "vietnamese": "từ bỏ, chuyển nhượng quyền hạn hoặc chức vụ lãnh đạo",
+    "partOfSpeech": "verb",
+    "category": "Corporate & Management",
+    "topicId": "corporate",
     "targetBand": "800+",
     "examples": [
-      "The editor removed superfluous paragraphs to make the annual report concise.",
-      "Modern inventory automation eliminates superfluous administrative paperwork."
+      "The founder decided to relinquish his role as chief executive officer.",
+      "Under the settlement agreement, the firm relinquished all claims to the trademark."
     ],
-    "mnemonicTip": "Superfluous information = thông tin thừa thãi",
+    "mnemonicTip": "Relinquish control/rights/post = chủ động từ bỏ vị trí hoặc quyền lợi.",
     "emoji": ""
   },
   {
@@ -1439,7 +1534,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The investment syndicate underwrote the telecommunications company's initial public offering."
     ],
     "mnemonicTip": "Banking syndicate = liên hiệp ngân hàng cùng cấp vốn",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v380",
@@ -1454,7 +1550,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The company published a tentative schedule for the upcoming regional sales seminars."
     ],
     "mnemonicTip": "Tentative agreement / schedule = thỏa thuận / lịch trình dự kiến",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v381",
@@ -1469,7 +1566,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The corporation maintains zero tolerance for workplace discrimination or harassment."
     ],
     "mnemonicTip": "Zero tolerance = chính sách không khoan nhượng",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v382",
@@ -1484,7 +1582,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The dry cleaner guarantees a rapid twenty-four-hour turnaround on all business attire."
     ],
     "mnemonicTip": "Corporate turnaround = cuộc hồi sinh doanh nghiệp",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v383",
@@ -1499,7 +1598,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The CEO gave an unambiguous statement reaffirming commitment to the expansion."
     ],
     "mnemonicTip": "Unambiguous terms = điều khoản rõ ràng không tranh cãi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   },
   {
     "id": "v384",
@@ -1514,7 +1614,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The hiring committee reached a unanimous decision to select Ms. Lin as chief architect."
     ],
     "mnemonicTip": "Unanimous vote / decision = biểu quyết / quyết định nhất trí 100%",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v385",
@@ -1522,14 +1623,15 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/ʌnˈfeɪvərəbl/",
     "vietnamese": "bất lợi, không thuận lợi (thời tiết, tỷ giá)",
     "partOfSpeech": "adj",
-    "category": "General Business",
+    "category": "Corporate & Management",
     "targetBand": "800+",
     "examples": [
       "Unfavorable foreign currency exchange rates reduced overseas subsidiary profits.",
       "The outdoor promotional exhibition was postponed due to unfavorable storm warnings."
     ],
     "mnemonicTip": "Unfavorable conditions = điều kiện bất lợi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v386",
@@ -1544,7 +1646,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The central bank took unprecedented emergency measures to stabilize financial markets."
     ],
     "mnemonicTip": "Unprecedented growth = sự tăng trưởng chưa từng thấy",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v387",
@@ -1559,7 +1662,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Venture capital firms seek high-growth opportunities despite substantial initial risks."
     ],
     "mnemonicTip": "Venture capitalist = nhà đầu tư mạo hiểm",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v388",
@@ -1574,7 +1678,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Portfolio hedging strategies help shield institutional assets during volatile trading sessions."
     ],
     "mnemonicTip": "Volatile market = thị trường biến động mạnh",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v389",
@@ -1589,7 +1694,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The year-end financial ledger reflects employee vacation pay accruals."
     ],
     "mnemonicTip": "Accrual basis = nguyên tắc kế toán dồn tích",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v390",
@@ -1604,7 +1710,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Review the loan amortization schedule to determine monthly principal and interest allocations."
     ],
     "mnemonicTip": "Amortization schedule = bảng lịch trình trả góp gốc lãi",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v391",
@@ -1619,7 +1726,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The slight price gap between London and New York silver markets allowed swift arbitrage."
     ],
     "mnemonicTip": "Arbitrage trading = giao dịch tận dụng chênh lệch giá",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v392",
@@ -1634,7 +1742,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Corporate management drafted a contingency plan in case the overseas port went on strike."
     ],
     "mnemonicTip": "Contingency plan = kế hoạch dự phòng sự cố",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "corporate"
   },
   {
     "id": "v393",
@@ -1649,7 +1758,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "Borrowers who default on municipal bonds face immediate rating downgrades."
     ],
     "mnemonicTip": "In default on = mất khả năng thanh toán nợ",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v394",
@@ -1664,66 +1774,71 @@ export const VOCAB_800: VocabularyWord[] = [
       "The prolonged slump in commodity prices exerted a deflationary impact on wholesale markets."
     ],
     "mnemonicTip": "Deflationary spiral = vòng xoáy giảm phát",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v395",
-    "word": "adjudicate",
-    "ipa": "/əˈdʒuːdɪkeɪt/",
-    "vietnamese": "xét xử, phán quyết phân xử tranh chấp",
+    "word": "underwrite",
+    "ipa": "/ˌʌndərˈraɪt/",
+    "vietnamese": "bảo lãnh phát hành tài chính, chịu trách nhiệm bảo hiểm rủi ro",
     "partOfSpeech": "verb",
-    "category": "Contracts & Legal",
+    "category": "Finance & Accounting",
+    "topicId": "finance",
     "targetBand": "800+",
     "examples": [
-      "An administrative tribunal was established to adjudicate disputed international trade tariffs.",
-      "The commercial magistrate adjudicated the complex patent lawsuit after reviewing evidence."
+      "Several major investment banks agreed to underwrite the public stock offering.",
+      "Insurance underwriters thoroughly assess risk before issuing commercial policies."
     ],
-    "mnemonicTip": "Adjudicate a claim / dispute = phán quyết tranh chấp",
+    "mnemonicTip": "Underwriter = nhà bảo lãnh phát hành cổ phiếu / người thẩm định bảo hiểm.",
     "emoji": ""
   },
   {
     "id": "v396",
-    "word": "affidavit",
-    "ipa": "/ˌæfəˈdeɪvɪt/",
-    "vietnamese": "bản tuyên thệ có công chứng trước tòa",
-    "partOfSpeech": "noun",
-    "category": "Contracts & Legal",
+    "word": "apportion",
+    "ipa": "/əˈpɔːrʃən/",
+    "vietnamese": "phân chia, phân bổ (ngân sách chi phí, trách nhiệm pháp lý) theo tỷ lệ",
+    "partOfSpeech": "verb",
+    "category": "Finance & Accounting",
+    "topicId": "finance",
     "targetBand": "800+",
     "examples": [
-      "The lead forensic accountant signed a sworn affidavit detailing the unrecorded disbursements.",
-      "The court received sworn affidavits from three independent structural engineers."
+      "Project expenses were apportioned among the three participating subsidiaries.",
+      "The committee apportioned funds based on each department demonstrated need."
     ],
-    "mnemonicTip": "Sworn affidavit = bản khai hữu thệ có giá trị trước tòa",
+    "mnemonicTip": "Portion (phần) -> apportion = chia thành từng phần hợp lý cho các bên.",
     "emoji": ""
   },
   {
     "id": "v397",
-    "word": "cease and desist",
-    "ipa": "/siːs ænd dɪˈzɪst/",
-    "vietnamese": "lệnh chấm dứt ngay hành vi vi phạm",
-    "partOfSpeech": "phrase",
-    "category": "Contracts & Legal",
+    "word": "consignment",
+    "ipa": "/kənˈsaɪnmənt/",
+    "vietnamese": "lô hàng ký gửi, hàng ủy thác phân phối",
+    "partOfSpeech": "noun",
+    "category": "Purchasing & Logistics",
+    "topicId": "logistics",
     "targetBand": "800+",
     "examples": [
-      "Corporate counsel issued a formal cease and desist notice against the counterfeit apparel vendor.",
-      "The regulatory agency ordered the unregistered crypto exchange to cease and desist operations."
+      "The local gallery sells original artwork on a consignment basis.",
+      "A large consignment of electronic components arrived at the seaport this morning."
     ],
-    "mnemonicTip": "Cease and desist letter = thư cảnh cáo yêu cầu chấm dứt vi phạm",
+    "mnemonicTip": "Consign (giao phó/ký gửi) -> on consignment = theo hình thức bán ký gửi.",
     "emoji": ""
   },
   {
     "id": "v398",
-    "word": "adulterate",
-    "ipa": "/əˈdʌltəreɪt/",
-    "vietnamese": "làm pha tạp, làm mất phẩm chất nguyên chất",
-    "partOfSpeech": "verb",
-    "category": "Manufacturing & Quality",
+    "word": "wholesaler",
+    "ipa": "/ˈhoʊlˌseɪlər/",
+    "vietnamese": "nhà bán buôn, đại lý phân phối sỉ quy mô lớn",
+    "partOfSpeech": "noun",
+    "category": "Purchasing & Logistics",
+    "topicId": "logistics",
     "targetBand": "800+",
     "examples": [
-      "Stringent food safety inspections prevent suppliers from using cheap fillers to adulterate spices.",
-      "The pharmaceutical firm was heavily penalized for selling adulterated clinical reagents."
+      "The retail store purchases its inventory directly from an authorized wholesaler.",
+      "Wholesalers offer significant volume discounts for advance orders."
     ],
-    "mnemonicTip": "Adulterated products = sản phẩm bị pha tạp chất",
+    "mnemonicTip": "Wholesale (bán sỉ) -> wholesaler = nhà phân phối bán buôn (đối lập với retailer).",
     "emoji": ""
   },
   {
@@ -1732,14 +1847,15 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/ˈbɑːtlnek/",
     "vietnamese": "điểm nghẽn gây ách tắc (quy trình sản xuất/vận chuyển)",
     "partOfSpeech": "noun",
-    "category": "Logistics & Shipping",
+    "category": "Purchasing & Logistics",
     "targetBand": "800+",
     "examples": [
       "A shortage of certified crane operators created a severe bottleneck at the maritime container port.",
       "Lean manufacturing consultants identified a critical assembly bottleneck on Line Four."
     ],
     "mnemonicTip": "Production bottleneck = nút thắt cổ chai trong sản xuất",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "logistics"
   },
   {
     "id": "v400",
@@ -1754,7 +1870,8 @@ export const VOCAB_800: VocabularyWord[] = [
       "The laboratory balance was calibrated according to national weights and measures standards."
     ],
     "mnemonicTip": "Calibrate equipment = căn chỉnh thiết bị",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "manufacturing"
   },
   {
     "id": "v401",
@@ -1762,28 +1879,30 @@ export const VOCAB_800: VocabularyWord[] = [
     "ipa": "/fɪˈduːʃieri ˈduːti/",
     "vietnamese": "nghĩa vụ ủy thác pháp lý cao nhất",
     "partOfSpeech": "phrase",
-    "category": "Contracts & Legal",
+    "category": "Finance & Accounting",
     "targetBand": "800+",
     "examples": [
       "Corporate directors violated their fiduciary duty by selling company assets to undisclosed relatives.",
       "Trust managers are held to the highest standard of fiduciary duty under federal commercial statutes."
     ],
     "mnemonicTip": "Breach of fiduciary duty = vi phạm nghĩa vụ ủy thác",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "finance"
   },
   {
     "id": "v402",
-    "word": "statute of limitations",
-    "ipa": "/ˈstætʃuːt əv ˌlɪmɪˈteɪʃnz/",
-    "vietnamese": "thời hiệu khởi kiện pháp lý",
-    "partOfSpeech": "phrase",
-    "category": "Contracts & Legal",
+    "word": "affiliate",
+    "ipa": "/əˈfɪlieɪt/",
+    "vietnamese": "công ty liên kết, đơn vị thành viên hợp tác kinh doanh",
+    "partOfSpeech": "noun",
+    "category": "Corporate & Management",
+    "topicId": "corporate",
     "targetBand": "800+",
     "examples": [
-      "The lawsuit was dismissed because the statutory period exceeded the statute of limitations.",
-      "Commercial contract breach claims must be filed before the three-year statute of limitations expires."
+      "The software company distributes its products through regional affiliates.",
+      "Our European affiliate handles all local customer support and marketing."
     ],
-    "mnemonicTip": "Thời hiệu hết hạn để nộp đơn kiện",
+    "mnemonicTip": "Affiliate = corporate partner or subsidiary connected to a larger organization.",
     "emoji": ""
   },
   {
@@ -1799,6 +1918,7 @@ export const VOCAB_800: VocabularyWord[] = [
       "The indemnification clause protects independent directors from personal liability arising from board service."
     ],
     "mnemonicTip": "Indemnification clause = điều khoản bồi thường thiệt hại",
-    "emoji": ""
+    "emoji": "",
+    "topicId": "contracts"
   }
 ];

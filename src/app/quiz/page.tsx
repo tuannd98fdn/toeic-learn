@@ -6,7 +6,7 @@ import QuizCard from '@/components/QuizCard';
 import Confetti from '@/components/Confetti';
 import MascotSVG from '@/components/illustrations/MascotSVG';
 import ShareButton from '@/components/ShareButton';
-import { VocabularyWord } from '@/data/vocabulary';
+import { VocabularyWord, TOEIC_TOPICS, getTopicByName } from '@/data/vocabulary';
 import { useVocabulary } from '@/hooks/useVocabulary';
 import { useDailyMission } from '@/hooks/useDailyMission';
 import { useStreak } from '@/hooks/useStreak';
@@ -46,6 +46,7 @@ export default function QuizPage() {
   const { addMistake, removeMistake, mistakes } = useMistakeNotebook();
   const { speak } = useAudio();
 
+  const [selectedTopic, setSelectedTopic] = useState<string>('All');
   const [questions, setQuestions] = useState<{ word: VocabularyWord; options: string[] }[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -57,14 +58,32 @@ export default function QuizPage() {
   const [reviewFilter, setReviewFilter] = useState<'all' | 'correct' | 'wrong'>('all');
   const [xpEarned, setXpEarned] = useState(0);
 
+  // Initialize selectedTopic from URL if provided
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const cat = new URLSearchParams(window.location.search).get('category');
+      if (cat) setSelectedTopic(cat);
+    }
+  }, []);
+
   // Initialize Quiz questions
-  const generateQuiz = useCallback((wordsList?: VocabularyWord[]) => {
-    const sourceWords = wordsList && wordsList.length > 0 
-      ? wordsList 
-      : getRandomWords(Math.min(QUIZ_LENGTH, allWords.length));
+  const generateQuiz = useCallback((wordsList?: VocabularyWord[], topic?: string) => {
+    const activeTopic = topic !== undefined ? topic : selectedTopic;
+    const filterCat = activeTopic !== 'All' ? activeTopic : undefined;
+
+    let sourceWords: VocabularyWord[] = [];
+    if (wordsList && wordsList.length > 0) {
+      sourceWords = wordsList;
+    } else {
+      sourceWords = getRandomWords(Math.min(QUIZ_LENGTH, allWords.length), [], filterCat);
+    }
+
+    if (sourceWords.length === 0) {
+      sourceWords = getRandomWords(Math.min(QUIZ_LENGTH, allWords.length));
+    }
     
     const generated = sourceWords.map(word => {
-      const wrongWords = getRandomWords(3, [word.id]);
+      const wrongWords = getRandomWords(3, [word.id], filterCat);
       const options = [word.vietnamese, ...wrongWords.map(w => w.vietnamese)];
       const shuffledOptions = options.sort(() => 0.5 - Math.random());
       return { word, options: shuffledOptions };
@@ -78,12 +97,26 @@ export default function QuizPage() {
     setUserAnswers([]);
     setIsFinished(false);
     setShowConfetti(false);
-  }, [allWords.length, getRandomWords]);
+  }, [allWords.length, getRandomWords, selectedTopic]);
 
   useEffect(() => {
     if (!vocabMounted) return;
     generateQuiz();
   }, [vocabMounted, generateQuiz]);
+
+  const handleTopicChange = (newTopic: string) => {
+    setSelectedTopic(newTopic);
+    generateQuiz(undefined, newTopic);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (newTopic === 'All') {
+        url.searchParams.delete('category');
+      } else {
+        url.searchParams.set('category', newTopic);
+      }
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
 
   const handleAnswer = (isCorrect: boolean, selectedOption?: string) => {
     const currentQ = questions[currentIndex];
@@ -361,6 +394,57 @@ export default function QuizPage() {
           </div>
         </div>
 
+        {/* Topic Mastery Assessment Card */}
+        {(() => {
+          const currentTopicMeta = selectedTopic !== 'All' ? getTopicByName(selectedTopic) : null;
+          const isMasteredTopic = percentage >= 70;
+          return (
+            <div className={styles.topicAssessmentCard}>
+              <div className={styles.topicAssessmentHeader}>
+                <div className={styles.topicAssessmentTitleGroup}>
+                  <TargetIcon size={18} style={{ color: 'var(--primary)' }} />
+                  <h3 className={styles.topicAssessmentTitle}>
+                    Đánh Giá Năng Lực {currentTopicMeta ? currentTopicMeta.nameVi : 'Tổng Thể 12 Chủ Đề ETS'}
+                  </h3>
+                </div>
+                <span
+                  className={styles.topicAssessmentBadge}
+                  style={{
+                    background: isMasteredTopic ? 'rgba(16, 185, 129, 0.12)' : 'rgba(239, 68, 68, 0.12)',
+                    color: isMasteredTopic ? 'var(--success)' : 'var(--danger)',
+                  }}
+                >
+                  {isMasteredTopic ? 'Đạt Chuẩn Thành Thạo' : 'Lỗ Hổng Cần Củng Cố'}
+                </span>
+              </div>
+
+              <div className={styles.topicAssessmentBody}>
+                <div className={styles.topicAssessmentText}>
+                  {isMasteredTopic ? (
+                    <>
+                      Bạn đạt độ chính xác <strong>{percentage}%</strong> ({score}/{questions.length} câu). Phản xạ từ vựng {currentTopicMeta ? `chủ đề ${currentTopicMeta.nameVi}` : 'trong bài thi'} rất vững vàng. Tiếp tục duy trì và mở rộng sang các chủ đề khác nhé!
+                    </>
+                  ) : (
+                    <>
+                      Độ chính xác hiện tại là <strong>{percentage}%</strong> ({score}/{questions.length} câu). Phát hiện lỗ hổng từ vựng {currentTopicMeta ? `ở chủ đề ${currentTopicMeta.nameVi}` : 'trong phiên luyện tập'}. Bạn nên ôn luyện Thẻ Flashcards Spaced Repetition để củng cố trí nhớ dài hạn.
+                    </>
+                  )}
+                </div>
+
+                <div className={styles.topicAssessmentActions}>
+                  <Link
+                    href={currentTopicMeta ? `/study?category=${encodeURIComponent(currentTopicMeta.nameEn)}` : '/study'}
+                    className={`${styles.topicCtaBtn} ${styles.topicCtaPrimary}`}
+                  >
+                    <span>Học Flashcards {currentTopicMeta ? currentTopicMeta.nameVi : 'chủ đề này'}</span>
+                    <ArrowRightIcon size={14} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+
         {/* Detailed Question Review & Sửa sai */}
         <section className={styles.reviewSection}>
           <div className={styles.reviewHeader}>
@@ -534,6 +618,26 @@ export default function QuizPage() {
             className={styles.progressBarFill} 
             style={{ width: `${progressPercent}%` }} 
           />
+        </div>
+
+        <div className={styles.quizTopicRow}>
+          <div className={styles.quizTopicLabel}>
+            <TargetIcon size={14} />
+            <span>Chủ đề luyện tập:</span>
+          </div>
+          <select
+            className={styles.quizTopicSelect}
+            value={selectedTopic}
+            onChange={(e) => handleTopicChange(e.target.value)}
+            aria-label="Chọn chủ đề câu hỏi Quiz"
+          >
+            <option value="All">Tất cả 12 Chủ Đề ETS (Ngẫu nhiên)</option>
+            {TOEIC_TOPICS.map((topic) => (
+              <option key={topic.id} value={topic.nameEn}>
+                {topic.nameVi} ({topic.nameEn})
+              </option>
+            ))}
+          </select>
         </div>
       </header>
 

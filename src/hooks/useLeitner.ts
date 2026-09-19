@@ -99,7 +99,7 @@ export function useLeitner() {
    * Returns a paced queue of words for today's study session.
    * Prioritizes due reviews (box > 0) and limits new unstudied words (box 0) to avoid cognitive overload.
    */
-  const getPacedStudyQueue = useCallback((targetBand: string = 'All', maxNewWords: number = 10) => {
+  const getPacedStudyQueue = useCallback((targetBand: string = 'All', maxNewWords: number = 10, category?: string) => {
     if (!mounted) {
       return {
         queue: [] as VocabularyWord[],
@@ -111,11 +111,22 @@ export function useLeitner() {
     }
 
     const eligibleWords = allWords.filter(word => {
-      if (targetBand === 'All') return true;
-      if (targetBand === 'Reading Part 6 & 7' || targetBand === 'reading_specialized') {
-        return word.category === 'Reading Collocations' || word.category === 'ETS Paraphrasing Pairs' || !!word.readingType;
+      let matchesBand = true;
+      if (targetBand !== 'All') {
+        if (targetBand === 'Reading Part 6 & 7' || targetBand === 'reading_specialized') {
+          matchesBand = word.category === 'Collocations & Paraphrase' || word.category === 'Reading Collocations' || word.category === 'ETS Paraphrasing Pairs' || !!word.readingType;
+        } else {
+          matchesBand = word.targetBand === targetBand;
+        }
       }
-      return word.targetBand === targetBand;
+
+      let matchesCategory = true;
+      if (category && category !== 'All') {
+        matchesCategory = word.category === category || word.topicId === category || 
+          (category === 'Collocations & Paraphrase' && (word.category === 'Reading Collocations' || word.category === 'ETS Paraphrasing Pairs' || !!word.readingType));
+      }
+
+      return matchesBand && matchesCategory;
     });
 
     const reviewWords: VocabularyWord[] = [];
@@ -144,7 +155,7 @@ export function useLeitner() {
     };
   }, [mounted, allWords, progress]);
 
-  const getStats = useCallback((targetBand: string = 'All') => {
+  const getStats = useCallback((targetBand: string = 'All', category?: string) => {
     if (!mounted) return { mastered: 0, learning: 0, unstudied: 0, boxes: { 1:0, 2:0, 3:0, 4:0, 5:0 } };
 
     const boxes = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
@@ -153,11 +164,22 @@ export function useLeitner() {
     let unstudied = 0;
 
     const filtered = allWords.filter(w => {
-      if (targetBand === 'All') return true;
-      if (targetBand === 'Reading Part 6 & 7' || targetBand === 'reading_specialized') {
-        return w.category === 'Reading Collocations' || w.category === 'ETS Paraphrasing Pairs' || !!w.readingType;
+      let matchesBand = true;
+      if (targetBand !== 'All') {
+        if (targetBand === 'Reading Part 6 & 7' || targetBand === 'reading_specialized') {
+          matchesBand = w.category === 'Collocations & Paraphrase' || w.category === 'Reading Collocations' || w.category === 'ETS Paraphrasing Pairs' || !!w.readingType;
+        } else {
+          matchesBand = w.targetBand === targetBand;
+        }
       }
-      return w.targetBand === targetBand;
+
+      let matchesCategory = true;
+      if (category && category !== 'All') {
+        matchesCategory = w.category === category || w.topicId === category || 
+          (category === 'Collocations & Paraphrase' && (w.category === 'Reading Collocations' || w.category === 'ETS Paraphrasing Pairs' || !!w.readingType));
+      }
+
+      return matchesBand && matchesCategory;
     });
 
     filtered.forEach(word => {

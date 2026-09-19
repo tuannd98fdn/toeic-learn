@@ -23,11 +23,13 @@ import {
   ZapIcon,
   QuizIcon,
   BookIcon,
+  TargetIcon,
 } from '@/components/icons/AppIcons';
 import { useLeitner } from '@/hooks/useLeitner';
 import { useStreak } from '@/hooks/useStreak';
 import { useDailyMission } from '@/hooks/useDailyMission';
-import { VocabularyWord } from '@/data/vocabulary';
+import { VocabularyWord, TOEIC_TOPICS } from '@/data/vocabulary';
+import VocabTopicMasteryMatrix from '@/components/VocabTopicMasteryMatrix';
 import { completeActiveTaskByType, AutoCompleteTaskResult } from '@/utils/studyPlanEngine';
 import styles from './page.module.css';
 
@@ -64,7 +66,9 @@ function StudyPageContent() {
   const { recordNewWordLearned, recordWordReviewed } = useDailyMission();
   
   const [selectedBand, setSelectedBand] = useState<string>('All');
-  const [loadedBand, setLoadedBand] = useState<string | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<string>(searchParams?.get('category') || 'All');
+  const [showTopicMatrix, setShowTopicMatrix] = useState<boolean>(false);
+  const [loadedKey, setLoadedKey] = useState<string | null>(null);
   const [studyMode, setStudyMode] = useState<StudyMode>('flashcard');
   const [words, setWords] = useState<VocabularyWord[]>([]);
   const [sessionStats, setSessionStats] = useState({ reviewCount: 0, newCount: 0 });
@@ -72,6 +76,14 @@ function StudyPageContent() {
   const [isFinished, setIsFinished] = useState(false);
   const [autoPlayAudio, setAutoPlayAudio] = useState(true);
   const [nextRoutine, setNextRoutine] = useState<AutoCompleteTaskResult | null>(null);
+
+  // Sync category from URL parameter if navigated with ?category=...
+  useEffect(() => {
+    const urlCategory = searchParams?.get('category');
+    if (urlCategory && urlCategory !== selectedTopic) {
+      setSelectedTopic(urlCategory);
+    }
+  }, [searchParams, selectedTopic]);
 
   // Initialize autoplay setting & band from user's onboarding target score
   useEffect(() => {
@@ -98,22 +110,28 @@ function StudyPageContent() {
     });
   };
 
-  const loadSession = useCallback((band: string) => {
+  const loadSession = useCallback((band: string, topic?: string) => {
     if (!mounted) return;
-    const { queue, reviewCount, newCount } = getPacedStudyQueue(band, 10);
+    const currentTopic = topic !== undefined ? topic : selectedTopic;
+    const { queue, reviewCount, newCount } = getPacedStudyQueue(
+      band,
+      10,
+      currentTopic !== 'All' ? currentTopic : undefined
+    );
     setWords(queue);
     setSessionStats({ reviewCount, newCount });
     setCurrentIndex(0);
     setIsFinished(false);
     recordStudy();
-  }, [mounted, getPacedStudyQueue, recordStudy]);
+  }, [mounted, getPacedStudyQueue, recordStudy, selectedTopic]);
 
   useEffect(() => {
-    if (mounted && selectedBand !== loadedBand) {
-      loadSession(selectedBand);
-      setLoadedBand(selectedBand);
+    const sessionKey = `${selectedBand}_${selectedTopic}`;
+    if (mounted && sessionKey !== loadedKey) {
+      loadSession(selectedBand, selectedTopic);
+      setLoadedKey(sessionKey);
     }
-  }, [mounted, selectedBand, loadedBand, loadSession]);
+  }, [mounted, selectedBand, selectedTopic, loadedKey, loadSession]);
 
   const handleRate = (rating: 1 | 2 | 3 | 4) => {
     const currentWord = words[currentIndex];
@@ -143,6 +161,19 @@ function StudyPageContent() {
     setSelectedBand(newBand);
   };
 
+  const handleTopicChange = (newTopic: string) => {
+    setSelectedTopic(newTopic);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (newTopic === 'All') {
+        url.searchParams.delete('category');
+      } else {
+        url.searchParams.set('category', newTopic);
+      }
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
+
   if (!mounted) return <div className={styles.loading}>Loading...</div>;
 
   const renderFlashCardView = () => {
@@ -166,6 +197,16 @@ function StudyPageContent() {
                   Ôn tập tất cả các Band
                 </button>
               )}
+              {selectedTopic !== 'All' && (
+                <button onClick={() => handleTopicChange('All')} className="btn-secondary" style={{ cursor: 'pointer' }}>
+                  <RotateCcwIcon size={18} style={{ marginRight: '8px' }} />
+                  Ôn tập tất cả các Chủ đề
+                </button>
+              )}
+              <button onClick={() => setShowTopicMatrix(prev => !prev)} className="btn-secondary" style={{ cursor: 'pointer' }}>
+                <TargetIcon size={18} style={{ marginRight: '8px' }} />
+                {showTopicMatrix ? 'Ẩn bản đồ năng lực' : 'Xem Bản Đồ Năng Lực 12 Chủ Đề'}
+              </button>
               <button onClick={() => setStudyMode('match')} className="btn-secondary" style={{ cursor: 'pointer' }}>
                 <LinkIcon size={18} style={{ marginRight: '8px' }} />
                 Luyện ghép cặp Paraphrase Part 7
@@ -178,10 +219,15 @@ function StudyPageContent() {
                 <CompassIcon size={18} style={{ marginRight: '8px' }} />
                 Khám phá thư viện từ
               </Link>
-              <Link href="/quiz" className="btn-primary">
+              <button
+                type="button"
+                onClick={() => handleTabChange('quiz')}
+                className="btn-primary"
+                style={{ cursor: 'pointer' }}
+              >
                 Làm Quiz củng cố
                 <ArrowRightIcon size={18} style={{ marginLeft: '8px' }} />
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -244,9 +290,19 @@ function StudyPageContent() {
             ) : null}
 
             <div className={styles.actions}>
-              <button onClick={() => loadSession(selectedBand)} className="btn-secondary" style={{ cursor: 'pointer' }}>
+              <button onClick={() => loadSession(selectedBand, selectedTopic)} className="btn-secondary" style={{ cursor: 'pointer' }}>
                 <RotateCcwIcon size={18} style={{ marginRight: '8px' }} />
                 Học thêm 10 từ mới nữa
+              </button>
+              {selectedTopic !== 'All' && (
+                <button onClick={() => handleTopicChange('All')} className="btn-secondary" style={{ cursor: 'pointer' }}>
+                  <RotateCcwIcon size={18} style={{ marginRight: '8px' }} />
+                  Học các chủ đề khác
+                </button>
+              )}
+              <button onClick={() => setShowTopicMatrix(prev => !prev)} className="btn-secondary" style={{ cursor: 'pointer' }}>
+                <TargetIcon size={18} style={{ marginRight: '8px' }} />
+                {showTopicMatrix ? 'Ẩn bản đồ năng lực' : 'Xem Đánh Giá 12 Chủ Đề'}
               </button>
               <button onClick={() => setStudyMode('match')} className="btn-secondary" style={{ cursor: 'pointer' }}>
                 <LinkIcon size={18} style={{ marginRight: '8px' }} />
@@ -339,7 +395,7 @@ function StudyPageContent() {
   };
 
   return (
-    <div className={`${styles.container} ${vocabTab !== 'flashcard' ? styles.wideContainer : ''}`}>
+    <div className={`${styles.container} ${vocabTab !== 'flashcard' || showTopicMatrix ? styles.wideContainer : ''}`}>
       {/* ═══════════════ TOP HUB HEADER & TABS ═══════════════ */}
       <div className={styles.topHubHeader}>
         <div className={styles.topHubTitleArea}>
@@ -415,24 +471,69 @@ function StudyPageContent() {
                 </div>
               </div>
 
-              {/* Band Selector (Used for Flashcard SRS) */}
+              {/* Band Selector & Topic Controls (Used for Flashcard SRS) */}
               {studyMode === 'flashcard' && (
-                <div className={styles.bandRow}>
-                  <div className={styles.bandSelector}>
-                    {BANDS.map(b => (
-                      <button
-                        key={b.value}
-                        className={`${styles.bandPill} ${selectedBand === b.value ? styles.activeBandPill : ''}`}
-                        onClick={() => handleBandChange(b.value)}
-                      >
-                        {b.label}
-                      </button>
-                    ))}
+                <>
+                  <div className={styles.bandRow}>
+                    <div className={styles.bandSelector}>
+                      {BANDS.map(b => (
+                        <button
+                          key={b.value}
+                          className={`${styles.bandPill} ${selectedBand === b.value ? styles.activeBandPill : ''}`}
+                          onClick={() => handleBandChange(b.value)}
+                        >
+                          {b.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
+
+                  <div className={styles.topicControlRow}>
+                    <div className={styles.topicSelectWrapper}>
+                      <label htmlFor="topic-filter-select" className={styles.topicSelectLabel}>
+                        Chủ đề ETS:
+                      </label>
+                      <select
+                        id="topic-filter-select"
+                        className={styles.topicSelectDropdown}
+                        value={selectedTopic}
+                        onChange={(e) => handleTopicChange(e.target.value)}
+                      >
+                        <option value="All">Tất cả 12 Chủ Đề ETS (453 từ)</option>
+                        {TOEIC_TOPICS.map((topic) => (
+                          <option key={topic.id} value={topic.nameEn}>
+                            {topic.nameVi} ({topic.nameEn})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <button
+                      type="button"
+                      className={`${styles.matrixToggleBtn} ${showTopicMatrix ? styles.matrixToggleBtnActive : ''}`}
+                      onClick={() => setShowTopicMatrix(prev => !prev)}
+                      title="Bật/tắt Bản đồ Đánh giá Năng lực 12 Chủ Đề"
+                    >
+                      <TargetIcon size={14} />
+                      <span>{showTopicMatrix ? 'Ẩn Đánh Giá' : 'Đánh Giá Năng Lực 12 Chủ Đề'}</span>
+                    </button>
+                  </div>
+                </>
               )}
             </div>
           </header>
+
+          {/* Collapsible 12-Topic Mastery Matrix */}
+          {showTopicMatrix && (
+            <div className={styles.matrixWrapper}>
+              <VocabTopicMasteryMatrix
+                onSelectTopic={(topicNameEn) => {
+                  handleTopicChange(topicNameEn);
+                  setShowTopicMatrix(false);
+                }}
+              />
+            </div>
+          )}
 
           {/* Main Body depending on Active Study Mode */}
           {studyMode === 'flashcard' && renderFlashCardView()}

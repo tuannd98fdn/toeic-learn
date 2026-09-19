@@ -9,6 +9,7 @@ import { useMistakeNotebook } from '@/hooks/useMistakeNotebook';
 import LeitnerBox from '@/components/LeitnerBox';
 import ShareButton from '@/components/ShareButton';
 import GrammarRadarChart from '@/components/GrammarRadarChart';
+import VocabTopicMasteryMatrix from '@/components/VocabTopicMasteryMatrix';
 import { storage } from '@/utils/storage';
 import { ExamScoreSummary } from '@/utils/toeicScoreCalculator';
 import { getPredictiveScore, PredictiveScoreData } from '@/utils/scorePredictor';
@@ -571,6 +572,11 @@ export default function StatsPage() {
       {/* Leitner Distribution */}
       <section className={styles.fullWidthSection}>
         <LeitnerBox stats={stats.boxes} totalWords={totalWords} />
+      </section>
+
+      {/* 12 TOEIC Topic Vocabulary Mastery Assessment */}
+      <section className={styles.fullWidthSection}>
+        <VocabTopicMasteryMatrix />
       </section>
 
       {/* Grammar & Sub-skill Gap Analysis */}
