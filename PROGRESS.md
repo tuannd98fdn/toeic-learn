@@ -1933,6 +1933,35 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
 
 ---
 
+### Milestone 67: Chuẩn Hóa 12 Chủ Đề Từ Vựng TOEIC ETS, Thanh Lọc Từ Vựng & Hệ Thống Đánh Giá Năng Lực [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề giải quyết**:
+  - Người dùng yêu cầu: *"các từ vựng ở system cần có chủ đề và hữu ích để thi toeic và phù hợp toeic, nghiên cứu tối ưu hóa chỗ từ vựng và đánh giá nữa nhé, các từ vựng của system mà không liên quan thì lôi ra"*.
+  - Phát hiện kho từ tồn tại các từ vựng hình sự/GRE/đời sống vụn vặt không phục vụ thi TOEIC (`subpoena`, `affidavit`, `plaintiff`, `deleterious`, `preposterous`, `soap`, `lotion`, v.v.), các từ vựng chưa phân theo chủ đề chuyên sâu ETS, và thiếu hệ thống đánh giá năng lực từ vựng theo từng chủ đề.
+* **Chi tiết triển khai**:
+  1. **Thanh lọc & Tái phân loại 453 Từ Vựng Cốt Lõi**:
+     - Thanh lọc 36 từ không phù hợp và thay thế bằng 36 từ xuất hiện tần suất cao trong đề thi ETS Part 1 - 7 (`credentials`, `confidentiality`, `non-disclosure`, `severance`, `turnover`, `downsizing`, `remittance`, `depreciation`, `reimbursement`, `disbursement`, `underwrite`, `consignment`, `tenant`, `landlord`, `amenity`, `complimentary`, `subscription`, `survey`, `incur`, `binding`, v.v.).
+     - Đảm bảo 100% 453 từ là duy nhất (0 duplicates), giữ nguyên mapping ID để bảo toàn tiến trình Leitner hiện có trong localStorage.
+  2. **Chuẩn Hóa 12 Chủ Đề ETS Cốt Lõi (Song ngữ Anh - Việt)**:
+     - `contracts` (Hợp đồng & Pháp lý), `corporate` (Doanh nghiệp & Quản lý), `personnel` (Nhân sự & Tuyển dụng), `finance` (Tài chính & Kế toán), `marketing` (Tiếp thị & Bán hàng), `office` (Văn phòng & Hành chính), `logistics` (Mua sắm & Chuỗi cung ứng), `manufacturing` (Sản xuất & Chất lượng), `travel` (Du lịch & Công tác), `real_estate` (Bất động sản & Cơ sở vật chất), `customer_service` (Chăm sóc Khách hàng), `collocations_paraphrase` (Cụm từ & Paraphrase Đọc hiểu).
+  3. **Hệ Thống Đánh Giá Năng Lực Từ Vựng Theo Chủ Đề (Topic Mastery Engine)**:
+     - Xây dựng `src/utils/vocabEvaluator.ts`: tính toán điểm thành thạo của 12 chủ đề, ước lượng vốn từ hoạt động thực chiến (`estimatedActiveVocab`), xác định chủ đề mạnh nhất và chủ đề yếu nhất (`weakestTopic`).
+     - Tích hợp vào `src/utils/knowledgeEvaluator.ts`: cung cấp lời khuyên chiến thuật và liên kết hành động 1-click củng cố từ vựng theo chủ đề hổng.
+     - Xây dựng component `VocabTopicMasteryMatrix.tsx` và module CSS: KPI strip, banner cảnh báo lỗ hổng, 12 thẻ chủ đề kèm thanh tiến trình đổi màu và nút luyện tập 1-click.
+  4. **Tối Ưu Hóa Trải Nghiệm Học & Luyện Tập (/study, /quiz, /vocabulary, /stats)**:
+     - `/study`: Bổ sung bộ lọc 12 chủ đề ETS, nút toggle mở Bản Đồ Năng Lực 12 Chủ Đề, tự động đồng bộ và tải từ của chủ đề đó.
+     - `/quiz`: Bổ sung bộ chọn chủ đề làm Quiz, sau khi nộp 10 câu hiển thị ngay Thẻ Đánh Giá Năng Lực Chủ Đề kèm nút CTA 1-click chuyển sang học Flashcards.
+     - `/vocabulary`: Cập nhật chip gợi ý nhanh theo các lĩnh vực TOEIC, chip lọc chủ đề tiếng Việt, badge chủ đề song ngữ trên từng thẻ từ, dọn dẹp triệt để emoji vụn vặt.
+     - `/stats`: Nhúng `VocabTopicMasteryMatrix` vào luồng báo cáo năng lực tri thức để theo dõi song song cùng Biểu đồ Radar ngữ pháp.
+* **Quy chuẩn & Xác minh**:
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Kiểm thử đơn vị: `scratch/test_vocab_evaluator_unit.mjs` PASS 100% (453 từ, 0 duplicates, 0 từ không phù hợp, 100% gán đúng 12 topics).
+  - Kiểm thử Playwright E2E: `scratch/test_vocab_topics_assessment_e2e.mjs` PASS 100% (5/5 kịch bản /study, /quiz, /vocabulary, /stats, mobile 375x667).
+  - Tuân thủ nghiêm ngặt **NO UI EMOJIS (STRICT)**: 100% sử dụng icon SVG sạch từ `AppIcons.tsx`.
+  - Next.js Build: `npm run build` thành công 100% (35/35 static routes).
+  - Ảnh nghiệm thu: `scratch/study_vocab_topic_matrix.png`, `scratch/quiz_topic_assessment_result.png`, `scratch/vocabulary_topic_filter.png`, `scratch/stats_vocab_topic_matrix.png`.
+
+---
+
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
 ### Vấn Đề 66: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
