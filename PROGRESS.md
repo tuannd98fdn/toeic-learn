@@ -1485,11 +1485,49 @@ Tài liệu này đóng vai trò là **Bộ Nhớ Chuyển Giao (Session Memory 
     - Sổ tay câu hỏi thi sai Desktop: `scratch/notebook_enhanced_exam_desktop.png`.
     - Sổ tay câu hỏi thi sai Mobile: `scratch/notebook_enhanced_exam_mobile.png`.
 
+### ✅ Vấn Đề 56: Nâng Cấp Toàn Diện Trang Mẹo & Bẫy Đề Thi (/tips), Hệ Thống Theo Dõi Nắm Vững (Mastery & Bookmarking) & Chế Độ Sổ Tay Tóm Tắt (Cheat Sheet Mode) [HOÀN TẤT 100%]
+* **Bối cảnh & Vấn đề**:
+  - Đánh giá trang `/tips` ("Kho Chiến Thuật & Bẫy Đề Thi TOEIC") phát hiện các lỗ hổng trải nghiệm và kỹ thuật:
+    1. **Lỗi Giao Diện & Vỡ Bố Cục Mobile**: Nút Home bị flex-wrap trôi lệch, icon bóng đèn ngắt dòng lộn xộn; khung lọc chiếm trọn >600px chiều cao màn hình với 17 nút xếp chồng 10 dòng làm người dùng không nhìn thấy bất kỳ mẹo thi nào; thiếu khoảng đệm an toàn chân trang khiến các thẻ cuối bị thanh điều hướng di động che khuất.
+    2. **Hiện Tượng Mỏi Cuộn & Quá Tải Nhận Thức (Scroll Fatigue)**: Cả 30 thẻ chiến thuật đều hiển thị bung rộng toàn bộ ví dụ dài dằng dặc, chiều dài trang vượt quá 25,000 pixels.
+    3. **Thiếu Cơ Chế Ghi Nhận Nắm Vững & Đánh Dấu (Mastery & Bookmarking)**: Không có cách lưu lại bẫy đề thi hay gặp, không theo dõi tiến độ người học đã làm chủ bao nhiêu trên 30 chiến thuật.
+    4. **Thiếu Bộ Lọc Nhanh (Presets)**: Thiếu các tab lọc nhanh cho bẫy đề, công thức vàng, danh sách đã lưu hay danh sách cần ôn tập.
+    5. **Thiếu Tiện Ích Sao Chép Công Thức Vàng**: Không thể copy nhanh các quy tắc cốt tử vào clipboard để ghi chú.
+* **Giải pháp & Triển khai**:
+  1. **Tích Hợp Hook Quản Lý Trạng Thái Học Mẹo (`useTipsMastery.ts`)**:
+     - Lưu trữ bền vững trong `localStorage`: `bookmarkedIds` và `masteredIds`.
+     - Cung cấp hàm `toggleBookmark`, `toggleMastered`, `isBookmarked`, `isMastered`.
+     - Tự động hoàn thành nhiệm vụ lộ trình học `completeActiveTaskByType('review')` khi người học đánh dấu nắm vững chiến thuật trong ngày.
+  2. **Thanh Tiến Độ Làm Chủ Chiến Thuật (Mastery Progress Card)**:
+     - Hiển thị trực quan: *Tiến độ làm chủ: X / 30 mẹo (Y%)*, thanh tiến độ gradient chuyển tiếp mượt mà, bộ đếm đã thuộc, đã lưu và số mẹo cần củng cố.
+  3. **Hai Chế Độ Xem: Chế Độ Chi Tiết vs Sổ Tay Tóm Tắt (Cheat Sheet Mode)**:
+     - Công tắc chuyển đổi linh hoạt:
+       - *Chế độ Chi tiết*: Hiển thị đầy đủ bài học, cảnh báo bẫy, công thức và ví dụ.
+       - *Sổ tay Tóm tắt*: Giảm 60% chiều dài trang, chỉ hiển thị tóm tắt, bẫy đề và công thức vàng, cho phép mở rộng ví dụ khi cần bằng accordion toggle.
+  4. **Bộ Lọc Nhanh Tần Suất Cao & Thanh Cuộn Ngang Part Trên Mobile**:
+     - Quick Presets: *Tất cả (30)*, *Bẫy đề thi ETS*, *Công thức vàng*, *Đã lưu*, *Cần ôn tập*.
+     - Thanh chọn Part cuộn ngang mượt mà (`overflow-x: auto`, `white-space: nowrap`), tiết kiệm hơn 400px chiều cao màn hình.
+     - Bộ lọc nâng cao thu gọn (Phân loại & Target Band) có hiển thị huy hiệu số bộ lọc đang chọn.
+  5. **Tiện Ích Sao Chép Công Thức Vàng (Copy Formula)**:
+     - Nút sao chép cạnh từng khối Quy tắc vàng, phản hồi *Đã chép* tức thì kèm icon `CheckIcon`.
+  6. **Mobile Ergonomics & Tuân Thủ Triệt Để NO UI EMOJIS**:
+     - Bổ sung `padding-bottom: calc(5.5rem + env(safe-area-inset-bottom))` vào `.container`.
+     - Sử dụng 100% icon SVG từ `AppIcons` (bổ sung `CopyIcon`, `FilterIcon`), phát hiện 0 emoji trên toàn bộ rendered DOM.
+* **Quy chuẩn & Xác minh**:
+  - Typecheck: `npx tsc --noEmit` đạt 0 lỗi biên dịch.
+  - Build kiểm định: `npm run build` thành công 100% (35/35 routes static & dynamic).
+  - Kiểm thử tự động Playwright E2E (`scratch/test_tips_enhancements_e2e.mjs`): PASS 100% (Tiêu đề trang, Bookmark toggle & filter, Mastered toggle & class, Copy formula feedback, Cheat sheet mode toggle & collapsible examples, Presets, Mobile layout nowrap & safe-area padding 88px, Dark mode, 0 DOM emojis).
+  - Ảnh nghiệm thu giao diện:
+    - Chế độ Chi tiết Desktop: `scratch/tips_enhanced_desktop_detailed.png`.
+    - Chế độ Sổ tay Tóm tắt Desktop: `scratch/tips_enhanced_desktop_cheatsheet.png`.
+    - Giao diện Mobile Light Mode: `scratch/tips_enhanced_mobile_light.png`.
+    - Giao diện Mobile Dark Mode: `scratch/tips_enhanced_mobile_dark.png`.
+
 ---
 
 ## Vấn Đề Tiếp Theo (Current Milestone / Next Issue)
 
-### Vấn Đề 56: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
+### Vấn Đề 57: Khai Phá & Đồng Bộ Đề Thi Thật ETS 2022 Test 7 (Full 200 Câu LC + RC, Audio Phòng Thu YBM, Graphic Scans, Zero-Bloat CDN)
 * **Bối cảnh & Kế hoạch**:
   - Đã hoàn tất 100% chuẩn xác thực cho ETS 2022 Test 1, Test 2, Test 3, Test 4, Test 5, và Test 6 (1,200 câu hỏi chuẩn hóa).
   - Tiếp tục mở rộng bộ đề ETS 2022 với **Test 7**:
